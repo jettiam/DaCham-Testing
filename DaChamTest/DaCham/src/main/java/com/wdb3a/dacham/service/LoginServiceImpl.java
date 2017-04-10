@@ -7,12 +7,38 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.wdb3a.dacham.bean.Emp;
+import com.wdb3a.dacham.bean.Member;
 import com.wdb3a.dacham.dao.LoginDAO;
 
 @Service
 public class LoginServiceImpl implements LoginService {
 	@Inject
 	private LoginDAO dao;
+	
+	@Override
+	public int checkMemberLogin(String id, String pw) throws Exception {
+		Member dbResult = dao.getMember(id);
+		if(dbResult != null){
+			if(pw.equals(dbResult.getPw())){
+				return 1; //로그인 성공.
+			}else{
+				return 0; // 아이디 있으나 비밀번호 틀림
+			}
+		}else{
+			return -1; // 아이디 없음
+		}
+	}
+	
+	@Override
+	public Member getMember(String id) throws Exception {
+		return dao.getMember(id);
+	}
+
+	
+	
+	
+	
+	
 	
 	@Override
 	public List<Emp> empListAll() throws Exception {
@@ -42,5 +68,7 @@ public class LoginServiceImpl implements LoginService {
 		// TODO Auto-generated method stub
 		return dao.getEmp(id);
 	}
+
+	
 
 }

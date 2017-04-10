@@ -7,6 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src = "http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -43,8 +44,21 @@
 			</span>
 		</div>
 	</form>
-
-
-
+	
+	<input id="loginResult" type="hidden" value="${result}"/>
 </body>
+<script>
+	$(document).ready(function(){
+		var result = $("#loginResult").val();
+		if(result == "0"){
+			alert("비밀번호가 틀렸습니다. 다시 확인해주세요.");
+		}
+		else if(result == "-1"){
+			alert("아이디가 존재하지 않습니다.");
+		}else{
+		}
+	});	
+</script>
+
+
 </html>

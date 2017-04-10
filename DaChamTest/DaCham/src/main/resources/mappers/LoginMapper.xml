@@ -4,12 +4,20 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wdb3a.LoginMapper">
 
-<!-- 테스팅용 emp테이블의 모든 정보를 가져옴 -->
+<!-- 고객 로그인용 -->
+<select id="selectMember" resultType="Member">
+	select *
+	from member
+	where id=#{id}
+</select>
+
+<!-- emp 테이블의 모든 정보를 가져옴 -->
 <select id="select_emp" resultType="Emp">
 	select *
 	from emp
 </select>  
 
+<!-- 특정 관리자 정보 가져옴 -->
 <select id="selectEmp" resultType="Emp">
 select *
 from emp

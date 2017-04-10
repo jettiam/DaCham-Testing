@@ -1,6 +1,5 @@
 package com.wdb3a.dacham;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.wdb3a.dacham.bean.Emp;
+import com.wdb3a.dacham.bean.Member;
 import com.wdb3a.dacham.service.LoginService;
 
 @Controller
@@ -36,22 +36,47 @@ public class LoginController {
 			
 		}
 		
+		@RequestMapping(value="memberLogin")
+		public String memberLogin(Model model, String id, String pw){
+			int result=-3;
+			try {
+				result = service.checkMemberLogin(id, pw);
+				if(result==1){
+					Member dbResult = service.getMember(id);
+					model.addAttribute("memberName", dbResult.getName());
+					return "client";
+				}else{
+					model.addAttribute("result", result);
+					return "main";
+				}			
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			System.out.println("회원 로그인 결과: "+result);
+			return "main";
+			
+		}
+		
 		@RequestMapping(value="empLogin")
 		public String empLogin(Model model, String emp_id, String emp_pw){
+			int result=-3;
 			try {
-				int result = service.checkEmpLogin(emp_id, emp_pw);
+				result = service.checkEmpLogin(emp_id, emp_pw);
 				System.out.println("........"+result);
 				if(result==1){ //로그인 성공시
 					Emp dbResult = service.getEmp(emp_id);
 					model.addAttribute("EmpName", dbResult.getEmp_name());
 					model.addAttribute("EmpDept", dbResult.getDept());
 					return "loginSuccess";
+				}else{
+					model.addAttribute("result", result);
+					return "main2";
 				}
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
+			} catch (Exception e) {				
 				e.printStackTrace();
-			}
-			
+			}		
 			return "main2";
 			
 		}

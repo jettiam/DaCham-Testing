@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.wdb3a.dacham.bean.Emp;
+import com.wdb3a.dacham.bean.Member;
 
 @Repository
 public class LoginDAOImpl implements LoginDAO {
@@ -22,11 +23,16 @@ public class LoginDAOImpl implements LoginDAO {
 	@Override
 	public int checkLogin(String emp_id, Emp emp) throws Exception {
 		emp=sqlSession.selectOne(namespace+".emp", emp_id);
-		if(emp!=null){
-				}
 		return 0;
 	}
 
+	@Override
+	public Member getMember(String id) throws Exception {
+		// id¸¦ ÅëÇØ ¸â¹ö *À» ºÒ·¯¿È
+		return sqlSession.selectOne(namespace+".selectMember", id);
+	}
+	
+	
 
 
 	@Override
@@ -42,6 +48,10 @@ public class LoginDAOImpl implements LoginDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace+".selectEmp", id);
 	}
+
+
+
+	
 
 
 
