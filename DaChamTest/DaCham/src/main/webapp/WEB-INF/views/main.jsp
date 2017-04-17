@@ -10,7 +10,7 @@
 </head>
 <body>
 	<!-- 고객 로그인 전용 페이지 -->
-	<h1>다참 고객 로그인 페이지</h1>
+	<h1>다참 고객 로그인 페이지032</h1>
 	<form method="post" action = "memberLogin">
 		아이디: <input type = "text" name = "id"><br>
 		비밀번호: <input type = "password" name = "pw"><br>
