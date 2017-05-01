@@ -36,7 +36,16 @@ public class LoginController {
 			
 		}
 		
+	
 		@RequestMapping(value="memberLogin")
+		/**
+		 * 
+		 * @param model
+		 * @param id 받아온 아이디
+		 * @param pw 받아온 비밀번호
+		 * result 1:로그인성공 2: ....
+		 * @return
+		 */
 		public String memberLogin(Model model, String id, String pw){
 			int result=-3;
 			try {
@@ -44,7 +53,7 @@ public class LoginController {
 				if(result==1){
 					Member dbResult = service.getMember(id);
 					model.addAttribute("memberName", dbResult.getName());
-					return "client";
+					return "customer/client";
 				}else{
 					model.addAttribute("result", result);
 					return "main";
@@ -69,7 +78,7 @@ public class LoginController {
 					Emp dbResult = service.getEmp(emp_id);
 					model.addAttribute("EmpName", dbResult.getEmp_name());
 					model.addAttribute("EmpDept", dbResult.getDept());
-					return "loginSuccess";
+					return "mate/mateMain";
 				}else{
 					model.addAttribute("result", result);
 					return "main2";

@@ -9,7 +9,7 @@
 <script>
 	$(document).ready(function(){
 		$("#insert").on("click",function(){
-			$("form").attr("action","writeCounsel");
+			$("form").attr("action","write");
 			$("form").submit();
 		});
 		$("#cancle").on("click",function(){
