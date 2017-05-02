@@ -19,7 +19,7 @@
 	
 	<input id="loginResult" type="hidden" value="${result}"/>
 </body>
-
+<!--  -->
 <script>
 	$(document).ready(function(){
 		var result = $("#loginResult").val();
