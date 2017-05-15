@@ -19,7 +19,7 @@ public class LoginServiceImpl implements LoginService {
 	public int checkMemberLogin(String id, String pw) throws Exception {
 		Member dbResult = dao.getMember(id);
 		if(dbResult != null){
-			if(pw.equals(dbResult.getPw())){
+			if(pw.equals(dbResult.getPasswd())){
 				return 1; //로그인 성공.
 			}else{
 				return 0; // 아이디 있으나 비밀번호 틀림

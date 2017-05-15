@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.wdb3a.dacham.bean.Emp;
 import com.wdb3a.dacham.bean.Member;
@@ -37,7 +38,7 @@ public class LoginController {
 		}
 		
 	
-		@RequestMapping(value="memberLogin")
+		@RequestMapping(value="main" ,method = RequestMethod.POST)
 		/**
 		 * 
 		 * @param model
@@ -53,7 +54,8 @@ public class LoginController {
 				if(result==1){
 					Member dbResult = service.getMember(id);
 					model.addAttribute("memberName", dbResult.getName());
-					return "customer/client";
+					model.addAttribute("result", result);
+					return "main";
 				}else{
 					model.addAttribute("result", result);
 					return "main";

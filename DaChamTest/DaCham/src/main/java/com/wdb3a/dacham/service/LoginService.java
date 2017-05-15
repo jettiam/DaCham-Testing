@@ -8,7 +8,7 @@ import com.wdb3a.dacham.bean.Member;
 public interface LoginService {
 	
 	public Member getMember(String id) throws Exception;
-	public int checkMemberLogin(String id, String pw) throws Exception;
+	public int checkMemberLogin(String id, String passwd) throws Exception;
 	
 	
 	public List<Emp> empListAll() throws Exception;
