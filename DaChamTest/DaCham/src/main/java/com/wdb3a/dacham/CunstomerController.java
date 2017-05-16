@@ -77,12 +77,12 @@ public String postWriteCounsel(){
 public String readCounsel(){
 	return "customer/counsel/counselRead";
 }
-@RequestMapping(value="/clientMain",method = RequestMethod.GET)
+@RequestMapping(value="/main",method = RequestMethod.GET)
 /**
  * 
  * @return 메인화면. 로고 클릭시 이동할 화면
  */
 public String clientMain(){
-	return "clientMain";
+	return "main";
 }
 }

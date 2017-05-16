@@ -16,11 +16,9 @@
 <title>Insert title here</title>
 <!-- 상단 내비게이션 표시를 위한 임시 CSS -->
 <style>
-
-.naviBox{
+.naviBox {
 	background-color: lightgray;
-	margin-top: 20px;
-	
+	margin-top: 10px;
 }
 
 .box {
@@ -30,35 +28,43 @@
 	font-size: 25px;
 }
 
-.loginBox {
-	position:absolute;
-	top:180px;
-	left:80%;
-	
-	width:280px;
-	height:200px;
-	background-color:gray;
+#sideBox {
+	position: absolute;
+	top: 170px;
+	left: 75%;
+	width: 280px;
+	height: 200px;
+	background-color: gray;
 }
 
+.loginBox {
+	
+	margin-top:10px;
+}
 
 #infoBox {
 	display: none;
-
+	float: right;
 }
-
 </style>
 <!-- 상단 내비게이션 표시를 위한 임시 CSS -->
 
 </head>
 <body>
-<div id="">
-<div id="logo"><!-- 로고박스 -->
-<img src="http://placehold.it/100x100">
-</div>
-	<div id="infoBox">
-		<h4><b>${memberName}</b>님 반갑습니다. 오늘도 다참으로 건강한 하루~!</h4> 
-		마이페이지 로그아웃
-	</div>
+	<div id="headerBox">
+		<!-- 로고+고객정보 -->
+		<div id="logo">
+			<!-- 로고박스 -->
+			<a href="main"><img src="http://placehold.it/100x100"></a>
+
+			<div id="infoBox">
+				<!-- 고객이름 출력. 로그아웃&마이인포 -->
+				<h4>
+					<b>${memberName}</b>님 반갑습니다. 오늘도 다참으로 건강한 하루~!
+				</h4>
+				마이페이지 로그아웃
+			</div>
+		</div>
 	</div>
 	<!-- 고객 메인 -->
 	<!-- 상단 메뉴바 -->
@@ -76,17 +82,23 @@
 	</div>
 
 	<!-- 고객 로그인 페이지 -->
-	<form method="post" action="main" class="loginBox">
-		아이디: <input type="text" name="id"><br> 비밀번호: <input
-			type="password" name="pw"><br> <input type="submit"
-			value="로그인">
-	</form>
+	<div id="sideBox">
+		<form method="post" action="main" class="loginBox">
+
+			아이디<br> 
+			<input type="text" name="id"><br> 
+			비밀번호<br>
+			<input type="password" name="pw"><br> <br> 
+			<input type="submit" value="로그인">
+
+		</form>
+	</div>
 
 	<input id="loginResult" type="hidden" value="${result}" />
 
 
 </body>
-<!--폴더정리2  -->
+<!--로그인함수  -->
 <script>
 	$(document).ready(function() {
 
