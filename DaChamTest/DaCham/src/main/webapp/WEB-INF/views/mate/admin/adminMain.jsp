@@ -9,6 +9,7 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
  <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%@include file="../admin/upmenu.jsp" %>
 <title>Insert title here</title>
 <style>
 .table{
@@ -51,11 +52,12 @@
 	
 	<div>
 	<h2>일자별 통계</h2>
-	일자<input type="date" id = "date" value="">
+	일자<input type="date" id = "startdate"> ~ <input type="date" id = "enddate">
 	<input type="button" value="오늘" id = "today">
 	<input type="button" value="일주일" id = "week">
 	<input type="button" value="한달" id = "month"><br>
 	<select>
+		<option>전체</option>
 		<option>당뇨병</option>
 		<option>고지혈증</option>
 		<option>심부전증</option>
@@ -101,26 +103,51 @@
 
 </body>
 <script>
-		// 시작
-        /* $(function() {
-            // 달력 붙이기
-            $('.datePicker').datepicker();
-            $('#notice').click(function(){
-            	window.location.href = "notice";
-            })
-        }); */
+        function getDefaultDate(){// 해당 일 계산
+
+            var now = new Date();
+            var day = ("0" + now.getDate()).slice(-2);
+            var month = ("0" + (now.getMonth() + 1)).slice(-2);
+            var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+            return today;
+        }
+        
+        function getStartDate(){// 한달 버튼 클릭시 그 해당 날짜의 첫번쨰 일 계산
+        	var now = new Date();
+            var Startdate = new Date(now.getYear(), now.getMonth(), 1);
+            var day = ("0" + Startdate.getDate()).slice(-2);
+            var month = ("0" + (Startdate.getMonth() + 1)).slice(-2);
+            var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+            return today;
+        }
+        
+        function getEndDate(){//한달 버튼 클릭시 그 해당 날짜의 마찌맊 일 계산
+        	var now = new Date();
+            var enddate = new Date(now.getYear(), now.getMonth()+1, 0);
+            var day = ("0" + enddate.getDate()).slice(-2);
+            var month = ("0" + (enddate.getMonth() + 1)).slice(-2);
+            var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+            return today;
+        }
+        
+        function getWeekStartDate(){
+        	var now = new Date();
+        	
+        }
+       
+        
 		$(document).ready(function(){
 			$("#today").click(function(){
-				var date = new Date();
-				var year = date.getFullYear();
-				var month = date.getMonth()+1;
-				var day = date.getDate();
-				var textid =$('#date');
-				$("#date").val(year+"-"+month+"-"+day);
+				$("#startdate").val( getDefaultDate());
+				$("#enddate").val( getDefaultDate());
 			});
-		})
+			$("#month").click(function(){
+				$("#startdate").val(getStartDate());
+				$("#enddate").val(getEndDate());
+			});
+			$("#notice").click(function(){
+				window.location.href = "notice";
+			});
+		});
 	</script>
-
-
-
 </html>
