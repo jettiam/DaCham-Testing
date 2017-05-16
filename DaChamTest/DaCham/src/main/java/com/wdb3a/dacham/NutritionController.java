@@ -23,4 +23,9 @@ public class NutritionController {
    public String getSide(){
 	   return "mate/nutritionist/sideDManagement";
    }
+   
+   @RequestMapping(value="/sideDRegist",method = RequestMethod.GET)
+   public String getSideRegist(){
+	   return "mate/nutritionist/sideDRegist";
+   }
 }
