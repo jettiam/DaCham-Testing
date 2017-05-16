@@ -11,7 +11,7 @@
 #mainImgBox{
  positon:absolute;
  top:0;
- left:20px;
+ left:20px;  
 }
 #mainMenuImgs{position: absolute;
 	top: 370px;
