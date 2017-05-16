@@ -16,7 +16,7 @@
 </script>
 </head>
 <body>
-<%@include file="../../main.jsp" %>
+<%@include file="../../clientNavi.jsp" %>
 <!-- 	<form action = "write" method = "get"> -->
 <%-- 		<input type = "hidden" name = "id" value = "${a. }"> --%>
 <!-- 	</form> -->

@@ -16,7 +16,7 @@
 </script>
 </head>
 <body>
-<%@include file="../../main.jsp" %>
+<%@include file="../../clientNavi.jsp" %>
 	<div>
 		<form method ="post">
 			제목 : <input type = "text" name = "title" value = "질문 있습니다."><br>

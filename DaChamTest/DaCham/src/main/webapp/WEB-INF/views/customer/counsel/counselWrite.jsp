@@ -20,7 +20,7 @@
 </script>
 </head>
 <body>
-<%@include file="../../main.jsp" %>
+<%@include file="../../clientNavi.jsp" %>
 	<h1>글쓰기 페이지</h1>
 	<form method = "post">
 		문의분류:<select name = "counselCode">

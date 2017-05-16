@@ -16,9 +16,11 @@
 <title>Insert title here</title>
 <!-- 상단 내비게이션 표시를 위한 임시 CSS -->
 <style>
-.bg {
+
+.naviBox{
 	background-color: lightgray;
 	margin-top: 20px;
+	
 }
 
 .box {
@@ -29,24 +31,38 @@
 }
 
 .loginBox {
-	text-align: right;
+	position:absolute;
+	top:180px;
+	left:80%;
+	
+	width:280px;
+	height:200px;
+	background-color:gray;
 }
 
 
 #infoBox {
 	display: none;
+
 }
+
 </style>
+<!-- 상단 내비게이션 표시를 위한 임시 CSS -->
 
 </head>
 <body>
+<div id="">
+<div id="logo"><!-- 로고박스 -->
+<img src="http://placehold.it/100x100">
+</div>
 	<div id="infoBox">
 		<h4><b>${memberName}</b>님 반갑습니다. 오늘도 다참으로 건강한 하루~!</h4> 
 		마이페이지 로그아웃
 	</div>
+	</div>
 	<!-- 고객 메인 -->
 	<!-- 상단 메뉴바 -->
-	<div class="bg">
+	<div class="naviBox">
 		<ul type="none" class="">
 			<!-- 메뉴 리스트 -->
 			<li class="box"><a href="dachamInfo" id="dachamInfo">다참소개</a></li>
@@ -59,8 +75,7 @@
 
 	</div>
 
-	<!-- 고객 로그인 전용 페이지 -->
-	<h1>다참 고객 로그인 페이지</h1>
+	<!-- 고객 로그인 페이지 -->
 	<form method="post" action="main" class="loginBox">
 		아이디: <input type="text" name="id"><br> 비밀번호: <input
 			type="password" name="pw"><br> <input type="submit"

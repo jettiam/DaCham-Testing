@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%@include file="../../main.jsp" %>
+<%@include file="../../clientNavi.jsp" %>
 식단주문
 </body>
 </html>
