@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 /*
- * 고객페이지 컨트롤러
+ * 영양사페이지 컨트롤러
  */
 @Controller
 @RequestMapping("mate/nutritionist")
