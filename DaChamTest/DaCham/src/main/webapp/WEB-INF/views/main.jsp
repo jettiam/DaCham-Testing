@@ -51,6 +51,6 @@
 
 <div id="mainNutriBox"> <!-- 각 식단의 간략한 영양정보 -->
 
-</div>
+</div>  
 </body>
 </html>
