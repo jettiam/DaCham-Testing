@@ -6,5 +6,6 @@
 	<typeAliases>
 		<typeAlias alias="Emp" type="com.wdb3a.dacham.bean.Emp"/>
 		<typeAlias alias="Member" type="com.wdb3a.dacham.bean.Member"/>
+		<typeAlias alias="orderList" type="com.wdb3a.dacham.bean.orderList"/>
 	</typeAliases>
 </configuration>

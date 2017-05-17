@@ -1,13 +1,26 @@
 package com.wdb3a.dacham;
 
+import java.util.List;
+
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.wdb3a.dacham.bean.orderList;
+import com.wdb3a.dacham.service.AdminMainService;
+
 
 @Controller
 public class AdminController {
-	
-	@RequestMapping(value="/adminMain")
-	public String getadminMain(){
+	@Inject
+	private AdminMainService service; 
+	@RequestMapping(value="/adminMain", method=RequestMethod.GET)
+	public String getadminMain(Model model) throws Exception{
+		List<orderList> list=service.orderListAll();
+		model.addAttribute("list",list);
 		return "mate/admin/adminMain";
 	}
 	@RequestMapping(value="/customer")

@@ -88,15 +88,14 @@
 				<th>진행상태</th>
 				<th>배송</th>
 			</tr>
-			<%-- <c:forEach items="${list}" var="board">
+			<c:forEach items="${list}" var="board">
 				<tr>
-					<td>${board.bno }&nbsp;&nbsp;&nbsp;</td>
-					<td><a href="read?bno=${board.bno }">
-					${board.title }&nbsp;&nbsp;</a></td>
-					<td>${board.writer }&nbsp;&nbsp;</td>
-					<td>${board.viewcnt }&nbsp;&nbsp;</td>
+					<td>${board.orderCode }&nbsp;&nbsp;&nbsp;</td>
+					<td>${board.id }</td>
+					<td>${board.dietCode }&nbsp;&nbsp;</td>
+					<td>${board.orderDate }&nbsp;&nbsp;</td>
 				</tr>
-			</c:forEach> --%>
+			</c:forEach> 
 		</table>
 		</div>
 	</div>
