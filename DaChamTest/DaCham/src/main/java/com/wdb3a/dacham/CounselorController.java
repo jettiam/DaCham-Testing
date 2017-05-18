@@ -11,4 +11,14 @@ public class CounselorController {
 	public String getMain(){
 		return "mate/counselor/counselorMain";
 	}
+	
+	@RequestMapping(value="/list", method =RequestMethod.GET)
+	public String getList(){
+		return "mate/counselor/counselorList";
+	}
+	
+	@RequestMapping(value="/detail", method = RequestMethod.GET)
+	public String getDetail(){
+		return "mate/counselor/counselorDetail";
+	}
 }

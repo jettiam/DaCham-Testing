@@ -11,5 +11,12 @@ public class DeliverController {
 	public String getMain(){
 		return "mate/deliver/deliverMain";
 	}
-
+	@RequestMapping(value="/list", method=RequestMethod.GET)
+	public String getList(){
+		return "/mate/deliver/deliverList";
+	}
+	@RequestMapping(value="/food", method=RequestMethod.GET)
+	public String getFood(){
+		return "/mate/deliver/foodStock";
+	}
 }
