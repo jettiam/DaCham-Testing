@@ -19,6 +19,7 @@
 .naviBox {
 	background-color: lightgray;
 	margin-top: 10px;
+	text-align:center;
 }
 
 .box {
@@ -31,8 +32,8 @@
 #sideBox {
 	position: absolute;
 	top: 170px;
-	left: 75%;
-	width: 280px;
+	left: 852px;
+	width: 285px;
 	height: 200px;
 	background-color: gray;
 }
