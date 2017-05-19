@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -30,23 +30,16 @@
 }
 
 #sideBox {
-	position: absolute;
-	top: 170px;
-	left: 852px;
-	width: 285px;
-	height: 200px;
-	background-color: gray;
+	float:right;
 }
 
-.loginBox {
-	
-	margin-top:10px;
-}
 
 #infoBox {
 	display: none;
 	float: right;
 }
+
+#logo{margin-top:10px;}
 </style>
 <!-- 상단 내비게이션 표시를 위한 임시 CSS -->
 
@@ -57,7 +50,20 @@
 		<div id="logo">
 			<!-- 로고박스 -->
 			<a href="main"><img src="http://placehold.it/100x100"></a>
+<!-- 고객 로그인 페이지 -->
+	<div id="sideBox">
+		<form method="post" action="main" class="loginBox">
 
+			아이디<br> 
+			<input type="text" name="id"><br> 
+			비밀번호<br>
+			<input type="password" name="pw"> 
+			<input type="submit" value="로그인">
+
+		</form>
+	</div>
+
+	<input id="loginResult" type="hidden" value="${result}" />
 			<div id="infoBox">
 				<!-- 고객이름 출력. 로그아웃&마이인포 -->
 				<h4>
@@ -82,20 +88,7 @@
 
 	</div>
 
-	<!-- 고객 로그인 페이지 -->
-	<div id="sideBox">
-		<form method="post" action="main" class="loginBox">
-
-			아이디<br> 
-			<input type="text" name="id"><br> 
-			비밀번호<br>
-			<input type="password" name="pw"><br> <br> 
-			<input type="submit" value="로그인">
-
-		</form>
-	</div>
-
-	<input id="loginResult" type="hidden" value="${result}" />
+	
 
 
 </body>
