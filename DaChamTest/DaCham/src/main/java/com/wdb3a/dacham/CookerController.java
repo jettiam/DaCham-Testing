@@ -12,4 +12,12 @@ public class CookerController {
 		return "mate/cooker/cookerMain";
 	}
 
+	@RequestMapping(value="/list", method=RequestMethod.GET)
+	public String getList(){
+		return "/mate/cooker/cookingList";
+	}
+	@RequestMapping(value="/food", method=RequestMethod.GET)
+	public String getFood(){
+		return "/mate/cooker/foodStock";
+	}
 }
