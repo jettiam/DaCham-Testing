@@ -6,6 +6,14 @@
  <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@include file="nutritionistNavi.jsp" %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$("#cancle").click(function(){
+			window.location.href = "diet";
+		});
+	});
+</script>
 <title>Insert title here</title>
 <style>
  .box1 {
@@ -77,6 +85,7 @@
 		</div>
 		<br><br><br>
 		<button id = "regist" type = "submit">등록</button>
+		<button id = "cancle">취소</button>
 	</div>
 </body>
 </html>
