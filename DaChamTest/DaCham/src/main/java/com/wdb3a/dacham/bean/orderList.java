@@ -7,14 +7,50 @@ public class orderList {
 	private String id;
 	private String dietCode;
 	private Date orderDate;
+	private String diseaseCode; // 질환코드
+	private String dietName; //
+	private String address;
+	private String tel;
+	private String name;
+	
 	
 	private int price;
 	private int dietAmount;
-	private String email;
 	private String orderItem;
 	private String paymentItem;
 	private String transportNum;
 	
+		
+	public String getDiseaseCode() {
+		return diseaseCode;
+	}
+	public void setDiseaseCode(String diseaseCode) {
+		this.diseaseCode = diseaseCode;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getTel() {
+		return tel;
+	}
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getDietName() {
+		return dietName;
+	}
+	public void setDietName(String dietName) {
+		this.dietName = dietName;
+	}
 	public String getOrderCode() {
 		return orderCode;
 	}
@@ -51,12 +87,6 @@ public class orderList {
 	public void setDietAmount(int dietAmount) {
 		this.dietAmount = dietAmount;
 	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
 	public String getOrderItem() {
 		return orderItem;
 	}
@@ -73,8 +103,16 @@ public class orderList {
 		return transportNum;
 	}
 	public void setTransportNum(String transportNum) {
-		this.transportNum = transportNum;
+		if(transportNum.equals("미진행")){
+			this.transportNum = "미진행";
+		}else{
+			this.transportNum = transportNum;
+		}
+		
+		
 	}
+	
+	
 	
 	
 }

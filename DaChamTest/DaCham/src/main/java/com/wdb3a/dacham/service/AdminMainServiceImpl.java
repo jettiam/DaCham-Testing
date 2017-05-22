@@ -19,4 +19,10 @@ public class AdminMainServiceImpl implements AdminMainService {
 		return dao.orderListAll();
 	}
 
+	@Override
+	public orderList datailview(String orderCode) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.datailview(orderCode);
+	}
+
 }

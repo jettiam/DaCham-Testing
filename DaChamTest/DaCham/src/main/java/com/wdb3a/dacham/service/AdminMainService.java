@@ -11,5 +11,6 @@ import com.wdb3a.dacham.bean.orderList;
 @Service
 public interface AdminMainService {
 	public List<orderList> orderListAll() throws Exception; 
+	public orderList datailview(String orderCode) throws Exception;
 
 }
