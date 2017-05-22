@@ -58,7 +58,7 @@
                <th>질환&nbsp;&nbsp;</th>
             </tr>
             <tr>
-               <td><input type = "checkbox"></td>
+               <td><input type = "radio"></td>
                <td></td>
                <td></td>
                <td></td>
