@@ -25,6 +25,8 @@
 	}
 	#mainLeftWrap {
 		float:left;
+		width:800px;
+		height:640px;
 	}
 
 
@@ -48,7 +50,7 @@
 }
 #myNutriInfo{
 width: 280px;
-	height: 160px;
+	height: 123px;
 	background-color: gray;
 }
 img{
@@ -65,7 +67,7 @@ img{
 	<div id="mainContent">
 		<div id="mainLeftWrap">
 			<!-- 메인페이지 메인이미지 -->
-			<img src="http://placehold.it/800x600">
+			<img src="../../dacham/resources/customerImage/dmain.jpg">
 		</div>
 		
 		
@@ -75,19 +77,19 @@ img{
 			<!-- 로그인박스 하단 작은 사이즈 식단 이미지 -->
 			<table>
 				<tr>
-					<td><img src="http://placehold.it/140x100" class="mainMenuImg1">
+					<td><img src="http://placehold.it/140x90" class="mainMenuImg1">
 					</td>
-					<td><img src="http://placehold.it/140x100" class="mainMenuImg2"></td>
+					<td><img src="http://placehold.it/140x90" class="mainMenuImg2"></td>
 				</tr>
 
 				<tr>
-					<td><img src="http://placehold.it/140x100" class="mainMenuImg3"></td>
-					<td><img src="http://placehold.it/140x100" class="mainMenuImg4"></td>
+					<td><img src="http://placehold.it/140x90" class="mainMenuImg3"></td>
+					<td><img src="http://placehold.it/140x90" class="mainMenuImg4"></td>
 				</tr>
 
 				<tr>
-					<td><img src="http://placehold.it/140x100" class="mainMenuImg5"></td>
-					<td><img src="http://placehold.it/140x100" class="mainMenuImg6"></td>
+					<td><img src="http://placehold.it/140x90" class="mainMenuImg5"></td>
+					<td><img src="http://placehold.it/140x90" class="mainMenuImg6"></td>
 				</tr>
 
 

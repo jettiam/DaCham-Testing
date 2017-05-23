@@ -16,6 +16,9 @@
 .container {
   position: relative;
   width: 50%;
+  margin: 0 auto;
+	
+  
 }
 #nutriInfoImg{
 margin-top:5px;
@@ -73,19 +76,73 @@ backface-visibility: hidden;
 <div class="container">
 
 <div id="nutriInfoImgList">
-<img src="../../../dacham/resources/customerImage/1.jpg" id="nutriInfoImg">
+<a href="nutritionInfoDetail"><img src="../../../dacham/resources/customerImage/tomato.jpg" id="nutriInfoImg">
+
 <div class="overlay">
-<div class="text">방울 토마토</div>
-</div>
-</div>
-
-<img src="http://placehold.it/300x300" id="nutriInfoImg2">
-<img src="http://placehold.it/300x300" id="nutriInfoImg3"><br>
-<img src="http://placehold.it/300x300" id="nutriInfoImg4">
-<img src="http://placehold.it/300x300" id="nutriInfoImg5">
-<img src="http://placehold.it/300x300" id="nutriInfoImg6">
+<div class="text">'방울 토마토'의 효능과 요리</div></a></div></div>
 </div>
 
+
+<div class="container">
+
+<div id="nutriInfoImgList">
+<a href="nutritionInfoDetail"><img src="../../../dacham/resources/customerImage/tomato2.jpg" id="nutriInfoImg">
+
+<div class="overlay">
+<div class="text">'브로콜리'</div></a></div></div>
 </div>
+
+
+
+<div class="container">
+
+<div id="nutriInfoImgList">
+<a href="nutritionInfoDetail"><img src="../../../dacham/resources/customerImage/tomato2.jpg" id="nutriInfoImg">
+
+<div class="overlay">
+<div class="text">'방울 토마토'</div></a></div></div>
+</div>
+
+
+<div class="container">
+
+<div id="nutriInfoImgList">
+<a href="nutritionInfoDetail"><img src="../../../dacham/resources/customerImage/tomato2.jpg" id="nutriInfoImg">
+
+<div class="overlay">
+<div class="text">'방울 토마토'</div></a></div></div>
+</div>
+
+
+<div class="container">
+
+<div id="nutriInfoImgList">
+<a href="nutritionInfoDetail"><img src="../../../dacham/resources/customerImage/tomato2.jpg" id="nutriInfoImg">
+
+<div class="overlay">
+<div class="text">'방울 토마토'</div></a></div></div>
+</div>
+
+
+<div class="container">
+
+<div id="nutriInfoImgList">
+<a href="nutritionInfoDetail"><img src="../../../dacham/resources/customerImage/tomato2.jpg" id="nutriInfoImg">
+
+<div class="overlay">
+<div class="text">'방울 토마토'</div></a></div></div>
+</div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
 </body>
 </html>
