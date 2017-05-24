@@ -16,7 +16,12 @@ import com.wdb3a.dacham.bean.orderList;
 import com.wdb3a.dacham.service.AdminMainService;
 
 
-
+/**
+ * 커밋을 위한 주석 수정(5월 24일)
+ * @author 김가은
+ * 
+ *
+ */
 @Controller
 public class AdminController {
 	@Inject
