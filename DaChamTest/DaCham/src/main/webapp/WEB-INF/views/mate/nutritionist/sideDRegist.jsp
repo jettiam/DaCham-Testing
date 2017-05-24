@@ -7,6 +7,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@include file="nutritionistNavi.jsp" %>
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$("#cancle").click(function(){
+			window.location.href = "side";
+		});
+	});
+</script>
 <style>
 	.box1 {
   float:left;  }
@@ -101,6 +109,7 @@
 				</tr>
 			</table>
 			<button id = "regist">등록</button>
+			<button id = "cancle">취소</button>
 		</div>
 	</div>
 </body>

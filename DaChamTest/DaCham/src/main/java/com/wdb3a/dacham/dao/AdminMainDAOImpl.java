@@ -20,4 +20,11 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 		return sqlSession.selectList(namespace+".listAll");
 	}
 
+	@Override
+	public orderList datailview(String orderCode) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".read", orderCode);
+	}
+
+	
 }

@@ -3,9 +3,23 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wdb3a.AdminMapper">
-	<select id="listAll" resultType="orderList">
+	<!-- <select id="listAll" resultType="orderList">
 		select 
-			orderCode, id, dietCode, orderDate
+			orderCode, id, dietCode, orderDate, price, orderItem, transportNum
 		from orderList 
+	</select> -->
+	<select id="listAll" resultType="orderList">
+		select b.dietCode, b.orderCode, b.id, a.dietName, b.orderDate, b.price, b.orderItem, b.transportNum
+		from diet a join orderlist b
+		on (a.dietCode=b.dietCode);
 	</select>
+	
+	<select id="read" resultType="orderList">
+	select b.dietCode, b.orderCode, b.id, a.dietName, b.orderDate, b.price, b.orderItem, b.transportNum, c.id, c.name, c.address, c.tel
+	from diet a join orderlist b join member c
+	where a.dietCode=b.dietCode 
+	and c.id=b.id
+	and orderCode=123;
+	</select>
+	
 </mapper>

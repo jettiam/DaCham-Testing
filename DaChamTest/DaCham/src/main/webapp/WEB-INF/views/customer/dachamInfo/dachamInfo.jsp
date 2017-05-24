@@ -35,7 +35,7 @@ margin-right:5px;
 #infoExplainText {
 
 width:615px;
-height:200px;
+height:197px;
 margin-left:5px;
 background-color: gray;
 color:white;
@@ -53,7 +53,7 @@ img {
 	<%@include file="../../clientNavi.jsp"%>
 <div id="dachamInfoMainImg">
 			<!-- 다참인포 메인이미지 -->
-			<img src="http://placehold.it/2000x200">
+			<img src="../../../dacham/resources/customerImage/dinfotop.jpg">
 		</div>
 
 	<div id="infoWrap">
@@ -68,7 +68,7 @@ img {
 			<h1>다참 서비스의 3 Step</h1><br>
 			<div id="infoExplain">
 			<div id="infoExplainImgBox">
-			<img src="http://placehold.it/200x200" id="infoExplainImg"></div>
+			<img src="../../../dacham/resources/customerImage/dinfob.jpg" id="infoExplainImg"></div>
 			<div id="infoExplainText">
 			
 			<h3><b>Step 1.</b> 알맞은 맞춤식단<br></h3>

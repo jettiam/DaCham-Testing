@@ -6,6 +6,14 @@
  <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@include file="nutritionistNavi.jsp" %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$("#regist").click(function(){
+			window.location.href = "sideDRegist";
+		});
+	});
+</script>
 <title>Insert title here</title>
 <style>
 	.box1 {
@@ -30,7 +38,7 @@
 	</div>
 	<div class = "box2">
 		<div>
-			<button>반찬 등록</button>
+			<button id = "regist">반찬 등록</button>
 			<button>반찬 수정</button>
 			<button>반찬 삭제</button>
 		</div>
