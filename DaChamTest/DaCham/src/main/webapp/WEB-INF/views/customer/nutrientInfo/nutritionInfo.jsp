@@ -86,10 +86,10 @@ backface-visibility: hidden;
 <div class="container">
 
 <div id="nutriInfoImgList">
-<a href="nutritionInfoDetail"><img src="../../../dacham/resources/customerImage/tomato2.jpg" id="nutriInfoImg">
+<a href="nutritionInfoDetail2"><img src="../../../dacham/resources/customerImage/broccoli.jpg" id="nutriInfoImg">
 
 <div class="overlay">
-<div class="text">'브로콜리'</div></a></div></div>
+<div class="text">미세먼지 기승, 녹차・브로콜리로 예방하세요!</div></a></div></div>
 </div>
 
 
@@ -97,7 +97,7 @@ backface-visibility: hidden;
 <div class="container">
 
 <div id="nutriInfoImgList">
-<a href="nutritionInfoDetail"><img src="../../../dacham/resources/customerImage/tomato2.jpg" id="nutriInfoImg">
+<a href="nutritionInfoDetail"><img src="../../../dacham/resources/customerImage/shutterstock.jpg" id="nutriInfoImg">
 
 <div class="overlay">
 <div class="text">'방울 토마토'</div></a></div></div>
