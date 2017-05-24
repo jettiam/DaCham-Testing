@@ -86,10 +86,10 @@
 				</tr>
 				<c:forEach items="${list}" var="board">
 					<tr>
-						<td>${board.orderCode }&nbsp;&nbsp;&nbsp;</td>
+						<td>${board.orderCode}&nbsp;&nbsp;&nbsp;</td>
 						<td>${board.id }</td>
 						<%-- <td>${board.dietName}&nbsp;&nbsp;</td> --%>
-						<td><a href="#" onclick="showmap()">${board.dietName}&nbsp;&nbsp;</td>
+						<td><a href="${board.orderCode}"  class="orderCode" >${board.dietName}&nbsp;&nbsp;</a></td>
 						<td>${board.orderDate }&nbsp;&nbsp;</td>
 						<td>${board.price}</td>
 						<td>${board.orderItem}</td>
@@ -101,40 +101,36 @@
 			</table>
 		</div>
 	</div>
-
-	<div name="read" id="read" class="read">
+	<div id="detailView">
+	</div>
+	 <div name="read" id="read" class="read">
 		<table width="600" border="1">
 			<tr>
 				<th>고객이름</th>
-				<td>${order.name}</td>
+				<td id="orderName"></td>
 				<th>배달주소</th> 
-				<td>${order.address}</td>
+				<td id="orderAddRess"></td>
 			</tr>
 			<tr>
 				<th>가격</th>
-				<td>${order.price}</td>
+				<td id ="orderPrice"></td>
 				<th>식단명</th>
-				<td>${order.dietName}</td>
+				<td id ="orderDietName"></td>
 			</tr>
 			<tr>
 				<th>주문일</th>
-				<td>${order.orderDate}</td>
-				<th>질환명</th>
-				<td></td>
-			</tr>
-			<tr>
+				<td id="orderOrderDate"></td>
 				<th>전화번호</th>
-				<td>${order.tel}</td>
-				<th>질환명</th>
-				<td></td>
+				<td id="orderTel"></td>
 			</tr>
 		</table>
 		<button id="close">닫기</button>
 	</div>
-
+ 
 
 </body>
 <script>
+
 	jQuery.fn.center = function () {
     this.css("position","absolute");
     this.css("top", Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) + $(window).scrollTop()) + "px");
@@ -142,11 +138,58 @@
     this.css("background-color", "#dddddd"); 
     return this;
 	}
-	function showmap(){
-		$("#read").show();
-		$("#read").center();
+	
+	$(".orderCode").on("click",function(){
+		event.preventDefault();
+		var orderCode = $(this).attr("href");
+		alert(orderCode);
 		
-	}
+		
+		$.ajax({
+	         type: "get",
+	         url: "adminSub/detailView/"+orderCode,  
+	         dataType: "text",
+	        /*  data: JSON.stringify({
+	            "orderCode":orderCode
+	         }) */
+	         success: function(data) {
+	            if(data=="SUCCESS"){
+	            	 var str = "";
+	            	 $(data.orderCode).each(function(){
+	            		 alert(this.name);
+	                  });
+	            	 
+	            }
+	            
+	         }
+	      });
+	});
+	/* function showmap(){
+		
+		/* event.preventDefault();
+		var orderCode = $(this).attr("href");
+		alert(orderCode); */
+		/* $.ajax({
+	         type: "get",
+	         url: "adminMain",
+	        
+	         dataType: "text",
+	         data: JSON.stringify({
+	            "replyText":replyText
+	         }),
+	         success: function(reslut) {
+	            if(reslut=="SUCCESS"){
+	               alert("수정되었습니다");
+	               $("#modDiv").hide("slow");
+	               getAllReplies();
+	            }
+	         }
+	      });
+		 */
+		//$("#read").show();
+		//$("#read").center();
+		
+	//}    
 	
 	function getDefaultDate() {// 해당 일 계산
 
