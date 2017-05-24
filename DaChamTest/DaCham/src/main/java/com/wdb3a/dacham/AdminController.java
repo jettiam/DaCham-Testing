@@ -16,19 +16,21 @@ import com.wdb3a.dacham.bean.orderList;
 import com.wdb3a.dacham.service.AdminMainService;
 
 
-
+/**
+ * 커밋을 위한 주석 수정(5월 24일)
+ * @author 김가은
+ * 
+ *
+ */
 @Controller
 public class AdminController {
 	@Inject
 	private AdminMainService service; 
 	@RequestMapping(value="/adminMain", method=RequestMethod.GET)
-	public String getadminMain(Model model, orderList order) throws Exception{
+	public String getadminMain(Model model) throws Exception{
 		List<orderList> list=service.orderListAll();
 		model.addAttribute("list",list);
-		order = service.datailview(order.getOrderCode());
-		System.out.println(order.getOrderCode());
-
-		model.addAttribute("order", order);
+		
 		return "mate/admin/adminMain";
 	}
 	
@@ -40,7 +42,7 @@ public class AdminController {
 	      model.addAttribute("board",board);
 	      return "mate/admin/adminMain";
 	   }*/
-	 
+
 	@RequestMapping(value="/customer")
 	public String getcustomer(){
 		return "mate/admin/customer";
@@ -74,7 +76,7 @@ public class AdminController {
 		return "mate/admin/foodStock";
 	}
 	@RequestMapping(value="/orderList",method=RequestMethod.GET)
-	public String getorderList(Model model) throws Exception{
+	public String getorderList(Model model, orderList order) throws Exception{
 		List<orderList> list=service.orderListAll();
 		model.addAttribute("list",list);
 		
