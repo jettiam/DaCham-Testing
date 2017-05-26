@@ -15,7 +15,7 @@
 
 	#mainContent {
 	
-		width: 1080px;
+		max-width: 1080px;
 		height: 100%;
 		
 		
@@ -25,8 +25,8 @@
 	}
 	#mainLeftWrap {
 		float:left;
-		width:800px;
-		height:640px;
+		max-width:800px;
+		/* height:640px; */
 	}
 
 
@@ -39,7 +39,7 @@
 #mainNutriBox {
 	
 	position:relative;
-	width: 280px;
+	max-width: 280px;
 	height: 140px;
 	background-color: gray;
 }
@@ -49,7 +49,7 @@
 	
 }
 #myNutriInfo{
-width: 280px;
+max-width: 280px;
 	height: 123px;
 	background-color: gray;
 }
