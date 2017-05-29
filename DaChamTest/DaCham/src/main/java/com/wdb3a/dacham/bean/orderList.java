@@ -111,6 +111,9 @@ public class orderList {
 		
 		
 	}
+	public String toString(){
+		return getName();
+	}
 	
 	
 	
