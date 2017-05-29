@@ -55,7 +55,8 @@ img {
 	height: auto;
 }
 td img{
-	width:140px;	
+	width:140px;
+	height:90px;	
 	}
 
 
@@ -78,7 +79,7 @@ td img{
 	}
 	td img{
 		width:250px;
-		max-height:160.7px;
+		height : auto;
 	}
 }
 </style>
@@ -101,23 +102,23 @@ td img{
 				<!-- 로그인박스 하단 작은 사이즈 식단 이미지 -->
 				<table>
 					<tr>
-						<td><img src="http://placehold.it/140x90"
+						<td><img src="http://placehold.it/280x180"
 							class="mainMenuImg1"></td>
-						<td><img src="http://placehold.it/140x90"
+						<td><img src="http://placehold.it/280x180"
 							class="mainMenuImg2"></td>
 					</tr>
 
 					<tr>
-						<td><img src="http://placehold.it/140x90"
+						<td><img src="http://placehold.it/280x180"
 							class="mainMenuImg3"></td>
-						<td><img src="http://placehold.it/140x90"
+						<td><img src="http://placehold.it/280x180"
 							class="mainMenuImg4"></td>
 					</tr>
 
 					<tr>
-						<td><img src="http://placehold.it/140x90"
+						<td><img src="http://placehold.it/280x180"
 							class="mainMenuImg5"></td>
-						<td><img src="http://placehold.it/140x90"
+						<td><img src="http://placehold.it/280x180"
 							class="mainMenuImg6"></td>
 					</tr>
 				</table>
