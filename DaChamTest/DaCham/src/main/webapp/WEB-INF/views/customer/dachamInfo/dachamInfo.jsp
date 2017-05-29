@@ -16,82 +16,128 @@
 	text-align: center;
 }
 
-#dachamInfoMainImg {
-	
+#infotop {
+		display: block;
+	}
+#infotop_m{
+	display:none;
 }
 
 #infoExplain {
-	width:615px;
-	height:200px;
-  margin:0 auto;
-position:relative; 
+	width: 615px;
+	height: 200px;
+	margin: 0 auto;
+	position: relative;
 }
 
-#infoExplainImgBox {float:left; background-color: white;
+#infoExplainImgBox {
+	float: left;
+	background-color: white;
 }
-#infoExplainImg{
-margin-right:5px;
+
+#infoExplainImg {
+	margin-right: 5px;
 }
+
 #infoExplainText {
-
-width:615px;
-height:197px;
-margin-left:5px;
-background-color: gray;
-color:white;
-padding:20px;
-
+	width: 615px;
+	height: 197px;
+	margin-left: 5px;
+	background-color: gray;
+	color: white;
+	padding: 20px;
 }
 
 img {
 	max-width: 100%;
 	height: auto;
 }
+
+@media only screen and (max-width: 500px) {
+	#infotop {
+		display: none;
+	}
+	#infotop_m{
+	display:block;
+	}
+	#infoWrap {
+		width: 100%;
+		height: 100%;
+		margin: 0 auto;
+		text-align: center;
+	}
+	#dachamInfoText>h1 {
+		font-size: 30px;
+	}
+	#infoExplain {
+		width: 100%;
+		height: auto;
+		margin: 0 auto;
+		position: relative;
+	}
+	#infoExplainImgBox {
+		display: none;
+	}
+	#infoExplainText {
+	width: 100%;
+	height: auto;
+	margin-left: 0px;
+	background-color: gray;
+	color: white;
+	padding: 20px;
+	}
+}
 </style>
 </head>
 <body>
 	<%@include file="../../clientNavi.jsp"%>
-<div id="dachamInfoMainImg">
-			<!-- 다참인포 메인이미지 -->
-			<img src="../../../dacham/resources/customerImage/dinfotop.jpg">
-		</div>
+	<div id="dachamInfoMainImg">
+		<!-- 다참인포 메인이미지 -->
+		<img id="infotop" src="../../../dacham/resources/customerImage/dinfotop.jpg">
+		<img id="infotop_m" src="../../../dacham/resources/customerImage/dinfotop_m.png">
+	</div>
 
 	<div id="infoWrap">
-		
-
 		<div id="dachamInfoText">
 			<h1>만성 질환 식단의 문제점</h1>
 			<br> 만성질환 식단의 문제점은 뭘까요 저도 모르겠어요 살려주세요<br> 만성질환 식단의 문제점은 뭘까요
 			저도 모르겠어요 살려주세요<br> 만성질환 식단의 문제점은 뭘까요 저도 모르겠어요 살려주세요<br>
-			만성질환 식단의 문제점은 뭘까요 저도 모르겠어요 살려주세요<br><br>
+			만성질환 식단의 문제점은 뭘까요 저도 모르겠어요 살려주세요<br> <br>
 
-			<h1>다참 서비스의 3 Step</h1><br>
+			<h1>다참 서비스의 3 Step</h1>
+			<br>
 			<div id="infoExplain">
-			<div id="infoExplainImgBox">
-			<img src="../../../dacham/resources/customerImage/dinfob.jpg" id="infoExplainImg"></div>
-			<div id="infoExplainText">
-			
-			<h3><b>Step 1.</b> 알맞은 맞춤식단<br></h3>
-			<h3><b>Step 2.</b> 비용절감, 시간절감<br></h3>
-			<h3><b>Step 3.</b> 번거로움 해소<br></h3>
-			
+				<div id="infoExplainImgBox">
+					<img src="../../../dacham/resources/customerImage/dinfob.jpg"
+						id="infoExplainImg">
+				</div>
+				<div id="infoExplainText">
+
+					<h3>
+						<b>Step 1.</b> 알맞은 맞춤식단<br>
+					</h3>
+					<h3>
+						<b>Step 2.</b> 비용절감, 시간절감<br>
+					</h3>
+					<h3>
+						<b>Step 3.</b> 번거로움 해소<br>
+					</h3>
+
+				</div>
 			</div>
-			</div>
-			<br>
-			<br>
-			<input type="button" id="moveOrder" value="주문하기"> 
+			<br> <br> <input type="button" id="moveOrder" value="주문하기">
 		</div>
 
 	</div>
-	
-	
+
+
 </body>
 <script>
-	window.onload=function(){
+	window.onload = function() {
 		var button = document.getElementById('moveOrder');
-		button.onclick=function(){
-			window.location="dietOrder"
+		button.onclick = function() {
+			window.location = "dietOrder"
 		};
 	};
-	</script>
+</script>
 </html>
