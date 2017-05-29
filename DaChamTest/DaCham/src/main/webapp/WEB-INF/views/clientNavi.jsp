@@ -22,13 +22,15 @@
 	text-align:center;
 }
 
-.box {
+.liBox {
 	display: inline-block;
 	height: 50px;
 	padding: 0 20px;
 	font-size: 25px;
 }
-
+#naviMenuBtn{
+	display: none;
+}
 #sideBox {
 	float:right;
 	margin-right:10px;
@@ -44,6 +46,31 @@
 #logo{margin-top:10px;
 		margin-left:10px;
       }
+      
+@media only screen and (max-width: 500px) {
+	.liBox {
+	display: block;
+	list-style:none;
+	magin : 5px 0px;
+	padding: 0px;
+	font-size: 14px;
+	height: 25px;
+	}
+	.ulBox{
+		margin: 0px;
+		padding: 0px;
+		text-align:left;
+		display:none;
+	}
+	#naviMenuBtn {
+		display:block;
+		padding: 10px;		
+		font-size : 20px;		
+	}
+	.naviBox {	
+	text-align:left;
+}
+}
 </style>
 <!-- 상단 내비게이션 표시를 위한 임시 CSS -->
 
@@ -80,19 +107,19 @@
 	<!-- 고객 메인 -->
 	<!-- 상단 메뉴바 -->
 	<div class="naviBox">
-		<ul type="none" class="">
+		<div id="naviMenuBtn">
+          <span class="glyphicon glyphicon-th-list"></span>
+        </div>
+		<ul class="ulBox">
 			<!-- 메뉴 리스트 -->
-			<li class="box"><a href="dachamInfo" id="dachamInfo">다참소개</a></li>
-			<li class="box"><a href="dietOrder" id="dietOrder">식단주문하기</a></li>
-			<li class="box"><a href="menuShow" id="menuShow">이달의메뉴</a></li>
-			<li class="box"><a href="nutritionInfo" id="nutritionInfo">영양소개</a></li>
-			<li class="box"><a href="counsel" id="counsel">문의하기</a></li>
-
+			<li class="liBox"><a href="dachamInfo" id="dachamInfo">다참소개</a></li>
+			<li class="liBox"><a href="dietOrder" id="dietOrder">식단주문하기</a></li>
+			<li class="liBox"><a href="menuShow" id="menuShow">이달의메뉴</a></li>
+			<li class="liBox"><a href="nutritionInfo" id="nutritionInfo">영양소개</a></li>
+			<li class="liBox"><a href="counsel" id="counsel">문의하기</a></li>
 		</ul>
 
-	</div>
-
-	
+	</div>	
 
 
 </body>
@@ -112,6 +139,10 @@
 		} else {
 
 		}
+		
+		$("#naviMenuBtn").on("click",function(){
+			$(".ulBox").toggle();
+		});
 	});
 </script>
 

@@ -66,6 +66,7 @@
 	transform: translate(-50%, -50%);
 	-ms-transform: translate(-50%, -50%);
 }
+#nutriInfotable{margin-left:100px;}
 </style>
 </head>
 <body>
@@ -74,7 +75,7 @@
 		<h1>영양소개</h1>
 		건강에 대한 좋은 말씀 드릴게요<br> 건강에 대한 좋은 말씀 드릴게요<br> 건강에 대한 좋은 말씀
 		드릴게요<br>
-<table>
+<table id="nutriInfotable">
 <tr><td>
 		<div class="nutriInfoContainer">
 
@@ -120,51 +121,54 @@
 	</div>
 	</td>
 	</tr>
+
+<tr>
+<td>
+	<div class="nutriInfoContainer">
+
+		<div id="nutriInfoImgList">
+			<a href="nutritionInfoDetail"><img
+				src="../../../dacham/resources/customerImage/tomato2.jpg"
+				id="nutriInfoImg">
+
+				<div class="overlay">
+					<div class="text">'방울 토마토'</div></a>
+		</div>
+	</div>
+	</div>
+</td>
+
+<td>
+	<div class="nutriInfoContainer">
+
+		<div id="nutriInfoImgList">
+			<a href="nutritionInfoDetail"><img
+				src="../../../dacham/resources/customerImage/tomato2.jpg"
+				id="nutriInfoImg">
+
+				<div class="overlay">
+					<div class="text">'방울 토마토'</div></a>
+		</div>
+	</div>
+	</div>
+</td>
+
+<td>
+	<div class="nutriInfoContainer">
+
+		<div id="nutriInfoImgList">
+			<a href="nutritionInfoDetail"><img
+				src="../../../dacham/resources/customerImage/tomato2.jpg"
+				id="nutriInfoImg">
+
+				<div class="overlay">
+					<div class="text">'방울 토마토'</div></a>
+		</div>
+	</div>
+	</div>
+</td>
+</tr>
 </table>
-
-	<div class="nutriInfoContainer">
-
-		<div id="nutriInfoImgList">
-			<a href="nutritionInfoDetail"><img
-				src="../../../dacham/resources/customerImage/tomato2.jpg"
-				id="nutriInfoImg">
-
-				<div class="overlay">
-					<div class="text">'방울 토마토'</div></a>
-		</div>
-	</div>
-	</div>
-
-
-	<div class="nutriInfoContainer">
-
-		<div id="nutriInfoImgList">
-			<a href="nutritionInfoDetail"><img
-				src="../../../dacham/resources/customerImage/tomato2.jpg"
-				id="nutriInfoImg">
-
-				<div class="overlay">
-					<div class="text">'방울 토마토'</div></a>
-		</div>
-	</div>
-	</div>
-
-
-	<div class="nutriInfoContainer">
-
-		<div id="nutriInfoImgList">
-			<a href="nutritionInfoDetail"><img
-				src="../../../dacham/resources/customerImage/tomato2.jpg"
-				id="nutriInfoImg">
-
-				<div class="overlay">
-					<div class="text">'방울 토마토'</div></a>
-		</div>
-	</div>
-	</div>
-
-
-
 
 
 
