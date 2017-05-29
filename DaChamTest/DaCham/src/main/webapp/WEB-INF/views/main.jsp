@@ -60,7 +60,7 @@ td img{
 	}
 
 
-@media only screen and (max-width: 750px) {
+@media only screen and (max-width: 500px) {
 	#mainNutriBox {
 		position: relative;
 		max-width: 500px;
