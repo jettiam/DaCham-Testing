@@ -25,7 +25,21 @@ public class Nutritionist {
 	private int maxBloodP;
 	private String judgement;
 	private String search;
+	private String foodMCode;
+	private String foodMImg;
 	
+	public String getFoodMCode() {
+		return foodMCode;
+	}
+	public void setFoodMCode(String foodMCode) {
+		this.foodMCode = foodMCode;
+	}
+	public String getFoodMImg() {
+		return foodMImg;
+	}
+	public void setFoodMImg(String foodMImg) {
+		this.foodMImg = foodMImg;
+	}
 	public String getSideDName() {
 		return sideDName;
 	}

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,26 +30,27 @@
 </style>
 </head>
 <body>
-	<div class = "div1">
-		<div>
-			<input type = "text" placeholder = "식재료 검색어 입력란">
-			<button id = "search"> 검색 </button>
-		</div>
-		<br><br>
-		<div>
-			<table>
-				<tr>
-					<th>코드번호</th>
-					<th>이미지</th>
-					<th>식재료명</th>
-				</tr>
-				<tr>
-					<td>A1</td>
-					<td></td>
-					<td>안창살</td>
-				</tr>
-			</table>
-		</div>
+	<form>
+		<div class = "div1">
+			<div>
+				<input type = "text" name = "search" placeholder = "식재료 검색어 입력란">
+				<button id = "search"> 검색 </button>
+				<table>
+					<tr>
+						<th>코드번호</th>
+						<th>이미지</th>
+						<th>식재료명</th>
+					</tr>
+					<c:forEach items = "${list }" var = "b">
+						<tr>
+							<td>${b.foodMCode }</td>
+							<td><img src = "displayFile?fileName=${b.foodMImg }" style= "width: 300px; height: auto;"></td>
+							<td>${b.foodMName }</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
+		</form>
 		<div>
 			<br><br>
 			<div class = "box1">

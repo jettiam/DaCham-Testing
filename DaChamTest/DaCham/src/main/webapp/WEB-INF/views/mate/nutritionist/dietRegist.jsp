@@ -91,8 +91,9 @@
 						<th>식품군</th>
 						<th>조리방법</th>
 					</tr>
+					<%int i = 1; %>
 					<c:forEach items = "${list }" var = "b">
-						<%int i = 1; %>
+						
 						<tr>
 							<td><input type = "checkbox" name = "chk" value = "<%=i %>"></td>
 							<td>${b.sideDName }</td>

@@ -6,4 +6,5 @@ import com.wdb3a.dacham.bean.Nutritionist;
 
 public interface NutritionistService {
 	public List<Nutritionist> listSearch(Nutritionist nutritionist) throws Exception;
+	public List<Nutritionist> materialSearch(Nutritionist nutritionist) throws Exception;
 }

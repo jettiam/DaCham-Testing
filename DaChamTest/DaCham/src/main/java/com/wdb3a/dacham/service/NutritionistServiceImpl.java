@@ -21,4 +21,10 @@ public class NutritionistServiceImpl implements NutritionistService {
 		return dao.listSearch(nutritionist);
 	}
 
+	@Override
+	public List<Nutritionist> materialSearch(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.materialSearch(nutritionist);
+	}
+
 }
