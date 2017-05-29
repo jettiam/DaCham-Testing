@@ -1,14 +1,26 @@
 package com.wdb3a.dacham;
 
+import java.util.List;
+
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.wdb3a.dacham.bean.Nutritionist;
+import com.wdb3a.dacham.service.NutritionistService;
 /*
  * 영양사페이지 컨트롤러
  */
 @Controller
 @RequestMapping("mate/nutritionist")
 public class NutritionController {
+	
+   @Inject
+   private NutritionistService service;
+   
    @RequestMapping(value = "/main", method = RequestMethod.GET)
    /*
     * @return 영양사 메인페이지로 이동
@@ -41,7 +53,10 @@ public class NutritionController {
     * @return 식단등록 페이지로 이동
     */
    @RequestMapping(value="/dietRegist",method=RequestMethod.GET)
-   public String getDietRegist(){
+   public String getDietRegist(Model model,Nutritionist nutritionist) throws Exception{
+	   List<Nutritionist> list = service.listSearch(nutritionist);
+	   model.addAttribute("list",list);
+	   
 	   return "mate/nutritionist/dietRegist";
    }
    /*

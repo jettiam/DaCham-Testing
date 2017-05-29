@@ -31,15 +31,19 @@
 
 #sideBox {
 	float:right;
+	margin-right:10px;
 }
 
 
 #infoBox {
 	display: none;
 	float: right;
+	margin-right:10px;
 }
 
-#logo{margin-top:10px;}
+#logo{margin-top:10px;
+		margin-left:10px;
+      }
 </style>
 <!-- 상단 내비게이션 표시를 위한 임시 CSS -->
 
@@ -49,7 +53,7 @@
 		<!-- 로고+고객정보 -->
 		<div id="logo">
 			<!-- 로고박스 -->
-			<a href="main"><img src="http://placehold.it/100x100"></a>
+			<a href="main"><img src="../../dacham/resources/customerImage/dachamlogo.jpg" width="100px" height="100px"></a>
 <!-- 고객 로그인 페이지 -->
 	<div id="sideBox">
 		<form method="post" action="main" class="loginBox">

@@ -53,6 +53,14 @@ public String nutritionInfoDetail(){
 	return "customer/nutrientInfo/nutritionInfoDetail";
 }
 
+@RequestMapping(value="/nutritionInfoDetail2",method = RequestMethod.GET)
+/**
+ * 
+ * @return 영양소개 상세로 이동
+ */
+public String nutritionInfoDetail2(){
+	return "customer/nutrientInfo/nutritionInfoDetail2";
+}
 @RequestMapping(value="/counsel",method = RequestMethod.GET)
 /**
  * 
