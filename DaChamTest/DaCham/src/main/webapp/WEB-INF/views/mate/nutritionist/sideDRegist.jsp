@@ -30,7 +30,7 @@
 </style>
 </head>
 <body>
-	<form>
+	<form id = "materialSearch">
 		<div class = "div1">
 			<div>
 				<input type = "text" name = "search" placeholder = "식재료 검색어 입력란">
@@ -44,7 +44,7 @@
 					<c:forEach items = "${list }" var = "b">
 						<tr>
 							<td>${b.foodMCode }</td>
-							<td><img src = "displayFile?fileName=${b.foodMImg }" style= "width: 300px; height: auto;"></td>
+							<td><img src = "displayFile?fileName=${b.foodMImg }" style= "width: 175px; height: 50px;"></td>
 							<td>${b.foodMName }</td>
 						</tr>
 					</c:forEach>
@@ -68,7 +68,7 @@
 			<div class = "box2">
 				<h2>반찬 사진</h2>
 				<input type = "file" name = "file">
-				<button id = "upload">업로드</button>
+				
 				<div>
 				</div>
 			</div>
@@ -82,6 +82,9 @@
 		<div>
 			<h2>반찬 레시피</h2>
 			<textarea placeholder = "레시피 입력란"></textarea>
+		</div>
+		<div>
+			반찬 이름<input type = "text" name = "sideDName">
 		</div>
 		<div>
 			<table>
