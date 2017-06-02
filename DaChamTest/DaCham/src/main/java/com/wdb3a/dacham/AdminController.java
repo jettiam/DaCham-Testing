@@ -42,8 +42,16 @@ public class AdminController {
 	public String getfoodStock(){
 		return "mate/admin/foodStock";
 	}
+	@RequestMapping(value="/orderList")
+	public String getorderList(){
+		return "mate/admin/orderList";
+	}
 	@RequestMapping(value="/statistics")
 	public String getstatistics(){
 		return "mate/admin/statistics";
+	}
+	@RequestMapping(value="/notice")
+	public String getnotice(){
+		return "mate/admin/notice";
 	}
 }
