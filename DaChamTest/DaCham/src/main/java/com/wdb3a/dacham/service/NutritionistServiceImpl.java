@@ -27,4 +27,10 @@ public class NutritionistServiceImpl implements NutritionistService {
 		return dao.materialSearch(nutritionist);
 	}
 
+	@Override
+	public Nutritionist materialView(String sideDCode) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.materialView(sideDCode);
+	}
+
 }

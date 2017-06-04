@@ -27,4 +27,10 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 		return sqlSession.selectList(namespace+".materialSearch",nutritionist);
 	}
 
+	@Override
+	public Nutritionist materialView(String sideDCode) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".materialAmount",sideDCode);
+	}
+
 }

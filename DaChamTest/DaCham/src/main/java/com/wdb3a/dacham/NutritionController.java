@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wdb3a.dacham.bean.Nutritionist;
@@ -76,6 +77,7 @@ public class NutritionController {
 	   List<Nutritionist> list = service.listSearch(nutritionist);
 	   model.addAttribute("list",list);
 	   
+	  
 	   return "mate/nutritionist/dietRegist";
    }
    /*
@@ -92,6 +94,8 @@ public class NutritionController {
    public String getSideRegist(Model model, Nutritionist nutritionist) throws Exception{
 	   List<Nutritionist> list = service.materialSearch(nutritionist);
 	   model.addAttribute("list",list);
+	   
+	  
 	   return "mate/nutritionist/sideDRegist";
    }
    /*

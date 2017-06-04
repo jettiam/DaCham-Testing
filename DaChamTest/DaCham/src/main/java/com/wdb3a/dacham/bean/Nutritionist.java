@@ -1,6 +1,7 @@
 package com.wdb3a.dacham.bean;
 
 public class Nutritionist {
+	private String sideDCode;
 	private String sideDName;
 	private String recipe;
 	private String sideDImg;
@@ -39,6 +40,12 @@ public class Nutritionist {
 	}
 	public void setFoodMImg(String foodMImg) {
 		this.foodMImg = foodMImg;
+	}
+	public String getSideDCode() {
+		return sideDCode;
+	}
+	public void setSideDCode(String sideDCode) {
+		this.sideDCode = sideDCode;
 	}
 	public String getSideDName() {
 		return sideDName;
