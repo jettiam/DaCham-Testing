@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wdb3a.DeliverMapper">
+	<select id="deliverList" resultType="orderList">
+		select a.orderCode, b.id, c.dietImg, c.dietName, b.address
+		from orderlist a join member b join diet c
+		where a.id = b.id
+		and a.dietCode = c.dietCode
+		<include refid="search"></include>
+	</select>
+	<sql id = "search">
+	  	<if test = "searchType != null">
+	  		<if test="searchType == 't'.toString()">
+	  			and a.orderCode like CONCAT('%',#{keyword},'%')
+	  		</if>
+	  		<if test="searchType == 'c'.toString()">
+	  			and a.id like CONCAT('%',#{keyword},'%')
+	  		</if>
+	  	</if>
+  </sql>
+</mapper>

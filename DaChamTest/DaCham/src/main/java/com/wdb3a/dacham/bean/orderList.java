@@ -12,15 +12,29 @@ public class orderList {
 	private String address;
 	private String tel;
 	private String name;
-	
+	private String dietImg;
 	
 	private int price;
 	private int dietAmount;
 	private String orderItem;
 	private String paymentItem;
 	private String transportNum;
+	private String searchType;
+	private String keyword;
+	public String getSearchType() {
+		return searchType;
+	}
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
+	}
 	
 		
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
 	public String getDiseaseCode() {
 		return diseaseCode;
 	}
@@ -110,6 +124,12 @@ public class orderList {
 		}
 		
 		
+	}
+	public String getDietImg() {
+		return dietImg;
+	}
+	public void setDietImg(String dietImg) {
+		this.dietImg = dietImg;
 	}
 	public String toString(){
 		return getName();

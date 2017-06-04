@@ -11,7 +11,7 @@
 		and a.sideDName like CONCAT('%',#{search},'%') 
 	</select>
 	<select id = "materialSearch" resultType = "com.wdb3a.dacham.bean.Nutritionist">
-		select foodMCode, foodMImg, foodMName
+		select *
 		from foodmaterial
 		where foodMName like CONCAT('%',#{search},'%')
 	</select>

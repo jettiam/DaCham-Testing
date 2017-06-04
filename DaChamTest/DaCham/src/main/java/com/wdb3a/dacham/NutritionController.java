@@ -76,7 +76,7 @@ public class NutritionController {
    public String getDietRegist(Model model,Nutritionist nutritionist) throws Exception{
 	   List<Nutritionist> list = service.listSearch(nutritionist);
 	   model.addAttribute("list",list);
-	   
+	   model.addAttribute("nutritionist",nutritionist);
 	  
 	   return "mate/nutritionist/dietRegist";
    }

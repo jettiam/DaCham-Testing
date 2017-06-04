@@ -35,6 +35,7 @@
 			System.out.println(str);
 		%>	
 		<input type = "hidden" name = "sideDCode" value = <%=str %>>
+		<input type = "hidden" name = "foodMCode" value = "${nutritionist.foodMName }">
 		<div class = "div1">
 			<div>
 				<input type = "text" name = "search" placeholder = "식재료 검색어 입력란">
@@ -160,9 +161,10 @@
 				for(var i = 0; i<cnt; i++){
 					var foodMName = localStorage[i + "_name"];
 					var item = $('<tr></tr>').addClass('item');
-					$('<td>'+foodMName+'</td>').addClass("foodMName"+i).appendTo(item);
+					$('<td>'+foodMName+'</td>').addClass("foodMName").attr('id','new'+i).attr('name','foodMName').appendTo(item);
 					$('<td></td>').html('<input type ="text" name = "foodMAmount" maxlength="4" size="1" >').appendTo(item);
 					item.appendTo(".material");
+					
 				}
 			}
 		});

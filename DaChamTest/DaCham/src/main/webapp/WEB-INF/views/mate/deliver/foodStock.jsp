@@ -16,25 +16,25 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form>
+	<form id = "foodStock">
 		<table border = "2">
 			<tr>
 				<th>입고날짜</th>
-				<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-				<th>단가</th>
-				<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</td>
+				<td> <input type="date" name="exDate"></td>
+				<th>단가(원)</th>
+				<td><input type = "text" name = "price"></td>
 			</tr>
 			<tr>
 				<td>식재료명</td>
-				<td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+				<td><input type = "text" name = "foodMName"></td>
 				<td>식재료 이미지</td>
-				<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+				<td><input type = "file" name = "foodMImg"></td>
 			</tr>
 			<tr>
 				<td>코드번호</td>
-				<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+				<td><input type = "text" name = "foodMCode"></td>
 				<td>단위</td>
-				<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+				<td><input type = "text" name = "outAmount"></td>
 			</tr>
 		</table>
 		<button type = "submit" id = "submit">확인</button>
