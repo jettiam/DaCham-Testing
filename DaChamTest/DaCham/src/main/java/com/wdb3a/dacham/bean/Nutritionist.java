@@ -28,7 +28,21 @@ public class Nutritionist {
 	private String search;
 	private String foodMCode;
 	private String foodMImg;
+	private String foodGCode;
+	private String cookMCode;
 	
+	public String getFoodGCode() {
+		return foodGCode;
+	}
+	public void setFoodGCode(String foodGCode) {
+		this.foodGCode = foodGCode;
+	}
+	public String getCookMCode() {
+		return cookMCode;
+	}
+	public void setCookMCode(String cookMCode) {
+		this.cookMCode = cookMCode;
+	}
 	public String getFoodMCode() {
 		return foodMCode;
 	}

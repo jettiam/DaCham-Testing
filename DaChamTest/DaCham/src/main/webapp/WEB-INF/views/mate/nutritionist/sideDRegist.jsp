@@ -24,7 +24,7 @@
 </style>
 </head>
 <body>
-	<form id = "materialSearch">
+	<form id = "materialSearch" >
 		<%
 			long time = System.currentTimeMillis(); 
 	
@@ -57,7 +57,8 @@
 			</div>
 		</div>
 	</form>
-	<form id = "regist">	
+	<form id = "registForm" enctype = "multipart/form-data">
+			<input type = "hidden" name = "sideDCode" value = <%=str %>>	
 			<br><br>
 			<div class = "box1">
 				<table class = "material">
@@ -84,7 +85,7 @@
 			</div>
 			<div>
 				<h2>반찬 레시피</h2>
-				<textarea placeholder = "레시피 입력란"></textarea>
+				<textarea placeholder = "레시피 입력란" name = "recipe"></textarea>
 			</div>
 			<div>
 				반찬 이름<input type = "text" name = "sideDName">
@@ -97,23 +98,23 @@
 					</tr>
 					<tr>
 						<td>
-							<select>
+							<select name = "foodGCode">
 								<option>식품군</option>
-								<option>곡류</option>
-								<option>조미류</option>
-								<option>포유류</option>
-								<option>생선류</option>
-								<option>고기류</option>
+								<option value = "01">곡류</option>
+								<option value = "02">조미류</option>
+								<option value = "03">포유류</option>
+								<option value = "04">생선류</option>
+								<option value = "05">고기류</option>
 							</select>
 						</td>
 						<td>
-							<select>	
+							<select name = "cookMCode">	
 								<option>조리방법</option>
-								<option>튀김</option>
-								<option>구이</option>
-								<option>조림</option>
-								<option>찜</option>
-								<option>초벌</option>
+								<option value = "01">튀김</option>
+								<option value = "02">구이</option>
+								<option value = "03">조림</option>
+								<option value = "04">찜</option>
+								<option value = "05">초벌</option>
 							</select>
 						</td>
 					</tr>
@@ -125,8 +126,14 @@
 	</form>
 	<script>
 		$(document).ready(function(){
+			
+			$("#regist").on("click",function(){
+				$("#registForm").attr("method","post");
+				$("#registForm").attr("action","side");
+				$("#registForm").submit();
+			});
 			Refresh();
-			localStorage.clear();
+			
 			if(!localStorage['init']){
 				localStorage['init'] = "true";
 				localStorage['cnt'] = 0;
@@ -170,6 +177,7 @@
 					item.appendTo(".material");
 					
 				}
+				
 			}
 		});
 	</script>
