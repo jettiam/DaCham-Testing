@@ -22,33 +22,28 @@
 <!-- 	</form> -->
 		<table border = 3>
 			<tr>
+				<th>문의분류</th>
 				<th>글번호</th>
 				<th>글제목</th>
 				<th>작성자</th>
 				<th>작성일</th>
-				<th>문의분류</th>
+				
 			</tr>
 			<c:forEach items="${list}" var="counsel">
 			<tr>
+				<td>${counsel.counselItemName}</td>			
 				<td>${counsel.counselCode }</td>
 				<td><a href = "read">${counsel.counselTitle }</a></td>
 				<td>${counsel.customer}</td>
 				<td>${counsel.counselDate }</td>
-				<td>${counsel.counselItemName}</td>
+				
 			</tr>
 			</c:forEach>
 		</table>
 		<div>
 			<button id = "write">글쓰기</button>
 		</div>
-		<div>
-			이메일문의
-			doifjewo@dacham.com(그냥 네모 틀)
-		</div>
-		<div>
-			전화문의
-			1004-0000(그냥 네모 틀)
-		</div>
+		
 	
 </body>
 </html>

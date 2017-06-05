@@ -7,8 +7,8 @@
   select c.counselCode, i.counselItemName,c.customer,c.counselTitle,c.counselDate from counsel c, counselitem i where c.counselItemCode=i.counselItemCode
   </select>
   <insert id="write">
-   insert into counsel(counselCode, customer, counselTitle, counselContent)
-   values(#{counselCode}, #{customer}, #{counselTitle}, #{counselContent})
+   insert into counsel(counselItemCode, customer, counselTitle, counselContent,counselDate)
+   values(#{counselItemCode}, #{customer}, #{counselTitle}, #{counselContent},now())
 </insert>
 <select id="read">
    select *

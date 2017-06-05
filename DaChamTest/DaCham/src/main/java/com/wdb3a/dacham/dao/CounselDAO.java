@@ -6,4 +6,5 @@ import com.wdb3a.dacham.bean.Counsel;
 
 public interface CounselDAO {
 public List<Counsel> counselList() throws Exception;
+public void write(Counsel counsel) throws Exception; 
 }

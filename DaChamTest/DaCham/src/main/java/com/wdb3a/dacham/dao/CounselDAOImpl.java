@@ -18,5 +18,10 @@ public class CounselDAOImpl implements CounselDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".counselList");
 	}
+	@Override
+	public void write(Counsel counsel) throws Exception {
+		// TODO Auto-generated method stub
+		 sqlSession.insert(namespace+".write",counsel);
+	}
 
 }

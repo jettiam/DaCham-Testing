@@ -22,17 +22,17 @@
 <body>
 <%@include file="../../clientNavi.jsp" %>
 	<h1>글쓰기 페이지</h1>
-	<form method = "post">
-		문의분류:<select name = "counselCode">
-			<option data-item="1">식단문의</option>
-			<option data-item="2">특별식단</option>
-			<option data-item="3">배송문의</option>
-			<option data-item="4">기타문의</option>
+	<form method = "post" action="write">
+		문의분류:<select name = "counselItemCode">
+			<option value="1">식단문의</option>
+			<option value="2">특별식단</option>
+			<option value="3">배송문의</option>
+			<option value="4">기타문의</option>
 		</select>
 		<br><br>
-		아이디: <input type = "text" name = "id" value = "id" readonly><br>
-		제목 : <input type = "text" name = "counselTitle"><br>
-		내용 : <textarea name = "content"></textarea><br>
+		아이디: <input type = "text" name = "${sessionScope.customerId}" value = "${sessionScope.customerId}" readonly><br>
+		제목 : <input type = "text" name ="counselTitle"><br>
+		내용 : <textarea name = "counselContent"></textarea><br>
 		
 	</form>
 	<div>

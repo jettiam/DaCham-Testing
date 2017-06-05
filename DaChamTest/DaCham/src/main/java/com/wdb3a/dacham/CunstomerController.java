@@ -89,14 +89,12 @@ public String getCounsel(Model model) throws Exception{
 public String writeCounsel(){
 	return "customer/counsel/counselWrite";
 }
-@RequestMapping(value="customer/counsel/counselWrite",method = RequestMethod.POST)
-/**
- * 
- * @return 문의글 쓰기 후 리다이렉트
- */
-public String postWriteCounsel(){
-	return "redirect:customer/counsel/counsel";
+@RequestMapping(value="/write",method = RequestMethod.POST)
+public String writeCounsel(Counsel counsel) throws Exception{
+	service.write(counsel);
+	return "redirect:counsel";
 }
+
 @RequestMapping(value="/read",method = RequestMethod.GET)
 /**
  * 

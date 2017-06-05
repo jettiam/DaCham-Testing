@@ -17,5 +17,10 @@ private CounselDAO dao;
 		// TODO Auto-generated method stub
 		return dao.counselList();
 	}
+	@Override
+	public void write(Counsel counsel) throws Exception {
+		// TODO Auto-generated method stub
+		dao.write(counsel);
+	}
 
 }
