@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.wdb3a.dacham.bean.FoodMInven;
 import com.wdb3a.dacham.bean.orderList;
 import com.wdb3a.dacham.service.AdminMainService;
 
@@ -72,7 +73,9 @@ public class AdminController {
 		return "mate/admin/foodOrder";
 	}
 	@RequestMapping(value="/foodStock")
-	public String getfoodStock(){
+	public String getfoodStock(Model model) throws Exception{
+		List<FoodMInven> list= service.foodStockList();
+		model.addAttribute(list);
 		return "mate/admin/foodStock";
 	}
 	@RequestMapping(value="/orderList",method=RequestMethod.GET)
