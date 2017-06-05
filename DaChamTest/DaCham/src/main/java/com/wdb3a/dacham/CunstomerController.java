@@ -1,8 +1,17 @@
 package com.wdb3a.dacham;
 
+import java.util.List;
+
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.wdb3a.dacham.bean.Counsel;
+import com.wdb3a.dacham.service.CounselService;
 /**
  * 
  * 고객페이지 컨트롤러
@@ -10,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 public class CunstomerController {
+	@Inject
+	CounselService service;
 @RequestMapping(value="/dachamInfo",method = RequestMethod.GET)
 /**
  * 
@@ -66,7 +77,9 @@ public String nutritionInfoDetail2(){
  * 
  * @return 문의하기로 이동
  */
-public String getCounsel(){
+public String getCounsel(Model model) throws Exception{	
+	List<Counsel> list = service.counselList();
+	model.addAttribute("list",list);
 	return "customer/counsel/counsel";
 }
 @RequestMapping(value="/write",method = RequestMethod.GET)
@@ -90,7 +103,8 @@ public String postWriteCounsel(){
  * 
  * @return 문의글 읽기 
  */
-public String readCounsel(){
+public String readCounsel(@RequestParam(value="counselCode",defaultValue="-1")int code,Model model) throws Exception{
+	model.addAttribute("read",service.couselRead(code));
 	return "customer/counsel/counselRead";
 }
 @RequestMapping(value="/main",method = RequestMethod.GET)

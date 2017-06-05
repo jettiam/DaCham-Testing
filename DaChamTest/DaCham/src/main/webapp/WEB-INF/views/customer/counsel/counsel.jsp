@@ -26,15 +26,17 @@
 				<th>글제목</th>
 				<th>작성자</th>
 				<th>작성일</th>
-				<th>답변</th>
+				<th>문의분류</th>
 			</tr>
+			<c:forEach items="${list}" var="counsel">
 			<tr>
-				<td>1</td>
-				<td><a href = "read">질문 있습니다.</a></td>
-				<td>김작성</td>
-				<td>2017-05-01</td>
-				<td>처리완료</td>
+				<td>${counsel.counselCode }</td>
+				<td><a href = "read?counselCode=${counsel.counselCode}">${counsel.counselTitle }</a></td>
+				<td>${counsel.customer}</td>
+				<td>${counsel.counselDate }</td>
+				<td>${counsel.counselItemName}</td>
 			</tr>
+			</c:forEach>
 		</table>
 		<div>
 			<button id = "write">글쓰기</button>

@@ -19,8 +19,8 @@
 <%@include file="../../clientNavi.jsp" %>
 	<div>
 		<form method ="post">
-			제목 : <input type = "text" name = "title" value = "질문 있습니다."><br>
-			작성자 : <input type = "text" name = "writer">
+			제목 : <input type = "text" name = "counselTitle" value = "${read.counselTitle }"><br>
+			작성자 : <input type = "text" name = "${read.customer}" value = "${read.customer}">
 			작성일 : <input type = "text" name = "regdate">
 			조회 : <input type = "text" name = "viewcnt"><br>
 			내용 : <textarea name = "content"></textarea>
