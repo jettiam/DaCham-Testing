@@ -19,16 +19,16 @@ public class CounselDAOImpl implements CounselDAO {
 		return sqlSession.selectList(namespace+".counselList");
 	}
 	@Override
-<<<<<<< HEAD
+
 	public void write(Counsel counsel) throws Exception {
 		// TODO Auto-generated method stub
 		 sqlSession.insert(namespace+".write",counsel);
 	}
-=======
+
 	public Counsel couselRead(int counselCode) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace+".counselRead",counselCode);
 	}	
->>>>>>> branch 'master' of https://github.com/jettiam/DaCham-Testing.git
+
 
 }
