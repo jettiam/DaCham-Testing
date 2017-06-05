@@ -4,8 +4,8 @@
     "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias alias="Emp" type="com.wdb3a.dacham.bean.Emp"/>
-		<typeAlias alias="Member" type="com.wdb3a.dacham.bean.Member"/>
-		<typeAlias alias="orderList" type="com.wdb3a.dacham.bean.orderList"/>
+		<typeAlias alias="Emp" 			type="com.wdb3a.dacham.bean.Emp"/>
+		<typeAlias alias="Member" 		type="com.wdb3a.dacham.bean.Member"/>
+		<typeAlias alias="orderList" 	type="com.wdb3a.dacham.bean.orderList"/>
 	</typeAliases>
 </configuration>
