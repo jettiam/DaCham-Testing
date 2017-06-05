@@ -1,6 +1,7 @@
 package com.wdb3a.dacham.bean;
 
 public class Nutritionist {
+	private String sideDCode;
 	private String sideDName;
 	private String recipe;
 	private String sideDImg;
@@ -25,7 +26,41 @@ public class Nutritionist {
 	private int maxBloodP;
 	private String judgement;
 	private String search;
+	private String foodMCode;
+	private String foodMImg;
+	private String foodGCode;
+	private String cookMCode;
 	
+	public String getFoodGCode() {
+		return foodGCode;
+	}
+	public void setFoodGCode(String foodGCode) {
+		this.foodGCode = foodGCode;
+	}
+	public String getCookMCode() {
+		return cookMCode;
+	}
+	public void setCookMCode(String cookMCode) {
+		this.cookMCode = cookMCode;
+	}
+	public String getFoodMCode() {
+		return foodMCode;
+	}
+	public void setFoodMCode(String foodMCode) {
+		this.foodMCode = foodMCode;
+	}
+	public String getFoodMImg() {
+		return foodMImg;
+	}
+	public void setFoodMImg(String foodMImg) {
+		this.foodMImg = foodMImg;
+	}
+	public String getSideDCode() {
+		return sideDCode;
+	}
+	public void setSideDCode(String sideDCode) {
+		this.sideDCode = sideDCode;
+	}
 	public String getSideDName() {
 		return sideDName;
 	}

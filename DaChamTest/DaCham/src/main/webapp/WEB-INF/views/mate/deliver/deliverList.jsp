@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,18 +25,27 @@
 <body>
 	<form name = "input_form">
 		<div>
-			<select>
-				<option>분류</option>
-				<option>코드번호</option>
-				<option>분류</option>
-				<option>식재료명</option>
+			<select name = "searchType">
+				<option value = "n"
+	   			<c:out value="${orderList.searchType==null?'selected':'' }"/>>
+	   			----------------------
+	   			</option>
+	   			<option value = "t"
+	   			<c:out value="${orderList.searchType eq 't'?'selected':'' }"/>>
+	   			주문번호
+	   			</option>
+	   			<option value = "c"
+	   			<c:out value="${orderList.searchType eq 'c'?'selected':'' }"/>>
+	   			고객id
+	   			</option>
 			</select>
 			<input type = "text" name = "keyword" placeholder = "검색어 입력란">
 			<button id = "search">검색</button>
 		</div>
 		<br><br><br><br>
+	
 		<div>
-			<table>
+			<table border = "1">
 				<tr>
 					<th><input type = "checkbox" name = "all" onclick="check();"></th>
 					<th>주문번호</th>
@@ -44,25 +54,23 @@
 					<th>식단명</th>
 					<th>주소</th>
 				</tr>
-				<tr>
-					<td><input type = "checkbox" name = "chk" value = "01"></td>
-					<td>ABAB11</td>
-					<td>성빡</td>
-					<td><img src="http://placehold.it/140x100"></td>
-					<td>병아리콩샐러드<br>식단</td>
-					<td>대구광역시 복현동 A타운 505호</td>
-				</tr>
-				<tr>
-					<td><input type = "checkbox" name = "chk" value = "02"></td>
-					<td>ABAB11</td>
-					<td>권찡</td>
-					<td><img src="http://placehold.it/140x100"></td>
-					<td>병아리콩샐러드<br>식단</td>
-					<td>대구광역시 복현동 A타운 505호</td>
-				</tr>
+				<%int i = 1; %>
+				<c:forEach items = "${list }" var = "b">
+					<tr>
+						<td><input type = "checkbox" name = "chk" value = "<%=i %>"></td>
+						<td>${b.orderCode }</td>
+						<td>${b.id }</td>
+						<td><img src = "displayFile?fileName=${b.dietImg }" style= "width: 175px; height: 50px;"></td>
+						<td>${b.dietName }</td>
+						<td>${b.address }</td>
+						<%i = i + 1;  %>
+					</tr>
+				</c:forEach>
 			</table>
+			
 		</div>
-		<input type = "submit" value = "배송">
 	</form>
+		<input type = "submit" value = "배송">
+	
 </body>
 </html>

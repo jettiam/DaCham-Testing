@@ -14,7 +14,16 @@
 <title>Insert title here</title>
 <style>
 #read {
-	display: none;
+	display: none; 
+	width:300px;
+	background-color:gray;
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin-top: -50px;
+	margin-left: -150px;
+	padding: 10px;
+	z-index:1000;
 }
 #close{
 	float : right;
@@ -89,7 +98,7 @@
 						<td>${board.orderCode}&nbsp;&nbsp;&nbsp;</td>
 						<td>${board.id }</td>
 						<%-- <td>${board.dietName}&nbsp;&nbsp;</td> --%>
-						<td><a href="${board.orderCode}"  class="orderCode" >${board.dietName}&nbsp;&nbsp;</a></td>
+						<td><a data-src="${board.orderCode}"  class="orderCode">${board.dietName}&nbsp;&nbsp;</a></td>
 						<td>${board.orderDate }&nbsp;&nbsp;</td>
 						<td>${board.price}</td>
 						<td>${board.orderItem}</td>
@@ -107,7 +116,7 @@
 		<table width="600" border="1">
 			<tr>
 				<th>고객이름</th>
-				<td id="orderName"></td>
+				<td id="orderName"></td> 
 				<th>배달주소</th> 
 				<td id="orderAddRess"></td>
 			</tr>
@@ -131,40 +140,50 @@
 </body>
 <script>
 
-	jQuery.fn.center = function () {
+	/* jQuery.fn.center = function () {
     this.css("position","absolute");
     this.css("top", Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) + $(window).scrollTop()) + "px");
     this.css("left", Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) + $(window).scrollLeft()) + "px");
     this.css("background-color", "#dddddd"); 
     return this;
-	}
+	} */
 	
-	$(".orderCode").on("click",function(){
+	$(".orderCode").on("click", function(){
 		event.preventDefault();
-		var orderCode = $(this).attr("href");
-		alert(orderCode);
-		
-		
+		var orderCode = $(this).attr("data-src");		
+		alert("이건됨");		
 		$.ajax({
-	         type: "get",
-	         url: "adminSub/detailView/"+orderCode,  
+	         type: "post",
+	         url: "adminSub/detailView/"+orderCode,
+	         headers: {
+	            "Content-Type":"application/json",
+	            "X-HTTP-Method-Override":"POST"
+	         },	         
 	         dataType: "text",
-	        /*  data: JSON.stringify({
-	            "orderCode":orderCode
-	         }) */
-	         success: function(data) {
-	            if(data=="SUCCESS"){
-	            	 var str = "";
-	            	 $(data.orderCode).each(function(){
-	            		 alert(this.name);
-	                  });
-	            	 
-	            }
-	            
+	         success: function(data) {	            
+	            	$("#read").show();  
+	           		 var str =data.list.name;
+	           		 alert(str);	           		
+	           
+	         },
+	         error:function(){
+	        	 alert("실패");
 	         }
+	    });    
+    });
+	/* function getPageReplyList() {
+		var orderCode = $(".orderCode").attr("data-src");
+		alert(orderCode); 
+	      $.getJSON("adminSub/detailView/"+orderCode, function(data){
+	         var str = "";
+	         $(data.list).each(function(){
+	            alert(this.dietCode);
+	        	 /* str += "<li data-rno='"+this.rno+"' class='replyLI'>"+this.rno+":"+this.replyText+
+	            "<button>변경</button></li>";     
+	         });
 	      });
-	});
-	/* function showmap(){
+	   } */
+	/* function showmap(){ 
 		
 		/* event.preventDefault();
 		var orderCode = $(this).attr("href");

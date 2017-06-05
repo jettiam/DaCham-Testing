@@ -14,12 +14,12 @@
 		on (a.dietCode=b.dietCode);
 	</select>
 	
-	<select id="read" resultType="orderList">
+	<select id="read" resultType="orderList"  parameterType="string" >
 	select b.dietCode, b.orderCode, b.id, a.dietName, b.orderDate, b.price, b.orderItem, b.transportNum, c.id, c.name, c.address, c.tel
 	from diet a join orderlist b join member c
 	where a.dietCode=b.dietCode 
 	and c.id=b.id
-	and orderCode=123;
+	and orderCode=#{orderCode};
 	</select>
 	
 </mapper>

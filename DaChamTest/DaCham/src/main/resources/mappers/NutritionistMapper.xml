@@ -8,6 +8,22 @@
 		from sideDish a join foodGroup b join cookMethod c
 		where a.foodGCode = b.foodGCode
 		and a.cookMCode = c.cookMCode
-		and a.sideDName like CONCAT('%',#{search},'%'); 
+		and a.sideDName like CONCAT('%',#{search},'%') 
 	</select>
+	<select id = "materialSearch" resultType = "com.wdb3a.dacham.bean.Nutritionist">
+		select *
+		from foodmaterial
+		where foodMName like CONCAT('%',#{search},'%')
+	</select>
+	<select id="materialAmount" resultType = "com.wdb3a.dacham.bean.Nutritionist">
+		select * from foodmaterial
+	</select>
+	<insert id="createAmount">
+		insert into sidedinfo(sideDCode, foodMCode, foodMAmount)
+		values (#{sideDCode},#{foodMCode},#{foodMAmount})
+	</insert>
+	<insert id = "createSide">
+		insert into sidedish(sideDCode, foodGCode, cookMCode, sideDName, recipe, sideDImg)
+		values (#{sideDCode},#{foodGCode},#{cookMCode},#{sideDName},#{recipe},#{sideDImg})
+	</insert>
 </mapper>

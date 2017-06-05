@@ -21,9 +21,9 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 	}
 
 	@Override
-	public orderList datailview(String orderCode) throws Exception {
+	public List<orderList> datailview(String orderCode) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne(namespace+".read", orderCode);
+		return sqlSession.selectList(namespace+".read", orderCode);
 	}
 
 	
