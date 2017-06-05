@@ -16,15 +16,19 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.wdb3a.dacham.bean.Nutritionist;
 import com.wdb3a.dacham.service.NutritionistService;
 
 import com.wdb3a.dacham.util.MediaUtils;
+
+import com.wdb3a.dacham.util.UploadFileUtils;
 
 
 
@@ -97,6 +101,16 @@ public class NutritionController {
 	   
 	  
 	   return "mate/nutritionist/sideDRegist";
+   }
+   
+   @RequestMapping(value = "/side", method = RequestMethod.POST)
+   public String postSideRegist(Model model, Nutritionist nutritionist, MultipartFile file) throws Exception{
+	   String savedName = UploadFileUtils.uploadFile(file.getOriginalFilename() ,uploadPath,file.getBytes());
+		model.addAttribute("savedName", savedName);
+		nutritionist.setSideDImg(savedName);
+		service.createSide(nutritionist);
+		System.out.println("¿Õ¿Õ¿Õ");
+	   return "redirect:side";
    }
    /*
     * @return ½ºÆä¼È½Ä´Ü °ü¸® ÆäÀÌÁö·Î ÀÌµ¿
