@@ -125,6 +125,7 @@
 	</form>
 	<script>
 		$(document).ready(function(){
+			Refresh();
 			localStorage.clear();
 			if(!localStorage['init']){
 				localStorage['init'] = "true";
@@ -138,8 +139,6 @@
 			$(".nameClick").on("click",function(){
 				event.preventDefault();
 				
-				
-				
 				var foodMName = $(this).attr('data-src');
 				
 				var cnt = parseInt(localStorage['cnt']);
@@ -149,19 +148,24 @@
 				
 				Refresh();
 				
-				$(foodMName).val('');
+			
 			});
-			function Remove(i){
+			$(document.body).on('click','.foodMName',function(){
+				var cnt = parseInt(localStorage['cnt']);
+				var id = $(this).parent().attr('data-id');
 				
-			}
+				$(this).parent().remove();
+				localStorage.removeItem(id+'_name');
+				localStorage['cnt'] = cnt - 1;
+			});
 			
 			function Refresh(){
-				$('.item').empty();
+				$('.item').empty();	
 				var cnt = parseInt(localStorage['cnt']);
 				for(var i = 0; i<cnt; i++){
 					var foodMName = localStorage[i + "_name"];
-					var item = $('<tr></tr>').addClass('item');
-					$('<td>'+foodMName+'</td>').addClass("foodMName").attr('id','new'+i).attr('name','foodMName').appendTo(item);
+					var item = $('<tr></tr>').addClass('item').attr('data-id',i);
+					$('<td>'+foodMName+'</td>').addClass("foodMName").attr('name','foodMName').appendTo(item);
 					$('<td></td>').html('<input type ="text" name = "foodMAmount" maxlength="4" size="1" >').appendTo(item);
 					item.appendTo(".material");
 					
