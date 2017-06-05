@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.wdb3a.CounselMapper">
+  <select id="counselList" resultType="Counsel">
+  select c.counselCode, i.counselItemName,c.customer,c.counselTitle,c.counselDate from counsel c, counselitem i where c.counselItemCode=i.counselItemCode
+  </select>
+  <insert id="write">
+   insert into counsel(counselCode, customer, counselTitle, counselContent)
+   values(#{counselCode}, #{customer}, #{counselTitle}, #{counselContent})
+</insert>
+<select id="read">
+   select *
+   from counsel
+   where couselCode=#{couselCode}
+</select>
+</mapper>

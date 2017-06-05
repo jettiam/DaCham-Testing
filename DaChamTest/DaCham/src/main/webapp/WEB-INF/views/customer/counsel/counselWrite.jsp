@@ -24,9 +24,10 @@
 	<h1>글쓰기 페이지</h1>
 	<form method = "post">
 		문의분류:<select name = "counselCode">
-			<option>식단문의</option>
-			<option>주문문의</option>
-			<option>기타</option>
+			<option data-item="1">식단문의</option>
+			<option data-item="2">특별식단</option>
+			<option data-item="3">배송문의</option>
+			<option data-item="4">기타문의</option>
 		</select>
 		<br><br>
 		아이디: <input type = "text" name = "id" value = "id" readonly><br>

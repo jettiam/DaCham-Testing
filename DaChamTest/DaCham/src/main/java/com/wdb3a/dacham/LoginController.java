@@ -3,6 +3,7 @@ package com.wdb3a.dacham;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,13 +48,14 @@ public class LoginController {
 		 * result 1:로그인성공 2: ....
 		 * @return
 		 */
-		public String memberLogin(Model model, String id, String pw){
+		public String memberLogin(Model model, String id, String pw, HttpSession session){
 			int result=-3;
 			try {
 				result = service.checkMemberLogin(id, pw);
 				if(result==1){
 					Member dbResult = service.getMember(id);
-					model.addAttribute("memberName", dbResult.getName());
+					session.setAttribute("memberName", dbResult.getName());
+					session.setAttribute("customerId", dbResult.getId());
 					model.addAttribute("result", result);
 					return "main";
 				}else{
