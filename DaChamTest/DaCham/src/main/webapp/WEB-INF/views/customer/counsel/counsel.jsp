@@ -33,7 +33,7 @@
 			<tr>
 				<td>${counsel.counselItemName}</td>			
 				<td>${counsel.counselCode }</td>
-				<td><a href = "read">${counsel.counselTitle }</a></td>
+				<td><a href = "read?counselCode=${counsel.counselCode}">${counsel.counselTitle }</a></td>
 				<td>${counsel.customer}</td>
 				<td>${counsel.counselDate }</td>
 				

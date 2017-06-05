@@ -10,9 +10,9 @@
    insert into counsel(counselItemCode, customer, counselTitle, counselContent,counselDate)
    values(#{counselItemCode}, #{customer}, #{counselTitle}, #{counselContent},now())
 </insert>
-<select id="read">
-   select *
-   from counsel
-   where couselCode=#{couselCode}
+<select id="counselRead" resultType="Counsel">
+   select c.counselTitle, c.counselContent,c.customer,i.counselItemName,c.counselCode
+	from counsel c,counselItem i
+   where c.counselItemCode=i.counselItemCode and c.counselCode=#{counselCode}
 </select>
 </mapper>

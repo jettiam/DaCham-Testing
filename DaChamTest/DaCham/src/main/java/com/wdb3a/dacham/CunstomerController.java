@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.wdb3a.dacham.bean.Counsel;
 import com.wdb3a.dacham.service.CounselService;
@@ -100,7 +101,8 @@ public String writeCounsel(Counsel counsel) throws Exception{
  * 
  * @return 문의글 읽기 
  */
-public String readCounsel(){
+public String readCounsel(@RequestParam(value="counselCode",defaultValue="-1")int code,Model model) throws Exception{
+	model.addAttribute("read",service.couselRead(code));
 	return "customer/counsel/counselRead";
 }
 @RequestMapping(value="/main",method = RequestMethod.GET)

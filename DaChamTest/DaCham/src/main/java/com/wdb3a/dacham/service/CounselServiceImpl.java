@@ -18,9 +18,15 @@ private CounselDAO dao;
 		return dao.counselList();
 	}
 	@Override
+<<<<<<< HEAD
 	public void write(Counsel counsel) throws Exception {
 		// TODO Auto-generated method stub
 		dao.write(counsel);
+=======
+	public Counsel couselRead(int counselCode) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.couselRead(counselCode);
+>>>>>>> branch 'master' of https://github.com/jettiam/DaCham-Testing.git
 	}
 
 }
