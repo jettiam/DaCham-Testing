@@ -136,8 +136,7 @@ Blockly.JavaScript['makeQSheet'] = function(block) {
   var value_question_sheet = Blockly.JavaScript.valueToCode(block,
     'question_sheet',
     Blockly.JavaScript.ORDER_ATOMIC);
-  var jsonParse = "{\n'q_no' : '" + number_q_no + "'" +
-    value_question_sheet + "\n}";
+  var jsonParse = "'q"+number_q_no+"' : {" + value_question_sheet + "\n}";
   return [jsonParse, Blockly.JavaScript.ORDER_ATOMIC];
 };
 
