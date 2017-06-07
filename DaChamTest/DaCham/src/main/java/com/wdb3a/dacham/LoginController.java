@@ -80,24 +80,23 @@ public class LoginController {
 				System.out.println("........"+result);
 				if(result==1){ //로그인 성공시
 					Emp dbResult = service.getEmp(emp_id);
-					session.setAttribute("EmpName", dbResult.getEmp_name());
-					session.setAttribute("EmpDept", dbResult.getDept());
+					session.setAttribute("EmpName", dbResult.getName());
+					session.setAttribute("EmpDept", dbResult.getDeptCode());
 					model.addAttribute("result",dbResult);
-					System.out.println(dbResult.getEmp_name());
-					System.out.println(dbResult.getDept());
-					if(dbResult.getDept().equals("영양사")){
+					
+					if(dbResult.getDeptCode().equals("영양사")){
 						return "/mate/nutritionist/nutritionistMain";
 					}
-					else if(dbResult.getDept().equals("조리팀")){
+					else if(dbResult.getDeptCode().equals("조리팀")){
 						return "/mate/cooker/cookerMain";
 					}
-					else if(dbResult.getDept().equals("관리자")){
+					else if(dbResult.getDeptCode().equals("관리자")){
 						return "/mate/admin/adminMain";
 					}
-					else if(dbResult.getDept().equals("배송팀")){
+					else if(dbResult.getDeptCode().equals("배송팀")){
 						return "/mate/deliver/deliverMain";
 					}
-					else if(dbResult.getDept().equals("고객응대팀")){
+					else if(dbResult.getDeptCode().equals("고객대응팀")){
 						return "/mate/counselor/counselorMain";
 					}
 					return "mate/mateMain";
