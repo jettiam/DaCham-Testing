@@ -50,7 +50,7 @@ public class LoginServiceImpl implements LoginService {
 		Emp dbResult = dao.getEmp(id);
 		int result;
 		if(dbResult!=null){
-			if(pw.equals(dbResult.getEmp_pw())){
+			if(pw.equals(dbResult.getPasswd())){
 				result=1;
 				return result; //로그인 성공.
 			}else{

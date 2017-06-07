@@ -56,7 +56,7 @@ public class LoginController {
 					Member dbResult = service.getMember(id);
 					session.setAttribute("memberName", dbResult.getName());
 					session.setAttribute("customerId", dbResult.getId());
-					model.addAttribute("result", result);
+					model.addAttribute("result", result);					
 					return "main";
 				}else{
 					model.addAttribute("result", result);
@@ -71,17 +71,40 @@ public class LoginController {
 			return "main";
 			
 		}
+		@RequestMapping(value="memberLogout")
+		public String memberLogout(HttpSession session){
+			session.invalidate();
+			return "main";			
+		}
 		
 		@RequestMapping(value="empLogin")
-		public String empLogin(Model model, String emp_id, String emp_pw){
+		public String empLogin(Model model, String emp_id, String emp_pw,HttpSession session){
 			int result=-3;
 			try {
 				result = service.checkEmpLogin(emp_id, emp_pw);
 				System.out.println("........"+result);
 				if(result==1){ //로그인 성공시
 					Emp dbResult = service.getEmp(emp_id);
-					model.addAttribute("EmpName", dbResult.getEmp_name());
-					model.addAttribute("EmpDept", dbResult.getDept());
+
+					session.setAttribute("EmpName", dbResult.getName());
+					session.setAttribute("EmpDept", dbResult.getDeptCode());
+					model.addAttribute("result",dbResult);
+					
+					if(dbResult.getDeptCode().equals("영양사")){
+						return "/mate/nutritionist/nutritionistMain";
+					}
+					else if(dbResult.getDeptCode().equals("조리팀")){
+						return "/mate/cooker/cookerMain";
+					}
+					else if(dbResult.getDeptCode().equals("관리자")){
+						return "/mate/admin/adminMain";
+					}
+					else if(dbResult.getDeptCode().equals("배송팀")){
+						return "/mate/deliver/deliverMain";
+					}
+					else if(dbResult.getDeptCode().equals("고객대응팀")){
+						return "/mate/counselor/counselorMain";
+					}
 					return "mate/mateMain";
 				}else{
 					model.addAttribute("result", result);
@@ -93,4 +116,10 @@ public class LoginController {
 			return "main2";
 			
 		}
+		@RequestMapping(value="empLogout")
+		public String empLogout(HttpSession session){
+			session.invalidate();
+			return "main2";			
+		}
+		
 }

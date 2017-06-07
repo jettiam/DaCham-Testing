@@ -42,9 +42,9 @@
 			<div id="infoBox">
 				<!-- 이름 출력. 로그아웃 -->
 				<h4>
-					영양사장
+					${EmpName }
 				</h4>
-				영양사 로그아웃
+				영양사 <a href="empLogout">로그아웃</a>
 			</div>
 		</div>
 	</div>
