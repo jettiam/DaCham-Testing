@@ -1,15 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<!DOCTYPE>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
+<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
+<!-- ìƒë‹¨ ë‚´ë¹„ê²Œì´ì…˜ í‘œì‹œë¥¼ ìœ„í•œ ì„ì‹œ CSS -->
 <style>
-.bg {
+.naviBox {
 	background-color: lightgray;
-	margin-top: 20px;
+	margin-top: 10px;
 }
 
 .box {
@@ -17,37 +26,43 @@
 	height: 50px;
 	padding: 0 20px;
 	font-size: 25px;
+	list-style-type: none;
 }
+.mateInfoBox{
+	float:right;
+	margin:20px 20px 0 0;
+	font-size:20px;
+}
+#logo{
+	margin :5px;
+}
+
 </style>
+<!-- ìƒë‹¨ ë‚´ë¹„ê²Œì´ì…˜ í‘œì‹œë¥¼ ìœ„í•œ ì„ì‹œ CSS -->
+
 </head>
 <body>
-<div id="headerBox">
-		<!-- ·Î°í -->
-		<div id="logo">
-			<!-- ·Î°í¹Ú½º -->
-			<a href="deliverMain" id="deliverMain">
-		    <img src="http://placehold.it/100x100"></a>
-
-			<div id="infoBox">
-				<!-- ÀÌ¸§ Ãâ·Â. ·Î±×¾Æ¿ô -->
-				<h4>
-					${EmpName }
-				</h4>
-				±èÈ£¶û ·Î±×¾Æ¿ô
+	<div id="headerBox">
+		<!-- ë¡œê³  -->
+		<div class="mateNavi">
+			<!-- ë¡œê³ ë°•ìŠ¤ -->
+			<a href="deliverMain"><img src="http://placehold.it/100x100" id="logo"></a>
+			<div class="mateInfoBox">
+				<!-- ì´ë¦„ ì¶œë ¥. ë¡œê·¸ì•„ì›ƒ -->	
+				${EmpDept}<br>				
+				${EmpGrade} ${EmpName} | <a href="empLogout">ë¡œê·¸ì•„ì›ƒ</a>
 			</div>
 		</div>
 	</div>
-	<!-- °í°´ ¸ŞÀÎ -->
-	<!-- »ó´Ü ¸Ş´º¹Ù -->
-	<div class="bg">
-		<ul type="none" class="">
-			<!-- ¸Ş´º ¸®½ºÆ® -->
-			<li class="box"><a href="deliverFood" id="foodStock">½ÄÀç·á Àç°í</a></li>
-			<li class="box"><a href="deliverList" id="deliverList">½Ä´Ü ¹è¼ÛÇÏ±â</a></li>
-			
-
+	<!-- ìƒë‹¨ ë©”ë‰´ë°” -->
+	<div class="naviBox">
+		<ul class="">
+			<!-- ë©”ë‰´ ë¦¬ìŠ¤íŠ¸ -->
+			<li class="box"><a href="deliverFood" id="foodStock">ì‹ì¬ë£Œ ì¬ê³ </a></li>
+			<li class="box"><a href="deliverList" id="deliverList">ì‹ë‹¨ ë°°ì†¡í•˜ê¸°</a></li>
 		</ul>
-
 	</div>
 </body>
 </html>
+			
+			

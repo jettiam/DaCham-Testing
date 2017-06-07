@@ -88,6 +88,8 @@ public class LoginController {
 
 					session.setAttribute("EmpName", dbResult.getName());
 					session.setAttribute("EmpDept", dbResult.getDeptCode());
+					session.setAttribute("EmpGrade", dbResult.getGradeCode());
+				
 					model.addAttribute("result",dbResult);
 					
 					if(dbResult.getDeptCode().equals("¿µ¾ç»ç")){

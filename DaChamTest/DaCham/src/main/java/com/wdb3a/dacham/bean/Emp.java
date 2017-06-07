@@ -5,6 +5,7 @@ public class Emp {
 	private String passwd;
 	private String name;
 	private String deptCode	;
+	private String gradeCode;
 	
 	public String getId() {
 		return id;
@@ -29,6 +30,12 @@ public class Emp {
 	}
 	public void setDeptCode(String deptCode) {
 		this.deptCode = deptCode;
+	}
+	public String getGradeCode() {
+		return gradeCode;
+	}
+	public void setGradeCode(String gradeCode) {
+		this.gradeCode = gradeCode;
 	}
 	
 	

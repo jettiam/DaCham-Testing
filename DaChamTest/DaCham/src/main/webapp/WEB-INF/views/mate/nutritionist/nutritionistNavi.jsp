@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -26,6 +26,15 @@
 	height: 50px;
 	padding: 0 20px;
 	font-size: 25px;
+	list-style-type: none;
+}
+.mateInfoBox{
+	float:right;
+	margin:20px 20px 0 0;
+	font-size:20px;
+}
+#logo{
+	margin :5px;
 }
 
 </style>
@@ -35,22 +44,19 @@
 <body>
 	<div id="headerBox">
 		<!-- 로고 -->
-		<div id="logo">
+		<div class="mateNavi">
 			<!-- 로고박스 -->
-			<a href="main"><img src="http://placehold.it/100x100"></a>
-
-			<div id="infoBox">
-				<!-- 이름 출력. 로그아웃 -->
-				<h4>
-					${EmpName }
-				</h4>
-				영양사 <a href="empLogout">로그아웃</a>
+			<a href="nutriMain"><img src="http://placehold.it/100x100" id="logo"></a>
+			<div class="mateInfoBox">
+				<!-- 이름 출력. 로그아웃 -->	
+				${EmpDept}<br>				
+				${EmpGrade} ${EmpName} | <a href="empLogout">로그아웃</a>
 			</div>
 		</div>
 	</div>
 	<!-- 상단 메뉴바 -->
 	<div class="naviBox">
-		<ul type="none" class="">
+		<ul class="">
 			<!-- 메뉴 리스트 -->
 			<li class="box"><a href="wizard" id="dachamInfo">식단위자드 관리</a></li>
 			<li class="box"><a href="diet" id="dietOrder">식단관리</a></li>
