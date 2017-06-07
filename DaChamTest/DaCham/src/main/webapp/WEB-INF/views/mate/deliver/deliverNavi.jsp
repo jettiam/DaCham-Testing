@@ -25,7 +25,7 @@
 		<!-- 로고 -->
 		<div id="logo">
 			<!-- 로고박스 -->
-			<a href="../deliver/main" id="deliverMain">
+			<a href="deliverMain" id="deliverMain">
 		    <img src="http://placehold.it/100x100"></a>
 
 			<div id="infoBox">
@@ -42,8 +42,8 @@
 	<div class="bg">
 		<ul type="none" class="">
 			<!-- 메뉴 리스트 -->
-			<li class="box"><a href="../deliver/food" id="foodStock">식재료 재고</a></li>
-			<li class="box"><a href="../deliver/list" id="deliverList">식단 배송하기</a></li>
+			<li class="box"><a href="deliverFood" id="foodStock">식재료 재고</a></li>
+			<li class="box"><a href="deliverList" id="deliverList">식단 배송하기</a></li>
 			
 
 		</ul>

@@ -36,7 +36,7 @@ import com.wdb3a.dacham.util.UploadFileUtils;
  * 영양사페이지 컨트롤러
  */
 @Controller
-@RequestMapping("mate/nutritionist")
+
 public class NutritionController {
 	private static final Logger logger = LoggerFactory.getLogger(NutritionController.class);
 
@@ -45,7 +45,7 @@ public class NutritionController {
    @Inject
    private NutritionistService service;
    
-   @RequestMapping(value = "/main", method = RequestMethod.GET)
+   @RequestMapping(value = "/nutriMain", method = RequestMethod.GET)
    /*
     * @return 영양사 메인페이지로 이동
     */

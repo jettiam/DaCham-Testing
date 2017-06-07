@@ -24,7 +24,7 @@
 		<!-- 로고 -->
 		<div id="logo">
 			<!-- 로고박스 -->
-			<a href="../counselor/main" id="counselorMain">
+			<a href="counselorMain" id="counselorMain">     
 		    <img src="http://placehold.it/100x100"></a>
 
 			<div id="infoBox">
@@ -43,8 +43,8 @@
 	<div class="bg">
 		<ul type="none" class="">
 			<!-- 메뉴 리스트 -->
-			<li class="box"><a href="../counselor/list" id="counselorList">고객상담</a></li>
-			<li class="box"><a href="../counselor/detail" id="counselorDetail">상담내역</a></li>
+			<li class="box"><a href="counselorList" id="counselorList">고객상담</a></li>
+			<li class="box"><a href="detail" id="counselorDetail">상담내역</a></li>
 			
 		</ul>
 
