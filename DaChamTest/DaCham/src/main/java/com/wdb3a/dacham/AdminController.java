@@ -8,10 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.wdb3a.dacham.bean.FoodMInven;
 import com.wdb3a.dacham.bean.orderList;
 import com.wdb3a.dacham.service.AdminMainService;
 
@@ -72,14 +74,21 @@ public class AdminController {
 		return "mate/admin/foodOrder";
 	}
 	@RequestMapping(value="/foodStock")
-	public String getfoodStock(){
+	public String getfoodStock(Model model) throws Exception{
+		List<FoodMInven> list= service.foodStockList();
+		model.addAttribute("list", list); 
 		return "mate/admin/foodStock";
 	}
 	@RequestMapping(value="/orderList",method=RequestMethod.GET)
 	public String getorderList(Model model, orderList order) throws Exception{
 		List<orderList> list=service.orderListAll();
 		model.addAttribute("list",list);
-		
+		return "mate/admin/orderList";
+	}
+	@RequestMapping(value="/orderList1",method=RequestMethod.POST)
+	public String getorderList1(Model model,@RequestBody orderList order) throws Exception{
+		service.transportNumUpdate(order);
+		System.out.println(order.getOrderCode());
 		return "mate/admin/orderList";
 	}
 	@RequestMapping(value="/statistics")

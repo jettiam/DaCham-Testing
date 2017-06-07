@@ -32,6 +32,7 @@
 	}
 	$(document).ready(function() {
 		var formObj = $("form[role='form']");
+		var checkArr=[];
 		$("#allCheck").click(function() {
 			if ($("#allCheck").prop("checked")) {
 				//input태그의 name이 che인 태그들을 찾아서 checked옵션을 true로 정의
@@ -42,11 +43,51 @@
 			}
 		});
 		$("#foodOrder").click(function() {
-			window.location.href = "foodOrder"
+			window.location.href = "foodOrder";     
 		});
 		$("#close").click(function(){
 			$("#read").css("display", "none");
 		});
+		var data = new Array();
+		var count = 0;
+		$('.tables*').on("click","input:checkbox",function(){ 
+			if($(this).prop("checked")){  
+			data[count] = $(this).val();
+			count++;
+			}
+			
+		});
+		$('#refund').click(function(){
+			data.forEach(function(item, index){
+				var allData = {"orderCode": item};
+				alert(data[index]);
+				$.ajax({
+					url : 'orderList1',
+					data :JSON.stringify(allData), 
+					dataType : 'json',  
+					type : 'POST',
+					headers: {
+			            "Content-Type":"application/json",
+			            "X-HTTP-Method-Override":"POST"
+			         },
+					success : function(data) {
+						alert(data);
+						}
+
+				});
+			})				
+			
+			
+		location.reload();	
+		});
+		
+		//$("#checkBoxId").is(":checked"))
+		 if ($(this).attr("checked")) {
+        // checked
+        return;
+    }
+		
+		
 	});
 </script>
 <style>
@@ -88,9 +129,9 @@
 		</form>
 	</div>
 
-
+	<form role="form" method="post">
 	<div class="divs" id="a1">
-		<table width="600" border="1">
+		<table width="600" border="1" class="tables">
 			<tr>
 				<th><input type="checkBox" id="allCheck">전체</th>
 				<th>주문번호</th>
@@ -103,11 +144,11 @@
 			</tr>
 			<c:forEach items="${list}" var="board">
 				<tr>
-					<th><input type="checkBox" id="${board.orderCode}" name="che"></th>
+					<th><input type="checkBox" id ="${board.orderCode}" class = "checkOrder" value="${board.orderCode}" name="che"></th>
 					<td>${board.orderCode }&nbsp;&nbsp;&nbsp;</td>
 					<td>${board.id }</td>
 					<%-- <td>${board.dietName}&nbsp;&nbsp;</td> --%>
-					<td><a onclick="showmap()">${board.dietName}${board.dietName}&nbsp;&nbsp;</td>
+					<td><a onclick="showmap()">${board.dietName}&nbsp;&nbsp;</td>
 					<td>${board.orderDate }&nbsp;&nbsp;</td>
 					<td>${board.price}</td>
 					<td>${board.orderItem}</td>
@@ -117,10 +158,11 @@
 			</c:forEach>
 		</table>
 	</div>
+	</form>
 	<div>
 		<button id="foodOrder">식재료 주문</button>
 		<button>작업 요청</button>
-		<button>환불</button>
+		<button id = "refund" type="submit">환불</button>
 	</div>
 
 	<div name="read" id="read" class="read">
