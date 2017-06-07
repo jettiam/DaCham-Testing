@@ -116,12 +116,13 @@
 	<button id = "cancle">취소</button>
 	<script>
 		$(document).ready(function(){
+			var v = 0;
 			$("#regist").on("click",function(){
 				$("#registForm").attr("method","post");
 				$("#registForm").attr("action","side");
 				$("#registForm").submit();
 			});
-			Refresh();
+			
 			
 			if(!localStorage['init']){
 				localStorage['init'] = "true";
@@ -137,22 +138,26 @@
 			$(".nameClick").on("click",function(){
 				event.preventDefault();
 				
+				var cnt = parseInt(localStorage['cnt']);
+				
 				var foodMName = $(this).attr('data-src');
 				
 				var foodMCode = $(this).attr('data-code');
 				
-				var cnt = parseInt(localStorage['cnt']);
 				
-				localStorage['cnt'] = cnt + 1;
+				
+				
 				
 				localStorage[cnt + '_name'] = foodMName;
 				localStorage[cnt + '_code'] = foodMCode;
 				
+				++cnt;
+				
+				localStorage['cnt'] = cnt;
 				
 				
 				Refresh();
-				
-			
+				v = cnt;
 			});
 			$(document.body).on('click','.foodMName',function(){
 				var cnt = parseInt(localStorage['cnt']);
@@ -160,15 +165,22 @@
 				
 				$(this).parent().remove();
 				localStorage.removeItem(id+'_name');
-				localStorage['cnt'] = cnt - 1;
+				localStorage.removeItem(id+'_code');
+				
+				--cnt;
+				localStorage['cnt'] = cnt;
+				
+				v = cnt;
+				cntChange(v);
 			});
 			
 			function Refresh(){
+				var cnt = parseInt(localStorage['cnt']);
 				$('.item').empty();	
 				
-				var cnt = parseInt(localStorage['cnt']);
-				$('<input type = "hidden" name = "cnt" value = "'+cnt+'">').appendTo(".registFrom");
 				
+				
+			
 				for(var i = 0; i<cnt; i++){
 					var foodMName = localStorage[i + "_name"];
 					var foodMCode = localStorage[i + "_code"];
@@ -180,7 +192,22 @@
 					
 				}
 				
+				v = cnt;
+
+				cntChange(v);
+				
 			}
+			Refresh();
+			
+			function cntChange(v){
+				$.getJSON("nutriAjax/"+v,function(data){
+					$("#cnt").val(data);
+					
+				});
+			}
+			
+		
+			$('<input type = "hidden" id = "cnt" name = "cnt" value = "'+v+'">').appendTo(".registFrom");
 		});
 	</script>
 </body>
