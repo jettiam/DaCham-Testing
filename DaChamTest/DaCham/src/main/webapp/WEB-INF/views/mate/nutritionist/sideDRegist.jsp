@@ -24,7 +24,7 @@
 </style>
 </head>
 <body>
-	<form id = "materialSearch" >
+	<form id = "materialSearch"  class = "materialSearch">
 		<div class = "div1">
 			<div>
 				<input type = "text" name = "search" placeholder = "식재료 검색어 입력란">
@@ -46,7 +46,7 @@
 			</div>
 		</div>
 	</form>
-	<form id = "registForm" enctype = "multipart/form-data">
+	<form id = "registForm" class = "registFrom" enctype = "multipart/form-data">
 			
 			<br><br>
 			<div class = "box1">
@@ -92,7 +92,7 @@
 								<option>식품군</option>
 								<option value = "01">곡류</option>
 								<option value = "02">조미류</option>
-								<option value = "03">포유류</option>
+								<option value = "03">채소군</option>
 								<option value = "04">생선류</option>
 								<option value = "05">고기류</option>
 							</select>
@@ -116,7 +116,6 @@
 	<button id = "cancle">취소</button>
 	<script>
 		$(document).ready(function(){
-			
 			$("#regist").on("click",function(){
 				$("#registForm").attr("method","post");
 				$("#registForm").attr("action","side");
@@ -128,6 +127,8 @@
 				localStorage['init'] = "true";
 				localStorage['cnt'] = 0;
 			}
+			
+			
 			$("#cancle").click(function(){
 				if(confirm("정말로 취소하시겠습니까?")){
 					window.location.href = "side";	
@@ -141,10 +142,13 @@
 				var foodMCode = $(this).attr('data-code');
 				
 				var cnt = parseInt(localStorage['cnt']);
+				
+				localStorage['cnt'] = cnt + 1;
+				
 				localStorage[cnt + '_name'] = foodMName;
 				localStorage[cnt + '_code'] = foodMCode;
 				
-				localStorage['cnt'] = cnt + 1;
+				
 				
 				Refresh();
 				
@@ -161,7 +165,10 @@
 			
 			function Refresh(){
 				$('.item').empty();	
+				
 				var cnt = parseInt(localStorage['cnt']);
+				$('<input type = "hidden" name = "cnt" value = "'+cnt+'">').appendTo(".registFrom");
+				
 				for(var i = 0; i<cnt; i++){
 					var foodMName = localStorage[i + "_name"];
 					var foodMCode = localStorage[i + "_code"];
