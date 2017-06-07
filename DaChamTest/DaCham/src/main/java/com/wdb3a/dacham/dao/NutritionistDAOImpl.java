@@ -45,4 +45,10 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 		sqlSession.insert(namespace+".createSide",nutritionist);
 	}
 
+	@Override
+	public void createAmount(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.insert(namespace+".createAmount",nutritionist);
+	}
+
 }

@@ -25,17 +25,6 @@
 </head>
 <body>
 	<form id = "materialSearch" >
-		<%
-			long time = System.currentTimeMillis(); 
-	
-			SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	
-			String str = dayTime.format(new Date(time));
-	
-			System.out.println(str);
-		%>	
-		<input type = "hidden" name = "sideDCode" value = <%=str %>>
-		<input type = "hidden" name = "foodMCode" value = "${nutritionist.foodMName }">
 		<div class = "div1">
 			<div>
 				<input type = "text" name = "search" placeholder = "식재료 검색어 입력란">
@@ -50,7 +39,7 @@
 						<tr>
 							<td>${b.foodMCode }</td>
 							<td><img src = "displayFile?fileName=${b.foodMImg }" style= "width: 175px; height: 50px;"></td>
-							<td><a class = "nameClick" data-src = "${b.foodMName }">${b.foodMName }</a></td>
+							<td><a class = "nameClick" data-src = "${b.foodMName }" data-code = "${b.foodMCode }">${b.foodMName }</a></td>
 						</tr>
 					</c:forEach>
 				</table>
@@ -58,11 +47,12 @@
 		</div>
 	</form>
 	<form id = "registForm" enctype = "multipart/form-data">
-			<input type = "hidden" name = "sideDCode" value = <%=str %>>	
+			
 			<br><br>
 			<div class = "box1">
 				<table class = "material">
 					<tr>
+						<th></th>
 						<th>식재료&nbsp;&nbsp;  </th>
 						<th>양(g)&nbsp;&nbsp;   </th>
 					</tr>
@@ -120,10 +110,10 @@
 					</tr>
 				</table>
 				<button id = "regist">등록</button>
-				<button id = "cancle">취소</button>
 			</div>
 		</div>
 	</form>
+	<button id = "cancle">취소</button>
 	<script>
 		$(document).ready(function(){
 			
@@ -148,8 +138,11 @@
 				
 				var foodMName = $(this).attr('data-src');
 				
+				var foodMCode = $(this).attr('data-code');
+				
 				var cnt = parseInt(localStorage['cnt']);
 				localStorage[cnt + '_name'] = foodMName;
+				localStorage[cnt + '_code'] = foodMCode;
 				
 				localStorage['cnt'] = cnt + 1;
 				
@@ -171,7 +164,9 @@
 				var cnt = parseInt(localStorage['cnt']);
 				for(var i = 0; i<cnt; i++){
 					var foodMName = localStorage[i + "_name"];
+					var foodMCode = localStorage[i + "_code"];
 					var item = $('<tr></tr>').addClass('item').attr('data-id',i);
+					$('<td></td>').html('<input type = "hidden" name = "foodMCode" value = '+foodMCode + '>').appendTo(item);    
 					$('<td>'+foodMName+'</td>').addClass("foodMName").attr('name','foodMName').appendTo(item);
 					$('<td></td>').html('<input type ="text" name = "foodMAmount" maxlength="4" size="1" >').appendTo(item);
 					item.appendTo(".material");

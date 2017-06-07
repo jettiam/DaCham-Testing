@@ -20,7 +20,7 @@
 	</select>
 	<insert id="createAmount">
 		insert into sidedinfo(sideDCode, foodMCode, foodMAmount)
-		values (#{sideDCode},#{foodMCode},#{foodMAmount})
+		values ((select MAX(sideDCode) from sidedish),#{foodMCode},#{foodMAmount})
 	</insert>
 	<insert id = "createSide">
 		insert into sidedish(sideDCode, foodGCode, cookMCode, sideDName, recipe, sideDImg)

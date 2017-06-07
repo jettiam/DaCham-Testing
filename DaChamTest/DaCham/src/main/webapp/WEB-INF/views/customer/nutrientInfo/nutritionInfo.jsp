@@ -73,8 +73,7 @@
 	<%@include file="../../clientNavi.jsp"%>
 	<div id="nutriInfoWrap">
 		<h1>영양소개</h1>
-		건강에 대한 좋은 말씀 드릴게요<br> 건강에 대한 좋은 말씀 드릴게요<br> 건강에 대한 좋은 말씀
-		드릴게요<br>
+		건강에 대한 유용한 정보를 알려드립니다.<br> 일상에서 쉽게 활용할 수 있는 정보만을 드릴게요.<br> 다참과 함께 건강한 생활 하세요<br>
 <table id="nutriInfotable">
 <tr><td>
 		<div class="nutriInfoContainer">
