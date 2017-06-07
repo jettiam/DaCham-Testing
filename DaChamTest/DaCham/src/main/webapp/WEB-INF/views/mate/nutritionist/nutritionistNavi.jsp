@@ -44,7 +44,7 @@
 				<h4>
 					${EmpName }
 				</h4>
-				영양사 로그아웃
+				영양사 <a href="empLogout">로그아웃</a>
 			</div>
 		</div>
 	</div>

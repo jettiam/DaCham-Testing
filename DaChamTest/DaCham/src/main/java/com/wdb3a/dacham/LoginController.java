@@ -116,4 +116,10 @@ public class LoginController {
 			return "main2";
 			
 		}
+		@RequestMapping(value="empLogout")
+		public String empLogout(HttpSession session){
+			session.invalidate();
+			return "main2";			
+		}
+		
 }
