@@ -9,8 +9,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
 	$(document).ready(function(){
-		$("#insert").on("click",function(){
-			$("form").attr("action","write");
+		$("#insert").on("click",function(){			
 			$("form").submit();
 		});
 		$("#cancle").on("click",function(){
@@ -30,13 +29,13 @@
 			<option value="4">기타문의</option>
 		</select>
 		<br><br>
-		아이디: <input type = "text" name = "${sessionScope.customerId}" value = "${sessionScope.customerId}" readonly><br>
+		아이디: <input type = "text" name = "customer" value = "${sessionScope.customerId}" readonly><br>
 		제목 : <input type = "text" name ="counselTitle"><br>
 		내용 : <textarea name = "counselContent"></textarea><br>
 		
 	</form>
 	<div>
-		<button type = "submit" id = "insert">등록</button>
+		<button id = "insert">등록</button>
 		<button id = "cancle">취소</button>
 	</div>
 </body>
