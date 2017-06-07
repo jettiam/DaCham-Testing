@@ -24,6 +24,7 @@
 	<!-- 상단 메뉴바 -->
 	<div class="bg">
 		<ul type="none" class="">
+			${EmpName }
 			<!-- 메뉴 리스트 -->
 			<li class="box"><a href="adminMain" id="adminMain">로고</a></li>
 			<li class="box"><a href="orderList" id="orderList">주문내역</a></li>

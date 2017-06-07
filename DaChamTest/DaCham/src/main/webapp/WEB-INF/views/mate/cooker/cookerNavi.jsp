@@ -24,13 +24,13 @@
 		<!-- 로고 -->
 		<div id="logo">
 			<!-- 로고박스 -->
-			<a href="../cooker/main" id="cookerMain">
+			<a href="cookMain" id="cookerMain">
 		    <img src="http://placehold.it/100x100"></a>
 
 			<div id="infoBox">
 				<!-- 이름 출력. 로그아웃 -->
 				<h4>
-					조리팀장
+					${EmpName }
 				</h4>
 				요리왕 로그아웃
 			</div>
@@ -41,8 +41,8 @@
 	<div class="bg">
 		<ul type="none" class="">
 			<!-- 메뉴 리스트 -->
-			<li class="box"><a href="../cooker/list" id="cookingList">조리목록</a></li>
-			<li class="box"><a href="../cooker/food" id="foodStock">식재료재고</a></li>
+			<li class="box"><a href="cookList" id="cookingList">조리목록</a></li>
+			<li class="box"><a href="cookFood" id="foodStock">식재료재고</a></li>
 		</ul>
 
 	</div>

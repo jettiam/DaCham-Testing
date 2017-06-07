@@ -10,4 +10,5 @@ public interface NutritionistService {
 	public Nutritionist materialView(String sideDCode) throws Exception;
 	public void create(Nutritionist nutritionist) throws Exception;
 	public void createSide(Nutritionist nutritionist) throws Exception;
+	public void createAmount(Nutritionist nutritionist) throws Exception;
 }

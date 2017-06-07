@@ -36,7 +36,7 @@ import com.wdb3a.dacham.util.UploadFileUtils;
  * 영양사페이지 컨트롤러
  */
 @Controller
-@RequestMapping("mate/nutritionist")
+
 public class NutritionController {
 	private static final Logger logger = LoggerFactory.getLogger(NutritionController.class);
 
@@ -45,7 +45,7 @@ public class NutritionController {
    @Inject
    private NutritionistService service;
    
-   @RequestMapping(value = "/main", method = RequestMethod.GET)
+   @RequestMapping(value = "/nutriMain", method = RequestMethod.GET)
    /*
     * @return 영양사 메인페이지로 이동
     */
@@ -105,12 +105,14 @@ public class NutritionController {
    
    @RequestMapping(value = "/side", method = RequestMethod.POST)
    public String postSideRegist(Model model, Nutritionist nutritionist, MultipartFile file) throws Exception{
+	   System.out.println("파일 업로드");
 	   String savedName = UploadFileUtils.uploadFile(file.getOriginalFilename() ,uploadPath,file.getBytes());
 		model.addAttribute("savedName", savedName);
 		nutritionist.setSideDImg(savedName);
 		service.createSide(nutritionist);
-		System.out.println("왕왕왕");
-	   return "redirect:side";
+		System.out.println("이것은");
+		service.createAmount(nutritionist);
+	    return "redirect:side";
    }
    /*
     * @return 스페셜식단 관리 페이지로 이동
@@ -127,7 +129,7 @@ public class NutritionController {
 	   return "mate/nutritionist/SPDietRegist";
    }
    
-   @ResponseBody
+    @ResponseBody
 	@RequestMapping("displayFile")
 	public ResponseEntity<byte[]> displayFile(String fileName) throws Exception{
 		ResponseEntity<byte[]> entity = null;

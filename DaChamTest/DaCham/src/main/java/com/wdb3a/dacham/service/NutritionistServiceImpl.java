@@ -45,4 +45,10 @@ public class NutritionistServiceImpl implements NutritionistService {
 		dao.createSide(nutritionist);
 	}
 
+	@Override
+	public void createAmount(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		dao.createAmount(nutritionist);
+	}
+
 }
