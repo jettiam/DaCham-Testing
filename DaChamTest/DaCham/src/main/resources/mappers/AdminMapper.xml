@@ -24,7 +24,12 @@
 	
 	
 	<select id="foodStockList" resultType="FoodMInven">
-	select foodMICode, foodMCode, foodMName, inAmount, inDate, outAmount, uint, price, exDate
+	select foodMICode, foodMCode, foodMName, inAmount, inDate, outAmount, uint, price, exDate, inAmount-outAmount as stock
 	from foodminven;
 	</select>
+	
+	<update id="update">
+		update orderlist set transportNum="환불"
+		where orderCode=#{orderCode}
+	</update>
 </mapper>

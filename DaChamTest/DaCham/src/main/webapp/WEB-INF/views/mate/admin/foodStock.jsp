@@ -8,7 +8,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@include file="../admin/upmenu.jsp" %>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> 
 <title>Insert title here</title>
+<script >
+	$(document).ready(function(){
+		$("#foodOrder").click(function(){
+			window.location.href = "foodOrder"; 
+		});	
+	});
+	
+</script>
 </head>
 <body>
 <div>
@@ -28,24 +38,26 @@
 					<th>입고날짜</th>
 					<th>단가</th>
 					<th>단위</th>
+					<th>입고량</th>
+					<th>출고량</th>
 					<th>재고량</th>
-					<th>요쳥량</th>
+				
 				</tr>
 				<c:forEach items="${list}" var="board">
 					<tr>
 						<td>${board.foodMICode}&nbsp;&nbsp;&nbsp;</td>
-						<td>${board.foodMCode  }</td>
+						<td>${board.foodMName}</td>
 						<%-- <td>${board.dietName}&nbsp;&nbsp;</td> --%>
-						<td><a href="#" data-src="${board.orderCode}"  class="orderCode">${board.dietName}&nbsp;&nbsp;</a></td>
-					
-						<td>${board.orderDate }&nbsp;&nbsp;</td>
-						<td>${board.price}</td>
-						<td>${board.orderItem}</td>
-						<td>${board.transportNum}</td>
-
+						<td>${board.inDate}&nbsp;&nbsp;</a></td>
+						<td>${board.price }&nbsp;&nbsp;</td>
+						<td>${board.uint}</td>
+						<td>${board.inAmount}</td>
+						<td>${board.outAmount}</td> 
+						<td>${board.stock}</td>
 					</tr>
-
 				</c:forEach>
+				</table> 
 	</div> 
+	<button id="foodOrder">식재료주문</button> 
 </body>
 </html>

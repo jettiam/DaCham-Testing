@@ -33,5 +33,10 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 		return sqlSession.selectList(namespace+".foodStockList");
 	}
 
+	@Override
+	public void transportNumUpdate(orderList list) throws Exception {
+		sqlSession.update(namespace+".update", list);
+	}
+
 	
 }

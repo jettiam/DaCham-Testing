@@ -32,4 +32,10 @@ public class AdminMainServiceImpl implements AdminMainService {
 		return dao.foodStockList();
 	}
 
+	@Override
+	public void transportNumUpdate(orderList list) throws Exception {
+		dao.transportNumUpdate(list);
+		
+	}
+
 }
