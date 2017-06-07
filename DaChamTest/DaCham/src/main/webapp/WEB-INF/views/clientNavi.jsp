@@ -37,8 +37,7 @@
 }
 
 
-#infoBox {
-	display: none;
+#infoBox {	
 	float: right;
 	margin-right:10px;
 }
@@ -82,6 +81,7 @@
 			<!-- 로고박스 -->
 			<a href="main"><img src="../../dacham/resources/customerImage/dachamlogo.jpg" width="100px" height="100px"></a>
 <!-- 고객 로그인 페이지 -->
+<c:if test="${empty sessionScope.memberName}">
 	<div id="sideBox">
 		<form method="post" action="main" class="loginBox">
 
@@ -92,16 +92,18 @@
 			<input type="submit" value="로그인">
 
 		</form>
-	</div>
 
-	<input id="loginResult" type="hidden" value="${result}" />
+	</div>	
+	</c:if>
+	 <c:if test="${not empty sessionScope.memberName}">
 			<div id="infoBox">
 				<!-- 고객이름 출력. 로그아웃&마이인포 -->
 				<h4>
 					<b>${memberName}</b>님 반갑습니다. 오늘도 다참으로 건강한 하루~!
 				</h4>
-				마이페이지 로그아웃
+				마이페이지 <a href="memberLogout">로그아웃</a>
 			</div>
+	</c:if>
 		</div>
 	</div>
 	<!-- 고객 메인 -->
@@ -133,8 +135,8 @@
 		} else if (result == "-1") {
 			alert("아이디가 존재하지 않습니다.");
 		} else if (result == "1") {
-			$('.loginBox').hide(); //로그인 성공하면 로그인 박스 숨기고 상단에 회원 정보 출력
-			$('#infoBox').show();
+			/* $('.loginBox').hide(); //로그인 성공하면 로그인 박스 숨기고 상단에 회원 정보 출력
+			$('#infoBox').show(); */
 
 		} else {
 

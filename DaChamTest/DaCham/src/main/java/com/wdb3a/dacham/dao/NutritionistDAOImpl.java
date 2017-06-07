@@ -33,4 +33,22 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 		return sqlSession.selectOne(namespace+".materialAmount",sideDCode);
 	}
 
+	@Override
+	public void create(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.insert(namespace+".createAmount",nutritionist);
+	}
+
+	@Override
+	public void createSide(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.insert(namespace+".createSide",nutritionist);
+	}
+
+	@Override
+	public void createAmount(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.insert(namespace+".createAmount",nutritionist);
+	}
+
 }

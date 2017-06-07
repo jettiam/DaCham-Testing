@@ -25,7 +25,7 @@ import com.wdb3a.dacham.service.DeliverService;
 import com.wdb3a.dacham.util.MediaUtils;
 
 @Controller
-@RequestMapping("mate/deliver")
+
 public class DeliverController {
 	@Inject
 	private DeliverService service;
@@ -33,24 +33,24 @@ public class DeliverController {
 	@Resource(name="uploadPath")
 	private String uploadPath;
 	
-	@RequestMapping(value="/main", method=RequestMethod.GET)
+	@RequestMapping(value="/deliverMain", method=RequestMethod.GET)
 	public String getMain(){
 		return "mate/deliver/deliverMain";
 	}
-	@RequestMapping(value="/list", method=RequestMethod.GET)
+	@RequestMapping(value="/deliverList", method=RequestMethod.GET)
 	public String getList(Model model,orderList orderList) throws Exception{
 		List<orderList> list = service.listAll(orderList);
 		model.addAttribute("list",list);
 		model.addAttribute("orderList",orderList);
 		return "/mate/deliver/deliverList";
 	}
-	@RequestMapping(value="/food", method=RequestMethod.GET)
+	@RequestMapping(value="/deliverFood", method=RequestMethod.GET)
 	public String getFood(){
 		return "/mate/deliver/foodStock";
 	}
 	
 	 @ResponseBody
-		@RequestMapping("displayFile")
+		@RequestMapping("deliverDisplayFile")
 		public ResponseEntity<byte[]> displayFile(String fileName) throws Exception{
 			ResponseEntity<byte[]> entity = null;
 			

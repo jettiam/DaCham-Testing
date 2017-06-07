@@ -18,4 +18,12 @@
 	<select id="materialAmount" resultType = "com.wdb3a.dacham.bean.Nutritionist">
 		select * from foodmaterial
 	</select>
+	<insert id="createAmount">
+		insert into sidedinfo(sideDCode, foodMCode, foodMAmount)
+		values ((select MAX(sideDCode) from sidedish),#{foodMCode},#{foodMAmount})
+	</insert>
+	<insert id = "createSide">
+		insert into sidedish(sideDCode, foodGCode, cookMCode, sideDName, recipe, sideDImg)
+		values (#{sideDCode},#{foodGCode},#{cookMCode},#{sideDName},#{recipe},#{sideDImg})
+	</insert>
 </mapper>

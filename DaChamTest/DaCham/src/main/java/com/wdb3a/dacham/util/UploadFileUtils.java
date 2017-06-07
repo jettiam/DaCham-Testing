@@ -17,7 +17,7 @@ public class UploadFileUtils {
 	public static String uploadFile(String originalName, String uploadPath, byte[] fileData) throws Exception{
 		long time = System.currentTimeMillis(); 
 
-		SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+		SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
 		String str = dayTime.format(new Date(time));
 		

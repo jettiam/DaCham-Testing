@@ -5,14 +5,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("mate/counselor")
+
 public class CounselorController {
-	@RequestMapping(value="/main", method=RequestMethod.GET)
+	@RequestMapping(value="/counselorMain", method=RequestMethod.GET)
 	public String getMain(){
 		return "mate/counselor/counselorMain";
 	}
 	
-	@RequestMapping(value="/list", method =RequestMethod.GET)
+	@RequestMapping(value="/counselorList", method =RequestMethod.GET)
 	public String getList(){
 		return "mate/counselor/counselorList";
 	}

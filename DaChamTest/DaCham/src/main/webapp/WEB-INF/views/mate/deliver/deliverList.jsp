@@ -60,7 +60,7 @@
 						<td><input type = "checkbox" name = "chk" value = "<%=i %>"></td>
 						<td>${b.orderCode }</td>
 						<td>${b.id }</td>
-						<td><img src = "displayFile?fileName=${b.dietImg }" style= "width: 175px; height: 50px;"></td>
+						<td><img src = "deliverDisplayFile?fileName=${b.dietImg }" style= "width: 175px; height: 50px;"></td>
 						<td>${b.dietName }</td>
 						<td>${b.address }</td>
 						<%i = i + 1;  %>
