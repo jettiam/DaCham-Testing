@@ -29,6 +29,12 @@ public class CunstomerController {
 public String dachamInfo(){
 	return "customer/dachamInfo/dachamInfo";
 }
+
+@RequestMapping(value="/dietOrderWizard", method=RequestMethod.GET)
+public String wizardOrder(){
+	return "customer/dietOrder/dietOrderWizard";
+}
+
 @RequestMapping(value="/dietOrder",method = RequestMethod.GET)
 /**
  * 
