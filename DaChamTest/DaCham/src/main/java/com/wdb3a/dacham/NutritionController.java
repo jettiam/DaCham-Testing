@@ -104,14 +104,20 @@ public class NutritionController {
    }
    
    @RequestMapping(value = "/side", method = RequestMethod.POST)
-   public String postSideRegist(Model model, Nutritionist nutritionist, MultipartFile file) throws Exception{
+   public String postSideRegist(Model model, Nutritionist nutritionist, MultipartFile file, @RequestParam("foodMCode")String[] foodMCode,@RequestParam("cnt")int cnt,@RequestParam("foodMAmount")int[] foodMAmount) throws Exception{
 	   System.out.println("파일 업로드");
 	   String savedName = UploadFileUtils.uploadFile(file.getOriginalFilename() ,uploadPath,file.getBytes());
 		model.addAttribute("savedName", savedName);
+		System.out.println("총합:"+cnt);
 		nutritionist.setSideDImg(savedName);
 		service.createSide(nutritionist);
-		System.out.println("이것은");
-		service.createAmount(nutritionist);
+		for(int i = 0; i< cnt; i++){
+			System.out.println("코드번호 : "+foodMCode[i]);
+			nutritionist.setFoodMCode(foodMCode[i]);
+			nutritionist.setFoodMAmount(foodMAmount[i]);
+			service.createAmount(nutritionist);
+		}
+		
 	    return "redirect:side";
    }
    /*

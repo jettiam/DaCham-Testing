@@ -104,12 +104,13 @@
 					</c:forEach>
 				</table>
 			</div>
+		</div>
 		</form>
 			<div>
 				<h3>선택한 반찬</h3>
 				<hr align = "left" width = "80%">
 			</div>
-		</div>
+		
 		<div class = "div2" style = "border-left:1px solid #000">
 			<div>
 				질환별 식단 목록<br>

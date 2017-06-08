@@ -11,4 +11,5 @@ public interface NutritionistService {
 	public void create(Nutritionist nutritionist) throws Exception;
 	public void createSide(Nutritionist nutritionist) throws Exception;
 	public void createAmount(Nutritionist nutritionist) throws Exception;
+	public Nutritionist openAPI(String foodMName) throws Exception;
 }

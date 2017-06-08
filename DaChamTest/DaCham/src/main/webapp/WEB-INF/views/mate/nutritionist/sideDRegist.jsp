@@ -10,6 +10,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@include file="nutritionistNavi.jsp" %>
 <title>Insert title here</title>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src = "../../../dacham/resources/openAPIjs/radarchart.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 <style>
@@ -24,7 +26,7 @@
 </style>
 </head>
 <body>
-	<form id = "materialSearch" >
+	<form id = "materialSearch"  class = "materialSearch">
 		<div class = "div1">
 			<div>
 				<input type = "text" name = "search" placeholder = "식재료 검색어 입력란">
@@ -46,7 +48,7 @@
 			</div>
 		</div>
 	</form>
-	<form id = "registForm" enctype = "multipart/form-data">
+	<form id = "registForm" class = "registFrom" enctype = "multipart/form-data">
 			
 			<br><br>
 			<div class = "box1">
@@ -69,9 +71,8 @@
 			
 	
 		<div class = "div2">
-			<div>
-				그래프가 들어갈
-				open API영역
+			<div id = "body">
+				<div id = "chart"></div>       
 			</div>
 			<div>
 				<h2>반찬 레시피</h2>
@@ -92,7 +93,7 @@
 								<option>식품군</option>
 								<option value = "01">곡류</option>
 								<option value = "02">조미류</option>
-								<option value = "03">포유류</option>
+								<option value = "03">채소군</option>
 								<option value = "04">생선류</option>
 								<option value = "05">고기류</option>
 							</select>
@@ -105,6 +106,8 @@
 								<option value = "03">조림</option>
 								<option value = "04">찜</option>
 								<option value = "05">초벌</option>
+								<option value = "06">무침</option>
+								<option value = "07">탕</option>								
 							</select>
 						</td>
 					</tr>
@@ -116,18 +119,20 @@
 	<button id = "cancle">취소</button>
 	<script>
 		$(document).ready(function(){
-			
+			var v = 0;
 			$("#regist").on("click",function(){
 				$("#registForm").attr("method","post");
 				$("#registForm").attr("action","side");
 				$("#registForm").submit();
 			});
-			Refresh();
+			
 			
 			if(!localStorage['init']){
 				localStorage['init'] = "true";
 				localStorage['cnt'] = 0;
 			}
+			
+			
 			$("#cancle").click(function(){
 				if(confirm("정말로 취소하시겠습니까?")){
 					window.location.href = "side";	
@@ -136,19 +141,21 @@
 			$(".nameClick").on("click",function(){
 				event.preventDefault();
 				
+				var cnt = parseInt(localStorage['cnt']);
+				
 				var foodMName = $(this).attr('data-src');
 				
 				var foodMCode = $(this).attr('data-code');
 				
-				var cnt = parseInt(localStorage['cnt']);
 				localStorage[cnt + '_name'] = foodMName;
 				localStorage[cnt + '_code'] = foodMCode;
 				
-				localStorage['cnt'] = cnt + 1;
+				++cnt;
+				
+				localStorage['cnt'] = cnt;
 				
 				Refresh();
-				
-			
+				v = cnt;
 			});
 			$(document.body).on('click','.foodMName',function(){
 				var cnt = parseInt(localStorage['cnt']);
@@ -156,25 +163,58 @@
 				
 				$(this).parent().remove();
 				localStorage.removeItem(id+'_name');
-				localStorage['cnt'] = cnt - 1;
+				localStorage.removeItem(id+'_code');
+				
+				--cnt;
+				localStorage['cnt'] = cnt;
+				
+				v = cnt;
+				cntChange(v);
 			});
 			
+			$(document.body).on('mouseover','.foodMName',function(){
+				var foodMName = $(this).attr('data-name');
+				alert("식재료이름:"+foodMName);
+				$.ajax({
+					url : "nutriAjax/show/"+ foodMName,              
+				});
+			});
+			
+			
 			function Refresh(){
-				$('.item').empty();	
 				var cnt = parseInt(localStorage['cnt']);
+				$('.item').empty();	
+			
+			
 				for(var i = 0; i<cnt; i++){
 					var foodMName = localStorage[i + "_name"];
 					var foodMCode = localStorage[i + "_code"];
 					var item = $('<tr></tr>').addClass('item').attr('data-id',i);
 					$('<td></td>').html('<input type = "hidden" name = "foodMCode" value = '+foodMCode + '>').appendTo(item);    
-					$('<td>'+foodMName+'</td>').addClass("foodMName").attr('name','foodMName').appendTo(item);
+					$('<td>'+foodMName+'</td>').addClass("foodMName").attr('name','foodMName').attr('data-name',foodMName).appendTo(item);
 					$('<td></td>').html('<input type ="text" name = "foodMAmount" maxlength="4" size="1" >').appendTo(item);
 					item.appendTo(".material");
 					
 				}
 				
+				v = cnt;
+
+				cntChange(v);
+				
 			}
+			Refresh();
+			
+			function cntChange(v){
+				$.getJSON("nutriAjax/"+v,function(data){
+					$("#cnt").val(data);
+					
+				});
+			}
+			
+		
+			$('<input type = "hidden" id = "cnt" name = "cnt" value = "'+v+'">').appendTo(".registFrom");
 		});
 	</script>
+	<script src = "../../../dacham/resources/openAPIjs/APIQuery2.js"></script>
 </body>
 </html>

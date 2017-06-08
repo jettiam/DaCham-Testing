@@ -26,4 +26,8 @@
 		insert into sidedish(sideDCode, foodGCode, cookMCode, sideDName, recipe, sideDImg)
 		values (#{sideDCode},#{foodGCode},#{cookMCode},#{sideDName},#{recipe},#{sideDImg})
 	</insert>
+	<select id="openAPI" resultType = "com.wdb3a.dacham.bean.Nutritionist">
+		select * from foodmaterial
+		where foodMName = #{foodMName}
+	</select>
 </mapper>
