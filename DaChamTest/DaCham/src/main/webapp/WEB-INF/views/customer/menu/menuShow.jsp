@@ -88,18 +88,18 @@ width:100px;
 
 <table id = "menuShowTableWrap">
 <tr>
-<td><img src="../../../dacham/resources/customerImage/dietImg/d00.JPG" id="menuShowImg"></td>
-<td><img src="../../../dacham/resources/customerImage/dietImg/d00.JPG" id="menuShowImg"></td>
+<td><img src="../../../dacham/resources/customerImage/dietImg/rice2.JPG" id="menuShowImg"></td>
+<td><img src="../../../dacham/resources/customerImage/dietImg/d10.JPG" id="menuShowImg"></td>
 </tr>
 
 <tr>
-<td><img src="../../../dacham/resources/customerImage/dietImg/d00.JPG" id="menuShowImg"></td>
-<td><img src="../../../dacham/resources/customerImage/dietImg/d00.JPG" id="menuShowImg"></td>
+<td><img src="../../../dacham/resources/customerImage/dietImg/d11.JPG" id="menuShowImg"></td>
+<td><img src="../../../dacham/resources/customerImage/dietImg/d07.JPG" id="menuShowImg"></td>
 </tr>
 
 <tr>
-<td><img src="../../../dacham/resources/customerImage/dietImg/d00.JPG" id="menuShowImg"></td>
-<td><img src="../../../dacham/resources/customerImage/dietImg/d00.JPG" id="menuShowImg"></td>
+<td><img src="../../../dacham/resources/customerImage/dietImg/d08.JPG" id="menuShowImg"></td>
+<td><img src="../../../dacham/resources/customerImage/dietImg/d09.JPG" id="menuShowImg"></td>
 </tr>
 </table>
 
