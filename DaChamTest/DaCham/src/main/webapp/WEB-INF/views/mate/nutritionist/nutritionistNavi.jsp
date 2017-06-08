@@ -46,7 +46,7 @@
 		<!-- 로고 -->
 		<div class="mateNavi">
 			<!-- 로고박스 -->
-			<a href="deliverMain"><img src="http://placehold.it/100x100" id="logo"></a>
+			<a href="nutriMain"><img src="http://placehold.it/100x100" id="logo"></a>
 			<div class="mateInfoBox">
 				<!-- 이름 출력. 로그아웃 -->	
 				${EmpDept}<br>				
