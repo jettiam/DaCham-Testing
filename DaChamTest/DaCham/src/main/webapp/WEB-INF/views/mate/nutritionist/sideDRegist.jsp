@@ -105,6 +105,8 @@
 								<option value = "03">조림</option>
 								<option value = "04">찜</option>
 								<option value = "05">초벌</option>
+								<option value = "06">무침</option>
+								<option value = "07">탕</option>								
 							</select>
 						</td>
 					</tr>
