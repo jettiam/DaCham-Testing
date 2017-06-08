@@ -11,16 +11,9 @@
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<!-- <property name="url" value="jdbc:mariadb://localhost:33060/dacham" /> --> 
-<<<<<<< HEAD
-		<property name="url" value="jdbc:mariadb://localhost:33060/dacham" /> 
-=======
-
+	
+		<!-- <property name="url" value="jdbc:mariadb://localhost:33060/dacham" />  -->
 		<property name="url" value="jdbc:mariadb://106.249.38.73:33060/dacham" /> 
-
-
-
->>>>>>> branch 'master' of git@github.com:jettiam/DaCham-Testing.git
 		<property name="driverClassName" value="org.mariadb.jdbc.Driver" />
 		<property name="username" value="root" />
 		<property name="password" value="1234" />

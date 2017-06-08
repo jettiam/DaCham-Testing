@@ -170,8 +170,7 @@
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.9.13</version>
-<<<<<<< HEAD
-		</dependency>
+		</dependency> -->
 
 		<!-- MONGO DB 사용하기 위한 dependency -->
 		<!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver -->
@@ -186,10 +185,6 @@
 			<artifactId>spring-data-mongodb</artifactId>
 			<version>1.10.3.RELEASE</version>
 		</dependency>
-
-=======
-		</dependency> -->
->>>>>>> branch 'master' of git@github.com:jettiam/DaCham-Testing.git
 	</dependencies>
 
 
