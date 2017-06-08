@@ -8,6 +8,7 @@
   <select id="dietList" resultType="Customer">
   	select d.dietCode, d.dietName, s.sideDImg
 	from diet d,dietinfo di, sidedish s
-	where d.diseaseCode=#{diseaseCode} and di.dietCode=d.dietCode and di.sideDCode=s.sideDCode;
+	where d.diseaseCode=#{diseaseCode} and di.dietCode=d.dietCode and di.sideDCode=s.sideDCode
+	order by d.dietCode
   </select>  
   </mapper>
