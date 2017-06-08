@@ -12,6 +12,10 @@
 <%@include file="../admin/upmenu.jsp"%>
 <title>Insert title here</title>
 <script>
+	var object = new Object();
+	var data = new Array();
+	var count = 0;
+	
 	jQuery.fn.center = function() {
 		this.css("position", "absolute");
 		this.css("top", Math.max(0, (($(window).height() - $(this)
@@ -32,7 +36,7 @@
 	}
 	$(document).ready(function() {
 		var formObj = $("form[role='form']");
-		var checkArr=[];
+		var checkArr = [];
 		$("#allCheck").click(function() {
 			if ($("#allCheck").prop("checked")) {
 				//input태그의 name이 che인 태그들을 찾아서 checked옵션을 true로 정의
@@ -42,82 +46,122 @@
 				$("input[name=che]").prop('checked', false);
 			}
 		});
-		$("#foodOrder").click(function() { 
-			window.location.href = "foodOrder";     
-		});
-		$("#close").click(function(){
+		 $("#foodOrder").click(function() {
+			 object.value = data;
+			 var values = JSON.stringify(object);
+			     $('input[name=orderCode]').val(values);
+			     $("#formid").submit();
+		}); 
+		
+		/* $("#foodOrder").click(function() {
+			var dataAll; 
+			data.forEach(function(item, index) {
+				var allData = {
+					"orderCode" : item
+				};
+				alert(item);
+
+				$.ajax({
+					url : 'adminSub/orderList3',
+					data : JSON.stringify(allData),
+					dataType : 'text',
+					type : 'POST',
+					headers : {
+						"Content-Type" : "application/json",
+						"X-HTTP-Method-Override" : "POST"
+					}, 
+					success : function(data) {
+							alert("성공");
+							dataAll = data;
+					
+  						
+					},error : function(){
+						alert("실패")
+					}
+
+				});
+				
+			});
+			window.location.href="foodStock"
+		}); */
+		
+		
+		
+		$("#close").click(function() {
 			$("#read").css("display", "none");
 		});
-		var data = new Array();
-		var count = 0;
-		$('.tables*').on("click","input:checkbox",function(){ 
-			if($(this).prop("checked")){  
-			data[count] = $(this).val();
-			count++;
+
+		$('.tables*').on("click", "input:checkbox", function() {
+			if ($(this).prop("checked")) {
+				data[count] = $(this).val();
+				count++;
 			}
-			
+
 		});
-		$('#refund').click(function(){
-			data.forEach(function(item, index){
-				var allData = {"orderCode": item};
-				alert(data[index]);
+		$('#refund').click(function() {
+			data.forEach(function(item, index) {
+				var allData = {
+					"orderCode" : item
+				};
+
 				$.ajax({
 					url : 'orderList1',
-					data :JSON.stringify(allData), 
-					dataType : 'json',  
+					data : JSON.stringify(allData),
+					dataType : 'json',
 					type : 'POST',
-					headers: {
-			            "Content-Type":"application/json",
-			            "X-HTTP-Method-Override":"POST"
-			         },
+					headers : {
+						"Content-Type" : "application/json",
+						"X-HTTP-Method-Override" : "POST"
+					},
 					success : function(data) {
-						alert(data);
-						}
+						alert("성공")
+					}, error : function(){   
+						alert("실패");
+					}
 
 				});
-			})				
-			
-			
-		location.reload();	
+			})
+
+			location.reload();
 		});
-		
-		$('#work').click(function(){
-			data.forEach(function(item, index){
-				var allData = {"orderCode": item};
-				alert(data[index]);
+
+		$('#work').click(function() {
+			data.forEach(function(item, index) {
+				var allData = {
+					"orderCode" : item
+				};
 				$.ajax({
 					url : 'orderList2',
-					data :JSON.stringify(allData), 
-					dataType : 'json',  
+					data : JSON.stringify(allData),
+					dataType : 'json',
 					type : 'POST',
-					headers: {
-			            "Content-Type":"application/json",
-			            "X-HTTP-Method-Override":"POST"
-			         },
+					headers : {
+						"Content-Type" : "application/json",
+						"X-HTTP-Method-Override" : "POST"
+					},
 					success : function(data) {
-						alert(data);
-						}
+
+					}
 
 				});
-			})				
-			
-			
-		location.reload();	
+			})
+
+			location.reload();
 		});
-		
+
 		//$("#checkBoxId").is(":checked"))
-		 if ($(this).attr("checked")) {
-        // checked
-        return;
-    }
-		
-		
+		if ($(this).attr("checked")) {
+			// checked
+			return;
+		}
+
 	});
 </script>
 <style>
 #read {
 	display: none;
 }
+
 .font {
 	text-align: center;
 	font-size: 15pt;
@@ -132,8 +176,8 @@
 
 </head>
 <body>
-	<form role="form" method="post">
-		<input type="hidden" name="orderCode" value="${orderCode}">
+	<form id='formid' method='post' action='foodStock'>
+		<input type="hidden" name="orderCode">
 	</form>
 	<div>
 		<a class="font">전체주문|&nbsp;&nbsp;</a> <a class="font">|결제
@@ -154,39 +198,40 @@
 	</div>
 
 	<form role="form" method="post">
-	<div class="divs" id="a1">
-		<table width="600" border="1" class="tables">
-			<tr>
-				<th><input type="checkBox" id="allCheck">전체</th>
-				<th>주문번호</th>
-				<th>고객id</th>
-				<th>식단명</th>
-				<th>주문 접수일</th>
-				<th>금액</th>
-				<th>진행상태</th>
-				<th>배송</th>
-			</tr>
-			<c:forEach items="${list}" var="board">
+		<div class="divs" id="a1">
+			<table width="600" border="1" class="tables">
 				<tr>
-					<th><input type="checkBox" id ="${board.orderCode}" class = "checkOrder" value="${board.orderCode}" name="che"></th>
-					<td>${board.orderCode }&nbsp;&nbsp;&nbsp;</td>
-					<td>${board.id }</td>
-					<%-- <td>${board.dietName}&nbsp;&nbsp;</td> --%>
-					<td><a onclick="showmap()">${board.dietName}&nbsp;&nbsp;</td>
-					<td>${board.orderDate }&nbsp;&nbsp;</td>
-					<td>${board.price}</td>
-					<td>${board.orderItemName}</td>
-					<td>${board.transportNum}</td>
+					<th><input type="checkBox" id="allCheck">전체</th>
+					<th>주문번호</th>
+					<th>고객id</th>
+					<th>식단명</th>
+					<th>주문 접수일</th>
+					<th>금액</th>
+					<th>진행상태</th>
+					<th>배송</th>
 				</tr>
+				<c:forEach items="${list}" var="board">
+					<tr>
+						<th><input type="checkBox" id="${board.orderCode}"
+							class="checkOrder" value="${board.orderCode}" name="che"></th>
+						<td>${board.orderCode }&nbsp;&nbsp;&nbsp;</td>
+						<td>${board.id }</td>
+						<%-- <td>${board.dietName}&nbsp;&nbsp;</td> --%>
+						<td><a onclick="showmap()">${board.dietName}&nbsp;&nbsp;</td>
+						<td>${board.orderDate }&nbsp;&nbsp;</td>
+						<td>${board.price}</td>
+						<td>${board.orderItemName}</td>
+						<td>${board.transportNum}</td>
+					</tr>
 
-			</c:forEach>
-		</table>
-	</div>
+				</c:forEach>
+			</table>
+		</div>
 	</form>
 	<div>
 		<button id="foodOrder">식재료 주문</button>
 		<button id="work">작업 요청</button>
-		<button id = "refund" type="submit">환불</button>
+		<button id="refund">환불</button>
 	</div>
 
 	<div name="read" id="read" class="read">

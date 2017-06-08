@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.wdb3a.dacham.bean.FoodMAmountRead;
 import com.wdb3a.dacham.bean.FoodMInven;
 import com.wdb3a.dacham.bean.orderList;
 @Repository
@@ -43,6 +44,14 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 		sqlSession.update(namespace+".workupdate", list);
 		
 	}
+
+	@Override
+	public List<FoodMAmountRead> foodMAmountRead(int orderCode) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".foodMAmountRead", orderCode);
+	}
+
+	
 
 	
 }

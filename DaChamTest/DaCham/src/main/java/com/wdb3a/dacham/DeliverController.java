@@ -29,7 +29,7 @@ import com.wdb3a.dacham.util.MediaUtils;
 public class DeliverController {
 	@Inject
 	private DeliverService service;
-	private static final Logger logger = LoggerFactory.getLogger(NutritionController.class);
+	private static final Logger logger = LoggerFactory.getLogger(DeliverController.class);
 	@Resource(name="uploadPath")
 	private String uploadPath;
 	

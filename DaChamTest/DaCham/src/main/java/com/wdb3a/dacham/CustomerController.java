@@ -18,7 +18,7 @@ import com.wdb3a.dacham.service.CounselService;
  *
  */
 @Controller
-public class CunstomerController {
+public class CustomerController {
 	@Inject
 	CounselService service;
 @RequestMapping(value="/dachamInfo",method = RequestMethod.GET)

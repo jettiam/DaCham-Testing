@@ -45,15 +45,15 @@
 				</tr>
 				<c:forEach items="${list}" var="board">
 					<tr>
-						<td>${board.foodMICode}&nbsp;&nbsp;&nbsp;</td>
-						<td>${board.foodMName}</td>
+						<td>${board.foodMNam}&nbsp;&nbsp;&nbsp;</td> 
+						<td>${board.price}</td>
 						<%-- <td>${board.dietName}&nbsp;&nbsp;</td> --%>
-						<td>${board.inDate}&nbsp;&nbsp;</a></td>
-						<td>${board.price }&nbsp;&nbsp;</td>
-						<td>${board.uint}</td>
-						<td>${board.inAmount}</td>
-						<td>${board.outAmount}</td> 
-						<td>${board.stock}</td>
+						<td>${board.foodMAmount}&nbsp;&nbsp;</a></td>
+						<td>${board.uint }&nbsp;&nbsp;</td>
+						<td>${board.foodMCode}</td>
+						<td>${board.orderCode}</td>
+						<%-- <td>${board.outAmount}</td> 
+						<td>${board.stock}</td> --%>
 					</tr>
 				</c:forEach>
 				</table> 

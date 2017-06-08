@@ -72,6 +72,12 @@
 	
 		<div class = "div2">
 			<div id = "body">
+				<input type = "hidden" id = "foodMName" name = "foodMName2">
+				<input type = "hidden" id =  "protein" name = "protein">
+				<input type = "hidden" id = "fat" name = "fat">
+				<input type = "hidden" id = "na" name = "na">
+				<input type = "hidden" id = "carbohydrate" name = "carbohydrate">
+				<input type = "hidden" id =  "fe" name = "fe">
 				<div id = "chart"></div>       
 			</div>
 			<div>
@@ -118,7 +124,9 @@
 	</form>
 	<button id = "cancle">취소</button>
 	<script>
+
 		$(document).ready(function(){
+			openAPI();
 			var v = 0;
 			$("#regist").on("click",function(){
 				$("#registForm").attr("method","post");
@@ -129,7 +137,7 @@
 			
 			if(!localStorage['init']){
 				localStorage['init'] = "true";
-				localStorage['cnt'] = 0;
+				localStorage['cnt'] = 0;              
 			}
 			
 			
@@ -174,11 +182,17 @@
 			
 			$(document.body).on('mouseover','.foodMName',function(){
 				var foodMName = $(this).attr('data-name');
-				alert("식재료이름:"+foodMName);
-				$.ajax({
-					url : "nutriAjax/show/"+ foodMName,              
+				
+				$.getJSON("nutriAjax/show/"+foodMName,function(data){
+					$("#foodMName").val(data.foodMName);
+					$("#protein").val(data.protein);
+					$("#fat").val(data.fat);
+					$("#na").val(data.na);
+					$("#carbohydrate").val(data.carbohydrate);
+					$("#fe").val(data.fe);
+					openAPI(); 
 				});
-			});
+			});	
 			
 			
 			function Refresh(){

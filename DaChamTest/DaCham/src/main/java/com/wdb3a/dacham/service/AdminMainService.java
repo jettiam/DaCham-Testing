@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.wdb3a.dacham.bean.FoodMAmountRead;
 import com.wdb3a.dacham.bean.FoodMInven;
 import com.wdb3a.dacham.bean.orderList;
 
@@ -16,5 +17,6 @@ public interface AdminMainService {
 	public List<FoodMInven> foodStockList() throws Exception;
 	public void refundUpdate(orderList list) throws Exception;
 	public void workUpdate(orderList list) throws Exception;
+	public List<FoodMAmountRead> foodMAmountRead(int orderCode) throws Exception;
 
 }

@@ -1,21 +1,39 @@
 package com.wdb3a.dacham;
 
+import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.wdb3a.dacham.bean.FoodMAmountRead;
 import com.wdb3a.dacham.bean.FoodMInven;
 import com.wdb3a.dacham.bean.orderList;
 import com.wdb3a.dacham.service.AdminMainService;
+
+
+
+
 
 
 /**
@@ -73,12 +91,49 @@ public class AdminController {
 	public String getfoodOrder(){
 		return "mate/admin/foodOrder";
 	}
-	@RequestMapping(value="/foodStock")
+	@RequestMapping(value="/foodStock", method=RequestMethod.GET)
 	public String getfoodStock(Model model) throws Exception{
-		List<FoodMInven> list= service.foodStockList();
-		model.addAttribute("list", list); 
+		/*List<FoodMInven> list= service.foodStockList();
+		model.addAttribute("list", list); */
 		return "mate/admin/foodStock";
 	}
+	@RequestMapping(value="/foodStock", method=RequestMethod.POST)
+	public String getfoodStock1(Model model, String orderCode) throws Exception{
+		
+
+		
+		JSONObject jsonobj = (JSONObject) JSONValue.parse(orderCode);
+		JSONArray bodyArray = (JSONArray) jsonobj.get("value");
+		int a = (int)bodyArray.get(0);
+		// 니미 씨발 요기 오류다
+		System.out.println(a);
+	
+	
+		List<FoodMAmountRead> list = service.foodMAmountRead(a);
+		System.out.println("123123");
+		model.addAttribute("list", list);
+		return "mate/admin/foodStock";
+	}
+	/*public class UserProfileEditor extends PropertyEditorSupport  {
+
+	    @Override
+	    public void setAsText(String text) throws IllegalArgumentException {
+	        ObjectMapper mapper = new ObjectMapper();
+
+	        UserProfile value = null;
+
+	        try {
+	            value = new UserProfile();
+	            JsonNode root = mapper.readTree(text);
+	            value.setEmail(root.path("email").asText());
+	        } catch (IOException e) {
+	            // handle error
+	        }
+
+	        setValue(value);
+	    }
+	}*/
+	
 	@RequestMapping(value="/orderList",method=RequestMethod.GET)
 	public String getorderList(Model model, orderList order) throws Exception{
 		List<orderList> list=service.orderListAll();
@@ -87,16 +142,21 @@ public class AdminController {
 	}
 	@RequestMapping(value="/orderList1",method=RequestMethod.POST)
 	public String getorderList1(Model model,@RequestBody orderList order) throws Exception{
+		if(order.getOrderItemCode()=="1"){
 		service.refundUpdate(order);
+		}
 		System.out.println(order.getOrderCode());
 		return "mate/admin/orderList";
 	}
+	
 	@RequestMapping(value="/orderList2",method=RequestMethod.POST)
 	public String getorderList2(Model model,@RequestBody orderList order) throws Exception{
 		service.workUpdate(order);
 		System.out.println(order.getOrderCode());
 		return "mate/admin/orderList";
 	}
+	
+	
 	@RequestMapping(value="/statistics")
 	public String getstatistics(){
 		return "mate/admin/statistics";

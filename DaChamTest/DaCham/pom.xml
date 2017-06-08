@@ -152,25 +152,29 @@
 			<version>1.3.2</version>
 		</dependency>
 		<dependency>
-         <groupId>com.fasterxml.jackson.core</groupId>
-         <artifactId>jackson-databind</artifactId>
-         <version>2.8.7</version>
-      </dependency>
-      <dependency>
-         <groupId>com.fasterxml.jackson.module</groupId>
-         <artifactId>jackson-module-jaxb-annotations</artifactId>
-         <version>2.4.1</version>
-      </dependency>
-      <dependency>
-         <groupId>org.codehaus.jackson</groupId>
-         <artifactId>jackson-mapper-asl</artifactId>
-         <version>1.9.13</version>
-      </dependency>
-		<!-- <dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.8.7</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.module</groupId>
+			<artifactId>jackson-module-jaxb-annotations</artifactId>
+			<version>2.4.1</version>
+		</dependency>
+		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.9.13</version>
-		</dependency> -->
+
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+
+
 
 		<!-- MONGO DB 사용하기 위한 dependency -->
 		<!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver -->
@@ -186,6 +190,7 @@
 			<version>1.10.3.RELEASE</version>
 		</dependency>
 	</dependencies>
+
 
 
 
