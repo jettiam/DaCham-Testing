@@ -3,40 +3,52 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wdb3a.AdminMapper">
-	<!-- <select id="listAll" resultType="orderList">
-		select 
-			orderCode, id, dietCode, orderDate, price, orderItem, transportNum
-		from orderList 
-	</select> -->
+	<!-- <select id="listAll" resultType="orderList"> select orderCode, id, 
+		dietCode, orderDate, price, orderItem, transportNum from orderList </select> -->
 	<select id="listAll" resultType="orderList">
-		select b.dietCode, b.orderCode, b.id, a.dietName, b.orderDate, b.price, b.orderItemCode, b.transportNum, c.orderItemName
-		from diet a join orderlist b join orderitem c 
+		select b.dietCode, b.orderCode,
+		b.id, a.dietName, b.orderDate, b.price, b.orderItemCode,
+		b.transportNum, c.orderItemName
+		from diet a join orderlist b join
+		orderitem c
 		where a.dietCode=b.dietCode
 		and b.orderItemCode = c.orderItemCode
 	</select>
-	
-	<select id="read" resultType="orderList"  parameterType="string" >
-	select b.dietCode, b.orderCode, b.id, a.dietName, b.orderDate, b.price, b.orderItemCode, b.transportNum, c.id, c.name, c.address, c.tel
-	from diet a join orderlist b join member c
-	where a.dietCode=b.dietCode 
-	and c.id=b.id
-	and orderCode=#{orderCode};
+
+	<select id="read" resultType="orderList" parameterType="string">
+		select b.dietCode, b.orderCode, b.id, a.dietName, b.orderDate,
+		b.price, b.orderItemCode, b.transportNum, c.id, c.name, c.address,
+		c.tel
+		from diet a join orderlist b join member c
+		where a.dietCode=b.dietCode
+		and c.id=b.id
+		and orderCode=#{orderCode};
 	</select>
-	
-	
+
+
 	<select id="foodStockList" resultType="FoodMInven">
-	select foodMICode, foodMCode, foodMName, inAmount, inDate, outAmount, uint, price, exDate, inAmount-outAmount as stock
-	from foodminven;
+		select foodMICode, foodMCode, foodMName, inAmount, inDate, outAmount, uint,
+		price, exDate, inAmount-outAmount as stock
+		from foodminven;
 	</select>
-	
+
 	<update id="refundupdate">
 		update orderlist set orderItemCode=6
-		where orderCode=#{orderCode}
+		where
+		orderCode=#{orderCode}
 	</update>
-	
+
 	<update id="workupdate">
 		update orderlist set orderItemCode=2
-		where orderCode=#{orderCode}
+		where
+		orderCode=#{orderCode}
 		and orderItemCode=1
 	</update>
+
+	<select id="foodMAmountRead" resultType="FoodMAmountRead">
+		select b.foodMAmount,b.foodMCode,f.foodMName, f.price, f.unit
+		from (select d.sideDcode from orderlist o, dietinfo d where o.ordercode=#{orderCode}
+		and o.dietCode=d.dietCode) a, sidedinfo b,foodmaterial f
+		where a.sideDCode=b.sideDCode and b.foodMCode=f.foodMCode;
+	</select>
 </mapper>

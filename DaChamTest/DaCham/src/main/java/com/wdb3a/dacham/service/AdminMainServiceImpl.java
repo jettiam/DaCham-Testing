@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.wdb3a.dacham.bean.FoodMAmountRead;
 import com.wdb3a.dacham.bean.FoodMInven;
 import com.wdb3a.dacham.bean.orderList;
 import com.wdb3a.dacham.dao.AdminMainDAO;
@@ -43,5 +44,15 @@ public class AdminMainServiceImpl implements AdminMainService {
 		dao.workUpdate(list);
 		
 	}
+
+	@Override
+	public List<FoodMAmountRead> foodMAmountRead(int orderCode) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.foodMAmountRead(orderCode);
+	}
+
+	
+
+	
 
 }

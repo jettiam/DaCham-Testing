@@ -1,20 +1,21 @@
 -- --------------------------------------------------------
--- 호스트:                          127.0.0.1
+-- 호스트:                          106.249.38.73
 -- 서버 버전:                        10.1.18-MariaDB - mariadb.org binary distribution
 -- 서버 OS:                        Win64
--- HeidiSQL 버전:                  9.3.0.4984
+-- HeidiSQL 버전:                  9.4.0.5125
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
 
 -- dacham 데이터베이스 구조 내보내기
 DROP DATABASE IF EXISTS `dacham`;
 CREATE DATABASE IF NOT EXISTS `dacham` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_bin */;
 USE `dacham`;
-
 
 -- 테이블 dacham.cookmethod 구조 내보내기
 DROP TABLE IF EXISTS `cookmethod`;
@@ -31,9 +32,10 @@ INSERT INTO `cookmethod` (`cookMCode`, `cookMName`) VALUES
 	('02', '구이'),
 	('03', '조림'),
 	('04', '찜'),
-	('05', '초벌');
+	('05', '초벌'),
+	('06', '무침'),
+	('07', '탕');
 /*!40000 ALTER TABLE `cookmethod` ENABLE KEYS */;
-
 
 -- 테이블 dacham.counsel 구조 내보내기
 DROP TABLE IF EXISTS `counsel`;
@@ -55,13 +57,12 @@ CREATE TABLE IF NOT EXISTS `counsel` (
   CONSTRAINT `FK_counsel_member_2` FOREIGN KEY (`adviser`) REFERENCES `member` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- 테이블 데이터 dacham.counsel:~2 rows (대략적) 내보내기
+-- 테이블 데이터 dacham.counsel:~1 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `counsel` DISABLE KEYS */;
 INSERT INTO `counsel` (`counselCode`, `counselItemCode`, `customer`, `adviser`, `counselTitle`, `counselDate`, `counselContent`, `counselRec`) VALUES
 	(1, '4', 'customer', NULL, '기타', '2017-06-05', '된다', NULL),
-	(2, '2', 'test', NULL, '고지혈증이', '2017-06-07', '고기좀 주세요', NULL);
+	(2, '2', 'test', 'counselor', '고지혈증이', '2017-06-07', '고기좀 주세요', NULL);
 /*!40000 ALTER TABLE `counsel` ENABLE KEYS */;
-
 
 -- 테이블 dacham.counselitem 구조 내보내기
 DROP TABLE IF EXISTS `counselitem`;
@@ -80,7 +81,6 @@ INSERT INTO `counselitem` (`counselItemCode`, `counselItemName`) VALUES
 	('4', '기타문의');
 /*!40000 ALTER TABLE `counselitem` ENABLE KEYS */;
 
-
 -- 테이블 dacham.diet 구조 내보내기
 DROP TABLE IF EXISTS `diet`;
 CREATE TABLE IF NOT EXISTS `diet` (
@@ -96,12 +96,15 @@ CREATE TABLE IF NOT EXISTS `diet` (
   KEY `FK_diet_wizardqna` (`wizardCode`),
   CONSTRAINT `FK_diet_disease` FOREIGN KEY (`diseaseCode`) REFERENCES `disease` (`diseaseCode`),
   CONSTRAINT `FK_diet_wizardqna` FOREIGN KEY (`wizardCode`) REFERENCES `wizardqna` (`wizardCode`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- 테이블 데이터 dacham.diet:~0 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `diet` DISABLE KEYS */;
+INSERT INTO `diet` (`dietCode`, `dietName`, `price`, `dietImg`, `diseaseCode`, `spDietItem`, `wizardCode`) VALUES
+	(1, '당뇨식1', 30000, NULL, 1, '0', 1),
+	(2, '당뇨식2', 20000, NULL, 1, '0', 1),
+	(3, '당뇨식3', 50000, NULL, 1, NULL, 1);
 /*!40000 ALTER TABLE `diet` ENABLE KEYS */;
-
 
 -- 테이블 dacham.dietinfo 구조 내보내기
 DROP TABLE IF EXISTS `dietinfo`;
@@ -116,8 +119,15 @@ CREATE TABLE IF NOT EXISTS `dietinfo` (
 
 -- 테이블 데이터 dacham.dietinfo:~0 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `dietinfo` DISABLE KEYS */;
+INSERT INTO `dietinfo` (`dietCode`, `sideDCode`) VALUES
+	(1, 8),
+	(1, 9),
+	(2, 4),
+	(2, 8),
+	(3, 3),
+	(3, 4),
+	(3, 8);
 /*!40000 ALTER TABLE `dietinfo` ENABLE KEYS */;
-
 
 -- 테이블 dacham.disease 구조 내보내기
 DROP TABLE IF EXISTS `disease`;
@@ -132,12 +142,24 @@ CREATE TABLE IF NOT EXISTS `disease` (
   `maxBloodP` int(3) NOT NULL,
   `judgement` varchar(10) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`diseaseCode`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- 테이블 데이터 dacham.disease:~0 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `disease` DISABLE KEYS */;
+INSERT INTO `disease` (`diseaseCode`, `diseaseName`, `minAge`, `maxAge`, `minBloodS`, `maxBloodS`, `minBloodP`, `maxBloodP`, `judgement`) VALUES
+	(1, '당뇨병', 10, 80, 100, 126, 0, 0, '주의'),
+	(2, '당뇨병', 10, 80, 127, 200, 0, 0, '위험'),
+	(3, '당뇨병', 10, 80, 201, 300, 0, 0, '고위험'),
+	(4, '신부전증', 10, 80, 100, 126, 80, 120, '주의'),
+	(5, '신부전증', 10, 80, 100, 126, 90, 140, '위험'),
+	(6, '신부전증', 10, 80, 100, 126, 100, 160, '고위험'),
+	(7, '신부전증', 10, 80, 127, 200, 80, 120, '위험'),
+	(8, '신부전증', 10, 80, 127, 200, 90, 140, '위험'),
+	(9, '신부전증', 10, 80, 127, 200, 100, 160, '고위험'),
+	(10, '신부전증', 10, 80, 201, 300, 80, 120, '고위험'),
+	(11, '신부전증', 10, 80, 201, 300, 90, 140, '고위험'),
+	(12, '신부전증', 10, 80, 201, 300, 100, 160, '고위험');
 /*!40000 ALTER TABLE `disease` ENABLE KEYS */;
-
 
 -- 테이블 dacham.foodgroup 구조 내보내기
 DROP TABLE IF EXISTS `foodgroup`;
@@ -156,7 +178,6 @@ INSERT INTO `foodgroup` (`foodGCode`, `foodGName`) VALUES
 	('04', '생선류'),
 	('05', '고기류');
 /*!40000 ALTER TABLE `foodgroup` ENABLE KEYS */;
-
 
 -- 테이블 dacham.foodmaterial 구조 내보내기
 DROP TABLE IF EXISTS `foodmaterial`;
@@ -180,17 +201,28 @@ CREATE TABLE IF NOT EXISTS `foodmaterial` (
   `k` double DEFAULT NULL,
   `na` double DEFAULT NULL,
   `foodMImg` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `price` int(8) DEFAULT NULL,
+  `unit` varchar(5) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`foodMCode`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- 테이블 데이터 dacham.foodmaterial:~3 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `foodmaterial` DISABLE KEYS */;
-INSERT INTO `foodmaterial` (`foodMCode`, `foodMName`, `kcal`, `carbohydrate`, `protein`, `fat`, `vitaminA_RE`, `vitaminA_retinol`, `vitaminA_beta`, `vitaminB1`, `vitaminB2`, `niacin`, `vitaminC`, `ca`, `p`, `fe`, `k`, `na`, `foodMImg`) VALUES
-	(1, '삼겹살', 493, 3, 22, 41, 25, 25, 0, 1, 0, 1, 0, 6, NULL, NULL, NULL, NULL, NULL),
-	(2, '후춧가루', 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 'images2017-05-07 08_05_11.jpg'),
-	(3, 'qwewe', 1.11, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `foodmaterial` (`foodMCode`, `foodMName`, `kcal`, `carbohydrate`, `protein`, `fat`, `vitaminA_RE`, `vitaminA_retinol`, `vitaminA_beta`, `vitaminB1`, `vitaminB2`, `niacin`, `vitaminC`, `ca`, `p`, `fe`, `k`, `na`, `foodMImg`, `price`, `unit`) VALUES
+	(1, '삼겹살', 493, 30, 22, 41, 25, 25, 0, 1, 0, 1, 0, 6, 0, 0, 0, 0, 'wher2017-06-07 07_14_28.PNG', 24000, 'kg'),
+	(2, '후춧가루', 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 'images2017-05-07 08_05_11.jpg', 15000, 'kg'),
+	(3, '연근', 70, 16.4, 2.1, 0.1, 0, 0, 0, 0.11, 0.01, 0.3, 57, 22, 67, 0.9, 377, 36, 'o2017-06-07 08_22_15.jpg', 15000, 'kg'),
+	(4, '백미', 363, 13.4, 6.4, 0.4, 1, 0, 4, 0.23, 0.02, 1.2, 0, 7, 87, 1.3, 170, 8, 'o2017-06-07 08_22_15.jpg', 1500, 'kg'),
+	(5, '가지', 17, 4, 0.8, 0.1, 63, 0, 377, 0.18, 0.03, 0.4, 2, 18, 24, 0.2, 189, 0, 'o2017-06-07 08_22_15.jpg', 10000, 'kg'),
+	(6, '시금치', 33, 6, 3.1, 0.5, 479, 0, 2876, 0.12, 0.34, 0.5, 60, 40, 29, 2.6, 502, 54, 'o2017-06-07 08_22_15.jpg', 8000, 'kg'),
+	(7, '도라지', 74, 19.2, 2, 0.1, 2, 0, 9, 0.02, 0.06, 6, 14, 45, 70, 1.3, 302, 19, 'o2017-06-07 08_22_15.jpg', 18000, 'kg'),
+	(8, '콩나물', 53, 4.7, 4.6, 1.8, 0.7, 0, 0, 0.59, 0.09, 0.8, 5, 48, 99, 0.6, 298, 3, '3', 9000, 'kg'),
+	(10, '오징어', 95, 0, 19.5, 1.3, 2, 2, 0, 0.05, 0.08, 2.5, 0, 25, 273, 0.5, 260, 181, NULL, 10000, 'kg'),
+	(11, '참깨', 569, 21.2, 20.5, 49.2, 3, 0, 12, 0.65, 0.15, 5.1, 0, 1060, 546, 10.4, 412, 2, NULL, 6000, 'kg'),
+	(12, '고추장', 178, 43.8, 4.9, 1.1, 408, 0, 2445, 0.17, 0.52, 1.6, 5, 40, 90, 2.2, 822, 3164, NULL, 15000, 'kg'),
+	(13, '땅콩기름', 884, 0, 0, 100, 0, 0, 1, 2, 3, 0, 0, 0, 0, 0, 0, 0, NULL, 15000, 'L'),
+	(14, '고추', 57, 10.3, 2.6, 1.7, 1078, 0, 6466, 0.13, 0.21, 2.1, 116, 16, 56, 0.9, 284, 12, NULL, 7900, 'kg');
 /*!40000 ALTER TABLE `foodmaterial` ENABLE KEYS */;
-
 
 -- 테이블 dacham.foodminven 구조 내보내기
 DROP TABLE IF EXISTS `foodminven`;
@@ -207,12 +239,13 @@ CREATE TABLE IF NOT EXISTS `foodminven` (
   PRIMARY KEY (`foodMICode`,`foodMCode`),
   KEY `FK_foodminven_foodmaterial` (`foodMCode`),
   CONSTRAINT `FK_foodminven_foodmaterial` FOREIGN KEY (`foodMCode`) REFERENCES `foodmaterial` (`foodMCode`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- 테이블 데이터 dacham.foodminven:~0 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `foodminven` DISABLE KEYS */;
+INSERT INTO `foodminven` (`foodMICode`, `foodMCode`, `foodMName`, `inAmount`, `inDate`, `outAmount`, `uint`, `price`, `exDate`) VALUES
+	(1, 5, '가지', 0, '2017-06-08', 0, 'kg', 5000, '2017-06-11');
 /*!40000 ALTER TABLE `foodminven` ENABLE KEYS */;
-
 
 -- 테이블 dacham.measure 구조 내보내기
 DROP TABLE IF EXISTS `measure`;
@@ -231,7 +264,6 @@ CREATE TABLE IF NOT EXISTS `measure` (
 /*!40000 ALTER TABLE `measure` DISABLE KEYS */;
 /*!40000 ALTER TABLE `measure` ENABLE KEYS */;
 
-
 -- 테이블 dacham.measureitem 구조 내보내기
 DROP TABLE IF EXISTS `measureitem`;
 CREATE TABLE IF NOT EXISTS `measureitem` (
@@ -244,7 +276,6 @@ CREATE TABLE IF NOT EXISTS `measureitem` (
 -- 테이블 데이터 dacham.measureitem:~0 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `measureitem` DISABLE KEYS */;
 /*!40000 ALTER TABLE `measureitem` ENABLE KEYS */;
-
 
 -- 테이블 dacham.member 구조 내보내기
 DROP TABLE IF EXISTS `member`;
@@ -275,7 +306,6 @@ INSERT INTO `member` (`id`, `passwd`, `name`, `address`, `tel`, `email`, `deptCo
 	('test', '1111', '김다희', '인천', '010', 'dahee@naver.com', '회원', '일반회원', '2017-06-07', NULL, NULL);
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 
-
 -- 테이블 dacham.orderitem 구조 내보내기
 DROP TABLE IF EXISTS `orderitem`;
 CREATE TABLE IF NOT EXISTS `orderitem` (
@@ -286,8 +316,14 @@ CREATE TABLE IF NOT EXISTS `orderitem` (
 
 -- 테이블 데이터 dacham.orderitem:~0 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `orderitem` DISABLE KEYS */;
+INSERT INTO `orderitem` (`orderItemCode`, `orderItemName`) VALUES
+	(1, '장바구니'),
+	(2, '결제완료'),
+	(3, '조리 대기'),
+	(4, '조리 중'),
+	(5, '조리완료'),
+	(6, '환불');
 /*!40000 ALTER TABLE `orderitem` ENABLE KEYS */;
-
 
 -- 테이블 dacham.orderlist 구조 내보내기
 DROP TABLE IF EXISTS `orderlist`;
@@ -310,12 +346,15 @@ CREATE TABLE IF NOT EXISTS `orderlist` (
   CONSTRAINT `FK_orderlist_member` FOREIGN KEY (`id`) REFERENCES `member` (`id`),
   CONSTRAINT `FK_orderlist_orderitem` FOREIGN KEY (`orderItemCode`) REFERENCES `orderitem` (`orderItemCode`),
   CONSTRAINT `FK_orderlist_paymentitem` FOREIGN KEY (`paymentItemCode`) REFERENCES `paymentitem` (`paymentItemCode`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- 테이블 데이터 dacham.orderlist:~0 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `orderlist` DISABLE KEYS */;
+INSERT INTO `orderlist` (`orderCode`, `id`, `dietCode`, `orderDate`, `price`, `dietAmount`, `transportNum`, `orderItemCode`, `paymentItemCode`) VALUES
+	(1, 'customer', 1, '2017-06-08', 30000, NULL, '', 6, 1),
+	(2, 'customer', 1, '2017-06-08', 30000, NULL, NULL, 1, 1),
+	(3, 'counselor', 1, '2017-06-09', 50000, NULL, NULL, 2, 3);
 /*!40000 ALTER TABLE `orderlist` ENABLE KEYS */;
-
 
 -- 테이블 dacham.paymentitem 구조 내보내기
 DROP TABLE IF EXISTS `paymentitem`;
@@ -327,8 +366,12 @@ CREATE TABLE IF NOT EXISTS `paymentitem` (
 
 -- 테이블 데이터 dacham.paymentitem:~0 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `paymentitem` DISABLE KEYS */;
+INSERT INTO `paymentitem` (`paymentItemCode`, `paymentItemName`) VALUES
+	(1, '결제대기'),
+	(2, '카드'),
+	(3, '계좌이체'),
+	(4, '휴대폰결제');
 /*!40000 ALTER TABLE `paymentitem` ENABLE KEYS */;
-
 
 -- 테이블 dacham.sidedinfo 구조 내보내기
 DROP TABLE IF EXISTS `sidedinfo`;
@@ -346,9 +389,14 @@ CREATE TABLE IF NOT EXISTS `sidedinfo` (
 /*!40000 ALTER TABLE `sidedinfo` DISABLE KEYS */;
 INSERT INTO `sidedinfo` (`sideDCode`, `foodMCode`, `foodMAmount`) VALUES
 	(3, 3, 114),
-	(5, 2, 41);
+	(5, 2, 41),
+	(6, 1, 24),
+	(6, 2, 24),
+	(6, 3, 24),
+	(8, 4, 200),
+	(9, 6, 50),
+	(9, 13, 1);
 /*!40000 ALTER TABLE `sidedinfo` ENABLE KEYS */;
-
 
 -- 테이블 dacham.sidedish 구조 내보내기
 DROP TABLE IF EXISTS `sidedish`;
@@ -364,16 +412,18 @@ CREATE TABLE IF NOT EXISTS `sidedish` (
   KEY `FK_sidedish_cookmethod` (`cookMCode`),
   CONSTRAINT `FK_sidedish_cookmethod` FOREIGN KEY (`cookMCode`) REFERENCES `cookmethod` (`cookMCode`),
   CONSTRAINT `FK_sidedish_foodgroup` FOREIGN KEY (`foodGCode`) REFERENCES `foodgroup` (`foodGCode`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- 테이블 데이터 dacham.sidedish:~3 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `sidedish` DISABLE KEYS */;
 INSERT INTO `sidedish` (`sideDCode`, `foodGCode`, `cookMCode`, `sideDName`, `recipe`, `sideDImg`) VALUES
 	(3, '02', '03', '2', '442', 'abc2017-06-07 08_37_24.png'),
 	(4, '01', '04', '77', '42', 'abc2017-06-07 08_39_40.png'),
-	(5, '02', '02', '4', '41', 'abc2017-06-07 08_40_04.png');
+	(5, '02', '02', '4', '41', 'abc2017-06-07 08_40_04.png'),
+	(6, '04', '01', '456', '004', 'abc2017-06-08 09_10_51.png'),
+	(8, '01', '04', '밥', '쌀 넣고 밥하면 됨', 'rice2017-06-08 10_47_35.JPG'),
+	(9, '03', '03', '시금치 무침', '시금치를 데친 후 무침', 'd012017-06-08 10_52_38.JPG');
 /*!40000 ALTER TABLE `sidedish` ENABLE KEYS */;
-
 
 -- 테이블 dacham.wizardqna 구조 내보내기
 DROP TABLE IF EXISTS `wizardqna`;
@@ -381,11 +431,14 @@ CREATE TABLE IF NOT EXISTS `wizardqna` (
   `QA` text COLLATE utf8_bin,
   `wizardCode` int(6) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`wizardCode`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- 테이블 데이터 dacham.wizardqna:~0 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `wizardqna` DISABLE KEYS */;
+INSERT INTO `wizardqna` (`QA`, `wizardCode`) VALUES
+	('1', 1);
 /*!40000 ALTER TABLE `wizardqna` ENABLE KEYS */;
+
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
