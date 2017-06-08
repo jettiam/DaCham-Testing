@@ -42,7 +42,7 @@
 				$("input[name=che]").prop('checked', false);
 			}
 		});
-		$("#foodOrder").click(function() {
+		$("#foodOrder").click(function() { 
 			window.location.href = "foodOrder";     
 		});
 		$("#close").click(function(){
@@ -63,6 +63,30 @@
 				alert(data[index]);
 				$.ajax({
 					url : 'orderList1',
+					data :JSON.stringify(allData), 
+					dataType : 'json',  
+					type : 'POST',
+					headers: {
+			            "Content-Type":"application/json",
+			            "X-HTTP-Method-Override":"POST"
+			         },
+					success : function(data) {
+						alert(data);
+						}
+
+				});
+			})				
+			
+			
+		location.reload();	
+		});
+		
+		$('#work').click(function(){
+			data.forEach(function(item, index){
+				var allData = {"orderCode": item};
+				alert(data[index]);
+				$.ajax({
+					url : 'orderList2',
 					data :JSON.stringify(allData), 
 					dataType : 'json',  
 					type : 'POST',
@@ -151,7 +175,7 @@
 					<td><a onclick="showmap()">${board.dietName}&nbsp;&nbsp;</td>
 					<td>${board.orderDate }&nbsp;&nbsp;</td>
 					<td>${board.price}</td>
-					<td>${board.orderItem}</td>
+					<td>${board.orderItemName}</td>
 					<td>${board.transportNum}</td>
 				</tr>
 
@@ -161,7 +185,7 @@
 	</form>
 	<div>
 		<button id="foodOrder">식재료 주문</button>
-		<button>작업 요청</button>
+		<button id="work">작업 요청</button>
 		<button id = "refund" type="submit">환불</button>
 	</div>
 

@@ -13,14 +13,23 @@ public class orderList {
 	private String tel;
 	private String name;
 	private String dietImg;
+	private String orderItemName;
 	
 	private int price;
 	private int dietAmount;
-	private String orderItem;
+	private String orderItemCode;
 	private String paymentItem;
 	private String transportNum;
 	private String searchType;
 	private String keyword;
+	
+	
+	public String getOrderItemName() {
+		return orderItemName;
+	}
+	public void setOrderItemName(String orderItemName) {
+		this.orderItemName = orderItemName;
+	}
 	public String getSearchType() {
 		return searchType;
 	}
@@ -101,11 +110,11 @@ public class orderList {
 	public void setDietAmount(int dietAmount) {
 		this.dietAmount = dietAmount;
 	}
-	public String getOrderItem() {
-		return orderItem;
+	public String getOrderItemCode() {
+		return orderItemCode;
 	}
-	public void setOrderItem(String orderItem) {
-		this.orderItem = orderItem;
+	public void setOrderItemCode(String orderItem) {
+		this.orderItemCode = orderItem;
 	}
 	public String getPaymentItem() {
 		return paymentItem;

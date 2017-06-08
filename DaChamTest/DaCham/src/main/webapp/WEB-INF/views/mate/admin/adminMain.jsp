@@ -101,7 +101,7 @@
 						<td><a data-src="${board.orderCode}"  class="orderCode">${board.dietName}&nbsp;&nbsp;</a></td>
 						<td>${board.orderDate }&nbsp;&nbsp;</td>
 						<td>${board.price}</td>
-						<td>${board.orderItem}</td>
+						<td>${board.orderItemName}</td> 
 						<td>${board.transportNum}</td>
 
 					</tr>

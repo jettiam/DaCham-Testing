@@ -9,13 +9,14 @@
 		from orderList 
 	</select> -->
 	<select id="listAll" resultType="orderList">
-		select b.dietCode, b.orderCode, b.id, a.dietName, b.orderDate, b.price, b.orderItem, b.transportNum
-		from diet a join orderlist b
-		on (a.dietCode=b.dietCode);
+		select b.dietCode, b.orderCode, b.id, a.dietName, b.orderDate, b.price, b.orderItemCode, b.transportNum, c.orderItemName
+		from diet a join orderlist b join orderitem c 
+		where a.dietCode=b.dietCode
+		and b.orderItemCode = c.orderItemCode
 	</select>
 	
 	<select id="read" resultType="orderList"  parameterType="string" >
-	select b.dietCode, b.orderCode, b.id, a.dietName, b.orderDate, b.price, b.orderItem, b.transportNum, c.id, c.name, c.address, c.tel
+	select b.dietCode, b.orderCode, b.id, a.dietName, b.orderDate, b.price, b.orderItemCode, b.transportNum, c.id, c.name, c.address, c.tel
 	from diet a join orderlist b join member c
 	where a.dietCode=b.dietCode 
 	and c.id=b.id
@@ -28,8 +29,14 @@
 	from foodminven;
 	</select>
 	
-	<update id="update">
-		update orderlist set transportNum="환불"
+	<update id="refundupdate">
+		update orderlist set orderItemCode=6
 		where orderCode=#{orderCode}
+	</update>
+	
+	<update id="workupdate">
+		update orderlist set orderItemCode=2
+		where orderCode=#{orderCode}
+		and orderItemCode=1
 	</update>
 </mapper>

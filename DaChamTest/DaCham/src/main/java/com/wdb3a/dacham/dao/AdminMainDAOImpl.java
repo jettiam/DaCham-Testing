@@ -34,8 +34,14 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 	}
 
 	@Override
-	public void transportNumUpdate(orderList list) throws Exception {
-		sqlSession.update(namespace+".update", list);
+	public void refundUpdate(orderList list) throws Exception {
+		sqlSession.update(namespace+".refundupdate", list);
+	}
+
+	@Override
+	public void workUpdate(orderList list) throws Exception {
+		sqlSession.update(namespace+".workupdate", list);
+		
 	}
 
 	

@@ -33,8 +33,14 @@ public class AdminMainServiceImpl implements AdminMainService {
 	}
 
 	@Override
-	public void transportNumUpdate(orderList list) throws Exception {
-		dao.transportNumUpdate(list);
+	public void refundUpdate(orderList list) throws Exception {
+		dao.refundUpdate(list);
+		
+	}
+
+	@Override
+	public void workUpdate(orderList list) throws Exception {
+		dao.workUpdate(list);
 		
 	}
 

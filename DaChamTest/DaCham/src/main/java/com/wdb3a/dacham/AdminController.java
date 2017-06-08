@@ -87,7 +87,13 @@ public class AdminController {
 	}
 	@RequestMapping(value="/orderList1",method=RequestMethod.POST)
 	public String getorderList1(Model model,@RequestBody orderList order) throws Exception{
-		service.transportNumUpdate(order);
+		service.refundUpdate(order);
+		System.out.println(order.getOrderCode());
+		return "mate/admin/orderList";
+	}
+	@RequestMapping(value="/orderList2",method=RequestMethod.POST)
+	public String getorderList2(Model model,@RequestBody orderList order) throws Exception{
+		service.workUpdate(order);
 		System.out.println(order.getOrderCode());
 		return "mate/admin/orderList";
 	}
