@@ -20,7 +20,12 @@ li{
 		});
 		
 		$("#sugarBlood").on("click",function(){
-			alert("당뇨");
+			var diseaseCode = $(this).attr("data-code");
+			$.getJSON("customerAjax/dietList/"+diseaseCode,function(data){
+				var a = data.list;
+				console.log(a);
+			});
+			
 		});
 	});
 </script>
@@ -29,11 +34,13 @@ li{
 <body>
 <%@include file="../../clientNavi.jsp" %>
 <ul>
-	<li><a href=# class="disease" id="sugarBlood">당뇨병</a></li>
+	<li><a href=# class="disease" data-code="1" id="sugarBlood">당뇨병</a></li>
 	<li><a href=# class="disease" id="renalFailure">신부전증</a></li>
 	<li><a href=# class="disease" id="heartFailure">심부전증</a></li>
 	<li><a href=# class="disease" id="hyperlipidemia">고지혈증</a></li>
 	<li><a href=# class="disease" id="wizardOrder">위자드로 주문하기</a></li>
 </ul>
+
+
 </body>
 </html>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.wdb3a.CustomerMapper">
+  
+  <!-- 식단 주문하기 목록 띄우는 쿼리문 -->
+  <select id="dietList" resultType="Customer">
+  	select d.dietCode, d.dietName, s.sideDImg
+	from diet d,dietinfo di, sidedish s
+	where d.diseaseCode=#{diseaseCode} and di.dietCode=d.dietCode and di.sideDCode=s.sideDCode;
+  </select>  
+  </mapper>
