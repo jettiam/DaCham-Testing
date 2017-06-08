@@ -39,8 +39,11 @@
 				<td>${counsel.customer}</td>
 				<td>${counsel.counselDate }</td>
 				<c:if test="${empty counsel.adviser}">
-				<td>답변대기</td>
-				</c:if>			
+				<td>미응답</td>
+				</c:if>
+				<c:if test="${not empty counsel.adviser}">
+				<td>답변완료</td>
+				</c:if>				
 			</tr>
 			</c:forEach>
 		</table>
