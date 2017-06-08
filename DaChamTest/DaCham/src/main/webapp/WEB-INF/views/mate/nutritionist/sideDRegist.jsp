@@ -10,6 +10,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@include file="nutritionistNavi.jsp" %>
 <title>Insert title here</title>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src = "../../../dacham/resources/openAPIjs/radarchart.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 <style>
@@ -69,9 +71,8 @@
 			
 	
 		<div class = "div2">
-			<div>
-				그래프가 들어갈
-				open API영역
+			<div id = "body">
+				<div id = "chart"></div>       
 			</div>
 			<div>
 				<h2>반찬 레시피</h2>
@@ -144,17 +145,12 @@
 				
 				var foodMCode = $(this).attr('data-code');
 				
-				
-				
-				
-				
 				localStorage[cnt + '_name'] = foodMName;
 				localStorage[cnt + '_code'] = foodMCode;
 				
 				++cnt;
 				
 				localStorage['cnt'] = cnt;
-				
 				
 				Refresh();
 				v = cnt;
@@ -174,19 +170,26 @@
 				cntChange(v);
 			});
 			
+			$(document.body).on('mouseover','.foodMName',function(){
+				var foodMName = $(this).attr('data-name');
+				alert("식재료이름:"+foodMName);
+				$.ajax({
+					url : "nutriAjax/show/"+ foodMName,              
+				});
+			});
+			
+			
 			function Refresh(){
 				var cnt = parseInt(localStorage['cnt']);
 				$('.item').empty();	
-				
-				
-				
+			
 			
 				for(var i = 0; i<cnt; i++){
 					var foodMName = localStorage[i + "_name"];
 					var foodMCode = localStorage[i + "_code"];
 					var item = $('<tr></tr>').addClass('item').attr('data-id',i);
 					$('<td></td>').html('<input type = "hidden" name = "foodMCode" value = '+foodMCode + '>').appendTo(item);    
-					$('<td>'+foodMName+'</td>').addClass("foodMName").attr('name','foodMName').appendTo(item);
+					$('<td>'+foodMName+'</td>').addClass("foodMName").attr('name','foodMName').attr('data-name',foodMName).appendTo(item);
 					$('<td></td>').html('<input type ="text" name = "foodMAmount" maxlength="4" size="1" >').appendTo(item);
 					item.appendTo(".material");
 					
@@ -210,5 +213,6 @@
 			$('<input type = "hidden" id = "cnt" name = "cnt" value = "'+v+'">').appendTo(".registFrom");
 		});
 	</script>
+	<script src = "../../../dacham/resources/openAPIjs/APIQuery2.js"></script>
 </body>
 </html>

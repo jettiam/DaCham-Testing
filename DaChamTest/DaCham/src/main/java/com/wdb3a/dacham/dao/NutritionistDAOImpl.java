@@ -51,4 +51,10 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 		sqlSession.insert(namespace+".createAmount",nutritionist);
 	}
 
+	@Override
+	public Nutritionist openAPI(String foodMName) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".openAPI",foodMName);
+	}
+
 }

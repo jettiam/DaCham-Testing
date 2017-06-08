@@ -61,4 +61,17 @@ public class NutritionistAjaxController {
 		entity = new ResponseEntity<>(cnt2,HttpStatus.OK);
 		return entity;
 	}
+	@RequestMapping(value = "/show/{foodMName}",method = RequestMethod.GET)
+	public ResponseEntity<Nutritionist> openAPI(@PathVariable("foodMName")String foodMName){
+		ResponseEntity<Nutritionist> entity = null;
+		try {
+			Nutritionist nutritionist = service.openAPI(foodMName);
+			entity = new ResponseEntity<>(nutritionist,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
 }
