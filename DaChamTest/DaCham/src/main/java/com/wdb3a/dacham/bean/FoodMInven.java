@@ -6,6 +6,7 @@ public class FoodMInven {
 	private String foodMICode;
 	private String foodMCode;
 	private String foodMName;
+	private int foodMAmount;
 	private int inAmount;
 	private Date inDate;
 	private int outAmount;
@@ -13,15 +14,12 @@ public class FoodMInven {
 	private int price;
 	private Date exDate;
 	private int stock;
+	private String keyword;
+	private String searchType;
 	
 	
 	
-	public int getStock() {
-		return stock;
-	}
-	public void setStock(int stock) {
-		this.stock = stock;
-	}
+	
 	public String getFoodMICode() {
 		return foodMICode;
 	}
@@ -39,6 +37,12 @@ public class FoodMInven {
 	}
 	public void setFoodMName(String foodMName) {
 		this.foodMName = foodMName;
+	}
+	public int getFoodMAmount() {
+		return foodMAmount;
+	}
+	public void setFoodMAmount(int foodMAmount) {
+		this.foodMAmount = foodMAmount;
 	}
 	public int getInAmount() {
 		return inAmount;
@@ -76,6 +80,27 @@ public class FoodMInven {
 	public void setExDate(Date exDate) {
 		this.exDate = exDate;
 	}
+	public int getStock() {
+		return stock;
+	}
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+	public String getSearchType() {
+		return searchType;
+	}
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
+	}
+	
+	
+	
 	
 	
 }

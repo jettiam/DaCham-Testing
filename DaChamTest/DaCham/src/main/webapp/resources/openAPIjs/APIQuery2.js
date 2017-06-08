@@ -1,15 +1,22 @@
-var w = 200,h = 200;
+
+
+
+function openAPI(){
+
+		var w = 200,h = 200;
 		
 		var colorscale = d3.scale.category10();
 		
 		//Legend titles
-		var foodMName = "식재료이름";
+		var foodMName = $("#foodMName").val();
 		var LegendOptions = [foodMName];
-		var A = 5;
-		var B = 4;
-		var C = 3;
-		var D = 2;
-		var E = 2;
+		
+		console.log("단백질:"+A);        
+		var A = ($("#protein").val())/100;
+		var B = ($("#carbohydrate").val())/100;
+		var C = ($("#fat").val())/100;
+		var D = ($("#na").val())/100;
+		var E = ($("#fe").val())/100;
 		//Data
 		var d = [
 			  [
@@ -18,7 +25,7 @@ var w = 200,h = 200;
 				
 				{axis:"지방",value:C},
 				{axis:"나트륨",value:D},
-				{axis:"비타민",value:E}
+				{axis:"철",value:E}
 			  ]
 			];
 		
@@ -84,3 +91,5 @@ var w = 200,h = 200;
 		  .attr("fill", "#737373")
 		  .text(function(d) { return d; })
 		  ;	
+		
+}

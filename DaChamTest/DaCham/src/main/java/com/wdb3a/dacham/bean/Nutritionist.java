@@ -7,11 +7,17 @@ public class Nutritionist {
 	private String sideDImg;
 	private int foodMAmount;
 	private String foodMName;
-	private int kcal;
-	private int carbohydrate;
-	private int protein;
-	private int fat;
-	private int na;
+	private int kcal; //Ä®·Î¸®
+	private int carbohydrate; //Åº¼öÈ­¹°
+	private int protein; //´Ü¹éÁú
+	private int fat; //Áö¹æ
+	private int na;//³ªÆ®·ý
+	private int vitaminA_RE;
+	private int vitaminA_retinol;
+	private int vitaminA_beta;
+	private int vitaminB1;
+	private int vitaminB2;
+	private int vitaminC; //ºñÅ¸¹Î
 	private String foodGName;
 	private String cookMName;
 	private String dietName;
@@ -63,6 +69,42 @@ public class Nutritionist {
 	}
 	public String getSideDName() {
 		return sideDName;
+	}
+	public int getVitaminA_RE() {
+		return vitaminA_RE;
+	}
+	public void setVitaminA_RE(int vitaminA_RE) {
+		this.vitaminA_RE = vitaminA_RE;
+	}
+	public int getVitaminA_retinol() {
+		return vitaminA_retinol;
+	}
+	public void setVitaminA_retinol(int vitaminA_retinol) {
+		this.vitaminA_retinol = vitaminA_retinol;
+	}
+	public int getVitaminA_beta() {
+		return vitaminA_beta;
+	}
+	public void setVitaminA_beta(int vitaminA_beta) {
+		this.vitaminA_beta = vitaminA_beta;
+	}
+	public int getVitaminB1() {
+		return vitaminB1;
+	}
+	public void setVitaminB1(int vitaminB1) {
+		this.vitaminB1 = vitaminB1;
+	}
+	public int getVitaminB2() {
+		return vitaminB2;
+	}
+	public void setVitaminB2(int vitaminB2) {
+		this.vitaminB2 = vitaminB2;
+	}
+	public int getVitaminC() {
+		return vitaminC;
+	}
+	public void setVitaminC(int vitaminC) {
+		this.vitaminC = vitaminC;
 	}
 	public void setSideDName(String sideDName) {
 		this.sideDName = sideDName;

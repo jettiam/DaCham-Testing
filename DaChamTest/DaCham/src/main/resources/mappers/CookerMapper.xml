@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wdb3a.CookerMapper">
+	<select id="foodStock" resultType="FoodMInven">
+		select b.foodMName, c.foodMAmount, a.inAmount, a.uint
+		from foodMInven a join sideDInfo c join foodMaterial b
+		where b.foodMCode = c.foodMCode
+		<include refid="search"></include>
+	</select>
+	<sql id = "search">
+	  	<if test = "searchType != null">
+	  		<if test="searchType == 't'.toString()">
+	  			and b.foodMName like CONCAT('%',#{keyword},'%')
+	  		</if>
+	  		<if test="searchType == 'c'.toString()">
+	  			and c.foodMAmount like CONCAT('%',#{keyword},'%')
+	  		</if>
+	  	</if>
+  </sql>
+</mapper>
