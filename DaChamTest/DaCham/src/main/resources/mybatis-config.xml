@@ -11,7 +11,11 @@
 		<typeAlias alias="orderList" type="com.wdb3a.dacham.bean.orderList" />
 		<typeAlias alias="Counsel" type="com.wdb3a.dacham.bean.Counsel" />
 		<typeAlias alias="FoodMInven" type="com.wdb3a.dacham.bean.FoodMInven"/>
+<<<<<<< HEAD
 		<typeAlias alias="FoodMAmountRead" type="com.wdb3a.dacham.bean.FoodMAmountRead"/>
+=======
+		<typeAlias alias="Customer" type="com.wdb3a.dacham.bean.Customer"/>
+>>>>>>> branch 'master' of https://github.com/jettiam/DaCham-Testing.git
 
 		
 

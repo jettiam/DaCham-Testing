@@ -20,7 +20,29 @@ li{
 		});
 		
 		$("#sugarBlood").on("click",function(){
-			alert("당뇨");
+			var diseaseCode = $(this).attr("data-code");
+			$.getJSON("customerAjax/dietList/"+diseaseCode,function(data){
+				var a = data.list;
+				console.log(a);
+				console.log(data.list.length);
+				console.log(data.list[0].dietName);
+				var dietCode=0;
+				for(var i = 0; i<data.list.length; i++){					
+					if(dietCode == 0){
+						dietCode = data.list[i].dietCode;
+					}					
+					if(dietCode==data.list[i].dietCode){
+						$("#dietList").append(data.list[i].sideDImg+"<br>");
+					}else{
+						$("#dietList").append(data.list[i-1].dietName+"<br>");
+						$("#dietList").append(data.list[i].sideDImg+"<br>");
+						dietCode = data.list[i].dietCode;
+					}					
+				}
+				$("#dietList").append(data.list[data.list.length-1].dietName+"<br>");
+				
+			});
+			
 		});
 	});
 </script>
@@ -29,11 +51,14 @@ li{
 <body>
 <%@include file="../../clientNavi.jsp" %>
 <ul>
-	<li><a href=# class="disease" id="sugarBlood">당뇨병</a></li>
+	<li><a href=# class="disease" data-code="1" id="sugarBlood">당뇨병</a></li>
 	<li><a href=# class="disease" id="renalFailure">신부전증</a></li>
 	<li><a href=# class="disease" id="heartFailure">심부전증</a></li>
 	<li><a href=# class="disease" id="hyperlipidemia">고지혈증</a></li>
 	<li><a href=# class="disease" id="wizardOrder">위자드로 주문하기</a></li>
 </ul>
+<div id="dietList">
+
+</div>
 </body>
 </html>

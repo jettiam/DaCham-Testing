@@ -59,7 +59,9 @@
 		<ul class="">
 			<!-- 메뉴 리스트 -->
 			<li class="box"><a href="cookList" id="cookingList">조리목록</a></li>
+			<li class="box"><a href="cook" id="cook">조리</a></li>
 			<li class="box"><a href="cookFood" id="foodStock">식재료재고</a></li>
+			
 		</ul>
 	</div>
 </body>
