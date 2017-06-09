@@ -6,7 +6,7 @@
   <select id="counselList" resultType="Counsel">
   select c.counselCode, i.counselItemName,c.customer,c.counselTitle,c.counselDate,c.adviser
   from counsel c, counselItem i
-  where c.counselItemCode=i.counselItemCode
+  where c.counselItemCode=i.counselItemCode order by c.counselCode desc
   </select>
   <insert id="write">
    insert into counsel(counselItemCode, customer, counselTitle, counselContent,counselDate)
@@ -17,4 +17,7 @@
 	from counsel c,counselItem i
    where c.counselItemCode=i.counselItemCode and c.counselCode=#{counselCode}
 </select>
+<delete id="delete">
+ delete from counsel where counselCode={#counselCode}
+</delete>
 </mapper>

@@ -28,5 +28,10 @@ private CounselDAO dao;
 		return dao.couselRead(counselCode);
 
 	}
+	@Override
+	public void delete(int counselCode) throws Exception {
+		// TODO Auto-generated method stub
+		dao.delete(counselCode);
+	}
 
 }
