@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.wdb3a.dacham.bean.Deliver;
+import com.wdb3a.dacham.bean.Nutritionist;
 import com.wdb3a.dacham.bean.orderList;
 import com.wdb3a.dacham.service.DeliverService;
 import com.wdb3a.dacham.util.MediaUtils;
@@ -45,8 +47,18 @@ public class DeliverController {
 		return "/mate/deliver/deliverList";
 	}
 	@RequestMapping(value="/deliverFood", method=RequestMethod.GET)
-	public String getFood(){
+	public String getFood(Model model,Deliver deliver) throws Exception{
+		List<Nutritionist> list = service.listMaterial();
+		List<Deliver> overList = service.showDeliver(deliver);
+		model.addAttribute("list",list);
+		model.addAttribute("overList",overList);
+		model.addAttribute("deliver",deliver);
 		return "/mate/deliver/foodStock";
+	}
+	@RequestMapping(value="/deliverRegist",method = RequestMethod.POST)
+	public String createDeliver(Deliver deliver) throws Exception{
+		service.createDeliver(deliver);
+		return "redirect:deliverFood";
 	}
 	
 	 @ResponseBody

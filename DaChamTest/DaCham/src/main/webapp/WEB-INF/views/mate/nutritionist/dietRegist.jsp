@@ -18,8 +18,8 @@
 		});
 		
 		
-		if(!localStorage['init']){
-			localStorage['init'] = "true";
+		if(!localStorage['clear'] || localStorage['count'] == 'NaN'){
+			localStorage['clear'] = "true";
 			localStorage['count'] = 0;   
 		}
 		
