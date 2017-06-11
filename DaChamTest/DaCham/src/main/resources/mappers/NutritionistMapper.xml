@@ -30,4 +30,8 @@
 		select * from foodmaterial
 		where foodMName = #{foodMName}
 	</select>
+	<insert id = "createDiet">
+		insert into diet(diseaseCode, wizardCode, dietName, price, dietImg, spDietItem)
+		values (#{diseaseCode},#{wizardCode},#{dietName},#{price},#{dietImg},#{spDietItem})
+	</insert>
 </mapper>

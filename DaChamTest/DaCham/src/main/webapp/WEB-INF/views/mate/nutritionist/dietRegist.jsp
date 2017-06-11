@@ -18,8 +18,8 @@
 		});
 		
 		
-		if(!localStorage['clear'] || localStorage['count'] == 'NaN'){
-			localStorage['clear'] = "true";
+		if(!localStorage['init'] || isNaN(localStorage['count']) == true){
+			localStorage['init'] = "true";
 			localStorage['count'] = 0;   
 		}
 		
@@ -87,6 +87,12 @@
 		}
 		
 		$('<input type = "hidden" id = "cnt" name = "count" value = "'+v+'">').appendTo("#registForm");
+		
+		$("#regist").on("click",function(){
+			$("#registForm").attr("method","post");
+			$("#registForm").attr("action","diet");
+			$("#registForm").submit();
+		});
 	});
 	
 </script>
@@ -120,13 +126,8 @@
 <body>
 	<form name = "input_form" id = "searchForm">
 		<div class = "div1">
-			<h2>위자드 선택</h2>
-			<hr align = "left" width = "40%">
-			<div class = "box1">
-				<input type = "radio" name = "wizardCode" value = "1"> 고위험군 당뇨병<br>
-				<input type = "radio" name = "wizardCode" value = "2"> 저위험 고지혈증<br>
-				<input type = "radio" name = "wizardCode" value = "3"> 주의 신부전증
-			</div>
+			
+			
 			<div class = "box2">
 				<table>
 					<tr>
@@ -165,7 +166,12 @@
 			</div>
 		</div>
 		</form>
-		<form id = "registForm">
+		<form id = "registForm" enctype = "multipart/form-data">
+			<div class = "box1">
+				<input type = "radio" name = "wizardCode" value = "1"> 고위험군 당뇨병<br>
+				<input type = "radio" name = "wizardCode" value = "2"> 저위험 고지혈증<br>
+				<input type = "radio" name = "wizardCode" value = "3"> 주의 신부전증
+			</div>             
 			<div>
 				<h3>선택한 반찬</h3>
 				<div class = "material">
@@ -174,6 +180,8 @@
 			</div>
 		
 			<div class = "div2" style = "border-left:1px solid #000">
+			    <h2>위자드 선택</h2>
+				<hr align = "left" width = "40%">          
 				<div>
 					질환별 식단 목록<br>
 					- <a>당뇨병</a><br>
@@ -192,7 +200,11 @@
 					<input type = "number" name = "price" placeholder = "식단 가격 짓기">
 				</div>
 				<div id = "dietImg">
-					<input type = "file" name = "dietImg" placeholder = "식단이미지 올리기">
+					<input type = "file" name = "file" placeholder = "식단이미지 올리기">
+				</div>
+				<div id = "spDietItem">
+					<input type = "radio" name = "spDietItem" value = "0">특별식단
+					<input type = "radio" name = "spDietItem" value = "1">일반식단
 				</div>
 				<div id = "body">
 					<div id = "chart"></div>
@@ -202,7 +214,7 @@
 				</div>
 			</div>
 		</form>
-	<button id = "regist" type = "submit">등록</button>
+	<button id = "regist">등록</button>
 	<button id = "cancle">취소</button>
 	
 </body>

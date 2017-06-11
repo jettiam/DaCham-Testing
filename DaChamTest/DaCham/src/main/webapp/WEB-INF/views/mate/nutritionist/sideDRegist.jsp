@@ -135,7 +135,7 @@
 			});
 			
 			
-			if(!localStorage['init']){
+			if(!localStorage['init'] || isNaN(localStorage['cnt']) == true){
 				localStorage['init'] = "true";
 				localStorage['cnt'] = 0;              
 			}
