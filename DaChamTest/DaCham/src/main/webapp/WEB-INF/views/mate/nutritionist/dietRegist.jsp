@@ -189,7 +189,11 @@
 				</div>
 				<br><br><br>
 				<div id = "test">
-					<input type = "text" name = "diseaseCode" placeholder = "질환코드(test용)">
+					<select name = "diseaseCode">
+						<c:forEach items = "${overList }" var = "v">
+							<option value = "${v.diseaseCode }">${v.diseaseName }, ${v.judgement}</option>
+						</c:forEach>
+					</select>
 				</div>
 				<div id = "dietName">
 					<!-- 식단의 이름을 지어줌 -->
