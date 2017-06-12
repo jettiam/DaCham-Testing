@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.wdb3a.dacham.bean.Counsel;
 import com.wdb3a.dacham.service.CounselService;
@@ -120,10 +121,11 @@ public String clientMain(){
 	return "main";
 }
 
-/*@RequestMapping(value="/delete",method = RequestMethod.GET)
-public String delete(@RequestParam(value="counselCode",defaultValue="-1")int code,Model model) throws Exception{
-	model.addAttribute("delete",service.couselRead(code));
+@RequestMapping(value="/counselDelete",method = RequestMethod.POST)
+public String delete(@RequestParam(value="counselCode")int code,RedirectAttributes rttr) throws Exception{
+	service.delete(code);
+	rttr.addFlashAttribute("msg","SUCCESS");
 	return "redirect:counsel";
 	
-}*/
+}
 }

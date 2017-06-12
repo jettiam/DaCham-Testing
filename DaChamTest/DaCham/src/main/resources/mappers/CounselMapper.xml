@@ -18,6 +18,6 @@
    where c.counselItemCode=i.counselItemCode and c.counselCode=#{counselCode}
 </select>
 <delete id="delete">
- delete from counsel where counselCode={#counselCode}
+ delete from counsel where counselCode=#{counselCode}
 </delete>
 </mapper>

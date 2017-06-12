@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wdb3a.NutritionistMapper">
 	<select id = "listSearch" resultType = "com.wdb3a.dacham.bean.Nutritionist">	
-		select a.sideDName, b.foodGName, c.cookMName
+		select a.sideDName, b.foodGName, c.cookMName , a.sideDCode, a.sideDImg
 		from sideDish a join foodGroup b join cookMethod c
 		where a.foodGCode = b.foodGCode
 		and a.cookMCode = c.cookMCode
@@ -30,4 +30,8 @@
 		select * from foodmaterial
 		where foodMName = #{foodMName}
 	</select>
+	<insert id = "createDiet">
+		insert into diet(diseaseCode, wizardCode, dietName, price, dietImg, spDietItem)
+		values (#{diseaseCode},#{wizardCode},#{dietName},#{price},#{dietImg},#{spDietItem})
+	</insert>
 </mapper>

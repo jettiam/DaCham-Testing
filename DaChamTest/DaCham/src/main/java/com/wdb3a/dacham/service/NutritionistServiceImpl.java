@@ -57,4 +57,10 @@ public class NutritionistServiceImpl implements NutritionistService {
 		return dao.openAPI(foodMName);
 	}
 
+	@Override
+	public void createDiet(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		dao.createDiet(nutritionist);
+	}
+
 }

@@ -12,4 +12,5 @@ public interface NutritionistDAO {
 	public void createSide(Nutritionist nutritionist) throws Exception;
 	public void createAmount(Nutritionist nutritionist) throws Exception;
 	public Nutritionist openAPI(String foodMName) throws Exception;
+	public void createDiet(Nutritionist nutritionist) throws Exception;
 }

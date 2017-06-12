@@ -6,6 +6,8 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.wdb3a.dacham.bean.Deliver;
+import com.wdb3a.dacham.bean.Nutritionist;
 import com.wdb3a.dacham.bean.orderList;
 import com.wdb3a.dacham.dao.DeliverDAO;
 import com.wdb3a.dacham.dao.NutritionistDAO;
@@ -19,6 +21,21 @@ public class DeliverServiceImpl implements DeliverService {
 	public List<orderList> listAll(orderList orderList) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.listAll(orderList);
+	}
+	@Override
+	public List<Nutritionist> listMaterial() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.listMaterial();
+	}
+	@Override
+	public void createDeliver(Deliver deliver) throws Exception {
+		// TODO Auto-generated method stub
+		dao.createDeliver(deliver);
+	}
+	@Override
+	public List<Deliver> showDeliver(Deliver deliver) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.showDeliver(deliver);
 	}
 
 }
