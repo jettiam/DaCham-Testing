@@ -36,6 +36,10 @@ public class Nutritionist {
 	private String foodMImg;
 	private String foodGCode;
 	private String cookMCode;
+	private int diseaseCode;
+	private int wizardCode;
+	private int dietCode;
+	private String spDietItem;
 	
 	public String getFoodGCode() {
 		return foodGCode;
@@ -246,6 +250,30 @@ public class Nutritionist {
 	}
 	public void setJudgement(String judgement) {
 		this.judgement = judgement;
+	}
+	public int getDiseaseCode() {
+		return diseaseCode;
+	}
+	public void setDiseaseCode(int diseaseCode) {
+		this.diseaseCode = diseaseCode;
+	}
+	public int getWizardCode() {
+		return wizardCode;
+	}
+	public void setWizardCode(int wizardCode) {
+		this.wizardCode = wizardCode;
+	}
+	public int getDietCode() {
+		return dietCode;
+	}
+	public void setDietCode(int dietCode) {
+		this.dietCode = dietCode;
+	}
+	public String getSpDietItem() {
+		return spDietItem;
+	}
+	public void setSpDietItem(String spDietItem) {
+		this.spDietItem = spDietItem;
 	}
 	
 }

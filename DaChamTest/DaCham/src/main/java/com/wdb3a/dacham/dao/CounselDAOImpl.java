@@ -28,6 +28,11 @@ public class CounselDAOImpl implements CounselDAO {
 	public Counsel couselRead(int counselCode) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace+".counselRead",counselCode);
+	}
+	@Override
+	public void delete(int counselCode) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.delete(namespace+".delete",counselCode);
 	}	
 
 

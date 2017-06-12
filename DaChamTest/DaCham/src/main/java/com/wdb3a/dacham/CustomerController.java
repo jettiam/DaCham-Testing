@@ -119,4 +119,11 @@ public String readCounsel(@RequestParam(value="counselCode",defaultValue="-1")in
 public String clientMain(){
 	return "main";
 }
+
+/*@RequestMapping(value="/delete",method = RequestMethod.GET)
+public String delete(@RequestParam(value="counselCode",defaultValue="-1")int code,Model model) throws Exception{
+	model.addAttribute("delete",service.couselRead(code));
+	return "redirect:counsel";
+	
+}*/
 }

@@ -19,5 +19,29 @@
 	  			and a.id like CONCAT('%',#{keyword},'%')
 	  		</if>
 	  	</if>
-  </sql>
+  	</sql>
+  	<insert id = "createDeliver">
+  		insert into foodminven(inDate, price,inAmount,foodMCode, uint, outAmount,exDate,foodMName )
+  		values (#{inDate},#{price},#{inAmount},#{foodMCode},#{uint},#{outAmount},#{exDate},#{foodMName})
+  	</insert>
+  	<select id = "deliverName" resultType = "com.wdb3a.dacham.bean.Nutritionist">
+  		select foodMCode, foodMName
+  		from foodmaterial
+  	</select>
+  	<select id = "showDeliver" resultType = "com.wdb3a.dacham.bean.Deliver">
+  		select a.foodMCode, a.foodMImg, b.foodMName, b.inDate, b.price, b.uint
+		from foodmaterial a join foodminven b
+		where a.foodMCode = b.foodMCode
+		<include refid="searchDeliver"></include>
+  	</select>
+  	<sql id = "searchDeliver">
+	  	<if test = "searchType != null">
+	  		<if test="searchType == 't'.toString()">
+	  			and a.foodMCode like CONCAT('%',#{keyword},'%')
+	  		</if>
+	  		<if test="searchType == 'c'.toString()">
+	  			and b.foodMName like CONCAT('%',#{keyword},'%')
+	  		</if>
+	  	</if>
+  	</sql>
 </mapper>

@@ -11,4 +11,5 @@ public void write(Counsel counsel) throws Exception;
 
 public Counsel couselRead(int counselCode) throws Exception;
 
+public void delete(int counselCode) throws Exception;
 }

@@ -23,8 +23,10 @@
 			작성자 : <input type = "text" name = "${read.customer}" value = "${read.customer}">
 			작성일 : <input type = "text" name = "regdate">
 			조회 : <input type = "text" name = "viewcnt"><br>
-			내용 : <textarea name = "content"></textarea>
+			내용 : <textarea name = "content">${read.counselContent}</textarea>
+		<button id = "delete">삭제</button>
 		</form>
+		
 	</div>
 	<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	<hr><hr><br>

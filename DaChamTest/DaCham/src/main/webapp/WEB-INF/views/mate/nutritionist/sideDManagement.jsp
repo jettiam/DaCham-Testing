@@ -45,13 +45,13 @@
 		<div>
 			<table>
 				<tr>
-					<th><input type = "checkbox"></th>
+					<th>&nbsp;&nbsp;</th>
 					<th>이미지</th>
 					<th>반찬명</th>
 					<th>질량</th>
 				</tr>
 				<tr>
-					<td><input type = "checkbox"></td>
+					<td><input type = "radio"></td>
 					<td>꺅두기</td>
 					<td>10g</td>
 					<td>정상</td>

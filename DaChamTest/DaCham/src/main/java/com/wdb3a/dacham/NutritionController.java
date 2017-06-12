@@ -1,6 +1,7 @@
 package com.wdb3a.dacham;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
@@ -119,6 +120,15 @@ public class NutritionController {
 		}
 		
 	    return "redirect:side";
+   }
+   @RequestMapping(value = "/diet",method = RequestMethod.POST)
+   public String postDietRegist(Model model, Nutritionist nutritionist, MultipartFile file) throws Exception{
+	   System.out.println("이제 등록되려 합니다.");
+	   String savedName = UploadFileUtils.uploadFile(file.getOriginalFilename(), uploadPath, file.getBytes());
+	   model.addAttribute("savedName",savedName);
+	   nutritionist.setDietImg(savedName);
+	   service.createDiet(nutritionist);
+	   return "redirect:diet";
    }
    /*
     * @return 스페셜식단 관리 페이지로 이동
