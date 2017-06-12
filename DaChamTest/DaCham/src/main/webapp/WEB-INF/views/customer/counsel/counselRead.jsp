@@ -19,6 +19,7 @@
 			}
 		});
 	});
+	
 </script>
 </head>
 <body>
@@ -26,11 +27,10 @@
 	<div>
 		<form  id="counselRead" method ="post">
 		<input type="hidden" name="counselCode" value="${read.counselCode}">
-			제목 : <input type = "text" name = "counselTitle" value = "${read.counselTitle }"><br>
-			작성자 : <input type = "text" name = "${read.customer}" value = "${read.customer}">
-			작성일 : <input type = "text" name = "regdate">
-			조회 : <input type = "text" name = "viewcnt"><br>
-			내용 : <textarea name = "content">${read.counselContent}</textarea>
+			제목 : <input type = "text" name = "counselTitle" value = "${read.counselTitle }" readonly><br>
+			작성자 : <input type = "text" name = "${read.customer}" value = "${read.customer}" readonly>
+			작성일 : <input type = "text" name = "regdate" value = "${read.counselDate}"readonly><br><br>
+			내용 : <textarea name = "content" readonly>${read.counselContent}</textarea>
 		
 		</form>
 		<button id = "counselDelete">삭제</button>

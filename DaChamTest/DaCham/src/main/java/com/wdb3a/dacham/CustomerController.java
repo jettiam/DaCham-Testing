@@ -128,4 +128,19 @@ public String delete(@RequestParam(value="counselCode")int code,RedirectAttribut
 	return "redirect:counsel";
 	
 }
+@RequestMapping(value="/counselUpdate",method = RequestMethod.GET)
+	public void updateGET(int code, Model model) throws Exception{
+	model.addAttribute(service.couselRead(code));
+	
+}
+
+@RequestMapping(value="/counselUpdate",method = RequestMethod.POST)
+	public String updatePOST(Counsel counsel,RedirectAttributes rttr) throws Exception {
+	
+	service.update(counsel);
+	
+	return "redirect:counsel";
+}
+
+
 }
