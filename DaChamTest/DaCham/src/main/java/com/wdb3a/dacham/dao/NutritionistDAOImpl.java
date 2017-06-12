@@ -63,4 +63,22 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 		sqlSession.insert(namespace+".createDiet",nutritionist);
 	}
 
+	@Override
+	public List<Nutritionist> choiceDisease() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".choiceDisease");
+	}
+
+	@Override
+	public void createDietInfo(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.insert(namespace+".createDietInfo",nutritionist);
+	}
+
+	@Override
+	public Nutritionist showKcal(String sideDCode) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".showKcal",sideDCode);
+	}
+
 }

@@ -18,47 +18,57 @@
 </head>
 <body>
    <div class = "box1">
+   	<form>
       <div>
-         <span>고객id</span>
-         <input type = "text" name = "keyword">
-         <button id = "search"> 검색 </button>
-      </div>
-      <div>
-        <span>연락처</span>
-         <input type = "text" name = "keyword">
-         <button id = "search"> 검색 </button>
-      </div>
+			<select name = "searchType">
+				<option value = "n"
+	   			<c:out value="${Counselor.searchType==null?'selected':'' }"/>>
+	   			----------
+	   			</option>
+	   			<option value = "t"
+	   			<c:out value="${Counselor.searchType eq 't'?'selected':'' }"/>>
+	   			고객id
+	   			</option>
+	   			<option value = "c"
+	   			<c:out value="${Counselor.searchType eq 'c'?'selected':'' }"/>>
+	   			고객이름
+	   			</option>
+			</select>
+			<input type = "text" name = "keyword" placeholder = "검색어 입력란">
+			<button id = "search">검색</button>
+		</div>
+	</form>
       <div>
       <table border ="1">
          <tr>
-            <th>아이디</th>
-            <td>아이디 디비값</td>  
+         			<th>고객id</th>
+					<th>고객이름</th>
+					<th>주소</th>
+					<th>전화번호</th>
+					<th>Email</th>
+					<th>부서</th>
+					<th>직급</th>
+					<th>가입일</th>
+					<th>상담사</th>
+					<th>상담일시</th>
+					<th>상담내용</th>
+					
          </tr>
-         <tr>
-            <th>이름</th>
-            <td>이름디비값</td>  
-         </tr>
-         <tr>
-            <th>생년월일</th>
-            <td>생년월일 디비</td>  
-         </tr>
-         <tr>
-            <th>핸드폰</th>
-            <td>핸드폰 디비</td>  
-         </tr>
-         <tr>
-            <th>자택번호</th>
-            <td>자택번호디비</td>  
-         </tr>
-          <tr>
-            <th>E-mail</th>
-            <td>이멜 디비</td>  
-         </tr>
-         <tr>
-            <th>주소</th>
-            <td>주소 디비</td>  
-         </tr>  
-         </tr>
+         <c:forEach items = "${list }" var = "c">
+					<tr>
+						<td>${c.id }</td>
+						<td>${c.name }</td>
+						<td>${c.address } </td>
+						<td>${c.tel }</td>
+						<td>${c.email }</td>
+						<td>${c.deptCode }</td>
+						<td>${c.gradeCode }</td>
+						<td>${c.joinDate }</td>
+						<td>${c.counselTitle }</td>
+						<td>${c.counselDate }</td>
+						<td>${c.counselContent }</td>
+					</tr>
+		</c:forEach>
       </table>
       
        <select>

@@ -12,4 +12,6 @@ public interface CounselService {
 	public Counsel couselRead(int counselCode) throws Exception;
     
 	public void delete(int counselCode) throws Exception;
+	
+	public void update(Counsel counsel) throws Exception;
 }

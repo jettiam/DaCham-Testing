@@ -11,7 +11,7 @@
 	where id=#{id}
 </select>
 
-<!-- emp 테이블의 모든 정보를 가져옴 -->
+<!-- member 테이블의 모든 정보를 가져옴 -->
 <select id="select_emp" resultType="Emp">
 	select *
 	from member
@@ -24,5 +24,4 @@ from member
 where id=#{id}
 </select>
 
- 
 </mapper>

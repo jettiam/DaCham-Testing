@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wdb3a.CounselorMapper">
+<select id="counselorList" resultType="Counselor">
+		select  a.id , a.name , a.address, a.tel, a.email, a.deptCode, a.gradeCode, a.joinDate, b.counselTitle, b.counselDate, b.counselContent
+		from member a join counsel b
+		where a.id = b.customer
+		<include refid="search"></include>
+	</select>
+	<sql id = "search">
+	  	<if test = "searchType != null">
+	  		<if test="searchType == 't'.toString()">
+	  			and a.id like CONCAT('%',#{keyword},'%')
+	  		</if>
+	  		<if test="searchType == 'c'.toString()">
+	  			and a.name like CONCAT('%',#{keyword},'%')
+	  		</if>
+	  	</if>
+  	</sql>
+</mapper>

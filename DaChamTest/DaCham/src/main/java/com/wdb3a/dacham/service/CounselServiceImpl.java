@@ -33,5 +33,10 @@ private CounselDAO dao;
 		// TODO Auto-generated method stub
 		dao.delete(counselCode);
 	}
-
+	@Override
+	public void update(Counsel counsel) throws Exception {
+		dao.update(counsel);
+		
+	}
+    
 }

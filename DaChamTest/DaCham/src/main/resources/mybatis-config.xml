@@ -13,7 +13,7 @@
 		<typeAlias alias="FoodMInven" type="com.wdb3a.dacham.bean.FoodMInven"/>
 		<typeAlias alias="FoodMAmountRead" type="com.wdb3a.dacham.bean.FoodMAmountRead"/>
 		<typeAlias alias="Customer" type="com.wdb3a.dacham.bean.Customer"/>
-
+		<typeAlias alias="Counselor" type="com.wdb3a.dacham.bean.Counselor"/>
 
 		
 

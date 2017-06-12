@@ -13,11 +13,16 @@
    values(#{counselItemCode}, #{customer}, #{counselTitle}, #{counselContent},now())
 </insert>
 <select id="counselRead" resultType="Counsel">
-   select c.counselTitle, c.counselContent,c.customer,i.counselItemName,c.counselCode
+   select c.counselTitle, c.counselContent,c.customer,c.counselDate,i.counselItemName,c.counselCode
 	from counsel c,counselItem i
    where c.counselItemCode=i.counselItemCode and c.counselCode=#{counselCode}
 </select>
 <delete id="delete">
- delete from counsel where counselCode={#counselCode}
+ delete from counsel where counselCode=#{counselCode}
 </delete>
+<update id="update">
+   update counsel set title=#{counselTitle}, content=#{counselContent}
+   where counselCode=#{counselCode}
+</update>
+
 </mapper>
