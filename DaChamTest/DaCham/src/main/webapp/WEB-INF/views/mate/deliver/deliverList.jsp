@@ -28,7 +28,7 @@
 			<select name = "searchType">
 				<option value = "n"
 	   			<c:out value="${orderList.searchType==null?'selected':'' }"/>>
-	   			----------------------
+	   			분류
 	   			</option>
 	   			<option value = "t"
 	   			<c:out value="${orderList.searchType eq 't'?'selected':'' }"/>>

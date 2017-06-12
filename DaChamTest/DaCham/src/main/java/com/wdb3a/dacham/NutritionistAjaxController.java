@@ -74,4 +74,17 @@ public class NutritionistAjaxController {
 		}
 		return entity;
 	}
+	@RequestMapping(value = "/showKcal/{sideDCode}",method = RequestMethod.GET)
+	public ResponseEntity<Nutritionist> showKcal(@PathVariable("sideDCode")String sideDCode){
+		ResponseEntity<Nutritionist> entity = null;
+		try {
+			Nutritionist nutritionist = service.showKcal(sideDCode);
+			entity = new ResponseEntity<>(nutritionist,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
 }

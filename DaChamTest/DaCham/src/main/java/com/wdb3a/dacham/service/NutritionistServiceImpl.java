@@ -63,4 +63,22 @@ public class NutritionistServiceImpl implements NutritionistService {
 		dao.createDiet(nutritionist);
 	}
 
+	@Override
+	public List<Nutritionist> choiceDisease() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.choiceDisease();
+	}
+
+	@Override
+	public void createDietInfo(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		dao.createDietInfo(nutritionist);
+	}
+
+	@Override
+	public Nutritionist showKcal(String sideDCode) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.showKcal(sideDCode);
+	}
+
 }

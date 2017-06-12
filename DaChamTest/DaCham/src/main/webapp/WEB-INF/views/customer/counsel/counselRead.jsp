@@ -12,20 +12,28 @@
 		$("#list").on("click",function(){
 			window.location.href = "counsel";
 		});
+		$("#counselDelete").on("click",function(){
+			if(confirm("삭제하시겠습니까?")){
+				$("#counselRead").attr('action','counselDelete');
+				$("#counselRead").submit();
+			}
+		});
 	});
+	
 </script>
 </head>
 <body>
 <%@include file="../../clientNavi.jsp" %>
 	<div>
-		<form method ="post">
-			제목 : <input type = "text" name = "counselTitle" value = "${read.counselTitle }"><br>
-			작성자 : <input type = "text" name = "${read.customer}" value = "${read.customer}">
-			작성일 : <input type = "text" name = "regdate">
-			조회 : <input type = "text" name = "viewcnt"><br>
-			내용 : <textarea name = "content">${read.counselContent}</textarea>
-		<button id = "delete">삭제</button>
+		<form  id="counselRead" method ="post">
+		<input type="hidden" name="counselCode" value="${read.counselCode}">
+			제목 : <input type = "text" name = "counselTitle" value = "${read.counselTitle }" readonly><br>
+			작성자 : <input type = "text" name = "${read.customer}" value = "${read.customer}" readonly>
+			작성일 : <input type = "text" name = "regdate" value = "${read.counselDate}"readonly><br><br>
+			내용 : <textarea name = "content" readonly>${read.counselContent}</textarea>
+		
 		</form>
+		<button id = "counselDelete">삭제</button>
 		
 	</div>
 	<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
