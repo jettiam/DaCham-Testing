@@ -75,4 +75,10 @@ public class NutritionistServiceImpl implements NutritionistService {
 		dao.createDietInfo(nutritionist);
 	}
 
+	@Override
+	public Nutritionist showKcal(String sideDCode) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.showKcal(sideDCode);
+	}
+
 }

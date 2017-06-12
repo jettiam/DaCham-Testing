@@ -57,6 +57,15 @@
 			cntChange(v);
 		});
 		
+		$(".nameClick").on("mouseover",function(){
+			var sideDCode = $(this).attr('data-code');
+			console.log("이것은"+sideDCode);
+			$.getJSON("nutriAjax/showKcal/"+sideDCode,function(data){
+				$("#sideDName").text(data.sideDName);
+				$("#kcal").text(data.kcal);
+			});
+			
+		});
 		function Refresh(){
 			var count = parseInt(localStorage['count']);
 			$('.item').empty();	
@@ -131,14 +140,12 @@
 			<div class = "box2">
 				<table>
 					<tr>
-						<th></th>
-						<th>반찬명</th>
-						<th>영양정보</th>
+						<th>반찬명&nbsp;&nbsp;</th>
+						<th>영양정보&nbsp;&nbsp;</th>
 					</tr>
 					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td id = "sideDName"></td>
+						<td id = "kcal"></td>
 					</tr>
 				</table>
 			</div>

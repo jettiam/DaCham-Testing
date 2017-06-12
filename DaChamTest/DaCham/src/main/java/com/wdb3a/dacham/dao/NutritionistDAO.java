@@ -15,4 +15,5 @@ public interface NutritionistDAO {
 	public void createDiet(Nutritionist nutritionist) throws Exception;
 	public List<Nutritionist> choiceDisease() throws Exception;
 	public void createDietInfo(Nutritionist nutritionist) throws Exception;
+	public Nutritionist showKcal(String sideDCode) throws Exception;
 }
