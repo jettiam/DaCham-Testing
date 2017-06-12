@@ -15,10 +15,12 @@
 	text-align: center;
 
 }
-#myInfo{
+#myInfoTable{
 position: relative;
 margin: 0 auto;
 }
+
+#myHealthTableWrap{display:none;}
 </style>
 </head>
 <body>
@@ -26,12 +28,14 @@ margin: 0 auto;
 
 <div id="myPageWrap">
 <h1>마이페이지</h1><br>
-<button>내 정보</button>
-<button>내 건강정보</button>
-<button>장바구니</button>
-<button>주문내역</button>
-<button>회원탈퇴</button><br><br>
-<table id="myInfo">
+<button id="myInfo">내 정보</button>
+<button id="myHealth">내 건강정보</button>
+<button id="myCart">장바구니</button>
+<button id="myOrderlist">주문내역</button>
+<button id="outMember">회원탈퇴</button><br><br>
+
+<div id="myInfoTableWrap">
+<table id="myInfoTable">
 <tr>
 <td>고객명</td>
 <td><input type="text" name="name" value="${memberName}" readonly></td>
@@ -52,8 +56,20 @@ margin: 0 auto;
 
 <br>
 <button>수정</button>
-
 </div>
 
+<div id="myHealthTableWrap">건강정보</div>
+</div>
+<script>
+$('#myInfo').click(function(){
+	$('#myHealthTableWrap').hide();
+	$('#myInfoTableWrap').show();
+});
+$('#myHealth').click(function(){
+	
+	$('#myInfoTableWrap').hide();
+	$('#myHealthTableWrap').show();
+});
+</script>
 </body>
 </html>
