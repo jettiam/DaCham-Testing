@@ -80,6 +80,8 @@ public class NutritionController {
    @RequestMapping(value="/dietRegist",method=RequestMethod.GET)
    public String getDietRegist(Model model,Nutritionist nutritionist) throws Exception{
 	   List<Nutritionist> list = service.listSearch(nutritionist);
+	   List<Nutritionist> overList = service.choiceDisease();
+	   model.addAttribute("overList",overList);
 	   model.addAttribute("list",list);
 	   model.addAttribute("nutritionist",nutritionist);
 	  
@@ -98,6 +100,7 @@ public class NutritionController {
    @RequestMapping(value="/sideDRegist",method = RequestMethod.GET)
    public String getSideRegist(Model model, Nutritionist nutritionist) throws Exception{
 	   List<Nutritionist> list = service.materialSearch(nutritionist);
+	   
 	   model.addAttribute("list",list);
 	   
 	  
@@ -122,12 +125,19 @@ public class NutritionController {
 	    return "redirect:side";
    }
    @RequestMapping(value = "/diet",method = RequestMethod.POST)
-   public String postDietRegist(Model model, Nutritionist nutritionist, MultipartFile file) throws Exception{
+   public String postDietRegist(Model model, Nutritionist nutritionist, MultipartFile file, @RequestParam("sideDCode")String[] sideDCode,@RequestParam("count")int count) throws Exception{
 	   System.out.println("이제 등록되려 합니다.");
 	   String savedName = UploadFileUtils.uploadFile(file.getOriginalFilename(), uploadPath, file.getBytes());
 	   model.addAttribute("savedName",savedName);
+	   System.out.println("총합:"+count);
 	   nutritionist.setDietImg(savedName);
 	   service.createDiet(nutritionist);
+	   for(int i = 0; i<count; i++){
+		   System.out.println("코드번호 : " + sideDCode[i]);
+		   nutritionist.setSideDCode(sideDCode[i]);
+		   service.createDietInfo(nutritionist);
+		   System.out.println("정보 등록 완료" + (i+1) + "개");
+	   }
 	   return "redirect:diet";
    }
    /*

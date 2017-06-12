@@ -12,11 +12,6 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> 
 <title>Insert title here</title>
 <script >
-	$(document).ready(function(){
-		$("#foodOrder").click(function(){
-			window.location.href = "foodOrder"; 
-		});	
-	});
 	
 </script>
 </head>
@@ -45,7 +40,7 @@
 				</tr>
 				<c:forEach items="${list}" var="board">
 					<tr>
-						<td>${board.foodMNam}&nbsp;&nbsp;&nbsp;</td> 
+						<td>${board.foodMName}&nbsp;&nbsp;&nbsp;</td>  
 						<td>${board.price}</td>
 						<%-- <td>${board.dietName}&nbsp;&nbsp;</td> --%>
 						<td>${board.foodMAmount}&nbsp;&nbsp;</a></td>

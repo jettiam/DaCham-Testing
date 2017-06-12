@@ -33,6 +33,12 @@ public class CounselDAOImpl implements CounselDAO {
 	public void delete(int counselCode) throws Exception {
 		// TODO Auto-generated method stub
 		sqlSession.delete(namespace+".delete",counselCode);
+	}
+	@Override
+	public void update(Counsel counsel) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace+".update",counsel);
+		
 	}	
 
 

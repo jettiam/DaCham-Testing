@@ -34,4 +34,19 @@
 		insert into diet(diseaseCode, wizardCode, dietName, price, dietImg, spDietItem)
 		values (#{diseaseCode},#{wizardCode},#{dietName},#{price},#{dietImg},#{spDietItem})
 	</insert>
+	<select id="choiceDisease" resultType = "com.wdb3a.dacham.bean.Nutritionist">
+		select * from disease
+	</select>
+	<insert id = "createDietInfo">
+		insert into dietinfo(dietCode, sideDCode)
+		values ((select MAX(dietCode) from diet),#{sideDCode})
+	</insert>
+	<select id="showKcal" resultType = "com.wdb3a.dacham.bean.Nutritionist">
+		select a.sideDCode,a.foodMCode, a.foodMAmount, sum(b.kcal) as kcal, c.sideDName
+		from sidedinfo a join foodmaterial b join sidedish c
+		where a.foodMCode = b.foodMCode
+		and a.sideDCode = c.sideDCode
+		group by a.sideDCode
+		having a.sideDCode = #{sideDCode}
+	</select>
 </mapper>

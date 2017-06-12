@@ -18,5 +18,5 @@ public interface AdminMainService {
 	public void refundUpdate(orderList list) throws Exception;
 	public void workUpdate(orderList list) throws Exception;
 	public List<FoodMAmountRead> foodMAmountRead(int orderCode) throws Exception;
-
+	public boolean send(String subject, String text, String from, String to) throws Exception;
 }
