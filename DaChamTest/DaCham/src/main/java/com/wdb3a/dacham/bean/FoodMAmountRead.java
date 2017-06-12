@@ -4,7 +4,7 @@ public class FoodMAmountRead {
 	private String foodMName;
 	private int price;
 	private int foodMAmount;
-	private String uint;
+	private String unit;
 	private String foodMCode;
 	private int orderCode;
 	
@@ -33,11 +33,11 @@ public class FoodMAmountRead {
 	public void setFoodMAmount(int foodMAmount) {
 		this.foodMAmount = foodMAmount;
 	}
-	public String getUint() {
-		return uint;
+	public String getUnit() {
+		return unit;
 	}
-	public void setUint(String uint) {
-		this.uint = uint;
+	public void setUnit(String unit) {
+		this.unit = unit;
 	}
 	public String getFoodMCode() {
 		return foodMCode;

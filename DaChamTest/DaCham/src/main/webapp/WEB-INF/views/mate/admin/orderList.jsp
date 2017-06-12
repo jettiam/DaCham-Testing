@@ -176,7 +176,7 @@
 
 </head>
 <body>
-	<form id='formid' method='post' action='foodStock'>
+	<form id='formid' method='post' action='foodOrder'>
 		<input type="hidden" name="orderCode">
 	</form>
 	<div>

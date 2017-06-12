@@ -14,4 +14,5 @@ public interface AdminMainDAO {
 	public void refundUpdate(orderList list) throws Exception;
 	public void workUpdate(orderList list) throws Exception;
 	public List<FoodMAmountRead> foodMAmountRead(int orderCode) throws Exception;
+	
 }

@@ -97,23 +97,23 @@ public class AdminController {
 		model.addAttribute("list", list); */
 		return "mate/admin/foodStock";
 	}
-	@RequestMapping(value="/foodStock", method=RequestMethod.POST)
+	@RequestMapping(value="/foodOrder", method=RequestMethod.POST)
 	public String getfoodStock1(Model model, String orderCode) throws Exception{
 		
 
 		
 		JSONObject jsonobj = (JSONObject) JSONValue.parse(orderCode);
 		JSONArray bodyArray = (JSONArray) jsonobj.get("value");
-		int a = (int)bodyArray.get(0);
-		// 니미 씨발 요기 오류다
+		int a =  Integer.parseInt((String) bodyArray.get(0));
+		
 		System.out.println(a);
 	
 	
 		List<FoodMAmountRead> list = service.foodMAmountRead(a);
-		System.out.println("123123");
 		model.addAttribute("list", list);
-		return "mate/admin/foodStock";
+		return "mate/admin/foodOrder";
 	}
+	
 	/*public class UserProfileEditor extends PropertyEditorSupport  {
 
 	    @Override
