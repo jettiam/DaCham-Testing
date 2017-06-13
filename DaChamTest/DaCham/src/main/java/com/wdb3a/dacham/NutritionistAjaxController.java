@@ -80,6 +80,7 @@ public class NutritionistAjaxController {
 		try {
 			Nutritionist nutritionist = service.showKcal(sideDCode);
 			entity = new ResponseEntity<>(nutritionist,HttpStatus.OK);
+			System.out.println(entity);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -88,19 +89,18 @@ public class NutritionistAjaxController {
 		return entity;
 	}
 	@RequestMapping(value = "/template/{diseaseCode}/{judgement}",method = RequestMethod.GET)
-	public ResponseEntity<Map<String,Object>> optionTemplate(@PathVariable("diseaseCode")int diseaseCode, @PathVariable("judgement")String judgement, Nutritionist nutritionist){
+	public ResponseEntity<List<Nutritionist>> optionTemplate(@PathVariable("diseaseCode")int diseaseCode, @PathVariable("judgement")String judgement, Nutritionist nutritionist){
 		System.out.println("1Ка");
-		ResponseEntity<Map<String,Object>> entity = null;
+		ResponseEntity<List<Nutritionist>> entity = null;
 		
 		try {
-			nutritionist.setDiseaseCode(diseaseCode);
-			nutritionist.setJudgement(judgement);
 			List<Nutritionist> list = service.optionTemplate(nutritionist);
-			Map<String,Object> map = new HashMap<>();
-			map.put("list", list);
-			map.put("status", "ok");
-			entity = new ResponseEntity<>(map,HttpStatus.OK);
-			System.out.println("okok");
+			System.out.println(list);
+			
+			entity = new ResponseEntity<>(list, HttpStatus.OK);
+			System.out.println(entity);
+			System.out.println("ok"+nutritionist.getDiseaseCode());
+			System.out.println("ok"+nutritionist.getJudgement());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
