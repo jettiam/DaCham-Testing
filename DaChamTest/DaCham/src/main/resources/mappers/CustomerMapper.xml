@@ -29,12 +29,12 @@ from
 	from sidedinfo si,foodmaterial f
 	where si.foodMCode = f.foodMCode) a
 	group by a.sidedcode) f 
-where s.sideDCode=f.sideDcode and s.foodGCode=03;
+where s.sideDCode=f.sideDcode and s.foodGCode=#{foodGCode};
   </select>
   
-  <insert id="cart">
-  	INSERT INTO orderlist ('id', 'dietCode', 'orderDate', 'price', 'dietAmount', 'orderItemCode', 'paymentItemCode') 
-	VALUES (?, ?, now(), ?, ?, 1, 1);
+  <insert id="orderRegist">
+  	INSERT INTO orderlist (id, dietCode, orderDate, price, dietAmount, orderItemCode, paymentItemCode) 
+	VALUES (#{id}, #{dietCode}, now(), #{price}, #{dietAmount}, 1, 1);
   </insert>  
 
   

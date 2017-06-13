@@ -8,4 +8,5 @@ public interface CustomerService {
 	public List<Customer> dietList(int diseaseCode) throws Exception;
 	public List<Customer> detailOrder(int dietCode) throws Exception;
 	public List<Customer> sideDDetail(String foodGCode) throws Exception;
+	public void orderRegist(Customer customer) throws Exception ;
 }

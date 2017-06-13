@@ -28,5 +28,10 @@ private CustomerDAO dao;
 		// TODO Auto-generated method stub
 		return dao.sideDDetail(foodGCode);
 	}
+	@Override
+	public void orderRegist(Customer customer) throws Exception {
+		dao.orderRegist(customer);
+		
+	}
 
 }

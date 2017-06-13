@@ -75,7 +75,19 @@ public String detailOrder(@RequestParam(value="dietCode") int dietCode, Model mo
 	
 	return "customer/dietOrder/detailOrder";
 }
-
+/**
+ * 
+ * @param customer
+ * @param model
+ * @return 주문하기로 이동
+ * @throws Exception
+ */
+@RequestMapping(value="/doOrder",method=RequestMethod.GET)
+public String doOrder(Customer customer,Model model)throws Exception{
+	serviceCu.orderRegist(customer);
+	model.addAttribute("order", customer);//나중에 상세페이지 만들기용
+	return "customer/dietOrder/orderRegister";
+}
 @RequestMapping(value="/menuShow",method = RequestMethod.GET)
 /**
  * 

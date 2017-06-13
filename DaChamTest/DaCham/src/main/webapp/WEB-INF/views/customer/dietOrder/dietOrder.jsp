@@ -14,6 +14,10 @@ li{
 table,tr,td{
 	border:1px solid black;
 }
+td>img{
+width:150px;
+height:150px;
+}
 </style>
 
 <script>
@@ -42,7 +46,7 @@ table,tr,td{
 					if(dietCode==data.list[i].dietCode){
 						if(tdCount<2){
 							console.log("티디카운트 " +tdCount);
-							$(".dietTable"+dietCode+">tbody>.dietTr"+trCount).append("<td><img src='displayFile?fileName="+data.list[i].sideDImg+" alt='이미지'></td>");
+							$(".dietTable"+dietCode+">tbody>.dietTr"+trCount).append("<td><img src='displayFile?fileName="+data.list[i].sideDImg+"' alt='이미지'></td>");
 							console.log("이미지찍음 " +i);	
 							tdCount++;
 							
@@ -51,7 +55,7 @@ table,tr,td{
 							trCount++;
 							$(".dietTable"+dietCode).append("</tr><tr class='dietTr"+trCount+"'>");
 							console.log("tr카운트 염" + trCount);
-							$(".dietTable"+dietCode+">tbody>.dietTr"+trCount).append("<td><img src='displayFile?fileName="+data.list[i].sideDImg+" alt='이미지'></td>");
+							$(".dietTable"+dietCode+">tbody>.dietTr"+trCount).append("<td><img src='displayFile?fileName="+data.list[i].sideDImg+"' alt='이미지'></td>");
 							console.log("이미지찍음 " +i);							
 							tdCount = 1;
 						}						
@@ -67,7 +71,7 @@ table,tr,td{
 						$("#dietList").append("<table class='dietTable"+dietCode+"'><tr class='dietTr"+trCount+"'>");
 						console.log(dietCode+"테이블 염");
 						console.log("tr카운트 염" + trCount);
-						$(".dietTable"+dietCode+">tbody>.dietTr"+trCount).append("<td><img src='displayFile?fileName="+data.list[i].sideDImg+" alt='이미지'></td>");
+						$(".dietTable"+dietCode+">tbody>.dietTr"+trCount).append("<td><img src='displayFile?fileName="+data.list[i].sideDImg+"' alt='이미지'></td>");
 						//$(".dietTable"+dietCode+">tbody>.dietTr"+trCount).append("<td><img src='displayFile?fileName="+data.list[i].sideDImg+" alt='이미지'></td>");
 						tdCount=1;
 						console.log("이미지찍음 " +i);	
