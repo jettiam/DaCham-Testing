@@ -1,6 +1,7 @@
 package com.wdb3a.dacham;
 
 import java.util.List;
+import java.util.ServiceConfigurationError;
 
 import javax.inject.Inject;
 
@@ -13,8 +14,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.wdb3a.dacham.bean.Counsel;
+
 import com.wdb3a.dacham.bean.OrderList;
+
+import com.wdb3a.dacham.bean.Customer;
+
 import com.wdb3a.dacham.service.CounselService;
+import com.wdb3a.dacham.service.CustomerService;
 /**
  * 
  * 고객페이지 컨트롤러
@@ -24,6 +30,9 @@ import com.wdb3a.dacham.service.CounselService;
 public class CustomerController {
 	@Inject
 	CounselService service;
+	
+	@Inject
+	CustomerService serviceCu;
 	
 	@RequestMapping(value="/myPage",method = RequestMethod.GET)
 	/**
@@ -56,7 +65,21 @@ public String wizardOrder(){
  */
 public String dietOrder(){
 	return "customer/dietOrder/dietOrder";
-} 
+}
+/**
+ * 
+ * @return 식단 상세 주문으로 이동
+ */
+@RequestMapping(value="/detailOrder",method = RequestMethod.GET)
+public String detailOrder(@RequestParam(value="dietCode") int dietCode, Model model) throws Exception{	
+	List<Customer> list;
+	list = serviceCu.detailOrder(dietCode);
+	System.out.println("리스트 출력"+list);
+	model.addAttribute("list",list);
+	
+	return "customer/dietOrder/detailOrder";
+}
+
 @RequestMapping(value="/menuShow",method = RequestMethod.GET)
 /**
  * 
@@ -166,17 +189,6 @@ public String delete(@RequestParam(value="counselCode")int code,RedirectAttribut
 	
 	return "redirect:counsel";
 }
-
-//@RequestMapping(value="/myCart",method = RequestMethod.GET)
-///**
-// * 
-// * @return 
-// */
-//public String getCart(Model model) throws Exception{	
-//	List<
-//	model.addAttribute("list",list);
-//	return "customer/myCart";
-//}
 
 
 }

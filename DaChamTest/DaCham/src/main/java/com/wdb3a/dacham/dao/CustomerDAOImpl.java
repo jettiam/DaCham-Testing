@@ -18,9 +18,22 @@ public class CustomerDAOImpl implements CustomerDAO {
 	}
 
 	@Override
-	public List<Customer> cartList(int dietCode) throws Exception {
+
+	public List<Customer> cartList(String id) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".cartList",dietCode);
+		return sqlSession.selectList(namespace+".cartList",id);}
+
+	public List<Customer> detailOrder(int dietCode) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".detailOrder",dietCode);
+	}
+
+
+	@Override
+	public List<Customer> sideDDetail(String foodGCode) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".sideDDetail",foodGCode);
+
 	}
 
 }

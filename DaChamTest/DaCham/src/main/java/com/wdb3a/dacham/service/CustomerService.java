@@ -5,6 +5,13 @@ import java.util.List;
 import com.wdb3a.dacham.bean.Customer;
 
 public interface CustomerService {
-	public List<Customer> dietList(int diseaseCode) throws Exception; 
-	public List<Customer> cartList(int dietCode) throws Exception;
+
+	public List<Customer> dietList(int diseaseCode) throws Exception;
+
+	public List<Customer> cartList(String id) throws Exception;
+
+	public List<Customer> detailOrder(int dietCode) throws Exception;
+
+	public List<Customer> sideDDetail(String foodGCode) throws Exception;
+
 }

@@ -15,13 +15,28 @@
 		});
 	});
 </script>
+<style>
+#counselTableWrap{
+    width: 1080px;
+	height: 100%;
+	margin: 0 auto;
+	
+}
+#counselTable{
+
+width:600px;
+
+}
+
+</style>
 </head>
 <body>
 <%@include file="../../clientNavi.jsp" %>
 <!-- 	<form action = "write" method = "get"> -->
 <%-- 		<input type = "hidden" name = "id" value = "${a. }"> --%>
 <!-- 	</form> -->
-		<table border = 3>
+		<div id="counselTableWrap">
+		<table id="counselTable" class="table table-hover">
 			<tr>
 				<th>문의분류</th>
 				<th>글번호</th>
@@ -47,15 +62,17 @@
 			</tr>
 			</c:forEach>
 		</table>
+	
+		
 		<div>
 		<c:if test="${empty sessionScope.memberName}">
 			로그인 후 이용해주세요.
 		</c:if>
 		<c:if test="${not empty sessionScope.memberName}">
-			<button id = "write">글쓰기</button>
+			<button id = "write" class="btn btn-warning">글쓰기</button>
 		</c:if>
 		</div>
-		
+			</div>
 	
 </body>
 </html>
