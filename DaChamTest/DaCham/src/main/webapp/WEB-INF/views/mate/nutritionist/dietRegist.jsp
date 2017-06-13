@@ -16,7 +16,7 @@
 				window.location.href = "diet";	
 			}
 		});
-		
+		localStorage.clear();
 		
 		if(!localStorage['init'] || isNaN(localStorage['count']) == true){
 			localStorage['init'] = "true";
@@ -66,6 +66,29 @@
 			});
 			
 		});
+		
+		$(".template a").on("click",function(){
+			event.preventDefault();
+			
+			var diseaseCode = $(this).attr("data-code");
+			var judgement = $(this).attr("data-judgement");
+			
+			console.log("판단:"+judgement);
+			
+			localStorage.clear();
+			
+			
+			$.getJSON("nutriAjax/template/"+diseaseCode+"/"+judgement, function(data){
+				var option = "";
+				alert("start");
+				$(data.list).each(function(){ 
+					alert("abc");
+					option += "<img src = 'displayFile?fileName='"+this.sideDImg+"' style = 'width : 75px; height : 25px;'>";
+					console.log("이미지이름:"+this.sideDImg);
+				});
+				$(".material").html(option);
+			});
+		});
 		function Refresh(){
 			var count = parseInt(localStorage['count']);
 			$('.item').empty();	
@@ -76,9 +99,9 @@
 				var sideDCode = localStorage[i + "_codes"];
 				var item = $('<div></div>').addClass('item').attr('data-id',i);
 				$('<input type = "hidden" name = "sideDCode" value = '+sideDCode + '>').appendTo(item);    
-				$('<img src = "displayFile?fileName='+sideDImg+'" style= "width: 75px; height: 50px;">').addClass("sideDImg").appendTo(item);
+				$('<img src = "displayFile?fileName='+sideDImg+'" style= "width: 75px; height: 25px;">').addClass("sideDImg").appendTo(item);
 				item.appendTo(".material");
-				
+
 			}
 			
 			v = count;
@@ -117,7 +140,7 @@
  .div2 {
   display:inline-block;  margin-left:10px;}    
   body {
-		  overflow: hidden;
+		  overflow: scroll;
 		  margin: 0;
 		  font-size: 14px;
 		 
@@ -189,9 +212,9 @@
 			<div class = "div2" style = "border-left:1px solid #000">
 			    <h2>위자드 선택</h2>
 				<hr align = "left" width = "40%">          
-				<div>
+				<div class = "template">
 					질환별 식단 목록<br>
-					- <a>당뇨병</a><br>
+					- <a data-code = "1" data-judgement = "주의">당뇨병</a><br>
 					- <a>고지혈증</a>
 				</div>
 				<br><br><br>

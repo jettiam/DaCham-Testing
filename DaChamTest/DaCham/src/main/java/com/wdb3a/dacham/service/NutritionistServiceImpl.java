@@ -81,4 +81,12 @@ public class NutritionistServiceImpl implements NutritionistService {
 		return dao.showKcal(sideDCode);
 	}
 
+	@Override
+	public List<Nutritionist> optionTemplate(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+
 }
