@@ -74,15 +74,16 @@ table,tr,td{
 					}
 					
 				}
-				$("#dietList").append(data.list[data.list.length-1].dietName+"<br>");
+				$("#dietList").append("<a class='dietCode' href=# data-dietcode='"+dietCode+"'>"+data.list[i-1].dietName+"</a><br>");
 				
 			});
 			
-		});
-		
-		$('.dietCode').on("click",function(){
+		});		
+		$("#dietList").on("click",'.dietCode',function(){
+			console.log("클릭됨");
 			var dietCode = $(this).attr("data-dietcode");
 			console.log(dietCode);
+			window.location.href="detailOrder?dietCode="+dietCode;
 		});
 	});
 </script>
@@ -90,6 +91,7 @@ table,tr,td{
 </head>
 <body>
 <%@include file="../../clientNavi.jsp" %>
+<div id="dietOrderNav">
 <ul>
 	<li><a href=# class="disease" data-code="1" id="sugarBlood">당뇨병</a></li>
 	<li><a href=# class="disease" id="renalFailure">신부전증</a></li>
@@ -97,10 +99,8 @@ table,tr,td{
 	<li><a href=# class="disease" id="hyperlipidemia">고지혈증</a></li>
 	<li><a href=# class="disease" id="wizardOrder">위자드로 주문하기</a></li>
 </ul>
-<div id="dietList">
 </div>
-<div id="detailOrder">
-
+<div id="dietList">
 </div>
 </body>
 </html>

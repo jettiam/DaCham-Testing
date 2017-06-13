@@ -18,5 +18,15 @@ private CustomerDAO dao;
 		// TODO Auto-generated method stub
 		return dao.dietList(diseaseCode);
 	}
+	@Override
+	public List<Customer> detailOrder(int dietCode) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.detailOrder(dietCode);
+	}
+	@Override
+	public List<Customer> sideDDetail(String foodGCode) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.sideDDetail(foodGCode);
+	}
 
 }

@@ -49,4 +49,15 @@
 		group by a.sideDCode
 		having a.sideDCode = #{sideDCode}
 	</select>
+	<select id = "optionTemplate" resultType = "com.wdb3a.dacham.bean.Nutritionist">
+		select a.dietCode, a.sideDCode, b.sideDImg, d.diseaseCode,d.diseaseName, d.judgement
+		from dietinfo a join sidedish b join diet c join disease d
+		where a.sideDCode = b.sideDCode
+		and a.dietCode = c.dietCode
+		and c.diseaseCode = d.diseaseCode
+		and c.diseaseCode = #{diseaseCode}
+		and d.judgement = #{judgement}
+		order by dietCode
+		
+	</select>
 </mapper>

@@ -19,6 +19,15 @@ private String paymentItemName;
 private int paymentItemCode;
 private String sideDName;
 private String sideDImg;
+private String foodGCode;
+private String foodGName;
+private int dietAmout;
+private double kcal;
+private double carbohydrate;
+private double protein;
+private double fat;
+private double na;
+
 public int getDietCode() {
 	return dietCode;
 }
@@ -126,6 +135,54 @@ public String getSideDImg() {
 }
 public void setSideDImg(String sideDImg) {
 	this.sideDImg = sideDImg;
+}
+public String getFoodGCode() {
+	return foodGCode;
+}
+public void setFoodGCode(String foodGCode) {
+	this.foodGCode = foodGCode;
+}
+public int getDietAmout() {
+	return dietAmout;
+}
+public void setDietAmout(int dietAmout) {
+	this.dietAmout = dietAmout;
+}
+public String getFoodGName() {
+	return foodGName;
+}
+public void setFoodGName(String foodGName) {
+	this.foodGName = foodGName;
+}
+public double getKcal() {
+	return kcal;
+}
+public void setKcal(double kcal) {
+	this.kcal = kcal;
+}
+public double getCarbohydrate() {
+	return carbohydrate;
+}
+public void setCarbohydrate(double carbohydrate) {
+	this.carbohydrate = carbohydrate;
+}
+public double getProtein() {
+	return protein;
+}
+public void setProtein(double protein) {
+	this.protein = protein;
+}
+public double getFat() {
+	return fat;
+}
+public void setFat(double fat) {
+	this.fat = fat;
+}
+public double getNa() {
+	return na;
+}
+public void setNa(double na) {
+	this.na = na;
 }
 
 
