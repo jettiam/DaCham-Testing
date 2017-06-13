@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ page import="com.wdb3a.dacham.bean.orderList"%>
+<%@ page import="com.wdb3a.dacham.bean.OrderList"%>
 <!DOCTYPE html>
 <html>
 <head>
