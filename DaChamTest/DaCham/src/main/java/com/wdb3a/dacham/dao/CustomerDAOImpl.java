@@ -17,4 +17,10 @@ public class CustomerDAOImpl implements CustomerDAO {
 		return sqlSession.selectList(namespace+".dietList",diseaseCode);
 	}
 
+	@Override
+	public List<Customer> cartList(int dietCode) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".cartList",dietCode);
+	}
+
 }

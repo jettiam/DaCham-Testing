@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.wdb3a.dacham.bean.Counsel;
+import com.wdb3a.dacham.bean.OrderList;
 import com.wdb3a.dacham.service.CounselService;
 /**
  * 
@@ -134,6 +135,10 @@ public String clientMain(){
 }
 
 @RequestMapping(value="/counselDelete",method = RequestMethod.POST)
+/**
+ * 
+ * @return 고객 게시글 삭제 후 게시글 목록으로 리다이렉트
+ */
 public String delete(@RequestParam(value="counselCode")int code,RedirectAttributes rttr) throws Exception{
 	service.delete(code);
 	rttr.addFlashAttribute("msg","SUCCESS");
@@ -141,18 +146,37 @@ public String delete(@RequestParam(value="counselCode")int code,RedirectAttribut
 	
 }
 @RequestMapping(value="/counselUpdate",method = RequestMethod.GET)
+/**
+ * 
+ * @return 고객 게시글 수정
+ */
 	public void updateGET(int code, Model model) throws Exception{
 	model.addAttribute(service.couselRead(code));
 	
 }
 
 @RequestMapping(value="/counselUpdate",method = RequestMethod.POST)
+/**
+ * 
+ * @return 고객 게시글 수정 후 게시글 목록으로 리다이렉트 
+ */
 	public String updatePOST(Counsel counsel,RedirectAttributes rttr) throws Exception {
 	
 	service.update(counsel);
 	
 	return "redirect:counsel";
 }
+
+//@RequestMapping(value="/myCart",method = RequestMethod.GET)
+///**
+// * 
+// * @return 
+// */
+//public String getCart(Model model) throws Exception{	
+//	List<
+//	model.addAttribute("list",list);
+//	return "customer/myCart";
+//}
 
 
 }
