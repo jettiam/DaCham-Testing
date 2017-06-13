@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.wdb3a.dacham.bean.FoodMAmountRead;
 import com.wdb3a.dacham.bean.FoodMInven;
-import com.wdb3a.dacham.bean.orderList;
+import com.wdb3a.dacham.bean.OrderList;
 import com.wdb3a.dacham.dao.AdminMainDAO;
 
 @Service
@@ -26,12 +26,12 @@ public class AdminMainServiceImpl implements AdminMainService {
 	private AdminMainDAO dao;
 	
 	@Override
-	public List<orderList> orderListAll() throws Exception {
+	public List<OrderList> orderListAll() throws Exception {
 		return dao.orderListAll();
 	}
 
 	@Override
-	public List<orderList> datailview(String orderCode) throws Exception {
+	public List<OrderList> datailview(String orderCode) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.datailview(orderCode);
 	}
@@ -43,13 +43,13 @@ public class AdminMainServiceImpl implements AdminMainService {
 	}
 
 	@Override
-	public void refundUpdate(orderList list) throws Exception {
+	public void refundUpdate(OrderList list) throws Exception {
 		dao.refundUpdate(list);
 		
 	}
 
 	@Override
-	public void workUpdate(orderList list) throws Exception {
+	public void workUpdate(OrderList list) throws Exception {
 		dao.workUpdate(list);
 		
 	}

@@ -5,7 +5,7 @@
 <mapper namespace="com.wdb3a.AdminMapper">
 	<!-- <select id="listAll" resultType="orderList"> select orderCode, id, 
 		dietCode, orderDate, price, orderItem, transportNum from orderList </select> -->
-	<select id="listAll" resultType="orderList">
+	<select id="listAll" resultType="OrderList">
 		select b.dietCode, b.orderCode,
 		b.id, a.dietName, b.orderDate, b.price, b.orderItemCode,
 		b.transportNum, c.orderItemName
@@ -15,7 +15,7 @@
 		and b.orderItemCode = c.orderItemCode
 	</select>
 
-	<select id="read" resultType="orderList" parameterType="string">
+	<select id="read" resultType="OrderList" parameterType="string">
 		select b.dietCode, b.orderCode, b.id, a.dietName, b.orderDate,
 		b.price, b.orderItemCode, b.transportNum, c.id, c.name, c.address,
 		c.tel

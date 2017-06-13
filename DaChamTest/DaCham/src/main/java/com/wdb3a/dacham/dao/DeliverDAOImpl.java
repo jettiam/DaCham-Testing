@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.wdb3a.dacham.bean.Deliver;
 import com.wdb3a.dacham.bean.Nutritionist;
-import com.wdb3a.dacham.bean.orderList;
+import com.wdb3a.dacham.bean.OrderList;
 
 @Repository
 public class DeliverDAOImpl implements DeliverDAO{
@@ -18,7 +18,7 @@ public class DeliverDAOImpl implements DeliverDAO{
 	@Inject
 	private SqlSession sqlSession;
 	@Override
-	public List<orderList> listAll(orderList orderList) throws Exception {
+	public List<OrderList> listAll(OrderList orderList) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".deliverList", orderList);
 	}

@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wdb3a.dacham.bean.FoodMAmountRead;
 import com.wdb3a.dacham.bean.FoodMInven;
-import com.wdb3a.dacham.bean.orderList;
+import com.wdb3a.dacham.bean.OrderList;
 import com.wdb3a.dacham.service.AdminMainService;
 
 
@@ -48,7 +48,7 @@ public class AdminController {
 	private AdminMainService service; 
 	@RequestMapping(value="/adminMain", method=RequestMethod.GET)
 	public String getadminMain(Model model) throws Exception{
-		List<orderList> list=service.orderListAll();
+		List<OrderList> list=service.orderListAll();
 		model.addAttribute("list",list);
 		
 		return "mate/admin/adminMain";
@@ -135,13 +135,13 @@ public class AdminController {
 	}*/
 	
 	@RequestMapping(value="/orderList",method=RequestMethod.GET)
-	public String getorderList(Model model, orderList order) throws Exception{
-		List<orderList> list=service.orderListAll();
+	public String getorderList(Model model, OrderList order) throws Exception{
+		List<OrderList> list=service.orderListAll();
 		model.addAttribute("list",list);
 		return "mate/admin/orderList";
 	}
 	@RequestMapping(value="/orderList1",method=RequestMethod.POST)
-	public String getorderList1(Model model,@RequestBody orderList order) throws Exception{
+	public String getorderList1(Model model,@RequestBody OrderList order) throws Exception{
 		if(order.getOrderItemCode()=="1"){
 		service.refundUpdate(order);
 		}
@@ -150,7 +150,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/orderList2",method=RequestMethod.POST)
-	public String getorderList2(Model model,@RequestBody orderList order) throws Exception{
+	public String getorderList2(Model model,@RequestBody OrderList order) throws Exception{
 		service.workUpdate(order);
 		System.out.println(order.getOrderCode());
 		return "mate/admin/orderList";

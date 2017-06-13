@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.wdb3a.dacham.bean.FoodMAmountRead;
 import com.wdb3a.dacham.bean.FoodMInven;
-import com.wdb3a.dacham.bean.orderList;
+import com.wdb3a.dacham.bean.OrderList;
 @Repository
 public class AdminMainDAOImpl implements AdminMainDAO {
 	private static final String namespace="com.wdb3a.AdminMapper";
@@ -17,13 +17,13 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 	private SqlSession sqlSession;
 	
 	@Override
-	public List<orderList> orderListAll() throws Exception {
+	public List<OrderList> orderListAll() throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".listAll");
 	}
 
 	@Override
-	public List<orderList> datailview(String orderCode) throws Exception {
+	public List<OrderList> datailview(String orderCode) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".read", orderCode);
 	}
@@ -35,12 +35,12 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 	}
 
 	@Override
-	public void refundUpdate(orderList list) throws Exception {
+	public void refundUpdate(OrderList list) throws Exception {
 		sqlSession.update(namespace+".refundupdate", list);
 	}
 
 	@Override
-	public void workUpdate(orderList list) throws Exception {
+	public void workUpdate(OrderList list) throws Exception {
 		sqlSession.update(namespace+".workupdate", list);
 		
 	}
