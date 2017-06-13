@@ -98,7 +98,9 @@ public class NutritionistAjaxController {
 			List<Nutritionist> list = service.optionTemplate(nutritionist);
 			Map<String,Object> map = new HashMap<>();
 			map.put("list", list);
+			map.put("status", "ok");
 			entity = new ResponseEntity<>(map,HttpStatus.OK);
+			System.out.println("okok");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
