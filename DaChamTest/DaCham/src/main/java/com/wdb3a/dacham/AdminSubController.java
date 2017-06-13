@@ -13,8 +13,11 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.junit.runner.Request;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wdb3a.dacham.bean.FoodMAmountRead;
-import com.wdb3a.dacham.bean.orderList;
+import com.wdb3a.dacham.bean.OrderList;
 import com.wdb3a.dacham.service.AdminMainService;
 
 
@@ -34,15 +37,16 @@ import com.wdb3a.dacham.service.AdminMainService;
 @RestController
 @RequestMapping(value="adminSub")
 public class AdminSubController {
-	
+	@Autowired
+	private JavaMailSenderImpl javaMailSenderImpl;
 	@Inject
 	private AdminMainService service; 
 	
    @RequestMapping(value="/detailView/{orderCode}", method=RequestMethod.POST)
    @ResponseBody
-   public List<orderList> detailView(@PathVariable("orderCode") String orderCode, Model model )throws Exception {			
+   public List<OrderList> detailView(@PathVariable("orderCode") String orderCode, Model model )throws Exception {			
 	   System.out.println("dddd");
-	   List<orderList> list= service.datailview(orderCode);
+	   List<OrderList> list= service.datailview(orderCode);
 	   
 	 
 	  
@@ -54,7 +58,7 @@ public class AdminSubController {
 	public ResponseEntity<String> getfoodOrder(@RequestBody String foodMArray) throws Exception{
 	   ResponseEntity<String> entity = null;
 	   JSONObject jsonobj = (JSONObject) JSONValue.parse(foodMArray);
-	   StringBuilder sb = new StringBuilder();
+	   
 	   String toString = "";
 	   String foodMCode = null;
 	   String foodMName = null;
@@ -69,13 +73,21 @@ public class AdminSubController {
           toString = toString + "\n" + ("식재료명 :" + bookObject.get("foodMName") + " 단가 :"+bookObject.get("price") + " 주문량 :" + bookObject.get("foodMAmount") + " 단위 : " + bookObject.get("unit"));
       }
 	  	System.out.println(toString);
-	  	sb.append(toString);
-	  	boolean a = service.send("제목", "ㅇㅇ", "dudtka4971@naver.com", "dudtka4971@naver.com");
-	  	if(a){
+	  	SimpleMailMessage  simpleMailMessage = new SimpleMailMessage();
+	  	simpleMailMessage.setFrom("dudtka4971@naver.com");
+	  	simpleMailMessage.setTo("dudtka4971@naver.com");
+	  	simpleMailMessage.setSubject("제발");
+	  	simpleMailMessage.setText(toString);
+	  	System.out.println("돌아감");
+	  	javaMailSenderImpl.send(simpleMailMessage);
+	  	System.out.println("돌아감2");
+	  	
+	  	
+	  	/*if(a){
 	  		entity = new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
 	  	}else{
 	  		entity = new ResponseEntity<String>("실패",HttpStatus.BAD_REQUEST);
-	  	}
+	  	}*/
 		return entity;
 	}
 	   

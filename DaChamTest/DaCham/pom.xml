@@ -192,13 +192,19 @@
 			<artifactId>spring-data-mongodb</artifactId>
 			<version>1.10.3.RELEASE</version>
 		</dependency>
-		
-		<!-- email  -->
+
+		<!-- email -->
 		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
 			<version>1.4</version>
 		</dependency>
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.5.1</version>
+		</dependency>
+
 	</dependencies>
 
 

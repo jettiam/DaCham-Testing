@@ -8,12 +8,13 @@
 		
 		<typeAlias alias="Emp" type="com.wdb3a.dacham.bean.Emp" />
 		<typeAlias alias="Member" type="com.wdb3a.dacham.bean.Member" />
-		<typeAlias alias="orderList" type="com.wdb3a.dacham.bean.orderList" />
+		<typeAlias alias="OrderList" type="com.wdb3a.dacham.bean.OrderList" />
 		<typeAlias alias="Counsel" type="com.wdb3a.dacham.bean.Counsel" />
 		<typeAlias alias="FoodMInven" type="com.wdb3a.dacham.bean.FoodMInven"/>
 		<typeAlias alias="FoodMAmountRead" type="com.wdb3a.dacham.bean.FoodMAmountRead"/>
 		<typeAlias alias="Customer" type="com.wdb3a.dacham.bean.Customer"/>
 		<typeAlias alias="Counselor" type="com.wdb3a.dacham.bean.Counselor"/>
+		<typeAlias alias="Diet" type="com.wdb3a.dacham.bean.Diet"/>
 
 		
 

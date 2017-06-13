@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.wdb3a.dacham.bean.FoodMAmountRead;
 import com.wdb3a.dacham.bean.FoodMInven;
-import com.wdb3a.dacham.bean.orderList;
+import com.wdb3a.dacham.bean.OrderList;
 import com.wdb3a.dacham.dao.AdminMainDAO;
 
 @Service
@@ -24,32 +24,31 @@ public class AdminMainServiceImpl implements AdminMainService {
 	    }
 	@Inject
 	private AdminMainDAO dao;
-	
 	@Override
-	public List<orderList> orderListAll() throws Exception {
-		return dao.orderListAll();
+	public List<OrderList> orderListAll(OrderList orderList) throws Exception {
+		return dao.orderListAll(orderList);
 	}
 
 	@Override
-	public List<orderList> datailview(String orderCode) throws Exception {
+	public List<OrderList> datailview(String orderCode) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.datailview(orderCode);
 	}
 
 	@Override
-	public List<FoodMInven> foodStockList() throws Exception {
+	public List<FoodMInven> foodStockList(FoodMInven foodMInven) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.foodStockList();
+		return dao.foodStockList(foodMInven);
 	}
 
 	@Override
-	public void refundUpdate(orderList list) throws Exception {
+	public void refundUpdate(OrderList list) throws Exception {
 		dao.refundUpdate(list);
 		
 	}
 
 	@Override
-	public void workUpdate(orderList list) throws Exception {
+	public void workUpdate(OrderList list) throws Exception {
 		dao.workUpdate(list);
 		
 	}
@@ -60,26 +59,11 @@ public class AdminMainServiceImpl implements AdminMainService {
 		return dao.foodMAmountRead(orderCode);
 	}
 
-	@Override
-	public boolean send(String subject, String text, String from, String to) throws Exception {
-		// javax.mail.internet.MimeMessage
-        MimeMessage message = javaMailSender.createMimeMessage();
- 
-        try {
-            // org.springframework.mail.javamail.MimeMessageHelper
-            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
-            helper.setSubject(subject);
-            helper.setText(text, true);
-            helper.setFrom(from);
-            helper.setTo(to);
+	
+	
+	
 
-            javaMailSender.send(message);
-            return true;
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
-		return false;
-	}
+	
 
 	
 
