@@ -8,15 +8,15 @@ import org.springframework.stereotype.Service;
 
 import com.wdb3a.dacham.bean.FoodMAmountRead;
 import com.wdb3a.dacham.bean.FoodMInven;
-import com.wdb3a.dacham.bean.orderList;
+import com.wdb3a.dacham.bean.OrderList;
 
 @Service
 public interface AdminMainService {
-	public List<orderList> orderListAll(orderList orderList) throws Exception; 
-	public List<orderList> datailview(String orderCode) throws Exception;
+	public List<OrderList> orderListAll(OrderList orderList) throws Exception; 
+	public List<OrderList> datailview(String orderCode) throws Exception;
 	public List<FoodMInven> foodStockList(FoodMInven foodMInven) throws Exception;
-	public void refundUpdate(orderList list) throws Exception;
-	public void workUpdate(orderList list) throws Exception;
+	public void refundUpdate(OrderList list) throws Exception;
+	public void workUpdate(OrderList list) throws Exception;
 	public List<FoodMAmountRead> foodMAmountRead(int orderCode) throws Exception;
 	
 }

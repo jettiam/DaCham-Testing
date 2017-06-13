@@ -2,7 +2,7 @@ package com.wdb3a.dacham.bean;
 
 import java.util.Date;
 
-public class orderList {
+public class OrderList {
 	private String orderCode;
 	private String id;
 	private String dietCode;

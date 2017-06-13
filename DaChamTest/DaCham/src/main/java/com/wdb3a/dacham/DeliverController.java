@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wdb3a.dacham.bean.Deliver;
 import com.wdb3a.dacham.bean.Nutritionist;
-import com.wdb3a.dacham.bean.orderList;
+import com.wdb3a.dacham.bean.OrderList;
 import com.wdb3a.dacham.service.DeliverService;
 import com.wdb3a.dacham.util.MediaUtils;
 
@@ -40,8 +40,8 @@ public class DeliverController {
 		return "mate/deliver/deliverMain";
 	}
 	@RequestMapping(value="/deliverList", method=RequestMethod.GET)
-	public String getList(Model model,orderList orderList) throws Exception{
-		List<orderList> list = service.listAll(orderList);
+	public String getList(Model model,OrderList orderList) throws Exception{
+		List<OrderList> list = service.listAll(orderList);
 		model.addAttribute("list",list);
 		model.addAttribute("orderList",orderList);
 		return "/mate/deliver/deliverList";

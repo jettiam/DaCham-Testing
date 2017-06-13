@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.wdb3a.dacham.bean.Deliver;
 import com.wdb3a.dacham.bean.Nutritionist;
-import com.wdb3a.dacham.bean.orderList;
+import com.wdb3a.dacham.bean.OrderList;
 import com.wdb3a.dacham.dao.DeliverDAO;
 import com.wdb3a.dacham.dao.NutritionistDAO;
 
@@ -18,7 +18,7 @@ public class DeliverServiceImpl implements DeliverService {
 	@Inject
 	private DeliverDAO dao;
 	@Override
-	public List<orderList> listAll(orderList orderList) throws Exception {
+	public List<OrderList> listAll(OrderList orderList) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.listAll(orderList);
 	}

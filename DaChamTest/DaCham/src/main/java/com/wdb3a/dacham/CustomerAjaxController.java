@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,23 +20,39 @@ import com.wdb3a.dacham.service.CustomerService;
 @RestController
 @RequestMapping(value = "customerAjax")
 public class CustomerAjaxController {
-@Inject
-private CustomerService service;
+	@Inject
+	private CustomerService service;
 
-@RequestMapping(value ="dietList/{diseaseCode}", method = RequestMethod.GET)
-public ResponseEntity<Map<String,Object>> dietList(@PathVariable("diseaseCode")int diseaseCode){
-	ResponseEntity<Map<String,Object>> entity = null;
-	List<Customer> list;
-	try {
-		list = service.dietList(diseaseCode);
-		Map<String,Object> map = new HashMap<>();
-		map.put("list", list);
-		entity = new ResponseEntity<>(map,HttpStatus.OK);
-	} catch (Exception e) {		
-		e.printStackTrace();
-		entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	@RequestMapping(value = "dietList/{diseaseCode}", method = RequestMethod.GET)
+	public ResponseEntity<Map<String, Object>> dietList(@PathVariable("diseaseCode") int diseaseCode) {
+		ResponseEntity<Map<String, Object>> entity = null;
+		List<Customer> list;
+		try {
+			list = service.dietList(diseaseCode);
+			Map<String, Object> map = new HashMap<>();
+			map.put("list", list);
+			entity = new ResponseEntity<>(map, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+
+		return entity;
 	}
-	
-	return entity;	
-}
+	@RequestMapping(value="getfoodG/{foodGCode}",method=RequestMethod.GET)
+	public ResponseEntity<Map<String, Object>> getDetailSideD(@PathVariable("foodGCode") String foodGCode){
+		System.out.println("½ÄÇ°±º "+foodGCode);
+		ResponseEntity<Map<String, Object>> entity = null;
+		List<Customer> list;
+		try {
+			list = service.sideDDetail(foodGCode);
+			Map<String, Object> map = new HashMap<>();
+			map.put("list", list);
+			entity = new ResponseEntity<>(map,HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;		
+	}
 }

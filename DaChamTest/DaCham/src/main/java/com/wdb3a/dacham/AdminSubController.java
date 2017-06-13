@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wdb3a.dacham.bean.FoodMAmountRead;
-import com.wdb3a.dacham.bean.orderList;
+import com.wdb3a.dacham.bean.OrderList;
 import com.wdb3a.dacham.service.AdminMainService;
 
 
@@ -44,9 +44,9 @@ public class AdminSubController {
 	
    @RequestMapping(value="/detailView/{orderCode}", method=RequestMethod.POST)
    @ResponseBody
-   public List<orderList> detailView(@PathVariable("orderCode") String orderCode, Model model )throws Exception {			
+   public List<OrderList> detailView(@PathVariable("orderCode") String orderCode, Model model )throws Exception {			
 	   System.out.println("dddd");
-	   List<orderList> list= service.datailview(orderCode);
+	   List<OrderList> list= service.datailview(orderCode);
 	   
 	 
 	  

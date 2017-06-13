@@ -10,5 +10,39 @@
 	from diet d,dietinfo di, sidedish s
 	where d.diseaseCode=#{diseaseCode} and di.dietCode=d.dietCode and di.sideDCode=s.sideDCode
 	order by d.dietCode
-  </select>  
+
+  </select>
+  <!-- 특정 식단 정보 띄우는 쿼리문 -->
+  <select id="detailOrder" resultType="Customer">
+    select d.dietImg, d.dietCode, d.dietName, d.price, s.sideDImg, s.sideDName,s.foodGCode
+	from diet d,dietinfo di, sidedish s
+	where d.dietCode=#{dietCode} and di.dietCode=d.dietCode and di.sideDCode=s.sideDCode
+	order by s.foodGcode  
+  </select>
+  
+  <!-- 특정 식품군 반찬 정보 띄우는 쿼리문 영양정보 포함 -->
+  <select id="sideDDetail" resultType="Customer">
+  select s.sideDCode, s.sidedImg,s.sideDname,s.foodGCode, f.kcal,f.carbohydrate,f.protein,f.fat,f.na
+from sidedish s,(select a.sideDcode,sum(kcal) kcal,sum(carbohydrate) carbohydrate, sum(protein) protein, sum(fat) fat, sum(na) na
+from 
+(select si.sideDCode,(si.foodMAmount/100)*f.kcal kcal,(si.foodMAmount/100)*f.protein protein,(si.foodMAmount/100)*f.carbohydrate carbohydrate,(si.foodMAmount/100)*f.na na,(si.foodMAmount/100)*f.fat fat
+	from sidedinfo si,foodmaterial f
+	where si.foodMCode = f.foodMCode) a
+	group by a.sidedcode) f 
+where s.sideDCode=f.sideDcode and s.foodGCode=03;
+  </select>
+  
+  <insert id="cart">
+  	INSERT INTO orderlist ('id', 'dietCode', 'orderDate', 'price', 'dietAmount', 'orderItemCode', 'paymentItemCode') 
+	VALUES (?, ?, now(), ?, ?, 1, 1);
+  </insert>  
+
+  
+ 
+  <!-- 장바구니 확인 쿼리문 -->
+  <select id="cartList" resultType="OrderList">
+  select o.dietCode, o.price, o.orderCode,o.orderDate, d.dietName,d.dietImg 
+from orderlist o, diet d where o.dietCode = d.dietCode and o.id = #{id} and o.orderItemCode = 1
+  </select>
+
   </mapper>
