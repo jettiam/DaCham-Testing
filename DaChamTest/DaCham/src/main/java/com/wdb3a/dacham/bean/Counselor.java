@@ -23,47 +23,8 @@ public class Counselor {
 	private String counselTitle;
 	private String counselContent;
 	private String keyword;
-	
-	
-	
-	public String getKeyword() {
-		return keyword;
-	}
-	public void setKeyword(String keyword) {
-		this.keyword = keyword;
-	}
-	public String getCounselContent() {
-		return counselContent;
-	}
-	public void setCounselContent(String counselContent) {
-		this.counselContent = counselContent;
-	}
-	public String getCounselTitle() {
-		return counselTitle;
-	}
-	public void setCounselTitle(String counselTitle) {
-		this.counselTitle = counselTitle;
-	}
-	public Date getJoinDate() {
-		return joinDate;
-	}
-	public void setJoinDate(Date joinDate) {
-		this.joinDate = joinDate;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	
+	private String keyword2;
+	private String searchType2;
 	public int getCouselCode() {
 		return couselCode;
 	}
@@ -75,6 +36,18 @@ public class Counselor {
 	}
 	public void setCounselCode(int counselCode) {
 		this.counselCode = counselCode;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public String getCounselitemName() {
 		return counselitemName;
@@ -148,15 +121,42 @@ public class Counselor {
 	public void setSearchType(String searchType) {
 		this.searchType = searchType;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public Date getJoinDate() {
+		return joinDate;
+	}
+	public void setJoinDate(Date joinDate) {
+		this.joinDate = joinDate;
+	}
+	public String getCounselTitle() {
+		return counselTitle;
+	}
+	public void setCounselTitle(String counselTitle) {
+		this.counselTitle = counselTitle;
+	}
+	public String getCounselContent() {
+		return counselContent;
+	}
+	public void setCounselContent(String counselContent) {
+		this.counselContent = counselContent;
+	}
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+	public String getKeyword2() {
+		return keyword2;
+	}
+	public void setKeyword2(String keyword2) {
+		this.keyword2 = keyword2;
+	}
+	public String getSearchType2() {
+		return searchType2;
+	}
+	public void setSearchType2(String searchType2) {
+		this.searchType2 = searchType2;
+	}
 	
 	
 	

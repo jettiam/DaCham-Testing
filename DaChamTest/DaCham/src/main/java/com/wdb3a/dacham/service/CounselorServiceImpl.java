@@ -36,5 +36,15 @@ public class CounselorServiceImpl implements CounselorService {
 		// TODO Auto-generated method stub
 		return dao.showCounselor(counselor);
 	}
+	@Override
+	public List<Counselor> counselorseList2(Counselor counselor) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.counselorseList2(counselor);
+	}
 
+	@Override
+	public Counselor viewCounsel(int counselCode) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.viewCounsel(counselCode);
+	}
 }
