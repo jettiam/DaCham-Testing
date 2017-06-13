@@ -1,65 +1,65 @@
 {
   "q1": {
-    "question": "질병을 선택 해주세요.",
+    "question": "질병을 선택해주세요.",
     "answerList": [{
-        "answer": "당뇨",
+        "answer": "�떦�눊",
         "link": "2"
       },
       {
-        "answer": "심부전증",
+        "answer": "�떖遺��쟾利�",
         "link": "3"
       },
       {
-        "answer": "신부전증",
+        "answer": "�떊遺��쟾利�",
         "link": "4"
       },
       {
-        "answer": "고지혈증",
+        "answer": "怨좎��삁利�",
         "link": "5"
       }
     ]
   },
 
   "q2": {
-    "question": "당뇨형을 선택 해주세요.",
+    "question": "�떦�눊�삎�쓣 �꽑�깮 �빐二쇱꽭�슂.",
     "answerList": [{
-      "answer": "1형 당뇨",
+      "answer": "1�삎 �떦�눊",
       "link": "6"
     }, {
-      "answer": "2형 당뇨",
+      "answer": "2�삎 �떦�눊",
       "link": "7"
     }, {
-      "answer": "임신성 당뇨",
+      "answer": "�엫�떊�꽦 �떦�눊",
       "link": "8"
     }]
   },
   "q6": {
-    "question": "1형 당뇨) 인슐린 요법을 사용하고 계십니까?",
+    "question": "1�삎 �떦�눊) �씤�뒓由� �슂踰뺤쓣 �궗�슜�븯怨� 怨꾩떗�땲源�?",
     "answerList": [{
-      "answer": "네",
+      "answer": "�꽕",
       "link": "8"
     }, {
-      "answer": "아니오",
+      "answer": "�븘�땲�삤",
       "link": "9"
     }]
   },
   "q7": {
-    "question": "2형 당뇨) 현재 당뇨약물을 복용 중이십니까?",
+    "question": "2�삎 �떦�눊) �쁽�옱 �떦�눊�빟臾쇱쓣 蹂듭슜 以묒씠�떗�땲源�?",
     "answerList": [{
-      "answer": "네",
+      "answer": "�꽕",
       "link": "10"
     }, {
-      "answer": "아니오",
+      "answer": "�븘�땲�삤",
       "link": "11"
     }]
   },
   "q11": {
-    "question": "최근 공복 혈당 수치를 선택 해주세요.",
+    "question": "理쒓렐 怨듬났 �삁�떦 �닔移섎�� �꽑�깮 �빐二쇱꽭�슂.",
     "answerList": [{
       "answer": "100mg/dl ~ 125mg/dl",
       "link": "15"
     }, {
-      "answer": "125mg/dl 이상",
+      "answer": "125mg/dl �씠�긽",
       "link": "16"
     }]
   }

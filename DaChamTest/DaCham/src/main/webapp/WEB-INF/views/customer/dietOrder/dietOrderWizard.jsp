@@ -21,7 +21,7 @@
 	});
 	function getWizard(no){				
 		$.ajax({			
-			url : "resources/testJson.txt",
+			url : "wizardTestGetWizard",
 			type: "GET", 
 			dataType: "text",
 			async:true,

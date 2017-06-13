@@ -22,9 +22,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.ContextLoader;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.wdb3a.dacham.bean.Nutritionist;
+import com.wdb3a.dacham.bean.Testing5;
+import com.wdb3a.dacham.dao.MongoDAO;
 import com.wdb3a.dacham.service.NutritionistService;
 
 import com.wdb3a.dacham.util.MediaUtils;
@@ -67,6 +71,7 @@ public class NutritionController {
    public String getMod(){
 	   return "mate/nutritionist/dietWizardMod";
    }
+  
    /*
     * @return 식단관리 페이지로 이동
     */
@@ -192,5 +197,38 @@ public class NutritionController {
 		
 		return entity;
 	}
+
+	/**
+	 * 몽고 DB 사용을 위한 DAO 객체 생성과 ctx를 통한 Bean 가져옴.
+	 */
+	WebApplicationContext ctx = ContextLoader.getCurrentWebApplicationContext();
+	MongoDAO mongoDAO = ctx.getBean("mongoDAO", MongoDAO.class);	
 	
+	/**
+	 * param을 불러온 뒤 mongoDB에 insert를 수행한다. 
+	 * @param wizard json형태의 String
+	 * @param block xml 형태의 String
+	 * @return success 문자열 반환
+	 */
+	@RequestMapping(value="/wizardInsert", method=RequestMethod.GET)
+	public @ResponseBody String wizardInsert(String wizard, String block){
+		mongoDAO.wizardInsert(wizard, block);		
+		return "success";
+	}
+	
+	@RequestMapping(value="/wizardTestGet", method=RequestMethod.GET)
+	public String wizardTestGet(Model model){
+		List<Testing5> tt = mongoDAO.getTestingWizard();
+		String block = tt.get(0).getBlock();
+		model.addAttribute("block", block);
+		model.addAttribute("tt", tt);
+	return "mate/nutritionist/dietWizardMod";		
+	}
+	
+	@RequestMapping(value="/wizardTestGetWizard", method=RequestMethod.GET)
+	public @ResponseBody Object getWizardText(){
+		List<Testing5> tt = mongoDAO.getTestingWizard();
+		Object wizard = tt.get(0).getWizard();
+		return wizard;
+	}
 }

@@ -13,7 +13,11 @@
 <script>
 	$(document).ready(function(){
 		$("#regist").click(function(){
-			window.location.href = "wizardMod";
+			window.open("wizardMod", "", 'height=' + screen.height + ',width=' + screen.width + 'fullscreen=yes');
+		});
+		
+		$("#modify").click(function(){
+			window.open("wizardTestGet", "", 'height=' + screen.height + ',width=' + screen.width + 'fullscreen=yes');		
 		});
 	});
 </script>
@@ -25,6 +29,7 @@
 	<div>
 		<input type = "datetime" name = "datetime" placeholder = "최근 위자드 갱신일" readonly>
 		<button id = "regist">위자드 등록</button>
+		<button id = "modify">위자드 수정(프로토 발표용)</button>
 	</div>
 </body>
 </html>
