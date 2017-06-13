@@ -187,13 +187,30 @@
 	</div>
 
 	<div>
-		<form method="get" action="">
-			<select>
-				<option>고객id</option>
-				<option>식단명</option>
-				<option>진행상태</option>
-				<option>배송상태</option>
-			</select> <input type="text"> <input type="submit" value="검색">
+		<form>
+			<select name = "searchType">
+			<option value = "n"
+	   			<c:out value="${order.searchType==null?'selected':'' }"/>>
+	   			전체
+	   			</option>
+	   			<option value = "t"
+	   			<c:out value="${order.searchType eq 't'?'selected':'' }"/>>
+	   			고객id
+	   			</option>
+	   			<option value = "c"
+	   			<c:out value="${order.searchType eq 'c'?'selected':'' }"/>>
+	   			식단명
+	   			</option>
+	   			<option value = "a"
+	   			<c:out value="${order.searchType eq 'a'?'selected':'' }"/>>
+	   			진행상태
+	   			</option>
+	   			<option value = "b"
+	   			<c:out value="${order.searchType eq 'b'?'selected':'' }"/>>
+	   			배송상태
+	   			</option>
+	   			
+			</select> 제목<input type="text" name = "keyword"> <button id = "search">검색</button>
 		</form>
 	</div>
 
@@ -218,7 +235,8 @@
 						<td>${board.id }</td>
 						<%-- <td>${board.dietName}&nbsp;&nbsp;</td> --%>
 						<td><a onclick="showmap()">${board.dietName}&nbsp;&nbsp;</td>
-						<td>${board.orderDate }&nbsp;&nbsp;</td>
+						<td><fmt:formatDate pattern="yyyy-MM-dd" 
+                     value="${board.orderDate}" /></td>
 						<td>${board.price}</td>
 						<td>${board.orderItemName}</td>
 						<td>${board.transportNum}</td>

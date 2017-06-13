@@ -25,7 +25,7 @@
 		
 		$(".nameClick").on("click",function(){
 			event.preventDefault();
-			
+						
 			var count = parseInt(localStorage['count']);
 			console.log(count);
 			var sideDImg = $(this).attr('data-img');
@@ -69,25 +69,32 @@
 		
 		$(".template a").on("click",function(){
 			event.preventDefault();
-			
+			      
 			var diseaseCode = $(this).attr("data-code");
 			var judgement = $(this).attr("data-judgement");
 			
-			console.log("판단:"+judgement);
+			
 			
 			localStorage.clear();
 			
-			
+			console.log("판단:"+judgement);
 			$.getJSON("nutriAjax/template/"+diseaseCode+"/"+judgement, function(data){
-				var option = "";
-				alert("start");
-				$(data.list).each(function(){ 
-					alert("abc");
-					option += "<img src = 'displayFile?fileName='"+this.sideDImg+"' style = 'width : 75px; height : 25px;'>";
-					console.log("이미지이름:"+this.sideDImg);
+				console.log(data);
+				var str = "";
+				$(data).each(function(){
+					str += "<img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width: 75px; height: 25px;'>" + "<input type = 'hidden' name = 'sideDCode' value = '"+this.sideDCode+"'>";
 				});
-				$(".material").html(option);
+				var v = 5;
+				$("#cnt").val(v);
+				$(".material").html(str);
 			});
+			
+		});
+		
+		$(document.body).on("click","#reset",function(){
+			event.preventDefault();
+			
+			location.reload();                        
 		});
 		function Refresh(){
 			var count = parseInt(localStorage['count']);
@@ -202,9 +209,11 @@
 				<input type = "radio" name = "wizardCode" value = "2"> 저위험 고지혈증<br>
 				<input type = "radio" name = "wizardCode" value = "3"> 주의 신부전증
 			</div>             
-			<div>
+			<div> 
+				<button id = 'reset'>반찬초기화</button><br>
 				<h3>선택한 반찬</h3>
 				<div class = "material">
+					
 				</div>
 				<hr align = "left" width = "80%">
 			</div>
@@ -214,7 +223,7 @@
 				<hr align = "left" width = "40%">          
 				<div class = "template">
 					질환별 식단 목록<br>
-					- <a data-code = "1" data-judgement = "주의">당뇨병</a><br>
+					- <a data-code = "3" data-judgement = "고위험">당뇨병</a><br>
 					- <a>고지혈증</a>
 				</div>
 				<br><br><br>

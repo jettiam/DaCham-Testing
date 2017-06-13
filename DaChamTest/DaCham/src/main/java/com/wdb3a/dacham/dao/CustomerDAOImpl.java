@@ -36,4 +36,10 @@ public class CustomerDAOImpl implements CustomerDAO {
 
 	}
 
+	@Override
+	public void orderRegist(Customer customer) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.selectList(namespace+".orderRegist",customer);
+	}
+
 }

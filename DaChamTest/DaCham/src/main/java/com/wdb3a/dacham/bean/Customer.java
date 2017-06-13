@@ -157,7 +157,7 @@ public void setFoodGName(String foodGName) {
 public double getKcal() {
 	return kcal;
 }
-public void setKcal(double kcal) {
+public void setKcal(double kcal) {	
 	this.kcal = kcal;
 }
 public double getCarbohydrate() {

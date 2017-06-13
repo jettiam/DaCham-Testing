@@ -14,4 +14,6 @@ public interface CustomerService {
 
 	public List<Customer> sideDDetail(String foodGCode) throws Exception;
 
+	public void orderRegist(Customer customer) throws Exception ;
+
 }
