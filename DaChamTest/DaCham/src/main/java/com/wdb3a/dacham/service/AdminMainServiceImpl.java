@@ -24,10 +24,9 @@ public class AdminMainServiceImpl implements AdminMainService {
 	    }
 	@Inject
 	private AdminMainDAO dao;
-	
 	@Override
-	public List<OrderList> orderListAll() throws Exception {
-		return dao.orderListAll();
+	public List<OrderList> orderListAll(OrderList orderList) throws Exception {
+		return dao.orderListAll(orderList);
 	}
 
 	@Override
@@ -37,9 +36,9 @@ public class AdminMainServiceImpl implements AdminMainService {
 	}
 
 	@Override
-	public List<FoodMInven> foodStockList() throws Exception {
+	public List<FoodMInven> foodStockList(FoodMInven foodMInven) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.foodStockList();
+		return dao.foodStockList(foodMInven);
 	}
 
 	@Override
@@ -60,26 +59,11 @@ public class AdminMainServiceImpl implements AdminMainService {
 		return dao.foodMAmountRead(orderCode);
 	}
 
-	@Override
-	public boolean send(String subject, String text, String from, String to) throws Exception {
-		// javax.mail.internet.MimeMessage
-        MimeMessage message = javaMailSender.createMimeMessage();
- 
-        try {
-            // org.springframework.mail.javamail.MimeMessageHelper
-            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
-            helper.setSubject(subject);
-            helper.setText(text, true);
-            helper.setFrom(from);
-            helper.setTo(to);
+	
+	
+	
 
-            javaMailSender.send(message);
-            return true;
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
-		return false;
-	}
+	
 
 	
 

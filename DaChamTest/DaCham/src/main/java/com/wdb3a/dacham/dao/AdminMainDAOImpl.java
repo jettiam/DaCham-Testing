@@ -17,9 +17,11 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 	private SqlSession sqlSession;
 	
 	@Override
-	public List<OrderList> orderListAll() throws Exception {
+
+	public List<OrderList> orderListAll(OrderList orderList) throws Exception {
+
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".listAll");
+		return sqlSession.selectList(namespace+".listAll",orderList);
 	}
 
 	@Override
@@ -29,9 +31,9 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 	}
 
 	@Override
-	public List<FoodMInven> foodStockList() throws Exception {
+	public List<FoodMInven> foodStockList(FoodMInven foodMInven) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".foodStockList");
+		return sqlSession.selectList(namespace+".foodStockList", foodMInven);
 	}
 
 	@Override
@@ -49,6 +51,12 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 	public List<FoodMAmountRead> foodMAmountRead(int orderCode) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".foodMAmountRead", orderCode);
+	}
+
+	@Override
+	public List<FoodMInven> foodStockList() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

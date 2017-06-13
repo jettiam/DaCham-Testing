@@ -12,11 +12,11 @@ import com.wdb3a.dacham.bean.OrderList;
 
 @Service
 public interface AdminMainService {
-	public List<OrderList> orderListAll() throws Exception; 
+	public List<OrderList> orderListAll(OrderList orderList) throws Exception; 
 	public List<OrderList> datailview(String orderCode) throws Exception;
-	public List<FoodMInven> foodStockList() throws Exception;
+	public List<FoodMInven> foodStockList(FoodMInven foodMInven) throws Exception;
 	public void refundUpdate(OrderList list) throws Exception;
 	public void workUpdate(OrderList list) throws Exception;
 	public List<FoodMAmountRead> foodMAmountRead(int orderCode) throws Exception;
-	public boolean send(String subject, String text, String from, String to) throws Exception;
+	
 }

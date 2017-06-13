@@ -76,11 +76,21 @@
 		<div>그래프 나와야함 ㅜㅜ</div>
 	</div>
 	<div>
-		<form method="post" action="notice">
-			<select>
-				<option>고객id</option>
-				<option>식단명</option>
-			</select> 제목<input type="text"> <input type="submit" value="검색">
+		<form>
+			<select name = "searchType">
+				<option value = "n"
+	   			<c:out value="${orderList.searchType==null?'selected':'' }"/>>
+	   			전체
+	   			</option>
+	   			<option value = "t"
+	   			<c:out value="${orderList.searchType eq 't'?'selected':'' }"/>>
+	   			고객 아이디
+	   			</option>
+	   			<option value = "c"
+	   			<c:out value="${orderList.searchType eq 'c'?'selected':'' }"/>>
+	   			식단명
+	   			</option>
+			</select> 제목<input type="text" name = "keyword"> <button id = "search">검색</button>
 		</form>
 		<div>
 			<table width="600" border="1">
@@ -99,11 +109,13 @@
 						<td>${board.id }</td>
 						<%-- <td>${board.dietName}&nbsp;&nbsp;</td> --%>
 						<td><a data-src="${board.orderCode}"  class="orderCode">${board.dietName}&nbsp;&nbsp;</a></td>
-						<td>${board.orderDate }&nbsp;&nbsp;</td>
+						<td><fmt:formatDate pattern="yyyy-MM-dd" 
+                     value="${board.orderDate}" /></td>
+						<%-- <td>${board.orderDate }&nbsp;&nbsp;</td> --%>
 						<td>${board.price}</td>
 						<td>${board.orderItemName}</td> 
 						<td>${board.transportNum}</td>
-
+ 
 					</tr>
 
 				</c:forEach>

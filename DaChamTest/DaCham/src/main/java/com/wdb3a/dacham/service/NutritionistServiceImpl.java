@@ -84,7 +84,7 @@ public class NutritionistServiceImpl implements NutritionistService {
 	@Override
 	public List<Nutritionist> optionTemplate(Nutritionist nutritionist) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.optionTemplate(nutritionist);
 	}
 
 	

@@ -15,12 +15,37 @@
 </head>
 <body>
 	<div>
-		<select>
-			<option>전체</option>
-			<option>코드번호</option>
-			<option>식재료명</option>
-		</select> <input type="text">
-		<button tpye="submit">검색</button>
+		<form>
+			<select>
+				<option>전체</option>
+				<option>코드번호</option>
+				<option>식재료명</option>
+			</select> <input type="text">
+			<button tpye="submit">검색</button>
+		</form>
+	</div>
+	<div>
+		<table id="foodMTable" width="600">
+			<tr>
+				<th>코드번호</th>
+				<th>식재료명</th>
+				<th>단가</th>
+				<th>단위</th>
+				<th>주문량</th>
+			</tr>
+			<c:forEach items="${invenlist}" var="board" varStatus="status">
+				<td>${board.foodMICode}&nbsp;&nbsp;&nbsp;</td>
+				<td>${board.foodMName}</td>
+				<%-- <td>${board.dietName}&nbsp;&nbsp;</td> --%>
+				<td>${board.price}&nbsp;&nbsp;</a></td>
+				<td>${board.uint }&nbsp;&nbsp;</td>
+				<td><input type="text">&nbsp;&nbsp;</td>
+
+				<%-- <td>${board.outAmount}</td> 
+						<td>${board.stock}</td> --%>
+				</tr>
+			</c:forEach>
+		</table>
 	</div>
 	<div>
 		<table id="foodMTable" width="600">
@@ -39,7 +64,7 @@
 					<%-- <td>${board.dietName}&nbsp;&nbsp;</td> --%>
 					<td class="foodMAmount" data-foodMAmount="${board.foodMAmount}">${board.foodMAmount}&nbsp;&nbsp;</a></td>
 					<td class="unit" data-unit="${board.unit }">${board.unit }&nbsp;&nbsp;</td>
-  
+
 					<%-- <td>${board.outAmount}</td> 
 						<td>${board.stock}</td> --%>
 				</tr>
@@ -49,47 +74,75 @@
 	<button id="foodMOrder">식재료 주문서 보내기</button>
 
 	<script>
-		$(document).ready(function(){
-			$("#foodMOrder").on("click",function(){
-				var count = $("#foodMTable tr").length;
-				//alert(count);
-				var foodMArray = new Array();
-				
-				var foodMArrayObj = new Object();
-				for(var i=0; i<3; i++){
-					var foodMObj = new Object();
-					foodMObj.foodMCode=$("#foodMOrder"+i+">.foodMCode").attr("data-foodMCode");
-					foodMObj.foodMName=$("#foodMOrder"+i+">.foodMName").attr("data-foodMName");
-					foodMObj.price=$("#foodMOrder"+i+">.price").attr("data-price");
-					foodMObj.foodMAmount=$("#foodMOrder"+i+">.foodMAmount").attr("data-foodMAmount");
-					foodMObj.unit=$("#foodMOrder"+i+">.unit").attr("data-unit");
-					foodMArray.push(foodMObj);
-				} 
-				foodMArrayObj.foodMInfo = foodMArray;
+		$(document)
+				.ready(
+						function() {
+							$("#foodMOrder")
+									.on(
+											"click",
+											function() {
+												var count = $("#foodMTable tr").length;
+												//alert(count);
+												var foodMArray = new Array();
 
-				$.ajax({
-					url : 'adminSub/foodOrder',
-					data : JSON.stringify(foodMArrayObj),
-					dataType : 'text',
-					type : 'POST',
-					headers : {
-						"Content-Type" : "application/json",
-						"X-HTTP-Method-Override" : "POST"
-					}, 
-					success : function(data) {
-							if(data=="SUCCESS")
-							alert("주문완료");
-							
-					
-  						
-					},error : function(){
-						alert("실패")
-					}
+												var foodMArrayObj = new Object();
+												for (var i = 0; i < 3; i++) {
+													var foodMObj = new Object();
+													foodMObj.foodMCode = $(
+															"#foodMOrder"
+																	+ i
+																	+ ">.foodMCode")
+															.attr(
+																	"data-foodMCode");
+													foodMObj.foodMName = $(
+															"#foodMOrder"
+																	+ i
+																	+ ">.foodMName")
+															.attr(
+																	"data-foodMName");
+													foodMObj.price = $(
+															"#foodMOrder" + i
+																	+ ">.price")
+															.attr("data-price");
+													foodMObj.foodMAmount = $(
+															"#foodMOrder"
+																	+ i
+																	+ ">.foodMAmount")
+															.attr(
+																	"data-foodMAmount");
+													foodMObj.unit = $(
+															"#foodMOrder" + i
+																	+ ">.unit")
+															.attr("data-unit");
+													foodMArray.push(foodMObj);
+												}
+												foodMArrayObj.foodMInfo = foodMArray;
 
-				});
-				console.log(foodMArray);
-			});
-		});
+												$
+														.ajax({
+															url : 'adminSub/foodOrder',
+															data : JSON
+																	.stringify(foodMArrayObj),
+															dataType : 'text',
+															type : 'POST',
+															headers : {
+																"Content-Type" : "application/json",
+																"X-HTTP-Method-Override" : "POST"
+															},
+															success : function(
+																	data) {
+																if (data == "SUCCESS")
+																	alert("주문완료");
+
+															},
+															error : function() {
+																alert("메세지가 전송되었습니다") 
+															}
+
+														});
+												console.log(foodMArray);
+											});
+						});
 	</script>
 </body>
 </html>
