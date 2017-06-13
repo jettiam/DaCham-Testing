@@ -11,42 +11,57 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> 
 <title>Insert title here</title>
-<script >
+<script>
+	$(document).ready(function(){
+		$("#foodOrder").on("click", function(){
+			window.location.href="foodOrder"
+		});
+	})
 	
 </script>
 </head>
 <body>
 <div>
-		<select>
-			<option>전체</option>
-			<option>코드번호</option>
-			<option>식재료명</option>
-		</select>
-		<input type="text"> 
-		<button tpye="submit">검색</button>  
+	<form>
+		<select name = "searchType">
+			<option value = "n"
+	   			<c:out value="${foodMInven.searchType==null?'selected':'' }"/>>
+	   			전체
+	   			</option>
+	   			<option value = "t"
+	   			<c:out value="${foodMInven.searchType eq 't'?'selected':'' }"/>>
+	   			코드번호
+	   			</option>
+	   			<option value = "c"
+	   			<c:out value="${foodMInven.searchType eq 'c'?'selected':'' }"/>>
+	   			식재료명
+	   			</option>
+			</select> 제목<input type="text" name = "keyword"> <button id = "search">검색</button>
+		</form> 
 	</div>
 	<div>
 		<table width="600">
 				<tr>
 					<th>코드번호</th>
 					<th>식재료명</th>
-					<th>입고날짜</th>
 					<th>단가</th>
 					<th>단위</th>
 					<th>입고량</th>
 					<th>출고량</th>
 					<th>재고량</th>
-				
+				  
 				</tr>
 				<c:forEach items="${list}" var="board">
 					<tr>
-						<td>${board.foodMName}&nbsp;&nbsp;&nbsp;</td>  
-						<td>${board.price}</td>
+						<td>${board.foodMICode}&nbsp;&nbsp;&nbsp;</td>  
+						<td>${board.foodMName}</td>
 						<%-- <td>${board.dietName}&nbsp;&nbsp;</td> --%>
-						<td>${board.foodMAmount}&nbsp;&nbsp;</a></td>
+						<td>${board.price}&nbsp;&nbsp;</a></td>
 						<td>${board.uint }&nbsp;&nbsp;</td>
-						<td>${board.foodMCode}</td>
-						<td>${board.orderCode}</td>
+						<td>${board.inAmount}</td>
+						<td>${board.outAmount}</td>
+						<td>${board.stock}</td>
+						
 						<%-- <td>${board.outAmount}</td> 
 						<td>${board.stock}</td> --%>
 					</tr>

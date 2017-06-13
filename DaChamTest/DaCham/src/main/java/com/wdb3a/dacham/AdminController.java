@@ -47,10 +47,10 @@ public class AdminController {
 	@Inject
 	private AdminMainService service; 
 	@RequestMapping(value="/adminMain", method=RequestMethod.GET)
-	public String getadminMain(Model model) throws Exception{
-		List<orderList> list=service.orderListAll();
+	public String getadminMain(Model model,orderList orderList) throws Exception{
+		List<orderList> list=service.orderListAll(orderList);
 		model.addAttribute("list",list);
-		
+		model.addAttribute("orderList",orderList);
 		return "mate/admin/adminMain";
 	}
 	
@@ -87,18 +87,21 @@ public class AdminController {
 	public String getempRegist(){
 		return "mate/admin/empRegist";
 	}
-	@RequestMapping(value="/foodOrder")
-	public String getfoodOrder(){
+	@RequestMapping(value="/foodOrder", method=RequestMethod.GET)
+	public String getfoodOrder(Model model, FoodMInven foodMInven) throws Exception{
+		List<FoodMInven> invenlist = service.foodStockList(foodMInven);
+		model.addAttribute("invenlist", invenlist);
 		return "mate/admin/foodOrder";
 	}
 	@RequestMapping(value="/foodStock", method=RequestMethod.GET)
-	public String getfoodStock(Model model) throws Exception{
-		/*List<FoodMInven> list= service.foodStockList();
-		model.addAttribute("list", list); */
+	public String getfoodStock(Model model, FoodMInven foodMInven) throws Exception{
+		List<FoodMInven> list= service.foodStockList(foodMInven);
+		model.addAttribute("list", list); 
+		model.addAttribute("foodMInven", foodMInven);
 		return "mate/admin/foodStock";
 	}
 	@RequestMapping(value="/foodOrder", method=RequestMethod.POST)
-	public String getfoodStock1(Model model, String orderCode) throws Exception{
+	public String getfoodStock1(Model model, String orderCode, FoodMInven foodMInven) throws Exception{
 		
 
 		
@@ -110,7 +113,9 @@ public class AdminController {
 	
 	
 		List<FoodMAmountRead> list = service.foodMAmountRead(a);
+		List<FoodMInven> invenlist = service.foodStockList(foodMInven);
 		model.addAttribute("list", list);
+		model.addAttribute("invenlist", invenlist);
 		return "mate/admin/foodOrder";
 	}
 	
@@ -136,13 +141,14 @@ public class AdminController {
 	
 	@RequestMapping(value="/orderList",method=RequestMethod.GET)
 	public String getorderList(Model model, orderList order) throws Exception{
-		List<orderList> list=service.orderListAll();
+		List<orderList> list=service.orderListAll(order);
 		model.addAttribute("list",list);
+		model.addAttribute("order", order);
 		return "mate/admin/orderList";
 	}
 	@RequestMapping(value="/orderList1",method=RequestMethod.POST)
 	public String getorderList1(Model model,@RequestBody orderList order) throws Exception{
-		if(order.getOrderItemCode()=="1"){
+		if(order.getOrderItemCode()=="2"){
 		service.refundUpdate(order);
 		}
 		System.out.println(order.getOrderCode());

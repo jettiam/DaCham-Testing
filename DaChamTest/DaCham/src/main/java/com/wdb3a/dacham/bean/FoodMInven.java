@@ -19,7 +19,6 @@ public class FoodMInven {
 	
 	
 	
-	
 	public String getFoodMICode() {
 		return foodMICode;
 	}
