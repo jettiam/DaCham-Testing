@@ -34,7 +34,7 @@ where s.sideDCode=f.sideDcode and s.foodGCode=#{foodGCode};
   
   <insert id="orderRegist">
   	INSERT INTO orderlist (id, dietCode, orderDate, price, dietAmount, orderItemCode, paymentItemCode) 
-	VALUES (#{id}, #{dietCode}, now(), #{price}, #{dietAmount}, 1, 1);
+	VALUES (#{id}, #{dietCode}, now(), #{price}, #{dietAmount}, 0, 1);
   </insert>  
 
   
