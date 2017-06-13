@@ -87,4 +87,26 @@ public class NutritionistAjaxController {
 		}
 		return entity;
 	}
+	@RequestMapping(value = "/template/{diseaseCode}/{judgement}",method = RequestMethod.GET)
+	public ResponseEntity<Map<String,Object>> optionTemplate(@PathVariable("diseaseCode")int diseaseCode, @PathVariable("judgement")String judgement, Nutritionist nutritionist){
+		System.out.println("1Ка");
+		ResponseEntity<Map<String,Object>> entity = null;
+		
+		try {
+			nutritionist.setDiseaseCode(diseaseCode);
+			nutritionist.setJudgement(judgement);
+			List<Nutritionist> list = service.optionTemplate(nutritionist);
+			Map<String,Object> map = new HashMap<>();
+			map.put("list", list);
+			map.put("status", "ok");
+			entity = new ResponseEntity<>(map,HttpStatus.OK);
+			System.out.println("okok");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
 }

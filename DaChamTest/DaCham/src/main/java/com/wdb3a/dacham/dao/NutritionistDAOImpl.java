@@ -81,4 +81,12 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 		return sqlSession.selectOne(namespace+".showKcal",sideDCode);
 	}
 
+	@Override
+	public List<Nutritionist> optionTemplate(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+
 }

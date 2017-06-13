@@ -11,6 +11,9 @@
 li{	
 	list-style: none;
 }
+table,tr,td{
+	border:1px solid black;
+}
 </style>
 
 <script>
@@ -27,22 +30,59 @@ li{
 				console.log(data.list.length);
 				console.log(data.list[0].dietName);
 				var dietCode=0;
+				var trCount=0;
+				var tdCount=0;
 				for(var i = 0; i<data.list.length; i++){					
 					if(dietCode == 0){
 						dietCode = data.list[i].dietCode;
+						console.log(dietCode+" 테이블 염");
+						$("#dietList").append("<table class='dietTable"+dietCode+"'><tr class='dietTr"+trCount+"'>");
+						console.log("tr카운트 염" + trCount);
 					}					
 					if(dietCode==data.list[i].dietCode){
-						$("#dietList").append(data.list[i].sideDImg+"<br>");
+						if(tdCount<2){
+							console.log("티디카운트 " +tdCount);
+							$(".dietTable"+dietCode+">tbody>.dietTr"+trCount).append("<td><img src='displayFile?fileName="+data.list[i].sideDImg+" alt='이미지'></td>");
+							console.log("이미지찍음 " +i);	
+							tdCount++;
+							
+						}else{
+							console.log("tr카운트 닫음" + trCount);
+							trCount++;
+							$(".dietTable"+dietCode).append("</tr><tr class='dietTr"+trCount+"'>");
+							console.log("tr카운트 염" + trCount);
+							$(".dietTable"+dietCode+">tbody>.dietTr"+trCount).append("<td><img src='displayFile?fileName="+data.list[i].sideDImg+" alt='이미지'></td>");
+							console.log("이미지찍음 " +i);							
+							tdCount = 1;
+						}						
+						
 					}else{
-						$("#dietList").append(data.list[i-1].dietName+"<br>");
-						$("#dietList").append(data.list[i].sideDImg+"<br>");
+						$(".dietTable"+dietCode).append("</tr>");
+						console.log("tr카운트 닫음" + trCount);
+						$("#dietList").append("</table>")						
+						console.log(dietCode+"테이블 닫기");
+						$("#dietList").append("<a class='dietCode' href=# data-dietcode='"+dietCode+"'>"+data.list[i-1].dietName+"</a><br>");					
+						trCount=0;						
 						dietCode = data.list[i].dietCode;
-					}					
+						$("#dietList").append("<table class='dietTable"+dietCode+"'><tr class='dietTr"+trCount+"'>");
+						console.log(dietCode+"테이블 염");
+						console.log("tr카운트 염" + trCount);
+						$(".dietTable"+dietCode+">tbody>.dietTr"+trCount).append("<td><img src='displayFile?fileName="+data.list[i].sideDImg+" alt='이미지'></td>");
+						//$(".dietTable"+dietCode+">tbody>.dietTr"+trCount).append("<td><img src='displayFile?fileName="+data.list[i].sideDImg+" alt='이미지'></td>");
+						tdCount=1;
+						console.log("이미지찍음 " +i);	
+					}
+					
 				}
 				$("#dietList").append(data.list[data.list.length-1].dietName+"<br>");
 				
 			});
 			
+		});
+		
+		$('.dietCode').on("click",function(){
+			var dietCode = $(this).attr("data-dietcode");
+			console.log(dietCode);
 		});
 	});
 </script>
@@ -58,6 +98,8 @@ li{
 	<li><a href=# class="disease" id="wizardOrder">위자드로 주문하기</a></li>
 </ul>
 <div id="dietList">
+</div>
+<div id="detailOrder">
 
 </div>
 </body>
