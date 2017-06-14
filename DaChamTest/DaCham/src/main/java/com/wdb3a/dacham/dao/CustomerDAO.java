@@ -18,5 +18,7 @@ public interface CustomerDAO {
 
 	
 	public void orderRegist(Customer customer) throws Exception;
+	
+	public void cartRegist(Customer customer) throws Exception;
 
 }

@@ -16,7 +16,7 @@
 </head>
 <style>
 .detailOrderWrap {
-	width: 1080px;
+	width: 80%;
 	margin: 0 auto;
 }
 .sideDImg{
@@ -66,16 +66,23 @@ table{
 			$("#dietPrice").text(a*price);
 		});
 		
-		$("#doOrder").on("click",function(){
-			$("#setDietCode").val();
+		$("#doOrder").on("click",function(){			
+			$("#setDietCode").val();			
+			$("#setDietName").val($("#dietName").text());
 			$("#setPrice").val($("#dietPrice").text());			
 			$("#setDietAmount").val($("#dietAmount").val());
+			$("#setDietImg").val($("#dietImg").attr("data-dietImg"));
 			$("#orderForm").attr("action","doOrder");
 			$("#orderForm").submit();
 		});
 		
 		$("#goMyCart").on("click",function(){
-			
+			$("#setDietCode").val();
+			$("#setDietName").val($("#dietName").text());
+			$("#setPrice").val($("#dietPrice").text());			
+			$("#setDietAmount").val($("#dietAmount").val());
+			$("#orderForm").attr("action","goMyCart");
+			$("#orderForm").submit();
 		});
 	});
 </script>
@@ -84,10 +91,11 @@ table{
 	<div class="detailOrderWrap">
 		<div class="row">
 			<div class="col-sm-7">
-				<img id = "dietImg" src='displayFile?fileName=${list[0].dietImg}' />
+
+				<img id="dietImg" data-dietImg ="${list[0].dietImg}" src='displayFile?fileName='${list[0].dietImg} />
 			</div>
 			<div class="col-sm-5">
-				<div>${list[0].dietName}</div>
+				<div id="dietName">${list[0].dietName}</div>
 				<div>
 					가격 <span id="dietPrice" data-basicPrice="${list[0].price}">${list[0].price}</span>원
 				</div>
@@ -118,7 +126,9 @@ table{
 	<form id="orderForm" method="get">
 		<input id="setDietCode" type="hidden" name="dietCode" value="${list[0].dietCode }">
 		<input id="setPrice" type="hidden" name="price">
+		<input id="setDietImg" type="hidden" name="dietImg">
 		<input id="setDietAmount" type="hidden" name="dietAmount">
+		<input id="setDietName" type="hidden" name="dietName">
 		<input id="customerId" type="hidden" name="id" value="${customerId}">
 	</form>
 </body>

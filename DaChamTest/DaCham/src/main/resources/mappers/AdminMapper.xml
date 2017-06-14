@@ -57,7 +57,7 @@
 	  			where foodMICode like CONCAT('%',#{keyword},'%')
 	  		</if>
 	  		<if test="searchType == 'c'.toString()">
-	  			and foodMName like CONCAT('%',#{keyword},'%')
+	  			where foodMName like CONCAT('%',#{keyword},'%')  
 	  		</if>
 	  	</if>
 	</sql>

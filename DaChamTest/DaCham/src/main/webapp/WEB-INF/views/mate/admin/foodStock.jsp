@@ -26,7 +26,7 @@
 		<select name = "searchType">
 			<option value = "n"
 	   			<c:out value="${foodMInven.searchType==null?'selected':'' }"/>>
-	   			전체
+	   			전체 
 	   			</option>
 	   			<option value = "t"
 	   			<c:out value="${foodMInven.searchType eq 't'?'selected':'' }"/>>
