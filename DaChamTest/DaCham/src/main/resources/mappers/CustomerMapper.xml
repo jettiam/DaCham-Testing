@@ -41,8 +41,9 @@ where s.sideDCode=f.sideDcode and s.foodGCode=#{foodGCode};
  
   <!-- 장바구니 확인 쿼리문 -->
   <select id="cartList" resultType="OrderList">
-  select o.dietCode, o.price, o.orderCode,o.orderDate, d.dietName,d.dietImg 
+  select o.dietCode, o.price, o.orderCode,o.orderDate, o.dietAmount,d.dietName,d.dietImg
 from orderlist o, diet d where o.dietCode = d.dietCode and o.id = #{id} and o.orderItemCode = 1
+order by o.orderCode desc;
   </select>
 
   </mapper>
