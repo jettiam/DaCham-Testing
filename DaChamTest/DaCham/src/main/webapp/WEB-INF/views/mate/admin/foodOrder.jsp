@@ -33,18 +33,20 @@
 				<th>단위</th>
 				<th>주문량</th>
 			</tr>
-			<c:forEach items="${invenlist}" var="board" varStatus="status">
-				<td>${board.foodMICode}&nbsp;&nbsp;&nbsp;</td>
-				<td>${board.foodMName}</td>
-				<%-- <td>${board.dietName}&nbsp;&nbsp;</td> --%>
-				<td>${board.price}&nbsp;&nbsp;</a></td>
-				<td>${board.uint }&nbsp;&nbsp;</td>
-				<td><input type="text">&nbsp;&nbsp;</td>
+			<tr>
+				<c:forEach items="${invenlist}" var="board" varStatus="status">
+					<td class="foodMCode1" data-foodMCode="${board.foodMCode}">${board.foodMICode}&nbsp;&nbsp;&nbsp;</td>
+					<td class="foodMName1" data-foodMCode="${board.foodMName}">${board.foodMName}</td>
+					<%-- <td>${board.dietName}&nbsp;&nbsp;</td> --%>
+					<td>${board.price}&nbsp;&nbsp;</a></td>
+					<td>${board.uint }&nbsp;&nbsp;</td>
+					<td><input type="text">&nbsp;&nbsp;</td>
 
-				<%-- <td>${board.outAmount}</td> 
+					<%-- <td>${board.outAmount}</td> 
 						<td>${board.stock}</td> --%>
-				</tr>
-			</c:forEach>
+
+				</c:forEach>
+			</tr>
 		</table>
 	</div>
 	<div>
@@ -57,7 +59,7 @@
 				<th>단위</th>
 			</tr>
 			<c:forEach items="${list}" var="board" varStatus="status">
-				<tr id="foodMOrder${status.index}">
+				<td id="foodMOrder${status.index}">
 					<td class="foodMCode" data-foodMCode="${board.foodMCode}">${board.foodMCode}</td>
 					<td class="foodMName" data-foodMName="${board.foodMName}">${board.foodMName}&nbsp;&nbsp;&nbsp;</td>
 					<td class="price" data-price="${board.price}"">${board.price}</td>
@@ -136,12 +138,16 @@
 
 															},
 															error : function() {
-																alert("메세지가 전송되었습니다") 
+																alert("메세지가 전송되었습니다")
 															}
 
 														});
 												console.log(foodMArray);
 											});
+							$(".foodMName1").on("click", function(){
+								var a = $(this).siblings()
+								alert(a); 
+							});
 						});
 	</script>
 </body>
