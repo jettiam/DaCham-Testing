@@ -8,25 +8,27 @@
 <head>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@include file="../admin/upmenu.jsp"%>
 <title>Insert title here</title>
 <style>
 #read {
-	display: none; 
-	width:300px;
-	background-color:gray;
-	position:absolute;
-	top:50%;
-	left:50%;
+	display: none;
+	width: 300px;
+	background-color: gray;
+	position: absolute;
+	top: 50%;
+	left: 50%;
 	margin-top: -50px;
 	margin-left: -150px;
 	padding: 10px;
-	z-index:1000;
+	z-index: 1000;
 }
-#close{
-	float : right;
+
+#close {
+	float: right;
 }
 </style>
 </head>
@@ -66,31 +68,23 @@
 		일자<input type="date" id="startdate"> ~ <input type="date"
 			id="enddate"> <input type="button" value="오늘" id="today">
 		<input type="button" value="일주일" id="week"> <input
-			type="button" value="한달" id="month"><br> <select>
-			<option>전체</option>
-			<option>당뇨병</option>
-			<option>고지혈증</option>
-			<option>심부전증</option>
-			<option>신부전증</option>
-		</select> <input type="button" value="검색">
-		<div>그래프 나와야함 ㅜㅜ</div>
+			type="button" value="한달" id="month"><br>
+		<div id="chart_div" style="width: 900px; height: 500px;"></div>
 	</div>
 	<div>
 		<form>
-			<select name = "searchType">
-				<option value = "n"
-	   			<c:out value="${orderList.searchType==null?'selected':'' }"/>>
-	   			전체
-	   			</option>
-	   			<option value = "t"
-	   			<c:out value="${orderList.searchType eq 't'?'selected':'' }"/>>
-	   			고객 아이디
-	   			</option>
-	   			<option value = "c"
-	   			<c:out value="${orderList.searchType eq 'c'?'selected':'' }"/>>
-	   			식단명
-	   			</option>
-			</select> 제목<input type="text" name = "keyword"> <button id = "search">검색</button>
+			<select name="searchType">
+				<option value="n"
+					<c:out value="${orderList.searchType==null?'selected':'' }"/>>
+					전체</option>
+				<option value="t"
+					<c:out value="${orderList.searchType eq 't'?'selected':'' }"/>>
+					고객 아이디</option>
+				<option value="c"
+					<c:out value="${orderList.searchType eq 'c'?'selected':'' }"/>>
+					식단명</option>
+			</select> 제목<input type="text" name="keyword">
+			<button id="search">검색</button>
 		</form>
 		<div>
 			<table width="600" border="1">
@@ -108,35 +102,34 @@
 						<td>${board.orderCode}&nbsp;&nbsp;&nbsp;</td>
 						<td>${board.id }</td>
 						<%-- <td>${board.dietName}&nbsp;&nbsp;</td> --%>
-						<td><a data-src="${board.orderCode}"  class="orderCode">${board.dietName}&nbsp;&nbsp;</a></td>
-						<td><fmt:formatDate pattern="yyyy-MM-dd" 
-                     value="${board.orderDate}" /></td>
+						<td><a data-src="${board.orderCode}" class="orderCode">${board.dietName}&nbsp;&nbsp;</a></td>
+						<td><fmt:formatDate pattern="yyyy-MM-dd"
+								value="${board.orderDate}" /></td>
 						<%-- <td>${board.orderDate }&nbsp;&nbsp;</td> --%>
 						<td>${board.price}</td>
-						<td>${board.orderItemName}</td> 
+						<td>${board.orderItemName}</td>
 						<td>${board.transportNum}</td>
- 
+
 					</tr>
 
 				</c:forEach>
 			</table>
 		</div>
 	</div>
-	<div id="detailView">
-	</div>
-	 <div name="read" id="read" class="read">
+	<div id="detailView"></div>
+	<div name="read" id="read" class="read">
 		<table width="600" border="1">
 			<tr>
 				<th>고객이름</th>
-				<td id="orderName"></td> 
-				<th>배달주소</th> 
+				<td id="orderName"></td>
+				<th>배달주소</th>
 				<td id="orderAddRess"></td>
 			</tr>
 			<tr>
 				<th>가격</th>
-				<td id ="orderPrice"></td>
+				<td id="orderPrice"></td>
 				<th>식단명</th>
-				<td id ="orderDietName"></td>
+				<td id="orderDietName"></td>
 			</tr>
 			<tr>
 				<th>주문일</th>
@@ -147,42 +140,76 @@
 		</table>
 		<button id="close">닫기</button>
 	</div>
- 
+
 
 </body>
 <script>
+	google.charts.load('current', {
+		'packages' : [ 'corechart' ]
+	});
+	google.charts.setOnLoadCallback(drawVisualization);
 
+	function drawVisualization() {
+		// Some raw data (not necessarily accurate)
+		var data = google.visualization.arrayToDataTable([
+				[ 'Day', 'Bolivia', 'Ecuador', 'Madagascar',
+						'Papua New Guinea', 'Rwanda', 'Average' ],
+				[ '2004/05', 165, 938, 522, 998, 450, 614.6 ],
+				[ '2005/06', 135, 1120, 599, 1268, 288, 682 ],
+				[ '2006/07', 157, 1167, 587, 807, 397, 623 ],
+				[ '2007/08', 139, 1110, 615, 968, 215, 609.4 ],
+				[ '2008/09', 136, 691, 629, 1026, 366, 569.6 ] ]);
+		var options = {
+			title : '식단 판매량',
+			vAxis : {
+				title : 'Cups'
+			},
+			hAxis : {
+				title : 'Month'
+			},
+			seriesType : 'bars',
+			series : {
+				5 : {
+					type : 'line'
+				}
+			}
+		};
+
+		var chart = new google.visualization.ComboChart(document
+				.getElementById('chart_div'));
+		chart.draw(data, options);
+	}
 	/* jQuery.fn.center = function () {
-    this.css("position","absolute");
-    this.css("top", Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) + $(window).scrollTop()) + "px");
-    this.css("left", Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) + $(window).scrollLeft()) + "px");
-    this.css("background-color", "#dddddd"); 
-    return this;
+	this.css("position","absolute");
+	this.css("top", Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) + $(window).scrollTop()) + "px");
+	this.css("left", Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) + $(window).scrollLeft()) + "px");
+	this.css("background-color", "#dddddd"); 
+	return this;
 	} */
-	
-	$(".orderCode").on("click", function(){
+
+	$(".orderCode").on("click", function() {
 		event.preventDefault();
-		var orderCode = $(this).attr("data-src");		
-		alert("이건됨");		
+		var orderCode = $(this).attr("data-src");
+		alert("이건됨");
 		$.ajax({
-	         type: "post",
-	         url: "adminSub/detailView/"+orderCode,
-	         headers: {
-	            "Content-Type":"application/json",
-	            "X-HTTP-Method-Override":"POST"
-	         },	         
-	         dataType: "text",
-	         success: function(data) {	            
-	            	$("#read").show();  
-	           		 var str =data.list.name;
-	           		 alert(str);	           		
-	           
-	         },
-	         error:function(){
-	        	 alert("실패");
-	         }
-	    });    
-    });
+			type : "post",
+			url : "adminSub/detailView/" + orderCode,
+			headers : {
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "POST"
+			},
+			dataType : "text",
+			success : function(data) {
+				$("#read").show();
+				var str = data.list.name;
+				alert(str);
+
+			},
+			error : function() {
+				alert("실패");
+			}
+		});
+	});
 	/* function getPageReplyList() {
 		var orderCode = $(".orderCode").attr("data-src");
 		alert(orderCode); 
@@ -200,28 +227,26 @@
 		/* event.preventDefault();
 		var orderCode = $(this).attr("href");
 		alert(orderCode); */
-		/* $.ajax({
-	         type: "get",
-	         url: "adminMain",
-	        
-	         dataType: "text",
-	         data: JSON.stringify({
-	            "replyText":replyText
-	         }),
-	         success: function(reslut) {
-	            if(reslut=="SUCCESS"){
-	               alert("수정되었습니다");
-	               $("#modDiv").hide("slow");
-	               getAllReplies();
-	            }
-	         }
-	      });
-		 */
-		//$("#read").show();
-		//$("#read").center();
-		
+	/* $.ajax({
+	     type: "get",
+	     url: "adminMain",
+	    
+	     dataType: "text",
+	     data: JSON.stringify({
+	        "replyText":replyText
+	     }),
+	     success: function(reslut) {
+	        if(reslut=="SUCCESS"){
+	           alert("수정되었습니다");
+	           $("#modDiv").hide("slow");
+	           getAllReplies();
+	        }
+	     }
+	  });
+	 */
+	//$("#read").show();
+	//$("#read").center();
 	//}    
-	
 	function getDefaultDate() {// 해당 일 계산
 
 		var now = new Date();
@@ -279,7 +304,7 @@
 		$("#notice").click(function() {
 			window.location.href = "notice";
 		});
-		$("#close").click(function(){
+		$("#close").click(function() {
 			$("#read").css("display", "none");
 		});
 	});

@@ -26,6 +26,7 @@
 #dietImg{
 	width:240px;
 	height:180px;
+
 }
 table,tr,td{
 border:solid 1px black;
@@ -91,7 +92,9 @@ table{
 	<div class="detailOrderWrap">
 		<div class="row">
 			<div class="col-sm-7">
+
 				<img id="dietImg" data-dietImg ="${list[0].dietImg}" src='displayFile?fileName=${list[0].dietImg}' />
+
 			</div>
 			<div class="col-sm-5">
 				<div id="dietName">${list[0].dietName}</div>
