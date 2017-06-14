@@ -42,6 +42,12 @@ display:none;
 }
 #myCartTableWrap{
 display:none;
+
+}
+#myCartTable{
+width:800px;
+margin: 0 auto;
+text-align: center;
 }
 </style>
 <script>
@@ -61,7 +67,7 @@ $(document).ready(function(){
 			success:function(data){
 				console.log(data);				
 				for(var i=0; data.list.length>i; i++){
-					$('#myCartTableWrap').append(data.list[i].dietName+"<br>"+ data.list[i].dietImg+"<br>"+ data.list[i].orderDate+"<br>"+ data.list[i].price);
+					$('#myCartTableWrap').append(data.list[i].dietName+"<br>"+ data.list[i].dietImg+"<br>"+ data.list[i].orderDate+"<br>"+ data.list[i].price+"<br>"+ data.list[i].dietAmount);
 					
 				}
 			}
@@ -122,7 +128,17 @@ $(document).ready(function(){
 
 <!-- 장바구니 -->
 <div id="myCartTableWrap">
-<table id="myCartTable">
+<table id="myCartTable" border=2>
+<tr> 
+	<th><input type="checkbox"></th>
+	<th>상품정보</th>
+	<th>상품명</th>
+	<th>수량</th>
+	<th>상품금액</th>
+</tr>
+
+
+
 
 </table>
 

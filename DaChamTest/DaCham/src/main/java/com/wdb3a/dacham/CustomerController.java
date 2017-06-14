@@ -88,10 +88,54 @@ public String detailOrder(@RequestParam(value="dietCode") int dietCode, Model mo
  */
 @RequestMapping(value="/doOrder",method=RequestMethod.GET)
 public String doOrder(Customer customer,Model model)throws Exception{
-	serviceCu.orderRegist(customer);
-	model.addAttribute("order", customer);//나중에 상세페이지 만들기용
+	//serviceCu.orderRegist(customer);
+	model.addAttribute("order", customer);
 	return "customer/dietOrder/orderRegister";
 }
+/**
+ * 
+ * @param customer
+ * @param model
+ * @return 주문 결제
+ * @throws Exception
+ */
+@RequestMapping(value="/payment",method=RequestMethod.POST)
+public String payment(Customer customer,Model model)throws Exception{
+	serviceCu.orderRegist(customer);	
+	return "redirect:goOrderInfo";
+}
+/**
+ * 
+ * @param customer
+ * @param model
+ * @return 장바구니에 넣고 장바구니로 가기
+ * @throws Exception
+ */
+@RequestMapping(value="/goMyCart",method=RequestMethod.GET)
+public String goMyCart(Customer customer)throws Exception{
+	serviceCu.cartRegist(customer);	
+	return "redirect:goCartList";
+}
+/** 
+ * @return 장바구니 리다이렉트용
+ * @throws Exception
+ */
+@RequestMapping(value="/goCartList",method=RequestMethod.GET)
+public String inputOrderInfo()throws Exception{	
+	return "customer/myPage";
+}
+/**
+ * 
+ * @return 결제 리다이렉트용
+ * @throws Exception
+ */
+@RequestMapping(value="/goOrderInfo",method=RequestMethod.GET)
+public String goOrderInfo()throws Exception{	
+	return "customer/myPage";
+}
+
+
+
 @RequestMapping(value="/menuShow",method = RequestMethod.GET)
 /**
  * 

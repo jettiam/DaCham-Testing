@@ -97,7 +97,7 @@ color:#88b04b;
 			<input type="text" name="id"><br> 
 			비밀번호<br>
 			<input type="password" name="pw"> 
-			<input type="submit" value="로그인">
+			<input type="submit" class="btn btn-warning" value="로그인">
 
 		</form>
 

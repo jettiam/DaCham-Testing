@@ -39,5 +39,10 @@ private CustomerDAO dao;
 		dao.orderRegist(customer);
 		
 	}
+	@Override
+	public void cartRegist(Customer customer) throws Exception {
+		dao.cartRegist(customer);
+		
+	}
 
 }

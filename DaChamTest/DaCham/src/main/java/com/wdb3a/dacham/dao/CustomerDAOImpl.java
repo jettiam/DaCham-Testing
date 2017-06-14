@@ -42,4 +42,10 @@ public class CustomerDAOImpl implements CustomerDAO {
 		sqlSession.selectList(namespace+".orderRegist",customer);
 	}
 
+	@Override
+	public void cartRegist(Customer customer) throws Exception {
+		sqlSession.selectList(namespace+".cartRegist",customer);
+		
+	}
+
 }
