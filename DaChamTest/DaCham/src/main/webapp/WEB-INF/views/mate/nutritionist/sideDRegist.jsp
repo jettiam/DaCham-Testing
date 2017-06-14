@@ -13,7 +13,42 @@
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src = "../../../dacham/resources/openAPIjs/radarchart.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+		//이미지를 업로드하면 미리 볼 수 있는 기능
+		function previewImage(targetObj, View_area){
+			var preview = document.getElementById(View_area);
+			var ua = window.navigator.userAgent;
 
+			var files  = targetObj.files;
+			for(var i = 0; i<files.length; i++){
+				var file = files[i];
+				var imageType = /image.*/;
+				if(!file.type.match(imageType)){
+					continue;
+				}
+				var prevImg = document.getElementById("prev_"+View_area);
+				if(prevImg){
+					preview.removeChild(prevImg);
+				}
+				var img = document.createElement("img");
+				img.id = "prev_"+View_area;
+				img.classList.add("obj");
+				img.file = file;
+				img.style.width = '100px';
+				img.style.height = '100px';
+				preview.appendChild(img);
+				if(window.FileReader){
+					var reader = new FileReader();
+					reader.onloadend = (function(almg){
+						return function(e){
+							almg.src = e.target.result;
+						};
+					})(img);
+					reader.readAsDataURL(file);
+				}
+			}
+		}
+</script>
 <style>
 	.box1 {
   display:inline-block;  margin-left:20px;  }
@@ -62,11 +97,12 @@
 			</div>
 	
 		<div class = "box2">
-				<h2>반찬 사진</h2>
-				<input type = "file" name = "file">
-				
-				<div>
+				<div id = "View_area">
 				</div>
+				<h2>반찬 사진</h2>
+				<input type = "file" name = "file" id = "profile_pt" onchange = "previewImage(this,'View_area')">
+				
+				
 		</div>
 			
 	
@@ -129,9 +165,15 @@
 			openAPI();
 			var v = 0;
 			$("#regist").on("click",function(){
-				$("#registForm").attr("method","post");
-				$("#registForm").attr("action","side");
-				$("#registForm").submit();
+				if(!localStorage['init'] || isNaN(localStorage['cnt'])==true || localStorage['cnt'] == 0){
+					alert("등록할 식재료를 선택하세요");
+					event.preventDefault();
+				}
+				else{
+					$("#registForm").attr("method","post");
+					$("#registForm").attr("action","side");
+					$("#registForm").submit();	
+				}
 			});
 			
 			localStorage.clear();
