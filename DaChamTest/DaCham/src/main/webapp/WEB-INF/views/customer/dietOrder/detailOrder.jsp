@@ -23,6 +23,10 @@
 	width:150px;
 	height: 150px;
 }
+#dietImg{
+	width:240px;
+	height:180px;
+}
 table,tr,td{
 border:solid 1px black;
 }
@@ -87,7 +91,7 @@ table{
 	<div class="detailOrderWrap">
 		<div class="row">
 			<div class="col-sm-7">
-				<img id="dietImg" data-dietImg ="${list[0].dietImg}" src='displayFile?fileName='${list[0].dietImg} />
+				<img id="dietImg" data-dietImg ="${list[0].dietImg}" src='displayFile?fileName=${list[0].dietImg}' />
 			</div>
 			<div class="col-sm-5">
 				<div id="dietName">${list[0].dietName}</div>
@@ -125,6 +129,7 @@ table{
 		<input id="setDietAmount" type="hidden" name="dietAmount">
 		<input id="setDietName" type="hidden" name="dietName">
 		<input id="customerId" type="hidden" name="id" value="${customerId}">
+		<input type="hidden" name="detailOrder" value="true"><!-- 디테일오더에서 넘어갔는지 유무 -->
 	</form>
 </body>
 </html>
