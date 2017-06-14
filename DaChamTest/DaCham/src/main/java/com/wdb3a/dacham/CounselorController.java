@@ -28,7 +28,9 @@ public class CounselorController {
 	@RequestMapping(value="/counselorList", method =RequestMethod.GET)
 	public String getList(Model model,Counselor counselor)throws Exception{
 		List<Counselor> list = service.listAll(counselor);
+		List<Counselor> list2 = service.counselorseList2(counselor);
 		model.addAttribute("list",list);
+		model.addAttribute("list2",list2);
 		model.addAttribute("Counselor",counselor);
 		return "mate/counselor/counselorList";
 	

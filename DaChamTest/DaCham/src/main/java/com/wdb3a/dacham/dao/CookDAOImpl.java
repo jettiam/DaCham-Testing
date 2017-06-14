@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.wdb3a.dacham.bean.Cook;
 import com.wdb3a.dacham.bean.FoodMInven;
 @Repository
 public class CookDAOImpl implements CookDAO {
@@ -17,6 +18,11 @@ public class CookDAOImpl implements CookDAO {
 	public List<FoodMInven> CookStock(FoodMInven foodInv) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".foodStock",foodInv);
+	}
+	@Override
+	public List<Cook> cookList() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".cookList");
 	}
 
 }

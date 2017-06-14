@@ -59,11 +59,11 @@ width:100px;
 <%@include file="../../clientNavi.jsp" %>
 
 <div id = "menuShowWrap">
-<h1>이달의 메뉴</h1><br>
-<input type="button" id="disease01" value="당뇨">
-<input type="button" id="disease02" value="신부전증">
-<input type="button" id="disease03" value="심부전증">
-<input type="button" id="disease04" value="고지혈">
+<h1>이달의 메뉴</h1>
+<input type="button" id="disease01" class="btn btn-warning" value="당뇨">
+<input type="button" id="disease02" class="btn btn-warning" value="신부전증">
+<input type="button" id="disease03" class="btn btn-warning" value="심부전증">
+<input type="button" id="disease04" class="btn btn-warning" value="고지혈">
 <br><br>
 
 <!-- 이달의 메뉴 기본 -->

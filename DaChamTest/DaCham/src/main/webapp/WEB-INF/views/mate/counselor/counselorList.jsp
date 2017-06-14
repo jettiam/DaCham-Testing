@@ -9,6 +9,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@include file = "counselorNavi.jsp" %>
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$(".counselTitle a").on("click",function(){
+			var counselCode = $(this).attr('data-code');
+			$.getJSON("counselAjax/views/"+counselCode,function(data){           
+				$(".box2").html("<table border = '1'><tr><td>제목</td><td><b>"+data.counselTitle+"</b></td></tr><tr><td>내용</td><td>"+data.counselContent+"</td></tr></table>")
+			});
+		});
+	});
+</script>
 <style>
  .box1 {
   float:left;  }
@@ -37,7 +48,7 @@
 			<input type = "text" name = "keyword" placeholder = "검색어 입력란">
 			<button id = "search">검색</button>
 		</div>
-	</form>
+	
       <div>
       <table border ="1">
          <tr>
@@ -70,35 +81,51 @@
 					</tr>
 		</c:forEach>
       </table>
-      
-       <select>
-	            <option>등록자</option>
-	            <option>제목</option>
-	            <option>내용</option>
-	      </select>
-	         <input type = "text" name = "keyword">
-	         <button id = "search"> 검색 </button>
-      </div>
+      </form>
+      <form>
+       <div>
+			<select name = "SearchType">
+				<option value = "n"
+	   			<c:out value="${Counselor.searchType2==null?'selected':'' }"/>>
+	   			----------
+	   			</option>
+	   			<option value = "y"
+	   			<c:out value="${Counselor.searchType2 eq 't'?'selected':'' }"/>>
+	   			작성자이름
+	   			</option>
+	   			<option value = "u"
+	   			<c:out value="${Counselor.searchType2 eq 'c'?'selected':'' }"/>>
+	   			작성자ID
+	   			</option>
+			</select>
+			<input type = "text" name = "keyword2" placeholder = "검색어 입력란">
+			<button id = "Search">검색</button>
+	 </div>
+  
       
       <div>
-	     
-         <table>
+	     <table border ="1">
             <tr>
                <th>번호</th>
-               <th>제목</th>
-               <th>등록자</th>
-               <th>등록일</th>
-               <th>조회수</th>
+               <th>글제목</th>
+               <th>작성자이름</th>
+               <th>작성자ID</th>
+               <th>작성일</th>
+             
             </tr>
-            <tr>
-               <td>1</td>
-               <td>영양관리주간목록</td>
-               <td>배송팀장</td>
-               <td>2017.05.05</td>
-               <td>0</td>
-            </tr>
+            <c:forEach items = "${list2 }" var = "n">
+					<tr>
+						<td>${n.counselCode }</td>
+						<td class = "counselTitle"><a data-code = "${n.counselCode }">${n.counselTitle }</a></td>
+						<td>${n.name }</td>
+						<td>${n.id } </td>
+						<td>${n.counselDate }</td>
+						
+					</tr>
+		</c:forEach>
          </table>
       </div>
+   	</form>
    </div>
    <div class = "box2">
       

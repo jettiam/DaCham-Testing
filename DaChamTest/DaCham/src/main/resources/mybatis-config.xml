@@ -14,8 +14,7 @@
 		<typeAlias alias="FoodMAmountRead" type="com.wdb3a.dacham.bean.FoodMAmountRead"/>
 		<typeAlias alias="Customer" type="com.wdb3a.dacham.bean.Customer"/>
 		<typeAlias alias="Counselor" type="com.wdb3a.dacham.bean.Counselor"/>
-		<typeAlias alias="Diet" type="com.wdb3a.dacham.bean.Diet"/>
-
+		<typeAlias alias="Cook" type="com.wdb3a.dacham.bean.Cook"/>
 		
 
 

@@ -2,12 +2,24 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/data/mongo 
 		http://www.springframework.org/schema/data/mongo/spring-mongo-1.10.2.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- 몽고 DB사용을 위한 bean -->
+	<mongo:mongo-client host="localhost" port="27017" credentials="admin:admin@admin">
+	</mongo:mongo-client>
 	
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg ref="mongo"/>
+		<constructor-arg name="databaseName" value="test1" /> <!-- 우선 test1 db 사용. -->
+	</bean>
+	
+	<bean id="mongoDAO" class="com.wdb3a.dacham.dao.MongoDAO">
+		<property name="mongoTemplate" ref="mongoTemplate"/>
+	</bean>
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">

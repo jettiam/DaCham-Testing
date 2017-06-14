@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wdb3a.dacham.bean.Customer;
@@ -55,4 +56,19 @@ public class CustomerAjaxController {
 		}
 		return entity;		
 	}
+	@RequestMapping(value="myCart",method=RequestMethod.POST)
+	public ResponseEntity<Map<String, Object>> getMyCart(@RequestBody Customer cu){
+		
+		ResponseEntity<Map<String, Object>> entity = null;
+		List<Customer> list;
+		try {
+			list = service.cartList(cu.getId());
+			Map<String, Object> map = new HashMap<>();
+			map.put("list", list);
+			entity = new ResponseEntity<>(map,HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;}
 }

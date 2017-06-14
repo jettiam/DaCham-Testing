@@ -31,12 +31,16 @@ from
 	group by a.sidedcode) f 
 where s.sideDCode=f.sideDcode and s.foodGCode=#{foodGCode};
   </select>
-  
+  <!-- 주문결제 -->
   <insert id="orderRegist">
   	INSERT INTO orderlist (id, dietCode, orderDate, price, dietAmount, orderItemCode, paymentItemCode) 
-	VALUES (#{id}, #{dietCode}, now(), #{price}, #{dietAmount}, 0, 1);
+	VALUES (#{id}, #{dietCode}, now(), #{price}, #{dietAmount}, 2, #{paymentItemCode});
   </insert>  
-
+<!-- 장바구니 등록 -->
+  <insert id="cartRegist">
+  	INSERT INTO orderlist (id, dietCode, orderDate, price, dietAmount, orderItemCode, paymentItemCode) 
+	VALUES (#{id}, #{dietCode}, now(), #{price}, #{dietAmount}, 1, 1);
+  </insert>  
   
  
   <!-- 장바구니 확인 쿼리문 -->

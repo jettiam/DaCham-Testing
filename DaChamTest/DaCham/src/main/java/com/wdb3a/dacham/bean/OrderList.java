@@ -1,6 +1,6 @@
 package com.wdb3a.dacham.bean;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class OrderList {
 	private String orderCode;

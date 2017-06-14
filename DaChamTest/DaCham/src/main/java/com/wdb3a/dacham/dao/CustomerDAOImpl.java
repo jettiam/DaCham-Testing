@@ -18,6 +18,11 @@ public class CustomerDAOImpl implements CustomerDAO {
 	}
 
 	@Override
+
+	public List<Customer> cartList(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".cartList",id);}
+
 	public List<Customer> detailOrder(int dietCode) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".detailOrder",dietCode);
@@ -28,12 +33,19 @@ public class CustomerDAOImpl implements CustomerDAO {
 	public List<Customer> sideDDetail(String foodGCode) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".sideDDetail",foodGCode);
+
 	}
 
 	@Override
 	public void orderRegist(Customer customer) throws Exception {
 		// TODO Auto-generated method stub
 		sqlSession.selectList(namespace+".orderRegist",customer);
+	}
+
+	@Override
+	public void cartRegist(Customer customer) throws Exception {
+		sqlSession.selectList(namespace+".cartRegist",customer);
+		
 	}
 
 }
