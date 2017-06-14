@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +8,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@include file = "cookerNavi.jsp" %>
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$("#button").on("click",function(){
+			window.location.href = "cook";
+		});
+	});
+</script>
 </head>
 <body>
 	<h1>조리 목록</h1>
@@ -17,37 +26,16 @@
 				<th>조리량</th>
 				<th>조리상태</th>
 			</tr>
-			<tr>
-				<td><a href = "#">연포탕</a></td>
-				<td>18인분</td>
-				<td>조리중</td>
-			</tr>
-			<tr>
-				<td><a href = "#">병아리콩 샐러드</a></td>
-				<td>18인분</td>
-				<td>조리대기</td>
-			</tr>
-			<tr>
-				<td><a href = "#">감자밥</a></td>
-				<td>18인분</td>
-				<td>조리대기</td>
-			</tr>
-			<tr>
-				<td><a href = "#">현미밥</a></td>
-				<td>18인분</td>
-				<td>조리대기</td>
-			</tr>
-			<tr>
-				<td><a href = "#">김치</a></td>
-				<td>18인분</td>
-				<td>조리완료</td>
-			</tr>
-			<tr>
-				<td><a href = "#">닭가슴살 샐러드</a></td>
-				<td>18인분</td>
-				<td>조리대기</td>
-			</tr>
+			<c:forEach items = "${list }" var = "b">
+				<tr>
+					<td><a href = "#">${b.sideDName }</a></td>
+					<td>${b.dietAmount }</td>
+					<td>${b.orderItemCode}</td>
+				</tr>
+			</c:forEach>		
+		
 		</table>
 	</div>
+	<button id = "button">조리시작</button>
 </body>
 </html>

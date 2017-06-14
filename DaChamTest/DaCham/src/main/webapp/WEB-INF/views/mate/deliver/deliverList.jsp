@@ -20,6 +20,12 @@
 			cbox.checked = input_form.all.checked;
 		}
 	}
+	$(document).ready(function(){
+		$("#button").on("click",function(){
+				window.location.href = "deliverMain";
+			});
+		});
+	
 </script>
 </head>
 <body>
@@ -70,7 +76,6 @@
 			
 		</div>
 	</form>
-		<input type = "submit" value = "배송">
-	
+		<button id = "button">배송완료</button>
 </body>
 </html>

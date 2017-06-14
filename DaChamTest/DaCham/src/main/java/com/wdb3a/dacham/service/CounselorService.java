@@ -10,4 +10,6 @@ public interface CounselorService {
 	public List<Counselor> listMaterial()throws Exception;
 	public void createCounselor(Counselor counselor)throws Exception;
 	public List<Counselor> showCounselor(Counselor counselor)throws Exception;
+	public List<Counselor> counselorseList2(Counselor counselor)throws Exception;
+	public Counselor viewCounsel(int counselCode) throws Exception;
 }
