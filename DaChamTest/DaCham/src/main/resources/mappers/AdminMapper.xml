@@ -7,59 +7,64 @@
 		dietCode, orderDate, price, orderItem, transportNum from orderList </select> -->
 	<select id="listAll" resultType="OrderList">
 		select b.dietCode, b.orderCode,
-		b.id, a.dietName, b.orderDate, b.price, b.orderItemCode,
+		b.id, a.dietName, b.orderDate, b.price,
+		b.orderItemCode,
 		b.transportNum, c.orderItemName
-		from diet a join orderlist b join
+		from diet a join
+		orderlist b join
 		orderitem c
 		where a.dietCode=b.dietCode
-		and b.orderItemCode = c.orderItemCode 
+		and
+		b.orderItemCode = c.orderItemCode
 		<include refid="search"></include>
 	</select>
-	<sql id = "search">
-		<if test = "searchType != null">
-	  		<if test="searchType == 't'.toString()">
-	  			and b.id like CONCAT('%',#{keyword},'%')
-	  		</if>
-	  		<if test="searchType == 'c'.toString()">
-	  			and a.dietName like CONCAT('%',#{keyword},'%')
-	  		</if>
-	  		<if test="searchType == 'a'.toString()">
-	  			and b.orderItemCode like CONCAT('%',#{keyword},'%')
-	  		</if>
-	  		<if test="searchType == 'b'.toString()">
-	  			and b.transportNum like CONCAT('%',#{keyword},'%')
-	  		</if>
-	  	</if>
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				and b.id like CONCAT('%',#{keyword},'%')
+			</if>
+			<if test="searchType == 'c'.toString()">
+				and a.dietName like CONCAT('%',#{keyword},'%')
+			</if>
+			<if test="searchType == 'a'.toString()">
+				and b.orderItemCode like CONCAT('%',#{keyword},'%')
+			</if>
+			<if test="searchType == 'b'.toString()">
+				and b.transportNum like CONCAT('%',#{keyword},'%')
+			</if>
+		</if>
 	</sql>
-	
 
 	<select id="read" resultType="OrderList" parameterType="string">
-
 		select b.dietCode, b.orderCode, b.id, a.dietName, b.orderDate,
-		b.price, b.orderItemCode, b.transportNum, c.id, c.name, c.address,
+		b.price,
+		b.orderItemCode, b.transportNum, c.id, c.name, c.address,
 		c.tel
-		from diet a join orderlist b join member c
+		from
+		diet a join orderlist b join member c
 		where a.dietCode=b.dietCode
-		and c.id=b.id
+		and
+		c.id=b.id
 		and orderCode=#{orderCode};
 	</select>
 
 
 	<select id="foodStockList" resultType="FoodMInven">
-		select foodMICode, foodMCode, foodMName, inAmount, inDate, outAmount, uint,
+		select foodMICode, foodMCode, foodMName, inAmount, inDate, outAmount,
+		uint,
 		price, exDate, inAmount-outAmount as stock
 		from foodminven
 		<include refid="foodsearch"></include>
 	</select>
-		<sql id = "foodsearch">
-		<if test = "searchType != null">
-	  		<if test="searchType == 't'.toString()">
-	  			where foodMICode like CONCAT('%',#{keyword},'%')
-	  		</if>
-	  		<if test="searchType == 'c'.toString()">
-	  			where foodMName like CONCAT('%',#{keyword},'%')  
-	  		</if>
-	  	</if>
+	<sql id="foodsearch">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				where foodMICode like CONCAT('%',#{keyword},'%')
+			</if>
+			<if test="searchType == 'c'.toString()">
+				where foodMName like CONCAT('%',#{keyword},'%')
+			</if>
+		</if>
 	</sql>
 
 	<update id="refundupdate">
@@ -76,9 +81,24 @@
 	</update>
 
 	<select id="foodMAmountRead" resultType="FoodMAmountRead">
-		select b.foodMAmount,b.foodMCode,f.foodMName, f.price, f.unit
-		from (select d.sideDcode from orderlist o, dietinfo d where o.ordercode=#{orderCode}
-		and o.dietCode=d.dietCode) a, sidedinfo b,foodmaterial f
-		where a.sideDCode=b.sideDCode and b.foodMCode=f.foodMCode;
+		select
+		b.foodMAmount,b.foodMCode,f.foodMName, f.price, f.unit
+		from (select
+		d.sideDcode from orderlist o, dietinfo d where
+		o.ordercode=#{orderCode}
+		and o.dietCode=d.dietCode) a, sidedinfo
+		b,foodmaterial f
+		where a.sideDCode=b.sideDCode and
+		b.foodMCode=f.foodMCode;
 	</select>
+	<select id="chartList" resultType="ChartList">
+		select diet.dietName, sum(orderList.dietAmount) as sellAmount,
+		sum(orderlist.price) as totalprice
+		from orderlist, diet
+		where orderlist.dietCode = diet.dietCode and orderlist.orderItemCode
+		BETWEEN 3 and 5
+		GROUP by diet.dietName;
+	</select>
+
+
 </mapper>

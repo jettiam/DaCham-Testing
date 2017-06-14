@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.wdb3a.dacham.bean.ChartList;
 import com.wdb3a.dacham.bean.FoodMAmountRead;
 import com.wdb3a.dacham.bean.FoodMInven;
 import com.wdb3a.dacham.bean.OrderList;
@@ -54,10 +55,12 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 	}
 
 	@Override
-	public List<FoodMInven> foodStockList() throws Exception {
+	public List<ChartList> chartList() throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectList(namespace+".chartList");
 	}
+
+	
 
 	
 
