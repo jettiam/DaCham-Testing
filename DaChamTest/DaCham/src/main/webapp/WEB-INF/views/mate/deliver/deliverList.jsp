@@ -18,13 +18,36 @@
 		}
 		else{
 			cbox.checked = input_form.all.checked;
-		}
+		}	
 	}
 	$(document).ready(function(){
 		$("#button").on("click",function(){
-				window.location.href = "deliverMain";
-			});
+			var data = $("#transportNum").val();
+			var orderCode = $("#checkbox").val();
+			
+			if(data != null || data != ""){
+				alert("def"+orderCode);
+				$.ajax({
+					type : "put",	
+					url : "deliverAjax/"+ orderCode,
+					headers : {
+						"Content-Type" : "application/json",
+						"X-HTTP-Method-Override" : "PUT"
+					},
+					dataType : 'text',
+					data : JSON.stringify({
+						"transportNum" : data
+					}),
+					success : function(result){
+						if(result == "SUCCESS"){
+							alert("수정되었습니다.");
+						}
+					}
+				});
+			}
 		});
+		
+	});
 	
 </script>
 </head>
@@ -59,16 +82,20 @@
 					<th>식단 이미지</th>
 					<th>식단명</th>
 					<th>주소</th>
+					<th>운송장번호</th>
+					<th>배송상태</th>
 				</tr>
 				<%int i = 1; %>
 				<c:forEach items = "${list }" var = "b">
 					<tr>
-						<td><input type = "checkbox" name = "chk" value = "<%=i %>"></td>
+						<td><input type = "checkbox" name = "chk" value = "${b.orderCode }" id = "checkbox" ></td>
 						<td>${b.orderCode }</td>
 						<td>${b.id }</td>
 						<td><img src = "deliverDisplayFile?fileName=${b.dietImg }" style= "width: 175px; height: 50px;"></td>
 						<td>${b.dietName }</td>
 						<td>${b.address }</td>
+						<td><input type = "text" id = "transportNum" name = "transportNum"></td>
+						<td>${b.orderItemCode }</td>
 						<%i = i + 1;  %>
 					</tr>
 				</c:forEach>
