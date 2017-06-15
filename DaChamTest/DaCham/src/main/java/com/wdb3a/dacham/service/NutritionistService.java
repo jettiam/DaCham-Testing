@@ -8,6 +8,7 @@ public interface NutritionistService {
 	public List<Nutritionist> listSearch(Nutritionist nutritionist) throws Exception;
 	public List<Nutritionist> materialSearch(Nutritionist nutritionist) throws Exception;
 	public Nutritionist materialView(String sideDCode) throws Exception;
+	public List<Nutritionist> materialAll() throws Exception;
 	public void create(Nutritionist nutritionist) throws Exception;
 	public void createSide(Nutritionist nutritionist) throws Exception;
 	public void createAmount(Nutritionist nutritionist) throws Exception;

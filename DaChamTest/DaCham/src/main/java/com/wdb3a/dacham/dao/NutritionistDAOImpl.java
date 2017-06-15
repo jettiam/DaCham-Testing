@@ -87,6 +87,12 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 		return sqlSession.selectList(namespace +".optionTemplate",nutritionist);
 	}
 
+	@Override
+	public List<Nutritionist> materialAll() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".materialAmount");
+	}
+
 	
 
 }
