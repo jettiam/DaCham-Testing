@@ -24,14 +24,12 @@
                <th>음식명</th>
                <th>주문수</th>
             </tr>
+            <c:forEach items = "${list }" var = "a">
             <tr>
-               <td><a href ="#">연포탕</a></td>
-               <td>16인분</td>
+               <td><a href = "#">${a.sideDName }</a></td>
+               <td>${a.dietAmount }</td>
             </tr>
-         	 <tr>
-               <td><a href ="#">병아리콩 샐러드</a></td>
-               <td>18인분</td>
-            </tr>
+            </c:forEach>
   		</table>
   		</div>
 <div>
@@ -41,17 +39,15 @@
                <th>음식명</th>
                <th>주문수</th>
             </tr>
+             <c:forEach items = "${list2 }" var = "b">
             <tr>
-               <td><a href ="#">감자조림</a></td>
-               <td>16인분</td>
+               <td><a href = "#">${b.sideDName }</a></td>
+               <td>${b.dietAmount }</td>
             </tr>
-         	 <tr>
-               <td><a href ="#">웰빙갈비찜</a></td>
-               <td>18인분</td>
-            </tr>
+            </c:forEach>
   		</table>
          
-  		</table>
+  		
 </div>
 <div>
 <h1>조리완료</h1>        
@@ -60,17 +56,15 @@
                <th>음식명</th>
                <th>주문수</th>
             </tr>
+              <c:forEach items = "${list3 }" var = "c">
             <tr>
-               <td><a href ="#">감자밥</a></td>
-               <td>16인분</td>
+               <td><a href = "#">${c.sideDName }</a></td>
+               <td>${c.dietAmount }</td>
             </tr>
-         	 <tr>
-               <td><a href ="#">김치</a></td>
-               <td>21인분</td>
-            </tr>
+            </c:forEach>
   		
   		</table>
 </div>
-<button id = "button">조리완료</button>
+<button id = "button">마감</button>
 </body>
 </html>

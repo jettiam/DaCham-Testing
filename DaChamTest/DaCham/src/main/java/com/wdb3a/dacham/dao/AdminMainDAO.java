@@ -7,6 +7,7 @@ import org.springframework.aop.ThrowsAdvice;
 import com.wdb3a.dacham.bean.FoodMInven;
 import com.wdb3a.dacham.bean.OrderList;
 import com.wdb3a.dacham.bean.ChartList;
+import com.wdb3a.dacham.bean.ChartPrice;
 import com.wdb3a.dacham.bean.FoodMAmountRead;
 
 public interface AdminMainDAO {
@@ -19,5 +20,6 @@ public interface AdminMainDAO {
 	public void workUpdate(OrderList list) throws Exception;
 	public List<FoodMAmountRead> foodMAmountRead(int orderCode) throws Exception;
 	public List<ChartList> chartList() throws Exception;
+	public List<ChartPrice> chartPrice() throws Exception;
 	
 }

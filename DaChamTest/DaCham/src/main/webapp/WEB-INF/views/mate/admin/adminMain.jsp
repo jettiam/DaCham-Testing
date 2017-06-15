@@ -8,7 +8,8 @@
 <head>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@include file="../admin/upmenu.jsp"%>
@@ -62,15 +63,25 @@
 			<input type="button" value="목록" id="notice">
 		</div>
 	</div>
-
+<!--차트  -->
 	<div>
 		<h2>일자별 통계</h2>
-		일자<input type="date" id="startdate"> ~ <input type="date"
-			id="enddate"> <input type="button" value="오늘" id="today">
-		<input type="button" value="일주일" id="week"> <input
-			type="button" value="한달" id="month"><br>
+		일자<input type="date" id="startdate"> ~ <input type="date" id="enddate"> 
+		   <input type="button" value="오늘" id="today">
+		   <input type="button" value="일주일" id="week"> 
+		   <input type="button" value="한달" id="month"><br>
+		   	<div>
+		   		<input type = "hidden" id = "dietName" name = "dietName">
+				<input type = "hidden" id =  "sellAmount" name = "sellAmount">
+				<input type = "hidden" id = "totalprice" name = "totalprice">
+			</div>
 		<div id="chart_div" style="width: 900px; height: 500px;"></div>
 	</div>
+	
+	
+	
+	
+	
 	<div>
 		<form>
 			<select name="searchType">
@@ -148,30 +159,39 @@
 		'packages' : [ 'corechart' ]
 	});
 	google.charts.setOnLoadCallback(drawVisualization);
-
+	
 	function drawVisualization() {
 		// Some raw data (not necessarily accurate)
+		
 		var data = google.visualization.arrayToDataTable([
-				[ 'Day', 'Bolivia', 'Ecuador', 'Madagascar',
-						'Papua New Guinea', 'Rwanda', 'Average' ],
-				[ '2004/05', 165, 938, 522, 998, 450, 614.6 ],
-				[ '2005/06', 135, 1120, 599, 1268, 288, 682 ],
-				[ '2006/07', 157, 1167, 587, 807, 397, 623 ],
-				[ '2007/08', 139, 1110, 615, 968, 215, 609.4 ],
-				[ '2008/09', 136, 691, 629, 1026, 366, 569.6 ] ]);
+         ['날짜', '판매양', '매출액'],
+         ['${chartPrice[0].orderdate}', { v :Number('${chartPrice[0].dietAmount}')*10000, f:Number('${chartPrice[0].dietAmount}')}, Number('${chartPrice[0].totalprice}')],
+         ['${chartPrice[1].orderdate}', { v :Number('${chartPrice[1].dietAmount}')*10000, f:Number('${chartPrice[1].dietAmount}')}, Number('${chartPrice[1].totalprice}')],
+         ['${chartPrice[2].orderdate}', { v :Number('${chartPrice[2].dietAmount}')*10000, f:Number('${chartPrice[2].dietAmount}')}, Number('${chartPrice[2].totalprice}')],
+         ['${chartPrice[3].orderdate}', { v :Number('${chartPrice[3].dietAmount}')*10000, f:Number('${chartPrice[3].dietAmount}')}, Number('${chartPrice[3].totalprice}')],
+         ['${chartPrice[4].orderdate}', { v :Number('${chartPrice[4].dietAmount}')*10000, f:Number('${chartPrice[4].dietAmount}')}, Number('${chartPrice[4].totalprice}')] 
+        
+         
+         /* ['2005/06',  135, 682],
+         ['2006/07',  157, 623],
+         ['2007/08',  139, 609.4],
+         ['2008/09',  136, 569.6] */ 
+      ]);
+		/* var data = google.visualization.arrayToDataTable([
+		    [ 'State', 'Relevance' ],
+		    [ 'Alabama', { v: 3, f: 'tooltip test text' } ], 
+		    [ 'Arizona', { v: 1, f: 'tooltip test text' } ],
+		]);
+		 */
+		
+	         
+		
+
+		
+		
 		var options = {
-			title : '식단 판매량',
-			vAxis : {
-				title : 'Cups'
-			},
-			hAxis : {
-				title : 'Month'
-			},
 			seriesType : 'bars',
-			series : {
-				5 : {
-					type : 'line'
-				}
+			series : { 1 : {type : 'line'}
 			}
 		};
 
