@@ -87,6 +87,12 @@ public class NutritionistServiceImpl implements NutritionistService {
 		return dao.optionTemplate(nutritionist);
 	}
 
+	@Override
+	public List<Nutritionist> materialAll() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.materialAll();
+	}
+
 	
 
 }
