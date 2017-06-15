@@ -11,6 +11,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.wdb3a.dacham.bean.ChartList;
+import com.wdb3a.dacham.bean.ChartPrice;
 import com.wdb3a.dacham.bean.FoodMAmountRead;
 import com.wdb3a.dacham.bean.FoodMInven;
 import com.wdb3a.dacham.bean.OrderList;
@@ -64,6 +65,12 @@ public class AdminMainServiceImpl implements AdminMainService {
 	public List<ChartList> chartList() throws Exception {
 		// TODO Auto-generated method stub
 		return dao.chartList();
+	}
+
+	@Override
+	public List<ChartPrice> chartPrice() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.chartPrice();
 	}
 
 	

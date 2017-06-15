@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wdb3a.dacham.bean.ChartList;
+import com.wdb3a.dacham.bean.ChartPrice;
 import com.wdb3a.dacham.bean.FoodMAmountRead;
 import com.wdb3a.dacham.bean.FoodMInven;
 import com.wdb3a.dacham.bean.OrderList;
@@ -50,11 +51,12 @@ public class AdminController {
 	
 	
 	@RequestMapping(value="/adminMain", method=RequestMethod.GET)
-	public String getadminMain(Model model, OrderList orderList, ChartList chartList) throws Exception{
+	public String getadminMain(Model model, OrderList orderList) throws Exception{
 		List<OrderList> list=service.orderListAll(orderList);
-		List<ChartList> list1=service.chartList();
+		List<ChartPrice> chartPrice = service.chartPrice();
 		model.addAttribute("list",list);
 		model.addAttribute("orderList",orderList);
+		model.addAttribute("chartPrice", chartPrice);
 		return "mate/admin/adminMain";
 	}
 	

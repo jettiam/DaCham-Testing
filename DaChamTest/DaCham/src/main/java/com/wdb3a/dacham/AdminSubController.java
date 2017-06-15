@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.wdb3a.dacham.bean.ChartList;
 import com.wdb3a.dacham.bean.FoodMAmountRead;
 import com.wdb3a.dacham.bean.OrderList;
 import com.wdb3a.dacham.service.AdminMainService;
@@ -90,6 +91,9 @@ public class AdminSubController {
 	  	}*/
 		return entity;
 	}
+  
+   
+   
 	   
    /*@RequestMapping(value = "/sendMail/auth", method = RequestMethod.POST, produces = "application/json")
    @ResponseBody

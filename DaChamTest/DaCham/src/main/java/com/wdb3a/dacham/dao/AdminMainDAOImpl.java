@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.wdb3a.dacham.bean.ChartList;
+import com.wdb3a.dacham.bean.ChartPrice;
 import com.wdb3a.dacham.bean.FoodMAmountRead;
 import com.wdb3a.dacham.bean.FoodMInven;
 import com.wdb3a.dacham.bean.OrderList;
@@ -58,6 +59,12 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 	public List<ChartList> chartList() throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".chartList");
+	}
+
+	@Override
+	public List<ChartPrice> chartPrice() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".chartprice");
 	}
 
 	

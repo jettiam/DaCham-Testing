@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.wdb3a.dacham.bean.ChartList;
+import com.wdb3a.dacham.bean.ChartPrice;
 import com.wdb3a.dacham.bean.FoodMAmountRead;
 import com.wdb3a.dacham.bean.FoodMInven;
 import com.wdb3a.dacham.bean.OrderList;
@@ -20,4 +21,5 @@ public interface AdminMainService {
 	public void workUpdate(OrderList list) throws Exception;
 	public List<FoodMAmountRead> foodMAmountRead(int orderCode) throws Exception;
 	public List<ChartList> chartList() throws Exception;
+	public List<ChartPrice> chartPrice() throws Exception;
 }

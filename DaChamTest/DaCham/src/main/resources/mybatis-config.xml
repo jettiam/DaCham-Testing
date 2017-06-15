@@ -16,6 +16,7 @@
 		<typeAlias alias="Counselor" type="com.wdb3a.dacham.bean.Counselor"/>
 		<typeAlias alias="Cook" type="com.wdb3a.dacham.bean.Cook"/>
 		<typeAlias alias="ChartList" type="com.wdb3a.dacham.bean.ChartList"/>
+		<typeAlias alias="ChartPrice" type="com.wdb3a.dacham.bean.ChartPrice"/>
 
 
 	</typeAliases>
