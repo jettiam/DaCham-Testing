@@ -17,11 +17,7 @@
 		//이미지를 업로드하면 미리 볼 수 있는 기능
 		function previewImage(targetObj, View_area){
 			var preview = document.getElementById(View_area);
-<<<<<<< HEAD
 			
-=======
->>>>>>> branch 'master' of https://github.com/jettiam/DaCham-Testing.git
-
 			var files  = targetObj.files;
 			for(var i = 0; i<files.length; i++){
 				var file = files[i];

@@ -268,7 +268,9 @@
 					<input type = "number" name = "price" placeholder = "식단 가격 짓기">
 				</div>
 				<div id = "dietImg">
-					<input type = "file" name = "file" placeholder = "식단이미지 올리기">
+					<div id = "View_area">
+					</div>
+					<input type = "file" name = "file" placeholder = "식단이미지 올리기" id = "profile_pt" onchange = "previewImage(this,'View_area')">
 				</div>
 				<div id = "spDietItem">
 					<input type = "radio" name = "spDietItem" value = "0">특별식단
@@ -284,6 +286,40 @@
 		</form>
 	<button id = "regist">등록</button>
 	<button id = "cancle">취소</button>
-	
+	<script>
+	//이미지를 업로드하면 미리 볼 수 있는 기능
+	function previewImage(targetObj, View_area){
+		var preview = document.getElementById(View_area);
+		
+		var files  = targetObj.files;
+		for(var i = 0; i<files.length; i++){
+			var file = files[i];
+			var imageType = /image.*/;
+			if(!file.type.match(imageType)){
+				continue;
+			}
+			var prevImg = document.getElementById("prev_"+View_area);
+			if(prevImg){
+				preview.removeChild(prevImg);
+			}
+			var img = document.createElement("img");
+			img.id = "prev_"+View_area;
+			img.classList.add("obj");
+			img.file = file;
+			img.style.width = '100px';
+			img.style.height = '100px';
+			preview.appendChild(img);
+			if(window.FileReader){
+				var reader = new FileReader();
+				reader.onloadend = (function(almg){
+					return function(e){
+						almg.src = e.target.result;
+					};
+				})(img);
+				reader.readAsDataURL(file);
+			}
+		}
+	}
+	</script>
 </body>
 </html>
