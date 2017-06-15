@@ -52,7 +52,7 @@ text-align: center;
 </style>
 <script>
 $(document).ready(function(){
-	$("#myCart").on("click",function(){
+	$("#myCart").on("click",function(){ //장바구니 버튼 클릭 시 데이터 받아오기
 		var id = $("#customerId").val();
 		$.ajax({
 			url:"customerAjax/myCart",
@@ -66,12 +66,51 @@ $(document).ready(function(){
 			
 			success:function(data){
 				console.log(data);				
-				for(var i=0; data.list.length>i; i++){
-					$('#myCartTableWrap').append(data.list[i].dietName+"<br>"+ data.list[i].dietImg+"<br>"+ data.list[i].orderDate+"<br>"+ data.list[i].price+"<br>"+ data.list[i].dietAmount);
+				
+				//$('#myCartTableWrap').append(data.list[i].dietName+"<br>"+ data.list[i].dietImg+"<br>"+ data.list[i].orderDate+"<br>"+ data.list[i].price+"<br>"+ data.list[i].dietAmount);
+// 					var div=document.querySelector('#cartTable');
+// 					html = '<table>';
+// 					html += '<tr><th><input type="checkbox"></th><th>상품정보</th><th>상품명</th><th>수량</th><th>상품금액</th></tr>';
+// 					for(var i=0; data.list.length>i; i++){
+// 						 html += '<tr><td>' + '<input type="checkbox">' + '</td><td>' + data.list[i].dietImg
+// 		                    + '</td><td> ' + data.list[i].dietName+ '</td><td> ' + data.list[i].dietAmount+ '</td><td> ' + data.list[i].price+ + '</td></tr>';
+						
+// 					}
+// 					 html += '</table>';
+				for(var i = 0; i<data.list.length; i++){ //장바구니의 데이터 테이블로 출력
+				$('#myCartTable').append("<tr><td>"+"<input type='checkbox' name='cartCheck' value='data.list[i].dietCode'>"+"</td><td><img src='displayFile?fileName="+data.list[i].dietImg+"' alt='이미지'></td><td>"+data.list[i].dietName+"</td><td>"+data.list[i].dietAmount+"</td><td>"+data.list[i].price+"원"+"</td></tr>");
+
+
 					
-				}
+			}
 			}
 		});
+	});
+});
+
+//checkbox 설정. 최상위의 체크박스 체크 시 하위 체크박스 전부 선택 혹은 해제시키기
+$(function(){
+	$('#checkAllCart').change(function(){
+		var checkAll = $('#checkAllCart').prop('checked'); //전체 체크박스의 체크여부
+		if(checkAll){ //체크박스가 전부 체크되어 있으면 true,아니면 false
+			$('input[name="cartCheck"]').prop('checked',true);
+		}else{
+			$('input[name="cartCheck"]').prop('checked',false);
+		}
+			});
+	$('input[name="cartCheck"]').change(function(){ //리스트 안의 체크박스의 상태가 변할 때
+		var cartCheck = true;
+		$('input[name="cartCheck"]').each(function(){
+			if(cartCheck){ //그 전 체크박스가 체크되어 있을 때
+				cartCheck = $(this).prop('checked');
+			if(!cartCheck){ //체크되어있지 않을 때
+				$('#checkAllCart').prop('checked',false);
+			}	
+			}
+		});	
+		if(cartCheck) { //리스트의 체크박스가 모두 체크되어 있을 때 checkAllCart 체크 
+			$('#checkAllCart').prop('checked',true);
+		}
 	});
 });
 </script>
@@ -128,19 +167,21 @@ $(document).ready(function(){
 
 <!-- 장바구니 -->
 <div id="myCartTableWrap">
-<table id="myCartTable" border=2>
+<!-- <table id="myCartTable" border=2> -->
+
+<table id="myCartTable" border=1>
 <tr> 
-	<th><input type="checkbox"></th>
-	<th>상품정보</th>
-	<th>상품명</th>
-	<th>수량</th>
-	<th>상품금액</th>
+	<td><input type="checkbox" id="checkAllCart"></td>
+	<td>상품정보</td>
+	<td>상품명</td>
+	<td>수량</td>
+	<td>상품금액</td>
 </tr>
-
-
-
-
 </table>
+
+
+
+<!-- </table> -->
 
 </div>
 <!-- 주문내역 -->

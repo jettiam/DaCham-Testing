@@ -71,4 +71,14 @@ public class CustomerAjaxController {
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		return entity;}
+	/**
+	 * 
+	 * @return 결제 컨트롤러
+	 */
+	@RequestMapping(value="/payment",method=RequestMethod.POST)
+	public ResponseEntity<String> payment(@RequestBody List<Map<String, Object>> list){
+		System.out.println(list.toString());
+		
+		return null;
+	}
 }

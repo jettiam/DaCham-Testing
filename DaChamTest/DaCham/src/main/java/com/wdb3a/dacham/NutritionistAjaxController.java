@@ -40,6 +40,34 @@ public class NutritionistAjaxController {
 		}
 		return entity;
 	}
+	@RequestMapping(value = "/searching/{search}",method = RequestMethod.GET)
+	public ResponseEntity<List<Nutritionist>> getSearch(@PathVariable("search")String search,Nutritionist nutritionist){
+		ResponseEntity<List<Nutritionist>> entity = null;
+		try {
+			nutritionist.setSearch(search);
+			List<Nutritionist> list = service.materialSearch(nutritionist);
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	@RequestMapping(value = "/materialAll",method = RequestMethod.GET)
+	public ResponseEntity<List<Nutritionist>> materialView(){
+		ResponseEntity<List<Nutritionist>> entity = null;
+		try {
+			List<Nutritionist> list = service.materialAll();
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
 	@RequestMapping(value="",method=RequestMethod.POST)
 	public ResponseEntity<String> register(@RequestBody Nutritionist nutritionist){
 		ResponseEntity<String> entity = null;
