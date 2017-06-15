@@ -24,5 +24,17 @@ public class CookDAOImpl implements CookDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".cookList");
 	}
+	public List<Cook> readycook() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".readycook");
+	}
+	public List<Cook> cookingfood() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".cookingfood");
+	}
+	public List<Cook> finishcook() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".finishcook");
+	}
 
 }
