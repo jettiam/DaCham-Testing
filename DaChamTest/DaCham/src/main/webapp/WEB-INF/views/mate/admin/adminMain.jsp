@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <%@ page import="com.wdb3a.dacham.bean.OrderList"%>
 <!DOCTYPE html>
 <html>
@@ -18,7 +19,7 @@
 #read {
 	display: none;
 	width: 300px;
-	background-color: gray;
+	/* background-color: gray; */ 
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -69,13 +70,14 @@
 		일자<input type="date" id="startdate"> ~ <input type="date" id="enddate"> 
 		   <input type="button" value="오늘" id="today">
 		   <input type="button" value="일주일" id="week"> 
-		   <input type="button" value="한달" id="month"><br>
-		   	<div>
+		   <input type="button" value="지난 한달" id="month"><br>
+		   	<div>  
 		   		<input type = "hidden" id = "dietName" name = "dietName">
 				<input type = "hidden" id =  "sellAmount" name = "sellAmount">
 				<input type = "hidden" id = "totalprice" name = "totalprice">
 			</div>
 		<div id="chart_div" style="width: 900px; height: 500px;"></div>
+		<div id="piechart" style="width: 900px; height: 500px;"></div>
 	</div>
 	
 	
@@ -112,11 +114,9 @@
 					<tr>
 						<td>${board.orderCode}&nbsp;&nbsp;&nbsp;</td>
 						<td>${board.id }</td>
-						<%-- <td>${board.dietName}&nbsp;&nbsp;</td> --%>
 						<td><a data-src="${board.orderCode}" class="orderCode">${board.dietName}&nbsp;&nbsp;</a></td>
 						<td><fmt:formatDate pattern="yyyy-MM-dd"
 								value="${board.orderDate}" /></td>
-						<%-- <td>${board.orderDate }&nbsp;&nbsp;</td> --%>
 						<td>${board.price}</td>
 						<td>${board.orderItemName}</td>
 						<td>${board.transportNum}</td>
@@ -127,8 +127,7 @@
 			</table>
 		</div>
 	</div>
-	<div id="detailView"></div>
-	<div name="read" id="read" class="read">
+	<div id="read" class="read">
 		<table width="600" border="1">
 			<tr>
 				<th>고객이름</th>
@@ -150,6 +149,7 @@
 			</tr>
 		</table>
 		<button id="close">닫기</button>
+		</div>
 	</div>
 
 
@@ -158,115 +158,96 @@
 	google.charts.load('current', {
 		'packages' : [ 'corechart' ]
 	});
+	google.charts.setOnLoadCallback(drawChart);
 	google.charts.setOnLoadCallback(drawVisualization);
-	
+	/*combo 그래프  */
 	function drawVisualization() {
-		// Some raw data (not necessarily accurate)
-		
-		var data = google.visualization.arrayToDataTable([
-         ['날짜', '판매양', '매출액'],
-         ['${chartPrice[0].orderdate}', { v :Number('${chartPrice[0].dietAmount}')*10000, f:Number('${chartPrice[0].dietAmount}')}, Number('${chartPrice[0].totalprice}')],
-         ['${chartPrice[1].orderdate}', { v :Number('${chartPrice[1].dietAmount}')*10000, f:Number('${chartPrice[1].dietAmount}')}, Number('${chartPrice[1].totalprice}')],
-         ['${chartPrice[2].orderdate}', { v :Number('${chartPrice[2].dietAmount}')*10000, f:Number('${chartPrice[2].dietAmount}')}, Number('${chartPrice[2].totalprice}')],
-         ['${chartPrice[3].orderdate}', { v :Number('${chartPrice[3].dietAmount}')*10000, f:Number('${chartPrice[3].dietAmount}')}, Number('${chartPrice[3].totalprice}')],
-         ['${chartPrice[4].orderdate}', { v :Number('${chartPrice[4].dietAmount}')*10000, f:Number('${chartPrice[4].dietAmount}')}, Number('${chartPrice[4].totalprice}')] 
-        
-         
-         /* ['2005/06',  135, 682],
-         ['2006/07',  157, 623],
-         ['2007/08',  139, 609.4],
-         ['2008/09',  136, 569.6] */ 
-      ]);
-		/* var data = google.visualization.arrayToDataTable([
-		    [ 'State', 'Relevance' ],
-		    [ 'Alabama', { v: 3, f: 'tooltip test text' } ], 
-		    [ 'Arizona', { v: 1, f: 'tooltip test text' } ],
-		]);
-		 */
-		
-	         
-		
-
-		
-		
-		var options = {
-			seriesType : 'bars',
-			series : { 1 : {type : 'line'}
-			}
-		};
-
-		var chart = new google.visualization.ComboChart(document
-				.getElementById('chart_div'));
-		chart.draw(data, options);
+		$.ajax({
+            url:"adminMain2",
+            success:function(data){ 
+               
+             var data1 = new google.visualization.DataTable();
+             data1.addColumn('string', '날짜'); 
+             data1.addColumn('number', '판매량');
+             data1.addColumn({type: 'number', role: 'tooltip'}); 
+             data1.addColumn('number', '매출액');
+             data1.addRows(data.length);
+                 
+             for(i=0; i<data.length; i++){ 
+             data1.setCell(i, 0, data[i].orderdate);    
+             data1.setCell(i, 1, data[i].dietAmount*10000);  
+             data1.setCell(i, 2, data[i].dietAmount);   
+             data1.setCell(i, 3, data[i].totalprice);
+            }   
+             var options = {
+            		tooltip: {isHtml: true},    
+            		seriesType : 'bars',
+         			series : { 1 : {type : 'line'}
+         			}
+         		};
+       			
+             var chart = new google.visualization.ComboChart(document
+     				.getElementById('chart_div'));
+     		chart.draw(data1, options);
+       	      }
+  
+	 });
 	}
-	/* jQuery.fn.center = function () {
-	this.css("position","absolute");
-	this.css("top", Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) + $(window).scrollTop()) + "px");
-	this.css("left", Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) + $(window).scrollLeft()) + "px");
-	this.css("background-color", "#dddddd"); 
-	return this;
-	} */
+	
+	 function drawChart() {
+		 $.ajax({
+	            url:"adminMain1",
+	            success:function(data){ 
+	              
+	             var data1 = new google.visualization.DataTable();
+	             data1.addColumn('string', '식단명');
+	             data1.addColumn('number', '판매량');
+	             data1.addRows(data.length);
+	             
+	             for(i=0; i<data.length; i++){
+	             data1.setCell(i, 0, data[i].dietName);    
+	             data1.setCell(i, 1, data[i].sellAmount); 
+	            }  
+	             var options = {
+	       	          title: '전체 식단 판매율'   
+	       	        };
+	       			
+	       	        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+	       	        chart.draw(data1, options); 
+	       	      }
+		 });   
+	      }
+	 
 
 	$(".orderCode").on("click", function() {
 		event.preventDefault();
 		var orderCode = $(this).attr("data-src");
 		alert("이건됨");
 		$.ajax({
-			type : "post",
-			url : "adminSub/detailView/" + orderCode,
-			headers : {
-				"Content-Type" : "application/json",
-				"X-HTTP-Method-Override" : "POST"
-			},
-			dataType : "text",
+			type : "post", 
+			url : "adminMain4",
+			data: { 
+				"orderCode" : orderCode,	
+		    },
+		    dataType:"json",
 			success : function(data) {
+				console.log(data); 
+				$("#orderName").append(data[0].name);
+				$("#orderAddRess").append(data[0].address);
+				$("#orderPrice").append(data[0].price);
+				$("#orderDietName").append(data[0].dietName);
+				$("#orderOrderDate").append(data[0].orderDate);
+				$("#orderTel").append(data[0].tel);
 				$("#read").show();
-				var str = data.list.name;
-				alert(str);
-
+				
 			},
 			error : function() {
 				alert("실패");
 			}
 		});
 	});
-	/* function getPageReplyList() {
-		var orderCode = $(".orderCode").attr("data-src");
-		alert(orderCode); 
-	      $.getJSON("adminSub/detailView/"+orderCode, function(data){
-	         var str = "";
-	         $(data.list).each(function(){
-	            alert(this.dietCode);
-	        	 /* str += "<li data-rno='"+this.rno+"' class='replyLI'>"+this.rno+":"+this.replyText+
-	            "<button>변경</button></li>";     
-	         });
-	      });
-	   } */
-	/* function showmap(){ 
-		
-		/* event.preventDefault();
-		var orderCode = $(this).attr("href");
-		alert(orderCode); */
-	/* $.ajax({
-	     type: "get",
-	     url: "adminMain",
-	    
-	     dataType: "text",
-	     data: JSON.stringify({
-	        "replyText":replyText
-	     }),
-	     success: function(reslut) {
-	        if(reslut=="SUCCESS"){
-	           alert("수정되었습니다");
-	           $("#modDiv").hide("slow");
-	           getAllReplies();
-	        }
-	     }
-	  });
-	 */
-	//$("#read").show();
-	//$("#read").center();
-	//}    
+	
 	function getDefaultDate() {// 해당 일 계산
 
 		var now = new Date();
@@ -298,7 +279,7 @@
 		var now = new Date();
 		var enddate = new Date(now.getYear(), now.getMonth(), 0);
 		var day = ("0" + enddate.getDate()).slice(-2);
-		var month = ("0" + (enddate.getMonth() + 1)).slice(-2);
+		var month = ("0" + (enddate.getMonth()+1)).slice(-2);
 		var today = now.getFullYear() + "-" + (month) + "-" + (day);
 		return today;
 	}
@@ -307,19 +288,67 @@
 		var now = new Date();
 
 	}
+	function todayChart(){
+		
+		var startdate = ($("#startdate").val());
+		var enddate = ($("#enddate").val())
+		console.log(startdate);
+		console.log(enddate); 
+		 $.ajax({ 
+			url : "adminMain3",
+			data: JSON.stringify({
+				"startdate" : startdate, 
+				"enddate" : enddate 
+		    }),
+		    headers : {
+					"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "POST"
+			},
+			type : "post",
+			dataType:"json", 
+			success:function(data){
+				var data1 = new google.visualization.DataTable();
+	             data1.addColumn('string', '날짜'); 
+	             data1.addColumn('number', '판매량');
+	             data1.addColumn({type: 'number', role: 'tooltip'}); 
+	             data1.addColumn('number', '매출액');
+	             data1.addRows(data.length);
+	                 
+	             for(i=0; i<data.length; i++){ 
+	             data1.setCell(i, 0, data[i].orderdate);    
+	             data1.setCell(i, 1, data[i].dietAmount*10000);  
+	             data1.setCell(i, 2, data[i].dietAmount);   
+	             data1.setCell(i, 3, data[i].totalprice);
+	            }   
+	             var options = {
+	            		tooltip: {isHtml: true},    
+	            		seriesType : 'bars',
+	         			series : { 1 : {type : 'line'}
+	         			}
+	         		};
+	       			
+	             var chart = new google.visualization.ComboChart(document
+	     				.getElementById('chart_div'));
+	     		chart.draw(data1, options);
+			}
+		 });
+	}
 
 	$(document).ready(function() {
 		$("#today").click(function() {
 			$("#startdate").val(getDefaultDate());
 			$("#enddate").val(getDefaultDate());
+			todayChart();
 		});
 		$("#week").click(function() {
 			$("#startdate").val(getWeek());
 			$("#enddate").val(getDefaultDate());
+			todayChart();
 		});
 		$("#month").click(function() {
 			$("#startdate").val(getStartDate());
 			$("#enddate").val(getEndDate());
+			todayChart();
 		});
 		$("#notice").click(function() {
 			window.location.href = "notice";
@@ -327,6 +356,9 @@
 		$("#close").click(function() {
 			$("#read").css("display", "none");
 		});
+		
 	});
+		
+	
 </script>
 </html>

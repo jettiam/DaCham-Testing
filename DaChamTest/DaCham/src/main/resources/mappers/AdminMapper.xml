@@ -35,7 +35,7 @@
 		</if>
 	</sql>
 
-	<select id="read" resultType="OrderList" parameterType="string">
+	<select id="read" resultType="OrderList">
 		select b.dietCode, b.orderCode, b.id, a.dietName, b.orderDate,
 		b.price,
 		b.orderItemCode, b.transportNum, c.id, c.name, c.address,
@@ -101,7 +101,13 @@
 	<select id="chartprice" resultType="ChartPrice"><!-- 날짜에 대한 매출,판매량  -->
 		select sum(price) as totalprice, orderDate, sum(dietAmount) as dietAmount
 		from orderlist
-		where orderlist.orderItemCode BETWEEN 3 and 5
+		where orderItemCode BETWEEN 3 and 5 and orderDate BETWEEN CURDATE()-7 and CURDATE() 
+		GROUP by orderDate;
+	</select>
+	<select id="chartprice1" resultType="ChartPrice"><!-- 날짜에 대한 매출,판매량  -->
+		select sum(price) as totalprice, orderDate, sum(dietAmount) as dietAmount
+		from orderlist
+		where orderItemCode BETWEEN 3 and 5 and orderDate BETWEEN #{startdate} and #{enddate} 
 		GROUP by orderDate;
 	</select>
 
