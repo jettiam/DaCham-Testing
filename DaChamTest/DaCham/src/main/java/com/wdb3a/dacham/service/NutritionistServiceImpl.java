@@ -92,6 +92,18 @@ public class NutritionistServiceImpl implements NutritionistService {
 		// TODO Auto-generated method stub
 		return dao.materialAll();
 	}
+	//반찬 템플릿의 개수를 구합니다.
+	@Override
+	public int optionTemplateCount(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.optionTemplateCount(nutritionist);
+	}
+
+	@Override
+	public List<Nutritionist> sideAll() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.sideAll();
+	}
 
 	
 
