@@ -232,7 +232,7 @@
 		    },
 		    dataType:"json",
 			success : function(data) {
-				console.log(data); 
+				console.log(data);  
 				$("#orderName").append(data[0].name);
 				$("#orderAddRess").append(data[0].address);
 				$("#orderPrice").append(data[0].price);
