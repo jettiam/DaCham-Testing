@@ -1,13 +1,19 @@
 package com.wdb3a.dacham;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.ServiceConfigurationError;
 
 import javax.inject.Inject;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -92,10 +98,49 @@ public String detailOrder(@RequestParam(value="dietCode") int dietCode, Model mo
  */
 @RequestMapping(value="/doOrder",method=RequestMethod.GET)
 public String doOrder(Customer customer,Model model)throws Exception{
-	//serviceCu.orderRegist(customer);		
+	//serviceCu.orderRegist(customer);
 	System.out.println("오더에 들어감");
 	model.addAttribute("order", customer);
 	return "customer/dietOrder/orderRegister";
+}
+/**
+ * 
+ * @param cartInfo
+ * @param model
+ * @return 장바구니에서 결제로 넘어감
+ * @throws Exception
+ */
+@RequestMapping(value="/cartOrderRegister",method=RequestMethod.POST)
+public String cartOrder(String cartInfo,Model model) throws Exception{
+	System.out.println(cartInfo);
+	List<Customer> cartOrder = new ArrayList<Customer>() ;
+	JSONParser jsonParser = new JSONParser();
+	JSONObject jsonObj = (JSONObject) jsonParser.parse(cartInfo);
+	
+	
+	JSONObject jsonObjTest = (JSONObject) jsonObj.get(1+"");	
+	System.out.println(Integer.parseInt(jsonObjTest.get("price").toString()));
+	
+	System.out.println("커스터머 만듬");
+for(int i=0; i< jsonObj.size();i++){
+		JSONObject jsonObj2 = (JSONObject) jsonObj.get(i+"");
+		System.out.println(i+" 반복문 돔");
+		Customer customer = new Customer();
+		System.out.println(i+" 커스터머 만듬");
+		System.out.println(Integer.parseInt(jsonObj2.get("dietCode").toString()));
+		customer.setDietCode(Integer.parseInt(jsonObj2.get("dietCode").toString()));		
+		customer.setOrderCode(Integer.parseInt(jsonObj2.get("orderCode").toString()));
+		customer.setPrice(Integer.parseInt(jsonObj2.get("price").toString()));
+		customer.setDietAmount(Integer.parseInt(jsonObj2.get("dietAmount").toString()));
+		customer.setDietImg(jsonObj2.get("dietImg").toString());
+		customer.setDietName(jsonObj2.get("dietName").toString());
+		System.out.println("커스터머에 넣기전");
+		cartOrder.add(customer);
+		System.out.println("커스터머에 넣음");
+	}
+	model.addAttribute("cartOrder",cartOrder);
+	
+	return "customer/dietOrder/orderRegister";	
 }
 /**
  * 

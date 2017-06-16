@@ -56,6 +56,10 @@
 #myOrderList {
 	display: none;
 }
+.myPageImg{
+	width: 160px;
+	height: 120px;
+}
 </style>
 <script>
 $(document).ready(function(){
@@ -90,7 +94,7 @@ $(document).ready(function(){
 			success:function(data){
 				console.log(data);
 				for(var i = 0; i<data.list.length; i++){ //장바구니의 데이터 테이블로 출력
-				$('#myCartTable').append("<tr><td>"+"<input type='checkbox' name='cartCheck' value='data.list[i].dietCode'>"+"</td><td><img src='displayFile?fileName="+data.list[i].dietImg+"' alt='이미지'></td><td>"+data.list[i].dietName+"</td><td>"+data.list[i].dietAmount+"</td><td>"+data.list[i].price+"원"+"</td></tr>");
+					$('#myCartTable').append("<tr class='addTr'><td>"+"<input type='checkbox' name='cartCheck' value='"+data.list[i].dietCode+"' data-orderCode='"+data.list[i].orderCode+"'>"+"</td><td><img class='myPageImg' data-img="+data.list[i].dietImg+" src='displayFile?fileName="+data.list[i].dietImg+"' alt='이미지'></td><td class='dietName'>"+data.list[i].dietName+"</td><td class='dietAmount'>"+data.list[i].dietAmount+"</td><td class='price'><span>"+data.list[i].price+"</span>원"+"</td></tr>");
 			}
 			}
 		});
@@ -129,6 +133,7 @@ $(document).ready(function(){
 	        break;
 	    case "2":
 			var id = $("#customerId").val();
+			$(".addTr").remove();
 			$.ajax({
 				url:"customerAjax/myCart",
 				headers : {
@@ -142,7 +147,7 @@ $(document).ready(function(){
 				success:function(data){
 					console.log(data);
 					for(var i = 0; i<data.list.length; i++){ //장바구니의 데이터 테이블로 출력
-					$('#myCartTable').append("<tr><td>"+"<input type='checkbox' name='cartCheck' value='data.list[i].dietCode'>"+"</td><td><img src='displayFile?fileName="+data.list[i].dietImg+"' alt='이미지'></td><td>"+data.list[i].dietName+"</td><td>"+data.list[i].dietAmount+"</td><td>"+data.list[i].price+"원"+"</td></tr>");
+					$('#myCartTable').append("<tr class='addTr'><td>"+"<input type='checkbox' name='cartCheck' value='"+data.list[i].dietCode+"' data-orderCode='"+data.list[i].orderCode+"'>"+"</td><td><img class='myPageImg' data-img="+data.list[i].dietImg+" src='displayFile?fileName="+data.list[i].dietImg+"' alt='이미지'></td><td class='dietName'>"+data.list[i].dietName+"</td><td class='dietAmount'>"+data.list[i].dietAmount+"</td><td class='price'><span>"+data.list[i].price+"</span>원"+"</td></tr>");
 				}
 				}
 			});
@@ -163,11 +168,8 @@ $(document).ready(function(){
 			$('#myCartTableWrap').hide();    	
 			$('#myOrderListTableWrap').hide();
 		}
-	});
-	
-	$("#myCart").on("click",function(){ //장바구니 버튼 클릭 시 데이터 받아오기
+	});	
 
-	});
 	//checkbox 설정. 최상위의 체크박스 체크 시 하위 체크박스 전부 선택 혹은 해제시키기
 	$('#checkAllCart').change(function(){
 		var checkAll = $('#checkAllCart').prop('checked'); //전체 체크박스의 체크여부
@@ -190,6 +192,48 @@ $(document).ready(function(){
 		if(cartCheck) { //리스트의 체크박스가 모두 체크되어 있을 때 checkAllCart 체크 
 			$('#checkAllCart').prop('checked',true);
 		}
+	});
+	
+	//장바구니 주문하기
+	$("#cartOrder").on("click",function(){		
+		var orderCode = $('.addTr:eq(0) input').attr("data-orderCode");
+		var dietCode = $('.addTr:eq(0) input').val();
+		var dietAmount = $('.addTr:eq(0) .dietAmount').text();
+		var price = $('.addTr:eq(0) .price>span').text();
+		console.log("주문번호:"+orderCode+" 식단코드:"+dietCode+" 양:"+dietAmount+" 가격:"+price);
+		
+		var cartOrderInfo = {};
+		var y=0;
+		for(var i=0; i<$(".addTr").length;i++){
+			if($('.addTr:eq('+i+') input').prop('checked')){
+				var orderCode = $('.addTr:eq('+i+') input').attr("data-orderCode");
+				var dietCode = $('.addTr:eq('+i+') input').val();
+				var dietAmount = $('.addTr:eq('+i+') .dietAmount').text();
+				var price = $('.addTr:eq('+i+') .price>span').text();
+				var dietImg=$('.addTr:eq('+i+') .myPageImg').attr("data-img");
+				var dietName=$('.addTr:eq('+i+') .dietName').text();
+				var jsonData ={					
+						"orderCode":orderCode,
+						"dietCode":dietCode,
+						"dietAmount":dietAmount,
+						"price":price,
+						"dietImg":dietImg,
+						"dietName":dietName
+				}				
+				cartOrderInfo[y]=jsonData;
+				y++;
+			}
+		}
+		
+/* 		var josnText = JSON.stringify(cartOrderInfo);
+		var jsonData ={
+				"orderInfo":josnText
+		}
+		console.log(JSON.stringify(jsonData));
+		*/
+		alert(JSON.stringify(cartOrderInfo));
+		$("#cartInfo").val(JSON.stringify(cartOrderInfo));
+		$("#cartForm").submit();
 	});
 });
 
@@ -289,6 +333,7 @@ $(document).ready(function(){
 				</tr>
 			</table>
 			<!-- </table> -->
+			<button id="cartOrder">주문하기</button>
 		</div>
 		<!-- 주문내역 -->
 		<div id="myOrderListTableWrap">주문내역</div>
@@ -344,6 +389,8 @@ var myChart = new Chart(ctx, {
 </script>
 
 
-
+<form id="cartForm" action="cartOrderRegister" method="post">
+<input type="hidden" name="cartInfo" id="cartInfo">
+</form>
 </body>
 </html>

@@ -56,6 +56,11 @@ public class CustomerAjaxController {
 		}
 		return entity;		
 	}
+	/**
+	 * 
+	 * @param cu
+	 * @return 장바구니로 이동
+	 */
 	@RequestMapping(value="myCart",method=RequestMethod.POST)
 	public ResponseEntity<Map<String, Object>> getMyCart(@RequestBody Customer cu){
 		
@@ -72,6 +77,8 @@ public class CustomerAjaxController {
 		}
 		return entity;
 		}
+	
+	
 	/**
 	 * 
 	 * @return 결제 컨트롤러
