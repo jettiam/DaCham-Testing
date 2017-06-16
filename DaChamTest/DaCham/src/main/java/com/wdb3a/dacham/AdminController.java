@@ -53,12 +53,44 @@ public class AdminController {
 	@RequestMapping(value="/adminMain", method=RequestMethod.GET)
 	public String getadminMain(Model model, OrderList orderList) throws Exception{
 		List<OrderList> list=service.orderListAll(orderList);
-		List<ChartPrice> chartPrice = service.chartPrice();
 		model.addAttribute("list",list);
 		model.addAttribute("orderList",orderList);
-		model.addAttribute("chartPrice", chartPrice);
 		return "mate/admin/adminMain";
 	}
+	//도넛차트 컨트롤러
+	@RequestMapping(value="/adminMain1", method=RequestMethod.GET)
+	@ResponseBody
+	public List<ChartList> getadminMain1(Model model) throws Exception{
+		List<ChartList> chartList = service.chartList(); 
+		model.addAttribute("chartList", chartList);
+		return chartList;
+	}
+	//막대그래프 컨트롤러{디폴트}
+	@RequestMapping(value="/adminMain2", method=RequestMethod.GET)
+	@ResponseBody
+	public List<ChartPrice> getadminMain2(Model model) throws Exception{
+		List<ChartPrice> chartPrice = service.chartPrice(); 
+		model.addAttribute("chartPrice", chartPrice);
+		return chartPrice;
+	}
+	//막대그래프 버튼클릭시
+	@RequestMapping(value="/adminMain3", method=RequestMethod.POST)
+	@ResponseBody
+	public List<ChartPrice> getadminMain3(Model model, @RequestBody ChartPrice dates) throws Exception{
+		System.out.println(dates.getStartdate());
+		List<ChartPrice> chartPrice = service.chartPrice1(dates);
+		model.addAttribute("chartPrice", chartPrice);
+		return chartPrice;
+	}
+	//디테일뷰
+	@RequestMapping(value="/adminMain4", method=RequestMethod.POST)
+	@ResponseBody
+	public List<OrderList> getadminMain4(@RequestParam(value="orderCode") String orderCode) throws Exception{
+		System.out.println(orderCode);
+		List<OrderList> orderList = service.datailview(orderCode);
+		return orderList;
+	}
+	
 	
 	
 	/* @RequestMapping(value="/adminRead", method=RequestMethod.GET)

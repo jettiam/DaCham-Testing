@@ -22,4 +22,5 @@ public interface AdminMainService {
 	public List<FoodMAmountRead> foodMAmountRead(int orderCode) throws Exception;
 	public List<ChartList> chartList() throws Exception;
 	public List<ChartPrice> chartPrice() throws Exception;
+	public List<ChartPrice> chartPrice1(ChartPrice dates) throws Exception;
 }
