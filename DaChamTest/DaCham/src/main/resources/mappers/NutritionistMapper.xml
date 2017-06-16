@@ -3,12 +3,20 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wdb3a.NutritionistMapper">
+	<!-- 반찬 목록을 검색합니다. -->
 	<select id = "listSearch" resultType = "com.wdb3a.dacham.bean.Nutritionist">	
 		select a.sideDName, b.foodGName, c.cookMName , a.sideDCode, a.sideDImg
 		from sideDish a join foodGroup b join cookMethod c
 		where a.foodGCode = b.foodGCode
 		and a.cookMCode = c.cookMCode
 		and a.sideDName like CONCAT('%',#{search},'%') 
+	</select>
+	<!-- 반찬 전체를 조회합니다(with 식품군, 조리방법) -->
+	<select id = "sideAll" resultType = "com.wdb3a.dacham.bean.Nutritionist">
+		select a.sideDName, b.foodGName, c.cookMName , a.sideDCode, a.sideDImg
+		from sideDish a join foodGroup b join cookMethod c
+		where a.foodGCode = b.foodGCode
+		and a.cookMCode = c.cookMCode
 	</select>
 	<select id = "materialSearch" resultType = "com.wdb3a.dacham.bean.Nutritionist">
 		select *
@@ -41,20 +49,27 @@
 		insert into dietinfo(dietCode, sideDCode)
 		values ((select MAX(dietCode) from diet),#{sideDCode})
 	</insert>
+	<!-- 특정 반찬에 대한 영양 정보 -->
 	<select id="showKcal" resultType = "com.wdb3a.dacham.bean.Nutritionist">
-		select a.sideDCode,a.foodMCode, a.foodMAmount, sum(b.kcal) as kcal, c.sideDName
-		from sidedinfo a join foodmaterial b join sidedish c
-		where a.foodMCode = b.foodMCode
-		and a.sideDCode = c.sideDCode
-		group by a.sideDCode
-		having a.sideDCode = #{sideDCode}
+		select f.foodMName, a.sideDName, sum(f.kcal*a.cu) kcal, f.carbohydrate*a.cu carbohydrate, f.protein*a.cu protein, f.fat*cu fat, f.na*cu na
+		from foodmaterial f,(select s.sideDCode, s.sideDImg,s.sideDName,i.foodMAmount/100 as cu,i.foodMCode
+		from sidedish s,sidedinfo i where s.sideDCode=i.sideDCode and s.sideDCode=#{sideDCode}) a
+		where f.foodMCode=a.foodMCode
+		group by a.sideDName;
 	</select>
 	<select id = "optionTemplate" resultType = "com.wdb3a.dacham.bean.Nutritionist">
 		select s.sideDCode,s.sideDName,s.sideDImg
 		from sidedish s,(select i.sideDcode
 		from diet d, dietInfo i
-		where d.dietCode=1 and d.dietCode=i.dietCode) b
+		where d.dietCode=#{diseaseCode} and d.dietCode=i.dietCode) b
 		where s.sideDcode = b.sideDCode;
-		
+	</select>
+	<!-- 	반찬 템플릿의 개수를 구합니다. -->
+	<select id = "optionTemplateCount" resultType = "Integer">
+		select count(s.sideDCode)
+		from sidedish s,(select i.sideDcode
+		from diet d, dietInfo i
+		where d.dietCode=#{diseaseCode} and d.dietCode=i.dietCode) b
+		where s.sideDcode = b.sideDCode;
 	</select>
 </mapper>

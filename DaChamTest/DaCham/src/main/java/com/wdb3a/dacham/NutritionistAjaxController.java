@@ -116,8 +116,8 @@ public class NutritionistAjaxController {
 		}
 		return entity;
 	}
-	@RequestMapping(value = "/template/{diseaseCode}/{judgement}",method = RequestMethod.GET)
-	public ResponseEntity<List<Nutritionist>> optionTemplate(@PathVariable("diseaseCode")int diseaseCode, @PathVariable("judgement")String judgement, Nutritionist nutritionist){
+	@RequestMapping(value = "/template/{diseaseCode}",method = RequestMethod.GET)
+	public ResponseEntity<List<Nutritionist>> optionTemplate(@PathVariable("diseaseCode")int diseaseCode, Nutritionist nutritionist){
 		System.out.println("1분");
 		ResponseEntity<List<Nutritionist>> entity = null;
 		
@@ -128,13 +128,56 @@ public class NutritionistAjaxController {
 			entity = new ResponseEntity<>(list, HttpStatus.OK);
 			System.out.println(entity);
 			System.out.println("ok"+nutritionist.getDiseaseCode());
-			System.out.println("ok"+nutritionist.getJudgement());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		
+		return entity;
+	}
+	//반찬 템플릿의 개수를 구합니다.
+	@RequestMapping(value = "/templateCount/{diseaseCode}",method = RequestMethod.GET)
+	public ResponseEntity<Integer> optionTemplateCount(@PathVariable("diseaseCode")int diseaseCode, Nutritionist nutritionist){
+		ResponseEntity<Integer> entity = null;
+		try {
+			int count = service.optionTemplateCount(nutritionist);
+			entity = new ResponseEntity<>(count,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	//반찬 목록을 검색합니다.
+	@RequestMapping(value = "/listSearch/{search}",method = RequestMethod.GET)
+	public ResponseEntity<List<Nutritionist>> listSearch(@PathVariable("search")String search, Nutritionist nutritionist){
+		ResponseEntity<List<Nutritionist>> entity = null;
+		try {
+			nutritionist.setSearch(search);
+			List<Nutritionist> list = service.listSearch(nutritionist);
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	
+	//반찬 목록을 조회합니다.
+	@RequestMapping(value = "/sideAll",method = RequestMethod.GET)
+	public ResponseEntity<List<Nutritionist>> sideAll(){
+		 ResponseEntity<List<Nutritionist>> entity = null;
+		 try {
+			List<Nutritionist> list = service.sideAll();
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 		return entity;
 	}
 }

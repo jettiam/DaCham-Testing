@@ -10,7 +10,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
 	$(document).ready(function(){
+		sideAll();        
 		var v = 0;
+		$("#sideAll").on("click",function(){
+			sideAll();
+		});
 		$("#cancle").click(function(){
 			if(window.confirm("정말로 취소하시겠습니까?")){
 				window.location.href = "diet";	
@@ -23,7 +27,7 @@
 			localStorage['count'] = 0;   
 		}
 		
-		$(".nameClick").on("click",function(){
+		$(document.body).on("click",".nameClick",function(){
 			event.preventDefault();
 						
 			var count = parseInt(localStorage['count']);
@@ -57,7 +61,7 @@
 			cntChange(v);
 		});
 		
-		$(".nameClick").on("mouseover",function(){
+		$(document.body).on("mouseover",".nameClick",function(){
 			var sideDCode = $(this).attr('data-code');
 			console.log("이것은"+sideDCode);
 			$.getJSON("nutriAjax/showKcal/"+sideDCode,function(data){
@@ -71,24 +75,23 @@
 			event.preventDefault();
 			      
 			var diseaseCode = $(this).attr("data-code");
-			var judgement = $(this).attr("data-judgement");
-			
+	
 			
 			
 			localStorage.clear();
 			
-			console.log("판단:"+judgement);
-			$.getJSON("nutriAjax/template/"+diseaseCode+"/"+judgement, function(data){
+		
+			$.getJSON("nutriAjax/template/"+diseaseCode, function(data){
 				console.log(data);
 				var str = "";
 				$(data).each(function(){
 					str += "<img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width: 75px; height: 25px;'>" + "<input type = 'hidden' name = 'sideDCode' value = '"+this.sideDCode+"'>";
 				});
-				var v = 5;
-				$("#cnt").val(v);
 				$(".material").html(str);
 			});
-			
+			$.getJSON("nutriAjax/templateCount/"+diseaseCode,function(data){
+				$("#cnt").val(data);
+			});
 		});
 		
 		$(document.body).on("click","#reset",function(){
@@ -132,6 +135,36 @@
 			$("#registForm").attr("action","diet");
 			$("#registForm").submit();
 		});
+		
+		$(".templateErase").on("click",function(){
+			event.preventDefault();
+			
+			$(".material img").remove();
+			$(".material input").remove();
+		});
+		
+		$("#search").on("click",function(){
+			$(".searchResult").remove();
+			var search = $("#keyword").val(); 
+			$.getJSON("nutriAjax/listSearch/"+search,function(data){
+				var str = "";
+				$(data).each(function(){
+					str += "<tr class = 'searchResult'><td><a class = 'nameClick' data-img = '"+this.sideDImg+"' data-code = '"+this.sideDCode+"'>"+this.sideDName+"</a></td>"+"<td>"+this.foodGName+"</td>"+"<td>"+this.cookMName+"</td></tr>"
+				});
+				$(".searchTable").append(str);
+			});
+		});
+		
+		function sideAll(){
+			$(".searchResult").remove();
+			$.getJSON("nutriAjax/sideAll",function(data){
+				var str = "";
+				$(data).each(function(){
+					str += "<tr class = 'searchResult'><td><a class = 'nameClick' data-img = '"+this.sideDImg+"' data-code = '"+this.sideDCode+"'>"+this.sideDName+"</a></td>"+"<td>"+this.foodGName+"</td>"+"<td>"+this.cookMName+"</td></tr>"
+				});
+				$(".searchTable").append(str);
+			});
+		}
 	});
 	
 </script>
@@ -140,6 +173,7 @@
 <style>
  .box1 {
   float:left;  }
+  
  .box2 {
   display:inline-block;  margin-left:10px;}
   .div1 {
@@ -163,10 +197,7 @@
 </style>
 </head>
 <body>
-	<form name = "input_form" id = "searchForm">
 		<div class = "div1">
-			
-			
 			<div class = "box2">
 				<table>
 					<tr>
@@ -181,28 +212,22 @@
 			</div>
 			<br><br><br><br><br><br>
 			<div>
-				<input type = "text" name = "search">
-				<button id = "search">검색</button><br>
-				<table border = "1">
+				<input type = "text" name = "search" id = "keyword" placeholder = "반찬 검색란">
+				<button id = "search">검색</button>
+				<button id=  "sideAll">전체목록</button><br>
+				<table border = "1" class = "searchTable">
 					<tr>
 						<th>반찬명</th>
 						<th>식품군</th>
 						<th>조리방법</th>
 					</tr>
-					
-					<c:forEach items = "${list }" var = "b">
-						
-						<tr>
-							<td><a class = "nameClick" data-img = "${b.sideDImg }" data-code = "${b.sideDCode }">${b.sideDName }</a></td>
-							<td>${b.foodGName }</td>
-							<td>${b.cookMName }</td>
+						<tr class = "searchResult">
+							
 						</tr>
 						
-					</c:forEach>
 				</table>
 			</div>
 		</div>
-		</form>
 		<form id = "registForm" enctype = "multipart/form-data">
 			<div class = "box1">
 				<input type = "radio" name = "wizardCode" value = "1"> 고위험군 당뇨병<br>
@@ -210,7 +235,6 @@
 				<input type = "radio" name = "wizardCode" value = "3"> 주의 신부전증
 			</div>             
 			<div> 
-				<button id = 'reset'>반찬초기화</button><br>
 				<h3>선택한 반찬</h3>
 				<div class = "material">
 					
@@ -223,8 +247,9 @@
 				<hr align = "left" width = "40%">          
 				<div class = "template">
 					질환별 식단 목록<br>
-					- <a data-code = "3" data-judgement = "고위험">당뇨병</a><br>
-					- <a>고지혈증</a>
+					- <a data-code = "1">당뇨병</a><br>
+					- <a data-code = "4">신부전증</a><br>     
+					- <a class = "templateErase">템플릿 초기화</a>
 				</div>
 				<br><br><br>
 				<div id = "test">
@@ -243,7 +268,9 @@
 					<input type = "number" name = "price" placeholder = "식단 가격 짓기">
 				</div>
 				<div id = "dietImg">
-					<input type = "file" name = "file" placeholder = "식단이미지 올리기">
+					<div id = "View_area">
+					</div>
+					<input type = "file" name = "file" placeholder = "식단이미지 올리기" id = "profile_pt" onchange = "previewImage(this,'View_area')">
 				</div>
 				<div id = "spDietItem">
 					<input type = "radio" name = "spDietItem" value = "0">특별식단
@@ -259,6 +286,40 @@
 		</form>
 	<button id = "regist">등록</button>
 	<button id = "cancle">취소</button>
-	
+	<script>
+	//이미지를 업로드하면 미리 볼 수 있는 기능
+	function previewImage(targetObj, View_area){
+		var preview = document.getElementById(View_area);
+		
+		var files  = targetObj.files;
+		for(var i = 0; i<files.length; i++){
+			var file = files[i];
+			var imageType = /image.*/;
+			if(!file.type.match(imageType)){
+				continue;
+			}
+			var prevImg = document.getElementById("prev_"+View_area);
+			if(prevImg){
+				preview.removeChild(prevImg);
+			}
+			var img = document.createElement("img");
+			img.id = "prev_"+View_area;
+			img.classList.add("obj");
+			img.file = file;
+			img.style.width = '100px';
+			img.style.height = '100px';
+			preview.appendChild(img);
+			if(window.FileReader){
+				var reader = new FileReader();
+				reader.onloadend = (function(almg){
+					return function(e){
+						almg.src = e.target.result;
+					};
+				})(img);
+				reader.readAsDataURL(file);
+			}
+		}
+	}
+	</script>
 </body>
 </html>

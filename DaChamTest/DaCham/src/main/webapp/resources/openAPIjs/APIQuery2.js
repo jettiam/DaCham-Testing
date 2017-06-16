@@ -15,7 +15,7 @@ function openAPI(){
 		var A = ($("#protein").val())/100;
 		var B = ($("#carbohydrate").val())/100;
 		var C = ($("#fat").val())/100;
-		var D = ($("#na").val())/100;
+		var D = ($("#na").val())/100000;
 		var E = ($("#fe").val())/100;
 		//Data
 		var d = [

@@ -29,17 +29,38 @@
 				var data = new Array();
 				var dataObj = new Object();
 				var length = $(".dietAmount").length;
-				//for() 17-06-14 내일여기 작업!!
-					
-				/* $.ajax({
+				console.log($(".dietAmount:eq(0)").text());
+				console.log($(".dietCode:eq(0)").attr("data-dietCode"));
+				console.log($(".dietPrice:eq(0)>span").text());
+				var orderInfo = new Array();
+				var orderInfoJSON = new Object();
+				for(var i=0; i<length;i++){					
+					var jsonVal ={
+							'dietCode':$(".dietCode:eq("+i+")").attr("data-dietCode"),
+							'dietAmount':$(".dietAmount:eq("+i+")>span").text(),
+							'dietPrice':$(".dietPrice:eq("+i+")>span").text(),
+							'id':$("#customerId").val()
+					}
+					orderInfo[i]=jsonVal;
+				}
+				console.log(orderInfo);
+				
+				$.ajax({
 					url:"customerAjax/payment",
-					data:,
-					type:"post",
-					data-type:"json",
+					data:orderInfoJSON,
+					headers : {
+			               "Content-Type" : "application/json",
+			               "X-HTTP-Method-Override" : "POST"
+			            },
+			        dataType : "json",
+					data:JSON.stringify(orderInfo),
+					type:"POST",
 					success:function(data){
 						
+							window.alert("성공");
+						
 					}
-				}); */
+				});
 			}
 		});
 	});
@@ -50,7 +71,7 @@
 	<div class="orderRegistWrap">
 		<div class="row">
 			<div class="block-center text-center">주문결제</div>
-			<div class="row col-sm-6">
+			<div class="row col-sm-6 leftArea">
 				<!--좌측 이 안에 배송지, 결제정보 저장 -->
 				<div>배송지 입력</div>
 				<div>결제수단 선택</div>
@@ -62,7 +83,7 @@
 			</div>
 			
 			
-				<div class="row col-sm-6"><!--우측 주문내역, 결제정보 출력및결제 -->
+				<div class="row col-sm-6 rightArea"><!--우측 주문내역, 결제정보 출력및결제 -->
 				<c:if test="${order.detailOrder == true}">
 				<!-- detaileOrder에서 넘어온 경우 사용 -->
 				<div class="row"> <!-- 주문내역 row -->
@@ -71,16 +92,16 @@
 							src="displayFile?fileName=${order.dietImg}">
 					</div>
 					<div class="col-sm-3 text-center">
-						<div class="block-center" data-dietCode0="${order.dietCode}">식단명</div>
+						<div class="block-center dietCode" data-dietCode="${order.dietCode}">식단명</div>
 						<div >${order.dietName}</div>
 					</div>
 					<div class="col-sm-3 text-center">
 						<div>주문수량</div>
-						<div class="dietAmount">${order.dietAmount }개</div>
+						<div class="dietAmount"><span>${order.dietAmount}</span>개</div>						
 					</div>
 					<div class="col-sm-3 text-center">
 						<div>가격</div>
-						<div class="dietPrice">${order.price}원</div>
+						<div class="dietPrice"><span>${order.price}</span>원</div>
 					</div>
 					</div>
 					</c:if>
@@ -98,11 +119,11 @@
 		</div>
 	</div>
 	<form id="paymentForm" method="post">
-		<input id="setDietCode" type="hidden" name="dietCode"> <input
-			id="setPrice" type="hidden" name="price"> <input
-			id="setDietAmount" type="hidden" name="dietAmount"> <input
-			id="setPaymentItem" type="hidden" name="paymentItemCode"> <input
-			id="customerId" type="hidden" name="id" value="${order.id }">
+		<input id="setDietCode" type="hidden" name="dietCode">
+		<input id="setPrice" type="hidden" name="price">
+		<input id="setDietAmount" type="hidden" name="dietAmount">
+		<input id="setPaymentItem" type="hidden" name="paymentItemCode"> 
+		<input id="customerId" type="hidden" name="id" value="${order.id }">
 	</form>
 </body>
 </html>

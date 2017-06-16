@@ -70,15 +70,22 @@ public class CustomerAjaxController {
 			e.printStackTrace();
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		return entity;}
+		return entity;
+		}
 	/**
 	 * 
 	 * @return 결제 컨트롤러
 	 */
 	@RequestMapping(value="/payment",method=RequestMethod.POST)
-	public ResponseEntity<String> payment(@RequestBody List<Map<String, Object>> list){
-		System.out.println(list.toString());
-		
-		return null;
+	public ResponseEntity<String> payment(@RequestBody List<Customer> list){//여기부터
+		System.out.println(list.size());
+		ResponseEntity<String> entity = null;
+		try {			
+			entity = new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
+		}		
+		return entity;
 	}
 }

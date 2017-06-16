@@ -25,7 +25,7 @@ public class UploadFileUtils {
 			
 		int extIdx = originalName.lastIndexOf(".");
 		String nameWithoutExtension = originalName.substring(0,extIdx);
-		String savedName = nameWithoutExtension;
+		String savedName = nameWithoutExtension+str;
 		savedName += originalName.substring(extIdx);
 		
 		
