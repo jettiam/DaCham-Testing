@@ -19,6 +19,11 @@ private CustomerDAO dao;
 		return dao.dietList(diseaseCode);
 	}
 	@Override
+
+	public List<Customer> cartList(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.cartList(id);}
+
 	public List<Customer> detailOrder(int dietCode) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.detailOrder(dietCode);
@@ -27,10 +32,16 @@ private CustomerDAO dao;
 	public List<Customer> sideDDetail(String foodGCode) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.sideDDetail(foodGCode);
+
 	}
 	@Override
 	public void orderRegist(Customer customer) throws Exception {
 		dao.orderRegist(customer);
+		
+	}
+	@Override
+	public void cartRegist(Customer customer) throws Exception {
+		dao.cartRegist(customer);
 		
 	}
 

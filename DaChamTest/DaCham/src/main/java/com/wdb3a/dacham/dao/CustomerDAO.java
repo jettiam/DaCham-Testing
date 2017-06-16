@@ -11,6 +11,14 @@ public interface CustomerDAO {
 	public List<Customer> detailOrder(int dietCode) throws Exception;
 
 	public List<Customer> sideDDetail(String foodGCode) throws Exception;
+
+
+	public List<Customer> cartList(String id) throws Exception;
+
+
 	
 	public void orderRegist(Customer customer) throws Exception;
+	
+	public void cartRegist(Customer customer) throws Exception;
+
 }

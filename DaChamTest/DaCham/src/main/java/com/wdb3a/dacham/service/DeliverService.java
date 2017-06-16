@@ -11,4 +11,5 @@ public interface DeliverService {
 	public List<Nutritionist> listMaterial() throws Exception;
 	public void createDeliver(Deliver deliver) throws Exception;
 	public List<Deliver> showDeliver(Deliver deliver) throws Exception;
+	public void transportNum(OrderList orderList) throws Exception;
 }

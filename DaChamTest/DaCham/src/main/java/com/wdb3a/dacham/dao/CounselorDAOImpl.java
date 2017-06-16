@@ -37,5 +37,14 @@ public class CounselorDAOImpl implements CounselorDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".showCounselor",counselor);
 	}
+	public List<Counselor> counselorseList2(Counselor counselor) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".counselorseList2",counselor);
+	}
 
+	@Override
+	public Counselor viewCounsel(int counselCode) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".viewCounsel",counselCode);
+	}
 }

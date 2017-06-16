@@ -21,7 +21,7 @@ private String sideDName;
 private String sideDImg;
 private String foodGCode;
 private String foodGName;
-private int dietAmout;
+private boolean detailOrder;
 private double kcal;
 private double carbohydrate;
 private double protein;
@@ -142,12 +142,7 @@ public String getFoodGCode() {
 public void setFoodGCode(String foodGCode) {
 	this.foodGCode = foodGCode;
 }
-public int getDietAmout() {
-	return dietAmout;
-}
-public void setDietAmout(int dietAmout) {
-	this.dietAmout = dietAmout;
-}
+
 public String getFoodGName() {
 	return foodGName;
 }
@@ -183,6 +178,12 @@ public double getNa() {
 }
 public void setNa(double na) {
 	this.na = na;
+}
+public boolean isDetailOrder() {
+	return detailOrder;
+}
+public void setDetailOrder(boolean detailOrder) {
+	this.detailOrder = detailOrder;
 }
 
 

@@ -13,7 +13,41 @@
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src = "../../../dacham/resources/openAPIjs/radarchart.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
+<script>
+		//이미지를 업로드하면 미리 볼 수 있는 기능
+		function previewImage(targetObj, View_area){
+			var preview = document.getElementById(View_area);
+			
+			var files  = targetObj.files;
+			for(var i = 0; i<files.length; i++){
+				var file = files[i];
+				var imageType = /image.*/;
+				if(!file.type.match(imageType)){
+					continue;
+				}
+				var prevImg = document.getElementById("prev_"+View_area);
+				if(prevImg){
+					preview.removeChild(prevImg);
+				}
+				var img = document.createElement("img");
+				img.id = "prev_"+View_area;
+				img.classList.add("obj");
+				img.file = file;
+				img.style.width = '100px';
+				img.style.height = '100px';
+				preview.appendChild(img);
+				if(window.FileReader){
+					var reader = new FileReader();
+					reader.onloadend = (function(almg){
+						return function(e){
+							almg.src = e.target.result;
+						};
+					})(img);
+					reader.readAsDataURL(file);
+				}
+			}
+		}
+</script>
 <style>
 	.box1 {
   display:inline-block;  margin-left:20px;  }
@@ -26,28 +60,35 @@
 </style>
 </head>
 <body>
-	<form id = "materialSearch"  class = "materialSearch">
+	
 		<div class = "div1">
-			<div>
-				<input type = "text" name = "search" placeholder = "식재료 검색어 입력란">
-				<button id = "search"> 검색 </button>
-				<table>
+		
+				<div>
+					<input type = "text" name = "search" placeholder = "식재료 검색어 입력란" id = "keyword"> 
+					<button id = "search"> 검색 </button>
+					<input type = "button" value = "전체목록" id = "listAll">    
+				</div>
+			
+		
+	
+				<table class = "searchTable">
 					<tr>
 						<th>코드번호</th>
-						<th>이미지</th>
 						<th>식재료명</th>
 					</tr>
-					<c:forEach items = "${list }" var = "b">
-						<tr>
-							<td>${b.foodMCode }</td>
-							<td><img src = "displayFile?fileName=${b.foodMImg }" style= "width: 175px; height: 50px;"></td>
-							<td><a class = "nameClick" data-src = "${b.foodMName }" data-code = "${b.foodMCode }">${b.foodMName }</a></td>
+					
+						<tr class = "searchResult">
+							
 						</tr>
-					</c:forEach>
+					
 				</table>
 			</div>
-		</div>
-	</form>
+	<input type = "hidden" id = "foodMName" name = "foodMName2">
+	<input type = "hidden" id =  "protein" name = "protein">
+	<input type = "hidden" id = "fat" name = "fat">
+	<input type = "hidden" id = "na" name = "na">
+	<input type = "hidden" id = "carbohydrate" name = "carbohydrate">
+	<input type = "hidden" id =  "fe" name = "fe">
 	<form id = "registForm" class = "registFrom" enctype = "multipart/form-data">
 			
 			<br><br>
@@ -62,22 +103,18 @@
 			</div>
 	
 		<div class = "box2">
-				<h2>반찬 사진</h2>
-				<input type = "file" name = "file">
-				
-				<div>
+				<div id = "View_area">
 				</div>
+				<h2>반찬 사진</h2>
+				<input type = "file" name = "file" id = "profile_pt" onchange = "previewImage(this,'View_area')">
+				
+				
 		</div>
 			
 	
 		<div class = "div2">
 			<div id = "body">
-				<input type = "hidden" id = "foodMName" name = "foodMName2">
-				<input type = "hidden" id =  "protein" name = "protein">
-				<input type = "hidden" id = "fat" name = "fat">
-				<input type = "hidden" id = "na" name = "na">
-				<input type = "hidden" id = "carbohydrate" name = "carbohydrate">
-				<input type = "hidden" id =  "fe" name = "fe">
+				
 				<div id = "chart"></div>       
 			</div>
 			<div>
@@ -127,11 +164,21 @@
 
 		$(document).ready(function(){
 			openAPI();
+			materialAll();
 			var v = 0;
+			$("#listAll").on("click",function(){
+				materialAll();
+			});
 			$("#regist").on("click",function(){
-				$("#registForm").attr("method","post");
-				$("#registForm").attr("action","side");
-				$("#registForm").submit();
+				if(!localStorage['init'] || isNaN(localStorage['cnt'])==true || localStorage['cnt'] == 0){
+					alert("등록할 식재료를 선택하세요");
+					event.preventDefault();
+				}
+				else{
+					$("#registForm").attr("method","post");
+					$("#registForm").attr("action","side");
+					$("#registForm").submit();	
+				}
 			});
 			
 			localStorage.clear();
@@ -146,7 +193,7 @@
 					window.location.href = "side";	
 				}
 			});
-			$(".nameClick").on("click",function(){
+			$(document.body).on("click",".nameClick",function(){
 				event.preventDefault();
 				
 				var cnt = parseInt(localStorage['cnt']);
@@ -227,6 +274,31 @@
 			
 		
 			$('<input type = "hidden" id = "cnt" name = "cnt" value = "'+v+'">').appendTo(".registFrom");
+			
+			$("#search").on("click",function(){
+				$(".searchResult").remove();
+				var search = $("#keyword").val();
+				alert("검색값:"+search);
+				$.getJSON("nutriAjax/searching/"+search,function(data){
+					var str = "";
+					$(data).each(function(){
+						str += "<tr class = 'searchResult'><td>"+this.foodMCode+"</td>"+"<td>"+"<a class = 'nameClick' data-src = '"+this.foodMName+"' data-code = '"+this.foodMCode+"'>"+this.foodMName+"</a></td></tr>";
+					});
+					$(".searchTable").append(str);
+					alert(str);
+				});
+			});
+			
+			function materialAll(){
+				$(".searchResult").remove();
+				$.getJSON("nutriAjax/materialAll",function(data){
+					var str = "";
+					$(data).each(function(){
+						str += "<tr class = 'searchResult'><td>"+this.foodMCode+"</td>"+"<td>"+"<a class = 'nameClick' data-src = '"+this.foodMName+"' data-code = '"+this.foodMCode+"'>"+this.foodMName+"</a></td></tr>";
+					});
+					$(".searchTable").append(str);
+				});
+			}
 		});
 	</script>
 	<script src = "../../../dacham/resources/openAPIjs/APIQuery2.js"></script>

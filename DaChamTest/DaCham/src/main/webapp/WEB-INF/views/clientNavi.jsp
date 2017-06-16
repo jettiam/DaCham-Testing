@@ -11,13 +11,12 @@
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <title>Insert title here</title>
 <!-- 상단 내비게이션 표시를 위한 임시 CSS -->
 <style>
 .naviBox {
-	background-color: lightgray;
+	background-color: #EAEAEA;
 	margin-top: 10px;
 	text-align:center;
 }
@@ -34,12 +33,14 @@
 #sideBox {
 	float:right;
 	margin-right:10px;
+	color:gray;
 }
 
 
 #infoBox {	
 	float: right;
 	margin-right:10px;
+	color:gray;
 }
 
 #logo{margin-top:10px;
@@ -70,6 +71,13 @@
 	text-align:left;
 }
 }
+.naviBox a{text-decoration: none;
+color:#88b04b;
+}
+#headerBox a{color:#EDA900;}
+
+
+
 </style>
 <!-- 상단 내비게이션 표시를 위한 임시 CSS -->
 
@@ -89,7 +97,7 @@
 			<input type="text" name="id"><br> 
 			비밀번호<br>
 			<input type="password" name="pw"> 
-			<input type="submit" value="로그인">
+			<input type="submit" class="btn btn-warning" value="로그인">
 
 		</form>
 

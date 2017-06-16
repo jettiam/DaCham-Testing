@@ -9,7 +9,7 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<!-- 몽고 DB사용을 위한 bean -->
-	<mongo:mongo-client host="localhost" port="27017" credentials="admin:admin@admin">
+	<mongo:mongo-client host="106.249.38.75" port="27017" credentials="admin:admin@admin">
 	</mongo:mongo-client>
 	
 	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">

@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 <title>Insert title here</title>
 <style>
 #infoWrap {
@@ -65,6 +68,7 @@ img {
 		height: 100%;
 		margin: 0 auto;
 		text-align: center;
+		
 	}
 	#dachamInfoText>h1 {
 		font-size: 30px;
@@ -126,7 +130,7 @@ img {
 
 				</div>
 			</div>
-			<br> <br> <input type="button" id="moveOrder" value="주문하기">
+			<br> <br> <input type="button" id="moveOrder"  class="btn btn-warning" value="주문하기">
 		</div>
 
 	</div>

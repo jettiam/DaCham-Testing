@@ -19,4 +19,39 @@
 	  		</if>
 	  	</if>
   </sql>
+  <select id = "cookList" resultType = "Cook">
+	select b.sideDName, sum(a.dietAmount) as dietAmount, a.orderItemCode
+	from orderlist a join sidedish b join dietinfo c
+	where a.dietCode = c.dietCode
+	and c.sideDCode = b.sideDCode
+	and a.orderItemCode between 3 and 5
+	group by b.sideDName
+  </select>
+ 
+  <select id ="readycook" resultType = "Cook">
+  select b.sideDName, sum(a.dietAmount) as dietAmount, a.orderItemCode
+	from orderlist a join sidedish b join dietinfo c
+	where a.dietCode = c.dietCode
+	and c.sideDCode = b.sideDCode
+	and a.orderItemCode = 3 
+	group by b.sideDName
+  </select>
+  
+  <select id = "cookingfood" resultType ="Cook">
+  select b.sideDName, sum(a.dietAmount) as dietAmount, a.orderItemCode
+	from orderlist a join sidedish b join dietinfo c
+	where a.dietCode = c.dietCode
+	and c.sideDCode = b.sideDCode
+	and a.orderItemCode = 4 
+	group by b.sideDName
+  </select>
+  
+  <select id = "finishcook" resultType ="Cook">
+  select b.sideDName, sum(a.dietAmount) as dietAmount, a.orderItemCode
+	from orderlist a join sidedish b join dietinfo c
+	where a.dietCode = c.dietCode
+	and c.sideDCode = b.sideDCode
+	and a.orderItemCode = 5 
+	group by b.sideDName
+	</select>
 </mapper>

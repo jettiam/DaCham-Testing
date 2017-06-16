@@ -37,5 +37,10 @@ public class DeliverDAOImpl implements DeliverDAO{
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".showDeliver",deliver);
 	}
+	@Override
+	public void transportNum(OrderList orderList) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace+".transportNum",orderList);
+	}
 
 }

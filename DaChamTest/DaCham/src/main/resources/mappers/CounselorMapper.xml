@@ -19,4 +19,27 @@
 	  		</if>
 	  	</if>
   	</sql>
+<select id="counselorseList2" resultType="Counselor">
+	select  b.counselCode,b.counselTitle ,a.name, a.id, b.counselDate, b.counselContent
+	from member a join counsel b
+	where a.id =b.customer
+	<include refid="Search"></include>
+</select>
+<sql id = "Search">
+	  	<if test = "searchType2 != null">
+	  		<if test="searchType == 'y'.toString()">
+	  			and a.name like CONCAT('%',#{keyword2},'%')
+	  		</if>
+	  		<if test="searchType2 == 'u'.toString()">
+	  			and a.id like CONCAT('%',#{keyword2},'%')
+	  		</if>
+	  	</if>
+  	</sql>
+
+
+<select id = "viewCounsel" resultType = "Counselor">
+	select counselTitle, counselContent
+	from counsel
+	where counselCode = #{counselCode} 
+</select>
 </mapper>

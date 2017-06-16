@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.wdb3a.dacham.bean.Cook;
 import com.wdb3a.dacham.bean.FoodMInven;
 import com.wdb3a.dacham.service.CookService;
 
@@ -26,7 +27,9 @@ public class CookerController {
 	}
 
 	@RequestMapping(value="/cookList", method=RequestMethod.GET)
-	public String getList(){
+	public String getList(Model model) throws Exception{
+		List<Cook> list = service.cookList();
+		model.addAttribute("list",list);
 		return "/mate/cooker/cookingList";
 	}
 	@RequestMapping(value="/cookFood", method=RequestMethod.GET)
@@ -37,7 +40,13 @@ public class CookerController {
 		return "/mate/cooker/foodStock";
 	}
 	@RequestMapping(value="/cook", method=RequestMethod.GET)
-	public String getcook(){
+	public String getcook(Model model)throws Exception{
+		List<Cook> list = service.readycook();
+		List<Cook> list2 = service.cookingfood();
+		List<Cook> list3 = service.finishcook();
+		model.addAttribute("list",list);
+		model.addAttribute("list2",list2);
+		model.addAttribute("list3",list3);
 		return "/mate/cooker/cook";
 	}
 }
