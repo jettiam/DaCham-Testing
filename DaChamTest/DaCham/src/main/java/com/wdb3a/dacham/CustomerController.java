@@ -39,8 +39,12 @@ public class CustomerController {
 	 * 
 	 * @return 고객 마이페이지로 이동
 	 */
-	public String myInfo(){
-		
+	public String myInfo(String status,Model model){
+		/*	status 0 = 내정보
+		status 1 = 내건강정보
+		status 2 = 장바구니
+		status 3 = 주문내역*/
+		model.addAttribute("status", status);
 		return "customer/myPage";
 	}
 
@@ -100,10 +104,11 @@ public String doOrder(Customer customer,Model model)throws Exception{
  * @return 주문 결제
  * @throws Exception
  */
-@RequestMapping(value="/payment",method=RequestMethod.POST)
-public String payment(Customer customer,Model model)throws Exception{
-	serviceCu.orderRegist(customer);	
-	return "redirect:goOrderInfo";
+@RequestMapping(value="/payment",method=RequestMethod.GET)
+public String payment(RedirectAttributes rttr)throws Exception{
+	rttr.addAttribute("status","3");
+	//결제후 마이페이지로
+	return "redirect:myPage";
 }
 /**
  * 
@@ -127,11 +132,12 @@ public String inputOrderInfo()throws Exception{
 }
 /**
  * 
- * @return 결제 리다이렉트용
+ * @return 마이페이지 가기
  * @throws Exception
  */
 @RequestMapping(value="/goOrderInfo",method=RequestMethod.GET)
-public String goOrderInfo()throws Exception{	
+public String goOrderInfo()throws Exception{
+	
 	return "customer/myPage";
 }
 

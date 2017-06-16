@@ -77,10 +77,13 @@ public class CustomerAjaxController {
 	 * @return 결제 컨트롤러
 	 */
 	@RequestMapping(value="/payment",method=RequestMethod.POST)
-	public ResponseEntity<String> payment(@RequestBody List<Customer> list){//여기부터
+	public ResponseEntity<String> payment(@RequestBody List<Customer> list){
 		System.out.println(list.size());
 		ResponseEntity<String> entity = null;
-		try {			
+		try {
+			for(int i=0;i<list.size();i++){
+				service.orderRegist(list.get(i));
+			}			
 			entity = new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -109,7 +109,7 @@ color:#88b04b;
 				<h4>
 					<b>${memberName}</b>님 반갑습니다. 오늘도 다참으로 건강한 하루~!
 				</h4>
-				<a href="myPage">마이페이지</a> <a href="myCart">장바구니</a> <a href="memberLogout">로그아웃</a>
+				<a href="myPage?status=0">마이페이지</a> <a href="myPage?status=2">장바구니</a> <a href="memberLogout">로그아웃</a>
 			</div>
 	</c:if>
 		</div>

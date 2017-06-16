@@ -38,8 +38,9 @@
 					var jsonVal ={
 							'dietCode':$(".dietCode:eq("+i+")").attr("data-dietCode"),
 							'dietAmount':$(".dietAmount:eq("+i+")>span").text(),
-							'dietPrice':$(".dietPrice:eq("+i+")>span").text(),
-							'id':$("#customerId").val()
+							'price':$(".dietPrice:eq("+i+")>span").text(),
+							'id':$("#customerId").val(),
+							'paymentItemCode':$("#paymentItem").val()
 					}
 					orderInfo[i]=jsonVal;
 				}
@@ -52,13 +53,13 @@
 			               "Content-Type" : "application/json",
 			               "X-HTTP-Method-Override" : "POST"
 			            },
-			        dataType : "json",
+			        dataType : "text",
 					data:JSON.stringify(orderInfo),
 					type:"POST",
-					success:function(data){
-						
-							window.alert("성공");
-						
+					success:function(data){							
+						if(data=="SUCCESS"){
+							window.location.href="payment";	
+						}							
 					}
 				});
 			}
