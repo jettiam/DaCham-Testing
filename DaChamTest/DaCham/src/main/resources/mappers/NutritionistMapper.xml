@@ -72,4 +72,11 @@
 		where d.dietCode=#{diseaseCode} and d.dietCode=i.dietCode) b
 		where s.sideDcode = b.sideDCode;
 	</select>
+	<!-- 해당 질병에 대한 식단을 조회합니다. -->
+	<select id = "diseaseDietOverview" resultType = "com.wdb3a.dacham.bean.Nutritionist">
+		select a.dietCode, a.dietImg,a.dietName ,a.diseaseCode, b.diseaseName
+		from diet a join disease b
+		where a.diseaseCode = b.diseaseCode
+		and b.diseaseName = #{diseaseName}
+	</select>
 </mapper>

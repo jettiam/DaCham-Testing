@@ -105,6 +105,12 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 		return sqlSession.selectList(namespace+".sideAll");
 	}
 
+	@Override
+	public List<Nutritionist> diseaseDietOverview(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".diseaseDietOverview",nutritionist);
+	}
+
 	
 
 }

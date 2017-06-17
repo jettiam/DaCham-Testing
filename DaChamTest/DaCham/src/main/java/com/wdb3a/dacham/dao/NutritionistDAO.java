@@ -23,4 +23,6 @@ public interface NutritionistDAO {
 	public List<Nutritionist> optionTemplate(Nutritionist nutritionist) throws Exception;
 //	반찬 템플릿의 개수를 구합니다.
 	public int optionTemplateCount(Nutritionist nutritionist) throws Exception;
+	//식단을 해당 질병과 관련하여 조회합니다.
+	public List<Nutritionist> diseaseDietOverview(Nutritionist nutritionist) throws Exception;
 }

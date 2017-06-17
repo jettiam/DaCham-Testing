@@ -1,27 +1,41 @@
 package com.wdb3a.dacham;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 
+import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wdb3a.dacham.bean.Nutritionist;
 import com.wdb3a.dacham.service.NutritionistService;
+import com.wdb3a.dacham.util.MediaUtils;
 
 
 @RestController
 @RequestMapping(value = "nutriAjax")
 public class NutritionistAjaxController {
+	private static final Logger logger = LoggerFactory.getLogger(NutritionController.class);
+
+	@Resource(name="uploadPath")
+	private String uploadPath;
 	@Inject
 	private NutritionistService service;
 	
@@ -180,4 +194,20 @@ public class NutritionistAjaxController {
 		}
 		return entity;
 	}
+	@RequestMapping(value = "/diseaseDietOverview/{diseaseName}",method = RequestMethod.GET)
+	public ResponseEntity<List<Nutritionist>> diseaseDietOverview(@PathVariable("diseaseName")String diseaseName){
+		ResponseEntity<List<Nutritionist>> entity = null;
+		Nutritionist nutritionist = new Nutritionist();
+		try {
+			nutritionist.setDiseaseName(diseaseName);
+			List<Nutritionist> list = service.diseaseDietOverview(nutritionist);
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	
 }

@@ -9,8 +9,7 @@
 <%@include file="nutritionistNavi.jsp" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
-	$(document).ready(function(){
-		sideAll();        
+	$(document).ready(function(){        
 		var v = 0;
 		$("#sideAll").on("click",function(){
 			sideAll();

@@ -105,6 +105,12 @@ public class NutritionistServiceImpl implements NutritionistService {
 		return dao.sideAll();
 	}
 
+	@Override
+	public List<Nutritionist> diseaseDietOverview(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.diseaseDietOverview(nutritionist);
+	}
+
 	
 
 }
