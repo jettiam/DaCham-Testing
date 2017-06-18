@@ -45,7 +45,7 @@
 			$.getJSON("deliverAjax/"+searchType+"/"+keyword,function(data){
 				var str = "";
 				$(data).each(function(){
-					str += "<tr class = 'searchResult'>"+"<td>"+"<input type = 'radio' name = 'chk' value = '"+this.orderCode+"' class = 'check'>"+"</td>"+"<td>"+this.orderCode+"</td>"+"<td>"+this.id+"</td>"+"<td>"+this.dietName+"</td>"+"<td>"+this.address+"</td>"+"<td>"+"<input type = 'text' class = 'transportNum"+this.orderCode+"' name = 'transportNum'>"+"</td>"+"<td>"+this.orderItemCode+"</td>"+"</tr>";
+					str += "<tr class = 'searchResult'>"+"<td>"+"<input type = 'radio' name = 'chk' value = '"+this.orderCode+"' class = 'check'>"+"</td>"+"<td>"+this.orderCode+"</td>"+"<td>"+this.id+"</td>"+"<td>"+this.dietName+"</td>"+"<td>"+this.address+"</td>"+"<td>"+"<input type = 'text' class = 'transportNum"+this.orderCode+"' name = 'transportNum'>"+"</td>"+"<td>"+this.orderItemName+"</td>"+"</tr>";
 				});
 				$(".searchTable").append(str);
 			});
@@ -58,7 +58,7 @@
 				$(".searchResult").remove();
 				var str = "";
 				$(data).each(function(){
-					str += "<tr class = 'searchResult'>"+"<td>"+"<input type = 'radio' name = 'chk' value = '"+this.orderCode+"' class = 'check'>"+"</td>"+"<td>"+this.orderCode+"</td>"+"<td>"+this.id+"</td>"+"<td>"+this.dietName+"</td>"+"<td>"+this.address+"</td>"+"<td>"+"<input type = 'text' class = 'transportNum"+this.orderCode+"' name = 'transportNum'>"+"</td>"+"<td>"+this.orderItemCode+"</td>"+"</tr>";
+					str += "<tr class = 'searchResult'>"+"<td>"+"<input type = 'radio' name = 'chk' value = '"+this.orderCode+"' class = 'check'>"+"</td>"+"<td>"+this.orderCode+"</td>"+"<td>"+this.id+"</td>"+"<td>"+this.dietName+"</td>"+"<td>"+this.address+"</td>"+"<td>"+"<input type = 'text' class = 'transportNum"+this.orderCode+"' name = 'transportNum'>"+"</td>"+"<td>"+this.orderItemName+"</td>"+"</tr>";
 				});
 				$(".searchTable").append(str);
 			});
