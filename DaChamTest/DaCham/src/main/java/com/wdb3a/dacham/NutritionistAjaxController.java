@@ -194,6 +194,7 @@ public class NutritionistAjaxController {
 		}
 		return entity;
 	}
+	//해당 질병에 관련한 식단 조회
 	@RequestMapping(value = "/diseaseDietOverview/{diseaseName}",method = RequestMethod.GET)
 	public ResponseEntity<List<Nutritionist>> diseaseDietOverview(@PathVariable("diseaseName")String diseaseName){
 		ResponseEntity<List<Nutritionist>> entity = null;
@@ -209,5 +210,21 @@ public class NutritionistAjaxController {
 		}
 		return entity;
 	}
-	
+	//해당 반찬에 대한 카테고리 검색
+	@RequestMapping(value = "/categorySearch/{foodGName}/{cookMName}",method = RequestMethod.GET)
+	public ResponseEntity<List<Nutritionist>> categorySearch(@PathVariable("foodGName")String foodGName, @PathVariable("cookMName")String cookMName){
+		ResponseEntity<List<Nutritionist>> entity = null;
+		Nutritionist nutritionist = new Nutritionist();
+		try {
+			nutritionist.setFoodGName(foodGName);
+			nutritionist.setCookMName(cookMName);
+			List<Nutritionist> list = service.categorySearch(nutritionist);
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
 }

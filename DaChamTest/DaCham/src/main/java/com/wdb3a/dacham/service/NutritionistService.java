@@ -25,4 +25,6 @@ public interface NutritionistService {
 	public int optionTemplateCount(Nutritionist nutritionist) throws Exception;
 	//식단을 해당 질병과 관련하여 조회합니다.
 	public List<Nutritionist> diseaseDietOverview(Nutritionist nutritionist) throws Exception;
+	//해당 반찬에 대한 카테고리 검색
+	public List<Nutritionist> categorySearch(Nutritionist nutritionist) throws Exception;
 }

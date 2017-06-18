@@ -111,6 +111,12 @@ public class NutritionistServiceImpl implements NutritionistService {
 		return dao.diseaseDietOverview(nutritionist);
 	}
 
+	@Override
+	public List<Nutritionist> categorySearch(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.categorySearch(nutritionist);
+	}
+
 	
 
 }

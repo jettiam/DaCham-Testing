@@ -12,6 +12,13 @@
 		$("#regist").click(function(){
 			window.location.href = "sideDRegist";
 		});
+		var foodGName = "";
+		$(".category li a").on("click",function(){
+			foodGName = $(this).attr("data-name");
+		});
+		$(".category2 li a").on("click",function(){
+			var cookMName = $(this).attr("data-name");
+		});
 	});
 </script>
 <title>Insert title here</title>
@@ -24,17 +31,26 @@
 </head>
 <body>
 	<div class = "box1">
-		<select>
-			<option>분류</option>
-			<option>식품군</option>
-			<option>조리법</option>
-		</select>
-		<input type = "text" name = "search">
-		<div>
-			반찬 검색창<br>
-			(옵션, 카테고리 사용)
-		</div>
-		<button id = "search">검색</button>
+		<nav>
+			<ul class = "category">
+				<li><a data-name = "곡류">곡류</a></li>
+				<li><a data-name = "조미류">조미류</a></li>
+				<li><a data-name = "채소류">채소류</a></li>
+				<li><a data-name = "생선류">생선류</a></li>
+				<li><a data-name = "고기류">고기류</a></li>
+			</ul>
+		</nav>
+		<nav>
+			<ul class = "category2">
+				<li><a data-name = "튀김">튀김</a></li>
+				<li><a data-name = "구이">구이</a></li>
+				<li><a data-name = "조림">조림</a></li>
+				<li><a data-name = "찜">찜</a></li>
+				<li><a data-name = "초벌">초벌</a></li>
+				<li><a data-name = "무침">무침</a></li>
+				<li><a data-name = "탕">탕</a></li>
+			</ul>
+		</nav>
 	</div>
 	<div class = "box2">
 		<div>

@@ -79,4 +79,13 @@
 		where a.diseaseCode = b.diseaseCode
 		and b.diseaseName = #{diseaseName}
 	</select>
+	<!-- 해당 반찬에 대한 카테고리 검색 -->
+	<select id = "categorySearch" resultType = "com.wdb3a.dacham.bean.Nutritionist">
+		select a.sideDName, a.sideDImg, b.cookMCode, b.cookMName,c.foodGName,c.foodGCode
+		from sidedish a join cookmethod b join foodgroup c
+		where a.cookMCode = b.cookMCode
+		and a.foodGCode = c.foodGCode
+		and b.cookMName = #{cookMName}
+		and c.foodGName = #{foodGName}
+	</select>
 </mapper>
