@@ -16,14 +16,27 @@
 		});
 		var foodGName = "";
 		$(".category li a").on("click",function(){
+			event.preventDefault();
 			foodGName = $(this).attr("data-name");
 			$('.category').hide();
 			$('.category2').show();
 		});
 		$(".category2 li a").on("click",function(){
+			event.preventDefault();
 			var cookMName = $(this).attr("data-name");
+			$(".searchResult").remove();
+			
 			$('.category2').hide();
 			$('#categoryStart').show();
+			
+			$.getJSON("nutriAjax/categorySearch/"+foodGName+"/"+cookMName,function(data){
+				console.log(data);
+				var str = "";
+				$(data).each(function(){
+					str += "<tr class = 'searchResult'>"+"<td>"+"<input type = 'radio' name = 'radio' value = '"+this.sideCode+"'>"+"</td>"+"<td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width: 75px; height: 25px;'></td>"+"<td>"+this.sideDName+"</td>"+"</tr>"
+				});
+				$(".searchTable").append(str);
+			});
 		});
 		$("#categoryStart").on("click",function(){
 			event.preventDefault();
@@ -71,18 +84,14 @@
 			<button>반찬 삭제</button>
 		</div>
 		<div>
-			<table>
+			<table class = "searchTable">
 				<tr>
 					<th>&nbsp;&nbsp;</th>
-					<th>이미지</th>
+					<th>이미지&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 					<th>반찬명</th>
-					<th>질량</th>
 				</tr>
-				<tr>
-					<td><input type = "radio"></td>
-					<td>꺅두기</td>
-					<td>10g</td>
-					<td>정상</td>
+				<tr class = "searchResult">
+					
 				</tr>
 			</table>
 		</div>
