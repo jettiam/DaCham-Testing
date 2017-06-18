@@ -42,5 +42,10 @@ public class DeliverServiceImpl implements DeliverService {
 		// TODO Auto-generated method stub
 		dao.transportNum(orderList);
 	}
+	@Override
+	public List<OrderList> all() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.all();
+	}
 
 }

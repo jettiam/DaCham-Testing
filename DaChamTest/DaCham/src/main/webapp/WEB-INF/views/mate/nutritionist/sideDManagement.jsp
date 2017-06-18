@@ -9,15 +9,26 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
 	$(document).ready(function(){
+		$('.category').hide();
+		$('.category2').hide();
 		$("#regist").click(function(){
 			window.location.href = "sideDRegist";
 		});
 		var foodGName = "";
 		$(".category li a").on("click",function(){
 			foodGName = $(this).attr("data-name");
+			$('.category').hide();
+			$('.category2').show();
 		});
 		$(".category2 li a").on("click",function(){
 			var cookMName = $(this).attr("data-name");
+			$('.category2').hide();
+			$('#categoryStart').show();
+		});
+		$("#categoryStart").on("click",function(){
+			event.preventDefault();
+			$('.category').show();
+			$("#categoryStart").hide();
 		});
 	});
 </script>
@@ -32,6 +43,7 @@
 <body>
 	<div class = "box1">
 		<nav>
+			<a href = "#" id = "categoryStart">반찬 찾아보기</a>
 			<ul class = "category">
 				<li><a data-name = "곡류">곡류</a></li>
 				<li><a data-name = "조미류">조미류</a></li>

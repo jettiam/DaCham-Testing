@@ -48,4 +48,10 @@
   		update orderlist set transportNum = #{transportNum}, orderItemCode = 7
   		where orderCode = #{orderCode}
   	</update>
+  	<select id = "all" resultType = "OrderList">
+  		select a.orderCode, b.id, c.dietImg, c.dietName, b.address, a.orderItemCode
+		from orderlist a join member b join diet c
+		where a.id = b.id
+		and a.dietCode = c.dietCode
+  	</select>
 </mapper>

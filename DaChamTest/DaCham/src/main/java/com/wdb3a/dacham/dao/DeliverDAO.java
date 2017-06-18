@@ -12,4 +12,5 @@ public interface DeliverDAO {
 	public void createDeliver(Deliver deliver) throws Exception;
 	public List<Deliver> showDeliver(Deliver deliver) throws Exception;
 	public void transportNum(OrderList orderList) throws Exception;
+	public List<OrderList> all() throws Exception;
 }
