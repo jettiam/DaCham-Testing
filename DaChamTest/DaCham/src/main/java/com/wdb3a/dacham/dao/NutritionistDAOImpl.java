@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.wdb3a.dacham.bean.Nutritionist;
+import com.wdb3a.dacham.bean.OrderList;
 @Repository
 public class NutritionistDAOImpl implements NutritionistDAO {
 	private static final String namespace="com.wdb3a.NutritionistMapper";
@@ -115,6 +116,12 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 	public List<Nutritionist> categorySearch(Nutritionist nutritionist) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".categorySearch",nutritionist);
+	}
+
+	@Override
+	public List<OrderList> orderList() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".orderList");
 	}
 
 	

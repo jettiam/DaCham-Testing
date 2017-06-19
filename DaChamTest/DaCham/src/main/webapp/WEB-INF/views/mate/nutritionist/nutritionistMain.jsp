@@ -5,10 +5,30 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<link rel="shortcut icon" href="resources/favicon/N.ico">
 <%@include file="nutritionistNavi.jsp" %>
-
+<<<<<<< HEAD
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function(){
+		orderList();
+		function orderList(){
+			$(".orderResult").remove();
+			$.getJSON("nutriAjax/orderList",function(data){
+				var str = "";
+				$(data).each(function(){
+					str += "<tr class = 'orderResult'><td>"+this.orderCode+"</td>"+"<td>"+this.id+"</td>"+"<td>"+this.dietName+"</td>"+"<td>"+this.orderDate+"</td>"+"<td>"+this.price+"</td>"+"</tr>"
+				});
+				$(".orderTable").append(str);          
+			});             
+		}
+	});
+</script>
 <title>Insert title here</title>
+=======
+
+<title>영양사</title>
+>>>>>>> branch 'master' of https://github.com/jettiam/DaCham-Testing.git
 <style>
  .box1 {
   float:left;  }
@@ -48,20 +68,16 @@
       </div>
    </div>
    <div class = "box2">
-      <table>
+      <table class = "orderTable">
          <tr>
-            <th>번호</th>
-            <th>고객id</th>
-            <th>식단명</th>
-            <th>주문접수일</th>
-            <th>금액</th>
+            <th>번호&nbsp;&nbsp;&nbsp;</th>
+            <th>고객id&nbsp;&nbsp;&nbsp;</th>
+            <th>식단명&nbsp;&nbsp;&nbsp;</th>
+            <th>주문접수일&nbsp;&nbsp;&nbsp;</th>
+            <th>금액&nbsp;&nbsp;&nbsp;</th>
          </tr>
-         <tr>
-            <td> </td>
-            <td> </td>
-            <td> </td>
-            <td> </td>
-            <td> </td>
+         <tr class = "orderResult">
+            
          </tr>
       </table>
    </div>

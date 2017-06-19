@@ -91,16 +91,6 @@ public class AdminController {
 		return orderList;
 	}
 	
-	
-	
-	/* @RequestMapping(value="/adminRead", method=RequestMethod.GET)
-	   public String read(@RequestParam(value="orderCode")String orderCode, Model model) throws Exception{
-	      
-	      orderList board = service.read(orderCode);
-	      model.addAttribute("board",board);
-	      return "mate/admin/adminMain";
-	   }*/
-
 	@RequestMapping(value="/customer")
 	public String getcustomer(){
 		return "mate/admin/customer";
@@ -140,15 +130,12 @@ public class AdminController {
 	}
 	@RequestMapping(value="/foodOrder", method=RequestMethod.POST)
 	public String getfoodStock1(Model model, String orderCode, FoodMInven foodMInven) throws Exception{
-		
-
-		
+	
 		JSONObject jsonobj = (JSONObject) JSONValue.parse(orderCode);
 		JSONArray bodyArray = (JSONArray) jsonobj.get("value");
 		int a =  Integer.parseInt((String) bodyArray.get(0));
 		
 		System.out.println(a);
-	
 	
 		List<FoodMAmountRead> list = service.foodMAmountRead(a);
 		List<FoodMInven> invenlist = service.foodStockList(foodMInven);
@@ -157,26 +144,6 @@ public class AdminController {
 		return "mate/admin/foodOrder";
 	}
 	
-	/*public class UserProfileEditor extends PropertyEditorSupport  {
-
-	    @Override
-	    public void setAsText(String text) throws IllegalArgumentException {
-	        ObjectMapper mapper = new ObjectMapper();
-
-	        UserProfile value = null;
-
-	        try {
-	            value = new UserProfile();
-	            JsonNode root = mapper.readTree(text);
-	            value.setEmail(root.path("email").asText());
-	        } catch (IOException e) {
-	            // handle error
-	        }
-
-	        setValue(value);
-	    }
-	}*/
-	
 	@RequestMapping(value="/orderList",method=RequestMethod.GET)
 	public String getorderList(Model model, OrderList order) throws Exception{
 		List<OrderList> list=service.orderListAll(order);
@@ -184,23 +151,7 @@ public class AdminController {
 		model.addAttribute("order", order);
 		return "mate/admin/orderList";
 	}
-	@RequestMapping(value="/orderList1",method=RequestMethod.POST)
-	public String getorderList1(Model model,@RequestBody OrderList order) throws Exception{
-		if(order.getOrderItemCode()=="1"){
-		service.refundUpdate(order);
-		}
-		System.out.println(order.getOrderCode());
-		return "mate/admin/orderList";
-	}
-	
-	@RequestMapping(value="/orderList2",method=RequestMethod.POST)
-	public String getorderList2(Model model,@RequestBody OrderList order) throws Exception{
-		service.workUpdate(order);
-		System.out.println(order.getOrderCode());
-		return "mate/admin/orderList";
-	}
-	
-	
+
 	@RequestMapping(value="/statistics")
 	public String getstatistics(){
 		return "mate/admin/statistics";

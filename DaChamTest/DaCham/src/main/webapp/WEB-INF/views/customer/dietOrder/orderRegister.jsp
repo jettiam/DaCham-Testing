@@ -29,8 +29,8 @@
 			$(".totalPrice").text(totalPrice);
 		}
 		$("#payment").on("click", function() {
-
-			if($(".orderInfo").attr("data-detailOrder")==true){
+			
+			if($(".orderInfo").attr("data-detailOrder")=="true"){
 				if(confirm("결제 하겠습니까?")){
 					$("#setPaymentItem").val($("#paymentItem").val());
 					$("#paymentForm").attr("action", "payment");
