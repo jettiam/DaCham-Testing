@@ -35,7 +35,11 @@ where s.sideDCode=f.sideDcode and s.foodGCode=#{foodGCode};
   <insert id="orderRegist">
   	INSERT INTO orderlist (id, dietCode, orderDate, price, dietAmount, orderItemCode, paymentItemCode) 
 	VALUES (#{id}, #{dietCode}, now(), #{price}, #{dietAmount}, 2, #{paymentItemCode});
-  </insert>  
+  </insert>
+  <!-- 장바구니 상품 주문결제 --> 
+  <update id="orderCart">
+  UPDATE orderlist SET orderItemCode=2, paymentItemCode=#{paymentItemCode} WHERE  orderCode=#{orderCode};
+  </update> 
 <!-- 장바구니 등록 -->
   <insert id="cartRegist">
   	INSERT INTO orderlist (id, dietCode, orderDate, price, dietAmount, orderItemCode, paymentItemCode) 

@@ -13,7 +13,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>DaCham 마이페이지</title>
 <style>
 #myPageWrap {
 	width: 1080px;
@@ -182,7 +182,7 @@ $(document).ready(function(){
 	        break;
 	    case "3":
 	    	var id = $("#customerId").val();
-			$(".addTr").remove();
+			$(".orderTr").remove();
 			$.ajax({
 				url:"customerAjax/myOrderlist",
 				headers : {
@@ -196,10 +196,11 @@ $(document).ready(function(){
 				success:function(data){
 					console.log(data);
 					for(var i = 0; i<data.list.length; i++){ //주문내역의 데이터 테이블로 출력
-					$('#myOrderListTable').append("<tr class='orderTr'><td class='orderCode'>"+data.list[i].orderCode+"</td><td class='orderDate'>"+data.list[i].orderDate+"</td><td><img class='myPageImg' data-img="+data.list[i].dietImg+" src='displayFile?fileName="+data.list[i].dietImg+"' alt='이미지'></td><td class='dietName'>"+data.list[i].dietName+"</td><td class='dietAmount'>"+data.list[i].dietAmount+"</td><td class='price'><span>"+data.list[i].price+"</span>원"+"</td><td>"+data.list[i].orderItemCode+"</td></tr>");
+					$('#myOrderListTable').append("<tr class='orderTr'><td class='orderCode'>"+data.list[i].orderCode+"</td><td class='orderDate'>"+data.list[i].orderDate+"</td><td><img class='myPageImg' data-img="+data.list[i].dietImg+" src='displayFile?fileName="+data.list[i].dietImg+"' alt='이미지'></td><td class='dietName'>"+data.list[i].dietName+"</td><td class='dietAmount'>"+data.list[i].dietAmount+"</td><td class='price'><span>"+data.list[i].price+"</span>원"+"</td><td class='oItemCode' data-oItemCode='"+data.list[i].orderItemCode+"'></td></tr>");
 				}
 				}
 			});
+			$(".oItemCode").attr("data-oItemCode");
 	    	$('#myInfoTableWrap').hide();
 	    	$('#myHealthTableWrap').hide();
 	    	$('#myCartTableWrap').hide();    	

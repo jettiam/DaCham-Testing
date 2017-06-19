@@ -60,6 +60,7 @@ width:100px;
 
 <div id = "menuShowWrap">
 <h1>이달의 메뉴</h1>
+<input type="button" id="disease00" class="btn btn-warning" value="다참 베이직">
 <input type="button" id="disease01" class="btn btn-warning" value="당뇨">
 <input type="button" id="disease02" class="btn btn-warning" value="신부전증">
 <input type="button" id="disease03" class="btn btn-warning" value="심부전증">
@@ -595,6 +596,13 @@ width:100px;
 </div>
 
 <script>
+$('#disease00').click(function(){
+	$('#menuShowList3').hide();
+	$('#menuShowList4').hide();
+	$('#menuShowList5').hide();
+	$('#menuShowList1').hide();
+	$('#menuShowList').show();
+});
 $('#disease01').click(function(){
 	$('#menuShowList').hide();
 	$('#menuShowList3').hide();
@@ -610,12 +618,14 @@ $('#disease02').click(function(){
 	$('#menuShowList2').show();
 });
 $('#disease03').click(function(){
+	$('#menuShowList').hide();
 	$('#menuShowList1').hide();
 	$('#menuShowList2').hide();
 	$('#menuShowList4').hide();
 	$('#menuShowList3').show();
 });
 $('#disease04').click(function(){
+	$('#menuShowList').hide();
 	$('#menuShowList1').hide();
 	$('#menuShowList2').hide();
 	$('#menuShowList3').hide();

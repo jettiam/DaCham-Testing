@@ -33,7 +33,7 @@
 			내용 : <textarea name = "content" readonly>${read.counselContent}</textarea>
 		
 		</form>
-		<button id = "counselDelete">삭제</button>
+		<button id = "counselDelete" class="btn btn-warning myPageBtn">삭제</button>
 		
 	</div>
 	<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -46,9 +46,9 @@
 	<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	<div align = "right">
-		<button id = "list">목록</button>
-		<button id = "modify">수정</button>
-		<button id = "remove">삭제</button>
+		<button id = "list" class="btn btn-warning myPageBtn">목록</button>
+		<button id = "modify" class="btn btn-warning myPageBtn">수정</button>
+		<button id = "remove" class="btn btn-warning myPageBtn">삭제</button>
 	</div>
 </body>
 </html>

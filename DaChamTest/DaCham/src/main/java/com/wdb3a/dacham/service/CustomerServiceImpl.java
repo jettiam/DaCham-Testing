@@ -45,9 +45,16 @@ private CustomerDAO dao;
 		
 	}
 	@Override
+
 	public List<Customer> myOrderList(String id) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.myOrderList(id);
+	}
+
+	public void orderCart(Customer customer) throws Exception {
+		dao.orderCart(customer);
+		
+
 	}
 
 }
