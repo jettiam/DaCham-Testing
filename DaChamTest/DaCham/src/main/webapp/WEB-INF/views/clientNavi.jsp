@@ -89,6 +89,9 @@
 	.naviBox {
 		text-align: left;
 	}
+	#logo{
+	display:none;
+	}
 }
 
 
