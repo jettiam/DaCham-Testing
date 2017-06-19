@@ -89,7 +89,7 @@ public class CustomerAjaxController {
 		ResponseEntity<String> entity = null;
 		try {
 			for(int i=0;i<list.size();i++){
-				service.orderRegist(list.get(i));
+				service.orderCart(list.get(i));
 			}			
 			entity = new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
 		} catch (Exception e) {
