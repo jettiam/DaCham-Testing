@@ -88,4 +88,10 @@
 		and b.cookMName = #{cookMName}
 		and c.foodGName = #{foodGName}
 	</select>
+	<!-- 해당 메인페이지에 주문목록 표시 -->
+	<select id = "orderList" resultType = "OrderList">
+		select a.orderCode, a.id, b.dietName,a.orderDate ,a.price
+		from orderlist a join diet b
+		where a.dietCode = b.dietCode
+	</select>
 </mapper>
