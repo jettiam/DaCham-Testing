@@ -12,6 +12,22 @@
 		$("#regist").click(function(){
 			window.location.href = "dietRegist";
 		});
+		
+		$(".diseaseNation li a").on("click",function(){
+			event.preventDefault();
+			$(".searchResult").remove();
+			
+			var diseaseName = $(this).attr("data-name");
+			
+			$.getJSON("nutriAjax/diseaseDietOverview/"+diseaseName,function(data){
+				console.log(data);
+				var str = "";
+				$(data).each(function(){
+					str += "<tr class = 'searchResult'>"+"<td>"+"<input type = 'radio' name = 'radio' value = '"+this.dietCode+"'>"+"</td>"+"<td><img src = 'displayFile?fileName="+this.dietImg+"' style = 'width: 75px; height: 25px;'></td>"+"<td>"+this.dietName+"</td>"+"<td>"+this.diseaseName+"</td>"+"</tr>";
+				});
+				$(".dietDiseaseOverview").append(str);     
+			});
+		});
 	});
 </script>
 <title>Insert title here</title>
@@ -35,11 +51,11 @@
          </tr>
       </table>
       <nav>
-         <ul>
-            <li><a>당뇨병</a></li>
-            <li><a>고지혈증</a></li>
-            <li><a>심부전증</a></li>
-            <li><a>신부전증</a></li>
+         <ul class = "diseaseNation">
+            <li><a data-name = "당뇨병">당뇨병</a></li>
+            <li><a data-name = "고지혈증">고지혈증</a></li>
+            <li><a data-name = "심부전증">심부전증</a></li>
+            <li><a data-name = "신부전증">신부전증</a></li>
          </ul>
       </nav>
    </div>
@@ -50,18 +66,15 @@
          <button>식단 삭제</button>
       </div>
       <div>
-         <table>
+         <table class = "dietDiseaseOverview">
             <tr>
                <th></th>
-               <th>식단 이미지&nbsp;&nbsp;</th>
-               <th>식단명&nbsp;&nbsp;</th>
-               <th>질환&nbsp;&nbsp;</th>
+               <th>식단 이미지&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+               <th>식단명&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+               <th>질환&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
             </tr>
-            <tr>
-               <td><input type = "radio"></td>
-               <td></td>
-               <td></td>
-               <td></td>
+            <tr class = "searchResult">
+               
             </tr>
          </table>
       </div>
