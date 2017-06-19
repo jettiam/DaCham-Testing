@@ -242,4 +242,17 @@ public class NutritionistAjaxController {
 		}
 		return entity;
 	}
+	@RequestMapping(value=  "/thisMonth",method = RequestMethod.GET)
+	public ResponseEntity<List<OrderList>> thisMonth(){
+		ResponseEntity<List<OrderList>> entity = null;
+		try {
+			List<OrderList> list = service.thisMonth();
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
 }

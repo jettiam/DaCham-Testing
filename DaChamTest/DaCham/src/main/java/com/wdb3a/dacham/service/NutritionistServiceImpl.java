@@ -124,6 +124,12 @@ public class NutritionistServiceImpl implements NutritionistService {
 		return dao.orderList();
 	}
 
+	@Override
+	public List<OrderList> thisMonth() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.thisMonth();
+	}
+
 	
 
 }
