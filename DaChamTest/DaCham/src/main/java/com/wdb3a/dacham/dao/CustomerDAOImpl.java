@@ -48,4 +48,9 @@ public class CustomerDAOImpl implements CustomerDAO {
 		
 	}
 
+	@Override
+	public void orderCart(Customer customer) throws Exception {		
+		sqlSession.update(namespace+".orderCart" ,customer);
+	}
+
 }

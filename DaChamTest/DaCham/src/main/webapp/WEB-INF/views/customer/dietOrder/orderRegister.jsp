@@ -29,25 +29,25 @@
 			$(".totalPrice").text(totalPrice);
 		}
 		$("#payment").on("click", function() {
-			/* $("#setPaymentItem").val($("#paymentItem").val());
-			$("#paymentForm").attr("action", "payment");
-			$("#paymentForm").submit(); */
 
-			
+			if($(".orderInfo").attr("data-detailOrder")==true){
+				if(confirm("결제 하겠습니까?")){
+					$("#setPaymentItem").val($("#paymentItem").val());
+					$("#paymentForm").attr("action", "payment");
+					$("#paymentForm").submit();	
+				}
+			}else{			
 			if(confirm("결제 하겠습니까?")){
 				var data = new Array();
 				var dataObj = new Object();
 				var length = $(".dietAmount").length;
 				console.log($(".dietAmount:eq(0)").text());
-				console.log($(".dietCode:eq(0)").attr("data-dietCode"));
+				console.log($(".orderCode:eq(0)").attr("data-orderCode"));
 				console.log($(".dietPrice:eq(0)>span").text());
 				var orderInfo = new Array();				
 				for(var i=0; i<length;i++){					
 					var jsonVal ={
-							'dietCode':$(".dietCode:eq("+i+")").attr("data-dietCode"),
-							'dietAmount':$(".dietAmount:eq("+i+")>span").text(),
-							'price':$(".dietPrice:eq("+i+")>span").text(),
-							'id':$("#customerId").val(),
+							'orderCode':$(".orderCode:eq("+i+")").attr("data-orderCode"),
 							'paymentItemCode':$("#paymentItem").val()
 					}
 					orderInfo[i]=jsonVal;
@@ -65,10 +65,11 @@
 					type:"POST",
 					success:function(data){							
 						if(data=="SUCCESS"){
-							window.location.href="payment";	
+							window.location.href="cartPayment";	
 						}							
 					}
 				});
+			}
 			}
 		});
 	});
@@ -94,7 +95,7 @@
 				<div class="row col-sm-6 rightArea"><!--우측 주문내역, 결제정보 출력및결제 -->
 				<c:if test="${order.detailOrder == true}">
 				<!-- detaileOrder에서 넘어온 경우 사용 -->
-				<div class="row"> <!-- 주문내역 row -->
+				<div class="row orderInfo" data-detailOrder="${order.detailOrder}"> <!-- 주문내역 row -->
 					<div class="col-sm-3 text-center">
 						<img class="block-center img-responsive" width="120" height="90"
 							src="displayFile?fileName=${order.dietImg}">
@@ -121,7 +122,7 @@
 							src="displayFile?fileName=${cart.dietImg}">
 					</div>
 					<div class="col-sm-3 text-center">
-						<div class="block-center dietCode" data-dietCode="${cart.dietCode}">식단명</div>
+						<div class="block-center orderCode" data-orderCode="${cart.orderCode}">식단명</div>
 						<div >${cart.dietName}</div>
 					</div>
 					<div class="col-sm-3 text-center">
@@ -146,10 +147,10 @@
 		</div>
 	</div>
 	
-	<form id="paymentForm" method="post">
-		<input id="setDietCode" type="hidden" name="dietCode">
-		<input id="setPrice" type="hidden" name="price">
-		<input id="setDietAmount" type="hidden" name="dietAmount">
+	<form id="paymentForm" method="POST">
+		<input id="setDietCode" type="hidden" name="dietCode" value="${order.dietCode}">
+		<input id="setPrice" type="hidden" name="price" value="${order.price }">
+		<input id="setDietAmount" type="hidden" name="dietAmount" value="${order.dietAmount}">
 		<input id="setPaymentItem" type="hidden" name="paymentItemCode"> 
 		<input id="customerId" type="hidden" name="id" value="${order.id }">
 	</form>
