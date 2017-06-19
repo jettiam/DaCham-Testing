@@ -102,7 +102,7 @@
 <body>
 	<div class="row">
 		<!-- 로고+고객정보 -->
-		<div class="col-sm-2" id="logo">
+		<div class="col-sm-2" id="logo" >
 			<!-- 로고박스 -->
 			<a href="main"><img class="img-responsive block-center"
 				src="../../dacham/resources/customerImage/dachamlogo.jpg"
