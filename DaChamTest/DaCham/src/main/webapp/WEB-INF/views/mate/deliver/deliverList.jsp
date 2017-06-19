@@ -41,7 +41,7 @@
 			$(".searchResult").remove();
 			var searchType = $('.searchType').val();
 			var keyword = $("#keyword").val();
-			alert("det : "+searchType + " sde: "+keyword);
+			alert("Ord : "+searchType + " sde: "+keyword);
 			$.getJSON("deliverAjax/"+searchType+"/"+keyword,function(data){
 				var str = "";
 				$(data).each(function(){

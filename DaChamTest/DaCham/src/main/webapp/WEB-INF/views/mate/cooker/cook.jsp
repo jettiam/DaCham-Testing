@@ -18,34 +18,26 @@
 			
 		});
 		cookAll1();
+		
+		$(document.body).on("click",".cookResult1 td a",function(){
+			event.preventDefault();
+			
+			alert("일단 클릭됨");
+			
+			$(".cookResult2").remove();
+			var i = $(this).attr("href");
+			alert(i);
+			$(".cook2").append($(".cookResult1").eq(i));        
+			
+		});    
 		function cookAll1(){
 			$.getJSON("cookAjax/readycook",function(data){
 				$(".cookResult1").remove();
 				var str = "";
-				$(data).each(function(){
-					str += "<tr class = 'cookResult1'>"+"<td>"+"<a href = '#' data-name = '"+this.sideDName+"'>"+this.sideDName+"</a>"+"</td>"+"<td>"+this.dietAmount+"</td>"+"</tr>"
+				$(data).each(function(index){
+					str += "<tr class = 'cookResult1'>"+"<td>"+"<a href = '"+index+"' data-name = '"+this.sideDName+"'>"+this.sideDName+"</a>"+"</td>"+"<td>"+this.dietAmount+"</td>"+"</tr>"
 				});
 				$(".cook1").append(str);
-			});
-		}
-		function cookAll2(){
-			$.getJSON("cookAjax/cookingfood",function(data){
-				$(".cookResult2").remove();
-				var str = "";
-				$(data).each(function(){
-					str += "<tr class = 'cookResult2'>"+"<td>"+"<a href = '#' data-name = '"+this.sideDName+"'>"+this.sideDName+"</a>"+"</td>"+"<td>"+this.dietAmount+"</td>"+"</tr>"
-				});
-				$(".cook2").append(str);
-			});
-		}
-		function cookAll3(){
-			$.getJSON("cookAjax/finishfood",function(data){
-				$(".cookResult3").remove();
-				var str = "";
-				$(data).each(function(){
-					str += "<tr class = 'cookResult3'>"+"<td>"+"<a href = '#'>"+this.sideDName+"</a>"+"</td>"+"<td>"+this.dietAmount+"</td>"+"</tr>"
-				});
-				$(".cook3").append(str);
 			});
 		}
 	});
