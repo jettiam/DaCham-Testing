@@ -59,7 +59,7 @@
 		<ul class="">
 			<!-- 메뉴 리스트 -->
 			<li class="box"><a href="orderList" id="orderList">주문내역</a></li>
-			<li class="box"><a href="statistics" id="statistics">통계</a></li>
+			<!-- <li class="box"><a href="statistics" id="statistics">통계</a></li> -->
 			<li class="box"><a href="foodStock" id="foodStock">식재료</a></li>
 			<li class="box"><a href="dietManagement" id="dietManagement">식단관리</a></li>
 			<li class="box"><a href="emp" id="emp">사원관리</a></li>

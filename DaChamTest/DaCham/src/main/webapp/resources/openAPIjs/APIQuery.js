@@ -3,42 +3,37 @@ var w = 200,h = 200;
 		var colorscale = d3.scale.category10();
 		
 		//Legend titles
-		var LegendOptions = ['단백질','탄수화물','지방','나트륨'];
-		var a = "콩나물";
-		var b = "마파두부";
+		var LegendOptions = ['반찬A','반찬B','반찬C','반찬D'];
 		//Data
 		var d = [
 			  [
-				{axis: a,value: 0},
-				{axis: b,value: 0.4},
+				{axis: "단백질",value: 0},
+				{axis: "탄수화물",value: 0.4},
 				
-				{axis:"반찬C",value:0.02},
-				{axis:"반찬D",value:0.8},
-				{axis:"반찬E",value:0.8}
+				{axis:"열량",value:0.02},
+				{axis:"나트륨",value:0.8},
+				{axis:"지방",value:0.8}
 			  ],[
-				{axis: a,value:0.14},
-				{axis: b,value:0.6},
-			
-				{axis:"반찬C",value:0.7},
-			
-				{axis:"반찬D",value:0.17},
-				{axis:"반찬E",value:0.8}
-			  ],[
-				{axis: a,value:0.2},
-				{axis: b,value:0.6},
-				
-				{axis:"반찬C",value:0.7},
-				
-				{axis:"반찬D",value:0.4},
-				{axis:"반찬E",value:0.8}
-			  ],[
-				{axis: a,value:0.3},
-				{axis: b,value:0.1},
+				  {axis: "단백질",value: 0},
+					{axis: "탄수화물",value: 0.4},            
 					
-				{axis:"반찬C",value:0.2},
+					{axis:"열량",value:0.02},
+					{axis:"나트륨",value:0.8},
+					{axis:"지방",value:0.8}
+			  ],[
+				  {axis: "단백질",value: 0},
+					{axis: "탄수화물",value: 0.4},
 					
-				{axis:"반찬D",value:0.05},
-				{axis:"반찬E",value:0.8}
+					{axis:"열량",value:0.02},
+					{axis:"나트륨",value:0.8},
+					{axis:"지방",value:0.8}
+			  ],[
+				  {axis: "단백질",value: 0},
+					{axis: "탄수화물",value: 0.4},
+					
+					{axis:"열량",value:0.02},
+					{axis:"나트륨",value:0.8},
+					{axis:"지방",value:0.8}       
 			  ]						
 			  
 			];
