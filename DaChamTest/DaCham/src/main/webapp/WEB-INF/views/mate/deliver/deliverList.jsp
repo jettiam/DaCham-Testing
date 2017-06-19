@@ -9,24 +9,14 @@
 <%@include file = "deliverNavi.jsp" %>
 <title>Insert title here</title>
 <script>
-	function check(){
-		cbox = input_form.chk;
-		if(cbox.length){
-			for(var i = 0; i < cbox.length; i++){
-				cbox[i].checked = input_form.all.checked;
-			}
-		}
-		else{
-			cbox.checked = input_form.all.checked;
-		}	
-	}
 	$(document).ready(function(){
+		all();
 		$("#button").on("click",function(){
-			var data = $("#transportNum").val();
-			var orderCode = $("#checkbox").val();
 			
-			if(data != null || data != ""){
-				alert("def"+orderCode);
+			var orderCode = $('input:radio[name="chk"]:checked').val();     
+			var data = $(".transportNum"+orderCode).val();
+			alert("def:"+data);
+			
 				$.ajax({
 					type : "put",	
 					url : "deliverAjax/"+ orderCode,
@@ -40,21 +30,46 @@
 					}),
 					success : function(result){
 						if(result == "SUCCESS"){
-							alert("수정되었습니다.");
+							alert("수정되었습니다.");          
+							all();	
 						}
 					}
 				});
-			}
+			
 		});
-		
+		$("#search").on("click",function(){
+			$(".searchResult").remove();
+			var searchType = $('.searchType').val();
+			var keyword = $("#keyword").val();
+			alert("det : "+searchType + " sde: "+keyword);
+			$.getJSON("deliverAjax/"+searchType+"/"+keyword,function(data){
+				var str = "";
+				$(data).each(function(){
+					str += "<tr class = 'searchResult'>"+"<td>"+"<input type = 'radio' name = 'chk' value = '"+this.orderCode+"' class = 'check'>"+"</td>"+"<td>"+this.orderCode+"</td>"+"<td>"+this.id+"</td>"+"<td>"+this.dietName+"</td>"+"<td>"+this.address+"</td>"+"<td>"+"<input type = 'text' class = 'transportNum"+this.orderCode+"' name = 'transportNum'>"+"</td>"+"<td>"+this.orderItemName+"</td>"+"</tr>";
+				});
+				$(".searchTable").append(str);
+			});
+		});
+		$("#all").on("click",function(){
+			all();
+		});
+		function all(){
+			$.getJSON("deliverAjax/all",function(data){
+				$(".searchResult").remove();
+				var str = "";
+				$(data).each(function(){
+					str += "<tr class = 'searchResult'>"+"<td>"+"<input type = 'radio' name = 'chk' value = '"+this.orderCode+"' class = 'check'>"+"</td>"+"<td>"+this.orderCode+"</td>"+"<td>"+this.id+"</td>"+"<td>"+this.dietName+"</td>"+"<td>"+this.address+"</td>"+"<td>"+"<input type = 'text' class = 'transportNum"+this.orderCode+"' name = 'transportNum'>"+"</td>"+"<td>"+this.orderItemName+"</td>"+"</tr>";
+				});
+				$(".searchTable").append(str);
+			});
+		}
 	});
 	
 </script>
 </head>
 <body>
-	<form name = "input_form">
 		<div>
-			<select name = "searchType">
+			<select name = "searchType" class = "searchType">
 				<option value = "n"
 	   			<c:out value="${orderList.searchType==null?'selected':'' }"/>>
 	   			분류
@@ -68,41 +83,30 @@
 	   			고객id
 	   			</option>
 			</select>
-			<input type = "text" name = "keyword" placeholder = "검색어 입력란">
+			<input type = "text" name = "keyword" placeholder = "검색어 입력란" id = "keyword">
 			<button id = "search">검색</button>
+			<button id = "all">전체목록</button>
 		</div>
 		<br><br><br><br>
 	
 		<div>
-			<table border = "1">
+			<table border = "1" class = "searchTable">
 				<tr>
-					<th><input type = "checkbox" name = "all" onclick="check();"></th>
+					<th>   </th>
 					<th>주문번호</th>
 					<th>고객 아이디</th>
-					<th>식단 이미지</th>
 					<th>식단명</th>
 					<th>주소</th>
 					<th>운송장번호</th>
 					<th>배송상태</th>
 				</tr>
-				<%int i = 1; %>
-				<c:forEach items = "${list }" var = "b">
-					<tr>
-						<td><input type = "checkbox" name = "chk" value = "${b.orderCode }" id = "checkbox" ></td>
-						<td>${b.orderCode }</td>
-						<td>${b.id }</td>
-						<td><img src = "deliverDisplayFile?fileName=${b.dietImg }" style= "width: 175px; height: 50px;"></td>
-						<td>${b.dietName }</td>
-						<td>${b.address }</td>
-						<td><input type = "text" id = "transportNum" name = "transportNum"></td>
-						<td>${b.orderItemCode }</td>
-						<%i = i + 1;  %>
+					<tr class = "searchResult">
+						
 					</tr>
-				</c:forEach>
 			</table>
 			
 		</div>
-	</form>
-		<button id = "button">배송완료</button>
+	
+		<button id = "button">배송</button>
 </body>
 </html>

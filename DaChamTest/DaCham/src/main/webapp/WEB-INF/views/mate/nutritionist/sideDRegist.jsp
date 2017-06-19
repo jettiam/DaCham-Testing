@@ -164,7 +164,7 @@
 
 		$(document).ready(function(){
 			openAPI();
-			materialAll();
+			
 			var v = 0;
 			$("#listAll").on("click",function(){
 				materialAll();

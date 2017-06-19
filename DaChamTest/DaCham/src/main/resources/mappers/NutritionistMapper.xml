@@ -72,4 +72,20 @@
 		where d.dietCode=#{diseaseCode} and d.dietCode=i.dietCode) b
 		where s.sideDcode = b.sideDCode;
 	</select>
+	<!-- 해당 질병에 대한 식단을 조회합니다. -->
+	<select id = "diseaseDietOverview" resultType = "com.wdb3a.dacham.bean.Nutritionist">
+		select a.dietCode, a.dietImg,a.dietName ,a.diseaseCode, b.diseaseName
+		from diet a join disease b
+		where a.diseaseCode = b.diseaseCode
+		and b.diseaseName = #{diseaseName}
+	</select>
+	<!-- 해당 반찬에 대한 카테고리 검색 -->
+	<select id = "categorySearch" resultType = "com.wdb3a.dacham.bean.Nutritionist">
+		select a.sideDCode,a.sideDName, a.sideDImg, b.cookMCode, b.cookMName,c.foodGName,c.foodGCode
+		from sidedish a join cookmethod b join foodgroup c
+		where a.cookMCode = b.cookMCode
+		and a.foodGCode = c.foodGCode
+		and b.cookMName = #{cookMName}
+		and c.foodGName = #{foodGName}
+	</select>
 </mapper>

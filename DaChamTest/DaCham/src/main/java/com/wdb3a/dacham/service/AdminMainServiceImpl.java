@@ -73,6 +73,12 @@ public class AdminMainServiceImpl implements AdminMainService {
 		return dao.chartPrice();
 	}
 
+	@Override
+	public List<ChartPrice> chartPrice1(ChartPrice dates) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.chartPrice1(dates);
+	}
+
 	
 	
 	
