@@ -78,6 +78,28 @@ public class CustomerAjaxController {
 		return entity;
 		}
 	
+	/**
+	 * 
+	 * @param mo
+	 * @return 주문내역으로 이동
+	 */
+	@RequestMapping(value="myOrderlist",method=RequestMethod.POST)
+	public ResponseEntity<Map<String, Object>> getOrderlist(@RequestBody Customer mo){
+		
+		ResponseEntity<Map<String, Object>> entity = null;
+		List<Customer> list;
+		try {
+			list = service.myOrderList(mo.getId());
+			Map<String, Object> map = new HashMap<>();
+			map.put("list", list);
+			entity = new ResponseEntity<>(map,HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+		}
+	
 	
 	/**
 	 * 

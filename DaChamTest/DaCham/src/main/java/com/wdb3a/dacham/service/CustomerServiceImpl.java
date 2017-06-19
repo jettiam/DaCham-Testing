@@ -44,5 +44,10 @@ private CustomerDAO dao;
 		dao.cartRegist(customer);
 		
 	}
+	@Override
+	public List<Customer> myOrderList(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.myOrderList(id);
+	}
 
 }

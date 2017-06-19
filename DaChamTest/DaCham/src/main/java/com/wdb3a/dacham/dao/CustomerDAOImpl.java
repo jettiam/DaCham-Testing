@@ -48,4 +48,10 @@ public class CustomerDAOImpl implements CustomerDAO {
 		
 	}
 
+	@Override
+	public List<Customer> myOrderList(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".myOrderList",id);
+	}
+
 }
