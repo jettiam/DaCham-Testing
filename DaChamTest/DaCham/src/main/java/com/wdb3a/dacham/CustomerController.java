@@ -118,7 +118,7 @@ public String cartOrder(String cartInfo,Model model) throws Exception{
 	JSONObject jsonObj = (JSONObject) jsonParser.parse(cartInfo);
 	
 	
-	JSONObject jsonObjTest = (JSONObject) jsonObj.get(1+"");	
+	JSONObject jsonObjTest = (JSONObject) jsonObj.get(0+"");	
 	System.out.println(Integer.parseInt(jsonObjTest.get("price").toString()));
 	
 	System.out.println("커스터머 만듬");
@@ -149,8 +149,15 @@ for(int i=0; i< jsonObj.size();i++){
  * @return 주문 결제
  * @throws Exception
  */
-@RequestMapping(value="/payment",method=RequestMethod.GET)
-public String payment(RedirectAttributes rttr)throws Exception{
+@RequestMapping(value="/payment",method=RequestMethod.POST)
+public String payment(RedirectAttributes rttr,Customer customer)throws Exception{	
+	serviceCu.orderRegist(customer);	
+	rttr.addAttribute("status","3");
+	//결제후 마이페이지로
+	return "redirect:myPage";
+}
+@RequestMapping(value="/cartPayment",method=RequestMethod.GET)
+public String cartPayment(RedirectAttributes rttr)throws Exception{	
 	rttr.addAttribute("status","3");
 	//결제후 마이페이지로
 	return "redirect:myPage";
@@ -164,7 +171,8 @@ public String payment(RedirectAttributes rttr)throws Exception{
  */
 @RequestMapping(value="/goMyCart",method=RequestMethod.GET)
 public String goMyCart(Customer customer)throws Exception{
-	serviceCu.cartRegist(customer);	
+	serviceCu.cartRegist(customer);
+	
 	return "redirect:goCartList";
 }
 /** 
@@ -172,7 +180,8 @@ public String goMyCart(Customer customer)throws Exception{
  * @throws Exception
  */
 @RequestMapping(value="/goCartList",method=RequestMethod.GET)
-public String inputOrderInfo()throws Exception{	
+public String inputOrderInfo(Model model)throws Exception{
+	model.addAttribute("status","2");
 	return "customer/myPage";
 }
 /**
