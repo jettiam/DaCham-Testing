@@ -7,7 +7,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="shortcut icon" href="resources/favicon/N.ico">
 <%@include file="nutritionistNavi.jsp" %>
-<<<<<<< HEAD
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
 	$(document).ready(function(){
@@ -24,11 +23,8 @@
 		}
 	});
 </script>
-<title>Insert title here</title>
-=======
 
 <title>영양사</title>
->>>>>>> branch 'master' of https://github.com/jettiam/DaCham-Testing.git
 <style>
  .box1 {
   float:left;  }
