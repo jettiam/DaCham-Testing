@@ -21,10 +21,19 @@
 </style>
 <script>
 	$(document).ready(function() {
+		if("${cartOrder[0].dietCode}">0){
+			var totalPrice = 0;
+			for(var i=0; i<$(".dietAmount").length;i++){
+				totalPrice += Number($(".dietPrice:eq("+i+")>span").text());
+			}
+			$(".totalPrice").text(totalPrice);
+		}
 		$("#payment").on("click", function() {
 			/* $("#setPaymentItem").val($("#paymentItem").val());
 			$("#paymentForm").attr("action", "payment");
 			$("#paymentForm").submit(); */
+
+			
 			if(confirm("결제 하겠습니까?")){
 				var data = new Array();
 				var dataObj = new Object();
@@ -32,8 +41,7 @@
 				console.log($(".dietAmount:eq(0)").text());
 				console.log($(".dietCode:eq(0)").attr("data-dietCode"));
 				console.log($(".dietPrice:eq(0)>span").text());
-				var orderInfo = new Array();
-				var orderInfoJSON = new Object();
+				var orderInfo = new Array();				
 				for(var i=0; i<length;i++){					
 					var jsonVal ={
 							'dietCode':$(".dietCode:eq("+i+")").attr("data-dietCode"),
@@ -47,8 +55,7 @@
 				console.log(orderInfo);
 				
 				$.ajax({
-					url:"customerAjax/payment",
-					data:orderInfoJSON,
+					url:"customerAjax/payment",					
 					headers : {
 			               "Content-Type" : "application/json",
 			               "X-HTTP-Method-Override" : "POST"
@@ -104,21 +111,41 @@
 						<div>가격</div>
 						<div class="dietPrice"><span>${order.price}</span>원</div>
 					</div>
-					</div>
+				</div>
 					</c:if>
+					<!-- 장바구니에서 넘어온 경우 사용 -->
+				<c:forEach items="${cartOrder}" var="cart">
+				<div class="row"> <!-- 주문내역 row -->
+					<div class="col-sm-3 text-center">
+						<img class="block-center img-responsive" width="120" height="90"
+							src="displayFile?fileName=${cart.dietImg}">
+					</div>
+					<div class="col-sm-3 text-center">
+						<div class="block-center dietCode" data-dietCode="${cart.dietCode}">식단명</div>
+						<div >${cart.dietName}</div>
+					</div>
+					<div class="col-sm-3 text-center">
+						<div>주문수량</div>
+						<div class="dietAmount"><span>${cart.dietAmount}</span>개</div>						
+					</div>
+					<div class="col-sm-3 text-center">
+						<div>가격</div>
+						<div class="dietPrice"><span>${cart.price}</span>원</div>
+					</div>
+				</div>	
+				</c:forEach>
 					<div>최종결제 정보</div>
 					<div class="row"><!-- 최종 결제정보 row -->						
-						<div class="col-sm-5">상품가격</div><div class="col-sm-7"><c:if test="${order.detailOrder == true}">${order.price}</c:if>원</div>
+						<div class="col-sm-5">상품가격</div><div class="col-sm-7"><c:if test="${order.detailOrder == true}">${order.price}</c:if><span class="totalPrice"></span>원</div>
 						<div class="col-sm-5">할인가격</div><div class="col-sm-7">0원</div>
 						<div class="col-sm-5">배송비</div><div class="col-sm-7">0원</div>
-						<div class="col-sm-5">최종 결제가격</div><div class="col-sm-7"><c:if test="${order.detailOrder == true}">${order.price}</c:if>원</div>
+						<div class="col-sm-5">최종 결제가격</div><div class="col-sm-7"><c:if test="${order.detailOrder == true}">${order.price}</c:if><span class="totalPrice"></span>원</div>
 						<button id="payment">결제</button>
 					</div>	
-				</div>
-			
-			
+				</div>			
 		</div>
 	</div>
+	
 	<form id="paymentForm" method="post">
 		<input id="setDietCode" type="hidden" name="dietCode">
 		<input id="setPrice" type="hidden" name="price">
