@@ -8,7 +8,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
+<title>DaCham 다참</title>
 <!-- 메인페이지 기본 틀을 위한 임시 CSS -->
 <style>
 table,td,tr,tbody{
@@ -35,8 +35,12 @@ table,td,tr,tbody{
 #mainNutriBox {
 	position: relative;
 	max-width: 280px;
-	height: 140px;
-	background-color: gray;
+	height: 50px;
+	background-color: #8A9D60;
+}
+#mainShowNutriTable{
+margin: 0 auto;
+display:none;
 }
 
 #mainRightWrap {
@@ -46,8 +50,8 @@ table,td,tr,tbody{
 
 #myNutriInfo {
 	max-width: 280px;
-	height: 123px;
-	background-color: gray;
+	height: 140px;
+	background-color: #EDA900;
 }
 
 img {
@@ -56,7 +60,7 @@ img {
 }
 td img{
 	width:140px;
-	height:90px;	
+	height:120px;	
 	}
 
 
@@ -102,33 +106,122 @@ td img{
 				<!-- 로그인박스 하단 작은 사이즈 식단 이미지 -->
 				<table>
 					<tr>
-						<td><img src="http://placehold.it/280x180"
-							class="mainMenuImg1"></td>
-						<td><img src="http://placehold.it/280x180"
-							class="mainMenuImg2"></td>
+						<td><a href="detailOrder?dietCode=1"><img src="../../dacham/resources/customerImage/dietImg/d01.JPG"
+							id=mainMenuImg class="mainMenuImg1"></a></td>
+						<td><a href="detailOrder?dietCode=2"><img src="../../dacham/resources/customerImage/dietImg/d02.JPG"
+							class="mainMenuImg2"></a></td>
 					</tr>
 
 					<tr>
-						<td><img src="http://placehold.it/280x180"
-							class="mainMenuImg3"></td>
-						<td><img src="http://placehold.it/280x180"
-							class="mainMenuImg4"></td>
+						<td><a href="detailOrder?dietCode=3"><img src="../../dacham/resources/customerImage/dietImg/d03.JPG"
+							class="mainMenuImg3"></a></td>
+						<td><a href="detailOrder?dietCode=3"><img src="../../dacham/resources/customerImage/dietImg/d05.JPG"
+							class="mainMenuImg4"></a></td>
 					</tr>
 
 					<tr>
-						<td><img src="http://placehold.it/280x180"
-							class="mainMenuImg5"></td>
-						<td><img src="http://placehold.it/280x180"
-							class="mainMenuImg6"></td>
+						<td><a href="detailOrder?dietCode=2"><img src="../../dacham/resources/customerImage/dietImg/m16.JPG"
+							class="mainMenuImg5"></a></td>
+						<td><a href="detailOrder?dietCode=1"><img src="../../dacham/resources/customerImage/dietImg/d20.JPG"
+							class="mainMenuImg6"></a></td>
 					</tr>
 				</table>
 			</div>
 
 			<div id="mainNutriBox">
 				<!-- 각 식단의 간략한 영양정보 -->
+				<table id = "mainShowNutriTable" class="table-bordered text-center mainNT1">
+<tr class="NutriTable">
+<td class="NutriTable">칼로리</td>
+<td class="NutriTable">나트륨</td>
+<td class="NutriTable">탄수화물</td>
+<td class="NutriTable">지방</td>
+</tr>
+
+<tr class="NutriTable">
+<td class="NutriTable">614.5kcal</td>
+<td class="NutriTable">80.4mg</td>
+<td class="NutriTable">14.3g</td>
+<td class="NutriTable">48.5g</td>
+</tr>
+</table>
+
+<table id = "mainShowNutriTable" class="table-bordered text-center mainNT2">
+<tr class="NutriTable">
+<td class="NutriTable">칼로리</td>
+<td class="NutriTable">나트륨</td>
+<td class="NutriTable">탄수화물</td>
+<td class="NutriTable">지방</td>
+</tr>
+
+<tr class="NutriTable">
+<td class="NutriTable">583.3kcal</td>
+<td class="NutriTable">57.2mg</td>
+<td class="NutriTable">50.3g</td>
+<td class="NutriTable">30.5g</td>
+</tr>
+</table>
+
+<table id = "mainShowNutriTable" class="table-bordered text-center mainNT3">
+<tr class="NutriTable">
+<td class="NutriTable">칼로리</td>
+<td class="NutriTable">나트륨</td>
+<td class="NutriTable">탄수화물</td>
+<td class="NutriTable">지방</td>
+</tr>
+
+<tr class="NutriTable">
+<td class="NutriTable">566.2kcal</td>
+<td class="NutriTable">53.2mg</td>
+<td class="NutriTable">56.3g</td>
+<td class="NutriTable">18.5g</td>
+</tr>
+</table>
 
 			</div>
 		</div>
 	</div>
+	<script>
+	$(function(){
+		$('.mainMenuImg1').mouseover(function(){
+			$('.mainNT1').show();
+		});
+		$('.mainMenuImg1').mouseout(function(){
+			$('.mainNT1').hide();
+		});
+		$('.mainMenuImg2').mouseover(function(){
+			$('.mainNT2').show();
+		});
+		$('.mainMenuImg2').mouseout(function(){
+			$('.mainNT2').hide();
+		});
+		$('.mainMenuImg3').mouseover(function(){
+			$('.mainNT3').show();
+		});
+		$('.mainMenuImg3').mouseout(function(){
+			$('.mainNT3').hide();
+		});
+		
+		$('.mainMenuImg4').mouseover(function(){
+			$('.mainNT1').show();
+		});
+		$('.mainMenuImg4').mouseout(function(){
+			$('.mainNT1').hide();
+		});
+		$('.mainMenuImg5').mouseover(function(){
+			$('.mainNT2').show();
+		});
+		$('.mainMenuImg5').mouseout(function(){
+			$('.mainNT2').hide();
+		});
+		$('.mainMenuImg6').mouseover(function(){
+			$('.mainNT3').show();
+		});
+		$('.mainMenuImg6').mouseout(function(){
+			$('.mainNT3').hide();	
+		
+		});
+	});
+	</script>
 </body>
 </html>

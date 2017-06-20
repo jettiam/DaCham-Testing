@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
+<title>DaCham 영양정보</title>
 <style>
 #nutriInfoWrap {
 	width: 1080px;
@@ -114,7 +114,7 @@
 				id="nutriInfoImg">
 
 				<div class="overlay">
-					<div class="text">'방울 토마토'</div></a>
+					<div class="text">'야채와 건강'</div></a>
 		</div>
 	</div>
 	</div>
@@ -127,11 +127,11 @@
 
 		<div id="nutriInfoImgList">
 			<a href="nutritionInfoDetail"><img
-				src="../../../dacham/resources/customerImage/tomato2.jpg"
+				src="../../../dacham/resources/customerImage/fruit.jpg"
 				id="nutriInfoImg">
 
 				<div class="overlay">
-					<div class="text">'방울 토마토'</div></a>
+					<div class="text">'당뇨와 과일'</div></a>
 		</div>
 	</div>
 	</div>
@@ -142,11 +142,11 @@
 
 		<div id="nutriInfoImgList">
 			<a href="nutritionInfoDetail"><img
-				src="../../../dacham/resources/customerImage/tomato2.jpg"
+				src="../../../dacham/resources/customerImage/gusal.jpg"
 				id="nutriInfoImg">
 
 				<div class="overlay">
-					<div class="text">'방울 토마토'</div></a>
+					<div class="text">'질병과 현미'</div></a>
 		</div>
 	</div>
 	</div>
@@ -157,11 +157,11 @@
 
 		<div id="nutriInfoImgList">
 			<a href="nutritionInfoDetail"><img
-				src="../../../dacham/resources/customerImage/tomato2.jpg"
+				src="../../../dacham/resources/customerImage/salmon.jpg"
 				id="nutriInfoImg">
 
 				<div class="overlay">
-					<div class="text">'방울 토마토'</div></a>
+					<div class="text">'슈퍼푸드 연어'</div></a>
 		</div>
 	</div>
 	</div>
