@@ -45,12 +45,12 @@
 					<%-- <td>${board.outAmount}</td> 
 						<td>${board.stock}</td> --%>
 
-				</c:forEach>
+				</c:forEach>   
 			</tr>
 		</table>
 	</div>
 	<div>
-		<table id="foodMTable" width="600">
+		<table id="foodMTable" width="600" class="tables"> 
 			<tr>
 				<th>식재료코드</th>
 				<th>식재료명</th>
@@ -58,28 +58,51 @@
 				<th>주문량</th>
 				<th>단위</th>
 			</tr>
-			<c:forEach items="${list}" var="board" varStatus="status">
+			<div class="length">
+			<c:forEach var="i" items="${map}">  
+				<c:forEach var ="j" items="${i.value}">
+				<c:set var="count" value="${count + 1}" /> 
+					<div class="length2">
+					<input type="hidden" id ="foodMName${count}" name="foodMName" value="${j.foodMName}">
+					<input type="hidden" id ="price${count}" name="price" value="${j.price}">
+					<input type="hidden" id ="foodMAmount${count}" name="foodMAmount" value="${j.foodMAmount}">
+					<input type="hidden" id ="unit${count}" name="unit" value="${j.unit}">
+					<input type="hidden" id ="foodMCode${count}" name="foodMCode" value="${j.foodMCode}">
+					</div>		  		  
+				</c:forEach> 
+			</c:forEach> 
+			</div>
+
+
+
+
+
+			<%-- <c:forEach items="${list}" var="board" varStatus="status">
 				<td id="foodMOrder${status.index}">
 					<td class="foodMCode" data-foodMCode="${board.foodMCode}">${board.foodMCode}</td>
 					<td class="foodMName" data-foodMName="${board.foodMName}">${board.foodMName}&nbsp;&nbsp;&nbsp;</td>
 					<td class="price" data-price="${board.price}"">${board.price}</td>
-					<%-- <td>${board.dietName}&nbsp;&nbsp;</td> --%>
+					<td>${board.dietName}&nbsp;&nbsp;</td>
 					<td class="foodMAmount" data-foodMAmount="${board.foodMAmount}">${board.foodMAmount}&nbsp;&nbsp;</a></td>
 					<td class="unit" data-unit="${board.unit }">${board.unit }&nbsp;&nbsp;</td>
 
-					<%-- <td>${board.outAmount}</td> 
-						<td>${board.stock}</td> --%>
+					<td>${board.outAmount}</td> 
+						<td>${board.stock}</td>
 				</tr>
-			</c:forEach>
+			</c:forEach> --%>
 		</table>
 	</div>
 	<button id="foodMOrder">식재료 주문서 보내기</button>
 
 	<script>
+	var divlength = $(".length .length2").size();
+	
+	
+			
 		$(document)
 				.ready(
 						function() {
-							$("#foodMOrder")
+							/* $("#foodMOrder")
 									.on(
 											"click",
 											function() {
@@ -143,11 +166,22 @@
 
 														});
 												console.log(foodMArray);
-											});
+											}); */
 							$(".foodMName1").on("click", function(){
 								var a = $(this).siblings()
 								alert(a); 
 							});
+							all();
+							function all(){
+									var str = "";
+									$(".foodOrder").remove();  
+									for(var i =1; i<=divlength; i++){
+										str += "<tr class='foodOrder'><td>"+$("#foodMCode"+i).val()+"</td>"+"<td>"+$("#foodMName"+i).val()+"</td>"+"<td>"+$("#price"+i).val()+"</td>"+"<td>"+$("#foodMAmount"+i).val()+"</td>"+"<td>"+$("#unit"+i).val()+"</td>" 
+									} 
+									console.log(str);
+									$(".tables").append(str); 
+								
+							} 
 						});
 	</script>
 </body>

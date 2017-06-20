@@ -63,6 +63,7 @@
 			</if>
 		</if>
 	</sql>
+	
 
 	<update id="refundupdate">
 		update orderlist set orderItemCode=6
@@ -79,9 +80,9 @@
 
 	<select id="foodMAmountRead" resultType="FoodMAmountRead">
 		select
-		b.foodMAmount,b.foodMCode,f.foodMName, f.price, f.unit
+		b.foodMAmount,b.foodMCode,f.foodMName, f.price, f.unit, a.orderCode
 		from (select
-		d.sideDcode from orderlist o, dietinfo d where
+		d.sideDcode, o.orderCode from orderlist o, dietinfo d where
 		o.ordercode=#{orderCode}
 		and o.dietCode=d.dietCode) a, sidedinfo
 		b,foodmaterial f
