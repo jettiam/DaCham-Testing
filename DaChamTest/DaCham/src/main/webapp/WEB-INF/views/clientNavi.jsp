@@ -58,7 +58,7 @@
 	color: #88b04b;
 }
 
-#headerBox a {
+#infoBox a {
 	color: #EDA900;
 }
 

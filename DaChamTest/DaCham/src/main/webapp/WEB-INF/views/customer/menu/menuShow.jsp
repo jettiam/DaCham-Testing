@@ -55,7 +55,7 @@ width:100px;
 }
 </style>
 
-
+<title>DaCham 이달의메뉴</title>
 <%@include file="../../clientNavi.jsp" %>
 
 <div id = "menuShowWrap">
@@ -178,36 +178,36 @@ width:100px;
 <div id="menuShowList1">
 <table id="menuShowTableWrap">
 <tr>
-<td><img src="http://placehold.it/200x150"/></td>
-<td><img src="http://placehold.it/200x150"/></td>
+<td><img src="../../../dacham/resources/customerImage/dietImg/rice5.JPG" id="menuShowImg"></td>
+<td><img src="../../../dacham/resources/customerImage/dietImg/s07.JPG" id="menuShowImg"></td>
 </tr>
 
 <tr>
-<td><img src="http://placehold.it/200x150"/></td>
-<td><img src="http://placehold.it/200x150"/></td>
+<td><img src="../../../dacham/resources/customerImage/dietImg/m12.JPG" id="menuShowImg"></td>
+<td><img src="../../../dacham/resources/customerImage/dietImg/d09.JPG" id="menuShowImg"></td>
 </tr>
 
 <tr>
-<td><img src="http://placehold.it/200x150"/></td>
-<td><img src="http://placehold.it/200x150"/></td>
+<td><img src="../../../dacham/resources/customerImage/dietImg/d10.JPG" id="menuShowImg"></td>
+<td><img src="../../../dacham/resources/customerImage/dietImg/d02.JPG" id="menuShowImg"></td>
 </tr>
 </table>
 
 
 <table id = "menuShowTableWrap" class="menuShowList2">
 <tr>
-<td><img src="http://placehold.it/200x150"/></td>
-<td><img src="http://placehold.it/200x150"/></td>
+<td><img src="../../../dacham/resources/customerImage/dietImg/rice2.JPG" id="menuShowImg"></td>
+<td><img src="../../../dacham/resources/customerImage/dietImg/s09.JPG" id="menuShowImg"></td>
 </tr>
 
 <tr>
-<td><img src="http://placehold.it/200x150"/></td>
-<td><img src="http://placehold.it/200x150"/></td>
+<td><img src="../../../dacham/resources/customerImage/dietImg/m11.JPG" id="menuShowImg"></td>
+<td><img src="../../../dacham/resources/customerImage/dietImg/d05.JPG" id="menuShowImg"></td>
 </tr>
 
 <tr>
-<td><img src="http://placehold.it/200x150"/></td>
-<td><img src="http://placehold.it/200x150"/></td>
+<td><img src="../../../dacham/resources/customerImage/dietImg/d08.JPG" id="menuShowImg"></td>
+<td><img src="../../../dacham/resources/customerImage/dietImg/d16.JPG" id="menuShowImg"></td>
 </tr>
 </table>
 
