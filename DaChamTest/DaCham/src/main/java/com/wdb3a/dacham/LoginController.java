@@ -1,14 +1,19 @@
 package com.wdb3a.dacham;
 
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wdb3a.dacham.bean.Emp;
 import com.wdb3a.dacham.bean.Member;
@@ -37,7 +42,37 @@ public class LoginController {
 			return "main2";
 			
 		}
-		
+		@ResponseBody
+		@RequestMapping(value="mLogin",method=RequestMethod.GET)
+		public void mLogin(HttpServletRequest req, HttpServletResponse res, HttpSession session,Model model) throws Exception{
+			req.setCharacterEncoding("utf-8");
+			String callback = req.getParameter("callback");
+			String id = req.getParameter("id");
+			System.out.println(id);
+			String pw = req.getParameter("passwd");	
+			System.out.println(pw);
+			int result = -3;
+			try {
+				result = service.checkMemberLogin(id, pw);
+				if(result == 1){
+					Member dbResult = service.getMember(id);
+					session.setAttribute("memberName", dbResult.getName());
+					session.setAttribute("customerId", dbResult.getId());
+					session.setAttribute("passwd", dbResult.getPasswd());
+					session.setAttribute("address", dbResult.getAddress());
+					session.setAttribute("tel", dbResult.getTel());
+					session.setAttribute("email", dbResult.getEmail());
+					session.setAttribute("joinDate", dbResult.getJoinDate());
+					session.setAttribute("gradeCode", dbResult.getGradeCode());				
+				}
+			} catch (Exception e) {								
+				e.printStackTrace();
+				
+			}
+			res.setContentType("text/html;charset=UTF-8");
+	         PrintWriter out = res.getWriter();
+	         out.write(callback+"(" + result + ")");
+		}
 	
 		@RequestMapping(value="main" ,method = RequestMethod.POST)
 		/**
@@ -79,9 +114,19 @@ public class LoginController {
 			
 		}
 		@RequestMapping(value="memberLogout")
-		public String memberLogout(HttpSession session){
+		public String memberLogout(HttpSession session){ //·Î±×¾Æ¿ô
 			session.invalidate();
 			return "main";			
+		}
+		@RequestMapping(value="mLogout")
+		public void mLogout(HttpServletRequest req, HttpServletResponse res,HttpSession session) throws Exception{ //·Î±×¾Æ¿ô
+			req.setCharacterEncoding("utf-8");
+			String callback = req.getParameter("callback");
+			session.invalidate();
+			int result=1;
+			res.setContentType("text/html;charset=UTF-8");
+	         PrintWriter out = res.getWriter();
+	         out.write(callback+"(" + result + ")");			
 		}
 		
 		@RequestMapping(value="empLogin")

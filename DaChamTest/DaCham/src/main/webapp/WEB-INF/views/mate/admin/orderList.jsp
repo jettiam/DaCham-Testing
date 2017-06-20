@@ -15,8 +15,8 @@
 	var object = new Object();
 	var data = new Array();
 	var count = 0;
-	
-	jQuery.fn.center = function() {
+	 /*디테일뷰 상세보기 css */
+	 jQuery.fn.center = function() {
 		this.css("position", "absolute");
 		this.css("top", Math.max(0, (($(window).height() - $(this)
 				.outerHeight()) / 2)
@@ -28,12 +28,8 @@
 				+ "px");
 		this.css("background-color", "#dddddd");
 		return this;
-	}
-	function showmap() {
-		$("#read").show();
-		$("#read").center();
-
-	}
+	} 
+	 
 	$(document).ready(function() {
 		var formObj = $("form[role='form']");
 		var checkArr = [];
@@ -46,46 +42,13 @@
 				$("input[name=che]").prop('checked', false);
 			}
 		});
+		
 		 $("#foodOrder").click(function() {
 			 object.value = data;
 			 var values = JSON.stringify(object);
 			     $('input[name=orderCode]').val(values);
 			     $("#formid").submit();
 		}); 
-		
-		/* $("#foodOrder").click(function() {
-			var dataAll; 
-			data.forEach(function(item, index) {
-				var allData = {
-					"orderCode" : item
-				};
-				alert(item);
-
-				$.ajax({
-					url : 'adminSub/orderList3',
-					data : JSON.stringify(allData),
-					dataType : 'text',
-					type : 'POST',
-					headers : {
-						"Content-Type" : "application/json",
-						"X-HTTP-Method-Override" : "POST"
-					}, 
-					success : function(data) {
-							alert("성공");
-							dataAll = data;
-					
-  						
-					},error : function(){
-						alert("실패")
-					}
-
-				});
-				
-			});
-			window.location.href="foodStock"
-		}); */
-		
-		
 		
 		$("#close").click(function() {
 			$("#read").css("display", "none");
@@ -98,57 +61,117 @@
 			}
 
 		});
+		//주문 전체 리스트
+		all();
+		function all(){
+			$.getJSON("adminSub/all",function(data){
+				console.log(data); 
+				$(".orderListTable").remove();
+				var str = "";
+				for(var i =0; i<data.length; i++){
+					str += "<tr class='orderListTable'><td>"+"<input type='checkBox' id='"+data[i].orderCode+"' value='"+data[i].orderCode+"' name='che'</td>"+"<td>"+data[i].orderCode+"</td>"+"<td>"+data[i].id+"</td>"+"<td>"+"<a data-src='"+data[i].orderCode+"' class='orderCode'>"+data[i].dietName+"</a> </td>"+"<td>"+data[i].orderDate+"</td>"+"<td>"+data[i].price+"</td>"+"<td>"+data[i].orderItemName+"</td>"+"<td>"+data[i].transportNum+"</td> </tr>"		 
+				}
+				console.log(str);
+				$(".tables").append(str); 
+			});
+		}
+		//환불 버튼
 		$('#refund').click(function() {
-			data.forEach(function(item, index) {
-				var allData = {
-					"orderCode" : item
-				};
-
+			$("input[name=che]:checked").each(function() {
+				var test = $(this).val();
+				console.log(test);
+				
 				$.ajax({
-					url : 'orderList1',
-					data : JSON.stringify(allData),
-					dataType : 'json',
-					type : 'POST',
+					url : 'adminSub/orderList1',
+					data : JSON.stringify({
+						"orderCode" : test  
+				    }),
+					dataType : 'text',
+					type : 'put',
 					headers : {
 						"Content-Type" : "application/json",
-						"X-HTTP-Method-Override" : "POST"
-					},
+						"X-HTTP-Method-Override" : "PUT"
+					}, 
 					success : function(data) {
-						alert("성공")
+						all();
+						alert("수정하였습니다")
+					}, error : function(){   
+						alert("실패");
+					}
+				
+				});
+			});
+		});
+		//작업요청
+		$('#work').click(function() {
+			$("input[name=che]:checked").each(function() {
+				var test = $(this).val();
+				console.log(test);
+				
+				$.ajax({
+					url : 'adminSub/orderList2',
+					data : JSON.stringify({
+						"orderCode" : test  
+				    }),
+					dataType : 'text',
+					type : 'put',
+					headers : {
+						"Content-Type" : "application/json",
+						"X-HTTP-Method-Override" : "PUT"
+					}, 
+					success : function(data) {
+						all();
+						alert("수정하였습니다")
 					}, error : function(){   
 						alert("실패");
 					}
 
 				});
-			})
-
-			location.reload();
+			});
 		});
-
-		$('#work').click(function() {
-			data.forEach(function(item, index) {
-				var allData = {
-					"orderCode" : item
-				};
-				$.ajax({
-					url : 'orderList2',
-					data : JSON.stringify(allData),
-					dataType : 'json',
-					type : 'POST',
-					headers : {
-						"Content-Type" : "application/json",
-						"X-HTTP-Method-Override" : "POST"
-					},
-					success : function(data) {
-
-					}
-
-				});
-			})
-
-			location.reload();
+		//검색
+	$("#search").on("click",function(){
+		$(".orderListTable").remove();
+		
+		var str=""; 
+		var searchType = $(".searchType").val();
+		var keyword = $("#keyword").val(); 
+		$.getJSON("adminSub/"+searchType+"/"+keyword,function(data){
+		for(var i=0; i<data.length; i++){
+			str += "<tr class='orderListTable'><td>"+"<input type='checkBox' id='"+data[i].orderCode+"' value='"+data[i].orderCode+"' name='che'</td>"+"<td>"+data[i].orderCode+"</td>"+"<td>"+data[i].id+"</td>"+"<td>"+"<a data-src='"+data[i].orderCode+"' class='orderCode'>"+data[i].dietName+"</a> </td>"+"<td>"+data[i].orderDate+"</td>"+"<td>"+data[i].price+"</td>"+"<td>"+data[i].orderItemName+"</td>"+"<td>"+data[i].transportNum+"</td> </tr>"
+			}  
+		$(".tables").append(str); 
 		});
-
+	});
+	$("#searchAll").on("click", function(){
+		all(); 
+	});
+	//디테일 뷰
+	$(document).on("click", ".orderCode" , function() {  
+			 var orderCode = $(this).attr("data-src"); 
+			 $.ajax({
+				type : "post",
+				url : "adminMain4",
+				data: { 
+					"orderCode" : orderCode,	
+			    },
+			    dataType:"json",
+				success : function(data) {
+					console.log(data);  
+					$("#orderName").append(data[0].name);
+					$("#orderAddRess").append(data[0].address);
+					$("#orderPrice").append(data[0].price);
+					$("#orderDietName").append(data[0].dietName);
+					$("#orderOrderDate").append(data[0].orderDate);
+					$("#orderTel").append(data[0].tel);
+					$("#read").show();
+					$("#read").center(); 
+				},
+				error : function() {
+					alert("실패");
+				}
+			});
+		});
 		//$("#checkBoxId").is(":checked"))
 		if ($(this).attr("checked")) {
 			// checked
@@ -179,19 +202,15 @@
 	<form id='formid' method='post' action='foodOrder'>
 		<input type="hidden" name="orderCode">
 	</form>
-	<div>
+	<!-- <div>
 		<a class="font">전체주문|&nbsp;&nbsp;</a> <a class="font">|결제
 			대기주문|&nbsp;&nbsp;</a> <a class="font">|결제 완료 주문|&nbsp;&nbsp;</a> <a
 			class="font">|배송중 주문|&nbsp;&nbsp;</a> <a class="font">|완료된주문|&nbsp;&nbsp;</a>
 		<a class="font">|취소된 주문|&nbsp;&nbsp;</a>
-	</div>
+	</div> -->
 
 	<div>
-		<form>
-			<select name = "searchType">
-			<option value = "n"
-	   			<c:out value="${order.searchType==null?'selected':'' }"/>>
-	   			전체
+			<select name = "searchType" class="searchType">
 	   			</option>
 	   			<option value = "t"
 	   			<c:out value="${order.searchType eq 't'?'selected':'' }"/>>
@@ -205,13 +224,7 @@
 	   			<c:out value="${order.searchType eq 'a'?'selected':'' }"/>>
 	   			진행상태
 	   			</option>
-	   			<option value = "b"
-	   			<c:out value="${order.searchType eq 'b'?'selected':'' }"/>>
-	   			배송상태
-	   			</option>
-	   			
-			</select> 제목<input type="text" name = "keyword"> <button id = "search">검색</button>
-		</form>
+			</select> <input type="text" name = "keyword" id="keyword"> <button id = "search">검색</button><button id = "searchAll">전체 검색</button>
 	</div>
 
 	<form role="form" method="post">
@@ -227,22 +240,7 @@
 					<th>진행상태</th>
 					<th>배송</th>
 				</tr>
-				<c:forEach items="${list}" var="board">
-					<tr>
-						<th><input type="checkBox" id="${board.orderCode}"
-							class="checkOrder" value="${board.orderCode}" name="che"></th>
-						<td>${board.orderCode }&nbsp;&nbsp;&nbsp;</td>
-						<td>${board.id }</td>
-						<%-- <td>${board.dietName}&nbsp;&nbsp;</td> --%>
-						<td><a onclick="showmap()">${board.dietName}&nbsp;&nbsp;</td>
-						<td><fmt:formatDate pattern="yyyy-MM-dd" 
-                     value="${board.orderDate}" /></td>
-						<td>${board.price}</td>
-						<td>${board.orderItemName}</td>
-						<td>${board.transportNum}</td>
-					</tr>
-
-				</c:forEach>
+					
 			</table>
 		</div>
 	</form>
@@ -252,35 +250,28 @@
 		<button id="refund">환불</button>
 	</div>
 
-	<div name="read" id="read" class="read">
+	<div id="read" class="read">
 		<table width="600" border="1">
 			<tr>
 				<th>고객이름</th>
-				<td>${order.name}</td>
+				<td id="orderName"></td>
 				<th>배달주소</th>
-				<td>${order.address}</td>
+				<td id="orderAddRess"></td>
 			</tr>
 			<tr>
 				<th>가격</th>
-				<td>${order.price}</td>
+				<td id="orderPrice"></td>
 				<th>식단명</th>
-				<td>${order.dietName}</td>
+				<td id="orderDietName"></td>
 			</tr>
 			<tr>
 				<th>주문일</th>
-				<td>${order.orderDate}</td>
-				<th>질환명</th>
-				<td></td>
-			</tr>
-			<tr>
+				<td id="orderOrderDate"></td>
 				<th>전화번호</th>
-				<td>${order.tel}</td>
-				<th>질환명</th>
-				<td></td>
+				<td id="orderTel"></td>
 			</tr>
 		</table>
 		<button id="close">닫기</button>
-	</div>
-
+		</div>
 </body>
 </html>

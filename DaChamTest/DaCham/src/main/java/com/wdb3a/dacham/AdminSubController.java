@@ -43,19 +43,6 @@ public class AdminSubController {
 	@Inject
 	private AdminMainService service; 
 	
-   @RequestMapping(value="/detailView/{orderCode}", method=RequestMethod.POST)
-   @ResponseBody
-   public List<OrderList> detailView(@PathVariable("orderCode") String orderCode, Model model )throws Exception {			
-	   System.out.println("dddd");
-	   List<OrderList> list= service.datailview(orderCode);
-	   
-	 
-	  
-		return  list;
-	}
-   
-   
-   
 
    @RequestMapping(value="/foodOrder",method=RequestMethod.POST)
 	public ResponseEntity<String> getfoodOrder(@RequestBody String foodMArray) throws Exception{
@@ -93,6 +80,68 @@ public class AdminSubController {
 	  	}*/
 		return entity;
 	}
+   //환불
+   @RequestMapping(value = "/orderList1",method = RequestMethod.PUT)
+	public ResponseEntity<String> transportNum(@RequestBody OrderList order){
+		ResponseEntity<String> entity = null;
+		System.out.println(order.getOrderCode());
+		try {
+			service.refundUpdate(order);
+			entity = new ResponseEntity<>("SUCCESS",HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+   //작업요청
+   @RequestMapping(value = "/orderList2",method = RequestMethod.PUT)
+	public ResponseEntity<String> transportNum1(@RequestBody OrderList order){
+		ResponseEntity<String> entity = null;
+		try {
+			service.workUpdate(order); 
+			entity = new ResponseEntity<>("SUCCESS",HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+   
+   @RequestMapping(value = "/all",method = RequestMethod.GET)
+	public ResponseEntity<List<OrderList>> all(){
+		ResponseEntity<List<OrderList>> entity = null;
+		try {
+			List<OrderList> list = service.all();
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+   //메인 검색
+   @RequestMapping(value = "/{searchType}/{keyword}", method = RequestMethod.GET)
+	public ResponseEntity<List<OrderList>> listAll(@PathVariable("searchType")String searchType,@PathVariable("keyword")String keyword){
+		ResponseEntity<List<OrderList>> entity = null;
+		
+		try {
+			OrderList orderList = new OrderList();
+			orderList.setSearchType(searchType);
+			orderList.setKeyword(keyword);
+			List<OrderList> list = service.orderListAll(orderList);
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+   
   
    
    

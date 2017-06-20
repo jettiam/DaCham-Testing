@@ -55,11 +55,12 @@ width:100px;
 }
 </style>
 
-
+<title>DaCham 이달의메뉴</title>
 <%@include file="../../clientNavi.jsp" %>
 
 <div id = "menuShowWrap">
 <h1>이달의 메뉴</h1>
+<input type="button" id="disease00" class="btn btn-warning" value="다참 베이직">
 <input type="button" id="disease01" class="btn btn-warning" value="당뇨">
 <input type="button" id="disease02" class="btn btn-warning" value="신부전증">
 <input type="button" id="disease03" class="btn btn-warning" value="심부전증">
@@ -177,36 +178,36 @@ width:100px;
 <div id="menuShowList1">
 <table id="menuShowTableWrap">
 <tr>
-<td><img src="http://placehold.it/200x150"/></td>
-<td><img src="http://placehold.it/200x150"/></td>
+<td><img src="../../../dacham/resources/customerImage/dietImg/rice5.JPG" id="menuShowImg"></td>
+<td><img src="../../../dacham/resources/customerImage/dietImg/s07.JPG" id="menuShowImg"></td>
 </tr>
 
 <tr>
-<td><img src="http://placehold.it/200x150"/></td>
-<td><img src="http://placehold.it/200x150"/></td>
+<td><img src="../../../dacham/resources/customerImage/dietImg/m12.JPG" id="menuShowImg"></td>
+<td><img src="../../../dacham/resources/customerImage/dietImg/d09.JPG" id="menuShowImg"></td>
 </tr>
 
 <tr>
-<td><img src="http://placehold.it/200x150"/></td>
-<td><img src="http://placehold.it/200x150"/></td>
+<td><img src="../../../dacham/resources/customerImage/dietImg/d10.JPG" id="menuShowImg"></td>
+<td><img src="../../../dacham/resources/customerImage/dietImg/d02.JPG" id="menuShowImg"></td>
 </tr>
 </table>
 
 
 <table id = "menuShowTableWrap" class="menuShowList2">
 <tr>
-<td><img src="http://placehold.it/200x150"/></td>
-<td><img src="http://placehold.it/200x150"/></td>
+<td><img src="../../../dacham/resources/customerImage/dietImg/rice2.JPG" id="menuShowImg"></td>
+<td><img src="../../../dacham/resources/customerImage/dietImg/s09.JPG" id="menuShowImg"></td>
 </tr>
 
 <tr>
-<td><img src="http://placehold.it/200x150"/></td>
-<td><img src="http://placehold.it/200x150"/></td>
+<td><img src="../../../dacham/resources/customerImage/dietImg/m11.JPG" id="menuShowImg"></td>
+<td><img src="../../../dacham/resources/customerImage/dietImg/d05.JPG" id="menuShowImg"></td>
 </tr>
 
 <tr>
-<td><img src="http://placehold.it/200x150"/></td>
-<td><img src="http://placehold.it/200x150"/></td>
+<td><img src="../../../dacham/resources/customerImage/dietImg/d08.JPG" id="menuShowImg"></td>
+<td><img src="../../../dacham/resources/customerImage/dietImg/d16.JPG" id="menuShowImg"></td>
 </tr>
 </table>
 
@@ -595,6 +596,13 @@ width:100px;
 </div>
 
 <script>
+$('#disease00').click(function(){
+	$('#menuShowList3').hide();
+	$('#menuShowList4').hide();
+	$('#menuShowList5').hide();
+	$('#menuShowList1').hide();
+	$('#menuShowList').show();
+});
 $('#disease01').click(function(){
 	$('#menuShowList').hide();
 	$('#menuShowList3').hide();
@@ -610,12 +618,14 @@ $('#disease02').click(function(){
 	$('#menuShowList2').show();
 });
 $('#disease03').click(function(){
+	$('#menuShowList').hide();
 	$('#menuShowList1').hide();
 	$('#menuShowList2').hide();
 	$('#menuShowList4').hide();
 	$('#menuShowList3').show();
 });
 $('#disease04').click(function(){
+	$('#menuShowList').hide();
 	$('#menuShowList1').hide();
 	$('#menuShowList2').hide();
 	$('#menuShowList3').hide();
