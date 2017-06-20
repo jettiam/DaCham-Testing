@@ -12,7 +12,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<title>주문 상세 보기</title>
+<title>DaCham 식단상세보기</title>
 </head>
 <style>
 .dashboard-nav-card {

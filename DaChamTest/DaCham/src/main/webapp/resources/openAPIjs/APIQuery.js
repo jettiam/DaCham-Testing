@@ -1,45 +1,42 @@
-var w = 200,h = 200;
+function openAPI(){
+
+	var w = 200,h = 200;
 		
 		var colorscale = d3.scale.category10();
 		
 		//Legend titles
-		var LegendOptions = ['단백질','탄수화물','지방','나트륨'];
-		var a = "콩나물";
-		var b = "마파두부";
+		var LegendOptions = ['반찬A','반찬B','반찬C','맛반찬'];
 		//Data
 		var d = [
 			  [
-				{axis: a,value: 0},
-				{axis: b,value: 0.4},
+				{axis: "단백질",value: (localStorage['0_protein']/100)},
+				{axis: "탄수화물",value: (localStorage['0_carbohydrate']/100)},
 				
-				{axis:"반찬C",value:0.02},
-				{axis:"반찬D",value:0.8},
-				{axis:"반찬E",value:0.8}
+				{axis:"열량",value: (localStorage['0_kcal']/100)},
+				{axis:"나트륨",value:(localStorage['0_na']/100)},
+				{axis:"지방",value:(localStorage['0_fat']/100)}
 			  ],[
-				{axis: a,value:0.14},
-				{axis: b,value:0.6},
-			
-				{axis:"반찬C",value:0.7},
-			
-				{axis:"반찬D",value:0.17},
-				{axis:"반찬E",value:0.8}
-			  ],[
-				{axis: a,value:0.2},
-				{axis: b,value:0.6},
-				
-				{axis:"반찬C",value:0.7},
-				
-				{axis:"반찬D",value:0.4},
-				{axis:"반찬E",value:0.8}
-			  ],[
-				{axis: a,value:0.3},
-				{axis: b,value:0.1},
+				  {axis: "단백질",value: (localStorage['1_protein']/100)},
+					{axis: "탄수화물",value: (localStorage['1_carbohydrate']/100)},            
 					
-				{axis:"반찬C",value:0.2},
+					{axis:"열량",value: (localStorage['1_kcal']/100)},
+					{axis:"나트륨",value: (localStorage['1_na']/100)},
+					{axis:"지방",value: (localStorage['1_fat']/100)}
+			  ],[
+				  {axis: "단백질",value: (localStorage['2_protein']/100)},
+					{axis: "탄수화물",value: (localStorage['2_carbohydrate']/100)},
 					
-				{axis:"반찬D",value:0.05},
-				{axis:"반찬E",value:0.8}
-			  ]						
+					{axis:"열량",value: (localStorage['2_kcal']/100)},
+					{axis:"나트륨",value:(localStorage['2_na']/100)},
+					{axis:"지방",value: (localStorage['2_fat']/100)}
+			  ],[
+				  {axis: "단백질",value: (localStorage['3_protein']/100)},
+					{axis: "탄수화물",value: (localStorage['3_carbohydrate']/100)},
+					
+					{axis:"열량",value: (localStorage['3_kcal']/100)},
+					{axis:"나트륨",value: (localStorage['3_na']/100)},
+					{axis:"지방",value: (localStorage['3_fat']/100)}       
+			  ]						         
 			  
 			];
 		
@@ -105,3 +102,4 @@ var w = 200,h = 200;
 		  .attr("fill", "#737373")
 		  .text(function(d) { return d; })
 		  ;	
+}

@@ -23,4 +23,5 @@ public interface AdminMainService {
 	public List<ChartList> chartList() throws Exception;
 	public List<ChartPrice> chartPrice() throws Exception;
 	public List<ChartPrice> chartPrice1(ChartPrice dates) throws Exception;
+	public List<OrderList> all() throws Exception;
 }

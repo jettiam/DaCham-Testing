@@ -11,71 +11,88 @@
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-<title>Insert title here</title>
+<title>다참</title>
 <!-- 상단 내비게이션 표시를 위한 임시 CSS -->
 <style>
 .naviBox {
 	background-color: #EAEAEA;
 	margin-top: 10px;
-	text-align:center;
+	text-align: center;
 }
 
 .liBox {
-	display: inline-block;
-	height: 50px;
-	padding: 0 20px;
+	
 	font-size: 25px;
 }
-#naviMenuBtn{
+.loginWrap{
+	margin-top:23px;
+	margin-bottom:23px;
+}
+
+#naviMenuBtn {
 	display: none;
 }
+
 #sideBox {
-	float:right;
-	margin-right:10px;
-	color:gray;
-}
-
-
-#infoBox {	
 	float: right;
-	margin-right:10px;
-	color:gray;
+	margin-right: 10px;
+	color: gray;
 }
 
-#logo{margin-top:10px;
-		margin-left:10px;
-      }
-      
+#infoBox {
+	float: right;
+	margin-right: 10px;
+	color: gray;
+}
+
+#logo {
+	margin-top: 10px;
+	margin-left: 10px;
+}
+.naviBox a {
+	text-decoration: none;
+	color: #88b04b;
+}
+
+#infoBox a {
+	color: #EDA900;
+}
+
 @media only screen and (max-width: 500px) {
-	.liBox {
-	display: block;
-	list-style:none;
-	magin : 5px 0px;
-	padding: 0px;
-	font-size: 14px;
-	height: 25px;
-	}
-	.ulBox{
-		margin: 0px;
-		padding: 0px;
-		text-align:left;
+	.loginWrap{
 		display:none;
 	}
-	#naviMenuBtn {
-		display:block;
-		padding: 10px;		
-		font-size : 20px;		
+	.liBox {
+		display: block;
+		list-style: none;
+		magin: 5px 0px;
+		padding: 0px;
+		font-size: 14px;
+		height: 25px;
+		font-size:15px;
 	}
-	.naviBox {	
-	text-align:left;
+	.ulBox {
+		margin: 0px;
+		padding: 0px;
+		text-align: left;
+		display: none;
+	}
+	#naviMenuBtn {
+		display: block;
+		padding: 10px;
+		font-size: 20px;
+	}
+	.naviBox {
+		text-align: left;
+	}
+	#logo{
+	display:none;
+	}
 }
-}
-.naviBox a{text-decoration: none;
-color:#88b04b;
-}
-#headerBox a{color:#EDA900;}
-
 
 
 </style>
@@ -83,44 +100,53 @@ color:#88b04b;
 
 </head>
 <body>
-	<div id="headerBox">
+	<div class="row">
 		<!-- 로고+고객정보 -->
-		<div id="logo">
+		<div class="col-sm-2" id="logo" >
 			<!-- 로고박스 -->
-			<a href="main"><img src="../../dacham/resources/customerImage/dachamlogo.jpg" width="100px" height="100px"></a>
-<!-- 고객 로그인 페이지 -->
-<c:if test="${empty sessionScope.memberName}">
-	<div id="sideBox">
-		<form method="post" action="main" class="loginBox">
+			<a href="main"><img class="img-responsive block-center"
+				src="../../dacham/resources/customerImage/dachamlogo.jpg"
+				width="100px" height="100px"></a>
+		</div>
+		<!-- 고객 로그인 페이지 -->
+		<c:if test="${empty sessionScope.memberName}">
+			<div class="col-sm-4 col-sm-offset-5 loginWrap">
+				<form method="post" action="main" class="loginBox">
+					<div class="form-group col-sm-5">
+						<input type="text" name="id" placeholder="ID"
+							class="form-control">
+					</div>
+					<div class="form-group col-sm-5">
+						<input type="password" name="pw" placeholder="Password"
+							class="form-control">
+					</div>
+					<div class="form-group col-sm-2">
+						<input type="submit" class="btn btn-warning" value="로그인">
+					</div>
+				</form>
 
-			아이디<br> 
-			<input type="text" name="id"><br> 
-			비밀번호<br>
-			<input type="password" name="pw"> 
-			<input type="submit" class="btn btn-warning" value="로그인">
-
-		</form>
-
-	</div>	
-	</c:if>
-	 <c:if test="${not empty sessionScope.memberName}">
-			<div id="infoBox">
+			</div>
+		</c:if>
+		<c:if test="${not empty sessionScope.memberName}">
+			<div id="infoBox" class="col-sm-4 col-sm-offset-5 loginWrap">
 				<!-- 고객이름 출력. 로그아웃&마이인포 -->
 				<h4>
-					<b>${memberName}</b>님 반갑습니다. 오늘도 다참으로 건강한 하루~!
+					<b>${memberName}</b>님 반갑습니다.
 				</h4>
-				<a href="myPage?status=0">마이페이지</a> <a href="myPage?status=2">장바구니</a> <a href="memberLogout">로그아웃</a>
+				<a href="myPage?status=0">마이페이지</a> <a href="myPage?status=2">장바구니</a>
+				<a href="memberLogout">로그아웃</a>
 			</div>
-	</c:if>
-		</div>
+		</c:if>
 	</div>
+
 	<!-- 고객 메인 -->
 	<!-- 상단 메뉴바 -->
-	<div class="naviBox">
+	<nav class="naviBox">
 		<div id="naviMenuBtn">
-          <span class="glyphicon glyphicon-th-list"></span>
-        </div>
-		<ul class="ulBox">
+			<span class="glyphicon glyphicon-th-list"></span>
+		</div>
+		<div class="container">
+		<ul class="ulBox nav nav-pills nav-justified">
 			<!-- 메뉴 리스트 -->
 			<li class="liBox"><a href="dachamInfo" id="dachamInfo">다참소개</a></li>
 			<li class="liBox"><a href="dietOrder" id="dietOrder">식단주문하기</a></li>
@@ -128,9 +154,9 @@ color:#88b04b;
 			<li class="liBox"><a href="nutritionInfo" id="nutritionInfo">영양소개</a></li>
 			<li class="liBox"><a href="counsel" id="counsel">문의하기</a></li>
 		</ul>
-
-	</div>	
-
+</div>
+	</nav>
+<input type="hidden" id="loginResult" value="${result}"/>
 
 </body>
 <!--로그인함수  -->
@@ -149,8 +175,8 @@ color:#88b04b;
 		} else {
 
 		}
-		
-		$("#naviMenuBtn").on("click",function(){
+
+		$("#naviMenuBtn").on("click", function() {
 			$(".ulBox").toggle();
 		});
 	});

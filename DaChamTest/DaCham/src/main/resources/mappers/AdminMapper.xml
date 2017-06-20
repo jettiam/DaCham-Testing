@@ -8,7 +8,7 @@
 	<select id="listAll" resultType="OrderList">
 		select b.dietCode, b.orderCode,
 		b.id, a.dietName, b.orderDate, b.price,
-		b.orderItemCode,
+		b.orderItemCode, 
 		b.transportNum, c.orderItemName
 		from diet a join
 		orderlist b join
@@ -27,12 +27,9 @@
 				and a.dietName like CONCAT('%',#{keyword},'%')
 			</if>
 			<if test="searchType == 'a'.toString()">
-				and b.orderItemCode like CONCAT('%',#{keyword},'%')
+				and c.orderItemName like CONCAT('%',#{keyword},'%')
 			</if>
-			<if test="searchType == 'b'.toString()">
-				and b.transportNum like CONCAT('%',#{keyword},'%')
-			</if>
-		</if>
+		</if> 
 	</sql>
 
 	<select id="read" resultType="OrderList">
@@ -66,25 +63,26 @@
 			</if>
 		</if>
 	</sql>
+	
 
 	<update id="refundupdate">
 		update orderlist set orderItemCode=6
 		where
-		orderCode=#{orderCode}
+		orderCode=#{orderCode} and orderItemCode BETWEEN 0 and 3
 	</update>
 
 	<update id="workupdate">
 		update orderlist set orderItemCode=3
 		where
 		orderCode=#{orderCode}
-		and orderItemCode=2
+		and orderItemCode = 2
 	</update>
 
 	<select id="foodMAmountRead" resultType="FoodMAmountRead">
 		select
-		b.foodMAmount,b.foodMCode,f.foodMName, f.price, f.unit
+		b.foodMAmount,b.foodMCode,f.foodMName, f.price, f.unit, a.orderCode
 		from (select
-		d.sideDcode from orderlist o, dietinfo d where
+		d.sideDcode, o.orderCode from orderlist o, dietinfo d where
 		o.ordercode=#{orderCode}
 		and o.dietCode=d.dietCode) a, sidedinfo
 		b,foodmaterial f
@@ -110,6 +108,17 @@
 		where orderItemCode BETWEEN 3 and 5 and orderDate BETWEEN #{startdate} and #{enddate} 
 		GROUP by orderDate;
 	</select>
-
+	<select id="all" resultType="OrderList">
+	select b.dietCode, b.orderCode,
+		b.id, a.dietName, b.orderDate, b.price,
+		b.orderItemCode,
+		b.transportNum, c.orderItemName
+		from diet a join
+		orderlist b join
+		orderitem c
+		where a.dietCode=b.dietCode
+		and
+		b.orderItemCode = c.orderItemCode
+	</select>
 
 </mapper>

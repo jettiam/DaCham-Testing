@@ -85,22 +85,18 @@
 	
 	
 	<div>
-		<form>
-			<select name="searchType">
-				<option value="n"
-					<c:out value="${orderList.searchType==null?'selected':'' }"/>>
-					전체</option>
+			<select name="searchType" class= "searchType">
 				<option value="t"
 					<c:out value="${orderList.searchType eq 't'?'selected':'' }"/>>
 					고객 아이디</option>
 				<option value="c"
 					<c:out value="${orderList.searchType eq 'c'?'selected':'' }"/>>
 					식단명</option>
-			</select> 제목<input type="text" name="keyword">
+			</select><input type="text" name="keyword" id = "keyword">
 			<button id="search">검색</button>
-		</form>
+			<button id="searchAll">전체</button>
 		<div>
-			<table width="600" border="1">
+			<table width="600" border="1" class="tables">
 				<tr>
 					<th>주문번호</th>
 					<th>고객id</th>
@@ -110,7 +106,7 @@
 					<th>진행상태</th>
 					<th>배송</th>
 				</tr>
-				<c:forEach items="${list}" var="board">
+				<%-- <c:forEach items="${list}" var="board">
 					<tr>
 						<td>${board.orderCode}&nbsp;&nbsp;&nbsp;</td>
 						<td>${board.id }</td>
@@ -123,7 +119,7 @@
 
 					</tr>
 
-				</c:forEach>
+				</c:forEach> --%>
 			</table>
 		</div>
 	</div>
@@ -150,7 +146,7 @@
 		</table>
 		<button id="close">닫기</button>
 		</div>
-	</div>
+
 
 
 </body>
@@ -218,36 +214,20 @@
 	       	      }
 		 });   
 	      }
-	 
-
-	$(".orderCode").on("click", function() {
-		event.preventDefault();
-		var orderCode = $(this).attr("data-src");
-		alert("이건됨");
-		$.ajax({
-			type : "post", 
-			url : "adminMain4",
-			data: { 
-				"orderCode" : orderCode,	
-		    },
-		    dataType:"json",
-			success : function(data) {
-				console.log(data);  
-				$("#orderName").append(data[0].name);
-				$("#orderAddRess").append(data[0].address);
-				$("#orderPrice").append(data[0].price);
-				$("#orderDietName").append(data[0].dietName);
-				$("#orderOrderDate").append(data[0].orderDate);
-				$("#orderTel").append(data[0].tel);
-				$("#read").show();
-				
-			},
-			error : function() {
-				alert("실패");
-			}
-		});
-	});
-	
+		/*디테일뷰 상세보기 css */
+		 jQuery.fn.center = function() {
+			this.css("position", "absolute");
+			this.css("top", Math.max(0, (($(window).height() - $(this)
+					.outerHeight()) / 2)
+					+ $(window).scrollTop())
+					+ "px");
+			this.css("left", Math.max(0,
+					(($(window).width() - $(this).outerWidth()) / 2)
+							+ $(window).scrollLeft())
+					+ "px");
+			this.css("background-color", "#dddddd");
+			return this;
+		} 
 	function getDefaultDate() {// 해당 일 계산
 
 		var now = new Date();
@@ -317,7 +297,7 @@
 	             for(i=0; i<data.length; i++){ 
 	             data1.setCell(i, 0, data[i].orderdate);    
 	             data1.setCell(i, 1, data[i].dietAmount*10000);  
-	             data1.setCell(i, 2, data[i].dietAmount);   
+	             data1.setCell(i, 2, data[i].dietAmount);  
 	             data1.setCell(i, 3, data[i].totalprice);
 	            }   
 	             var options = {
@@ -355,7 +335,68 @@
 		});
 		$("#close").click(function() {
 			$("#read").css("display", "none");
+			$("#orderName").empty();
+			$("#orderAddRess").empty();
+			$("#orderPrice").empty();
+			$("#orderDietName").empty();
+			$("#orderOrderDate").empty();
+			$("#orderTel").empty();
 		});
+		
+		all();
+		function all(){
+			$.getJSON("adminSub/all",function(data){
+				console.log(data); 
+				$(".orderListTable").remove(); 
+				var str = "";
+				for(var i =0; i<data.length; i++){
+					str += "<tr class='orderListTable'>"+"<td>"+data[i].orderCode+"</td>"+"<td>"+data[i].id+"</td>"+"<td>"+"<a data-src='"+data[i].orderCode+"' class='orderCode'>"+data[i].dietName+"</a> </td>"+"<td>"+data[i].orderDate+"</td>"+"<td>"+data[i].price+"</td>"+"<td>"+data[i].orderItemName+"</td>"+"<td>"+data[i].transportNum+"</td> </tr>"		 
+				}
+				console.log(str);
+				$(".tables").append(str); 
+			});  
+		}   
+		$(document).on("click", ".orderCode" , function() {  
+			 var orderCode = $(this).attr("data-src"); 
+			 $.ajax({
+				type : "post",
+				url : "adminMain4",
+				data: { 
+					"orderCode" : orderCode,	
+			    },
+			    dataType:"json",
+				success : function(data) {
+					console.log(data);  
+					$("#orderName").append(data[0].name);
+					$("#orderAddRess").append(data[0].address);
+					$("#orderPrice").append(data[0].price);
+					$("#orderDietName").append(data[0].dietName);
+					$("#orderOrderDate").append(data[0].orderDate);
+					$("#orderTel").append(data[0].tel);
+					$("#read").show();
+					$("#read").center(); 
+				},
+				error : function() {
+					alert("실패");
+				}
+			});
+		});
+	$("#search").on("click",function(){
+		$(".orderListTable").remove();
+		
+		var str=""; 
+		var searchType = $(".searchType").val();
+		var keyword = $("#keyword").val();
+		$.getJSON("adminSub/"+searchType+"/"+keyword,function(data){
+		for(var i=0; i<data.length; i++){
+			str += "<tr class='orderListTable'>"+"<td>"+data[i].orderCode+"</td>"+"<td>"+data[i].id+"</td>"+"<td>"+"<a data-src='"+data[i].orderCode+"' class='orderCode'>"+data[i].dietName+"</a> </td>"+"<td>"+data[i].orderDate+"</td>"+"<td>"+data[i].price+"</td>"+"<td>"+data[i].orderItemName+"</td>"+"<td>"+data[i].transportNum+"</td> </tr>"
+			}
+		$(".tables").append(str); 
+		});
+	});
+	$("#searchAll").on("click", function(){
+		all(); 
+	});
 		
 	});
 		

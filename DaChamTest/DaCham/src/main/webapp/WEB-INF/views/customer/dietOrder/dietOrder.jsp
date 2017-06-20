@@ -91,7 +91,7 @@ height:150px;
 		});
 	});
 </script>
-<title>Insert title here</title>
+<title>DaCham 식단주문</title>
 </head>
 <body>
 <%@include file="../../clientNavi.jsp" %>

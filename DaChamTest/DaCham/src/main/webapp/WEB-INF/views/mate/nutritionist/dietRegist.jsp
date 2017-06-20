@@ -7,6 +7,8 @@
  <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@include file="nutritionistNavi.jsp" %>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src = "../../../dacham/resources/openAPIjs/radarchart.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
 	$(document).ready(function(){        
@@ -34,6 +36,13 @@
 			var sideDImg = $(this).attr('data-img');
 			
 			var sideDCode = $(this).attr('data-code');
+			$.getJSON("nutriAjax/allNutri/"+sideDCode,function(data){
+				localStorage[count+'_kcal'] = data.kcal;
+				localStorage[count+'_carbohydrate'] = data.carbohydrate;
+				localStorage[count+'_protein'] = data.protein;
+				localStorage[count+'_fat']= data.fat;
+				localStorage[count+'_na'] = data.na;
+			});
 			
 			localStorage[count + '_img'] = sideDImg;
 			localStorage[count + '_codes'] = sideDCode;
@@ -44,6 +53,9 @@
 			
 			Refresh();
 			v = count;
+			
+			
+			
 		});
 		$(document.body).on('click','.sideDImg',function(){
 			var count = parseInt(localStorage['count']);
@@ -67,7 +79,6 @@
 				$("#sideDName").text(data.sideDName);
 				$("#kcal").text(data.kcal);
 			});
-			
 		});
 		
 		$(".template a").on("click",function(){
@@ -107,7 +118,7 @@
 				var sideDImg = localStorage[i + "_img"];
 				var sideDCode = localStorage[i + "_codes"];
 				var item = $('<div></div>').addClass('item').attr('data-id',i);
-				$('<input type = "hidden" name = "sideDCode" value = '+sideDCode + '>').appendTo(item);    
+				$('<input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '>').appendTo(item);    
 				$('<img src = "displayFile?fileName='+sideDImg+'" style= "width: 75px; height: 25px;">').addClass("sideDImg").appendTo(item);
 				item.appendTo(".material");
 
@@ -116,7 +127,7 @@
 			v = count;
 
 			cntChange(v);
-			
+			openAPI();
 		}
 		Refresh();
 		
@@ -137,6 +148,8 @@
 		
 		$(".templateErase").on("click",function(){
 			event.preventDefault();
+			
+			localStorage['count'] = 0;
 			
 			$(".material img").remove();
 			$(".material input").remove();
@@ -174,7 +187,7 @@
   float:left;  }
   
  .box2 {
-  display:inline-block;  margin-left:10px;}
+  display:inline-block;  margin-left:10px; position : absolute;}
   .div1 {
   float:left;  }
  .div2 {
@@ -227,6 +240,11 @@
 				</table>
 			</div>
 		</div>
+		<input type = "hidden" name = "kcal" id = "kcal">
+		<input type = "hidden" name = "carbohydrate" id = "carbohydrate">
+		<input type = "hidden" name = "protein" id = "protein">
+		<input type = "hidden" name = "fat" id = "fat">
+		<input type = "hidden" name = "na"  id = "na">
 		<form id = "registForm" enctype = "multipart/form-data">
 			<div class = "box1">
 				<input type = "radio" name = "wizardCode" value = "1"> 고위험군 당뇨병<br>
@@ -320,5 +338,6 @@
 		}
 	}
 	</script>
+	<script src = "../../../dacham/resources/openAPIjs/APIQuery.js"></script>
 </body>
 </html>

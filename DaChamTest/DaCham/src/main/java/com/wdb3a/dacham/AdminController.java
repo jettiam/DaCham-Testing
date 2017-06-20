@@ -3,6 +3,8 @@ package com.wdb3a.dacham;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +14,7 @@ import javax.inject.Inject;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
+import org.json.simple.parser.JSONParser;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wdb3a.dacham.bean.ChartList;
 import com.wdb3a.dacham.bean.ChartPrice;
+import com.wdb3a.dacham.bean.Customer;
 import com.wdb3a.dacham.bean.FoodMAmountRead;
 import com.wdb3a.dacham.bean.FoodMInven;
 import com.wdb3a.dacham.bean.OrderList;
@@ -91,16 +95,6 @@ public class AdminController {
 		return orderList;
 	}
 	
-	
-	
-	/* @RequestMapping(value="/adminRead", method=RequestMethod.GET)
-	   public String read(@RequestParam(value="orderCode")String orderCode, Model model) throws Exception{
-	      
-	      orderList board = service.read(orderCode);
-	      model.addAttribute("board",board);
-	      return "mate/admin/adminMain";
-	   }*/
-
 	@RequestMapping(value="/customer")
 	public String getcustomer(){
 		return "mate/admin/customer";
@@ -138,44 +132,36 @@ public class AdminController {
 		model.addAttribute("foodMInven", foodMInven);
 		return "mate/admin/foodStock";
 	}
+	//체크박스 된 식단에 대한 orderCode에 맞는 식재료 넘기기
 	@RequestMapping(value="/foodOrder", method=RequestMethod.POST)
-	public String getfoodStock1(Model model, String orderCode, FoodMInven foodMInven) throws Exception{
+	public String getfoodStock1(Model model, String orderCode) throws Exception{
+		//System.out.println(orderCode);
+		Map<Integer, Object> map = new HashMap<Integer, Object>();
+		//List<FoodMAmountRead> list = new ArrayList<FoodMAmountRead>();
+		JSONParser jsonParser = new JSONParser(); 
+		JSONObject jsonObj = (JSONObject) jsonParser.parse(orderCode);
+		//JSONObject jsonObjTest = (JSONObject) jsonObj.get(0+"");	
+		//System.out.println(Integer.parseInt(jsonObjTest.get("orderCode").toString()));
+		for(int i=0; i<jsonObj.size(); i++){
+			
+			JSONObject jsonObj1 = (JSONObject) jsonObj.get(i+"");
+			System.out.println("이건돌아가냐?1");
+			List<FoodMAmountRead> foodMAmountRead1 = new ArrayList<FoodMAmountRead>();
+			System.out.println("이건돌아가냐?2");
+			//foodMAmountRead1.setOrderCode(Integer.parseInt(jsonObj1.get("orderCode").toString()));
+			System.out.println(Integer.parseInt(jsonObj1.get("orderCode").toString()));
+			int a = Integer.parseInt(jsonObj1.get("orderCode").toString());
+			foodMAmountRead1 = service.foodMAmountRead(a);
+			
+			map.put(i ,foodMAmountRead1);   
+		 
+		}
+		 
+		model.addAttribute("map", map);
 		
-
 		
-		JSONObject jsonobj = (JSONObject) JSONValue.parse(orderCode);
-		JSONArray bodyArray = (JSONArray) jsonobj.get("value");
-		int a =  Integer.parseInt((String) bodyArray.get(0));
-		
-		System.out.println(a);
-	
-	
-		List<FoodMAmountRead> list = service.foodMAmountRead(a);
-		List<FoodMInven> invenlist = service.foodStockList(foodMInven);
-		model.addAttribute("list", list);
-		model.addAttribute("invenlist", invenlist);
 		return "mate/admin/foodOrder";
 	}
-	
-	/*public class UserProfileEditor extends PropertyEditorSupport  {
-
-	    @Override
-	    public void setAsText(String text) throws IllegalArgumentException {
-	        ObjectMapper mapper = new ObjectMapper();
-
-	        UserProfile value = null;
-
-	        try {
-	            value = new UserProfile();
-	            JsonNode root = mapper.readTree(text);
-	            value.setEmail(root.path("email").asText());
-	        } catch (IOException e) {
-	            // handle error
-	        }
-
-	        setValue(value);
-	    }
-	}*/
 	
 	@RequestMapping(value="/orderList",method=RequestMethod.GET)
 	public String getorderList(Model model, OrderList order) throws Exception{
@@ -184,23 +170,7 @@ public class AdminController {
 		model.addAttribute("order", order);
 		return "mate/admin/orderList";
 	}
-	@RequestMapping(value="/orderList1",method=RequestMethod.POST)
-	public String getorderList1(Model model,@RequestBody OrderList order) throws Exception{
-		if(order.getOrderItemCode()=="1"){
-		service.refundUpdate(order);
-		}
-		System.out.println(order.getOrderCode());
-		return "mate/admin/orderList";
-	}
-	
-	@RequestMapping(value="/orderList2",method=RequestMethod.POST)
-	public String getorderList2(Model model,@RequestBody OrderList order) throws Exception{
-		service.workUpdate(order);
-		System.out.println(order.getOrderCode());
-		return "mate/admin/orderList";
-	}
-	
-	
+
 	@RequestMapping(value="/statistics")
 	public String getstatistics(){
 		return "mate/admin/statistics";

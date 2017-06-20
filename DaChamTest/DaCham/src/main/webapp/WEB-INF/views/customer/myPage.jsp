@@ -13,7 +13,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>DaCham 마이페이지</title>
 <style>
 #myPageWrap {
 	width: 1080px;
@@ -55,6 +55,11 @@
 
 #myOrderList {
 	display: none;
+}
+#myOrderListTable{
+	width: 800px;
+	margin: 0 auto;
+	text-align: center;
 }
 .myPageImg{
 	width: 160px;
@@ -104,6 +109,38 @@ $(document).ready(function(){
     	$('#myOrderListTableWrap').hide();
         break;
     case 3:
+    	var id = $("#customerId").val();
+		$(".addTr").remove();
+		$.ajax({
+			url:"customerAjax/myOrderlist",
+			headers : {
+	               "Content-Type" : "application/json",
+	               "X-HTTP-Method-Override" : "POST"
+	            },
+	            dataType : "json",
+			data:JSON.stringify({id:id}),
+			type:"POST",
+			
+			success:function(data){
+				
+				var orderStatus="";
+				for(var i = 0; i<data.list.length; i++){ //주문내역의 데이터 테이블로 출력
+					console.log(data.list[i].orderItemCode);
+				if(data.list[i].orderItemCode==0){
+					orderStatus="미결제";				
+				}else if(data.list[i].orderItemCode==6){
+					orderStatus="주문취소";
+				}else if(data.list[i].orderItemCode==7){
+					orderStatus="배송중";
+				}else if(data.list[i].orderItemCode==8){
+					orderStatus="배송완료";
+				}else{
+					orderStatus="결제완료";
+				}
+					$('#myOrderListTable').append("<tr class='orderTr'><td class='orderCode'>"+data.list[i].orderCode+"</td><td class='orderDate'>"+data.list[i].orderDate+"</td><td><img class='myPageImg' data-img="+data.list[i].dietImg+" src='displayFile?fileName="+data.list[i].dietImg+"' alt='이미지'></td><td class='dietName'>"+data.list[i].dietName+"</td><td class='dietAmount'>"+data.list[i].dietAmount+"</td><td class='price'><span>"+data.list[i].price+"</span>원"+"</td><td class='oItemCode' data-oItemCode='"+data.list[i].orderItemCode+"'>"+orderStatus+"</td></tr>");
+			}
+			}
+		});
     	$('#myInfoTableWrap').hide();
     	$('#myHealthTableWrap').hide();
     	$('#myCartTableWrap').hide();    	
@@ -157,6 +194,39 @@ $(document).ready(function(){
 	    	$('#myOrderListTableWrap').hide();
 	        break;
 	    case "3":
+	    	var id = $("#customerId").val();
+			$(".orderTr").remove();
+			$.ajax({
+				url:"customerAjax/myOrderlist",
+				headers : {
+		               "Content-Type" : "application/json",
+		               "X-HTTP-Method-Override" : "POST"
+		            },
+		            dataType : "json",
+				data:JSON.stringify({id:id}),
+				type:"POST",
+				
+				success:function(data){
+					console.log(data);
+					var orderStatus="";
+					for(var i = 0; i<data.list.length; i++){ //주문내역의 데이터 테이블로 출력
+						console.log(Number(data.list[i].orderItemCode));
+					if(data.list[i].orderItemCode==0){
+						orderStatus="미결제";					
+					}else if(data.list[i].orderItemCode==6){
+						orderStatus="주문취소";
+					}else if(data.list[i].orderItemCode==7){
+						orderStatus="배송중";
+					}else if(data.list[i].orderItemCode==8){
+						orderStatus="배송완료";
+					}else{
+						orderStatus="결제완료";
+					}
+						$('#myOrderListTable').append("<tr class='orderTr'><td class='orderCode'>"+data.list[i].orderCode+"</td><td class='orderDate'>"+data.list[i].orderDate+"</td><td><img class='myPageImg' data-img="+data.list[i].dietImg+" src='displayFile?fileName="+data.list[i].dietImg+"' alt='이미지'></td><td class='dietName'>"+data.list[i].dietName+"</td><td class='dietAmount'>"+data.list[i].dietAmount+"</td><td class='price'><span>"+data.list[i].price+"</span>원"+"</td><td class='oItemCode' data-oItemCode='"+data.list[i].orderItemCode+"'>"+orderStatus+"</td></tr>");
+				}
+				}
+			});
+			$(".oItemCode").attr("data-oItemCode");
 	    	$('#myInfoTableWrap').hide();
 	    	$('#myHealthTableWrap').hide();
 	    	$('#myCartTableWrap').hide();    	
@@ -305,7 +375,7 @@ $(document).ready(function(){
 			</table>
 
 			<br>
-			<button>수정</button>
+			<button class="btn btn-warning  myPageBtn">수정</button>
 		</div>
 
 		<!-- 내 건강정보 -->
@@ -323,7 +393,7 @@ $(document).ready(function(){
 		<div id="myCartTableWrap">
 			<!-- <table id="myCartTable" border=2> -->
 
-			<table id="myCartTable" border=1>
+			<table id="myCartTable" class="table table-bordered">
 				<tr>
 					<td><input type="checkbox" id="checkAllCart"></td>
 					<td>상품정보</td>
@@ -332,11 +402,24 @@ $(document).ready(function(){
 					<td>상품금액</td>
 				</tr>
 			</table>
+			<br>
 			<!-- </table> -->
-			<button id="cartOrder">주문하기</button>
+			<button id="cartOrder" class="btn btn-warning  myPageBtn">주문하기</button>
 		</div>
 		<!-- 주문내역 -->
-		<div id="myOrderListTableWrap">주문내역</div>
+		<div id="myOrderListTableWrap">
+		<table id="myOrderListTable" class="table table-bordered">
+				<tr>
+					<td>주문번호</td>
+					<td>주문일자</td>
+					<td>상품정보</td>
+					<td>상품명</td>
+					<td>수량</td>
+					<td>상품금액</td>
+					<td>주문상태</td>
+				</tr>
+			</table>
+		</div>
 		<!-- 회원탈퇴 -->
 		
 	</div>
