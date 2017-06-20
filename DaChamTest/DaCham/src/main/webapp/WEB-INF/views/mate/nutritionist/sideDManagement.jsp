@@ -55,6 +55,7 @@
 </head>
 <body>
 	<div class = "box1">
+		<b>반찬 카테고리</b>
 		<nav>
 			<a href = "#" id = "categoryStart">반찬 찾아보기</a>
 			<ul class = "category">
