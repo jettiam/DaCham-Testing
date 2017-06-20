@@ -36,6 +36,13 @@
 			var sideDImg = $(this).attr('data-img');
 			
 			var sideDCode = $(this).attr('data-code');
+			$.getJSON("nutriAjax/allNutri/"+sideDCode,function(data){
+				localStorage[count+'_kcal'] = data.kcal;
+				localStorage[count+'_carbohydrate'] = data.carbohydrate;
+				localStorage[count+'_protein'] = data.protein;
+				localStorage[count+'_fat']= data.fat;
+				localStorage[count+'_na'] = data.na;
+			});
 			
 			localStorage[count + '_img'] = sideDImg;
 			localStorage[count + '_codes'] = sideDCode;
@@ -47,7 +54,6 @@
 			Refresh();
 			v = count;
 			
-			var sideDCode = $(this).attr('data-code');
 			
 			
 		});
@@ -73,7 +79,6 @@
 				$("#sideDName").text(data.sideDName);
 				$("#kcal").text(data.kcal);
 			});
-			
 		});
 		
 		$(".template a").on("click",function(){
@@ -122,7 +127,7 @@
 			v = count;
 
 			cntChange(v);
-			
+			openAPI();
 		}
 		Refresh();
 		
@@ -182,7 +187,7 @@
   float:left;  }
   
  .box2 {
-  display:inline-block;  margin-left:10px;}
+  display:inline-block;  margin-left:10px; position : absolute;}
   .div1 {
   float:left;  }
  .div2 {

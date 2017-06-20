@@ -7,11 +7,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="shortcut icon" href="resources/favicon/N.ico">
 <%@include file="nutritionistNavi.jsp" %>
-<<<<<<< HEAD
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
 	$(document).ready(function(){
 		orderList();
+		thisMonth();
 		function orderList(){
 			$(".orderResult").remove();
 			$.getJSON("nutriAjax/orderList",function(data){
@@ -22,13 +22,20 @@
 				$(".orderTable").append(str);          
 			});             
 		}
+		function thisMonth(){
+			$(".monthResult").remove();
+			$.getJSON("nutriAjax/thisMonth",function(data){
+				var str = "";
+				$(data).each(function(){
+					str += "<ul class = 'monthResult'>"+"<li>"+"<img src = 'displayFile?fileName="+this.dietImg+"' style = 'width: 75px; height: 25px;'>"+"</li>"+"</ul>";
+				});
+				$(".thisMonth").append(str);
+			});
+		}
 	});
 </script>
-<title>Insert title here</title>
-=======
 
 <title>영양사</title>
->>>>>>> branch 'master' of https://github.com/jettiam/DaCham-Testing.git
 <style>
  .box1 {
   float:left;  }
@@ -83,12 +90,12 @@
    </div>
    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
    <br><br><br><br><br><br>
-   <div>
+   <div class = "thisMonth">
       <h1> 월의 판매 식단</h1>
       <hr align = "left" width = "20%">
-      <li>탕평채</li>
-      <li>낙지연포탕</li>
-      <li>닭가슴살두부파치</li>
+     <ul class = "monthResult">
+     	<li></li>
+     </ul>
    </div>
 </body>
 </html>

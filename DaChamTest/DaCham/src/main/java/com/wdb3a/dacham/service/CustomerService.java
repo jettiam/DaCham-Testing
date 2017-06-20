@@ -9,6 +9,8 @@ public interface CustomerService {
 	public List<Customer> dietList(int diseaseCode) throws Exception;
 
 	public List<Customer> cartList(String id) throws Exception;
+	
+	public List<Customer> myOrderList(String id) throws Exception;
 
 	public List<Customer> detailOrder(int dietCode) throws Exception;
 
@@ -17,5 +19,6 @@ public interface CustomerService {
 	public void orderRegist(Customer customer) throws Exception ;
 
 	public void cartRegist(Customer customer) throws Exception;
+	
 	public void orderCart(Customer customer) throws Exception;
 }

@@ -14,12 +14,15 @@ public interface CustomerDAO {
 
 
 	public List<Customer> cartList(String id) throws Exception;
-
-
 	
+	public List<Customer> myOrderList(String id) throws Exception;
+
+
 	public void orderRegist(Customer customer) throws Exception;
 	
 	public void cartRegist(Customer customer) throws Exception;
+
 	public void orderCart(Customer customer) throws Exception;
+
 
 }
