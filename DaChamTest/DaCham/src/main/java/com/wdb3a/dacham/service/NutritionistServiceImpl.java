@@ -130,6 +130,12 @@ public class NutritionistServiceImpl implements NutritionistService {
 		return dao.thisMonth();
 	}
 
+	@Override
+	public Nutritionist allNutri(String sideDCode) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.allNutri(sideDCode);
+	}
+
 	
 
 }

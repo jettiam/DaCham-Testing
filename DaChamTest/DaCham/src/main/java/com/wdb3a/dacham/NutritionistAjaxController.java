@@ -242,12 +242,27 @@ public class NutritionistAjaxController {
 		}
 		return entity;
 	}
+	//해당 월에 대한 메뉴 표시
 	@RequestMapping(value=  "/thisMonth",method = RequestMethod.GET)
 	public ResponseEntity<List<OrderList>> thisMonth(){
 		ResponseEntity<List<OrderList>> entity = null;
 		try {
 			List<OrderList> list = service.thisMonth();
 			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	//해당 반찬에 대한 영양정보 표시
+	@RequestMapping(value = "/allNutri/{sideDCode}",method = RequestMethod.GET)
+	public ResponseEntity<Nutritionist> allNutri(@PathVariable("sideDCode")String sideDCode){
+		ResponseEntity<Nutritionist> entity = null;
+		try {
+			Nutritionist nutritionist = service.allNutri(sideDCode);
+			entity = new ResponseEntity<>(nutritionist,HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

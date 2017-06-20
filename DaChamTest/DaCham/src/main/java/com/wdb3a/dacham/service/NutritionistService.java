@@ -32,4 +32,6 @@ public interface NutritionistService {
 	public List<Nutritionist> categorySearch(Nutritionist nutritionist) throws Exception;
 	//해당 메인 페이지에 주문목록 표시
 	public List<OrderList> orderList() throws Exception;
+	//해당 반찬에 대한 영양정보
+	public Nutritionist allNutri(String sideDCode) throws Exception;
 }

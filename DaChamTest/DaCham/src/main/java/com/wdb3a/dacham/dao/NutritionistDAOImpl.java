@@ -130,6 +130,12 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 		return sqlSession.selectList(namespace+".thisMonth");
 	}
 
+	@Override
+	public Nutritionist allNutri(String sideDCode) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".allNutri",sideDCode);
+	}
+
 	
 
 }
