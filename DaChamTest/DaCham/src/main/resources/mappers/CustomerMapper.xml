@@ -54,11 +54,24 @@ from orderlist o, diet d where o.dietCode = d.dietCode and o.id = #{id} and o.or
 order by o.orderCode desc;
   </select>
   
-    <select id="myOrderList" resultType="OrderList">
+<select id="myOrderList" resultType="OrderList">
   select d.dietImg,d.dietName,o.dietCode,o.price,o.orderCode,o.orderDate,o.dietAmount,o.orderItemCode
 from (select dietCode, price, orderCode,orderDate, dietAmount,orderItemCode
 from orderlist where id = #{id} and orderItemCode between 2 and 8 or orderItemCode = 0) o,diet d
 where o.dietCode = d.dietCode order by o.orderDate desc; 
   </select>
+
+<!-- 가장 최신의 주문번호를 알기 위한 쿼리문, 하나의 정수(주문번호)가 리턴 -->
+<select id="recentlyOrderCode" resultType="int">
+select max(orderCode)
+from orderlist
+where id=#{id};
+</select>
+
+<!-- 사용자 주문 식단(반찬옵션) 에 insert 하기 위한 쿼리문, 리턴 없음 -->
+<insert id="registOrderOption" parameterType="hashmap">
+insert into orderoptions
+values( #{recentCode}, #{sideCode});
+</insert>
 
   </mapper>

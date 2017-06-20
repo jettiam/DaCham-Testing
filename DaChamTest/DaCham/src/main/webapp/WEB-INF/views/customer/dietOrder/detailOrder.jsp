@@ -126,15 +126,20 @@ table {
 			sideDish[arrInx] = checkedValue;
 			arrInx++;		
 			}
+			console.log(sideDish);
 		});
-		return sideDish;
+		$("#orderForm>#sideDish").remove();
+		for(i=0; i<arrInx; i++){
+			$("#orderForm").append(					
+					"<input id='sideDish' type='hidden' name='sideDish' value='"+sideDish[i]+"'>");
+		}		
 	}
 
 	$(document).ready(function() {
 		getDishList($("#foodGList"));
-		/* $(document).on("click", "input:radio", function() {
+	 /* $(document).on("click", "input:radio", function() {
 			getCheckedList($("#foodGList"));
-		}); */
+		});  */
 		//console.log("${list}.length");
 		/* $(".sideDList").on("click",function() {
 							$(".foodGSideD").remove();
@@ -209,11 +214,12 @@ table {
 		});
 
 		$("#goMyCart").on("click", function() {
-			//getCheckedList($("#foodGList")
+			getCheckedList($("#foodGList"));
 			$("#setDietCode").val();
 			$("#setDietName").val($("#dietName").text());
 			$("#setPrice").val($("#dietPrice").text());
 			$("#setDietAmount").val($("#dietAmount").val());
+			$("#sideDish").val();
 			$("#orderForm").attr("action", "goMyCart");
 			$("#orderForm").submit();
 		});
@@ -302,13 +308,15 @@ table {
 
 	<form id="orderForm" method="get">
 		<input id="setDietCode" type="hidden" name="dietCode"
-			value="${list[0].dietCode }"> <input id="setPrice"
-			type="hidden" name="price"> <input id="setDietImg"
-			type="hidden" name="dietImg"> <input id="setDietAmount"
-			type="hidden" name="dietAmount"> <input id="setDietName"
-			type="hidden" name="dietName"> <input id="customerId"
-			type="hidden" name="id" value="${customerId}"> <input
-			type="hidden" name="detailOrder" value="true">
+			value="${list[0].dietCode }"> 
+		<input id="setPrice" type="hidden" name="price">
+		<input id="setDietImg"type="hidden" name="dietImg">
+		<input id="setDietAmount" type="hidden" name="dietAmount">
+		<input id="setDietName" type="hidden" name="dietName">
+		<input id="customerId" type="hidden" name="id" value="${customerId}">
+		<input id="sideDish" type="hidden" name="sideDish">
+		<input type="hidden" name="detailOrder" value="true">
+
 		<!-- 디테일오더에서 넘어갔는지 유무 -->
 	</form>
 </body>
