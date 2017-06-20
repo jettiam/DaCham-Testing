@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.wdb3a.dacham.bean.Cook;
 import com.wdb3a.dacham.bean.FoodMInven;
+import com.wdb3a.dacham.bean.OrderList;
 import com.wdb3a.dacham.dao.CookDAO;
 
 @Service
@@ -29,15 +30,11 @@ public class CookServiceImpl implements CookService {
 		// TODO Auto-generated method stub
 		return dao.readycook();
 	}
+	
 	@Override
-	public List<Cook> cookingfood() throws Exception {
+	public void transportNum2(OrderList order) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.cookingfood();
-	}
-	@Override
-	public List<Cook> finishcook() throws Exception {
-		// TODO Auto-generated method stub
-		return dao.finishcook();
+		dao.transportNum2(order);
 	}
 	
 }

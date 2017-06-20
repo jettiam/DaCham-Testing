@@ -29,29 +29,16 @@
   </select>
  
   <select id ="readycook" resultType = "Cook">
-  select b.sideDName, sum(a.dietAmount) as dietAmount, a.orderItemCode
+  select a.orderCode, b.sideDName, sum(a.dietAmount) as dietAmount, a.orderItemCode
 	from orderlist a join sidedish b join dietinfo c
 	where a.dietCode = c.dietCode
 	and c.sideDCode = b.sideDCode
 	and a.orderItemCode = 3 
 	group by b.sideDName
   </select>
+  <update id = "transportNum2">
+  		update orderlist set orderItemCode = 5
+  		where orderCode = #{orderCode}
+  	</update>
   
-  <select id = "cookingfood" resultType ="Cook">
-  select b.sideDName, sum(a.dietAmount) as dietAmount, a.orderItemCode
-	from orderlist a join sidedish b join dietinfo c
-	where a.dietCode = c.dietCode
-	and c.sideDCode = b.sideDCode
-	and a.orderItemCode = 4 
-	group by b.sideDName
-  </select>
-  
-  <select id = "finishcook" resultType ="Cook">
-  select b.sideDName, sum(a.dietAmount) as dietAmount, a.orderItemCode
-	from orderlist a join sidedish b join dietinfo c
-	where a.dietCode = c.dietCode
-	and c.sideDCode = b.sideDCode
-	and a.orderItemCode = 5 
-	group by b.sideDName
-	</select>
 </mapper>

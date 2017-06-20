@@ -42,11 +42,9 @@ public class CookerController {
 	@RequestMapping(value="/cook", method=RequestMethod.GET)
 	public String getcook(Model model)throws Exception{
 		List<Cook> list = service.readycook();
-		List<Cook> list2 = service.cookingfood();
-		List<Cook> list3 = service.finishcook();
+		
 		model.addAttribute("list",list);
-		model.addAttribute("list2",list2);
-		model.addAttribute("list3",list3);
+	
 		return "/mate/cooker/cook";
 	}
 }
