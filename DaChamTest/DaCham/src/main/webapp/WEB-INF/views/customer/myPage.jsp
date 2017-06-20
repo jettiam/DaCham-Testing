@@ -122,9 +122,22 @@ $(document).ready(function(){
 			type:"POST",
 			
 			success:function(data){
-				console.log(data);
+				
+				var orderStatus="";
 				for(var i = 0; i<data.list.length; i++){ //주문내역의 데이터 테이블로 출력
-				$('#myOrderListTable').append("<tr class='addTr'><td class='orderCode'>"+data.list[i].orderCode+"</td><td class='orderDate'>"+data.list[i].orderDate+"</td><td><img class='myPageImg' data-img="+data.list[i].dietImg+" src='displayFile?fileName="+data.list[i].dietImg+"' alt='이미지'></td><td class='dietName'>"+data.list[i].dietName+"</td><td class='dietAmount'>"+data.list[i].dietAmount+"</td><td class='price'><span>"+data.list[i].price+"</span>원"+"</td><td>"+data.list[i].orderItemCode+"</td></tr>");
+					console.log(data.list[i].orderItemCode);
+				if(data.list[i].orderItemCode==0){
+					orderStatus="미결제";				
+				}else if(data.list[i].orderItemCode==6){
+					orderStatus="주문취소";
+				}else if(data.list[i].orderItemCode==7){
+					orderStatus="배송중";
+				}else if(data.list[i].orderItemCode==8){
+					orderStatus="배송완료";
+				}else{
+					orderStatus="결제완료";
+				}
+					$('#myOrderListTable').append("<tr class='orderTr'><td class='orderCode'>"+data.list[i].orderCode+"</td><td class='orderDate'>"+data.list[i].orderDate+"</td><td><img class='myPageImg' data-img="+data.list[i].dietImg+" src='displayFile?fileName="+data.list[i].dietImg+"' alt='이미지'></td><td class='dietName'>"+data.list[i].dietName+"</td><td class='dietAmount'>"+data.list[i].dietAmount+"</td><td class='price'><span>"+data.list[i].price+"</span>원"+"</td><td class='oItemCode' data-oItemCode='"+data.list[i].orderItemCode+"'>"+orderStatus+"</td></tr>");
 			}
 			}
 		});
@@ -195,8 +208,21 @@ $(document).ready(function(){
 				
 				success:function(data){
 					console.log(data);
+					var orderStatus="";
 					for(var i = 0; i<data.list.length; i++){ //주문내역의 데이터 테이블로 출력
-					$('#myOrderListTable').append("<tr class='orderTr'><td class='orderCode'>"+data.list[i].orderCode+"</td><td class='orderDate'>"+data.list[i].orderDate+"</td><td><img class='myPageImg' data-img="+data.list[i].dietImg+" src='displayFile?fileName="+data.list[i].dietImg+"' alt='이미지'></td><td class='dietName'>"+data.list[i].dietName+"</td><td class='dietAmount'>"+data.list[i].dietAmount+"</td><td class='price'><span>"+data.list[i].price+"</span>원"+"</td><td class='oItemCode' data-oItemCode='"+data.list[i].orderItemCode+"'></td></tr>");
+						console.log(Number(data.list[i].orderItemCode));
+					if(data.list[i].orderItemCode==0){
+						orderStatus="미결제";					
+					}else if(data.list[i].orderItemCode==6){
+						orderStatus="주문취소";
+					}else if(data.list[i].orderItemCode==7){
+						orderStatus="배송중";
+					}else if(data.list[i].orderItemCode==8){
+						orderStatus="배송완료";
+					}else{
+						orderStatus="결제완료";
+					}
+						$('#myOrderListTable').append("<tr class='orderTr'><td class='orderCode'>"+data.list[i].orderCode+"</td><td class='orderDate'>"+data.list[i].orderDate+"</td><td><img class='myPageImg' data-img="+data.list[i].dietImg+" src='displayFile?fileName="+data.list[i].dietImg+"' alt='이미지'></td><td class='dietName'>"+data.list[i].dietName+"</td><td class='dietAmount'>"+data.list[i].dietAmount+"</td><td class='price'><span>"+data.list[i].price+"</span>원"+"</td><td class='oItemCode' data-oItemCode='"+data.list[i].orderItemCode+"'>"+orderStatus+"</td></tr>");
 				}
 				}
 			});
