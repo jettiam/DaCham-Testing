@@ -11,6 +11,13 @@
 		and a.cookMCode = c.cookMCode
 		and a.sideDName like CONCAT('%',#{search},'%') 
 	</select>
+	<!-- 해당 메인페이지에 이달의 메뉴를 조회합니다. -->
+	<select id = "thisMonth" resultType = "OrderList">
+		select a.orderDate, b.dietName, b.dietImg 
+		from orderlist a join diet b
+		where a.dietCode = b.dietCode
+		and month(a.orderDate) between month(a.orderDate) and (month(a.orderDate)+1);
+	</select>
 	<!-- 반찬 전체를 조회합니다(with 식품군, 조리방법) -->
 	<select id = "sideAll" resultType = "com.wdb3a.dacham.bean.Nutritionist">
 		select a.sideDName, b.foodGName, c.cookMName , a.sideDCode, a.sideDImg
@@ -93,5 +100,15 @@
 		select a.orderCode, a.id, b.dietName,a.orderDate ,a.price
 		from orderlist a join diet b
 		where a.dietCode = b.dietCode
+	</select>
+	<!-- 해당 반찬에 대한 영양정보 -->
+	<select id = "allNutri" resultType = "com.wdb3a.dacham.bean.Nutritionist">
+		select a.sideDcode,sum(kcal) kcal,sum(carbohydrate) carbohydrate, sum(protein) protein, sum(fat) fat, sum(na) na
+		from 
+		(select si.sideDCode,(si.foodMAmount/100)*f.kcal kcal,(si.foodMAmount/100)*f.protein protein,(si.foodMAmount/100)*f.carbohydrate carbohydrate,(si.foodMAmount/100)*f.na na,(si.foodMAmount/100)*f.fat fat
+		   from sidedinfo si,foodmaterial f
+		   where si.foodMCode = f.foodMCode) a
+		   group by a.sidedcode
+			having a.sidedcode = #{sideDCode};		
 	</select>
 </mapper>
