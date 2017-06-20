@@ -84,7 +84,7 @@ public String dietOrder(){
 public String detailOrder(@RequestParam(value="dietCode") int dietCode, Model model) throws Exception{	
 	List<Customer> list;
 	list = serviceCu.detailOrder(dietCode);
-	System.out.println("리스트 출력"+list);
+	System.out.println("리스트 출력"+list.size());
 	model.addAttribute("list",list);
 	
 	return "customer/dietOrder/detailOrder";
