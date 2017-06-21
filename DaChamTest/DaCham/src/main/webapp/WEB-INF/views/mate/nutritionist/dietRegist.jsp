@@ -41,7 +41,7 @@
 
 			$.getJSON("nutriAjax/allNutri/"+sideDCode,function(data){
 				var subCount = count - 1;
-				alert(subCount);
+				
 				localStorage[subCount+'_kcal'] = data.kcal;
 				localStorage[subCount+'_carbohydrate'] = data.carbohydrate;
 				localStorage[subCount+'_protein'] = data.protein;
