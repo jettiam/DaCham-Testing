@@ -13,6 +13,10 @@
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src = "../../../dacham/resources/openAPIjs/radarchart.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
 		//이미지를 업로드하면 미리 볼 수 있는 기능
 		function previewImage(targetObj, View_area){
@@ -52,15 +56,19 @@
 	.box1 {
   display:inline-block;  margin-left:20px;  }
  .box2 {
-  display:inline-block;  margin-left:10px;}
-  .div1 {
+  display:inline-block;  margin-left:10px;}           
+  .div1 {   
   float:left;  }
  .div2 {
-  display:inline-block;  margin-left:10px;}  
+  display:inline-block;  margin-left:10px;} 
+  #body{
+  	display : inline-block;
+  	
+  } 
 </style>
 </head>
 <body>
-	
+	<div class = "container">
 		<div class = "div1">
 		
 				<div>
@@ -82,7 +90,8 @@
 						</tr>
 					
 				</table>
-			</div>
+		</div>
+	
 	<input type = "hidden" id = "foodMName" name = "foodMName2">
 	<input type = "hidden" id =  "protein" name = "protein">
 	<input type = "hidden" id = "fat" name = "fat">
@@ -93,18 +102,18 @@
 		<div class = "div2">	
 			<br><br>
 			<div class = "box1">
-				<table class = "material">       
+				<table class = "material" style = "position:absolute;">          
 					<tr>
 						<th></th>
 						<th>식재료&nbsp;&nbsp;  </th>
 						<th>양(g)&nbsp;&nbsp;   </th>
 					</tr>
 				</table>
-			</div>
-	
+		
 		<div class = "box2">
 				<h2>반찬 사진</h2>
 				<div id = "View_area">
+					<img id = "prev_View_area" src="http://placehold.it/100x100">
 				</div>
 				
 				<input type = "file" name = "file" id = "profile_pt" onchange = "previewImage(this,'View_area')">
@@ -151,12 +160,14 @@
 						</td>
 					</tr>
 				</table> 	
-			</div>    
+			</div>       
+		  </div> 
 		</div>
 	</form>
-	<div style = "margin-left:600px; margin-bottom : 1px;">          
-		<button id = "regist">등록</button>
-		<button id = "cancle">취소</button>
+		<div style = "margin-left:500px; margin-bottom : 1px;">                   
+			<button id = "regist">등록</button>
+			<button id = "cancle">취소</button>
+		</div>
 	</div>
 	<script>
 
