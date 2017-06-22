@@ -17,6 +17,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../../dacham/resources/bootstrap-filestyle.min.js"> </script>
 <script>
 		//이미지를 업로드하면 미리 볼 수 있는 기능
 		function previewImage(targetObj, View_area){
@@ -73,13 +74,13 @@
 		
 				<div>
 					<input type = "text" name = "search" placeholder = "식재료 검색어 입력란" id = "keyword"> 
-					<button id = "search"> 검색 </button>
-					<input type = "button" value = "전체목록" id = "listAll">    
+					<button id = "search" class = "btn btn-warning"> 검색 </button>
+					<input type = "button" value = "전체목록" class = "btn btn-warning" id = "listAll">    
 				</div>
 			
 		
 	
-				<table class = "searchTable">
+				<table class = "searchTable table table-hover">
 					<tr>
 						<th>코드번호&nbsp;&nbsp;</th>   
 						<th>식재료명&nbsp;&nbsp;</th>
@@ -104,7 +105,7 @@
 			<div class = "box1">
 				<table class = "material" style = "position:absolute;">          
 					<tr>
-						<th></th>
+						<th></th>  
 						<th>식재료&nbsp;&nbsp;  </th>
 						<th>양(g)&nbsp;&nbsp;   </th>
 					</tr>
@@ -116,7 +117,7 @@
 					<img id = "prev_View_area" src="http://placehold.it/100x100">
 				</div>
 				
-				<input type = "file" name = "file" id = "profile_pt" onchange = "previewImage(this,'View_area')">
+				<input type = "file" class = "filestyle" data-input = "false" name = "file" placeholder = "식단이미지 올리기" id = "profile_pt" onchange = "previewImage(this,'View_area')">
 				
 				
 		</div>
@@ -165,8 +166,8 @@
 		</div>
 	</form>
 		<div style = "margin-left:500px; margin-bottom : 1px;">                   
-			<button id = "regist">등록</button>
-			<button id = "cancle">취소</button>
+			<button id = "regist" class = "btn btn-success">등록</button>
+			<button id = "cancle" class = "btn btn-success">취소</button>
 		</div>
 	</div>
 	<script>
