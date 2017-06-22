@@ -7,6 +7,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@include file="nutritionistNavi.jsp" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
 	$(document).ready(function(){
 		$("#regist").click(function(){
@@ -36,9 +40,13 @@
   float:left;  }
  .box2 {
   display:inline-block;  margin-left:10px;}  
+  ul{
+  	list-style : none;
+  }
 </style>
 </head>
 <body>
+	<div class = "container">
    <div class = "box1">
       <table>
          <tr>
@@ -60,12 +68,12 @@
    </div>
    <div class = "box2">
       <div>
-         <button id = "regist">식단 등록</button>
-         <button>식단 수정</button>
-         <button>식단 삭제</button>
+         <button id = "regist" class = "btn btn-default">식단 등록</button>
+         <button class = "btn btn-default">식단 수정</button>
+         <button class = "btn btn-default">식단 삭제</button>   
       </div>
       <div>
-         <table class = "dietDiseaseOverview">
+         <table class = "dietDiseaseOverview table table-hover">
             <tr>
                <th></th>
                <th>식단 이미지&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
@@ -77,6 +85,7 @@
             </tr>
          </table>
       </div>
+   </div>
    </div>
 </body>
 </html>

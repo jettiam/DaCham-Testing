@@ -73,4 +73,9 @@ public void orderOptionRegist(HashMap options) throws Exception {
 	sqlSession.insert(namespace+".registOrderOption", options);
 }
 
+@Override
+public List<Customer> orderOption(int orderCode) throws Exception {
+	return sqlSession.selectList(namespace+".orderOption", orderCode);
+}
+
 }

@@ -8,6 +8,10 @@
 <link rel="shortcut icon" href="resources/favicon/N.ico">
 <%@include file="nutritionistNavi.jsp" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
 	$(document).ready(function(){
 		orderList(1);
@@ -36,7 +40,7 @@
 			$.getJSON("nutriAjax/thisMonth",function(data){
 				var str = "";
 				$(data).each(function(){
-					str += "<ul class = 'monthResult'>"+"<li>"+"<img src = 'displayFile?fileName="+this.dietImg+"' style = 'width: 75px; height: 25px;'>"+"</li>"+"</ul>";
+					str += "<ul class = 'monthResult'>"+"<li>"+"<img src = 'displayFile?fileName="+this.dietImg+"' style = 'width: 75px; height: 25px;'>"+this.dietName+"</li>"+"</ul>";
 				});
 				$(".thisMonth").append(str);
 			});
@@ -65,9 +69,13 @@
   float:left;  }
  .box2 {
   display:inline-block;  margin-left:10px;}  
+  ul{
+  	list-style : none;
+  }
 </style>
 </head>
 <body>
+  <div class = "container">
    <div class = "box1">
       <div>
          <select>
@@ -99,7 +107,8 @@
       </div>
    </div>
    <div class = "box2">
-      <table class = "orderTable">
+   	
+      <table class = "orderTable table table-hover">      
          <tr>
             <th>번호&nbsp;&nbsp;&nbsp;</th>
             <th>고객id&nbsp;&nbsp;&nbsp;</th>
@@ -114,8 +123,6 @@
       <ul class = "pagination">
       </ul>
    </div>
-   <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-   <br><br><br><br><br><br>
    <div class = "thisMonth">
       <h1> 월의 판매 식단</h1>
       <hr align = "left" width = "20%">
@@ -123,5 +130,6 @@
      	<li></li>
      </ul>
    </div>
+  </div> 
 </body>
 </html>

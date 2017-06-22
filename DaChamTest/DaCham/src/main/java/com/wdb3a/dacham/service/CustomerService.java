@@ -18,4 +18,5 @@ public interface CustomerService {
 	
 	public int recentlyOrderCode(String id) throws Exception;
 	public void orderOptionRegist(HashMap options) throws Exception;
+	public List<Customer> orderOption(int orderCode) throws Exception;
 }
