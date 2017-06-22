@@ -62,13 +62,19 @@ public class CustomerAjaxController {
 	 * @return 장바구니로 이동
 	 */
 	@RequestMapping(value="myCart",method=RequestMethod.POST)
-	public ResponseEntity<Map<String, Object>> getMyCart(@RequestBody Customer cu){
-		
+	public ResponseEntity<Map<String, Object>> getMyCart(@RequestBody Customer cu){		
 		ResponseEntity<Map<String, Object>> entity = null;
 		List<Customer> list;
+		List<Customer> options;
 		try {
 			list = service.cartList(cu.getId());
 			Map<String, Object> map = new HashMap<>();
+			for(int i=0; i<list.size(); i++){
+				int orderCode = list.get(i).getOrderCode();
+				String sCode = orderCode+"";
+				options = service.orderOption(orderCode);
+				map.put(sCode, options);
+			}
 			map.put("list", list);
 			entity = new ResponseEntity<>(map,HttpStatus.OK);
 		} catch (Exception e) {

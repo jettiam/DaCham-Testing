@@ -183,6 +183,7 @@ public String goMyCart(@RequestParam(value="sideDish") List<String> sideDish, Cu
 	}	
 	return "redirect:goCartList";
 }
+
 /** 
  * @return 장바구니 리다이렉트용
  * @throws Exception
