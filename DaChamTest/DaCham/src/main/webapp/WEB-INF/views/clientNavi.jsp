@@ -156,7 +156,7 @@
 		</ul>
 </div>
 	</nav>
-
+<input type="hidden" id="loginResult" value="${result}"/>
 
 </body>
 <!--로그인함수  -->

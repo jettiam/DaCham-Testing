@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.wdb3a.dacham.bean.Criteria;
 import com.wdb3a.dacham.bean.Nutritionist;
 import com.wdb3a.dacham.bean.OrderList;
 import com.wdb3a.dacham.dao.NutritionistDAO;
@@ -119,9 +120,9 @@ public class NutritionistServiceImpl implements NutritionistService {
 	}
 
 	@Override
-	public List<OrderList> orderList() throws Exception {
+	public List<OrderList> orderList(Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.orderList();
+		return dao.orderList(criteria);
 	}
 
 	@Override
@@ -134,6 +135,12 @@ public class NutritionistServiceImpl implements NutritionistService {
 	public Nutritionist allNutri(String sideDCode) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.allNutri(sideDCode);
+	}
+
+	@Override
+	public int orderList() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.orderList();
 	}
 
 	

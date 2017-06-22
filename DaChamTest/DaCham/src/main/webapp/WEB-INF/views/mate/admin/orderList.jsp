@@ -13,8 +13,7 @@
 <title>Insert title here</title>
 <script>
 	var object = new Object();
-	var data = new Array();
-	var count = 0;
+	var booler = false; 
 	 /*디테일뷰 상세보기 css */
 	 jQuery.fn.center = function() {
 		this.css("position", "absolute");
@@ -43,34 +42,47 @@
 			}
 		});
 		
-		 $("#foodOrder").click(function() {
+		/*  $("#foodOrder").click(function() {
 			 object.value = data;
+			 alert(data);
 			 var values = JSON.stringify(object);
 			     $('input[name=orderCode]').val(values);
 			     $("#formid").submit();
-		}); 
+		});  */
+		//체크박스 된 값의 orderCode값 출력
+	 	var y = 0;
+		$("#foodOrder").on('click', function(){
+			var orderCode="";
+			var foodOrderinfo = {};
+			for(var i=0; i<$('.orderListTable').length; i++){
+			if($('.orderListTable:eq('+i+') input').prop('checked')){   
+			orderCode = $('.orderListTable:eq('+i+') input').val();  
+			var json ={
+					'orderCode':orderCode
+			}
+			foodOrderinfo[y] = json;
+			y++;  
+				}
+			}
+			alert(JSON.stringify(foodOrderinfo)); 
+			$('input[name=orderCode]').val(JSON.stringify(foodOrderinfo));
+			$("#formid").submit();
+		});
 		
 		$("#close").click(function() {
 			$("#read").css("display", "none");
 		});
 
-		$('.tables*').on("click", "input:checkbox", function() {
-			if ($(this).prop("checked")) {
-				data[count] = $(this).val();
-				count++;
-			}
-
-		});
 		//주문 전체 리스트
 		all();
-		function all(){
-			$.getJSON("adminSub/all",function(data){
+		function all(){ 
+			$.getJSON("adminSub/orderAll",function(data){
 				console.log(data); 
 				$(".orderListTable").remove();
 				var str = "";
 				for(var i =0; i<data.length; i++){
-					str += "<tr class='orderListTable'><td>"+"<input type='checkBox' id='"+data[i].orderCode+"' value='"+data[i].orderCode+"' name='che'</td>"+"<td>"+data[i].orderCode+"</td>"+"<td>"+data[i].id+"</td>"+"<td>"+"<a data-src='"+data[i].orderCode+"' class='orderCode'>"+data[i].dietName+"</a> </td>"+"<td>"+data[i].orderDate+"</td>"+"<td>"+data[i].price+"</td>"+"<td>"+data[i].orderItemName+"</td>"+"<td>"+data[i].transportNum+"</td> </tr>"		 
-				}
+					str += "<tr class='orderListTable'><td>"+"<input type='checkBox' id='"+data[i].orderCode+"' value='"+data[i].orderCode+"' name='che'</td>"+"<td class='orderCode'>"+data[i].orderCode+"</td>"+"<td class='id'>"+data[i].id+"</td>"+"<td>"+"<a data-src='"+data[i].orderCode+"' class='dietName'>"+data[i].dietName+"</a> </td>"+"<td class='orderDate'>"+data[i].orderDate+"</td>"+"<td class='price'>"+data[i].price+"</td>"+"<td class='orderItemName'>"+data[i].orderItemName+"</td></tr>"		 
+				} 
 				console.log(str);
 				$(".tables").append(str); 
 			});
@@ -93,8 +105,8 @@
 						"X-HTTP-Method-Override" : "PUT"
 					}, 
 					success : function(data) {
+							alert("환불처리 되었습니다");
 						all();
-						alert("수정하였습니다")
 					}, error : function(){   
 						alert("실패");
 					}
@@ -120,8 +132,9 @@
 						"X-HTTP-Method-Override" : "PUT"
 					}, 
 					success : function(data) {
+						 
 						all();
-						alert("수정하였습니다")
+						
 					}, error : function(){   
 						alert("실패");
 					}
@@ -147,8 +160,8 @@
 		all(); 
 	});
 	//디테일 뷰
-	$(document).on("click", ".orderCode" , function() {  
-			 var orderCode = $(this).attr("data-src"); 
+	$(document).on("click", ".dietName" , function() {  
+			 var orderCode = $(this).attr("data-src");  
 			 $.ajax({
 				type : "post",
 				url : "adminMain4",
@@ -172,11 +185,11 @@
 				}
 			});
 		});
-		//$("#checkBoxId").is(":checked"))
+		/* //$("#checkBoxId").is(":checked"))
 		if ($(this).attr("checked")) {
 			// checked
 			return;
-		}
+		} */
 
 	});
 </script>
@@ -238,7 +251,6 @@
 					<th>주문 접수일</th>
 					<th>금액</th>
 					<th>진행상태</th>
-					<th>배송</th>
 				</tr>
 					
 			</table>

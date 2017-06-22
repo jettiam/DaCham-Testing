@@ -1,6 +1,7 @@
 package com.wdb3a.dacham;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ServiceConfigurationError;
@@ -84,7 +85,7 @@ public String dietOrder(){
 public String detailOrder(@RequestParam(value="dietCode") int dietCode, Model model) throws Exception{	
 	List<Customer> list;
 	list = serviceCu.detailOrder(dietCode);
-	System.out.println("리스트 출력"+list);
+	System.out.println("리스트 출력"+list.size());
 	model.addAttribute("list",list);
 	
 	return "customer/dietOrder/detailOrder";
@@ -170,9 +171,16 @@ public String cartPayment(RedirectAttributes rttr)throws Exception{
  * @throws Exception
  */
 @RequestMapping(value="/goMyCart",method=RequestMethod.GET)
-public String goMyCart(Customer customer)throws Exception{
+public String goMyCart(@RequestParam(value="sideDish") List<String> sideDish, Customer customer)throws Exception{
 	serviceCu.cartRegist(customer);
-	
+	int recentCode = serviceCu.recentlyOrderCode(customer.getId());
+	for(String sCode : sideDish){
+	int code = Integer.parseInt(sCode);
+	HashMap options = new HashMap();
+	options.put("recentCode", recentCode);
+	options.put("sideCode", code);
+	serviceCu.orderOptionRegist(options);
+	}	
 	return "redirect:goCartList";
 }
 /** 

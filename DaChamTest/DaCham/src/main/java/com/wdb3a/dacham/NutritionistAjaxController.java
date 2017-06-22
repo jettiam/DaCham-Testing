@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.wdb3a.dacham.bean.Criteria;
 import com.wdb3a.dacham.bean.Nutritionist;
 import com.wdb3a.dacham.bean.OrderList;
 import com.wdb3a.dacham.service.NutritionistService;
@@ -229,12 +230,20 @@ public class NutritionistAjaxController {
 		return entity;
 	}
 	//해당 메인페이지에 주문목록 표시
-	@RequestMapping(value = "/orderList",method = RequestMethod.GET)
-	public ResponseEntity<List<OrderList>> orderList(){
-		ResponseEntity<List<OrderList>> entity = null;
+	@RequestMapping(value = "/orderList/{page}",method = RequestMethod.GET)
+	public ResponseEntity<Map<String,Object>> orderList(@PathVariable("page")int page){
+		System.out.println("넘어옴"+page);
+		ResponseEntity<Map<String,Object>> entity = null;
 		try {
-			List<OrderList> list = service.orderList();
-			entity = new ResponseEntity<>(list,HttpStatus.OK);
+			Criteria criteria = new Criteria();
+			criteria.setPage(page);
+			int totalCount = service.orderList();
+			criteria.setTotalCount(totalCount);
+			List<OrderList> list = service.orderList(criteria);
+			Map<String,Object> map = new HashMap<>();
+			map.put("list", list);
+			map.put("criteria", criteria);
+			entity = new ResponseEntity<>(map,HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

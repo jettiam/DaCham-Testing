@@ -104,22 +104,8 @@
 					<th>주문 접수일</th>
 					<th>금액</th>
 					<th>진행상태</th>
-					<th>배송</th>
+					<th>운송장 번호</th>
 				</tr>
-				<%-- <c:forEach items="${list}" var="board">
-					<tr>
-						<td>${board.orderCode}&nbsp;&nbsp;&nbsp;</td>
-						<td>${board.id }</td>
-						<td><a data-src="${board.orderCode}" class="orderCode">${board.dietName}&nbsp;&nbsp;</a></td>
-						<td><fmt:formatDate pattern="yyyy-MM-dd"
-								value="${board.orderDate}" /></td>
-						<td>${board.price}</td>
-						<td>${board.orderItemName}</td>
-						<td>${board.transportNum}</td>
-
-					</tr>
-
-				</c:forEach> --%>
 			</table>
 		</div>
 	</div>
@@ -350,6 +336,9 @@
 				$(".orderListTable").remove(); 
 				var str = "";
 				for(var i =0; i<data.length; i++){
+					if(data[i].transportNum == null){
+						data[i].transportNum = " "
+					}
 					str += "<tr class='orderListTable'>"+"<td>"+data[i].orderCode+"</td>"+"<td>"+data[i].id+"</td>"+"<td>"+"<a data-src='"+data[i].orderCode+"' class='orderCode'>"+data[i].dietName+"</a> </td>"+"<td>"+data[i].orderDate+"</td>"+"<td>"+data[i].price+"</td>"+"<td>"+data[i].orderItemName+"</td>"+"<td>"+data[i].transportNum+"</td> </tr>"		 
 				}
 				console.log(str);

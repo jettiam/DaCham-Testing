@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.wdb3a.dacham.bean.Cook;
 import com.wdb3a.dacham.bean.FoodMInven;
+import com.wdb3a.dacham.bean.OrderList;
 @Repository
 public class CookDAOImpl implements CookDAO {
 	private static final String namespace="com.wdb3a.CookerMapper";
@@ -28,13 +29,11 @@ public class CookDAOImpl implements CookDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".readycook");
 	}
-	public List<Cook> cookingfood() throws Exception {
+	
+	@Override
+	public void transportNum2(OrderList orderList) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".cookingfood");
-	}
-	public List<Cook> finishcook() throws Exception {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".finishcook");
+		sqlSession.update(namespace+".transportNum2",orderList);
 	}
 
 }

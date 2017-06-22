@@ -11,7 +11,8 @@
 <script src = "../../../dacham/resources/openAPIjs/radarchart.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
-	$(document).ready(function(){        
+	$(document).ready(function(){     
+		$('#body').hide();
 		var v = 0;
 		$("#sideAll").on("click",function(){
 			sideAll();
@@ -29,6 +30,7 @@
 		}
 		
 		$(document.body).on("click",".nameClick",function(){
+			$('#body').show();    
 			event.preventDefault();
 						
 			var count = parseInt(localStorage['count']);
@@ -36,12 +38,16 @@
 			var sideDImg = $(this).attr('data-img');
 			
 			var sideDCode = $(this).attr('data-code');
+
 			$.getJSON("nutriAjax/allNutri/"+sideDCode,function(data){
-				localStorage[count+'_kcal'] = data.kcal;
-				localStorage[count+'_carbohydrate'] = data.carbohydrate;
-				localStorage[count+'_protein'] = data.protein;
-				localStorage[count+'_fat']= data.fat;
-				localStorage[count+'_na'] = data.na;
+				var subCount = count - 1;
+				
+				localStorage[subCount+'_kcal'] = data.kcal;
+				localStorage[subCount+'_carbohydrate'] = data.carbohydrate;
+				localStorage[subCount+'_protein'] = data.protein;
+				localStorage[subCount+'_fat']= data.fat;
+				localStorage[subCount+'_na'] = data.na;
+				openAPI();
 			});
 			
 			localStorage[count + '_img'] = sideDImg;
@@ -53,21 +59,22 @@
 			
 			Refresh();
 			v = count;
-			
-			
-			
 		});
 		$(document.body).on('click','.sideDImg',function(){
 			var count = parseInt(localStorage['count']);
 			var id = $(this).parent().attr('data-id');
 			
-			$(this).parent().remove();
+			$(this).remove();
 			localStorage.removeItem(id+'_img');
 			localStorage.removeItem(id+'_codes');
-			
+			localStorage.removeItem(id+'_kcal');
+			localStorage.removeItem(id+'_carbohydrate');
+			localStorage.removeItem(id+'_protein');
+			localStorage.removeItem(id+'_fat');
+			localStorage.removeItem(id+'_na');
 			--count;
 			localStorage['count'] = count;
-			
+			openAPI();
 			v = count;
 			cntChange(v);
 		});
@@ -78,12 +85,17 @@
 			$.getJSON("nutriAjax/showKcal/"+sideDCode,function(data){
 				$("#sideDName").text(data.sideDName);
 				$("#kcal").text(data.kcal);
+				$("#carbohydrate").text(data.carbohydrate);
+				$("#protein").text(data.protein);
+				$("#fat").text(data.fat);
+				$("#na").text(data.na);
 			});
 		});
 		
 		$(".template a").on("click",function(){
 			event.preventDefault();
-			      
+			  
+			$("#body").hide();
 			var diseaseCode = $(this).attr("data-code");
 	
 			
@@ -104,30 +116,23 @@
 			});
 		});
 		
-		$(document.body).on("click","#reset",function(){
-			event.preventDefault();
-			
-			location.reload();                        
-		});
 		function Refresh(){
 			var count = parseInt(localStorage['count']);
-			$('.item').empty();	
+			$('.material').empty();	
 		
 		
 			for(var i = 0; i<count; i++){
 				var sideDImg = localStorage[i + "_img"];
 				var sideDCode = localStorage[i + "_codes"];
-				var item = $('<div></div>').addClass('item').attr('data-id',i);
-				$('<input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '>').appendTo(item);    
-				$('<img src = "displayFile?fileName='+sideDImg+'" style= "width: 75px; height: 25px;">').addClass("sideDImg").appendTo(item);
-				item.appendTo(".material");
+				
+				$('<input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '>').appendTo('.material');    
+				$('<img src = "displayFile?fileName='+sideDImg+'" style= "width: 75px; height: 25px;">').addClass("sideDImg").appendTo('.material');
 
 			}
 			
 			v = count;
 
 			cntChange(v);
-			openAPI();
 		}
 		Refresh();
 		
@@ -199,10 +204,12 @@
 		 
 	}
    #body{
-   		position : relative;
+   		position : absolute;      
+   		margin-left : 700px;          	
+   		margin-bottom : 500px;                
    }
   #chart {
-	  position: relative;
+	  position: absolute;
 	  top: 50px;
 	  left: 10px;
 	}	
@@ -214,11 +221,19 @@
 				<table>
 					<tr>
 						<th>반찬명&nbsp;&nbsp;</th>
-						<th>영양정보&nbsp;&nbsp;</th>
+						<th>열량&nbsp;&nbsp;</th>
+						<th>탄수화물&nbsp;&nbsp;</th>
+						<th>단백질&nbsp;&nbsp;</th>
+						<th>지방&nbsp;&nbsp;</th>
+						<th>나트륨&nbsp;&nbsp;</th>
 					</tr>
 					<tr>
 						<td id = "sideDName"></td>
 						<td id = "kcal"></td>
+						<td id = "carbohydrate"></td>
+						<td id = "protein"></td>
+						<td id = "fat"></td>
+						<td id = "na"></td>
 					</tr>
 				</table>
 			</div>
@@ -245,29 +260,34 @@
 		<input type = "hidden" name = "protein" id = "protein">
 		<input type = "hidden" name = "fat" id = "fat">
 		<input type = "hidden" name = "na"  id = "na">
-		<form id = "registForm" enctype = "multipart/form-data">
-			<div class = "box1">
-				<input type = "radio" name = "wizardCode" value = "1"> 고위험군 당뇨병<br>
-				<input type = "radio" name = "wizardCode" value = "2"> 저위험 고지혈증<br>
-				<input type = "radio" name = "wizardCode" value = "3"> 주의 신부전증
-			</div>             
-			<div> 
+		<div id = "body">
+						<div id = "chart"></div>     
+						<div>
+						<!-- 총 칼로리 양 표시 -->
+						</div>
+		</div>     	
+		<form id = "registForm" enctype = "multipart/form-data" style = "position:relative; margin-left : 300px;">              
+			<div>                                
 				<h3>선택한 반찬</h3>
-				<div class = "material">
+				<div class = "material" style = "margin-bottom:50px; position:absolute;">   
 					
 				</div>
-				<hr align = "left" width = "80%">
 			</div>
 		
-			<div class = "div2" style = "border-left:1px solid #000">
+			<div class = "div2" style = "border-left:1px solid #000; position:absolute; margin-top : 45px;"> 
 			    <h2>위자드 선택</h2>
-				<hr align = "left" width = "40%">          
+			    <input type = "radio" name = "wizardCode" value = "1"> 고위험군 당뇨병<br>
+				<input type = "radio" name = "wizardCode" value = "2"> 저위험 고지혈증<br>
+				<input type = "radio" name = "wizardCode" value = "3"> 주의 신부전증
+				<hr align = "left" width = "40%">
+				
 				<div class = "template">
 					질환별 식단 목록<br>
 					- <a data-code = "1">당뇨병</a><br>
 					- <a data-code = "4">신부전증</a><br>     
 					- <a class = "templateErase">템플릿 초기화</a>
 				</div>
+				
 				<br><br><br>
 				<div id = "test">
 					<select name = "diseaseCode">
@@ -285,24 +305,24 @@
 					<input type = "number" name = "price" placeholder = "식단 가격 짓기">
 				</div>
 				<div id = "dietImg">
+					<input type = "file" name = "file" placeholder = "식단이미지 올리기" id = "profile_pt" onchange = "previewImage(this,'View_area')">
 					<div id = "View_area">
 					</div>
-					<input type = "file" name = "file" placeholder = "식단이미지 올리기" id = "profile_pt" onchange = "previewImage(this,'View_area')">
 				</div>
 				<div id = "spDietItem">
 					<input type = "radio" name = "spDietItem" value = "0">특별식단
 					<input type = "radio" name = "spDietItem" value = "1">일반식단
 				</div>
-				<div id = "body">
-					<div id = "chart"></div>
-					<div>
-					<!-- 총 칼로리 양 표시 -->
-					</div>
-				</div>
+				
 			</div>
 		</form>
-	<button id = "regist">등록</button>
-	<button id = "cancle">취소</button>
+		<div style = "margin-left: 500px; margin-top : 500px; position : absolute;">      	   
+			
+			<button id = "regist">등록</button>
+			<button id = "cancle">취소</button>
+		</div>
+		
+	
 	<script>
 	//이미지를 업로드하면 미리 볼 수 있는 기능
 	function previewImage(targetObj, View_area){

@@ -73,8 +73,8 @@
 	
 				<table class = "searchTable">
 					<tr>
-						<th>코드번호</th>
-						<th>식재료명</th>
+						<th>코드번호&nbsp;&nbsp;</th>   
+						<th>식재료명&nbsp;&nbsp;</th>
 					</tr>
 					
 						<tr class = "searchResult">
@@ -89,11 +89,11 @@
 	<input type = "hidden" id = "na" name = "na">
 	<input type = "hidden" id = "carbohydrate" name = "carbohydrate">
 	<input type = "hidden" id =  "fe" name = "fe">
-	<form id = "registForm" class = "registFrom" enctype = "multipart/form-data">
-			
+	<form id = "registForm" class = "registFrom" enctype = "multipart/form-data" style = "margin-bottom:100px;">
+		<div class = "div2">	
 			<br><br>
 			<div class = "box1">
-				<table class = "material">
+				<table class = "material">       
 					<tr>
 						<th></th>
 						<th>식재료&nbsp;&nbsp;  </th>
@@ -103,28 +103,24 @@
 			</div>
 	
 		<div class = "box2">
+				<h2>반찬 사진</h2>
 				<div id = "View_area">
 				</div>
-				<h2>반찬 사진</h2>
+				
 				<input type = "file" name = "file" id = "profile_pt" onchange = "previewImage(this,'View_area')">
 				
 				
 		</div>
-			
-	
-		<div class = "div2">
 			<div id = "body">
 				
 				<div id = "chart"></div>       
 			</div>
-			<div>
+			<div style = "margin-bottom : 1px;">
 				<h2>반찬 레시피</h2>
 				<textarea placeholder = "레시피 입력란" name = "recipe"></textarea>
-			</div>
-			<div>
+				<br>
 				반찬 이름<input type = "text" name = "sideDName">
-			</div>
-			<div>
+			
 				<table>
 					<tr>
 						<th>식품군</th>
@@ -154,12 +150,14 @@
 							</select>
 						</td>
 					</tr>
-				</table>
-				<button id = "regist">등록</button>
-			</div>
+				</table> 	
+			</div>    
 		</div>
 	</form>
-	<button id = "cancle">취소</button>
+	<div style = "margin-left:600px; margin-bottom : 1px;">          
+		<button id = "regist">등록</button>
+		<button id = "cancle">취소</button>
+	</div>
 	<script>
 
 		$(document).ready(function(){
