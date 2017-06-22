@@ -8,6 +8,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@include file = "deliverNavi.jsp" %>
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link rel="stylesheet"
+   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+   src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
 	$(document).ready(function(){
 		all();
@@ -68,7 +73,9 @@
 </script>
 </head>
 <body>
+	<div class = "container">
 		<div>
+		 
 			<select name = "searchType" class = "searchType">
 				<option value = "n"
 	   			<c:out value="${orderList.searchType==null?'selected':'' }"/>>
@@ -90,7 +97,8 @@
 		<br><br><br><br>
 	
 		<div>
-			<table border = "1" class = "searchTable">
+		<button id = "button" class = "btn btn-primary">배송</button>
+			<table class = "searchTable table table-hover">
 				<tr>
 					<th>   </th>
 					<th>주문번호</th>
@@ -107,6 +115,7 @@
 			
 		</div>
 	
-		<button id = "button">배송</button>
+		
+	</div>
 </body>
 </html>
