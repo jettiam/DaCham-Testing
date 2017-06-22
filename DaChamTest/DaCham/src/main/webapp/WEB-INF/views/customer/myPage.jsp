@@ -92,7 +92,7 @@ $(document).ready(function(){
 	    	var id = $("#customerId").val();
 	    	  $(".addTr").remove();
 			$(".optionAddTr").remove();
-			$(".optionView").css("display","table-cell");
+			$(".optionView").css("display","");
 			$.ajax({
 				url:"customerAjax/myCart",
 				headers : {
@@ -129,20 +129,7 @@ $(document).ready(function(){
 						})
 				}
 				}
-			});	
-			
-			$("#myCartTable").on("click", ".optiondown", function(){
-				var orderCode = $(this).attr("data-orderCode");
-				if($(this).hasClass('glyphicon-chevron-down')){
-					$(this).removeClass('glyphicon-chevron-down');
-					$(this).addClass('glyphicon-chevron-up');
-				}else{
-					$(this).removeClass('glyphicon-chevron-up');
-					$(this).addClass('glyphicon-chevron-down');			
-				}			
-				$("."+orderCode+"_optionArea").toggle("fast");			
-			});
-				
+			});					
 			
 			
 			
@@ -266,6 +253,19 @@ $(document).ready(function(){
 		alert(JSON.stringify(cartOrderInfo));
 		$("#cartInfo").val(JSON.stringify(cartOrderInfo));
 		$("#cartForm").submit();
+	});
+	
+	$("#myCartTable").on("click", ".optiondown", function(){				
+		var orderCode = $(this).attr("data-orderCode");
+		$("."+orderCode+"_optionArea").toggle("fast");	
+		if($(this).hasClass('glyphicon-chevron-down')){
+			$(this).removeClass('glyphicon-chevron-down');
+			$(this).addClass('glyphicon-chevron-up');
+		}else{
+			$(this).removeClass('glyphicon-chevron-up');
+			$(this).addClass('glyphicon-chevron-down');			
+		}			
+				
 	});
 });
 
