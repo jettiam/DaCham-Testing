@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.wdb3a.dacham.bean.Criteria;
 import com.wdb3a.dacham.bean.Nutritionist;
 import com.wdb3a.dacham.bean.OrderList;
 @Repository
@@ -119,9 +120,9 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 	}
 
 	@Override
-	public List<OrderList> orderList() throws Exception {
+	public List<OrderList> orderList(Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".orderList");
+		return sqlSession.selectList(namespace+".orderList",criteria);
 	}
 
 	@Override
@@ -134,6 +135,12 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 	public Nutritionist allNutri(String sideDCode) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace+".allNutri",sideDCode);
+	}
+
+	@Override
+	public int orderList() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".orderListCount");
 	}
 
 	

@@ -109,12 +109,26 @@ public class AdminSubController {
 		}
 		return entity;
 	}
-   
+   //메인화면 전체 리스트 출력
    @RequestMapping(value = "/all",method = RequestMethod.GET)
 	public ResponseEntity<List<OrderList>> all(){
 		ResponseEntity<List<OrderList>> entity = null;
 		try {
 			List<OrderList> list = service.all();
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+   //orderList 리스트 출력
+   @RequestMapping(value = "/orderAll",method = RequestMethod.GET)
+	public ResponseEntity<List<OrderList>> orderAll(){
+		ResponseEntity<List<OrderList>> entity = null;
+		try {
+			List<OrderList> list = service.orderAll();
 			entity = new ResponseEntity<>(list,HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

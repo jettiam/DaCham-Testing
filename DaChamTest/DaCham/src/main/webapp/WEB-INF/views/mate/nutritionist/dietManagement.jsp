@@ -7,6 +7,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@include file="nutritionistNavi.jsp" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
 	$(document).ready(function(){
 		$("#regist").click(function(){
@@ -39,15 +43,15 @@
 </style>
 </head>
 <body>
+	<div class = "container">
    <div class = "box1">
       <table>
          <tr>
-            <th>질환</th>
-            <th>식단 수량(개)</th>
+            <th>질환</th>      
+          
          </tr>
          <tr>
-            <td>당뇨병</td>
-            <td>5</td>
+          
          </tr>
       </table>
       <nav>
@@ -78,6 +82,7 @@
             </tr>
          </table>
       </div>
+   </div>
    </div>
 </body>
 </html>

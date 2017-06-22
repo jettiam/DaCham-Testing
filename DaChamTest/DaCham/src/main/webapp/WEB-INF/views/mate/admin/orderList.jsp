@@ -13,8 +13,7 @@
 <title>Insert title here</title>
 <script>
 	var object = new Object();
-	var data = new Array();
-	var count = 0;
+	var booler = false; 
 	 /*디테일뷰 상세보기 css */
 	 jQuery.fn.center = function() {
 		this.css("position", "absolute");
@@ -74,25 +73,15 @@
 			$("#read").css("display", "none");
 		});
 
-		  /* $('.tables*').on("click", "input:checkbox", function() {
-			if ($(this).prop("checked")) {
-				data[count] = $(this).val();
-				count++;
-			}
-
-		});    */
-		
-		
-		
 		//주문 전체 리스트
 		all();
-		function all(){
-			$.getJSON("adminSub/all",function(data){
+		function all(){ 
+			$.getJSON("adminSub/orderAll",function(data){
 				console.log(data); 
 				$(".orderListTable").remove();
 				var str = "";
 				for(var i =0; i<data.length; i++){
-					str += "<tr class='orderListTable'><td>"+"<input type='checkBox' id='"+data[i].orderCode+"' value='"+data[i].orderCode+"' name='che'</td>"+"<td class='orderCode'>"+data[i].orderCode+"</td>"+"<td class='id'>"+data[i].id+"</td>"+"<td>"+"<a data-src='"+data[i].orderCode+"' class='dietName'>"+data[i].dietName+"</a> </td>"+"<td class='orderDate'>"+data[i].orderDate+"</td>"+"<td class='price'>"+data[i].price+"</td>"+"<td class='orderItemName'>"+data[i].orderItemName+"</td>"+"<td class='transportNum'>"+data[i].transportNum+"</td> </tr>"		 
+					str += "<tr class='orderListTable'><td>"+"<input type='checkBox' id='"+data[i].orderCode+"' value='"+data[i].orderCode+"' name='che'</td>"+"<td class='orderCode'>"+data[i].orderCode+"</td>"+"<td class='id'>"+data[i].id+"</td>"+"<td>"+"<a data-src='"+data[i].orderCode+"' class='dietName'>"+data[i].dietName+"</a> </td>"+"<td class='orderDate'>"+data[i].orderDate+"</td>"+"<td class='price'>"+data[i].price+"</td>"+"<td class='orderItemName'>"+data[i].orderItemName+"</td></tr>"		 
 				} 
 				console.log(str);
 				$(".tables").append(str); 
@@ -116,8 +105,8 @@
 						"X-HTTP-Method-Override" : "PUT"
 					}, 
 					success : function(data) {
+							alert("환불처리 되었습니다");
 						all();
-						alert("수정하였습니다")
 					}, error : function(){   
 						alert("실패");
 					}
@@ -143,8 +132,9 @@
 						"X-HTTP-Method-Override" : "PUT"
 					}, 
 					success : function(data) {
+						 
 						all();
-						alert("수정하였습니다")
+						
 					}, error : function(){   
 						alert("실패");
 					}
@@ -261,7 +251,6 @@
 					<th>주문 접수일</th>
 					<th>금액</th>
 					<th>진행상태</th>
-					<th>배송</th>
 				</tr>
 					
 			</table>

@@ -154,9 +154,8 @@ public class AdminController {
 			foodMAmountRead1 = service.foodMAmountRead(a);
 			
 			map.put(i ,foodMAmountRead1);   
-		 
 		}
-		 
+		
 		model.addAttribute("map", map);
 		
 		

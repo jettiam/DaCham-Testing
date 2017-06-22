@@ -23,5 +23,6 @@ public interface AdminMainDAO {
 	public List<ChartPrice> chartPrice() throws Exception;
 	public List<ChartPrice> chartPrice1(ChartPrice dates) throws Exception;
 	public List<OrderList> all() throws Exception;
+	public List<OrderList> orderAll() throws Exception;
 	
 }
