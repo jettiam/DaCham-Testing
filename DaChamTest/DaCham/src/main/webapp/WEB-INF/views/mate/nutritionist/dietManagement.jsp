@@ -42,12 +42,11 @@
    <div class = "box1">
       <table>
          <tr>
-            <th>질환</th>
-            <th>식단 수량(개)</th>
+            <th>질환</th>      
+          
          </tr>
          <tr>
-            <td>당뇨병</td>
-            <td>5</td>
+          
          </tr>
       </table>
       <nav>

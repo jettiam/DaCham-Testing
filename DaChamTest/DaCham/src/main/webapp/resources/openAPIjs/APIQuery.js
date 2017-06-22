@@ -1,5 +1,7 @@
 function openAPI(){
-
+	if(localStorage['count'] == 0){
+		$("#body").hide();
+	}
 	var w = 200,h = 200;
 		
 		var colorscale = d3.scale.category10();

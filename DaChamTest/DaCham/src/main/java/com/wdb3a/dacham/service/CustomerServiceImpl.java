@@ -1,5 +1,6 @@
 package com.wdb3a.dacham.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -55,6 +56,15 @@ private CustomerDAO dao;
 		dao.orderCart(customer);
 		
 
+	}
+	@Override
+	public int recentlyOrderCode(String id) throws Exception {
+		// 가장 최근의 주문번호를 가져오기 위한 함수
+		return dao.recentlyOrderCode(id);
+	}
+	@Override
+	public void orderOptionRegist(HashMap options) throws Exception {
+		dao.orderOptionRegist(options);
 	}
 
 }

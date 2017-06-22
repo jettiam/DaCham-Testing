@@ -4,6 +4,8 @@ public class Cook {
 	private String sideDName;
 	private int dietAmount;
 	private int orderItemCode;
+	private int orderCode;
+	
 	public String getSideDName() {
 		return sideDName;
 	}
@@ -21,6 +23,12 @@ public class Cook {
 	}
 	public void setOrderItemCode(int orderItemCode) {
 		this.orderItemCode = orderItemCode;
+	}
+	public int getOrderCode() {
+		return orderCode;
+	}
+	public void setOrderCode(int orderCode) {
+		this.orderCode = orderCode;
 	}
 	
 	

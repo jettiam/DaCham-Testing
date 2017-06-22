@@ -61,7 +61,7 @@
 			<li class="box"><a href="wizard" id="dachamInfo">식단위자드 관리</a></li>
 			<li class="box"><a href="diet" id="dietOrder">식단관리</a></li>
 			<li class="box"><a href="side" id="menuShow">반찬관리</a></li>
-			<li class="box"><a href="special" id="nutritionInfo">특별식단 작성</a></li>
+
 		</ul>
 	</div>
 </body>

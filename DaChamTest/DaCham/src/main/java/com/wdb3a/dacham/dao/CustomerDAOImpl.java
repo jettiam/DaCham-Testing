@@ -1,5 +1,6 @@
 package com.wdb3a.dacham.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
@@ -59,5 +60,17 @@ public class CustomerDAOImpl implements CustomerDAO {
 		sqlSession.update(namespace+".orderCart" ,customer);
 
 	}
+
+@Override
+public int recentlyOrderCode(String id) throws Exception {
+	// 최근의 주문 번호 가져옴
+	return sqlSession.selectOne(namespace+".recentlyOrderCode", id);
+}
+
+@Override
+public void orderOptionRegist(HashMap options) throws Exception {
+	// TODO Auto-generated method stub
+	sqlSession.insert(namespace+".registOrderOption", options);
+}
 
 }
