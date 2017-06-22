@@ -79,6 +79,12 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 		return sqlSession.selectList(namespace+".all"); 
 	}
 
+	@Override
+	public List<OrderList> orderAll() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".orderAll");
+	}
+
 	
 
 	

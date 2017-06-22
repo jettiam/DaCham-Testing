@@ -16,7 +16,8 @@
 		select a.orderDate, b.dietName, b.dietImg 
 		from orderlist a join diet b
 		where a.dietCode = b.dietCode
-		and month(a.orderDate) between month(a.orderDate) and (month(a.orderDate)+1);
+		and month(a.orderDate) between month(a.orderDate) and (month(a.orderDate)+1)
+		group by a.dietCode;
 	</select>
 	<!-- 반찬 전체를 조회합니다(with 식품군, 조리방법) -->
 	<select id = "sideAll" resultType = "com.wdb3a.dacham.bean.Nutritionist">
@@ -98,6 +99,13 @@
 	<!-- 해당 메인페이지에 주문목록 표시 -->
 	<select id = "orderList" resultType = "OrderList">
 		select a.orderCode, a.id, b.dietName,a.orderDate ,a.price
+		from orderlist a join diet b
+		where a.dietCode = b.dietCode
+		limit #{startRecord}, #{recordsPerPage}
+	</select>
+	<!-- 해당 메인페이지 주문목록의 총 개수를 구함 -->
+	<select id = "orderListCount" resultType = "Integer">
+		select count(a.orderCode)
 		from orderlist a join diet b
 		where a.dietCode = b.dietCode
 	</select>

@@ -41,7 +41,7 @@
 
 			$.getJSON("nutriAjax/allNutri/"+sideDCode,function(data){
 				var subCount = count - 1;
-				alert(subCount);
+				
 				localStorage[subCount+'_kcal'] = data.kcal;
 				localStorage[subCount+'_carbohydrate'] = data.carbohydrate;
 				localStorage[subCount+'_protein'] = data.protein;
@@ -64,7 +64,7 @@
 			var count = parseInt(localStorage['count']);
 			var id = $(this).parent().attr('data-id');
 			
-			$(this).parent().remove();
+			$(this).remove();
 			localStorage.removeItem(id+'_img');
 			localStorage.removeItem(id+'_codes');
 			localStorage.removeItem(id+'_kcal');
@@ -107,7 +107,7 @@
 				console.log(data);
 				var str = "";
 				$(data).each(function(){
-					str += "<img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width: 75px; height: 25px;'>" + "<input type = 'hidden' name = 'sideDCode' value = '"+this.sideDCode+"'>"+"<br>";
+					str += "<img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width: 75px; height: 25px;'>" + "<input type = 'hidden' name = 'sideDCode' value = '"+this.sideDCode+"'>";
 				});
 				$(".material").html(str);
 			});
@@ -118,16 +118,15 @@
 		
 		function Refresh(){
 			var count = parseInt(localStorage['count']);
-			$('.item').empty();	
+			$('.material').empty();	
 		
 		
 			for(var i = 0; i<count; i++){
 				var sideDImg = localStorage[i + "_img"];
 				var sideDCode = localStorage[i + "_codes"];
-				var item = $('<div></div>').addClass('item').attr('data-id',i);
-				$('<input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '>').appendTo(item);    
-				$('<img src = "displayFile?fileName='+sideDImg+'" style= "width: 75px; height: 25px;">').addClass("sideDImg").appendTo(item);
-				item.appendTo(".material");
+				
+				$('<input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '>').appendTo('.material');    
+				$('<img src = "displayFile?fileName='+sideDImg+'" style= "width: 75px; height: 25px;">').addClass("sideDImg").appendTo('.material');
 
 			}
 			
@@ -206,7 +205,7 @@
 	}
    #body{
    		position : absolute;      
-   		margin-left : 500px;          	
+   		margin-left : 700px;          	
    		margin-bottom : 500px;                
    }
   #chart {
@@ -270,12 +269,12 @@
 		<form id = "registForm" enctype = "multipart/form-data" style = "position:relative; margin-left : 300px;">              
 			<div>                                
 				<h3>선택한 반찬</h3>
-				<div class = "material">
+				<div class = "material" style = "margin-bottom:50px; position:absolute;">   
 					
 				</div>
 			</div>
 		
-			<div class = "div2" style = "border-left:1px solid #000; position:absolute;"> 
+			<div class = "div2" style = "border-left:1px solid #000; position:absolute; margin-top : 45px;"> 
 			    <h2>위자드 선택</h2>
 			    <input type = "radio" name = "wizardCode" value = "1"> 고위험군 당뇨병<br>
 				<input type = "radio" name = "wizardCode" value = "2"> 저위험 고지혈증<br>

@@ -10,16 +10,25 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
 	$(document).ready(function(){
-		orderList();
+		orderList(1);
+		var currentPage = 1;
+		$(".pagination").on("click","li a",function(){
+			event.preventDefault();
+			var replyPage = $(this).attr("href");
+			orderList(replyPage);
+		});
+		
 		thisMonth();
-		function orderList(){
+		function orderList(page){
+			currentPage = page;
 			$(".orderResult").remove();
-			$.getJSON("nutriAjax/orderList",function(data){
+			$.getJSON("nutriAjax/orderList/"+page,function(data){
 				var str = "";
-				$(data).each(function(){
+				$(data.list).each(function(){
 					str += "<tr class = 'orderResult'><td>"+this.orderCode+"</td>"+"<td>"+this.id+"</td>"+"<td>"+this.dietName+"</td>"+"<td>"+this.orderDate+"</td>"+"<td>"+this.price+"</td>"+"</tr>"
 				});
-				$(".orderTable").append(str);          
+				$(".orderTable").append(str);
+				printPaging(data.criteria);
 			});             
 		}
 		function thisMonth(){
@@ -31,6 +40,21 @@
 				});
 				$(".thisMonth").append(str);
 			});
+		}
+		function printPaging(criteria){
+			var str = "";
+					
+			if(criteria.prev){
+				str += "<li><a href=''"+(criteria.startPage-1)+"'>'" + "<<"+"</a></li>";
+			}
+			for(var i = criteria.startPage; i<=criteria.endPage; i++){
+				var strClass = criteria.page == i?"class = 'active'":"";
+				str += "<li "+strClass+"><a href ='"+i+"'>"+i + "</a></li>";
+			}
+			if(criteria.next){
+				str += "<li><a href=''"+(criteria.endPage+1)+"'>'" + ">>"+"</a></li>";
+			}
+			$(".pagination").html(str);
 		}
 	});
 </script>
@@ -87,6 +111,8 @@
             
          </tr>
       </table>
+      <ul class = "pagination">
+      </ul>
    </div>
    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
    <br><br><br><br><br><br>
