@@ -1,5 +1,6 @@
 package com.wdb3a.dacham.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.wdb3a.dacham.bean.Customer;
@@ -24,5 +25,8 @@ public interface CustomerDAO {
 
 	public void orderCart(Customer customer) throws Exception;
 
+	public int recentlyOrderCode(String id) throws Exception;
+	public void orderOptionRegist(HashMap options) throws Exception;
+	public List<Customer> orderOption(int orderCode) throws Exception;
 
 }

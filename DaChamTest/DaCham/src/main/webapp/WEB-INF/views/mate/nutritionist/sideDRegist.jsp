@@ -13,6 +13,11 @@
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src = "../../../dacham/resources/openAPIjs/radarchart.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../../dacham/resources/bootstrap-filestyle.min.js"> </script>
 <script>
 		//이미지를 업로드하면 미리 볼 수 있는 기능
 		function previewImage(targetObj, View_area){
@@ -52,29 +57,33 @@
 	.box1 {
   display:inline-block;  margin-left:20px;  }
  .box2 {
-  display:inline-block;  margin-left:10px;}
-  .div1 {
+  display:inline-block;  margin-left:10px;}           
+  .div1 {   
   float:left;  }
  .div2 {
-  display:inline-block;  margin-left:10px;}  
+  display:inline-block;  margin-left:10px;} 
+  #body{
+  	display : inline-block;
+  	
+  } 
 </style>
 </head>
 <body>
-	
+	<div class = "container">
 		<div class = "div1">
 		
 				<div>
 					<input type = "text" name = "search" placeholder = "식재료 검색어 입력란" id = "keyword"> 
-					<button id = "search"> 검색 </button>
-					<input type = "button" value = "전체목록" id = "listAll">    
+					<button id = "search" class = "btn btn-warning"> 검색 </button>
+					<input type = "button" value = "전체목록" class = "btn btn-warning" id = "listAll">    
 				</div>
 			
 		
 	
-				<table class = "searchTable">
+				<table class = "searchTable table table-hover">
 					<tr>
-						<th>코드번호</th>
-						<th>식재료명</th>
+						<th>코드번호&nbsp;&nbsp;</th>   
+						<th>식재료명&nbsp;&nbsp;</th>
 					</tr>
 					
 						<tr class = "searchResult">
@@ -82,49 +91,46 @@
 						</tr>
 					
 				</table>
-			</div>
+		</div>
+	
 	<input type = "hidden" id = "foodMName" name = "foodMName2">
 	<input type = "hidden" id =  "protein" name = "protein">
 	<input type = "hidden" id = "fat" name = "fat">
 	<input type = "hidden" id = "na" name = "na">
 	<input type = "hidden" id = "carbohydrate" name = "carbohydrate">
 	<input type = "hidden" id =  "fe" name = "fe">
-	<form id = "registForm" class = "registFrom" enctype = "multipart/form-data">
-			
+	<form id = "registForm" class = "registFrom" enctype = "multipart/form-data" style = "margin-bottom:100px;">
+		<div class = "div2">	
 			<br><br>
 			<div class = "box1">
-				<table class = "material">
+				<table class = "material" style = "position:absolute;">          
 					<tr>
-						<th></th>
+						<th></th>  
 						<th>식재료&nbsp;&nbsp;  </th>
 						<th>양(g)&nbsp;&nbsp;   </th>
 					</tr>
 				</table>
-			</div>
-	
+		
 		<div class = "box2">
-				<div id = "View_area">
-				</div>
 				<h2>반찬 사진</h2>
-				<input type = "file" name = "file" id = "profile_pt" onchange = "previewImage(this,'View_area')">
+				<div id = "View_area">
+					<img id = "prev_View_area" src="http://placehold.it/100x100">
+				</div>
+				
+				<input type = "file" class = "filestyle" data-input = "false" name = "file" placeholder = "식단이미지 올리기" id = "profile_pt" onchange = "previewImage(this,'View_area')">
 				
 				
 		</div>
-			
-	
-		<div class = "div2">
 			<div id = "body">
 				
 				<div id = "chart"></div>       
 			</div>
-			<div>
+			<div style = "margin-bottom : 1px;">
 				<h2>반찬 레시피</h2>
 				<textarea placeholder = "레시피 입력란" name = "recipe"></textarea>
-			</div>
-			<div>
+				<br>
 				반찬 이름<input type = "text" name = "sideDName">
-			</div>
-			<div>
+			
 				<table>
 					<tr>
 						<th>식품군</th>
@@ -154,12 +160,16 @@
 							</select>
 						</td>
 					</tr>
-				</table>
-				<button id = "regist">등록</button>
-			</div>
+				</table> 	
+			</div>       
+		  </div> 
 		</div>
 	</form>
-	<button id = "cancle">취소</button>
+		<div style = "margin-left:500px; margin-bottom : 1px;">                   
+			<button id = "regist" class = "btn btn-success">등록</button>
+			<button id = "cancle" class = "btn btn-success">취소</button>
+		</div>
+	</div>
 	<script>
 
 		$(document).ready(function(){

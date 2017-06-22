@@ -48,17 +48,38 @@ where s.sideDCode=f.sideDcode and s.foodGCode=#{foodGCode};
   
  
   <!-- 장바구니 확인 쿼리문 -->
-  <select id="cartList" resultType="OrderList">
+  <select id="cartList" resultType="Customer">
   select o.dietCode, o.price, o.orderCode,o.orderDate, o.dietAmount,d.dietName,d.dietImg
 from orderlist o, diet d where o.dietCode = d.dietCode and o.id = #{id} and o.orderItemCode = 1
 order by o.orderCode desc;
   </select>
   
-    <select id="myOrderList" resultType="OrderList">
+<select id="myOrderList" resultType="Customer">
   select d.dietImg,d.dietName,o.dietCode,o.price,o.orderCode,o.orderDate,o.dietAmount,o.orderItemCode
 from (select dietCode, price, orderCode,orderDate, dietAmount,orderItemCode
 from orderlist where id = #{id} and orderItemCode between 2 and 8 or orderItemCode = 0) o,diet d
 where o.dietCode = d.dietCode order by o.orderDate desc; 
   </select>
+
+
+<!-- 가장 최신의 주문번호를 알기 위한 쿼리문, 하나의 정수(주문번호)가 리턴 -->
+<select id="recentlyOrderCode" resultType="int">
+select max(orderCode)
+from orderlist
+where id=#{id};
+</select>
+
+<!-- 사용자 주문 식단(반찬옵션) 에 insert 하기 위한 쿼리문, 리턴 없음 -->
+<insert id="registOrderOption" parameterType="hashmap">
+insert into orderoptions
+values( #{recentCode}, #{sideCode});
+</insert>
+
+<!-- 주문에 대한 옵션(반찬들) 가져오는 쿼리문, 리턴 Customer(반찬이름, 반찬이미지) -->
+<select id="orderOption" resultType="Customer">
+select s.sideDName, s.sideDImg
+from orderoptions o, sidedish s
+where o.orderCode = #{orderCode} and o.sideDCode = s.sideDCode;
+</select>
 
   </mapper>

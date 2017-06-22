@@ -9,6 +9,7 @@ public class FoodMAmountRead {
 	private int orderCode;
 	
 	
+	
 	public int getOrderCode() {
 		return orderCode;
 	}

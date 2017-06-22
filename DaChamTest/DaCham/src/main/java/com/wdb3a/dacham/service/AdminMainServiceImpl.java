@@ -85,6 +85,12 @@ public class AdminMainServiceImpl implements AdminMainService {
 		return dao.all();  
 	}
 
+	@Override
+	public List<OrderList> orderAll() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.orderAll();
+	}
+
 	
 	
 	

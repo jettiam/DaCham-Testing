@@ -5,7 +5,15 @@ public class Cook {
 	private int dietAmount;
 	private int orderItemCode;
 	private int orderCode;
+	private String orderItemName;
 	
+	
+	public String getOrderItemName() {
+		return orderItemName;
+	}
+	public void setOrderItemName(String orderItemName) {
+		this.orderItemName = orderItemName;
+	}
 	public String getSideDName() {
 		return sideDName;
 	}

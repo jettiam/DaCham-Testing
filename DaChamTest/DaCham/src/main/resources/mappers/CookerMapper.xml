@@ -20,12 +20,13 @@
 	  	</if>
   </sql>
   <select id = "cookList" resultType = "Cook">
-	select b.sideDName, sum(a.dietAmount) as dietAmount, a.orderItemCode
-	from orderlist a join sidedish b join dietinfo c
-	where a.dietCode = c.dietCode
-	and c.sideDCode = b.sideDCode
-	and a.orderItemCode between 3 and 5
-	group by b.sideDName
+	select b.sideDName, sum(a.dietAmount) as dietAmount, a.orderItemCode, d.orderItemName
+   from orderlist a join sidedish b join dietinfo c join orderitem d
+   where a.dietCode = c.dietCode
+   and c.sideDCode = b.sideDCode
+   and a.orderItemCode = d.orderItemCode
+   and a.orderItemCode = 3
+   group by b.sideDName
   </select>
  
   <select id ="readycook" resultType = "Cook">

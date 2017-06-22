@@ -8,18 +8,31 @@
 <link rel="shortcut icon" href="resources/favicon/N.ico">
 <%@include file="nutritionistNavi.jsp" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
 	$(document).ready(function(){
-		orderList();
+		orderList(1);
+		var currentPage = 1;
+		$(".pagination").on("click","li a",function(){
+			event.preventDefault();
+			var replyPage = $(this).attr("href");
+			orderList(replyPage);
+		});
+		
 		thisMonth();
-		function orderList(){
+		function orderList(page){
+			currentPage = page;
 			$(".orderResult").remove();
-			$.getJSON("nutriAjax/orderList",function(data){
+			$.getJSON("nutriAjax/orderList/"+page,function(data){
 				var str = "";
-				$(data).each(function(){
+				$(data.list).each(function(){
 					str += "<tr class = 'orderResult'><td>"+this.orderCode+"</td>"+"<td>"+this.id+"</td>"+"<td>"+this.dietName+"</td>"+"<td>"+this.orderDate+"</td>"+"<td>"+this.price+"</td>"+"</tr>"
 				});
-				$(".orderTable").append(str);          
+				$(".orderTable").append(str);
+				printPaging(data.criteria);
 			});             
 		}
 		function thisMonth(){
@@ -27,10 +40,25 @@
 			$.getJSON("nutriAjax/thisMonth",function(data){
 				var str = "";
 				$(data).each(function(){
-					str += "<ul class = 'monthResult'>"+"<li>"+"<img src = 'displayFile?fileName="+this.dietImg+"' style = 'width: 75px; height: 25px;'>"+"</li>"+"</ul>";
+					str += "<ul class = 'monthResult'>"+"<li>"+"<img src = 'displayFile?fileName="+this.dietImg+"' style = 'width: 75px; height: 25px;'>"+this.dietName+"</li>"+"</ul>";
 				});
 				$(".thisMonth").append(str);
 			});
+		}
+		function printPaging(criteria){
+			var str = "";
+					
+			if(criteria.prev){
+				str += "<li><a href=''"+(criteria.startPage-1)+"'>'" + "<<"+"</a></li>";
+			}
+			for(var i = criteria.startPage; i<=criteria.endPage; i++){
+				var strClass = criteria.page == i?"class = 'active'":"";
+				str += "<li "+strClass+"><a href ='"+i+"'>"+i + "</a></li>";
+			}
+			if(criteria.next){
+				str += "<li><a href=''"+(criteria.endPage+1)+"'>'" + ">>"+"</a></li>";
+			}
+			$(".pagination").html(str);
 		}
 	});
 </script>
@@ -41,9 +69,13 @@
   float:left;  }
  .box2 {
   display:inline-block;  margin-left:10px;}  
+  ul{
+  	list-style : none;
+  }
 </style>
 </head>
 <body>
+  <div class = "container">
    <div class = "box1">
       <div>
          <select>
@@ -75,7 +107,8 @@
       </div>
    </div>
    <div class = "box2">
-      <table class = "orderTable">
+   	
+      <table class = "orderTable table table-hover">      
          <tr>
             <th>번호&nbsp;&nbsp;&nbsp;</th>
             <th>고객id&nbsp;&nbsp;&nbsp;</th>
@@ -87,9 +120,9 @@
             
          </tr>
       </table>
+      <ul class = "pagination">
+      </ul>
    </div>
-   <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-   <br><br><br><br><br><br>
    <div class = "thisMonth">
       <h1> 월의 판매 식단</h1>
       <hr align = "left" width = "20%">
@@ -97,5 +130,6 @@
      	<li></li>
      </ul>
    </div>
+  </div> 
 </body>
 </html>

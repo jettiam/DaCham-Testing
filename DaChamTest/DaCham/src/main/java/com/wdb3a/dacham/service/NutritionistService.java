@@ -2,6 +2,7 @@ package com.wdb3a.dacham.service;
 
 import java.util.List;
 
+import com.wdb3a.dacham.bean.Criteria;
 import com.wdb3a.dacham.bean.Nutritionist;
 import com.wdb3a.dacham.bean.OrderList;
 
@@ -31,7 +32,9 @@ public interface NutritionistService {
 	//해당 반찬에 대한 카테고리 검색
 	public List<Nutritionist> categorySearch(Nutritionist nutritionist) throws Exception;
 	//해당 메인 페이지에 주문목록 표시
-	public List<OrderList> orderList() throws Exception;
+	public List<OrderList> orderList(Criteria criteria) throws Exception;
+	//해당 메인페이지 주문목록 개수 구하기
+	public int orderList() throws Exception;
 	//해당 반찬에 대한 영양정보
 	public Nutritionist allNutri(String sideDCode) throws Exception;
 }

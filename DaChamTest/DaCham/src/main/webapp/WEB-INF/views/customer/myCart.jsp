@@ -15,15 +15,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>DaCham 마이페이지</title>
 <style>
-
-
-
-
-
-
-
-
-
 #myPageWrap {
 	width: 1080px;
 	height: 100%;
@@ -77,7 +68,7 @@
 </style>
 <script>
 $(document).ready(function(){
-	//각 상태에 따른 출력 0:내정보,1:내건강정보,2:장바구니,3:주문내역	
+	//각 상태에 따른 출력 0:내정보,1:내건강정보,2:장바구니,3:주문내역
 	var status=${status};	
 	status = Number(status);
 	switch(status) {
@@ -95,8 +86,6 @@ $(document).ready(function(){
         break;
     case 2:
     	var id = $("#customerId").val();
-    	  $(".addTr").remove();
-		$(".optionAddTr").remove();
 		$.ajax({
 			url:"customerAjax/myCart",
 			headers : {
@@ -105,51 +94,15 @@ $(document).ready(function(){
 	            },
 	            dataType : "json",
 			data:JSON.stringify({id:id}),
-			type:"POST",			
-			success:function(data){				
-				for(var i = 0; i<data.list.length; i++){ //장바구니의 데이터 테이블로 출력					
-					var orderCode = data.list[i].orderCode;				
-					$('#myCartTable').append("<tr class='addTr' data-orderCode='"+data.list[i].orderCode+"'><td>"
-							+"<input type='checkbox' name='cartCheck' value='"+data.list[i].dietCode+"' data-orderCode='"+data.list[i].orderCode+"'>"
-							+"</td><td><img class='myPageImg' data-img="+data.list[i].dietImg+" src='displayFile?fileName="+data.list[i].dietImg
-									+"' alt='이미지'>"
-									+"<span data-orderCode='"+data.list[i].orderCode+"' class='optiondown glyphicon glyphicon-chevron-down'>"						
-									+"주문상세보기</span></td><td class='dietName'>"+data.list[i].dietName
-									+"</td><td class='dietAmount'>"+data.list[i].dietAmount+"</td><td class='price'><span>"+data.list[i].price+"</span>원"+"</td></tr>");
-					var sideDName = "sideDName";
-					$.each(data, function(key, value){
-						if(key==orderCode){	
-							var length = value.length
-							$(".addTr[data-orderCode="+orderCode+"]").after(
-									"<tr class='optionAddTr'><td class='"+orderCode+"_optionArea' colspan='5'>"
-									//새로 열리는 반찬 옵션 창 안의 내용
-									+"<h4>"+orderCode+"번 주문 반찬</h4>"
-									+"<div class='"+orderCode+"_options' ></div>"
-									+"</td></tr>");
-							 for(var i=0; i<length; i++){
-								$("."+orderCode+"_options").html($("."+orderCode+"_options").html()+"<img src='"+value[i].sideDImg+"'/>"+value[i].sideDName);																		
-							}	 						
-						}
-					})
-			}
-			}
-		});	
-		
-		$("#myCartTable").on("click", ".optiondown", function(){
-			var orderCode = $(this).attr("data-orderCode");
-			if($(this).hasClass('glyphicon-chevron-down')){
-				$(this).removeClass('glyphicon-chevron-down');
-				$(this).addClass('glyphicon-chevron-up');
-			}else{
-				$(this).removeClass('glyphicon-chevron-up');
-				$(this).addClass('glyphicon-chevron-down');			
-			}			
-			$("."+orderCode+"_optionArea").toggle("fast");			
-		});
+			type:"POST",
 			
-		
-		
-		
+			success:function(data){
+				console.log(data);
+				for(var i = 0; i<data.list.length; i++){ //장바구니의 데이터 테이블로 출력
+					$('#myCartTable').append("<tr class='addTr'><td>"+"<input type='checkbox' name='cartCheck' value='"+data.list[i].dietCode+"' data-orderCode='"+data.list[i].orderCode+"'>"+"</td><td><img class='myPageImg' data-img="+data.list[i].dietImg+" src='displayFile?fileName="+data.list[i].dietImg+"' alt='이미지'></td><td class='dietName'>"+data.list[i].dietName+"</td><td class='dietAmount'>"+data.list[i].dietAmount+"</td><td class='price'><span>"+data.list[i].price+"</span>원"+"</td></tr>");
+			}
+			}
+		});
     	$('#myInfoTableWrap').hide();;
     	$('#myHealthTableWrap').hide();
     	$('#myCartTableWrap').show();    	
@@ -157,7 +110,6 @@ $(document).ready(function(){
         break;
     case 3:
     	var id = $("#customerId").val();
-    	
 		$(".addTr").remove();
 		$.ajax({
 			url:"customerAjax/myOrderlist",
@@ -173,6 +125,7 @@ $(document).ready(function(){
 				
 				var orderStatus="";
 				for(var i = 0; i<data.list.length; i++){ //주문내역의 데이터 테이블로 출력
+					console.log(data.list[i].orderItemCode);
 				if(data.list[i].orderItemCode==0){
 					orderStatus="미결제";				
 				}else if(data.list[i].orderItemCode==6){
@@ -216,9 +169,8 @@ $(document).ready(function(){
 	    	$('#myOrderListTableWrap').hide();
 	        break;
 	    case "2":
-	    	var id = $("#customerId").val();
-	  	  $(".addTr").remove();
-			$(".optionAddTr").remove();
+			var id = $("#customerId").val();
+			$(".addTr").remove();
 			$.ajax({
 				url:"customerAjax/myCart",
 				headers : {
@@ -227,51 +179,15 @@ $(document).ready(function(){
 		            },
 		            dataType : "json",
 				data:JSON.stringify({id:id}),
-				type:"POST",			
-				success:function(data){				
-					for(var i = 0; i<data.list.length; i++){ //장바구니의 데이터 테이블로 출력					
-						var orderCode = data.list[i].orderCode;				
-						$('#myCartTable').append("<tr class='addTr' data-orderCode='"+data.list[i].orderCode+"'><td>"
-								+"<input type='checkbox' name='cartCheck' value='"+data.list[i].dietCode+"' data-orderCode='"+data.list[i].orderCode+"'>"
-								+"</td><td><img class='myPageImg' data-img="+data.list[i].dietImg+" src='displayFile?fileName="+data.list[i].dietImg
-										+"' alt='이미지'>"
-										+"<span data-orderCode='"+data.list[i].orderCode+"' class='optiondown glyphicon glyphicon-chevron-down'>"						
-										+"주문상세보기</span></td><td class='dietName'>"+data.list[i].dietName
-										+"</td><td class='dietAmount'>"+data.list[i].dietAmount+"</td><td class='price'><span>"+data.list[i].price+"</span>원"+"</td></tr>");
-						var sideDName = "sideDName";
-						$.each(data, function(key, value){
-							if(key==orderCode){	
-								var length = value.length
-								$(".addTr[data-orderCode="+orderCode+"]").after(
-										"<tr class='optionAddTr'><td class='"+orderCode+"_optionArea' colspan='5'>"
-										//새로 열리는 반찬 옵션 창 안의 내용
-										+"<h4>"+orderCode+"번 주문 반찬</h4>"
-										+"<div class='"+orderCode+"_options' ></div>"
-										+"</td></tr>");
-								 for(var i=0; i<length; i++){
-									$("."+orderCode+"_options").html($("."+orderCode+"_options").html()+"<img src='"+value[i].sideDImg+"'/>"+value[i].sideDName);																		
-								}	 						
-							}
-						})
-				}
-				}
-			});	
-			
-			$("#myCartTable").on("click", ".optiondown", function(){
-				var orderCode = $(this).attr("data-orderCode");
-				if($(this).hasClass('glyphicon-chevron-down')){
-					$(this).removeClass('glyphicon-chevron-down');
-					$(this).addClass('glyphicon-chevron-up');
-				}else{
-					$(this).removeClass('glyphicon-chevron-up');
-					$(this).addClass('glyphicon-chevron-down');			
-				}			
-				$("."+orderCode+"_optionArea").toggle("fast");			
-			});
+				type:"POST",
 				
-			
-			
-			
+				success:function(data){
+					console.log(data);
+					for(var i = 0; i<data.list.length; i++){ //장바구니의 데이터 테이블로 출력
+					$('#myCartTable').append("<tr class='addTr'><td>"+"<input type='checkbox' name='cartCheck' value='"+data.list[i].dietCode+"' data-orderCode='"+data.list[i].orderCode+"'>"+"</td><td><img class='myPageImg' data-img="+data.list[i].dietImg+" src='displayFile?fileName="+data.list[i].dietImg+"' alt='이미지'></td><td class='dietName'>"+data.list[i].dietName+"</td><td class='dietAmount'>"+data.list[i].dietAmount+"</td><td class='price'><span>"+data.list[i].price+"</span>원"+"</td></tr>");
+				}
+				}
+			});
 	    	$('#myInfoTableWrap').hide();;
 	    	$('#myHealthTableWrap').hide();
 	    	$('#myCartTableWrap').show();    	
@@ -291,10 +207,10 @@ $(document).ready(function(){
 				type:"POST",
 				
 				success:function(data){
-
+					console.log(data);
 					var orderStatus="";
 					for(var i = 0; i<data.list.length; i++){ //주문내역의 데이터 테이블로 출력
-				
+						console.log(Number(data.list[i].orderItemCode));
 					if(data.list[i].orderItemCode==0){
 						orderStatus="미결제";					
 					}else if(data.list[i].orderItemCode==6){
@@ -475,6 +391,7 @@ $(document).ready(function(){
 
 		<!-- 장바구니 -->
 		<div id="myCartTableWrap">
+			<!-- <table id="myCartTable" border=2> -->
 			<div class="heading">
 				<h3>장바구니</h3>
 			</div>
@@ -483,7 +400,6 @@ $(document).ready(function(){
 				<tr>
 					<td><input type="checkbox" id="checkAllCart"></td>
 					<td>상품정보</td>
-
 					<td>상품명</td>
 					<td>수량</td>
 					<td>상품금액</td>
@@ -491,13 +407,11 @@ $(document).ready(function(){
 				</thead>
 				<tbody>
 				</tbody>
-				
 			</table>
 			<br>
 			<!-- </table> -->
 			<button id="cartOrder" class="btn btn-warning  myPageBtn">주문하기</button>
 		</div>
-		
 		
 		
 		
@@ -515,6 +429,7 @@ $(document).ready(function(){
 				</tr>
 			</table>
 		</div>
+		
 		<!-- 회원탈퇴 -->
 		
 	</div>
