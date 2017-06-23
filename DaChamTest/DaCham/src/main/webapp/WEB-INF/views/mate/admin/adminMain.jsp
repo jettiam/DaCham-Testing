@@ -13,6 +13,10 @@
 	src="https://www.gstatic.com/charts/loader.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <%@include file="../admin/upmenu.jsp"%>
 <title>Insert title here</title>
 <style>
@@ -32,18 +36,29 @@
 #close {
 	float: right;
 }
+.tables{
+
+}
 </style>
 </head>
 <body>
-	<div>
-		<form method="post" action="notice">
-			<select>
+	<div class="container">
+	<div class="col-sm-6">  
+		<h2>공지사항</h2>
+		<div class="form-group row">
+		<div class="col-sm-3">   
+			<select class= "form-control">
 				<option>등록자</option>
 				<option>제목</option>
-			</select> 제목<input type="text"> <input type="submit" value="검색">
-		</form>
-		<div>
-			<table width="600" border="1">
+			</select>
+		</div>
+		<div class="col-sm-5">
+			<input type="text" class="form-control"> 
+		</div>
+			<input type="submit" value="검색" class = "btn btn-default">
+		
+			<div style="margin-top:13px">
+			<table class="table table-bordered">    
 				<tr>
 					<th>번호</th>
 					<th>제목</th>
@@ -51,33 +66,41 @@
 					<th>등록 일자</th>
 					<th>조회수</th>
 				</tr>
-				<%-- <c:forEach items="${list}" var="board">
-				<tr>
-					<td>${board.bno }&nbsp;&nbsp;&nbsp;</td>
-					<td><a href="read?bno=${board.bno }">
-					${board.title }&nbsp;&nbsp;</a></td>
-					<td>${board.writer }&nbsp;&nbsp;</td>
-					<td>${board.viewcnt }&nbsp;&nbsp;</td>
-				</tr>
-			</c:forEach> --%>
 			</table>
-			<input type="button" value="목록" id="notice">
+			<input type="button" value="목록" id="notice" class = "btn btn-default">
+			</div>
 		</div>
 	</div>
 <!--차트  -->
-	<div>
+	<div id ="chart" class="col-sm-6">
 		<h2>일자별 통계</h2>
-		일자<input type="date" id="startdate"> ~ <input type="date" id="enddate"> 
-		   <input type="button" value="오늘" id="today">
-		   <input type="button" value="일주일" id="week"> 
-		   <input type="button" value="지난 한달" id="month"><br>
-		   	<div>  
-		   		<input type = "hidden" id = "dietName" name = "dietName">
+		<div class="form-group row">
+			<div class="col-sm-4 text-right">   
+		<input type="date" id="startdate" class="form-control">      
+		</div>
+		<div class="col-sm-1 text-center" style="font-size:23px" > 
+		~
+		</div>    
+		<div class="col-sm-4 text-right">             
+		<input type="date" id="enddate" class="form-control">
+			</div>
+			<div class="col-sm-2 text-right">
+		   <input type="button" value="검색" id="chartsearch" class = "btn btn-default">
+		   </div>  
+		   <div class="col-sm-11 text-right" style="margin-top:13px">   
+		   <input type="button" value="오늘" id="today" class = "btn btn-default">
+		   <input type="button" value="일주일" id="week" class = "btn btn-default"> 
+		   <input type="button" value="지난 한달" id="month" class = "btn btn-default">
+		   <br>
+		   </div>
+		   </div>   
+		   	<div> 
+		   		<input type = "hidden" id = "dietName" name = "dietName" >
 				<input type = "hidden" id =  "sellAmount" name = "sellAmount">
 				<input type = "hidden" id = "totalprice" name = "totalprice">
 			</div>
-		<div id="chart_div" style="width: 900px; height: 500px;"></div>
-		<div id="piechart" style="width: 900px; height: 500px;"></div>
+		<div id="chart_div" style="width: 500px; height: 300px;"></div>  
+		<div id="piechart" style="width: 500px; height: 300px;"></div>
 	</div>
 	
 	
@@ -85,18 +108,26 @@
 	
 	
 	<div>
-			<select name="searchType" class= "searchType">
+		<h2>모든 주문내역</h2>
+			<div class="form-group row">      
+			<div class="col-xs-2"> 
+			<select name="searchType" class= "searchType form-control">
 				<option value="t"
 					<c:out value="${orderList.searchType eq 't'?'selected':'' }"/>>
 					고객 아이디</option>
 				<option value="c"
 					<c:out value="${orderList.searchType eq 'c'?'selected':'' }"/>>
 					식단명</option>
-			</select><input type="text" name="keyword" id = "keyword">
-			<button id="search">검색</button>
-			<button id="searchAll">전체</button>
+			</select>
+			</div>
+			<div class="col-xs-3">
+			<input type="text" name="keyword" id = "keyword" class="form-control">
+			</div>
+			<button id="search" class = "btn btn-default">검색</button>
+			<button id="searchAll" class = "btn btn-default">전체</button>
+			</div>
 		<div>
-			<table width="600" border="1" class="tables">
+			<table class="tables table table-condensed" width="600">  
 				<tr>
 					<th>주문번호</th>
 					<th>고객id</th>
@@ -107,10 +138,12 @@
 					<th>운송장 번호</th>
 				</tr>
 			</table>
+			<ul class="pagination" position="center">  
+			</ul>
 		</div>
 	</div>
-	<div id="read" class="read">
-		<table width="600" border="1">
+	<div id="read" class="read" >  
+		<table  border="1" class="table table-bordered">
 			<tr>
 				<th>고객이름</th>
 				<td id="orderName"></td>
@@ -132,9 +165,7 @@
 		</table>
 		<button id="close">닫기</button>
 		</div>
-
-
-
+</div>
 </body>
 <script>
 	google.charts.load('current', {
@@ -200,7 +231,7 @@
 	       	      }
 		 });   
 	      }
-		/*디테일뷰 상세보기 css */
+		/* 디테일뷰 상세보기 css 
 		 jQuery.fn.center = function() {
 			this.css("position", "absolute");
 			this.css("top", Math.max(0, (($(window).height() - $(this)
@@ -212,8 +243,8 @@
 							+ $(window).scrollLeft())
 					+ "px");
 			this.css("background-color", "#dddddd");
-			return this;
-		} 
+			return this;   
+		}  */
 	function getDefaultDate() {// 해당 일 계산
 
 		var now = new Date();
@@ -299,7 +330,6 @@
 			}
 		 });
 	}
-
 	$(document).ready(function() {
 		$("#today").click(function() {
 			$("#startdate").val(getDefaultDate());
@@ -316,6 +346,11 @@
 			$("#enddate").val(getEndDate());
 			todayChart();
 		});
+		$("#chartsearch").click(function(){
+			$("#startdate").val();
+			$("#enddate").val();
+			todayChart();  
+		})
 		$("#notice").click(function() {
 			window.location.href = "notice";
 		});
@@ -329,22 +364,8 @@
 			$("#orderTel").empty();
 		});
 		
-		all();
-		function all(){
-			$.getJSON("adminSub/all",function(data){
-				console.log(data); 
-				$(".orderListTable").remove(); 
-				var str = "";
-				for(var i =0; i<data.length; i++){
-					if(data[i].transportNum == null){
-						data[i].transportNum = " "
-					}
-					str += "<tr class='orderListTable'>"+"<td>"+data[i].orderCode+"</td>"+"<td>"+data[i].id+"</td>"+"<td>"+"<a data-src='"+data[i].orderCode+"' class='orderCode'>"+data[i].dietName+"</a> </td>"+"<td>"+data[i].orderDate+"</td>"+"<td>"+data[i].price+"</td>"+"<td>"+data[i].orderItemName+"</td>"+"<td>"+data[i].transportNum+"</td> </tr>"		 
-				}
-				console.log(str);
-				$(".tables").append(str); 
-			});  
-		}   
+		all(1);
+		
 		$(document).on("click", ".orderCode" , function() {  
 			 var orderCode = $(this).attr("data-src"); 
 			 $.ajax({
@@ -384,10 +405,60 @@
 		});
 	});
 	$("#searchAll").on("click", function(){
-		all(); 
+		all(1); 
 	});
-		
+      
+	var currentPage = 1;
+	$(".pagination").on("click","li a",function(){
+		event.preventDefault();
+		var replyPage = $(this).attr("href");
+		all(replyPage);
 	});
+	/* function orderList(page){
+		currentPage = page;
+		$(".orderResult").remove();
+		$.getJSON("nutriAjax/orderList/"+page,function(data){
+			var str = "";
+			$(data.list).each(function(){
+				str += "<tr class = 'orderResult'><td>"+this.orderCode+"</td>"+"<td>"+this.id+"</td>"+"<td>"+this.dietName+"</td>"+"<td>"+this.orderDate+"</td>"+"<td>"+this.price+"</td>"+"</tr>"
+			});
+			$(".orderTable").append(str);
+			printPaging(data.criteria);
+		});             
+	} */
+	function all(page){
+		$.getJSON("adminSub/all/"+page,function(data){
+			console.log(data); 
+			$(".orderListTable").remove(); 
+			var str = "";
+			for(var i =0; i<data.list.length; i++){    
+				if(data.list[i].transportNum == null){
+					data.list[i].transportNum = ""; 
+				}
+				str += "<tr class='orderListTable'>"+"<td>"+data.list[i].orderCode+"</td>"+"<td>"+data.list[i].id+"</td>"+"<td>"+"<a data-src='"+data.list[i].orderCode+"' class='orderCode'>"+data.list[i].dietName+"</a> </td>"+"<td>"+data.list[i].orderDate+"</td>"+"<td>"+data.list[i].price+"</td>"+"<td>"+data.list[i].orderItemName+"</td>"+"<td>"+data.list[i].transportNum+"</td> </tr>"		 
+			}
+			console.log(str);
+			$(".tables").append(str);
+			printPaging(data.criteria);  
+		});  
+	}   
+	function printPaging(criteria){  
+		var str = "";
+				
+		if(criteria.prev){
+			str += "<li><a href=''"+(criteria.startPage-1)+"'>'" + "<<"+"</a></li>";
+		}
+		for(var i = criteria.startPage; i<=criteria.endPage; i++){
+			var strClass = criteria.page == i?"class = 'active'":"";
+			str += "<li "+strClass+"><a href ='"+i+"'>"+i + "</a></li>";
+		}
+		if(criteria.next){
+			str += "<li><a href=''"+(criteria.endPage+1)+"'>'" + ">>"+"</a></li>";
+		}
+		$(".pagination").html(str);
+	}
+	});
+	
 		
 	
 </script>

@@ -164,7 +164,7 @@ public class AdminController {
 	
 	@RequestMapping(value="/orderList",method=RequestMethod.GET)
 	public String getorderList(Model model, OrderList order) throws Exception{
-		List<OrderList> list=service.orderListAll(order);
+		List<OrderList> list=service.orderAll(order);
 		model.addAttribute("list",list);
 		model.addAttribute("order", order);
 		return "mate/admin/orderList";

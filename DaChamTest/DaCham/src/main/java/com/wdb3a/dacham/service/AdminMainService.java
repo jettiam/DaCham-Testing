@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.wdb3a.dacham.bean.ChartList;
 import com.wdb3a.dacham.bean.ChartPrice;
+import com.wdb3a.dacham.bean.Criteria;
 import com.wdb3a.dacham.bean.FoodMAmountRead;
 import com.wdb3a.dacham.bean.FoodMInven;
 import com.wdb3a.dacham.bean.OrderList;
@@ -23,6 +24,9 @@ public interface AdminMainService {
 	public List<ChartList> chartList() throws Exception;
 	public List<ChartPrice> chartPrice() throws Exception;
 	public List<ChartPrice> chartPrice1(ChartPrice dates) throws Exception;
-	public List<OrderList> all() throws Exception;
+	public List<OrderList> all(Criteria criteria) throws Exception;
 	public List<OrderList> orderAll() throws Exception;
+	public List<FoodMInven> foodStockListAll() throws Exception; 
+	public int orderListCount() throws Exception;
+	public List<OrderList> orderAll(OrderList orderList) throws Exception;
 }

@@ -9,6 +9,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <%@include file="../admin/upmenu.jsp"%>
 <title>Insert title here</title>
 <script>
@@ -64,10 +68,10 @@
 			y++;  
 				}
 			}
-			alert(JSON.stringify(foodOrderinfo)); 
+			//alert(JSON.stringify(foodOrderinfo)); 
 			$('input[name=orderCode]').val(JSON.stringify(foodOrderinfo));
 			$("#formid").submit();
-		});
+		}); 
 		
 		$("#close").click(function() {
 			$("#read").css("display", "none");
@@ -149,7 +153,7 @@
 		var str=""; 
 		var searchType = $(".searchType").val();
 		var keyword = $("#keyword").val(); 
-		$.getJSON("adminSub/"+searchType+"/"+keyword,function(data){
+		$.getJSON("adminSub/orderList/"+searchType+"/"+keyword,function(data){
 		for(var i=0; i<data.length; i++){
 			str += "<tr class='orderListTable'><td>"+"<input type='checkBox' id='"+data[i].orderCode+"' value='"+data[i].orderCode+"' name='che'</td>"+"<td>"+data[i].orderCode+"</td>"+"<td>"+data[i].id+"</td>"+"<td>"+"<a data-src='"+data[i].orderCode+"' class='orderCode'>"+data[i].dietName+"</a> </td>"+"<td>"+data[i].orderDate+"</td>"+"<td>"+data[i].price+"</td>"+"<td>"+data[i].orderItemName+"</td>"+"<td>"+data[i].transportNum+"</td> </tr>"
 			}  
@@ -212,6 +216,7 @@
 
 </head>
 <body>
+	<div class="container">
 	<form id='formid' method='post' action='foodOrder'>
 		<input type="hidden" name="orderCode">
 	</form>
@@ -223,7 +228,9 @@
 	</div> -->
 
 	<div>
-			<select name = "searchType" class="searchType">
+		<div class="form-group row">
+		<div class="col-xs-2"> 
+			<select name = "searchType" class="searchType form-control">
 	   			</option>
 	   			<option value = "t"
 	   			<c:out value="${order.searchType eq 't'?'selected':'' }"/>>
@@ -237,12 +244,19 @@
 	   			<c:out value="${order.searchType eq 'a'?'selected':'' }"/>>
 	   			진행상태
 	   			</option>
-			</select> <input type="text" name = "keyword" id="keyword"> <button id = "search">검색</button><button id = "searchAll">전체 검색</button>
+			</select> 
+		</div>
+		<div class="col-xs-3">       
+			<input type="text" name = "keyword" id="keyword" class="form-control"> 
+		</div>
+			<button id = "search" class="btn btn-default">검색</button>
+			<button id = "searchAll" class="btn btn-default">전체 검색</button>
 	</div>
+	<div class="form-group row">  
 
 	<form role="form" method="post">
 		<div class="divs" id="a1">
-			<table width="600" border="1" class="tables">
+			<table width="600" class="tables table table-condensed">    
 				<tr>
 					<th><input type="checkBox" id="allCheck">전체</th>
 					<th>주문번호</th>
@@ -257,9 +271,9 @@
 		</div>
 	</form>
 	<div>
-		<button id="foodOrder">식재료 주문</button>
-		<button id="work">작업 요청</button>
-		<button id="refund">환불</button>
+		<button id="foodOrder" class="btn btn-default">식재료 주문</button>
+		<button id="work" class="btn btn-default">작업 요청</button>
+		<button id="refund" class="btn btn-default">환불</button>
 	</div>
 
 	<div id="read" class="read">
@@ -284,6 +298,7 @@
 			</tr>
 		</table>
 		<button id="close">닫기</button>
+		</div>
 		</div>
 </body>
 </html>

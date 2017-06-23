@@ -119,6 +119,7 @@
 		where a.dietCode=b.dietCode
 		and
 		b.orderItemCode = c.orderItemCode
+		limit #{startRecord}, #{recordsPerPage}
 	</select>
 	<!--orderList 페이지 내역 출력  -->
 	<select id="orderAll" resultType="OrderList">
@@ -129,9 +130,18 @@
 		from diet a join
 		orderlist b join
 		orderitem c
+		where a.dietCode=b.dietCode 
+		and
+		b.orderItemCode = c.orderItemCode and c.orderItemCode BETWEEN 2 and 3 
+	</select>
+	<select id="orderALlCount" resultType="Integer">
+	select count(b.orderCode)
+		from diet a join
+		orderlist b join
+		orderitem c
 		where a.dietCode=b.dietCode
 		and
-		b.orderItemCode = c.orderItemCode and c.orderItemCode BETWEEN 0 and 3
+		b.orderItemCode = c.orderItemCode
 	</select>
 
 </mapper>
