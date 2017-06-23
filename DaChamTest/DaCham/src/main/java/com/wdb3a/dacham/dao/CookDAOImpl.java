@@ -35,5 +35,10 @@ public class CookDAOImpl implements CookDAO {
 		// TODO Auto-generated method stub
 		sqlSession.update(namespace+".transportNum2",orderList);
 	}
+	@Override
+	public List<Cook> finishcook() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".finishcook");
+	}
 
 }

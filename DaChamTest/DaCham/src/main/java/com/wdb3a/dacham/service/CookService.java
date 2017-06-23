@@ -10,7 +10,7 @@ public interface CookService {
 	public List<FoodMInven> CookStock(FoodMInven foodInv) throws Exception;
 	public List<Cook> cookList() throws Exception;
 	public List<Cook> readycook() throws Exception;
-	
+	public List<Cook> finishcook() throws Exception;
 	public void transportNum2(OrderList order) throws Exception;
 	
 

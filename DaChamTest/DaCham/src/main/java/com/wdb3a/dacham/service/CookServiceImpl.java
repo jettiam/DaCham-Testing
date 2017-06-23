@@ -36,5 +36,10 @@ public class CookServiceImpl implements CookService {
 		// TODO Auto-generated method stub
 		dao.transportNum2(order);
 	}
+	@Override
+	public List<Cook> finishcook() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.finishcook();
+	}
 	
 }
