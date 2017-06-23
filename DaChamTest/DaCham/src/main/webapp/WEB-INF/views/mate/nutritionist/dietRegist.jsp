@@ -17,8 +17,10 @@
 <script type="text/javascript" src="../../../dacham/resources/bootstrap-filestyle.min.js"> </script>	
 <script>
 	$(document).ready(function(){     
-		$('#body').hide();
+		          
 		var v = 0;
+		openAPI();      
+		sideAll();
 		$("#sideAll").on("click",function(){
 			sideAll();
 		});
