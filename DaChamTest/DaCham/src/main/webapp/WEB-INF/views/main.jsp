@@ -98,7 +98,7 @@ display:none;}
 </tr>
 </table>
 
-<table id = "mainShowNutriTable" class="table-bordered text-center table">
+<table id = "mainShowNutriTable" class="table-bordered text-center mainNT2">
 <tr class="NutriTable">
 <td class="NutriTable">칼로리</td>
 <td class="NutriTable">나트륨</td>
