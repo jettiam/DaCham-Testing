@@ -82,4 +82,14 @@ from orderoptions o, sidedish s
 where o.orderCode = #{orderCode} and o.sideDCode = s.sideDCode;
 </select>
 
+<!-- 병이름과 정도를 통해 질병코드를 가져오고 질병코드를 가진 식단코드 1개만 반환 -->
+<select id="getOneDCode" resultType="int">
+select d.dietCode
+from (select diseaseCode
+		from disease
+		where diseaseName=#{rName} AND judgement=#{rJudg}) s,
+		diet d
+where s.diseaseCode = d.diseaseCode limit 1;
+</select>
+
   </mapper>

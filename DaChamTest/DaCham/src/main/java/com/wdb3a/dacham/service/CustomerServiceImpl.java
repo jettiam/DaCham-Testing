@@ -70,5 +70,9 @@ private CustomerDAO dao;
 	public List<Customer> orderOption(int orderCode) throws Exception {
 		return dao.orderOption(orderCode);
 	}
+	@Override
+	public int getOneDCode(String rName, String rJudg) throws Exception {
+		return dao.getOneDCode(rName, rJudg);
+	}
 
 }

@@ -316,5 +316,10 @@ public String delete(@RequestParam(value="counselCode")int code,RedirectAttribut
 	return "redirect:counsel";
 }
 
+@RequestMapping(value="/recommendDiet")
+public String getRecommendDiet(String rName, String rJudg) throws Exception {		
+	//int code = service.getOneDCode(rName, rJudg);
+	return "redirect:detailOrder?dietCode=23";
+}
 
 }

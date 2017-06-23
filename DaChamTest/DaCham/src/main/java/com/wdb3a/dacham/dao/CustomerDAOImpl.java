@@ -78,4 +78,10 @@ public List<Customer> orderOption(int orderCode) throws Exception {
 	return sqlSession.selectList(namespace+".orderOption", orderCode);
 }
 
+@Override
+public int getOneDCode(String rName, String rJudg) throws Exception {
+	// TODO Auto-generated method stub
+	return sqlSession.selectOne(namespace+".getOneDCode");
+}
+
 }
