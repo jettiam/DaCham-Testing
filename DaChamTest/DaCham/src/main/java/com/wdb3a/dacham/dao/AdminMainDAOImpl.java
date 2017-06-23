@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.wdb3a.dacham.bean.ChartList;
 import com.wdb3a.dacham.bean.ChartPrice;
+import com.wdb3a.dacham.bean.Criteria;
 import com.wdb3a.dacham.bean.FoodMAmountRead;
 import com.wdb3a.dacham.bean.FoodMInven;
 import com.wdb3a.dacham.bean.OrderList;
@@ -74,9 +75,9 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 	}
 
 	@Override
-	public List<OrderList> all() throws Exception {
+	public List<OrderList> all(Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".all"); 
+		return sqlSession.selectList(namespace+".all", criteria); 
 	}
 
 	@Override
@@ -84,6 +85,24 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".orderAll");
 	}
+
+	@Override
+	public List<FoodMInven> foodStockListAll() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".foodStockList");
+	}
+
+	@Override
+	public int orderListCount() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".orderALlCount");
+	}
+
+	@Override
+	public List<OrderList> orderAll(OrderList orderList) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".orderAll", orderList);
+	}   
 
 	
 

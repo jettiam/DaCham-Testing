@@ -10,47 +10,58 @@
 <%@include file="../admin/upmenu.jsp"%>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 
 </head>
 <body>
-	<div>
-		<form>
-			<select>
-				<option>전체</option>
+	<div class="container">
+	<div class="form-group row">
+	<div class="col-xs-2"> 
+			<select class= "searchType form-control">
 				<option>코드번호</option>
 				<option>식재료명</option>
-			</select> <input type="text">
-			<button tpye="submit">검색</button>
-		</form>
+			</select> 
+			
+	</div>
+	<div class="col-xs-2"> 
+	<input type="text" class="form-control">
+	</div>
+	<div class="col-xs-2"> 
+	<button class = "btn btn-default">검색</button>
+	</div>
 	</div>
 	<div>
-		<table id="foodMTable" width="600">
+		<table id="foodMTable" width="600" class="foodMTable table table-condensed">
 			<tr>
 				<th>코드번호</th>
 				<th>식재료명</th>
 				<th>단가</th>
-				<th>단위</th>
 				<th>주문량</th>
-			</tr>
-			<tr>
+				<th>단위</th>
+			</tr> 
+			<%-- <tr>
 				<c:forEach items="${invenlist}" var="board" varStatus="status">
 					<td class="foodMCode1" data-foodMCode="${board.foodMCode}">${board.foodMICode}&nbsp;&nbsp;&nbsp;</td>
 					<td class="foodMName1" data-foodMCode="${board.foodMName}">${board.foodMName}</td>
-					<%-- <td>${board.dietName}&nbsp;&nbsp;</td> --%>
+					<td>${board.dietName}&nbsp;&nbsp;</td>
 					<td>${board.price}&nbsp;&nbsp;</a></td>
 					<td>${board.uint }&nbsp;&nbsp;</td>
 					<td><input type="text">&nbsp;&nbsp;</td>
 
-					<%-- <td>${board.outAmount}</td> 
-						<td>${board.stock}</td> --%>
+					<td>${board.outAmount}</td> 
+						<td>${board.stock}</td>
 
 				</c:forEach>   
-			</tr>
+			</tr> --%>
 		</table>
 	</div>
+	
 	<div>
-		<table id="foodMTable" width="600" class="tables"> 
+		<table id="foodMTable" class="tables table table-condensed"> 
 			<tr>
 				<th>식재료코드</th>
 				<th>식재료명</th>
@@ -58,10 +69,8 @@
 				<th>주문량</th>
 				<th>단위</th>
 			</tr>
-			<!--  -->
+		
 			<div class="length">
-			
-
 			<c:forEach var="i" items="${map}">  
 				<c:forEach var ="j" items="${i.value}">
 				<c:set var="count" value="${count + 1}" /> 
@@ -74,32 +83,25 @@
 					</div>	  		  
 				</c:forEach> 
 			</c:forEach> 
-			</div>
-
-
-
-
-
-			<%-- <c:forEach items="${list}" var="board" varStatus="status">
-				<td id="foodMOrder${status.index}">
-					<td class="foodMCode" data-foodMCode="${board.foodMCode}">${board.foodMCode}</td>
-					<td class="foodMName" data-foodMName="${board.foodMName}">${board.foodMName}&nbsp;&nbsp;&nbsp;</td>
-					<td class="price" data-price="${board.price}"">${board.price}</td>
-					<td>${board.dietName}&nbsp;&nbsp;</td>
-					<td class="foodMAmount" data-foodMAmount="${board.foodMAmount}">${board.foodMAmount}&nbsp;&nbsp;</a></td>
-					<td class="unit" data-unit="${board.unit }">${board.unit }&nbsp;&nbsp;</td>
-
-					<td>${board.outAmount}</td> 
-						<td>${board.stock}</td>
-				</tr>
-			</c:forEach> --%>
 		</table>
 	</div>
-	<button id="foodMOrder">식재료 주문서 보내기</button>
+	<button id="foodMOrder" class = "btn btn-default">식재료 주문서 보내기</button>
+	</div>
 
 	<script>
 	var divlength = $(".length .length2").size();
-	
+	function foodStockall(){
+		$.getJSON("adminSub/foodStockAll",function(data){
+			console.log(data); 
+			$(".foodStock").remove(); 
+			var str = "";
+			for(var i =0; i<data.length; i++){
+				str += "<tr class='foodStock'>"+"<td>"+data[i].foodMCode+"</td>"+"<td>"+data[i].foodMName+"</td>"+"<td>"+data[i].price+"</td>"+"<td><input type='text' class='Stock' size='4'></td>"+"<td>"+data[i].uint+"</td>"+"<td><button class='btn btn-primary'>주문</button></td>"+"</tr>"		 
+			}
+			console.log(str);
+			$(".foodMTable").append(str); 
+		});  
+	} 
 	
 	
 			
@@ -176,6 +178,7 @@
 								alert(a); 
 							});
 							all();
+							foodStockall();
 							function all(){
 								
 								
