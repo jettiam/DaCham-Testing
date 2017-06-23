@@ -1,9 +1,7 @@
 function openAPI(){
 	var count = parseInt(localStorage['count']);
-	if(localStorage['count'] == 0){
-		$("#body").hide();
-	}
-	var w = 200,h = 200;
+	
+	    var w = 200,h = 200;           
 		
 		var colorscale = d3.scale.category10();
 		
@@ -19,26 +17,26 @@ function openAPI(){
 		console.log(typeof(count));
 		for(var i = 0; i < count; i++){
 			protein += parseInt(localStorage[i+'_protein']);
-			carbohydrate += localStorage[i+'_carbohydrate'];
-			kcal += localStorage[i+'_kcal'];
-			na += localStorage[i+'_na'];
-			fat += localStorage[i+'_fat'];
+			carbohydrate += parseInt(localStorage[i+'_carbohydrate']);
+			kcal += parseInt(localStorage[i+'_kcal']);
+			na += parseInt(localStorage[i+'_na']);
+			fat += parseInt(localStorage[i+'_fat']);
 			      
 		}
 		var sum = parseInt(localStorage[0+'_protein']) + parseInt(localStorage[1+'_protein']) + parseInt(localStorage[2 + '_protein']) + parseInt(localStorage[3+'_protein']);
-		console.log("단백질"+protein/100000);
-		console.log("단백질"+carbohydrate/100000);
-		console.log("단백질"+kcal/100000);
-		console.log("단백질"+na/100000);
-		console.log("단백질"+fat/100000);
+		console.log("단백질"+protein);
+		console.log("단백질"+carbohydrate);
+		console.log("단백질"+kcal);
+		console.log("단백질"+na);
+		console.log("단백질"+fat);     
 		var d = [
 			  [
-				{axis: "단백질",value: protein/100000},
-				{axis: "탄수화물",value: carbohydrate/100000},
+				{axis: "단백질",value: protein},
+				{axis: "탄수화물",value: carbohydrate},
 				
-				{axis:"열량",value: kcal/100000},
-				{axis:"나트륨",value:na/100000},
-				{axis:"지방",value:fat/100000}
+				{axis:"열량",value: kcal},
+				{axis:"나트륨",value:na},
+				{axis:"지방",value:fat}
 			  ]
 			  
 			];
@@ -47,8 +45,8 @@ function openAPI(){
 		var mycfg = {
 		w: w,
 		h: h,
-		maxValue: 0.6,
-		levels: 6,
+		maxValue: 1000,
+		levels: 5,
 		ExtraWidthX: 300
 		}
 		
