@@ -1,4 +1,5 @@
 function openAPI(){
+	var count = parseInt(localStorage['count']);
 	if(localStorage['count'] == 0){
 		$("#body").hide();
 	}
@@ -7,38 +8,38 @@ function openAPI(){
 		var colorscale = d3.scale.category10();
 		
 		//Legend titles
-		var LegendOptions = ['반찬A','반찬B','반찬C','맛반찬'];
+		var LegendOptions = ['선택 반찬의 영양정보'];
 		//Data
+		var protein = 0;
+		var carbohydrate = 0;
+		var kcal = 0;
+		var na = 0;
+		var fat = 0;
+		console.log(count);
+		console.log(typeof(count));
+		for(var i = 0; i < count; i++){
+			protein += parseInt(localStorage[i+'_protein']);
+			carbohydrate += localStorage[i+'_carbohydrate'];
+			kcal += localStorage[i+'_kcal'];
+			na += localStorage[i+'_na'];
+			fat += localStorage[i+'_fat'];
+			      
+		}
+		var sum = parseInt(localStorage[0+'_protein']) + parseInt(localStorage[1+'_protein']) + parseInt(localStorage[2 + '_protein']) + parseInt(localStorage[3+'_protein']);
+		console.log("단백질"+protein/100000);
+		console.log("단백질"+carbohydrate/100000);
+		console.log("단백질"+kcal/100000);
+		console.log("단백질"+na/100000);
+		console.log("단백질"+fat/100000);
 		var d = [
 			  [
-				{axis: "단백질",value: (localStorage['0_protein']/100)},
-				{axis: "탄수화물",value: (localStorage['0_carbohydrate']/100)},
+				{axis: "단백질",value: protein/100000},
+				{axis: "탄수화물",value: carbohydrate/100000},
 				
-				{axis:"열량",value: (localStorage['0_kcal']/100)},
-				{axis:"나트륨",value:(localStorage['0_na']/100)},
-				{axis:"지방",value:(localStorage['0_fat']/100)}
-			  ],[
-				  {axis: "단백질",value: (localStorage['1_protein']/100)},
-					{axis: "탄수화물",value: (localStorage['1_carbohydrate']/100)},            
-					
-					{axis:"열량",value: (localStorage['1_kcal']/100)},
-					{axis:"나트륨",value: (localStorage['1_na']/100)},
-					{axis:"지방",value: (localStorage['1_fat']/100)}
-			  ],[
-				  {axis: "단백질",value: (localStorage['2_protein']/100)},
-					{axis: "탄수화물",value: (localStorage['2_carbohydrate']/100)},
-					
-					{axis:"열량",value: (localStorage['2_kcal']/100)},
-					{axis:"나트륨",value:(localStorage['2_na']/100)},
-					{axis:"지방",value: (localStorage['2_fat']/100)}
-			  ],[
-				  {axis: "단백질",value: (localStorage['3_protein']/100)},
-					{axis: "탄수화물",value: (localStorage['3_carbohydrate']/100)},
-					
-					{axis:"열량",value: (localStorage['3_kcal']/100)},
-					{axis:"나트륨",value: (localStorage['3_na']/100)},
-					{axis:"지방",value: (localStorage['3_fat']/100)}       
-			  ]						         
+				{axis:"열량",value: kcal/100000},
+				{axis:"나트륨",value:na/100000},
+				{axis:"지방",value:fat/100000}
+			  ]
 			  
 			];
 		
