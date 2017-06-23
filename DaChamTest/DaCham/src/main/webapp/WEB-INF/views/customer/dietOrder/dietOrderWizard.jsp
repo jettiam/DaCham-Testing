@@ -27,8 +27,8 @@
 		});
 
 		$("#showResultDiet").click(function(){
-			$("#rName").val($("#resultName"));
-			$("#rJudg").val($("#resultJudg"));
+			$("#rName").val($("#resultName").text());
+			$("#rJudg").val($("#resultJudg").text());
 			$("#ResultDiet").attr("action", "recommendDiet");
 			$("#ResultDiet").submit();
 		});

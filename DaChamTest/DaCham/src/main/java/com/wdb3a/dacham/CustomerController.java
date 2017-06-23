@@ -319,7 +319,12 @@ public String delete(@RequestParam(value="counselCode")int code,RedirectAttribut
 @RequestMapping(value="/recommendDiet")
 public String getRecommendDiet(String rName, String rJudg) throws Exception {		
 	//int code = service.getOneDCode(rName, rJudg);
-	return "redirect:detailOrder?dietCode=23";
+	HashMap rInfo = new HashMap();
+	rInfo.put("rName", rName);
+	rInfo.put("rJudg", rJudg);
+	int code = serviceCu.getOneDCode(rInfo);
+	System.out.println("ฤฺตๅดย..."+code);
+	return "redirect:detailOrder?dietCode="+code;
 }
 
 }

@@ -79,9 +79,8 @@ public List<Customer> orderOption(int orderCode) throws Exception {
 }
 
 @Override
-public int getOneDCode(String rName, String rJudg) throws Exception {
-	// TODO Auto-generated method stub
-	return sqlSession.selectOne(namespace+".getOneDCode");
+public int getOneDCode(HashMap rInfo) throws Exception {
+	return sqlSession.selectOne(namespace+".getOneDCode", rInfo);
 }
 
 }

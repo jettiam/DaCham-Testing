@@ -16,14 +16,6 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>DaCham 식단상세보기</title>
-<<<<<<< HEAD
-<style>
-</style>
-</head>
-=======
-</head>
-
->>>>>>> branch 'master' of git@github.com:jettiam/DaCham-Testing.git
 <script>
 	function getDishList(a) {
 		a
@@ -197,42 +189,13 @@
 <body>
 	<%@include file="../../clientNavi.jsp"%>
 	<!-- Start Top Bar -->
-	<div class="top-bar">
-		<div class="row">
-			<div class="top-bar-left">
-				<ul class="dropdown menu" data-dropdown-menu>
-					<li class="menu-text">Yeti Store</li>
-					<li class="has-submenu"><a href="#">One</a>
-						<ul class="submenu menu vertical" data-submenu>
-							<li><a href="#">One</a></li>
-							<li><a href="#">Two</a></li>
-							<li><a href="#">Three</a></li>
-						</ul></li>
-					<li><a href="#">Two</a></li>
-					<li><a href="#">Three</a></li>
-				</ul>
-			</div>
-			<div class="top-bar-right">
-				<ul class="menu">
-					<li><input type="search" placeholder="Search"></li>
-					<li><button type="button" class="button">Search</button></li>
-				</ul>
-			</div>
-		</div>
-	</div>
+	
 	<!-- End Top Bar -->
 	<br>
+	<br>
+	<br>
 	<!-- You can now combine a row and column if you just need a 12 column row -->
-	<div class="row columns">
-		<nav aria-label="You are here:" role="navigation">
-			<ul class="breadcrumbs">
-				<li><a href="#">Home</a></li>
-				<li><a href="#">Features</a></li>
-				<li class="disabled">Gene Splicing</li>
-				<li><span class="show-for-sr">Current: </span> Cloning</li>
-			</ul>
-		</nav>
-	</div>
+	
 
 	<div class="row">
 		<div class="medium-6 columns">
@@ -279,7 +242,7 @@
 
 			<!-- 장바구니, 주문하기 버튼 -->
 			<div class="large secondary expanded button-group">
-				<h1>버튼 연결 해야됩니다.</h1>
+				
 				<a href="#" class="button large expanded" id="goMyCart">Cart</a> <a href="#"
 					class="button large expanded" id="doOrder">Buy Now</a>
 			</div>
@@ -353,7 +316,7 @@
 
 
 
-	<div class="detailOrderWrap">
+<%-- 	<div class="detailOrderWrap">
 		<div class="row">
 			<div class="col-sm-7">
 				<img src="http://via.placeholder.com/150x150">
@@ -422,7 +385,7 @@
 	<div>
 		<h1>삭제할 공간입니다.</h1>
 		<div id="testing"></div>
-	</div>
+	</div> --%>
 
 
 	<form id="orderForm" method="get">
