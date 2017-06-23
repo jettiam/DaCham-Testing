@@ -40,6 +40,9 @@
   float:left;  }
  .box2 {
   display:inline-block;  margin-left:10px;}  
+  ul{
+  	list-style : none;
+  }
 </style>
 </head>
 <body>
@@ -65,12 +68,12 @@
    </div>
    <div class = "box2">
       <div>
-         <button id = "regist">식단 등록</button>
-         <button>식단 수정</button>
-         <button>식단 삭제</button>
+         <button id = "regist" class = "btn btn-default">식단 등록</button>
+         <button class = "btn btn-default">식단 수정</button>
+         <button class = "btn btn-default">식단 삭제</button>   
       </div>
       <div>
-         <table class = "dietDiseaseOverview">
+         <table class = "dietDiseaseOverview table table-hover">
             <tr>
                <th></th>
                <th>식단 이미지&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>

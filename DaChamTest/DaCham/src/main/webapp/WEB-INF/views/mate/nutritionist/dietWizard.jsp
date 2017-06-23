@@ -8,7 +8,10 @@
 <%@include file="nutritionistNavi.jsp" %>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <script>
 	$(document).ready(function(){
@@ -25,11 +28,12 @@
 </head>
 
 <body>
-
-	<div>
-		<input type = "datetime" name = "datetime" placeholder = "최근 위자드 갱신일" readonly>
-		<button id = "regist">위자드 등록</button>
-		<button id = "modify">위자드 수정(프로토 발표용)</button>
+	<div class = "container">   
+		<div>
+			<input type = "datetime" name = "datetime" placeholder = "최근 위자드 갱신일" readonly>
+			<button id = "regist" class = "btn btn-default">위자드 등록</button>
+			<button id = "modify" class = "btn btn-primary">위자드 수정(프로토 발표용)</button>
+		</div>
 	</div>
 </body>
 </html>

@@ -8,21 +8,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-<link rel="stylesheet"
+<!-- <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
 
 <title>다참</title>
 <!-- 상단 내비게이션 표시를 위한 임시 CSS -->
 <style>
-.naviBox {
-	background-color: #EAEAEA;
-	margin-top: 10px;
-	text-align: center;
-}
+
 
 .liBox {
 	
@@ -33,9 +29,6 @@
 	margin-bottom:23px;
 }
 
-#naviMenuBtn {
-	display: none;
-}
 
 #sideBox {
 	float: right;
@@ -53,45 +46,14 @@
 	margin-top: 10px;
 	margin-left: 10px;
 }
-.naviBox a {
-	text-decoration: none;
-	color: #88b04b;
-}
+
 
 #infoBox a {
 	color: #EDA900;
 }
 
-@media only screen and (max-width: 500px) {
-	.loginWrap{
-		display:none;
-	}
-	.liBox {
-		display: block;
-		list-style: none;
-		magin: 5px 0px;
-		padding: 0px;
-		font-size: 14px;
-		height: 25px;
-		font-size:15px;
-	}
-	.ulBox {
-		margin: 0px;
-		padding: 0px;
-		text-align: left;
-		display: none;
-	}
-	#naviMenuBtn {
-		display: block;
-		padding: 10px;
-		font-size: 20px;
-	}
-	.naviBox {
-		text-align: left;
-	}
-	#logo{
-	display:none;
-	}
+@media only screen and (max-width: 736px) {
+
 }
 
 
@@ -102,15 +64,15 @@
 <body>
 	<div class="row">
 		<!-- 로고+고객정보 -->
-		<div class="col-sm-2" id="logo" >
+		<div class="col-sm-2 hidden-xs" id="logo" >
 			<!-- 로고박스 -->
 			<a href="main"><img class="img-responsive block-center"
 				src="../../dacham/resources/customerImage/dachamlogo.jpg"
-				width="100px" height="100px"></a>
+				max-width="100px" max-height="100px"></a>
 		</div>
 		<!-- 고객 로그인 페이지 -->
 		<c:if test="${empty sessionScope.memberName}">
-			<div class="col-sm-4 col-sm-offset-5 loginWrap">
+			<div class="col-sm-4 col-sm-offset-5 loginWrap hidden-xs">
 				<form method="post" action="main" class="loginBox">
 					<div class="form-group col-sm-5">
 						<input type="text" name="id" placeholder="ID"
@@ -128,7 +90,7 @@
 			</div>
 		</c:if>
 		<c:if test="${not empty sessionScope.memberName}">
-			<div id="infoBox" class="col-sm-4 col-sm-offset-5 loginWrap">
+			<div id="infoBox" class="col-sm-4 col-sm-offset-5 loginWrap hidden-xs">
 				<!-- 고객이름 출력. 로그아웃&마이인포 -->
 				<h4>
 					<b>${memberName}</b>님 반갑습니다.
@@ -141,21 +103,30 @@
 
 	<!-- 고객 메인 -->
 	<!-- 상단 메뉴바 -->
-	<nav class="naviBox">
-		<div id="naviMenuBtn">
-			<span class="glyphicon glyphicon-th-list"></span>
-		</div>
-		<div class="container">
-		<ul class="ulBox nav nav-pills nav-justified">
-			<!-- 메뉴 리스트 -->
+	
+	<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="visible-xs" style="margin:5px;" href="main">
+        <img style="display:blcok; width:48px; height:48px;"
+				src="../../dacham/resources/customerImage/dachamlogo.jpg" ></a>            
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">    
+      	<ul class="nav nav-bar nav-justified">			
 			<li class="liBox"><a href="dachamInfo" id="dachamInfo">다참소개</a></li>
 			<li class="liBox"><a href="dietOrder" id="dietOrder">식단주문하기</a></li>
 			<li class="liBox"><a href="menuShow" id="menuShow">이달의메뉴</a></li>
 			<li class="liBox"><a href="nutritionInfo" id="nutritionInfo">영양소개</a></li>
 			<li class="liBox"><a href="counsel" id="counsel">문의하기</a></li>
 		</ul>
-</div>
-	</nav>
+	</div>
+  </div>
+</nav>
 <input type="hidden" id="loginResult" value="${result}"/>
 
 </body>

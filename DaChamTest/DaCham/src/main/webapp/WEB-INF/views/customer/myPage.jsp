@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
@@ -15,15 +16,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>DaCham 마이페이지</title>
 <style>
-
-
-
-
-
-
-
-
-
 #myPageWrap {
 	width: 1080px;
 	height: 100%;
@@ -78,147 +70,29 @@
 <script>
 $(document).ready(function(){
 	//각 상태에 따른 출력 0:내정보,1:내건강정보,2:장바구니,3:주문내역	
-	var status=${status};	
-	status = Number(status);
-	switch(status) {
-    case 0:
-    	$('#myInfoTableWrap').show();
-    	$('#myHealthTableWrap').hide();
-    	$('#myCartTableWrap').hide();    	
-    	$('#myOrderListTableWrap').hide();
-        break;
-    case 1:
-    	$('#myInfoTableWrap').hide();
-    	$('#myHealthTableWrap').show();
-    	$('#myCartTableWrap').hide();    	
-    	$('#myOrderListTableWrap').hide();
-        break;
-    case 2:
-    	var id = $("#customerId").val();
-    	  $(".addTr").remove();
-		$(".optionAddTr").remove();
-		$.ajax({
-			url:"customerAjax/myCart",
-			headers : {
-	               "Content-Type" : "application/json",
-	               "X-HTTP-Method-Override" : "POST"
-	            },
-	            dataType : "json",
-			data:JSON.stringify({id:id}),
-			type:"POST",			
-			success:function(data){				
-				for(var i = 0; i<data.list.length; i++){ //장바구니의 데이터 테이블로 출력					
-					var orderCode = data.list[i].orderCode;				
-					$('#myCartTable').append("<tr class='addTr' data-orderCode='"+data.list[i].orderCode+"'><td>"
-							+"<input type='checkbox' name='cartCheck' value='"+data.list[i].dietCode+"' data-orderCode='"+data.list[i].orderCode+"'>"
-							+"</td><td><img class='myPageImg' data-img="+data.list[i].dietImg+" src='displayFile?fileName="+data.list[i].dietImg
-									+"' alt='이미지'>"
-									+"<span data-orderCode='"+data.list[i].orderCode+"' class='optiondown glyphicon glyphicon-chevron-down'>"						
-									+"주문상세보기</span></td><td class='dietName'>"+data.list[i].dietName
-									+"</td><td class='dietAmount'>"+data.list[i].dietAmount+"</td><td class='price'><span>"+data.list[i].price+"</span>원"+"</td></tr>");
-					var sideDName = "sideDName";
-					$.each(data, function(key, value){
-						if(key==orderCode){	
-							var length = value.length
-							$(".addTr[data-orderCode="+orderCode+"]").after(
-									"<tr class='optionAddTr'><td class='"+orderCode+"_optionArea' colspan='5'>"
-									//새로 열리는 반찬 옵션 창 안의 내용
-									+"<h4>"+orderCode+"번 주문 반찬</h4>"
-									+"<div class='"+orderCode+"_options' ></div>"
-									+"</td></tr>");
-							 for(var i=0; i<length; i++){
-								$("."+orderCode+"_options").html($("."+orderCode+"_options").html()+"<img src='"+value[i].sideDImg+"'/>"+value[i].sideDName);																		
-							}	 						
-						}
-					})
-			}
-			}
-		});	
-		
-		$("#myCartTable").on("click", ".optiondown", function(){
-			var orderCode = $(this).attr("data-orderCode");
-			if($(this).hasClass('glyphicon-chevron-down')){
-				$(this).removeClass('glyphicon-chevron-down');
-				$(this).addClass('glyphicon-chevron-up');
-			}else{
-				$(this).removeClass('glyphicon-chevron-up');
-				$(this).addClass('glyphicon-chevron-down');			
-			}			
-			$("."+orderCode+"_optionArea").toggle("fast");			
-		});
-			
-		
-		
-		
-    	$('#myInfoTableWrap').hide();;
-    	$('#myHealthTableWrap').hide();
-    	$('#myCartTableWrap').show();    	
-    	$('#myOrderListTableWrap').hide();
-        break;
-    case 3:
-    	var id = $("#customerId").val();
-    	
-		$(".addTr").remove();
-		$.ajax({
-			url:"customerAjax/myOrderlist",
-			headers : {
-	               "Content-Type" : "application/json",
-	               "X-HTTP-Method-Override" : "POST"
-	            },
-	            dataType : "json",
-			data:JSON.stringify({id:id}),
-			type:"POST",
-			
-			success:function(data){
-				
-				var orderStatus="";
-				for(var i = 0; i<data.list.length; i++){ //주문내역의 데이터 테이블로 출력
-				if(data.list[i].orderItemCode==0){
-					orderStatus="미결제";				
-				}else if(data.list[i].orderItemCode==6){
-					orderStatus="주문취소";
-				}else if(data.list[i].orderItemCode==7){
-					orderStatus="배송중";
-				}else if(data.list[i].orderItemCode==8){
-					orderStatus="배송완료";
-				}else{
-					orderStatus="결제완료";
-				}
-					$('#myOrderListTable').append("<tr class='orderTr'><td class='orderCode'>"+data.list[i].orderCode+"</td><td class='orderDate'>"+data.list[i].orderDate+"</td><td><img class='myPageImg' data-img="+data.list[i].dietImg+" src='displayFile?fileName="+data.list[i].dietImg+"' alt='이미지'></td><td class='dietName'>"+data.list[i].dietName+"</td><td class='dietAmount'>"+data.list[i].dietAmount+"</td><td class='price'><span>"+data.list[i].price+"</span>원"+"</td><td class='oItemCode' data-oItemCode='"+data.list[i].orderItemCode+"'>"+orderStatus+"</td></tr>");
-			}
-			}
-		});
-    	$('#myInfoTableWrap').hide();
-    	$('#myHealthTableWrap').hide();
-    	$('#myCartTableWrap').hide();    	
-    	$('#myOrderListTableWrap').show();
-        break;   
-    default:
-    	$('#myInfoTableWrap').show();
-		$('#myHealthTableWrap').hide();
-		$('#myCartTableWrap').hide();    	
-		$('#myOrderListTableWrap').hide();
-	}
+	var status=${status};
+	myPage(status);
 	
-	$(".myPageBtn").on("click",function(){
-		status = $(this).attr("data-status");		
+	function myPage(status){
+		status = Number(status);
 		switch(status) {
-	    case "0":
+	    case 0:
 	    	$('#myInfoTableWrap').show();
 	    	$('#myHealthTableWrap').hide();
 	    	$('#myCartTableWrap').hide();    	
 	    	$('#myOrderListTableWrap').hide();
 	        break;
-	    case "1":
+	    case 1:
 	    	$('#myInfoTableWrap').hide();
 	    	$('#myHealthTableWrap').show();
 	    	$('#myCartTableWrap').hide();    	
 	    	$('#myOrderListTableWrap').hide();
 	        break;
-	    case "2":
+	    case 2:
 	    	var id = $("#customerId").val();
-	  	  $(".addTr").remove();
+	    	  $(".addTr").remove();
 			$(".optionAddTr").remove();
+			$(".optionView").css("display","");
 			$.ajax({
 				url:"customerAjax/myCart",
 				headers : {
@@ -243,7 +117,7 @@ $(document).ready(function(){
 							if(key==orderCode){	
 								var length = value.length
 								$(".addTr[data-orderCode="+orderCode+"]").after(
-										"<tr class='optionAddTr'><td class='"+orderCode+"_optionArea' colspan='5'>"
+										"<tr class='optionAddTr'><td class='"+orderCode+"_optionArea optionView' colspan='5'>"
 										//새로 열리는 반찬 옵션 창 안의 내용
 										+"<h4>"+orderCode+"번 주문 반찬</h4>"
 										+"<div class='"+orderCode+"_options' ></div>"
@@ -255,20 +129,7 @@ $(document).ready(function(){
 						})
 				}
 				}
-			});	
-			
-			$("#myCartTable").on("click", ".optiondown", function(){
-				var orderCode = $(this).attr("data-orderCode");
-				if($(this).hasClass('glyphicon-chevron-down')){
-					$(this).removeClass('glyphicon-chevron-down');
-					$(this).addClass('glyphicon-chevron-up');
-				}else{
-					$(this).removeClass('glyphicon-chevron-up');
-					$(this).addClass('glyphicon-chevron-down');			
-				}			
-				$("."+orderCode+"_optionArea").toggle("fast");			
-			});
-				
+			});					
 			
 			
 			
@@ -277,9 +138,10 @@ $(document).ready(function(){
 	    	$('#myCartTableWrap').show();    	
 	    	$('#myOrderListTableWrap').hide();
 	        break;
-	    case "3":
+	    case 3:
 	    	var id = $("#customerId").val();
-			$(".orderTr").remove();
+	    	
+			$(".addTr").remove();
 			$.ajax({
 				url:"customerAjax/myOrderlist",
 				headers : {
@@ -291,12 +153,11 @@ $(document).ready(function(){
 				type:"POST",
 				
 				success:function(data){
-
+					
 					var orderStatus="";
 					for(var i = 0; i<data.list.length; i++){ //주문내역의 데이터 테이블로 출력
-				
 					if(data.list[i].orderItemCode==0){
-						orderStatus="미결제";					
+						orderStatus="미결제";				
 					}else if(data.list[i].orderItemCode==6){
 						orderStatus="주문취소";
 					}else if(data.list[i].orderItemCode==7){
@@ -310,7 +171,6 @@ $(document).ready(function(){
 				}
 				}
 			});
-			$(".oItemCode").attr("data-oItemCode");
 	    	$('#myInfoTableWrap').hide();
 	    	$('#myHealthTableWrap').hide();
 	    	$('#myCartTableWrap').hide();    	
@@ -322,8 +182,13 @@ $(document).ready(function(){
 			$('#myCartTableWrap').hide();    	
 			$('#myOrderListTableWrap').hide();
 		}
-	});	
-
+	}
+	
+	$(".myPageBtn").on("click",function(){
+		status = Number($(this).attr("data-status"));
+		myPage(status);
+		
+	});
 	//checkbox 설정. 최상위의 체크박스 체크 시 하위 체크박스 전부 선택 혹은 해제시키기
 	$('#checkAllCart').change(function(){
 		var checkAll = $('#checkAllCart').prop('checked'); //전체 체크박스의 체크여부
@@ -388,6 +253,19 @@ $(document).ready(function(){
 		alert(JSON.stringify(cartOrderInfo));
 		$("#cartInfo").val(JSON.stringify(cartOrderInfo));
 		$("#cartForm").submit();
+	});
+	
+	$("#myCartTable").on("click", ".optiondown", function(){				
+		var orderCode = $(this).attr("data-orderCode");
+		$("."+orderCode+"_optionArea").toggle("fast");	
+		if($(this).hasClass('glyphicon-chevron-down')){
+			$(this).removeClass('glyphicon-chevron-down');
+			$(this).addClass('glyphicon-chevron-up');
+		}else{
+			$(this).removeClass('glyphicon-chevron-up');
+			$(this).addClass('glyphicon-chevron-down');			
+		}			
+				
 	});
 });
 

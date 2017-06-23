@@ -4,11 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wdb3a.DeliverMapper">
 	<select id="deliverList" resultType="OrderList">
-		select a.orderCode, b.id, c.dietImg, c.dietName, b.address, a.orderItemCode, d.orderItemName
+		select a.orderCode, b.id, c.dietImg, c.dietName, b.address, a.orderItemCode,d.orderItemName
 		from orderlist a join member b join diet c join orderitem d
 		where a.id = b.id
 		and a.dietCode = c.dietCode
 		and a.orderItemCode = d.orderItemCode
+		and a.orderItemCode in(5,7)
+		
 		<include refid="search"></include>
 	</select>
 	<sql id = "search">
@@ -55,5 +57,7 @@
 		where a.id = b.id
 		and a.dietCode = c.dietCode
 		and a.orderItemCode = d.orderItemCode
+		and a.orderItemCode in(5,7)
+		
   	</select>
 </mapper>

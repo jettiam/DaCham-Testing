@@ -19,6 +19,7 @@
 	$(document).ready(function(){     
 		$('#body').hide();
 		var v = 0;
+		sideAll();
 		$("#sideAll").on("click",function(){
 			sideAll();
 		});
@@ -210,7 +211,7 @@
 	}
    #body{
    		position : absolute;      
-   		margin-left : 700px;          	
+   		margin-left : 900px;          	
    		margin-bottom : 500px;                
    }
   #chart {
@@ -224,14 +225,14 @@
 	<div class = "container">
 		<div class = "div1">
 			<div class = "box2">
-				<table>
+				<table class = "table table-hover">
 					<tr>
 						<th>반찬명&nbsp;&nbsp;</th>
 						<th>열량&nbsp;&nbsp;</th>
 						<th>탄수화물&nbsp;&nbsp;</th>
 						<th>단백질&nbsp;&nbsp;</th>
 						<th>지방&nbsp;&nbsp;</th>
-						<th>나트륨&nbsp;&nbsp;</th>
+						<th>나트륨&nbsp;&nbsp;</th>    
 					</tr>
 					<tr>
 						<td id = "sideDName"></td>
@@ -272,7 +273,7 @@
 						<!-- 총 칼로리 양 표시 -->
 						</div>
 		</div>     	
-		<form id = "registForm" enctype = "multipart/form-data" style = "position:relative; margin-left : 300px;">              
+		<form id = "registForm" enctype = "multipart/form-data" style = "position:relative; margin-left : 500px;">              
 			<div>                                
 				<h3>선택한 반찬</h3>
 				<div class = "material" style = "margin-bottom:50px; position:absolute;">   
@@ -314,7 +315,8 @@
 				</div>
 				<div id = "dietImg">
 					<input type = "file" class = "filestyle" data-input = "false" name = "file" placeholder = "식단이미지 올리기" id = "profile_pt" onchange = "previewImage(this,'View_area')">
-					<div id = "View_area">      
+					<div id = "View_area">  
+						<img id = "prev_View_area" src="http://placehold.it/100x100">    
 					</div>
 				</div>
 				<div id = "spDietItem">
@@ -324,12 +326,12 @@
 				
 			</div>
 		</form>
-		<div style = "margin-left: 500px; margin-top : 500px; position : absolute;">      	   
+		<div style = "margin-left: 500px; margin-top : 600px; position : absolute;">      	   
 			
 			<button id = "regist" class = "btn btn-danger">등록</button>
 			<button id = "cancle" class = "btn btn-warning">취소</button>      
 		</div>
-		
+		                  
 	</div>
 	<script>
 	//이미지를 업로드하면 미리 볼 수 있는 기능

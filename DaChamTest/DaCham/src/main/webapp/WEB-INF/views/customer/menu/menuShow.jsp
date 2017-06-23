@@ -1,7 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!document HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <style> 
 #menuShowWrap{
 	max-width: 1080px;
@@ -56,6 +64,8 @@ width:100px;
 </style>
 
 <title>DaCham 이달의메뉴</title>
+</head>
+<body>
 <%@include file="../../clientNavi.jsp" %>
 
 <div id = "menuShowWrap">
@@ -632,3 +642,5 @@ $('#disease04').click(function(){
 	$('#menuShowList4').show();
 });
 </script>
+</body>
+</html>
