@@ -24,7 +24,7 @@
 		});
 	});
 </script>
-<title></title>
+<title>식단 위자드 관리</title>
 </head>
 
 <body>

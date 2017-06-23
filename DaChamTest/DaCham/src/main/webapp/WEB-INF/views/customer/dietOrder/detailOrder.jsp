@@ -16,9 +16,14 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>DaCham 식단상세보기</title>
+<<<<<<< HEAD
 <style>
 </style>
 </head>
+=======
+</head>
+
+>>>>>>> branch 'master' of git@github.com:jettiam/DaCham-Testing.git
 <script>
 	function getDishList(a) {
 		a

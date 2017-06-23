@@ -197,14 +197,21 @@ public class NutritionistAjaxController {
 		return entity;
 	}
 	//해당 질병에 관련한 식단 조회
-	@RequestMapping(value = "/diseaseDietOverview/{diseaseName}",method = RequestMethod.GET)
-	public ResponseEntity<List<Nutritionist>> diseaseDietOverview(@PathVariable("diseaseName")String diseaseName){
-		ResponseEntity<List<Nutritionist>> entity = null;
-		Nutritionist nutritionist = new Nutritionist();
+	@RequestMapping(value = "/diseaseDietOverview/{page}/{diseaseName}",method = RequestMethod.GET)
+	public ResponseEntity<Map<String,Object>> diseaseDietOverview(@PathVariable("page")int page,@PathVariable("diseaseName")String diseaseName){
+		ResponseEntity<Map<String,Object>> entity = null;
+		
 		try {
-			nutritionist.setDiseaseName(diseaseName);
-			List<Nutritionist> list = service.diseaseDietOverview(nutritionist);
-			entity = new ResponseEntity<>(list,HttpStatus.OK);
+			Criteria criteria = new Criteria();
+			criteria.setPage(page);
+			int totalCount = service.diseaseDietCount(diseaseName);
+			criteria.setTotalCount(totalCount);
+			
+			List<Nutritionist> list = service.diseaseDietOverview(diseaseName,criteria);
+			Map<String,Object> map = new HashMap<>();
+			map.put("list", list);
+			map.put("criteria", criteria);
+			entity = new ResponseEntity<>(map,HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

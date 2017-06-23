@@ -1,6 +1,8 @@
 package com.wdb3a.dacham.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -108,9 +110,12 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 	}
 
 	@Override
-	public List<Nutritionist> diseaseDietOverview(Nutritionist nutritionist) throws Exception {
+	public List<Nutritionist> diseaseDietOverview(String diseaseName, Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".diseaseDietOverview",nutritionist);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("diseaseName", diseaseName);
+		map.put("criteria", criteria);
+		return sqlSession.selectList(namespace+".diseaseDietOverview",map);
 	}
 
 	@Override
@@ -141,6 +146,12 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 	public int orderList() throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace+".orderListCount");
+	}
+
+	@Override
+	public int diseaseDietCount(String diseaseName) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".diseaseDietCount",diseaseName);
 	}
 
 	
