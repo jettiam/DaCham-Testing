@@ -17,34 +17,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>DaCham 식단상세보기</title>
 </head>
-<<<<<<< HEAD
-=======
-<style>
 
-.detailOrderWrap {
-	width: 80%;
-	margin: 0 auto;
-}
-
-.sideDImg {
-	width: 150px;
-	height: 150px;
-}
-
-#dietImg {
-	width: 240px;
-	height: 180px;
-}
-
-table, tr, td {
-	border: solid 1px black;
-}
-
-table {
-	display: inline-table;
-}
-</style>
->>>>>>> branch 'master' of git@github.com:jettiam/DaCham-Testing.git
 <script>
 
 	function getDishList(a) {
