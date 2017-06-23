@@ -19,6 +19,7 @@
 	$(document).ready(function(){     
 		$('#body').hide();
 		var v = 0;
+		sideAll();
 		$("#sideAll").on("click",function(){
 			sideAll();
 		});
