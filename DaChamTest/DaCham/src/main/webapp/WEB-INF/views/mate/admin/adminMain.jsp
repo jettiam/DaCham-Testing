@@ -361,7 +361,7 @@
 			$("#orderPrice").empty();
 			$("#orderDietName").empty();
 			$("#orderOrderDate").empty();
-			$("#orderTel").empty();
+			$("#orderTel").empty(); 
 		});
 		
 		all(1);
