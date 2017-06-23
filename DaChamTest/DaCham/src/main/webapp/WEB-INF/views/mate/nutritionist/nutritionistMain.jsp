@@ -84,10 +84,10 @@
             <option>내용</option>
          </select>
          <input type = "text" name = "keyword">
-         <button id = "search"> 검색 </button>
+         <button id = "search" class = "btn btn-warning"> 검색 </button>
       </div>
       <div>
-         <table>
+         <table class = "table table-hover">
             <tr>
                <th>번호</th>
                <th>제목</th>
@@ -103,7 +103,7 @@
                <td>0</td>
             </tr>
          </table>
-         <button id = "noticeList">목록</button>
+         <button id = "noticeList" class = "btn btn-warning">목록</button>
       </div>
    </div>
    <div class = "box2">

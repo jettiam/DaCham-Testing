@@ -86,6 +86,14 @@
 		from diet a join disease b
 		where a.diseaseCode = b.diseaseCode
 		and b.diseaseName = #{diseaseName}
+		limit #{criteria.startRecord},#{criteria.recordsPerPage}
+	</select>
+	<!-- 위의 조회목록의 개수를 구합니다. -->
+	<select id = "diseaseDietCount" resultType = "Integer">
+		select count(a.dietCode)
+		from diet a join disease b
+		where a.diseaseCode = b.diseaseCode
+		and b.diseaseName = #{diseaseName}
 	</select>
 	<!-- 해당 반찬에 대한 카테고리 검색 -->
 	<select id = "categorySearch" resultType = "com.wdb3a.dacham.bean.Nutritionist">

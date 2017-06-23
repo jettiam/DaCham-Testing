@@ -193,7 +193,7 @@
 	
 </script>
 
-<title>Insert title here</title>
+<title>식단 등록 페이지</title>
 <style>
  .box1 {
   float:left;  }
