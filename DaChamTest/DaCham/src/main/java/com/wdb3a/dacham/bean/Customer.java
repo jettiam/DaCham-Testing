@@ -1,5 +1,7 @@
 package com.wdb3a.dacham.bean;
 
+import java.sql.Date;
+
 public class Customer {
 private int dietCode;
 private int sideDCode;
@@ -15,12 +17,14 @@ private int dietAmount;
 private String transportNum;
 private String orderItemName;
 private int orderItemCode;
+private String orderListStatus;
 private String paymentItemName;
 private int paymentItemCode;
 private String sideDName;
 private String sideDImg;
 private String foodGCode;
 private String foodGName;
+private Date orderDate;
 private boolean detailOrder;
 private double kcal;
 private double carbohydrate;
@@ -111,6 +115,17 @@ public int getOrderItemCode() {
 }
 public void setOrderItemCode(int orderItemCode) {
 	this.orderItemCode = orderItemCode;
+	if(orderItemCode==0){
+		this.setOrderListStatus("미결제");
+	}else if(orderItemCode>=2 && orderItemCode<=5){
+		this.setOrderListStatus("결제완료");
+	}else if(orderItemCode==6){
+		this.setOrderListStatus("주문취소");
+	}else if(orderItemCode==7){
+		this.setOrderListStatus("배송중");
+	}else if(orderItemCode==8){
+		this.setOrderListStatus("배송완료");
+	}
 }
 public String getPaymentItemName() {
 	return paymentItemName;
@@ -184,6 +199,18 @@ public boolean isDetailOrder() {
 }
 public void setDetailOrder(boolean detailOrder) {
 	this.detailOrder = detailOrder;
+}
+public Date getOrderDate() {
+	return orderDate;
+}
+public void setOrderDate(Date orderDate) {
+	this.orderDate = orderDate;
+}
+public String getOrderListStatus() {
+	return orderListStatus;
+}
+public void setOrderListStatus(String orderListStatus) {
+	this.orderListStatus = orderListStatus;
 }
 
 

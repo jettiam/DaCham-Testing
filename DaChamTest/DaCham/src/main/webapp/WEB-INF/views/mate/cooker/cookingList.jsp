@@ -38,9 +38,24 @@
 					<td>${b.dietAmount }</td>
 					<td>${b.orderItemName}</td>
 				</tr>
-			</c:forEach>		
-		
+			</c:forEach>			
 		</table>
+	<h1>조리 완료</h1>
+		<table class = "table table-hover">
+			<tr>
+				<th>음식명</th>
+				<th>조리량</th>
+				<th>조리상태</th>
+			</tr>
+			<c:forEach items = "${list2 }" var ="y">
+			<tr>
+				<td><a href ="#">${y. sideDName }</a></td>
+				<td>${y.dietAmount }</td>
+				<td>${y.orderItemName }</td>
+			</tr>
+			</c:forEach>
+		</table>
+			
 	</div>
 </body>
 </html>
