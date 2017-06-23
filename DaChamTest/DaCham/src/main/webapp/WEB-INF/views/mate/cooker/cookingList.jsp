@@ -9,6 +9,10 @@
 <%@include file = "cookerNavi.jsp" %>
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link rel="stylesheet"
+   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+   src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
 	$(document).ready(function(){
 		$("#button").on("click",function(){
@@ -18,9 +22,11 @@
 </script>
 </head>
 <body>
+	
+	<div class = container>
 	<h1>조리 목록</h1>
-	<div>
-		<table>
+		<button id = "button" class = "btn btn-primary">조리시작</button>
+		<table class ="table table-hover">
 			<tr>
 				<th>음식명</th>
 				<th>조리량</th>
@@ -30,12 +36,26 @@
 				<tr>
 					<td><a href = "#">${b.sideDName }</a></td>
 					<td>${b.dietAmount }</td>
-					<td>${b.orderItemCode}</td>
+					<td>${b.orderItemName}</td>
 				</tr>
-			</c:forEach>		
-		
+			</c:forEach>			
 		</table>
+	<h1>조리 완료</h1>
+		<table class = "table table-hover">
+			<tr>
+				<th>음식명</th>
+				<th>조리량</th>
+				<th>조리상태</th>
+			</tr>
+			<c:forEach items = "${list2 }" var ="y">
+			<tr>
+				<td><a href ="#">${y. sideDName }</a></td>
+				<td>${y.dietAmount }</td>
+				<td>${y.orderItemName }</td>
+			</tr>
+			</c:forEach>
+		</table>
+			
 	</div>
-	<button id = "button">조리시작</button>
 </body>
 </html>

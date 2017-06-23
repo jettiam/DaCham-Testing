@@ -10,10 +10,17 @@
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src = "../../../dacham/resources/openAPIjs/radarchart.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../../dacham/resources/bootstrap-filestyle.min.js"> </script>	
 <script>
 	$(document).ready(function(){     
-		$('#body').hide();
+		          
 		var v = 0;
+		openAPI();      
+		sideAll();
 		$("#sideAll").on("click",function(){
 			sideAll();
 		});
@@ -205,7 +212,7 @@
 	}
    #body{
    		position : absolute;      
-   		margin-left : 700px;          	
+   		margin-left : 900px;          	
    		margin-bottom : 500px;                
    }
   #chart {
@@ -216,16 +223,17 @@
 </style>
 </head>
 <body>
+	<div class = "container">
 		<div class = "div1">
 			<div class = "box2">
-				<table>
+				<table class = "table table-hover">
 					<tr>
 						<th>반찬명&nbsp;&nbsp;</th>
 						<th>열량&nbsp;&nbsp;</th>
 						<th>탄수화물&nbsp;&nbsp;</th>
 						<th>단백질&nbsp;&nbsp;</th>
 						<th>지방&nbsp;&nbsp;</th>
-						<th>나트륨&nbsp;&nbsp;</th>
+						<th>나트륨&nbsp;&nbsp;</th>    
 					</tr>
 					<tr>
 						<td id = "sideDName"></td>
@@ -240,10 +248,10 @@
 			<br><br><br><br><br><br>
 			<div>
 				<input type = "text" name = "search" id = "keyword" placeholder = "반찬 검색란">
-				<button id = "search">검색</button>
-				<button id=  "sideAll">전체목록</button><br>
-				<table border = "1" class = "searchTable">
-					<tr>
+				<button id = "search" class = "btn btn-primary">검색</button>
+				<button id=  "sideAll" class = "btn btn-primary">전체목록</button><br>
+				<table class = "searchTable table table-hover">          
+					<tr>    
 						<th>반찬명</th>
 						<th>식품군</th>
 						<th>조리방법</th>
@@ -266,7 +274,7 @@
 						<!-- 총 칼로리 양 표시 -->
 						</div>
 		</div>     	
-		<form id = "registForm" enctype = "multipart/form-data" style = "position:relative; margin-left : 300px;">              
+		<form id = "registForm" enctype = "multipart/form-data" style = "position:relative; margin-left : 500px;">              
 			<div>                                
 				<h3>선택한 반찬</h3>
 				<div class = "material" style = "margin-bottom:50px; position:absolute;">   
@@ -276,9 +284,11 @@
 		
 			<div class = "div2" style = "border-left:1px solid #000; position:absolute; margin-top : 45px;"> 
 			    <h2>위자드 선택</h2>
-			    <input type = "radio" name = "wizardCode" value = "1"> 고위험군 당뇨병<br>
-				<input type = "radio" name = "wizardCode" value = "2"> 저위험 고지혈증<br>
-				<input type = "radio" name = "wizardCode" value = "3"> 주의 신부전증
+			   
+				    <input type = "radio" name = "wizardCode" value = "1"> 고위험군 당뇨병<br>
+					<input type = "radio" name = "wizardCode" value = "2"> 저위험 고지혈증<br>
+					<input type = "radio" name = "wizardCode" value = "3"> 주의 신부전증
+				       
 				<hr align = "left" width = "40%">
 				
 				<div class = "template">
@@ -305,8 +315,9 @@
 					<input type = "number" name = "price" placeholder = "식단 가격 짓기">
 				</div>
 				<div id = "dietImg">
-					<input type = "file" name = "file" placeholder = "식단이미지 올리기" id = "profile_pt" onchange = "previewImage(this,'View_area')">
-					<div id = "View_area">
+					<input type = "file" class = "filestyle" data-input = "false" name = "file" placeholder = "식단이미지 올리기" id = "profile_pt" onchange = "previewImage(this,'View_area')">
+					<div id = "View_area">  
+						<img id = "prev_View_area" src="http://placehold.it/100x100">    
 					</div>
 				</div>
 				<div id = "spDietItem">
@@ -316,19 +327,19 @@
 				
 			</div>
 		</form>
-		<div style = "margin-left: 500px; margin-top : 500px; position : absolute;">      	   
+		<div style = "margin-left: 500px; margin-top : 600px; position : absolute;">      	   
 			
-			<button id = "regist">등록</button>
-			<button id = "cancle">취소</button>
+			<button id = "regist" class = "btn btn-danger">등록</button>
+			<button id = "cancle" class = "btn btn-warning">취소</button>      
 		</div>
-		
-	
+		                  
+	</div>
 	<script>
 	//이미지를 업로드하면 미리 볼 수 있는 기능
 	function previewImage(targetObj, View_area){
 		var preview = document.getElementById(View_area);
 		
-		var files  = targetObj.files;
+		var files  = targetObj.files
 		for(var i = 0; i<files.length; i++){
 			var file = files[i];
 			var imageType = /image.*/;

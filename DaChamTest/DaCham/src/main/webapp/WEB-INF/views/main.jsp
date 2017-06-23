@@ -1,13 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <title>DaCham 다참</title>
 <!-- 메인페이지 기본 틀을 위한 임시 CSS -->
 <style>
@@ -16,76 +21,22 @@ table,td,tr,tbody{
 	padding:0;
 	border:0;
 }
-#mainContent {
-	max-width: 1080px;
-	height: 100%;
-	margin: 0 auto;
+#mainImgWrap{
+padding:0px;
 }
-
-#mainLeftWrap {
-	float: left;
-	max-width: 800px;
-	/* height:640px; */
+#nutriInfoWrap{
+padding:0px;}
+#myNutriInfo{
+padding:0px;
 }
-
-#mainMenuImgs {
-	position: relative;
+#mainMenuImgs{
+padding:0px;
 }
-
-#mainNutriBox {
-	position: relative;
-	max-width: 280px;
-	height: 50px;
-	background-color: #8A9D60;
-}
+#mainNutriBox{
+padding:0px;}
 #mainShowNutriTable{
-margin: 0 auto;
-display:none;
-}
-
-#mainRightWrap {
-	position: relative;
-	float: right;
-}
-
-#myNutriInfo {
-	max-width: 280px;
-	height: 140px;
-	background-color: #EDA900;
-}
-
-img {
-	max-width: 100%;
-	height: auto;
-}
-td img{
-	width:140px;
-	height:120px;	
-	}
-
-
-@media only screen and (max-width: 500px) {
-	#mainNutriBox {
-		position: relative;
-		max-width: 500px;
-		height: 140px;
-		background-color: gray;
-	}
-	#mainRightWrap {
-	max-width: 500px;
-		position: relative;
-		float: right;
-	}
-	#myNutriInfo {
-		max-width: 500px;
-		height: 123px;
-		background-color: gray;
-	}
-	td img{
-		width:250px;
-		height : auto;
-	}
-}
+margin-top:10px;
+display:none;}
 </style>
 </head>
 <body>
@@ -93,42 +44,43 @@ td img{
 		<%@include file="clientNavi.jsp"%><!-- 네비게이션 삽입 -->
 	</div>
 
-	<div id="mainContent">
-		<div id="mainLeftWrap">
+	<div id="mainContent" class="container">
+	<div class="row">
+		<div class="col-sm-9" id="mainImgWrap">
 			<!-- 메인페이지 메인이미지 -->
-			<img src="../../dacham/resources/customerImage/dmain.jpg">
+			<img class="img-responsive" src="../../dacham/resources/customerImage/dmain.jpg">
 		</div>
 
 
-		<div id="mainRightWrap">
-			<div id="myNutriInfo"></div>
-			<div id="mainMenuImgs">
+		<div class="col-sm-3" id="nutriInfoWrap">		
+			<div class="col-sm-12" id="myNutriInfo"></div>
+			<div id="mainMenuImgs" class="col-sm-12">
 				<!-- 로그인박스 하단 작은 사이즈 식단 이미지 -->
 				<table>
 					<tr>
 						<td><a href="detailOrder?dietCode=1"><img src="../../dacham/resources/customerImage/dietImg/d01.JPG"
-							id=mainMenuImg class="mainMenuImg1"></a></td>
+							id=mainMenuImg class="mainMenuImg1 img-responsive"></a></td>
 						<td><a href="detailOrder?dietCode=2"><img src="../../dacham/resources/customerImage/dietImg/d02.JPG"
-							class="mainMenuImg2"></a></td>
+							class="mainMenuImg2 img-responsive"></a></td>
 					</tr>
 
 					<tr>
 						<td><a href="detailOrder?dietCode=3"><img src="../../dacham/resources/customerImage/dietImg/d03.JPG"
-							class="mainMenuImg3"></a></td>
+							class="mainMenuImg3 img-responsive"></a></td>
 						<td><a href="detailOrder?dietCode=3"><img src="../../dacham/resources/customerImage/dietImg/d05.JPG"
-							class="mainMenuImg4"></a></td>
+							class="mainMenuImg4 img-responsive"></a></td>
 					</tr>
 
 					<tr>
 						<td><a href="detailOrder?dietCode=2"><img src="../../dacham/resources/customerImage/dietImg/m16.JPG"
-							class="mainMenuImg5"></a></td>
+							class="mainMenuImg5 img-responsive"></a></td>
 						<td><a href="detailOrder?dietCode=1"><img src="../../dacham/resources/customerImage/dietImg/d20.JPG"
-							class="mainMenuImg6"></a></td>
+							class="mainMenuImg6 img-responsive"></a></td>
 					</tr>
 				</table>
 			</div>
 
-			<div id="mainNutriBox">
+			<div id="mainNutriBox" class="col-sm-12">
 				<!-- 각 식단의 간략한 영양정보 -->
 				<table id = "mainShowNutriTable" class="table-bordered text-center mainNT1">
 <tr class="NutriTable">
@@ -146,7 +98,7 @@ td img{
 </tr>
 </table>
 
-<table id = "mainShowNutriTable" class="table-bordered text-center mainNT2">
+<table id = "mainShowNutriTable" class="table-bordered text-center table">
 <tr class="NutriTable">
 <td class="NutriTable">칼로리</td>
 <td class="NutriTable">나트륨</td>
@@ -180,7 +132,9 @@ td img{
 
 			</div>
 		</div>
+		</div>
 	</div>
+	
 	<script>
 	$(function(){
 		$('.mainMenuImg1').mouseover(function(){

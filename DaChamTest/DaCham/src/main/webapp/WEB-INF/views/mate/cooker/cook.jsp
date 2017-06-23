@@ -8,6 +8,21 @@
 <%@include file = "cookerNavi.jsp" %>
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link rel="stylesheet"
+   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+   src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+	.floating-box{
+		display : inline-block;
+	   	width: 150px;
+	    height: 75px;
+	    margin: 10px;   
+	}
+	.cooking{
+		
+	}
+</style>
 <script>
 	$(document).ready(function(){
 		$(document.body).on("click","#finishBtn",function(){
@@ -29,9 +44,10 @@
 					},
 					dataType : 'text',
 					success : function(result){
+			
 						if(result == "SUCCESS"){
 							alert("완료되었습니다.");
-							window.location.href = "cookMain";
+							window.location.href = "cookingList";
 						}
 					}
 				});
@@ -79,43 +95,46 @@
 </script>
 </head>
 <body>
-<h1>조리 대기</h1>
-<div>
-         <table border ="1" class = "cook1">
-            <tr>            
-               <th>음식명</th>
-               <th>주문수</th>
-            </tr>
-            <tr class = "cookResult1">
-            </tr>
-  		</table>
-  		</div>
-<div>
-<h1>조리중</h1>        
-<table border ="1" class = "cook2">
-             <tr>
-               <th>음식명</th>
-               <th>주문수</th>
-            </tr>
-            <tr class = "cookResult2">
-            </tr>
-  		</table>
-         
-  		
-</div>
-<div>
-<h1>조리완료</h1>        
-<table border ="1" class = "cook3">
-             <tr>
-               <th>음식명</th>
-               <th>주문수</th>
-            </tr>
-             <tr class = "cookResult3">
-             	
-             </tr>
-  		
-  		</table>
-</div>
-<button id = "finishBtn">마감</button>
+	<div>
+		
+		<div style="float: left; width: 33%;"> 
+			<h1>조리 대기</h1>     
+		       <table class = "cook1 table table-hover">
+		           <tr>            
+		              <th>음식명</th>
+		              <th>주문수</th>
+		           </tr>
+		           <tr class = "cookResult1">
+		           </tr>
+		  	 </table>
+		 </div>     
+		<div style="float: left; width: 33%;">
+			<h1>조리중</h1>        
+			<table  class = "cook2 table table-hover">
+			             <tr>
+			               <th>음식명</th>
+			               <th>주문수</th>
+			            </tr>
+			            <tr class = "cookResult2">
+			            </tr>
+			</table> 		
+		</div>  
+		<div style="float: left; width: 33%;">
+			<h1>조리완료</h1>        
+			<table  class = "cook3 table table-hover">
+		             <tr>
+		               <th>음식명</th>
+		               <th>주문수</th>
+		            </tr>
+		             <tr class = "cookResult3">
+		             	
+		             </tr>
+		  		
+		  		</table>
+		</div>
+	</div>    
+	<div style = " margin-top : 500px; position : absolute;">
+		<button id = "finishBtn" class = "btn btn-primary">마감</button>
+	</div>
 </body>
 </html>

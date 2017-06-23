@@ -66,5 +66,9 @@ private CustomerDAO dao;
 	public void orderOptionRegist(HashMap options) throws Exception {
 		dao.orderOptionRegist(options);
 	}
+	@Override
+	public List<Customer> orderOption(int orderCode) throws Exception {
+		return dao.orderOption(orderCode);
+	}
 
 }
