@@ -13,28 +13,62 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
 	$(document).ready(function(){
+		var currentPage = 1;
+		var diseaseName = "";
 		$("#regist").click(function(){
 			window.location.href = "dietRegist";
 		});
 		
+		$(".pagination").on("click","li a",function(){
+			event.preventDefault();
+			var replyPage = $(this).attr("href");
+			
+			all(replyPage, diseaseName);
+		});
+		
 		$(".diseaseNation li a").on("click",function(){
 			event.preventDefault();
+			
+			
+			var subDiseaseName = $(this).attr("data-name");
+			diseaseName = subDiseaseName;
+			all(1, diseaseName);
+			
+		});
+		function all(page, diseaseName){
+			currentPage = page;
+			console.log(diseaseName);
 			$(".searchResult").remove();
-			
-			var diseaseName = $(this).attr("data-name");
-			
-			$.getJSON("nutriAjax/diseaseDietOverview/"+diseaseName,function(data){
+			$.getJSON("nutriAjax/diseaseDietOverview/"+page+"/"+diseaseName,function(data){
 				console.log(data);
+				console.log(page);
 				var str = "";
-				$(data).each(function(){
+				$(data.list).each(function(){
 					str += "<tr class = 'searchResult'>"+"<td>"+"<input type = 'radio' name = 'radio' value = '"+this.dietCode+"'>"+"</td>"+"<td><img src = 'displayFile?fileName="+this.dietImg+"' style = 'width: 75px; height: 25px;'></td>"+"<td>"+this.dietName+"</td>"+"<td>"+this.diseaseName+"</td>"+"</tr>";
 				});
-				$(".dietDiseaseOverview").append(str);     
+				$(".dietDiseaseOverview").append(str); 
+				printPaging(data.criteria);
 			});
-		});
+		}
+		
+		function printPaging(criteria){
+			var str = "";
+					
+			if(criteria.prev){
+				str += "<li><a href=''"+(criteria.startPage-1)+"'>'" + "<<"+"</a></li>";
+			}
+			for(var i = criteria.startPage; i<=criteria.endPage; i++){
+				var strClass = criteria.page == i?"class = 'active'":"";
+				str += "<li "+strClass+"><a href ='"+i+"'>"+i + "</a></li>";
+			}
+			if(criteria.next){
+				str += "<li><a href=''"+(criteria.endPage+1)+"'>'" + ">>"+"</a></li>";
+			}
+			$(".pagination").html(str);
+		}
 	});
 </script>
-<title>Insert title here</title>
+<title>식단 관리 페이지</title>
 <style>
  .box1 {
   float:left;  }
@@ -84,6 +118,8 @@
                
             </tr>
          </table>
+         <ul class = "pagination">
+         </ul>
       </div>
    </div>
    </div>

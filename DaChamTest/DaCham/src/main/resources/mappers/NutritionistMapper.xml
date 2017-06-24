@@ -47,8 +47,8 @@
 		where foodMName = #{foodMName}
 	</select>
 	<insert id = "createDiet">
-		insert into diet(diseaseCode, wizardCode, dietName, price, dietImg, spDietItem)
-		values (#{diseaseCode},#{wizardCode},#{dietName},#{price},#{dietImg},#{spDietItem})
+		insert into diet(diseaseCode, dietName, price, dietImg, spDietItem)
+		values (#{diseaseCode},#{dietName},#{price},#{dietImg},#{spDietItem})
 	</insert>
 	<select id="choiceDisease" resultType = "com.wdb3a.dacham.bean.Nutritionist">
 		select * from disease
@@ -83,6 +83,14 @@
 	<!-- 해당 질병에 대한 식단을 조회합니다. -->
 	<select id = "diseaseDietOverview" resultType = "com.wdb3a.dacham.bean.Nutritionist">
 		select a.dietCode, a.dietImg,a.dietName ,a.diseaseCode, b.diseaseName
+		from diet a join disease b
+		where a.diseaseCode = b.diseaseCode
+		and b.diseaseName = #{diseaseName}
+		limit #{criteria.startRecord},#{criteria.recordsPerPage}
+	</select>
+	<!-- 위의 조회목록의 개수를 구합니다. -->
+	<select id = "diseaseDietCount" resultType = "Integer">
+		select count(a.dietCode)
 		from diet a join disease b
 		where a.diseaseCode = b.diseaseCode
 		and b.diseaseName = #{diseaseName}

@@ -10,38 +10,17 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>DaCham 식단상세보기</title>
-</head>
-<style>
-
-.detailOrderWrap {
-	width: 80%;
-	margin: 0 auto;
-}
-
-.sideDImg {
-	width: 150px;
-	height: 150px;
-}
-
-#dietImg {
-	width: 240px;
-	height: 180px;
-}
-
-table, tr, td {
-	border: solid 1px black;
-}
-
-table {
-	display: inline-table;
-}
-</style>
 <script>
 	function getDishList(a) {
-		a.children().each(
+		a
+				.children()
+				.each(
 						function() {
 							var foodGCode = $(this).attr("data-foodGCode");
 							var b = $(this);
@@ -78,75 +57,94 @@ table {
 											})
 						});
 	}
+	
+	// div : panel id
+	// foodGCode : 각각 판넬에 들어가게 될 반찬들의 GCode(그룹코드)
+	function getDish(div, foodGCode){
+		var foodGCode= foodGCode;
+		$.getJSON("customerAjax/getfoodG/"+foodGCode, function(data){
+			for(var i=0; i<data.list.length; i++){
+				var kcal = data.list[i].kcal.toFixed(0);
+				var carbo = data.list[i].carbohydrate.toFixed(0);
+				var protein = data.list[i].protein.toFixed(0);
+				var fat = data.list[i].fat.toFixed(0);
+				var na = data.list[i].na.toFixed(0);
+				
+				if(i==0){
+				div.append(
+							"<div class='column foodGSideD backColor' data-sideDCode='"+data.list[i].sideDCode+"'>"							
+							+"<img class='thumbnail' src='http://placehold.it/350x200'>"
+							+"<h5 style='text-align:center'>"+data.list[i].sideDName+"</h5>"
+							+"<table class='table' >"
+							+"<tr><th>칼로리</th><td>"+kcal+"</td></tr>"
+							+"<tr><th>탄수화물</th><td>"+carbo+"</td></tr>"
+							+"<tr><th>단백질</th><td>"+protein+"</td></tr>"
+							+"<tr><th>지방</th><td>"+fat+"</td></tr>"
+							+"<tr><th>나트륨</th><td>"+na+"</td></tr>"
+							+"</table>"							
+							+"<a class='sideButton button hollow tiny expanded'>선택 하기</a>"
+							+"<input type='radio' name='"+foodGCode+"' value='"+data.list[i].sideDCode+"' checked='true'/>"
+							+"</div>"
+						);
+				}else{
+					div.append(
+							"<div class='column foodGSideD' data-sideDCode='"+data.list[i].sideDCode+"'>"		
+							+"<img class='thumbnail' src='http://placehold.it/350x200'>"
+							+"<h5 style='text-align:center'>"+data.list[i].sideDName+"</h5>"
+							+"<table class='table' >"
+							+"<tr><th>칼로리</th><td>"+kcal+"</td></tr>"
+							+"<tr><th>탄수화물</th><td>"+carbo+"</td></tr>"
+							+"<tr><th>단백질</th><td>"+protein+"</td></tr>"
+							+"<tr><th>지방</th><td>"+fat+"</td></tr>"
+							+"<tr><th>나트륨</th><td>"+na+"</td></tr>"
+							+"</table>"							
+							+"<a class='sideButton button hollow tiny expanded'>선택 하기</a>"
+							+"<input type='radio' name='"+foodGCode+"' value='"+data.list[i].sideDCode+"' />"
+							+"</div>"
+						);
+				}				
+			}
+		});
+	}
+	
+	function activeRadio(btn){		
+		alert("클릭되었습니다.");
+		var inputBtn = btn.find("input:radio");
+		inputBtn.attr("checked", true);
+	}
 
-	function getCheckedList(a) {		
+	function getCheckedList(a) {
 		var arrInx = 0;
 		var sideDish = [];
-		a.children().each(function() {
-			var name = $(this).attr("data-foodGCode");
-			var checkedValue = $('input:radio[name="'+name+'"]:checked').val(); //벨류가 반찬 코드		
-			if(checkedValue!=undefined){
-			sideDish[arrInx] = checkedValue;
-			arrInx++;		
-			}
-			console.log(sideDish);
-		});
+		a.children().each(
+				function() {
+					var name = $(this).attr("data-foodGCode");
+					var checkedValue = $(
+							'input:radio[name="' + name + '"]:checked').val(); //벨류가 반찬 코드		
+					if (checkedValue != undefined) {
+						sideDish[arrInx] = checkedValue;
+						arrInx++;
+					}
+					console.log(sideDish);
+				});
 		$("#orderForm>#sideDish").remove();
-		for(i=0; i<arrInx; i++){
-			$("#orderForm").append(					
-					"<input id='sideDish' type='hidden' name='sideDish' value='"+sideDish[i]+"'>");
-		}		
+		for (i = 0; i < arrInx; i++) {
+			$("#orderForm")
+					.append(
+							"<input id='sideDish' type='hidden' name='sideDish' value='"+sideDish[i]+"'>");
+		}
 	}
 
 	$(document).ready(function() {
-		getDishList($("#foodGList"));
-	 /* $(document).on("click", "input:radio", function() {
-			getCheckedList($("#foodGList"));
-		});  */
-		//console.log("${list}.length");
-		/* $(".sideDList").on("click",function() {
-							$(".foodGSideD").remove();
-							var foodGCode = $(this).attr("data-foodGCode");
-							$.getJSON(
-											"customerAjax/getfoodG/"
-													+ foodGCode,
-											function(data) {
-										 	var a = data.list;
-												console.log(a); 
-												for (var i = 0; i < data.list.length; i++) {
-													console.log(data.list[i]);
-													$(
-															"#foodGList")
-															.append(
-																	"<label><div class='col-sm-8 foodGSideD' data-sideDCode='"+data.list[i].sideDCode+"'>"
-																			+ "<input type='radio' name='"+data.list[i].foodGCode+"' value='"+data.list[i].sideDCode+"' />"
-																			+ "<img src='http://via.placeholder.com/150x150'>"
-																			+ "<b>  "
-																			+ data.list[i].sideDCode
-																			+ "  </b>"
-																			//<img class='sideDImg' src='displayFile?fileName="	+ data.list[i].sideDImg//+ "'>"
-																			+ data.list[i].sideDName
-																			+ "  <table><tr><td>칼로리</td><td>탄수화물</td><td>단백질</td><td>지방</td><td>나트륨</td></tr><tr><td>"
-																			+ data.list[i].kcal
-																					.toFixed(0)
-																			+ "kcal</td><td>"
-																			+ data.list[i].carbohydrate
-																					.toFixed(0)
-																			+ "g</td><td>"
-																			+ data.list[i].protein
-																					.toFixed(0)
-																			+ "g</td><td>"
-																			+ data.list[i].fat
-																					.toFixed(0)
-																			+ "g</td><td>"
-																			+ data.list[i].na
-																					.toFixed(0)
-																			+ "mg</td></tr></table>"
-																			+ "</div></label>");
-												}
-
-											});
-						}); */
+		$(document).on("click", ".sideButton", function(){
+			activeRadio($(this).parent());
+		});
+		getDish($("#panel1>div"), "01");
+		getDish($("#panel2>div"),"02");
+		getDish($("#panel3>div"), "03");
+		getDish($("#panel4>div"),"04");
+		getDish($("#panel5>div"), "05");
+		getDish($("#panel6>div"),"06");
 
 		$("#dietAmount").keyup(function() {
 			var a = $("#dietAmount").val();
@@ -177,7 +175,7 @@ table {
 		});
 
 		$("#goMyCart").on("click", function() {
-			getCheckedList($("#foodGList"));
+			getCheckedList($(".tabs-content"));
 			$("#setDietCode").val();
 			$("#setDietName").val($("#dietName").text());
 			$("#setPrice").val($("#dietPrice").text());
@@ -190,7 +188,135 @@ table {
 </script>
 <body>
 	<%@include file="../../clientNavi.jsp"%>
-	<div class="detailOrderWrap">
+	<!-- Start Top Bar -->
+	
+	<!-- End Top Bar -->
+	<br>
+	<br>
+	<br>
+	<!-- You can now combine a row and column if you just need a 12 column row -->
+	
+
+	<div class="row">
+		<div class="medium-6 columns">
+			<img class="thumbnail" src="http://placehold.it/650x450">
+			<div class="row small-up-3">
+				<!-- <img src="resources/customerImage/option_list.png"> -->
+				<div class="column">
+					<img class="thumbnail t1"
+						src="resources/customerImage/detail_option_img.png">
+				</div>
+				<div class="column">
+					<img class="thumbnail t2" src="http://placehold.it/250x200">
+				</div>
+				<div class="column">
+					<img class="thumbnail t3" src="http://placehold.it/250x200">
+				</div>
+				<div class="column">
+					<img class="thumbnail t4" src="http://placehold.it/250x200">
+				</div>
+				<div class="column">
+					<img class="thumbnail t5" src="http://placehold.it/250x200">
+				</div>
+				<div class="column">
+					<img class="thumbnail t6" src="http://placehold.it/250x200">
+				</div>
+			</div>
+		</div>
+
+		<!-- 우측 식단 정보 영역 -->
+		<div class="medium-6 large-5 columns">
+			<h3>${list[0].dietName}</h3>
+
+			<div class="row">
+				<div class="small-3 columns">
+					<label for="dietAmount" class="middle" name="dietAmount">수량</label>
+					<label for="middle-label" class="middle">가격</label>
+				</div>
+				<div class="small-9 columns float-right">
+					<input id="dietAmount" type="number" name="dietAmount" min="1"
+						value="1"> <span id="dietPrice"
+						data-basicPrice="${list[0].price}">${list[0].price}</span> <b>원</b>
+				</div>
+			</div>
+
+			<!-- 장바구니, 주문하기 버튼 -->
+			<div class="large secondary expanded button-group">
+				
+				<a href="#" class="button large expanded" id="goMyCart">Cart</a> <a href="#"
+					class="button large expanded" id="doOrder">Buy Now</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- 반찬 선택창 -->
+	<div id="foodGList"class="column row">
+		<hr>
+		<ul class="tabs" data-tabs id="example-tabs">
+			<li class="tabs-title is-active"><a href="#panel1"
+				aria-selected="true">밥</a></li>
+			<li class="tabs-title"><a href="#panel2">국</a></li>
+			<li class="tabs-title"><a href="#panel3">메인 메뉴1</a></li>
+			<li class="tabs-title"><a href="#panel4">메인 메뉴2</a></li>
+			<li class="tabs-title"><a href="#panel5">메인 메뉴3</a></li>
+			<li class="tabs-title"><a href="#panel6">메인 메뉴4</a></li>
+		</ul>
+		<div class="tabs-content" data-tabs-content="example-tabs">
+			<!-- 1번판넬 밥 -->
+			<div class="tabs-panel is-active" id="panel1" data-foodGCode="01">
+				<h4>밥</h4>
+				<div class="row medium-up-3 large-up-5"></div>
+			</div>
+
+			<!-- 판넬2 국 -->
+			<div class="tabs-panel" id="panel2" data-foodGCode="02">
+				<h4>국</h4>
+				<div class="row medium-up-3 large-up-5"></div>
+			</div>
+
+			<!-- 판넬3 메인 메뉴1 -->
+			<div class="tabs-panel" id="panel3" data-foodGCode="03">
+				<h4>메인 메뉴1</h4>
+				<div class="row medium-up-3 large-up-5"></div>
+			</div>
+
+			<!-- 판넬4 메인 메뉴2 -->
+			<div class="tabs-panel" id="panel4" data-foodGCode="04">
+				<h4>메인 메뉴2</h4>
+				<div class="row medium-up-3 large-up-5"></div>
+			</div>
+
+			<!-- 판넬5 메인 메뉴3 -->
+			<div class="tabs-panel" id="panel5" data-foodGCode="05">
+				<h4>메인 메뉴3</h4>
+				<div class="row medium-up-3 large-up-5"></div>
+			</div>
+			
+			<!-- 판넬6 메인 메뉴4 -->
+			<div class="tabs-panel" id="panel6" data-foodGCode="06">
+				<h4>메인 메뉴4</h4>
+				<div class="row medium-up-3 large-up-5">
+				</div>				
+			</div>
+		</div>
+	</div>
+
+	<div class="row column">
+		<hr>
+	</div>
+
+
+
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script
+		src="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+	<script>
+		$(document).foundation();
+	</script>
+
+
+
+<%-- 	<div class="detailOrderWrap">
 		<div class="row">
 			<div class="col-sm-7">
 				<img src="http://via.placeholder.com/150x150">
@@ -233,7 +359,7 @@ table {
 			<c:forEach items="${list}" var="list">
 				<div id="${list.foodGCode}_foodGList"
 					data-foodGCode="${list.foodGCode}">
-					<h1>${list.foodGCode}</h1>
+					<h1>${list.foodGCode}안녕반찬이름...</h1>
 				</div>
 			</c:forEach>
 		</div>
@@ -248,12 +374,6 @@ table {
 			</nav>
 		</section>
 	</div>
-
-	<a class="dashboard-nav-card" href="#"> <i
-		class="dashboard-nav-card-icon fa fa-users" aria-hidden="true"></i>
-		<h3 class="dashboard-nav-card-title">Visitors</h3>
-	</a>
-
 	<div>
 		<img src="http://via.placeholder.com/150x150"> <img
 			src="http://via.placeholder.com/150x150"> <img
@@ -265,22 +385,22 @@ table {
 	<div>
 		<h1>삭제할 공간입니다.</h1>
 		<div id="testing"></div>
-	</div>
-
+	</div> --%>
 
 
 	<form id="orderForm" method="get">
 		<input id="setDietCode" type="hidden" name="dietCode"
-			value="${list[0].dietCode }"> 
-		<input id="setPrice" type="hidden" name="price">
-		<input id="setDietImg"type="hidden" name="dietImg">
-		<input id="setDietAmount" type="hidden" name="dietAmount">
-		<input id="setDietName" type="hidden" name="dietName">
-		<input id="customerId" type="hidden" name="id" value="${customerId}">
-		<input id="sideDish" type="hidden" name="sideDish">
-		<input type="hidden" name="detailOrder" value="true">
-
+			value="${list[0].dietCode }"> <input id="setPrice"
+			type="hidden" name="price"> <input id="setDietImg"
+			type="hidden" name="dietImg"> <input id="setDietAmount"
+			type="hidden" name="dietAmount"> <input id="setDietName"
+			type="hidden" name="dietName"> <input id="customerId"
+			type="hidden" name="id" value="${customerId}"> <input
+			id="sideDish" type="hidden" name="sideDish"> <input
+			type="hidden" name="detailOrder" value="true">
 		<!-- 디테일오더에서 넘어갔는지 유무 -->
 	</form>
+
+
 </body>
 </html>

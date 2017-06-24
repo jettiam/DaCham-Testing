@@ -108,9 +108,9 @@ public class NutritionistServiceImpl implements NutritionistService {
 	}
 
 	@Override
-	public List<Nutritionist> diseaseDietOverview(Nutritionist nutritionist) throws Exception {
+	public List<Nutritionist> diseaseDietOverview(String diseaseName, Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.diseaseDietOverview(nutritionist);
+		return dao.diseaseDietOverview(diseaseName,criteria);
 	}
 
 	@Override
@@ -141,6 +141,12 @@ public class NutritionistServiceImpl implements NutritionistService {
 	public int orderList() throws Exception {
 		// TODO Auto-generated method stub
 		return dao.orderList();
+	}
+
+	@Override
+	public int diseaseDietCount(String diseaseName) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.diseaseDietCount(diseaseName);
 	}
 
 	

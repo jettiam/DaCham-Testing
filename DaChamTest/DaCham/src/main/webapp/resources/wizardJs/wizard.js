@@ -14,6 +14,22 @@ Blockly.Blocks['makeQSheet'] = {
     this.setHelpUrl('');
   }
 };
+Blockly.Blocks['resultsheet'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("결과: ");
+    this.appendValueInput("result")
+        .setCheck(null)
+        .appendField("결과를 블록으로 연결하세요.");
+    this.setInputsInline(false);
+    this.setOutput(true, null);
+    this.setColour(75);
+    this.setTooltip('');
+    this.setHelpUrl(''); 
+  }
+};
+
+
 
 /**
  * 질문지 입력기능, 답안지 연결 기능.
@@ -123,6 +139,56 @@ Blockly.Blocks['answerLink'] = {
   }
 };
 
+//당뇨 결과 블록들 1~3 위로 갈수록 심각.
+Blockly.Blocks['d1'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("당뇨");
+    this.appendDummyInput()
+        .appendField("주의");
+    this.setOutput(true, null);
+    this.setColour(160);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['d2'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("당뇨");
+    this.appendDummyInput()
+        .appendField("위험");
+    this.setOutput(true, null);
+    this.setColour(290);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['d3'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("당뇨");
+    this.appendDummyInput()
+        .appendField("고위험");
+    this.setOutput(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
 
 // 블록 코드 정의
 
@@ -167,3 +233,39 @@ Blockly.JavaScript['answerLink'] = function(block) {
   var linkParse = "{'answer' : '"+text_answer+"', 'link' : '"+number_link_no+"'}"
   return [linkParse, Blockly.JavaScript.ORDER_ATOMIC];
 };
+
+/**
+ * 결과에 따른 값을 선택 해줌.
+ */
+Blockly.JavaScript['resultsheet'] = function(block) {
+	  var value_result = Blockly.JavaScript.valueToCode(block, 'result', Blockly.JavaScript.ORDER_ATOMIC);
+	  // TODO: Assemble JavaScript into code variable.
+	  var code = "'result' : '결과', \n" + "'resultList' : {"+value_result+"}";
+	  // TODO: Change ORDER_NONE to the correct strength.
+	  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+	};
+
+
+	
+	
+	// 당뇨 고위험군
+	Blockly.JavaScript['d1'] = function(block) {
+		  var code = " 'result': '당뇨', 'judg':'주의' ";
+		  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+		};
+
+	
+	// 당뇨 고위험군
+	Blockly.JavaScript['d2'] = function(block) {
+		  var code = " 'result': '당뇨', 'judg':'위험' ";
+		  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+		};
+
+	
+	
+	
+// 당뇨 고위험군
+Blockly.JavaScript['d3'] = function(block) {
+	  var code = " 'result': '당뇨', 'judg':'고위험' ";
+	  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+	};

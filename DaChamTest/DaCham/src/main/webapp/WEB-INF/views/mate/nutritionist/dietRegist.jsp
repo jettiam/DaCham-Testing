@@ -193,7 +193,7 @@
 	
 </script>
 
-<title>Insert title here</title>
+<title>식단 등록 페이지</title>
 <style>
  .box1 {
   float:left;  }
@@ -283,12 +283,7 @@
 			</div>
 		
 			<div class = "div2" style = "border-left:1px solid #000; position:absolute; margin-top : 45px;"> 
-			    <h2>위자드 선택</h2>
-			   
-				    <input type = "radio" name = "wizardCode" value = "1"> 고위험군 당뇨병<br>
-					<input type = "radio" name = "wizardCode" value = "2"> 저위험 고지혈증<br>
-					<input type = "radio" name = "wizardCode" value = "3"> 주의 신부전증
-				       
+			  
 				<hr align = "left" width = "40%">
 				
 				<div class = "template">

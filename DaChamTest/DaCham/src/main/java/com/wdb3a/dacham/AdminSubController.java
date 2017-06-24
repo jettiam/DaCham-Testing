@@ -28,7 +28,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wdb3a.dacham.bean.ChartList;
+import com.wdb3a.dacham.bean.Criteria;
 import com.wdb3a.dacham.bean.FoodMAmountRead;
+import com.wdb3a.dacham.bean.FoodMInven;
 import com.wdb3a.dacham.bean.OrderList;
 import com.wdb3a.dacham.service.AdminMainService;
 
@@ -110,12 +112,21 @@ public class AdminSubController {
 		return entity;
 	}
    //메인화면 전체 리스트 출력
-   @RequestMapping(value = "/all",method = RequestMethod.GET)
-	public ResponseEntity<List<OrderList>> all(){
-		ResponseEntity<List<OrderList>> entity = null;
+   @RequestMapping(value = "/all/{page}",method = RequestMethod.GET)
+	public ResponseEntity<Map<String,Object>> all(@PathVariable("page") int page){
+		ResponseEntity<Map<String,Object>> entity = null;
+	
 		try {
-			List<OrderList> list = service.all();
-			entity = new ResponseEntity<>(list,HttpStatus.OK);
+			
+			Criteria criteria = new Criteria();
+			criteria.setPage(page);
+			int totalCount = service.orderListCount();
+			criteria.setTotalCount(totalCount);
+			List<OrderList> list = service.all(criteria);
+			Map<String,Object> map = new HashMap<>();
+			map.put("list", list);
+			map.put("criteria", criteria);
+			entity = new ResponseEntity<>(map,HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -155,6 +166,38 @@ public class AdminSubController {
 		}
 		return entity;
 	}
+   //orderList 검색
+   @RequestMapping(value = "orderList/{searchType}/{keyword}", method = RequestMethod.GET)
+  	public ResponseEntity<List<OrderList>> orderListSearch(@PathVariable("searchType")String searchType,@PathVariable("keyword")String keyword){
+  		ResponseEntity<List<OrderList>> entity = null;
+  		
+  		try {
+  			OrderList orderList = new OrderList();
+  			orderList.setSearchType(searchType);
+  			orderList.setKeyword(keyword);
+  			List<OrderList> list = service.orderAll(orderList);
+  			entity = new ResponseEntity<>(list,HttpStatus.OK);
+  		} catch (Exception e) {
+  			// TODO Auto-generated catch block
+  			e.printStackTrace();
+  			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+  		}
+  		return entity;
+  	}
+   //foodStock 리스트 출력
+   @RequestMapping(value = "/foodStockAll",method = RequestMethod.GET)
+  	public ResponseEntity<List<FoodMInven>> foodStockAll(){
+  		ResponseEntity<List<FoodMInven>> entity = null;
+  		try {
+  			List<FoodMInven> list = service.foodStockListAll();
+  			entity = new ResponseEntity<>(list,HttpStatus.OK);
+  		} catch (Exception e) {
+  			// TODO Auto-generated catch block
+  			e.printStackTrace();
+  			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+  		}
+  		return entity;
+  	}
    
   
    
