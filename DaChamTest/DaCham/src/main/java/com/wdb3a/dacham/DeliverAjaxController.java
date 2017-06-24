@@ -1,6 +1,8 @@
 package com.wdb3a.dacham;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.wdb3a.dacham.bean.Criteria;
 import com.wdb3a.dacham.bean.Nutritionist;
 import com.wdb3a.dacham.bean.OrderList;
 import com.wdb3a.dacham.service.DeliverService;
@@ -55,12 +58,20 @@ public class DeliverAjaxController {
 		}
 		return entity;
 	}
-	@RequestMapping(value = "/all",method = RequestMethod.GET)
-	public ResponseEntity<List<OrderList>> all(){
-		ResponseEntity<List<OrderList>> entity = null;
-		try {
-			List<OrderList> list = service.all();
-			entity = new ResponseEntity<>(list,HttpStatus.OK);
+	@RequestMapping(value = "/all/{page}/{orderItemCode}",method = RequestMethod.GET)
+	public ResponseEntity<Map<String,Object>> all(@PathVariable("orderItemCode")String orderItemCode,@PathVariable("page")int page){
+		ResponseEntity<Map<String,Object>> entity = null;
+		try {	
+			Criteria criteria = new Criteria();
+			criteria.setPage(page);
+			int totalCount = service.allCount(orderItemCode);
+			criteria.setTotalCount(totalCount);
+			
+			List<OrderList> list = service.all(orderItemCode,criteria);
+			Map<String,Object> map = new HashMap<>();
+			map.put("list",list);
+			map.put("criteria", criteria);
+			entity = new ResponseEntity<>(map,HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

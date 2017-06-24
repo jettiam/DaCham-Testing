@@ -15,7 +15,9 @@
    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
 	$(document).ready(function(){
-		all();
+		var currentPage = 1;
+		var currentItemCode = "";
+		all(1,5);
 		$("#button").on("click",function(){
 			
 			var orderCode = $('input:radio[name="chk"]:checked').val();     
@@ -35,8 +37,8 @@
 					}),
 					success : function(result){
 						if(result == "SUCCESS"){
-							alert("수정되었습니다.");          
-							all();	
+							alert("수정되었습니다.");
+							all(currentPage,5);   
 						}
 					}
 				});
@@ -46,7 +48,7 @@
 			$(".searchResult").remove();
 			var searchType = $('.searchType').val();
 			var keyword = $("#keyword").val();
-			alert("def : "+searchType + " sde: "+keyword);
+			
 			$.getJSON("deliverAjax/"+searchType+"/"+keyword,function(data){
 				var str = "";
 				$(data).each(function(){
@@ -56,17 +58,51 @@
 			});
 		});
 		$("#all").on("click",function(){
-			all();
+			all(1,5);
 		});
-		function all(){
-			$.getJSON("deliverAjax/all",function(data){
+		$("#button1").on("click",function(){
+			all(1,5);
+		});
+		$("#button2").on("click",function(){
+			all(1,7);
+		});
+		$(".pagination").on("click","li a",function(){
+			event.preventDefault();
+			var replyPage = $(this).attr("href");
+			all(replyPage,currentItemCode);
+		});
+		function all(page,orderItemCode){
+			$.getJSON("deliverAjax/all/"+page+"/"+orderItemCode,function(data){
+				currentPage = page;
+				currentItemCode = orderItemCode;
 				$(".searchResult").remove();
 				var str = "";
-				$(data).each(function(){
-					str += "<tr class = 'searchResult'>"+"<td>"+"<input type = 'radio' name = 'chk' value = '"+this.orderCode+"' class = 'check'>"+"</td>"+"<td>"+this.orderCode+"</td>"+"<td>"+this.id+"</td>"+"<td>"+this.dietName+"</td>"+"<td>"+this.address+"</td>"+"<td>"+"<input type = 'text' class = 'transportNum"+this.orderCode+"' name = 'transportNum'>"+"</td>"+"<td>"+this.orderItemName+"</td>"+"</tr>";
+				$(data.list).each(function(){
+					if(orderItemCode == 5){
+						str += "<tr class = 'searchResult'>"+"<td>"+"<input type = 'radio' name = 'chk' value = '"+this.orderCode+"' class = 'check'>"+"</td>"+"<td>"+this.orderCode+"</td>"+"<td>"+this.id+"</td>"+"<td>"+this.dietName+"</td>"+"<td>"+this.address+"</td>"+"<td>"+"<input type = 'text' class = 'transportNum"+this.orderCode+"' name = 'transportNum'>"+"</td>"+"<td>"+this.orderItemName+"</td>"+"</tr>";
+					}
+					else{
+						str += "<tr class = 'searchResult'>"+"<td>"+"<input type = 'radio' name = 'chk' value = '"+this.orderCode+"' class = 'check'>"+"</td>"+"<td>"+this.orderCode+"</td>"+"<td>"+this.id+"</td>"+"<td>"+this.dietName+"</td>"+"<td>"+this.address+"</td>"+"<td>"+"<input type = 'text' class = 'transportNum"+this.orderCode+"' name = 'transportNum' value = '"+this.transportNum+"' readonly>"+"</td>"+"<td>"+this.orderItemName+"</td>"+"</tr>";
+					}
 				});
 				$(".searchTable").append(str);
+				printPaging(data.criteria);
 			});
+		}
+		function printPaging(criteria){
+			var str = "";
+					
+			if(criteria.prev){
+				str += "<li><a href=''"+(criteria.startPage-1)+"'>'" + "<<"+"</a></li>";
+			}
+			for(var i = criteria.startPage; i<=criteria.endPage; i++){
+				var strClass = criteria.page == i?"class = 'active'":"";
+				str += "<li "+strClass+"><a href ='"+i+"'>"+i + "</a></li>";
+			}
+			if(criteria.next){
+				str += "<li><a href=''"+(criteria.endPage+1)+"'>'" + ">>"+"</a></li>";
+			}
+			$(".pagination").html(str);
 		}
 	});
 	
@@ -91,14 +127,18 @@
 	   			</option>
 			</select>
 			<input type = "text" name = "keyword" placeholder = "검색어 입력란" id = "keyword">
-			<button id = "search">검색</button>
-			<button id = "all">전체목록</button>
+			<button id = "search" class = "btn btn-warning">검색</button>
+			<button id = "all" class = "btn btn-warning">전체목록</button>
 		</div>
 		<br><br><br><br>
 	
 		<div>
 		<button id = "button" class = "btn btn-primary">배송</button>
-			<table class = "searchTable table table-hover">
+		<div style = "float:right;">
+			<button id = "button1" class = "btn btn-danger">조리목록</button>
+			<button id = "button2" class = "btn btn-danger">배송목록 확인</button>       
+		</div>
+			<table class = "searchTable table table-hover">   
 				<tr>
 					<th>   </th>
 					<th>주문번호</th>
@@ -112,6 +152,8 @@
 						
 					</tr>
 			</table>
+			<ul class = "pagination">
+			</ul>
 			
 		</div>
 	
