@@ -6,7 +6,7 @@
 <head>
  <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%@include file="nutritionistNavi.jsp" %>
+
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src = "../../../dacham/resources/openAPIjs/radarchart.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../../../dacham/resources/bootstrap-filestyle.min.js"> </script>	
 <script>
 	$(document).ready(function(){     
-		          
+		$("#diet").addClass("w3-light-gray");
 		var v = 0;
 		openAPI();      
 		sideAll();
@@ -39,13 +39,13 @@
 		$(document.body).on("click",".nameClick",function(){
 			$('#body').show();    
 			event.preventDefault();
-						
+			$(this).parent().parent().hide();	            		
 			var count = parseInt(localStorage['count']);
 			console.log(count);
 			var sideDImg = $(this).attr('data-img');
 			
 			var sideDCode = $(this).attr('data-code');
-
+			
 			$.getJSON("nutriAjax/allNutri/"+sideDCode,function(data){
 				var subCount = count - 1;
 				
@@ -67,11 +67,18 @@
 			Refresh();
 			v = count;
 		});
+		
 		$(document.body).on('click','.sideDImg',function(){
 			var count = parseInt(localStorage['count']);
-			var id = $(this).parent().attr('data-id');
+			var id = $(this).attr('data-id');
 			
-			$(this).remove();
+			var sideDCode = $('.sideDCode').val();
+			console.log("데이터:"+sideDCode);
+			var prev = $(this).prev().val();
+			$('.nameClick[data-code = "'+prev+'"]').parent().parent().show();   
+			$(this).prev().remove();
+			$(this).remove();       
+			
 			localStorage.removeItem(id+'_img');
 			localStorage.removeItem(id+'_codes');
 			localStorage.removeItem(id+'_kcal');
@@ -133,7 +140,7 @@
 				var sideDCode = localStorage[i + "_codes"];
 				
 				$('<input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '>').appendTo('.material');    
-				$('<img src = "displayFile?fileName='+sideDImg+'" style= "width: 75px; height: 25px;">').addClass("sideDImg").appendTo('.material');
+				$('<img src = "displayFile?fileName='+sideDImg+'" style= "width: 75px; height: 25px;">').attr('data-id',i).addClass("sideDImg").appendTo('.material');
 
 			}
 			
@@ -177,7 +184,7 @@
 				});
 				$(".searchTable").append(str);
 			});
-		});
+		});   
 		
 		function sideAll(){
 			$(".searchResult").remove();
@@ -223,6 +230,7 @@
 </style>
 </head>
 <body>
+<%@include file="nutritionistNavi.jsp" %>
 	<div class = "container">
 		<div class = "div1">
 			<div class = "box2">
@@ -317,7 +325,7 @@
 				</div>
 				<div id = "spDietItem">
 					<input type = "radio" name = "spDietItem" value = "0">특별식단
-					<input type = "radio" name = "spDietItem" value = "1">일반식단
+					<input type = "radio" name = "spDietItem" value = "1" checked>일반식단
 				</div>
 				
 			</div>
