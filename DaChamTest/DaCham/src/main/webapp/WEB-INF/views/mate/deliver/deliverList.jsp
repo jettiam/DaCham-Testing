@@ -6,7 +6,7 @@
 <head>
  <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%@include file = "deliverNavi.jsp" %>
+
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <link rel="stylesheet"
@@ -14,10 +14,13 @@
 <script
    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
-	$(document).ready(function(){
-		var currentPage = 1;
-		var currentItemCode = "";
-		all(1,5);
+
+	$(document).ready(function(){	
+			$("#deliverList").addClass("w3-light-gray");
+			var currentPage = 1;
+			var currentItemCode = "";
+			all(1,5);
+		
 		$("#button").on("click",function(){
 			
 			var orderCode = $('input:radio[name="chk"]:checked').val();     
@@ -109,6 +112,7 @@
 </script>
 </head>
 <body>
+<%@include file = "deliverNavi.jsp" %>
 	<div class = "container">
 		<div>
 		 

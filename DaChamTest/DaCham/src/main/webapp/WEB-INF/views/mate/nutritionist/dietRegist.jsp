@@ -6,7 +6,7 @@
 <head>
  <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%@include file="nutritionistNavi.jsp" %>
+
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src = "../../../dacham/resources/openAPIjs/radarchart.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../../../dacham/resources/bootstrap-filestyle.min.js"> </script>	
 <script>
 	$(document).ready(function(){     
-		          
+		$("#diet").addClass("w3-light-gray");
 		var v = 0;
 		openAPI();      
 		sideAll();
@@ -230,6 +230,7 @@
 </style>
 </head>
 <body>
+<%@include file="nutritionistNavi.jsp" %>
 	<div class = "container">
 		<div class = "div1">
 			<div class = "box2">

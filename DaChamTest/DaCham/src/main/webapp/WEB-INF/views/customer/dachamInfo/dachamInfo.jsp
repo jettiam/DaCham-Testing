@@ -100,8 +100,8 @@ img {
 	<%@include file="../../clientNavi.jsp"%>
 	<div id="dachamInfoMainImg">
 		<!-- 다참인포 메인이미지 -->
-		<img id="infotop" src="../../../dacham/resources/customerImage/dinfotop.jpg">
-		<img id="infotop_m" src="../../../dacham/resources/customerImage/dinfotop_m.png">
+		<img id="infotop" src="resources/customerImage/dinfotop.jpg">
+		<img id="infotop_m" src="resources/customerImage/dinfotop_m.png">
 	</div>
 
 	<div id="infoWrap">
@@ -116,7 +116,7 @@ img {
 			<br>
 			<div id="infoExplain">
 				<div id="infoExplainImgBox">
-					<img src="../../../dacham/resources/customerImage/dinfob.jpg"
+					<img src="resources/customerImage/dinfob.jpg"
 						id="infoExplainImg">
 				</div>
 				<div id="infoExplainText">
