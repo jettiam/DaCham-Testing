@@ -31,6 +31,9 @@ private double carbohydrate;
 private double protein;
 private double fat;
 private double na;
+private double ca;
+private double k;
+
 
 public int getDietCode() {
 	return dietCode;
@@ -212,6 +215,17 @@ public String getOrderListStatus() {
 public void setOrderListStatus(String orderListStatus) {
 	this.orderListStatus = orderListStatus;
 }
-
+public double getCa() {
+	return ca;
+}
+public void setCa(double ca) {
+	this.ca = ca;
+}
+public double getK() {
+	return k;
+}
+public void setK(double k) {
+	this.k = k;
+}
 
 }
