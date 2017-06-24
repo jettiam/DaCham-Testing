@@ -18,9 +18,10 @@
 <script>
 	$(document).ready(function(){     
 		$("#diet").addClass("w3-light-gray");
+		var currentPage = 1;
 		var v = 0;
 		openAPI();      
-		sideAll();
+		sideAll(1);
 		$("#sideAll").on("click",function(){
 			sideAll();
 		});
@@ -186,15 +187,38 @@
 			});
 		});   
 		
-		function sideAll(){
+		$(".pagination").on("click","li a",function(){
+			event.preventDefault();
+			var replyPage = $(this).attr("href");
+			sideAll(replyPage);
+		});
+		
+		function sideAll(page){
 			$(".searchResult").remove();
-			$.getJSON("nutriAjax/sideAll",function(data){
+			$.getJSON("nutriAjax/sideAll/"+page,function(data){
+				currentPage = page;
 				var str = "";
-				$(data).each(function(){
+				$(data.list).each(function(){
 					str += "<tr class = 'searchResult'><td><a class = 'nameClick' data-img = '"+this.sideDImg+"' data-code = '"+this.sideDCode+"'>"+this.sideDName+"</a></td>"+"<td>"+this.foodGName+"</td>"+"<td>"+this.cookMName+"</td></tr>"
 				});
 				$(".searchTable").append(str);
+				printPaging(data.criteria);
 			});
+		}
+		function printPaging(criteria){
+			var str = "";
+					
+			if(criteria.prev){
+				str += "<li><a href=''"+(criteria.startPage-1)+"'>'" + "<<"+"</a></li>";
+			}
+			for(var i = criteria.startPage; i<=criteria.endPage; i++){
+				var strClass = criteria.page == i?"class = 'active'":"";
+				str += "<li "+strClass+"><a href ='"+i+"'>"+i + "</a></li>";
+			}
+			if(criteria.next){
+				str += "<li><a href=''"+(criteria.endPage+1)+"'>'" + ">>"+"</a></li>";
+			}
+			$(".pagination").html(str);
 		}
 	});
 	
@@ -269,6 +293,8 @@
 						</tr>
 						
 				</table>
+				<ul class = "pagination">
+				</ul>
 			</div>
 		</div>
 		<input type = "hidden" name = "kcal" id = "kcal">
