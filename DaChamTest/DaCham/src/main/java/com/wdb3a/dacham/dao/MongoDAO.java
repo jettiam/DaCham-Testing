@@ -19,7 +19,6 @@ public class MongoDAO {
 	}
 	/**
 	 * wizard(json형태), block(xml)형태를 받아와서 "testing5"테이블에 삽입하는 mongodb 쿼리.
-	 * 서비스와의 연동성은 차후에 생각..! 
 	 * @param wizard
 	 * @param block
 	 */

@@ -13,7 +13,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<%@include file="../admin/upmenu.jsp"%>
+
 <title>Insert title here</title>
 <script>
 	var object = new Object();
@@ -216,6 +216,7 @@
 
 </head>
 <body>
+<%@include file="../admin/upmenu.jsp"%>
 	<div class="container">
 	<form id='formid' method='post' action='foodOrder'>
 		<input type="hidden" name="orderCode">

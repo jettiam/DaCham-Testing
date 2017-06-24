@@ -219,7 +219,8 @@ public class NutritionController {
 	@RequestMapping(value="/wizardTestGet", method=RequestMethod.GET)
 	public String wizardTestGet(Model model){
 		List<Testing5> tt = mongoDAO.getTestingWizard();
-		String block = tt.get(0).getBlock();
+		int maxInx = tt.size()-1;
+		String block = tt.get(maxInx).getBlock();
 		model.addAttribute("block", block);
 		model.addAttribute("tt", tt);
 	return "mate/nutritionist/dietWizardMod";		
@@ -228,7 +229,8 @@ public class NutritionController {
 	@RequestMapping(value="/wizardTestGetWizard", method=RequestMethod.GET)
 	public @ResponseBody Object getWizardText(){
 		List<Testing5> tt = mongoDAO.getTestingWizard();
-		Object wizard = tt.get(0).getWizard();
+		int maxInx = tt.size()-1;
+		Object wizard = tt.get(maxInx).getWizard();
 		return wizard;
 	}
 }

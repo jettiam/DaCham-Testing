@@ -17,7 +17,6 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<%@include file="../admin/upmenu.jsp"%>
 <title>Insert title here</title>
 <style>
 #read {
@@ -42,6 +41,7 @@
 </style>
 </head>
 <body>
+<%@include file="../admin/upmenu.jsp"%>
 	<div class="container">
 	<div class="col-sm-6">  
 		<h2>공지사항</h2>

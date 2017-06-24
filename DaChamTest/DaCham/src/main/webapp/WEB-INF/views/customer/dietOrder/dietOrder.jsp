@@ -133,10 +133,10 @@ display:none;
 <a href=# class="disease btn btn-danger" id="wizardOrder">위자드로 주문하기</a>
 </div>
 <div id="dietOrderNav" class="block-center text-center">	
-		<div class="col-sm-6 text-center disease"><a href=#  data-code="1" id="sugarBlood"><img class="img-responsive dImg center-block" src="../../dacham/resources/customerImage/dang.png"><div class="dName">당뇨병</div></a></div>
-		<div class="col-sm-6 text-center disease"><a href=# id="renalFailure"><img class="img-responsive dImg center-block" src="../../dacham/resources/customerImage/sin.png"><div class="dName">신부전증</div></a></div>
-		<div class="col-sm-6 text-center disease"><a href=# id="heartFailure"><img class="img-responsive dImg center-block" src="../../dacham/resources/customerImage/sim.png"><div class="dName">심부전증</div></a></div>
-		<div class="col-sm-6 text-center disease"><a href=# id="hyperlipidemia"><img class="img-responsive dImg center-block" src="../../dacham/resources/customerImage/go.png"><div class="dName">고지혈증</div></a></div>	
+		<div class="col-sm-6 text-center disease"><a href=#  data-code="1" id="sugarBlood"><img class="img-responsive dImg center-block" src="resources/customerImage/dang.png"><div class="dName">당뇨병</div></a></div>
+		<div class="col-sm-6 text-center disease"><a href=# id="renalFailure"><img class="img-responsive dImg center-block" src="resources/customerImage/sin.png"><div class="dName">신부전증</div></a></div>
+		<div class="col-sm-6 text-center disease"><a href=# id="heartFailure"><img class="img-responsive dImg center-block" src="resources/customerImage/sim.png"><div class="dName">심부전증</div></a></div>
+		<div class="col-sm-6 text-center disease"><a href=# id="hyperlipidemia"><img class="img-responsive dImg center-block" src="resources/customerImage/go.png"><div class="dName">고지혈증</div></a></div>	
 	
 </div>
 <div id="dietList" class="container">	

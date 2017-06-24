@@ -5,7 +5,6 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%@include file = "cookerNavi.jsp" %>
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <link rel="stylesheet"
@@ -93,6 +92,7 @@
 	});
 </script>
 </head>
+<%@include file = "cookerNavi.jsp" %>
 <body>
 	<div>
 		

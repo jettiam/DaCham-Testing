@@ -16,10 +16,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>DaCham 식단상세보기</title>
-</head>
-
 <script>
-
 	function getDishList(a) {
 		a
 				.children()
@@ -61,33 +58,59 @@
 						});
 	}
 	
-
+	// div : panel id
+	// foodGCode : 각각 판넬에 들어가게 될 반찬들의 GCode(그룹코드)
 	function getDish(div, foodGCode){
 		var foodGCode= foodGCode;
 		$.getJSON("customerAjax/getfoodG/"+foodGCode, function(data){
 			for(var i=0; i<data.list.length; i++){
+				var kcal = data.list[i].kcal.toFixed(0);
+				var carbo = data.list[i].carbohydrate.toFixed(0);
+				var protein = data.list[i].protein.toFixed(0);
+				var fat = data.list[i].fat.toFixed(0);
+				var na = data.list[i].na.toFixed(0);
+				
+				if(i==0){
 				div.append(
-						//"<label>"
-							"<div class='column foodGSideD' data-sideDCode='"+data.list[i].sideDCode+"'>"
-							+"<input type='radio' name='"+foodGCode+"'' value='"+data.list[i].sideDCode+"' />"
+							"<div class='column foodGSideD backColor' data-sideDCode='"+data.list[i].sideDCode+"'>"							
 							+"<img class='thumbnail' src='http://placehold.it/350x200'>"
-							+"<h5>"+data.list[i].sideDName+"여기반찬이름<small>여기는 작은글씨</small></h5>"
-							+"<p>여기는p태그</p>"
+							+"<h5 style='text-align:center'>"+data.list[i].sideDName+"</h5>"
+							+"<table class='table' >"
+							+"<tr><th>칼로리</th><td>"+kcal+"</td></tr>"
+							+"<tr><th>탄수화물</th><td>"+carbo+"</td></tr>"
+							+"<tr><th>단백질</th><td>"+protein+"</td></tr>"
+							+"<tr><th>지방</th><td>"+fat+"</td></tr>"
+							+"<tr><th>나트륨</th><td>"+na+"</td></tr>"
+							+"</table>"							
 							+"<a class='sideButton button hollow tiny expanded'>선택 하기</a>"
+							+"<input type='radio' name='"+foodGCode+"' value='"+data.list[i].sideDCode+"' checked='true'/>"
 							+"</div>"
-						//+"</label>";
 						);
+				}else{
+					div.append(
+							"<div class='column foodGSideD' data-sideDCode='"+data.list[i].sideDCode+"'>"		
+							+"<img class='thumbnail' src='http://placehold.it/350x200'>"
+							+"<h5 style='text-align:center'>"+data.list[i].sideDName+"</h5>"
+							+"<table class='table' >"
+							+"<tr><th>칼로리</th><td>"+kcal+"</td></tr>"
+							+"<tr><th>탄수화물</th><td>"+carbo+"</td></tr>"
+							+"<tr><th>단백질</th><td>"+protein+"</td></tr>"
+							+"<tr><th>지방</th><td>"+fat+"</td></tr>"
+							+"<tr><th>나트륨</th><td>"+na+"</td></tr>"
+							+"</table>"							
+							+"<a class='sideButton button hollow tiny expanded'>선택 하기</a>"
+							+"<input type='radio' name='"+foodGCode+"' value='"+data.list[i].sideDCode+"' />"
+							+"</div>"
+						);
+				}				
 			}
 		});
 	}
 	
-	function selectRadio(){
-		if($(this).find("input[radio]")){
-			$(this).find("input[radio]").attr("checked", true);
-			alert("선택되었습니다");
-		};
-		$(this).find("input").attr("checked", true);
-		
+	function activeRadio(btn){		
+		alert("클릭되었습니다.");
+		var inputBtn = btn.find("input:radio");
+		inputBtn.attr("checked", true);
 	}
 
 	function getCheckedList(a) {
@@ -114,63 +137,14 @@
 
 	$(document).ready(function() {
 		$(document).on("click", ".sideButton", function(){
-			selectRadio();
+			activeRadio($(this).parent());
 		});
-
-		//	$(document).on("click", ".sideButton", selectRadio() );	
-		
-		getDishList($("#foodGList"));
-		
-		
 		getDish($("#panel1>div"), "01");
 		getDish($("#panel2>div"),"02");
-		/* $(document).on("click", "input:radio", function() {
-			getCheckedList($("#foodGList"));
-		});  */
-		//console.log("${list}.length");
-		/* $(".sideDList").on("click",function() {
-							$(".foodGSideD").remove();
-							var foodGCode = $(this).attr("data-foodGCode");
-							$.getJSON(
-											"customerAjax/getfoodG/"
-													+ foodGCode,
-											function(data) {
-										 	var a = data.list;
-												console.log(a); 
-												for (var i = 0; i < data.list.length; i++) {
-													console.log(data.list[i]);
-													$(
-															"#foodGList")
-															.append(
-																	"<label><div class='col-sm-8 foodGSideD' data-sideDCode='"+data.list[i].sideDCode+"'>"
-																			+ "<input type='radio' name='"+data.list[i].foodGCode+"' value='"+data.list[i].sideDCode+"' />"
-																			+ "<img src='http://via.placeholder.com/150x150'>"
-																			+ "<b>  "
-																			+ data.list[i].sideDCode
-																			+ "  </b>"
-																			//<img class='sideDImg' src='displayFile?fileName="	+ data.list[i].sideDImg//+ "'>"
-																			+ data.list[i].sideDName
-																			+ "  <table><tr><td>칼로리</td><td>탄수화물</td><td>단백질</td><td>지방</td><td>나트륨</td></tr><tr><td>"
-																			+ data.list[i].kcal
-																					.toFixed(0)
-																			+ "kcal</td><td>"
-																			+ data.list[i].carbohydrate
-																					.toFixed(0)
-																			+ "g</td><td>"
-																			+ data.list[i].protein
-																					.toFixed(0)
-																			+ "g</td><td>"
-																			+ data.list[i].fat
-																					.toFixed(0)
-																			+ "g</td><td>"
-																			+ data.list[i].na
-																					.toFixed(0)
-																			+ "mg</td></tr></table>"
-																			+ "</div></label>");
-												}
-
-											});
-						}); */
+		getDish($("#panel3>div"), "03");
+		getDish($("#panel4>div"),"04");
+		getDish($("#panel5>div"), "05");
+		getDish($("#panel6>div"),"06");
 
 		$("#dietAmount").keyup(function() {
 			var a = $("#dietAmount").val();
@@ -201,7 +175,7 @@
 		});
 
 		$("#goMyCart").on("click", function() {
-			getCheckedList($("#foodGList"));
+			getCheckedList($(".tabs-content"));
 			$("#setDietCode").val();
 			$("#setDietName").val($("#dietName").text());
 			$("#setPrice").val($("#dietPrice").text());
@@ -215,42 +189,13 @@
 <body>
 	<%@include file="../../clientNavi.jsp"%>
 	<!-- Start Top Bar -->
-	<div class="top-bar">
-		<div class="row">
-			<div class="top-bar-left">
-				<ul class="dropdown menu" data-dropdown-menu>
-					<li class="menu-text">Yeti Store</li>
-					<li class="has-submenu"><a href="#">One</a>
-						<ul class="submenu menu vertical" data-submenu>
-							<li><a href="#">One</a></li>
-							<li><a href="#">Two</a></li>
-							<li><a href="#">Three</a></li>
-						</ul></li>
-					<li><a href="#">Two</a></li>
-					<li><a href="#">Three</a></li>
-				</ul>
-			</div>
-			<div class="top-bar-right">
-				<ul class="menu">
-					<li><input type="search" placeholder="Search"></li>
-					<li><button type="button" class="button">Search</button></li>
-				</ul>
-			</div>
-		</div>
-	</div>
+	
 	<!-- End Top Bar -->
 	<br>
+	<br>
+	<br>
 	<!-- You can now combine a row and column if you just need a 12 column row -->
-	<div class="row columns">
-		<nav aria-label="You are here:" role="navigation">
-			<ul class="breadcrumbs">
-				<li><a href="#">Home</a></li>
-				<li><a href="#">Features</a></li>
-				<li class="disabled">Gene Splicing</li>
-				<li><span class="show-for-sr">Current: </span> Cloning</li>
-			</ul>
-		</nav>
-	</div>
+	
 
 	<div class="row">
 		<div class="medium-6 columns">
@@ -297,17 +242,19 @@
 
 			<!-- 장바구니, 주문하기 버튼 -->
 			<div class="large secondary expanded button-group">
-				<h1>버튼 연결 해야됩니다.</h1>
-				<a href="#" class="button large expanded">Cart</a> <a href="#"
-					class="button large expanded">Buy Now</a>
+				
+				<a href="#" class="button large expanded" id="goMyCart">Cart</a> <a href="#"
+					class="button large expanded" id="doOrder">Buy Now</a>
 			</div>
 		</div>
 	</div>
 
-	<div class="column row">
+	<!-- 반찬 선택창 -->
+	<div id="foodGList"class="column row">
 		<hr>
 		<ul class="tabs" data-tabs id="example-tabs">
-			<li class="tabs-title is-active"><a href="#panel1" aria-selected="true">밥</a></li>
+			<li class="tabs-title is-active"><a href="#panel1"
+				aria-selected="true">밥</a></li>
 			<li class="tabs-title"><a href="#panel2">국</a></li>
 			<li class="tabs-title"><a href="#panel3">메인 메뉴1</a></li>
 			<li class="tabs-title"><a href="#panel4">메인 메뉴2</a></li>
@@ -318,117 +265,44 @@
 			<!-- 1번판넬 밥 -->
 			<div class="tabs-panel is-active" id="panel1" data-foodGCode="01">
 				<h4>밥</h4>
-				<div class="row medium-up-3 large-up-5">
-					<div class="column">
-						<img class="thumbnail" src="http://placehold.it/350x200">
-						<h5>
-							Other Product <small>$22</small>
-						</h5>
-						<p>In condimentum facilisis porta. Sed nec diam eu diam mattis
-							viverra. Nulla fringilla, orci ac euismod semper, magna diam.</p>
-						<a href="#" class="button hollow tiny expanded">Buy Now</a>
-					</div>
-					<div class="column">
-						<img class="thumbnail" src="http://placehold.it/350x200">
-						<h5>
-							Other Product <small>$22</small>
-						</h5>
-						<p>In condimentum facilisis porta. Sed nec diam eu diam mattis
-							viverra. Nulla fringilla, orci ac euismod semper, magna diam.</p>
-						<a href="#" class="button hollow tiny expanded">Buy Now</a>
-					</div>
-					<div class="column">
-						<img class="thumbnail" src="http://placehold.it/350x200">
-						<h5>
-							Other Product <small>$22</small>
-						</h5>
-						<p>In condimentum facilisis porta. Sed nec diam eu diam mattis
-							viverra. Nulla fringilla, orci ac euismod semper, magna diam.</p>
-						<a href="#" class="button hollow tiny expanded">Buy Now</a>
-					</div>
-					<div class="column">
-						<img class="thumbnail" src="http://placehold.it/350x200">
-						<h5>
-							Other Product <small>$22</small>
-						</h5>
-						<p>In condimentum facilisis porta. Sed nec diam eu diam mattis
-							viverra. Nulla fringilla, orci ac euismod semper, magna diam.</p>
-						<a href="#" class="button hollow tiny expanded">Buy Now</a>
-					</div>
-					<div class="column">
-						<img class="thumbnail" src="http://placehold.it/350x200">
-						<h5>
-							Other Product <small>$22</small>
-						</h5>
-						<p>In condimentum facilisis porta. Sed nec diam eu diam mattis
-							viverra. Nulla fringilla, orci ac euismod semper, magna diam.</p>
-						<a href="#" class="button hollow tiny expanded">Buy Now</a>
-					</div>
-				</div>				
+				<div class="row medium-up-3 large-up-5"></div>
 			</div>
-			
+
 			<!-- 판넬2 국 -->
 			<div class="tabs-panel" id="panel2" data-foodGCode="02">
+				<h4>국</h4>
+				<div class="row medium-up-3 large-up-5"></div>
+			</div>
+
+			<!-- 판넬3 메인 메뉴1 -->
+			<div class="tabs-panel" id="panel3" data-foodGCode="03">
+				<h4>메인 메뉴1</h4>
+				<div class="row medium-up-3 large-up-5"></div>
+			</div>
+
+			<!-- 판넬4 메인 메뉴2 -->
+			<div class="tabs-panel" id="panel4" data-foodGCode="04">
+				<h4>메인 메뉴2</h4>
+				<div class="row medium-up-3 large-up-5"></div>
+			</div>
+
+			<!-- 판넬5 메인 메뉴3 -->
+			<div class="tabs-panel" id="panel5" data-foodGCode="05">
+				<h4>메인 메뉴3</h4>
+				<div class="row medium-up-3 large-up-5"></div>
+			</div>
+			
+			<!-- 판넬6 메인 메뉴4 -->
+			<div class="tabs-panel" id="panel6" data-foodGCode="06">
+				<h4>메인 메뉴4</h4>
 				<div class="row medium-up-3 large-up-5">
-					<div class="column">
-						<img class="thumbnail" src="http://placehold.it/350x200">
-						<h5>
-							Other Product <small>$22</small>
-						</h5>
-						<p>In condimentum facilisis porta. Sed nec diam eu diam mattis
-							viverra. Nulla fringilla, orci ac euismod semper, magna diam.</p>
-						<a href="#" class="button hollow tiny expanded">Buy Now</a>
-					</div>
-					<div class="column">
-						<img class="thumbnail" src="http://placehold.it/350x200">
-						<h5>
-							Other Product <small>$22</small>
-						</h5>
-						<p>In condimentum facilisis porta. Sed nec diam eu diam mattis
-							viverra. Nulla fringilla, orci ac euismod semper, magna diam.</p>
-						<a href="#" class="button hollow tiny expanded">Buy Now</a>
-					</div>
-					<div class="column">
-						<img class="thumbnail" src="http://placehold.it/350x200">
-						<h5>
-							Other Product <small>$22</small>
-						</h5>
-						<p>In condimentum facilisis porta. Sed nec diam eu diam mattis
-							viverra. Nulla fringilla, orci ac euismod semper, magna diam.</p>
-						<a href="#" class="button hollow tiny expanded">Buy Now</a>
-					</div>
-					<div class="column">
-						<img class="thumbnail" src="http://placehold.it/350x200">
-						<h5>
-							Other Product <small>$22</small>
-						</h5>
-						<p>In condimentum facilisis porta. Sed nec diam eu diam mattis
-							viverra. Nulla fringilla, orci ac euismod semper, magna diam.</p>
-						<a href="#" class="button hollow tiny expanded">Buy Now</a>
-					</div>
-					<div class="column">
-						<img class="thumbnail" src="http://placehold.it/350x200">
-						<h5>
-							Other Product <small>$22</small>
-						</h5>
-						<p>In condimentum facilisis porta. Sed nec diam eu diam mattis
-							viverra. Nulla fringilla, orci ac euismod semper, magna diam.</p>
-						<a href="#" class="button hollow tiny expanded">Buy Now</a>
-					</div>
-				</div>
+				</div>				
 			</div>
 		</div>
 	</div>
 
 	<div class="row column">
 		<hr>
-		<ul class="menu">
-			<li>Yeti Store</li>
-			<li><a href="#">Home</a></li>
-			<li><a href="#">About</a></li>
-			<li><a href="#">Contact</a></li>
-			<li class="float-right">Copyright 2016</li>
-		</ul>
 	</div>
 
 
@@ -442,7 +316,7 @@
 
 
 
-	<div class="detailOrderWrap">
+<%-- 	<div class="detailOrderWrap">
 		<div class="row">
 			<div class="col-sm-7">
 				<img src="http://via.placeholder.com/150x150">
@@ -511,8 +385,7 @@
 	<div>
 		<h1>삭제할 공간입니다.</h1>
 		<div id="testing"></div>
-	</div>
-
+	</div> --%>
 
 
 	<form id="orderForm" method="get">
