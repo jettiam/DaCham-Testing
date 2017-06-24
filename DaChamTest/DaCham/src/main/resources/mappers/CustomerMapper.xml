@@ -92,4 +92,21 @@ from (select diseaseCode
 where s.diseaseCode = d.diseaseCode limit 1;
 </select>
 
+<!-- 마이페이지 차트의 내 영양정보 불러오기 용 -->
+<select id="myNutri" resultType="Customer">
+select sum(kcal)kcal, sum(carbohydrate) carbohydrate,sum(protein) protein, sum(fat) fat,sum(na) na,sum(k) k, sum(ca) ca
+from
+(select a.sideDcode,sum(f.kcal*a.cu) kcal, sum(f.carbohydrate*a.cu) carbohydrate, sum(f.protein*a.cu) protein, sum(f.fat*cu) fat, sum(f.na*cu) na, sum(f.k*cu) k,
+sum(f.ca*cu) ca
+      from foodmaterial f,(select s.sideDCode, s.sideDImg,s.sideDName,i.foodMAmount/100 as cu,i.foodMCode
+      from sidedish s,sidedinfo i where s.sideDCode=i.sideDCode) a
+      where f.foodMCode=a.foodMCode
+      group by a.sideDcode) n,
+      (select op.sideDcode
+from orderlist ol, orderoptions op
+where ol.id=#{id} and ol.ordercode=op.ordercode) u
+where u.sideDcode=n.sideDcode;
+</select>
+
+
   </mapper>

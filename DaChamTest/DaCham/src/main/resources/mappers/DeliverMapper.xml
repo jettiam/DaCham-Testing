@@ -52,12 +52,21 @@
   		where orderCode = #{orderCode}
   	</update>
   	<select id = "all" resultType = "OrderList">
-  		select a.orderCode, b.id, c.dietImg, c.dietName, b.address, a.orderItemCode,d.orderItemName
+  		select a.orderCode, b.id, c.dietImg, c.dietName, b.address, a.orderItemCode,d.orderItemName,  a.transportNum
 		from orderlist a join member b join diet c join orderitem d
 		where a.id = b.id
 		and a.dietCode = c.dietCode
 		and a.orderItemCode = d.orderItemCode
-		and a.orderItemCode in(5,7)
-		
+		and a.orderItemCode = #{orderItemCode}
+		order by a.orderCode desc
+		limit #{criteria.startRecord}, #{criteria.recordsPerPage}
+  	</select>
+  	<select id = "allCount" resultType = "Integer">
+  		select count(a.orderCode)
+  		from orderlist a join member b join diet c join orderitem d
+		where a.id = b.id
+		and a.dietCode = c.dietCode
+		and a.orderItemCode = d.orderItemCode
+		and a.orderItemCode = #{orderItemCode}
   	</select>
 </mapper>
