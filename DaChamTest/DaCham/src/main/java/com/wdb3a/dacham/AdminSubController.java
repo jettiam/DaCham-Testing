@@ -40,13 +40,11 @@ import com.wdb3a.dacham.service.AdminMainService;
 @RestController
 @RequestMapping(value="adminSub")
 public class AdminSubController {
-	@Autowired
-	private JavaMailSenderImpl javaMailSenderImpl;
 	@Inject
 	private AdminMainService service; 
 	
 
-   @RequestMapping(value="/foodOrder",method=RequestMethod.POST)
+   /*@RequestMapping(value="/foodOrder",method=RequestMethod.POST)
 	public ResponseEntity<String> getfoodOrder(@RequestBody String foodMArray) throws Exception{
 	   ResponseEntity<String> entity = null;
 	   JSONObject jsonobj = (JSONObject) JSONValue.parse(foodMArray);
@@ -75,13 +73,13 @@ public class AdminSubController {
 	  	System.out.println("돌아감2");
 	  	
 	  	
-	  	/*if(a){
+	  	if(a){
 	  		entity = new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
 	  	}else{
 	  		entity = new ResponseEntity<String>("실패",HttpStatus.BAD_REQUEST);
-	  	}*/
+	  	}
 		return entity;
-	}
+	}*/
    //환불
    @RequestMapping(value = "/orderList1",method = RequestMethod.PUT)
 	public ResponseEntity<String> transportNum(@RequestBody OrderList order){

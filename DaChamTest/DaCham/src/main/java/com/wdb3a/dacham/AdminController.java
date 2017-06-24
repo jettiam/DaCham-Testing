@@ -10,14 +10,19 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -52,7 +57,43 @@ import com.wdb3a.dacham.service.AdminMainService;
 public class AdminController {
 	@Inject
 	private AdminMainService service; 
-	
+	 @Autowired
+	  private JavaMailSender mailSender;
+	//자바 메일 테스팅
+	// mailForm
+	  @RequestMapping(value = "/mailForm")
+	  public String mailForm() {
+	   
+	    return "mate/admin/mailForm";
+	  }  
+	 
+	  // mailSending 코드
+	  @RequestMapping(value = "/mail/mailSending")
+	  public String mailSending(HttpServletRequest request) {
+	    
+	    String setfrom = "dudtka4971@gmail.com";         
+	    String tomail  = request.getParameter("tomail");     // 받는 사람 이메일
+	    String title   = request.getParameter("title");      // 제목
+	    String content = request.getParameter("content");    // 내용
+	   System.out.println(title);
+	    try {
+	      MimeMessage message = mailSender.createMimeMessage();
+	      MimeMessageHelper messageHelper 
+	                        = new MimeMessageHelper(message, true, "UTF-8");
+	 
+	      messageHelper.setFrom(setfrom);  // 보내는사람 생략하거나 하면 정상작동을 안함
+	      messageHelper.setTo(tomail);     // 받는사람 이메일
+	      messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
+	      messageHelper.setText(content);  // 메일 내용
+	     
+	      mailSender.send(message);
+	    } catch(Exception e){
+	      System.out.println(e);
+	    }
+	   
+	    return "redirect:/mailForm";  
+	  }
+	 
 	
 	@RequestMapping(value="/adminMain", method=RequestMethod.GET)
 	public String getadminMain(Model model, OrderList orderList) throws Exception{
