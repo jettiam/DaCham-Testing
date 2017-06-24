@@ -47,8 +47,8 @@
 		where foodMName = #{foodMName}
 	</select>
 	<insert id = "createDiet">
-		insert into diet(diseaseCode, wizardCode, dietName, price, dietImg, spDietItem)
-		values (#{diseaseCode},#{wizardCode},#{dietName},#{price},#{dietImg},#{spDietItem})
+		insert into diet(diseaseCode, dietName, price, dietImg, spDietItem)
+		values (#{diseaseCode},#{dietName},#{price},#{dietImg},#{spDietItem})
 	</insert>
 	<select id="choiceDisease" resultType = "com.wdb3a.dacham.bean.Nutritionist">
 		select * from disease

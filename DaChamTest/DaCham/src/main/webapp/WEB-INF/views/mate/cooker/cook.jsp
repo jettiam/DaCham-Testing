@@ -30,11 +30,10 @@
 			
 			
 			var length = $(".cook3>tbody>tr").length-1;
-			alert("+length"+length);
+			
 			
 			for(var i=0; i<length; i++){
-				var orderCode = $(".cook3 tbody tr:eq("+(i+1)+")").attr('data-code');
-				alert(orderCode);
+				var orderCode = $(".cook3 tbody tr:eq("+(i+1)+")").attr('data-code');				
 				$.ajax({
 					type : "put",	
 					url : "cookAjax/"+ orderCode,
@@ -47,7 +46,7 @@
 			
 						if(result == "SUCCESS"){
 							alert("완료되었습니다.");
-							window.location.href = "cookingList";
+							window.location.href = "cookList";
 						}
 					}
 				});

@@ -78,4 +78,9 @@ public List<Customer> orderOption(int orderCode) throws Exception {
 	return sqlSession.selectList(namespace+".orderOption", orderCode);
 }
 
+@Override
+public int getOneDCode(HashMap rInfo) throws Exception {
+	return sqlSession.selectOne(namespace+".getOneDCode", rInfo);
+}
+
 }

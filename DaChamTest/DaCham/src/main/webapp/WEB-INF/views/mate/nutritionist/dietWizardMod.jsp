@@ -114,12 +114,19 @@ svg {
 	<span id="blockWizard">
 		<div id="blocklyDiv"
 			style="display: inline-block; height: 1000px; width: 1200px;"></div>
-		<xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox"
+	  <xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox"
 			style="display: none"> <category name="1. 질문지 만들기"
-			colour="#89934a"> <block type="makeQSheet"></block> </category> <category
-			name="2. 질문 입력" colour="#f57e24"> <block type="inputQ"></block>
+			colour="#89934a"> <block type="makeQSheet"></block> </category>
+			 <category name="2. 질문 입력" colour="#f57e24"> <block type="inputQ"></block>
 		</category> <category name="3. 답안입력, 연결" colour="#f8b125"> <block
-			type="answerLink"></block> </category> </xml>
+			type="answerLink"></block></category>
+			<category name="4. 결과지와 연결하기"><block type="resultsheet"></block></category>
+			<category name="5. 결과지 블록모음">
+			<block type="d1"></block>
+			<block type="d2"></block>
+			<block type="d3"></block>
+			</category></xml>
+			
 	</span>
 
 	<script>
