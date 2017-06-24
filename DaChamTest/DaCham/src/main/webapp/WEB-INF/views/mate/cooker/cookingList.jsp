@@ -15,6 +15,7 @@
    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
 	$(document).ready(function(){
+		$("#cookList").addClass("w3-light-gray");
 		$("#button").on("click",function(){
 			window.location.href = "cook";
 		});

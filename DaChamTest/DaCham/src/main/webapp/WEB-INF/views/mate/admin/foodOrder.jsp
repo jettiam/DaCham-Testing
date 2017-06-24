@@ -202,6 +202,9 @@
 									$(".tables").append(str); 
 								
 							} 
+							
+								$("#foodStock").addClass("w3-light-gray");
+							
 						});
 	</script>
 </body>

@@ -16,6 +16,7 @@
    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
 	$(document).ready(function(){
+		$("#counselorList").addClass("w3-light-gray");
 		$(".counselTitle a").on("click",function(){
 			var counselCode = $(this).attr('data-code');
 			$.getJSON("counselAjax/views/"+counselCode,function(data){           

@@ -24,6 +24,7 @@
 </style>
 <script>
 	$(document).ready(function(){
+		$("#cook").addClass("w3-light-gray");
 		$(document.body).on("click","#finishBtn",function(){
 			
 			
@@ -94,7 +95,7 @@
 </head>
 <%@include file = "cookerNavi.jsp" %>
 <body>
-	<div>
+	<div class="">
 		
 		<div style="float: left; width: 33%;"> 
 			<h1>조리 대기</h1>     

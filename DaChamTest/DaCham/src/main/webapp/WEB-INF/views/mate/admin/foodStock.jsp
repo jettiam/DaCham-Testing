@@ -28,7 +28,8 @@ function all(){
 	});  
 } 
 	$(document).ready(function() {
-		all();''
+		$("#foodStock").addClass("w3-light-gray");
+		all();
 		$("#foodOrder").on("click", function() {
 			window.location.href = "foodOrder"
 		});

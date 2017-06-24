@@ -19,6 +19,11 @@
  .box2 {
   display:inline-block;  margin-left:20px;}  
 </style>
+<script>
+$(function(){
+	$("#detail").addClass("w3-light-gray");
+});
+</script>
 </head>
 <body>
 <%@include file = "counselorNavi.jsp" %>

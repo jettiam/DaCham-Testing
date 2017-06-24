@@ -14,7 +14,9 @@
 <script
    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
-	$(document).ready(function(){
+	$(document).ready(function(){	
+			$("#deliverList").addClass("w3-light-gray");
+		
 		all();
 		$("#button").on("click",function(){
 			

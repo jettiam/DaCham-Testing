@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="shortcut icon" href="resources/favicon/N.ico">
-<%@include file="nutritionistNavi.jsp" %>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -75,6 +75,7 @@
 </style>
 </head>
 <body>
+<%@include file="nutritionistNavi.jsp" %>
   <div class = "container">
    <div class = "box1">
       <div>
@@ -107,7 +108,7 @@
       </div>
    </div>
    <div class = "box2">
-   	
+   	  <h2>고객 식단 요청 리스트</h2>
       <table class = "orderTable table table-hover">      
          <tr>
             <th>번호&nbsp;&nbsp;&nbsp;</th>

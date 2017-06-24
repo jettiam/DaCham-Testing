@@ -8,7 +8,6 @@
 <head>
  <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%@include file="nutritionistNavi.jsp" %>
 <title>Insert title here</title>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src = "../../../dacham/resources/openAPIjs/radarchart.js"></script>
@@ -69,6 +68,7 @@
 </style>
 </head>
 <body>
+<%@include file="nutritionistNavi.jsp" %>
 	<div class = "container">
 		<div class = "div1">
 		
@@ -173,6 +173,7 @@
 	<script>
 
 		$(document).ready(function(){
+			$("#side").addClass("w3-light-gray");
 			openAPI();
 			
 			var v = 0;

@@ -23,6 +23,7 @@
 </style>
 <script>
 	$(document).ready(function(){
+		$("#deliverFood").addClass("w3-light-gray");
 		$("#regist").on("click",function(){
 			$("#foodStockForm").attr("method","post");
 			$("#foodStockForm").attr("action","deliverRegist");

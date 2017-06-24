@@ -34,6 +34,7 @@
 	} 
 	 
 	$(document).ready(function() {
+		$("#orderList").addClass("w3-light-gray");
 		var formObj = $("form[role='form']");
 		var checkArr = [];
 		$("#allCheck").click(function() {
