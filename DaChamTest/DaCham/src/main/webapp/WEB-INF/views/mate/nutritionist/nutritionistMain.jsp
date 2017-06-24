@@ -107,7 +107,7 @@
       </div>
    </div>
    <div class = "box2">
-   	
+   	  <h2>고객 식단 요청 리스트</h2>
       <table class = "orderTable table table-hover">      
          <tr>
             <th>번호&nbsp;&nbsp;&nbsp;</th>

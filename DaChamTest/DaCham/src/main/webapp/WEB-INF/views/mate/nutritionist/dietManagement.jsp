@@ -93,7 +93,7 @@
       </table>
       <nav>
          <ul class = "diseaseNation">
-            <li><a data-name = "당뇨병">당뇨병</a></li>
+            <li><a data-name = "당뇨">당뇨</a></li>
             <li><a data-name = "고지혈증">고지혈증</a></li>
             <li><a data-name = "심부전증">심부전증</a></li>
             <li><a data-name = "신부전증">신부전증</a></li>
