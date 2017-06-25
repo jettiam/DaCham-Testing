@@ -45,7 +45,7 @@
 		and orderCode=#{orderCode};
 	</select>
 
-
+<!--식재료 재고량  -->
 	<select id="foodStockList" resultType="FoodMInven">
 		select foodMICode, foodMCode, foodMName, inAmount, inDate, outAmount,
 		uint,
@@ -77,7 +77,7 @@
 		orderCode=#{orderCode}
 		and orderItemCode = 2
 	</update>
-
+<!--특정 식단에 대한 식재료 검색  -->
 	<select id="foodMAmountRead" resultType="FoodMAmountRead">
 		select
 		b.foodMAmount,b.foodMCode,f.foodMName, f.price, f.unit, a.orderCode
@@ -89,6 +89,7 @@
 		where a.sideDCode=b.sideDCode and
 		b.foodMCode=f.foodMCode;
 	</select>
+	
 	<select id="chartList" resultType="ChartList"> <!--특정식단에 대한 이름, 판매량  -->
 		select diet.dietName, sum(orderList.dietAmount) as sellAmount
 		from orderlist, diet

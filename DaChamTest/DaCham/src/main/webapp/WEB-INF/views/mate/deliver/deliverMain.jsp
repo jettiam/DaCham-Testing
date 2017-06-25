@@ -82,7 +82,7 @@
 	         <button id = "search" class = "btn btn-warning"> 검색 </button>
 	      </div>
 	      <div>
-	         <table border ="1">
+	         <table class = "table table-hover">
 	            <tr>
 	               <th>번호</th>
 	               <th>고객id</th>

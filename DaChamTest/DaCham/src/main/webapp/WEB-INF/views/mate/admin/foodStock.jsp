@@ -33,6 +33,28 @@ function all(){
 		$("#foodOrder").on("click", function() {
 			window.location.href = "foodOrder"
 		});
+		$("#search").on("click",function(){
+			$(".foodStock").remove();
+			var str=""; 
+			var searchType = $(".searchType").val();
+			var keyword = $("#keyword").val();
+		)}
+		/* $("#search").on("click",function(){
+			$(".orderListTable").remove();
+			
+			var str=""; 
+			var searchType = $(".searchType").val();
+			var keyword = $("#keyword").val();
+			$.getJSON("adminSub/"+searchType+"/"+keyword,function(data){
+			for(var i=0; i<data.length; i++){
+				str += "<tr class='orderListTable'>"+"<td>"+data[i].orderCode+"</td>"+"<td>"+data[i].id+"</td>"+"<td>"+"<a data-src='"+data[i].orderCode+"' class='orderCode'>"+data[i].dietName+"</a> </td>"+"<td>"+data[i].orderDate+"</td>"+"<td>"+data[i].price+"</td>"+"<td>"+data[i].orderItemName+"</td>"+"<td>"+data[i].transportNum+"</td> </tr>"
+				}
+			$(".tables").append(str); 
+			});
+		});
+		$("#searchAll").on("click", function(){
+			all(1); 
+		}); */
 	})
 </script>
 </head>

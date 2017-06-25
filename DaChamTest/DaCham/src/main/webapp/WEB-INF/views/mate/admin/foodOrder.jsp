@@ -36,7 +36,7 @@
 	</div>
 	</div>
 	<div>
-		<table id="foodMTable" width="600" class="foodMTable table table-condensed">
+		<table id="foodMTable" class="foodMTable table table-condensed"> 
 			<tr>
 				<th>코드번호</th>
 				<th>식재료명</th>
@@ -117,7 +117,7 @@
 
 					var foodMname = $("#foodMName"+i).val();
 					var price = $("#price"+i).val();
-					var foodMAmount = $("#foodMAmount"+i).val();
+					var foodMAmount = Number($("#foodMAmount"+i).val())*0.001;
 					var unit = $("#unit"+i).val();
 					 var jsonData ={					
 							"foodMname":foodMname,
@@ -230,10 +230,10 @@
 										+"</td>"+"<td>"
 										+$("#price"+i).val()
 										+"</td>"+"<td>"
-										+$("#foodMAmount"+i).val()
+										+Number($("#foodMAmount"+i).val())*0.001
 										+"</td>"+"<td>"
 										+$("#unit"+i).val()
-										+"</td>" 
+										+"</td> </tr>" 
 									} 
 									console.log(str);
 									$(".tables").append(str); 
