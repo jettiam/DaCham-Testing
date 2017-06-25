@@ -398,6 +398,6 @@
 		}
 	}
 	</script>
-	<script src = "../../../dacham/resources/openAPIjs/APIQuery.js"></script>
+	<script src = "resources/openAPIjs/APIQuery.js"></script>
 </body>
 </html>

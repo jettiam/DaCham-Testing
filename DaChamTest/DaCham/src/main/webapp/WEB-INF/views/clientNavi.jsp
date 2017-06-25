@@ -28,7 +28,9 @@
 	margin-top:23px;
 	margin-bottom:23px;
 }
-
+.logoBox{
+	margin-bottom:15px;
+}
 
 #sideBox {
 	float: right;
@@ -62,7 +64,7 @@
 
 </head>
 <body>
-	<div class="row">
+	<div class="w3-row logoBox">
 		<!-- 로고+고객정보 -->
 		<div class="col-sm-2 hidden-xs" id="logo" >
 			<!-- 로고박스 -->

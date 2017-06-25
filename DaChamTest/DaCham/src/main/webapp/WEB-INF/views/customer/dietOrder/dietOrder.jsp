@@ -53,73 +53,94 @@ display:none;
 		$("#sugarBlood").on("click",function(){
 			$("#dietOrderNav").toggle("slow");
 			$("#dietList").toggle("slow");			
-			
 			var diseaseCode = $(this).attr("data-code");
-			$.getJSON("customerAjax/dietList/"+diseaseCode,function(data){
-				var a = data.list;
-				console.log(a);
-				console.log(data.list.length);
-				console.log(data.list[0].dietName);
-				var dietCode=0;
-				var trCount=0;
-				var tdCount=0;
-				var divCount=0;
-				for(var i = 0; i<data.list.length; i++){					
-					if(dietCode == 0){
-						$("#dietList").append("<div class='dietListTab col-sm-6 d"+divCount+"'></div>");						
-						dietCode = data.list[i].dietCode;
-						console.log(dietCode+" 테이블 염");
-						$("#dietList>.d"+divCount).append("<table class='dietTable"+dietCode+" table'><tr class='dietTr"+trCount+"'>");
-						console.log("tr카운트 염" + trCount);						
-					}					
-					if(dietCode==data.list[i].dietCode){
-						if(tdCount<2){
-							console.log("티디카운트 " +tdCount);
-							$(".dietTable"+dietCode+">tbody>.dietTr"+trCount).append("<td><img class='img-responsive' src='displayFile?fileName="+data.list[i].sideDImg+"' alt='이미지'></td>");
-							console.log("이미지찍음 " +i);	
-							tdCount++;
-							
-						}else{
-							console.log("tr카운트 닫음" + trCount);
-							trCount++; 
-							$(".dietTable"+dietCode).append("</tr><tr class='dietTr"+trCount+"'>");
-							console.log("tr카운트 염" + trCount);
-							$(".dietTable"+dietCode+">tbody>.dietTr"+trCount).append("<td><img class='img-responsive' src='displayFile?fileName="+data.list[i].sideDImg+"' alt='이미지'></td>");
-							console.log("이미지찍음 " +i);							
-							tdCount = 1;
-						}						
-						
-					}else{
-						$(".dietTable"+dietCode).append("</tr>");
-						console.log("tr카운트 닫음" + trCount);
-						$("#dietList>.d"+divCount).append("</table>");						
-						console.log(dietCode+"테이블 닫기");						
-						$("#dietList>.d"+divCount).append("<a class='dietCode btn btn-warning' href=# data-dietcode='"+dietCode+"'>"+data.list[i-1].dietName+"</a>");					
-						divCount++;
-						trCount=0;						
-						dietCode = data.list[i].dietCode;
-						$("#dietList").append("<div class='dietListTab col-sm-6 d"+divCount+"'></div>");
-						$("#dietList>.d"+divCount).append("<table class='dietTable"+dietCode+" table'><tr class='dietTr"+trCount+"'>");
-						console.log(dietCode+"테이블 염");
-						console.log("tr카운트 염" + trCount);
-						$(".dietTable"+dietCode+">tbody>.dietTr"+trCount).append("<td><img class='img-responsive' src='displayFile?fileName="+data.list[i].sideDImg+"' alt='이미지'></td>");
-						//$(".dietTable"+dietCode+">tbody>.dietTr"+trCount).append("<td><img src='displayFile?fileName="+data.list[i].sideDImg+" alt='이미지'></td>");
-						tdCount=1;
-						console.log("이미지찍음 " +i);	
-					}
-					
-				}
-				$("#dietList>.d"+divCount).append("<a class='dietCode btn btn-warning' href=# data-dietcode='"+dietCode+"'>"+data.list[i-1].dietName+"</a>");
-				divCount++;
-			});
-			
-		});		
+			dietListCall(diseaseCode);
+		});	
+		$("#renalFailure").on("click",function(){
+			$("#dietOrderNav").toggle("slow");
+			$("#dietList").toggle("slow");			
+			var diseaseCode = $(this).attr("data-code");
+			dietListCall(diseaseCode);
+		});	
+		$("#heartFailure").on("click",function(){
+			$("#dietOrderNav").toggle("slow");
+			$("#dietList").toggle("slow");			
+			var diseaseCode = $(this).attr("data-code");
+			dietListCall(diseaseCode);
+		});	
+		$("#hyperlipidemia").on("click",function(){
+			$("#dietOrderNav").toggle("slow");
+			$("#dietList").toggle("slow");			
+			var diseaseCode = $(this).attr("data-code");
+			dietListCall(diseaseCode);
+		});	
+		
 		$("#dietList").on("click",'.dietCode',function(){
 			console.log("클릭됨");
 			var dietCode = $(this).attr("data-dietcode");
 			console.log(dietCode);
 			window.location.href="detailOrder?dietCode="+dietCode;
 		});
+		
+		function dietListCall(diseaseCode){
+		$.getJSON("customerAjax/dietList/"+diseaseCode,function(data){
+			var a = data.list;
+			console.log(a);
+			console.log(data.list.length);
+			console.log(data.list[0].dietName);
+			var dietCode=0;
+			var trCount=0;
+			var tdCount=0;
+			var divCount=0;
+			for(var i = 0; i<data.list.length; i++){					
+				if(dietCode == 0){
+					$("#dietList").append("<div class='dietListTab col-sm-6 d"+divCount+"'></div>");						
+					dietCode = data.list[i].dietCode;
+					console.log(dietCode+" 테이블 염");
+					$("#dietList>.d"+divCount).append("<table class='dietTable"+dietCode+" table'><tr class='dietTr"+trCount+"'>");
+					console.log("tr카운트 염" + trCount);						
+				}					
+				if(dietCode==data.list[i].dietCode){
+					if(tdCount<2){
+						console.log("티디카운트 " +tdCount);
+						$(".dietTable"+dietCode+">tbody>.dietTr"+trCount).append("<td><img class='img-responsive' src='displayFile?fileName="+data.list[i].sideDImg+"' alt='이미지'></td>");
+						console.log("이미지찍음 " +i);	
+						tdCount++;
+						
+					}else{
+						console.log("tr카운트 닫음" + trCount);
+						trCount++; 
+						$(".dietTable"+dietCode).append("</tr><tr class='dietTr"+trCount+"'>");
+						console.log("tr카운트 염" + trCount);
+						$(".dietTable"+dietCode+">tbody>.dietTr"+trCount).append("<td><img class='img-responsive' src='displayFile?fileName="+data.list[i].sideDImg+"' alt='이미지'></td>");
+						console.log("이미지찍음 " +i);							
+						tdCount = 1;
+					}						
+					
+				}else{
+					$(".dietTable"+dietCode).append("</tr>");
+					console.log("tr카운트 닫음" + trCount);
+					$("#dietList>.d"+divCount).append("</table>");						
+					console.log(dietCode+"테이블 닫기");						
+					$("#dietList>.d"+divCount).append("<a class='dietCode btn btn-warning' href=# data-dietcode='"+dietCode+"'>"+data.list[i-1].dietName+"</a>");					
+					divCount++;
+					trCount=0;						
+					dietCode = data.list[i].dietCode;
+					$("#dietList").append("<div class='dietListTab col-sm-6 d"+divCount+"'></div>");
+					$("#dietList>.d"+divCount).append("<table class='dietTable"+dietCode+" table'><tr class='dietTr"+trCount+"'>");
+					console.log(dietCode+"테이블 염");
+					console.log("tr카운트 염" + trCount);
+					$(".dietTable"+dietCode+">tbody>.dietTr"+trCount).append("<td><img class='img-responsive' src='displayFile?fileName="+data.list[i].sideDImg+"' alt='이미지'></td>");
+					//$(".dietTable"+dietCode+">tbody>.dietTr"+trCount).append("<td><img src='displayFile?fileName="+data.list[i].sideDImg+" alt='이미지'></td>");
+					tdCount=1;
+					console.log("이미지찍음 " +i);	
+				}
+				
+			}
+			$("#dietList>.d"+divCount).append("<a class='dietCode btn btn-warning' href=# data-dietcode='"+dietCode+"'>"+data.list[i-1].dietName+"</a>");
+			divCount++;
+		});
+		}
 	});
 </script>
 <title>DaCham 식단주문</title>
@@ -129,15 +150,14 @@ display:none;
 <div class="container">
 <div class="row">
 <div class="wizardSelectWrap text-center">
-<div class="wizardExplain block-center ">위자드에 대한 설명 적기</div>
+<div class="wizardExplain block-center ">당신의 질환 상태에 맞는 식단을 추천받을 수 있습니다.</div>
 <a href=# class="disease btn btn-danger" id="wizardOrder">위자드로 주문하기</a>
 </div>
 <div id="dietOrderNav" class="block-center text-center">	
 		<div class="col-sm-6 text-center disease"><a href=#  data-code="1" id="sugarBlood"><img class="img-responsive dImg center-block" src="resources/customerImage/dang.png"><div class="dName">당뇨병</div></a></div>
-		<div class="col-sm-6 text-center disease"><a href=# id="renalFailure"><img class="img-responsive dImg center-block" src="resources/customerImage/sin.png"><div class="dName">신부전증</div></a></div>
-		<div class="col-sm-6 text-center disease"><a href=# id="heartFailure"><img class="img-responsive dImg center-block" src="resources/customerImage/sim.png"><div class="dName">심부전증</div></a></div>
-		<div class="col-sm-6 text-center disease"><a href=# id="hyperlipidemia"><img class="img-responsive dImg center-block" src="resources/customerImage/go.png"><div class="dName">고지혈증</div></a></div>	
-	
+		<div class="col-sm-6 text-center disease"><a href=# data-code="4" id="renalFailure"><img class="img-responsive dImg center-block" src="resources/customerImage/sin.png"><div class="dName">신부전증</div></a></div>
+		<div class="col-sm-6 text-center disease"><a href=# data-code="16" id="heartFailure"><img class="img-responsive dImg center-block" src="resources/customerImage/sim.png"><div class="dName">심부전증</div></a></div>
+		<div class="col-sm-6 text-center disease"><a href=# data-code="13" id="hyperlipidemia"><img class="img-responsive dImg center-block" src="resources/customerImage/go.png"><div class="dName">고지혈증</div></a></div>	
 </div>
 <div id="dietList" class="container">	
 </div>
