@@ -75,5 +75,10 @@ private CustomerDAO dao;
 	public int getOneDCode(HashMap rInfo) throws Exception {
 		return dao.getOneDCode(rInfo);
 	}
+	@Override
+	public List<Customer> myNutri(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.myNutri(id);
+	}
 
 }

@@ -29,5 +29,8 @@ public interface CustomerDAO {
 	public void orderOptionRegist(HashMap options) throws Exception;
 	public List<Customer> orderOption(int orderCode) throws Exception;
 	public int getOneDCode(HashMap rInfo) throws Exception;
+	
+	public List<Customer> myNutri(String id) throws Exception;
+	
 
 }

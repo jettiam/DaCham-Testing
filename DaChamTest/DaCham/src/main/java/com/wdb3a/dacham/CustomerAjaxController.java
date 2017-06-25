@@ -126,4 +126,29 @@ public class CustomerAjaxController {
 		}		
 		return entity;
 	}
+	
+	@RequestMapping(value="myNutri",method=RequestMethod.POST)
+	public ResponseEntity<Map<String, Object>> getMyNutri(@RequestBody Customer no){
+		
+		ResponseEntity<Map<String, Object>> entity = null;
+		System.out.println("1");
+		List<Customer> list;
+		System.out.println(no.getId());
+		try {
+			list = service.myNutri(no.getId());
+			System.out.println("3");
+			Map<String, Object> map = new HashMap<>();
+			System.out.println("4");
+			map.put("list", list);
+			System.out.println("4");
+			entity = new ResponseEntity<>(map,HttpStatus.OK);
+			System.out.println("5");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("6");
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			System.out.println("7");
+		}
+		return entity;
+		}
 }
