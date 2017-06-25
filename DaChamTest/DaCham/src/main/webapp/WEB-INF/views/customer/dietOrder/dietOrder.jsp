@@ -159,7 +159,7 @@ display:none;
 		<div class="col-sm-6 text-center disease"><a href=# data-code="16" id="heartFailure"><img class="img-responsive dImg center-block" src="resources/customerImage/sim.png"><div class="dName">심부전증</div></a></div>
 		<div class="col-sm-6 text-center disease"><a href=# data-code="13" id="hyperlipidemia"><img class="img-responsive dImg center-block" src="resources/customerImage/go.png"><div class="dName">고지혈증</div></a></div>	
 </div>
-<div id="dietList" class="container">	
+<div id="dietList" class="container text-center">	
 </div>
 </div>
 </div>
