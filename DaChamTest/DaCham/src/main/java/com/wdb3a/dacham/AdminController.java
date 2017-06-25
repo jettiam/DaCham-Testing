@@ -17,6 +17,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -68,15 +69,24 @@ public class AdminController {
 	  }  
 	 
 	  // mailSending 코드
-	  @RequestMapping(value = "/mail/mailSending")
-	  public String mailSending(HttpServletRequest request) {
-	    
+	  @RequestMapping(value = "/mailSending", method=RequestMethod.POST)
+	  public String mailSending(String foodMOrderInfo) throws Exception {
+	    String toString = "";
 	    String setfrom = "dudtka4971@gmail.com";         
-	    String tomail  = request.getParameter("tomail");     // 받는 사람 이메일
-	    String title   = request.getParameter("title");      // 제목
-	    String content = request.getParameter("content");    // 내용
-	   System.out.println(title);
-	    try {
+	    String tomail  = "dudtka4971@naver.com"; 
+	    String title   = "이번 식재료 주문 내역서입니다";      // 제목
+	     
+	    JSONParser jsonParser = new JSONParser(); 
+		JSONObject jsonObj = (JSONObject) jsonParser.parse(foodMOrderInfo);
+		System.out.println(jsonObj); 
+		for(int i=0; i<jsonObj.size(); i++){
+			JSONObject jsonObj1 = (JSONObject) jsonObj.get(i+"");
+			System.out.println(jsonObj1);
+			System.out.println(jsonObj1.get("foodMname").toString());
+			toString = toString + "\n" + "식재료명 : " +jsonObj1.get("foodMname").toString() + "단가 : "+  jsonObj1.get("price").toString() + " 주문량 :" + jsonObj1.get("foodMAmount").toString() + jsonObj1.get("unit").toString() + " 총가격 : " + Integer.parseInt(jsonObj1.get("price").toString()) * Integer.parseInt(jsonObj1.get("foodMAmount").toString());  
+		}
+		String content = toString;    // 내용
+		try {
 	      MimeMessage message = mailSender.createMimeMessage();
 	      MimeMessageHelper messageHelper 
 	                        = new MimeMessageHelper(message, true, "UTF-8");
@@ -90,8 +100,29 @@ public class AdminController {
 	    } catch(Exception e){
 	      System.out.println(e);
 	    }
+		
+		//("식재료명 :" + bookObject.get("foodMName") + " 단가 :"+bookObject.get("price") + " 주문량 :" + bookObject.get("foodMAmount") + " 단위 : " + bookObject.get("unit"));
+	    //String tomail  = request.getParameter("tomail");     // 받는 사람 이메일
+	  
+	   // String title   = request.getParameter("title");      // 제목
+	    //String content = request.getParameter("content");    // 내용
+	  
+	    /*try {
+	      MimeMessage message = mailSender.createMimeMessage();
+	      MimeMessageHelper messageHelper 
+	                        = new MimeMessageHelper(message, true, "UTF-8");
+	 
+	      messageHelper.setFrom(setfrom);  // 보내는사람 생략하거나 하면 정상작동을 안함
+	      messageHelper.setTo(tomail);     // 받는사람 이메일
+	      messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
+	      messageHelper.setText(content);  // 메일 내용
+	     
+	      mailSender.send(message);
+	    } catch(Exception e){
+	      System.out.println(e);
+	    }*/
 	   
-	    return "redirect:/mailForm";  
+	    return "redirect:orderList";  
 	  }
 	 
 	

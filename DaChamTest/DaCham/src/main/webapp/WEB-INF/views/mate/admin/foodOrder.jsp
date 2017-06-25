@@ -88,6 +88,9 @@
 	</div>
 	<button id="foodMOrder" class = "btn btn-default">식재료 주문서 보내기</button>
 	</div>
+	<form id="foodMOrderForm" action="mailSending" method="post">  
+		<input type="hidden" name="foodMOrderInfo" id="foodMOrderInfo">
+	</form>
 
 	<script>
 	var divlength = $(".length .length2").size();
@@ -116,7 +119,7 @@
 					var price = $("#price"+i).val();
 					var foodMAmount = $("#foodMAmount"+i).val();
 					var unit = $("#unit"+i).val();
-					var jsonData ={					
+					 var jsonData ={					
 							"foodMname":foodMname,
 							"price":price,
 							"foodMAmount":foodMAmount,
@@ -124,14 +127,16 @@
 							"unit":unit
 					}	
 					foodMOrderInfo[y]=jsonData;
-					y++;
+					y++; 
+					
 					//alert(foodMname);
 					//alert(price);
 					//alert(foodMAmount);
 					//alert(unit);
 				}    
 				console.log(foodMOrderInfo);   
-
+				$("#foodMOrderInfo").val(JSON.stringify(foodMOrderInfo));
+				$("#foodMOrderForm").submit();
 
 			  
 				//alert(content.length);		 
