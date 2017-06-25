@@ -145,7 +145,7 @@
 								<option value = "03">메인메뉴1</option>
 								<option value = "04">메인메뉴2</option>
 								<option value = "05">메인메뉴3</option>
-								<option value = "05">메인메뉴4</option>
+								<option value = "06">메인메뉴4</option>
 							</select>
 						</td>
 						<td>
