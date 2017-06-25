@@ -16,6 +16,16 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+.dietImg{
+/* max-width:650px;
+max-height:350px; */
+}
+.sideDImg{
+/* max-width:250px;
+mat-height:200px; */
+}
+</style>
 <title>DaCham 식단상세보기</title>
 <script>
 	function getDishList(a) {
@@ -34,8 +44,8 @@
 													b
 															.append("<label><div class='foodGSideD' data-sideDCode='"+data.list[i].sideDCode+"'>"
 																	+ "<input type='radio' name='"+data.list[i].foodGCode+"' value='"+data.list[i].sideDCode+"' />"
-																	+ "<img src='http://via.placeholder.com/150x150'>"
-																	//<img class='sideDImg' src='displayFile?fileName="	+ data.list[i].sideDImg//+ "'>"
+																	/* + "<img src='http://via.placeholder.com/150x150'>" */
+																	+"<img class='sideDImg' src='displayFile?fileName="	+ data.list[i].sideDImg+"'>"
 																	+ data.list[i].sideDName
 																	+ "  <table><tr><td>칼로리</td><td>탄수화물</td><td>단백질</td><td>지방</td><td>나트륨</td></tr><tr><td>"
 																	+ data.list[i].kcal
@@ -74,7 +84,7 @@
 				if(i==0){
 				div.append(
 							"<div class='column foodGSideD backColor' data-sideDCode='"+data.list[i].sideDCode+"'>"							
-							+"<img class='thumbnail' src='http://placehold.it/350x200'>"
+							+"<img class='thumbnail' src='displayFile?fileName="+data.list[i].sideDImg+"'>"
 							+"<h5 style='text-align:center'>"+data.list[i].sideDName+"</h5>"
 							+"<table class='table' >"
 							+"<tr><th>칼로리</th><td>"+kcal+"</td></tr>"
@@ -90,7 +100,7 @@
 				}else{
 					div.append(
 							"<div class='column foodGSideD' data-sideDCode='"+data.list[i].sideDCode+"'>"		
-							+"<img class='thumbnail' src='http://placehold.it/350x200'>"
+							+"<img class='thumbnail' src='displayFile?fileName="+data.list[i].sideDImg+"'>"
 							+"<h5 style='text-align:center'>"+data.list[i].sideDName+"</h5>"
 							+"<table class='table' >"
 							+"<tr><th>칼로리</th><td>"+kcal+"</td></tr>"
@@ -200,9 +210,18 @@
 
 	<div class="row">
 		<div class="medium-6 columns">
-			<img class="thumbnail" src="http://placehold.it/650x450">
+			<img class="thumbnail" class="dietImg" data-dietImg="${list[0].dietImg}" src='displayFile?fileName=${list[0].dietImg}'>
 			<div class="row small-up-3">
 				<!-- <img src="resources/customerImage/option_list.png"> -->
+				<c:forEach items="${list}" var="list">
+				<div class="column" data-foodGCode='${list.foodGCode}'>
+						
+						<img class="thumbnail sideDImg" src='displayFile?fileName=${list.sideDImg}'>
+					
+					<div>${list.sideDName}</div>
+				</div>
+				</c:forEach>
+				<!-- 
 				<div class="column">
 					<img class="thumbnail t1"
 						src="resources/customerImage/detail_option_img.png">
@@ -221,7 +240,7 @@
 				</div>
 				<div class="column">
 					<img class="thumbnail t6" src="http://placehold.it/250x200">
-				</div>
+				</div> -->				
 			</div>
 		</div>
 

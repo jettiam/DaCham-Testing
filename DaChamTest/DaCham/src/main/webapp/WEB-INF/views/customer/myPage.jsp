@@ -27,6 +27,10 @@
 .optionView{
 	display:none;
 }
+.detailSideDImg{
+	max-width:150px;
+	max-height:100px;
+}
 #myHealthTable{
 	display:table;
 }
@@ -314,7 +318,7 @@ $(document).ready(function(){
 										+"<div class='"+orderCode+"_options' ></div>"
 										+"</td></tr>");
 								 for(var i=0; i<length; i++){
-									$("."+orderCode+"_options").html($("."+orderCode+"_options").html()+"<img src='"+value[i].sideDImg+"'/>"+value[i].sideDName);																		
+									$("."+orderCode+"_options").html($("."+orderCode+"_options").html()+"<div class='col-sm-2'><img class='detailSideDImg' src='displayFile?fileName="+value[i].sideDImg+"'/>"+value[i].sideDName+"</div>");																		
 								}	 						
 							}
 						})
