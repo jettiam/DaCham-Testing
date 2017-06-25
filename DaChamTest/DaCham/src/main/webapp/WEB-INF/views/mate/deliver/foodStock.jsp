@@ -43,86 +43,88 @@
 		String str = dayTime.format(new Date(time));
 	%>
 	<%@include file = "deliverNavi.jsp" %>
-	<form id = "foodStockForm">
-		<input type = "hidden" name = "exDate" value = "<%=str %>">
-		<table border = 1>
-			<tr>
-				<th>입고날짜</th>
-				<td> <input type="date" name="inDate"></td>
-				<th>단가(원)</th>
-				<td><input type = "text" name = "price"></td>
-			</tr>
-			<tr>
-				<td>입고량</td>
-				<td><input type = "text" name = "inAmount"></td>
-				<td>코드번호</td>
-				<td>
-					<select name = "foodMCode">
-						<c:forEach items = "${list }" var = "v">
-							<option value = "${v.foodMCode }">${v.foodMName }</option>
-						</c:forEach>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>출고량</td>
-				<td><input type = "text" name = "outAmount"></td>
-				<td>단위</td>
-				<td><input type = "text" name = "uint"></td>
-			</tr>
-			<tr>
-				<td>식재료이름</td>
-				<td><input type = "text" name = "foodMName"></td>
-				<td></td>
-				<td></td>
-			</tr>
-		</table>
-		<button id = "regist">확인</button>
-	</form>
-	<br><br><br>
-	<form id = "searchForm">
-		<div>
-			<select name = "searchType">
-				<option value = "n"
-	   			<c:out value="${deliver.searchType==null?'selected':'' }"/>>
-	   			분류
-	   			</option>
-	   			<option value = "t"
-	   			<c:out value="${deliver.searchType eq 't'?'selected':'' }"/>>
-	   			코드번호
-	   			</option>
-	   			<option value = "c"
-	   			<c:out value="${deliver.searchType eq 'c'?'selected':'' }"/>>
-	   			식재료명
-	   			</option>
-			</select>
-			<input type = "text" name = "keyword" placeholder = "검색어 입력란">
-			<button id = "search">검색</button>
-		</div>
-		<br><br>
-		<div>
-			<table>
+	<div class = "container">
+		<form id = "foodStockForm">
+			<input type = "hidden" name = "exDate" value = "<%=str %>">
+			<table class = "table table-hover">
 				<tr>
-					<th>코드번호&nbsp;</th>
-					<th>이미지&nbsp;</th>
-					<th>식재료명&nbsp;</th>
-					<th>입고날짜&nbsp;</th>
-					<th>단가&nbsp;</th>
-					<th>단위&nbsp;</th>
-					<th> </th>
+					<th>입고날짜</th>
+					<td> <input type="date" name="inDate"></td>
+					<th>단가(원)</th>
+					<td><input type = "text" name = "price"></td>
 				</tr>
-				<c:forEach items = "${overList }" var = "s">
-					<tr>
-						<td>${s.foodMCode }</td>
-						<td><img src = "deliverDisplayFile?fileName=${s.foodMImg}" style= "width: 175px; height: 50px;"></td>
-						<td>${s.foodMName }</td>
-						<td>${s.inDate }</td>
-						<td>${s.price }</td>
-						<td>${s.uint }</td>
-					</tr>
-				</c:forEach>
+				<tr>
+					<td>입고량</td>
+					<td><input type = "text" name = "inAmount"></td>
+					<td>코드번호</td>
+					<td>
+						<select name = "foodMCode">
+							<c:forEach items = "${list }" var = "v">
+								<option value = "${v.foodMCode }">${v.foodMName }</option>
+							</c:forEach>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>출고량</td>
+					<td><input type = "text" name = "outAmount"></td>
+					<td>단위</td>
+					<td><input type = "text" name = "uint"></td>
+				</tr>
+				<tr>
+					<td>식재료이름</td>
+					<td><input type = "text" name = "foodMName"></td>
+					<td></td>
+					<td></td>
+				</tr>
 			</table>
-		</div>
-	</form>
+			<button id = "regist" class = "btn btn-danger">확인</button>
+		</form>
+		<br><br><br>
+		<form id = "searchForm">
+			<div>
+				<select name = "searchType">
+					<option value = "n"
+		   			<c:out value="${deliver.searchType==null?'selected':'' }"/>>
+		   			분류
+		   			</option>
+		   			<option value = "t"
+		   			<c:out value="${deliver.searchType eq 't'?'selected':'' }"/>>
+		   			코드번호
+		   			</option>
+		   			<option value = "c"
+		   			<c:out value="${deliver.searchType eq 'c'?'selected':'' }"/>>
+		   			식재료명
+		   			</option>
+				</select>
+				<input type = "text" name = "keyword" placeholder = "검색어 입력란">
+				<button id = "search" class = "btn btn-warning">검색</button>
+			</div>
+			<br><br>
+			<div>
+				<table class = "table table-hover">
+					<tr>
+						<th>코드번호&nbsp;</th>
+						<th>이미지&nbsp;</th>
+						<th>식재료명&nbsp;</th>
+						<th>입고날짜&nbsp;</th>
+						<th>단가&nbsp;</th>
+						<th>단위&nbsp;</th>
+						<th> </th>
+					</tr>
+					<c:forEach items = "${overList }" var = "s">
+						<tr>
+							<td>${s.foodMCode }</td>
+							<td><img src = "deliverDisplayFile?fileName=${s.foodMImg}" style= "width: 175px; height: 50px;"></td>
+							<td>${s.foodMName }</td>
+							<td>${s.inDate }</td>
+							<td>${s.price }</td>
+							<td>${s.uint }</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
+		</form>
+	</div>
 </body>
 </html>

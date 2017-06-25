@@ -18,9 +18,10 @@
 <script>
 	$(document).ready(function(){     
 		$("#diet").addClass("w3-light-gray");
+		var currentPage = 1;
 		var v = 0;
 		openAPI();      
-		sideAll();
+		sideAll(1);
 		$("#sideAll").on("click",function(){
 			sideAll();
 		});
@@ -186,15 +187,38 @@
 			});
 		});   
 		
-		function sideAll(){
+		$(".pagination").on("click","li a",function(){
+			event.preventDefault();
+			var replyPage = $(this).attr("href");
+			sideAll(replyPage);
+		});
+		
+		function sideAll(page){
 			$(".searchResult").remove();
-			$.getJSON("nutriAjax/sideAll",function(data){
+			$.getJSON("nutriAjax/sideAll/"+page,function(data){
+				currentPage = page;
 				var str = "";
-				$(data).each(function(){
+				$(data.list).each(function(){
 					str += "<tr class = 'searchResult'><td><a class = 'nameClick' data-img = '"+this.sideDImg+"' data-code = '"+this.sideDCode+"'>"+this.sideDName+"</a></td>"+"<td>"+this.foodGName+"</td>"+"<td>"+this.cookMName+"</td></tr>"
 				});
 				$(".searchTable").append(str);
+				printPaging(data.criteria);
 			});
+		}
+		function printPaging(criteria){
+			var str = "";
+					
+			if(criteria.prev){
+				str += "<li><a href=''"+(criteria.startPage-1)+"'>'" + "<<"+"</a></li>";
+			}
+			for(var i = criteria.startPage; i<=criteria.endPage; i++){
+				var strClass = criteria.page == i?"class = 'active'":"";
+				str += "<li "+strClass+"><a href ='"+i+"'>"+i + "</a></li>";
+			}
+			if(criteria.next){
+				str += "<li><a href=''"+(criteria.endPage+1)+"'>'" + ">>"+"</a></li>";
+			}
+			$(".pagination").html(str);
 		}
 	});
 	
@@ -206,7 +230,7 @@
   float:left;  }
   
  .box2 {
-  display:inline-block;  margin-left:10px; position : absolute;}
+  display:inline-block;  margin-left:10px;}       
   .div1 {
   float:left;  }
  .div2 {
@@ -244,12 +268,12 @@
 						<th>나트륨&nbsp;&nbsp;</th>    
 					</tr>
 					<tr>
-						<td id = "sideDName"></td>
-						<td id = "kcal"></td>
-						<td id = "carbohydrate"></td>
-						<td id = "protein"></td>
-						<td id = "fat"></td>
-						<td id = "na"></td>
+						<td id = "sideDName">&nbsp;&nbsp;&nbsp;</td>
+						<td id = "kcal">&nbsp;&nbsp;&nbsp;</td>
+						<td id = "carbohydrate">&nbsp;&nbsp;&nbsp;</td>
+						<td id = "protein">&nbsp;&nbsp;&nbsp;</td>
+						<td id = "fat">&nbsp;&nbsp;&nbsp;</td>
+						<td id = "na">&nbsp;&nbsp;&nbsp;</td>
 					</tr>
 				</table>
 			</div>
@@ -269,6 +293,8 @@
 						</tr>
 						
 				</table>
+				<ul class = "pagination">
+				</ul>
 			</div>
 		</div>
 		<input type = "hidden" name = "kcal" id = "kcal">
@@ -372,6 +398,6 @@
 		}
 	}
 	</script>
-	<script src = "../../../dacham/resources/openAPIjs/APIQuery.js"></script>
+	<script src = "resources/openAPIjs/APIQuery.js"></script>
 </body>
 </html>

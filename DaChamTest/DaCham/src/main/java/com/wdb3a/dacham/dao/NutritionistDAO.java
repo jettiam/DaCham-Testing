@@ -10,9 +10,13 @@ public interface NutritionistDAO {
 //	반찬 목록을 검색합니다.
 	public List<Nutritionist> listSearch(Nutritionist nutritionist) throws Exception;
 // 반찬 전체를 조회합니다.(with 식품군, 조리법)
-	public List<Nutritionist> sideAll() throws Exception;
+	public List<Nutritionist> sideAll(Criteria criteria) throws Exception;
+	//반찬 전체의 수량을 구합니다.
+	public int sideAllCount() throws Exception;
 	//해당 메인페이지에 이달의 메뉴를 조회합니다.
-	public List<OrderList> thisMonth() throws Exception;
+	public List<OrderList> thisMonth(Criteria criteria) throws Exception;
+	//이달의 메뉴의 개수를 구합니다.
+	public int thisMonthCount() throws Exception;
 	public List<Nutritionist> materialSearch(Nutritionist nutritionist) throws Exception;
 	public Nutritionist materialView(String sideDCode) throws Exception;
 	public List<Nutritionist> materialAll() throws Exception;
