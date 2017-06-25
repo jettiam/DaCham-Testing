@@ -230,7 +230,7 @@
   float:left;  }
   
  .box2 {
-  display:inline-block;  margin-left:10px; position : absolute;}
+  display:inline-block;  margin-left:10px;}       
   .div1 {
   float:left;  }
  .div2 {
@@ -268,12 +268,12 @@
 						<th>나트륨&nbsp;&nbsp;</th>    
 					</tr>
 					<tr>
-						<td id = "sideDName"></td>
-						<td id = "kcal"></td>
-						<td id = "carbohydrate"></td>
-						<td id = "protein"></td>
-						<td id = "fat"></td>
-						<td id = "na"></td>
+						<td id = "sideDName">&nbsp;&nbsp;&nbsp;</td>
+						<td id = "kcal">&nbsp;&nbsp;&nbsp;</td>
+						<td id = "carbohydrate">&nbsp;&nbsp;&nbsp;</td>
+						<td id = "protein">&nbsp;&nbsp;&nbsp;</td>
+						<td id = "fat">&nbsp;&nbsp;&nbsp;</td>
+						<td id = "na">&nbsp;&nbsp;&nbsp;</td>
 					</tr>
 				</table>
 			</div>
