@@ -128,7 +128,7 @@
 		            </tr>
 		             <tr class = "cookResult3">
 		             	
-		             </tr>
+		             </tr>   
 		  		
 		  		</table>
 		</div>
