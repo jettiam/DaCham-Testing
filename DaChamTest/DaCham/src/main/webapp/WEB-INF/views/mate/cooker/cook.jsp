@@ -95,7 +95,7 @@
 </head>
 <%@include file = "cookerNavi.jsp" %>
 <body>
-	<div class="">
+	<div class="container">    
 		
 		<div style="float: left; width: 33%;"> 
 			<h1>조리 대기</h1>     
@@ -132,9 +132,10 @@
 		  		
 		  		</table>
 		</div>
+		<div style = " margin-top : 500px; position : absolute;">
+			<button id = "finishBtn" class = "btn btn-primary">마감</button>
+		</div>   
 	</div>    
-	<div style = " margin-top : 500px; position : absolute;">
-		<button id = "finishBtn" class = "btn btn-primary">마감</button>
-	</div>
+	
 </body>
 </html>
