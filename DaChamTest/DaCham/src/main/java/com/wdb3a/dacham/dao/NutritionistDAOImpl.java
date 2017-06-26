@@ -104,9 +104,12 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 	}
 
 	@Override
-	public List<Nutritionist> sideAll(Criteria criteria) throws Exception {
+	public List<Nutritionist> sideAll(String foodGCode,Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".sideAll",criteria);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("foodGCode", foodGCode);
+		map.put("criteria", criteria);
+		return sqlSession.selectList(namespace+".sideAll",map);
 	}
 
 	@Override
@@ -155,9 +158,9 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 	}
 
 	@Override
-	public int sideAllCount() throws Exception {
+	public int sideAllCount(String foodGCode) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne(namespace+".sideAllCount");
+		return sqlSession.selectOne(namespace+".sideAllCount",foodGCode);
 	}
 
 	@Override

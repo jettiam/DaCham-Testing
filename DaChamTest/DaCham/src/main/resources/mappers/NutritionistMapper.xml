@@ -36,7 +36,8 @@
 		from sideDish a join foodGroup b join cookMethod c
 		where a.foodGCode = b.foodGCode
 		and a.cookMCode = c.cookMCode
-		limit #{startRecord},#{recordsPerPage}
+		and a.foodGCode = #{foodGCode}
+		limit #{criteria.startRecord},#{criteria.recordsPerPage}
 	</select>
 	<!-- 반찬 전체의 수량 구하기 -->
 	<select id = "sideAllCount" resultType = "Integer">
@@ -44,6 +45,7 @@
 		from sideDish a join foodGroup b join cookMethod c
 		where a.foodGCode = b.foodGCode
 		and a.cookMCode = c.cookMCode
+		and a.foodGCode = #{foodGCode}
 	</select>
 	<select id = "materialSearch" resultType = "com.wdb3a.dacham.bean.Nutritionist">
 		select *

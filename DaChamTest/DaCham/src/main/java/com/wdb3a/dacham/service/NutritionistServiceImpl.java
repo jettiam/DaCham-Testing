@@ -102,9 +102,9 @@ public class NutritionistServiceImpl implements NutritionistService {
 	}
 
 	@Override
-	public List<Nutritionist> sideAll(Criteria criteria) throws Exception {
+	public List<Nutritionist> sideAll(String foodGCode,Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.sideAll(criteria);
+		return dao.sideAll(foodGCode,criteria);
 	}
 
 	@Override
@@ -150,9 +150,9 @@ public class NutritionistServiceImpl implements NutritionistService {
 	}
 
 	@Override
-	public int sideAllCount() throws Exception {
+	public int sideAllCount(String foodGCode) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.sideAllCount();
+		return dao.sideAllCount(foodGCode);
 	}
 
 	@Override

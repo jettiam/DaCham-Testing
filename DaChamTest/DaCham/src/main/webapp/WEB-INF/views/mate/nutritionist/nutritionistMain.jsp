@@ -101,6 +101,7 @@
 <%@include file="nutritionistNavi.jsp" %>
   <div class = "container">
    <div class = "box1">
+   	  <h3>공지사항</h3>
       <div>
          <select>
             <option>등록자</option>

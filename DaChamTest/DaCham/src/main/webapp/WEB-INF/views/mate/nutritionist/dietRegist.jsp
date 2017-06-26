@@ -19,9 +19,10 @@
 	$(document).ready(function(){     
 		$("#diet").addClass("w3-light-gray");
 		var currentPage = 1;
+		var currentGroup = "";
 		var v = 0;
 		  
-		sideAll(1);
+		sideAll(1,"01");
 		$("#sideAll").on("click",function(){
 			sideAll();
 		});
@@ -190,17 +191,37 @@
 		$(".pagination").on("click","li a",function(){
 			event.preventDefault();
 			var replyPage = $(this).attr("href");
-			sideAll(replyPage);
+			sideAll(replyPage,currentGroup);
 		});
-		
-		function sideAll(page){
+		$("#rice").on("click",function(){
+			sideAll(1,"01");
+		});
+		$("#soup").on("click",function(){
+			sideAll(1,"02");
+		});
+		$("#main1").on("click",function(){
+			sideAll(1,"03");
+		});
+		$("#main2").on("click",function(){
+			sideAll(1,"04");
+		});
+		$("#main3").on("click",function(){
+			sideAll(1,"05");
+		});
+		$("#main4").on("click",function(){
+			sideAll(1,"06");
+		});
+		function sideAll(page,foodGCode){
 			$(".searchResult").remove();
-			$.getJSON("nutriAjax/sideAll/"+page,function(data){
+			$.getJSON("nutriAjax/sideAll/"+page+"/"+foodGCode,function(data){
 				currentPage = page;
+				currentGroup = foodGCode;
+				console.log("이것만:"+foodGCode);
 				var str = "";
 				$(data.list).each(function(){
 					str += "<tr class = 'searchResult'><td><a class = 'nameClick' data-img = '"+this.sideDImg+"' data-code = '"+this.sideDCode+"'>"+this.sideDName+"</a></td>"+"<td>"+this.foodGName+"</td>"+"<td>"+this.cookMName+"</td></tr>"
 				});
+				
 				$(".searchTable").append(str);
 				printPaging(data.criteria);
 			});
@@ -281,7 +302,13 @@
 			<div>
 				<input type = "text" name = "search" id = "keyword" placeholder = "반찬 검색란">
 				<button id = "search" class = "btn btn-primary">검색</button>
-				<button id=  "sideAll" class = "btn btn-primary">전체목록</button><br>
+				<br>
+				<button id = "rice" class = "btn btn-info">밥</button>
+				<button id = "soup" class = "btn btn-info">국</button>
+				<button id = "main1" class = "btn btn-info">메인 메뉴1</button>
+				<button id = "main2" class = "btn btn-info">메인 메뉴2</button>
+				<button id = "main3" class = "btn btn-info">메인 메뉴3</button>
+				<button id = "main4" class = "btn btn-info">메인 메뉴4</button>
 				<table class = "searchTable table table-hover">          
 					<tr>    
 						<th>반찬명</th>
