@@ -15,7 +15,8 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-light-green.css">
+
 <style>
 .dietImg{
 /* max-width:650px;
@@ -42,8 +43,8 @@ mat-height:200px; */
 											function(data) { //데이터 받아옴 data.list로 사용
 												for (var i = 0; i < data.list.length; i++) {
 													b
-															.append("<label><div class='foodGSideD' data-sideDCode='"+data.list[i].sideDCode+"'>"
-																	+ "<input type='radio' name='"+data.list[i].foodGCode+"' value='"+data.list[i].sideDCode+"' />"
+															.append("<label><div class='' data-sideDCode='"+data.list[i].sideDCode+"'>"
+																	+ "<input type='radio' style='display:none' name='"+data.list[i].foodGCode+"' value='"+data.list[i].sideDCode+"' />"
 																	/* + "<img src='http://via.placeholder.com/150x150'>" */
 																	+"<img class='sideDImg' src='displayFile?fileName="	+ data.list[i].sideDImg+"'>"
 																	+ data.list[i].sideDName
@@ -94,7 +95,7 @@ mat-height:200px; */
 							+"<tr><th>나트륨</th><td>"+na+"</td></tr>"
 							+"</table>"							
 							+"<a class='sideButton button hollow tiny expanded'>선택 하기</a>"
-							+"<input type='radio' name='"+foodGCode+"' value='"+data.list[i].sideDCode+"' checked='true'/>"
+							+"<input type='radio' style='display:none' name='"+foodGCode+"' value='"+data.list[i].sideDCode+"' checked='true'/>"
 							+"</div>"
 						);
 				}else{
@@ -110,7 +111,7 @@ mat-height:200px; */
 							+"<tr><th>나트륨</th><td>"+na+"</td></tr>"
 							+"</table>"							
 							+"<a class='sideButton button hollow tiny expanded'>선택 하기</a>"
-							+"<input type='radio' name='"+foodGCode+"' value='"+data.list[i].sideDCode+"' />"
+							+"<input type='radio' style='display:none' name='"+foodGCode+"' value='"+data.list[i].sideDCode+"' />"
 							+"</div>"
 						);
 				}				
@@ -118,11 +119,11 @@ mat-height:200px; */
 		});
 	}
 	
-	function activeRadio(btn){		
-		alert("클릭되었습니다.");
+/* 	function activeRadio(btn){		
+		//alert("클릭되었습니다."); 
 		var inputBtn = btn.find("input:radio");
 		inputBtn.attr("checked", true);
-	}
+	} */
 
 	function getCheckedList(a) {
 		var arrInx = 0;
@@ -147,9 +148,23 @@ mat-height:200px; */
 	}
 
 	$(document).ready(function() {
-		$(document).on("click", ".sideButton", function(){
-			activeRadio($(this).parent());
+		$(document).on("click", ".foodGSideD", function(){
+			var foodGCode= $(this).children("input").attr("name");
+			
+			$(this).siblings().removeClass("w3-theme-l4");
+			$(this).addClass("w3-theme-l4");
+			var img = $(this).children("img").attr("src");
+			//alert(img);
+			var sideDName=$(this).children("h5").text();			
+			//alert(foodGCode);
+			$(".defaultFood[data-foodGCode='"+foodGCode+"']>img").attr("src",img);
+			$(".defaultFood[data-foodGCode='"+foodGCode+"']>.defaultSideDName").text(sideDName);
+			console.log($(".defaultFood[data-foodGCode='"+foodGCode+"']>img"));
+			$(this).siblings().children(":input").removeAttr("checked");
+			$(this).children(":input").attr("checked",true);
+			//activeRadio($(this));
 		});
+		
 		getDish($("#panel1>div"), "01");
 		getDish($("#panel2>div"),"02");
 		getDish($("#panel3>div"), "03");
@@ -214,11 +229,11 @@ mat-height:200px; */
 			<div class="row small-up-3">
 				<!-- <img src="resources/customerImage/option_list.png"> -->
 				<c:forEach items="${list}" var="list">
-				<div class="column" data-foodGCode='${list.foodGCode}'>
+				<div class="column defaultFood" data-foodGCode='${list.foodGCode}'>
 						
 						<img class="thumbnail sideDImg" src='displayFile?fileName=${list.sideDImg}'>
 					
-					<div>${list.sideDName}</div>
+					<div class="defaultSideDName">${list.sideDName}</div>
 				</div>
 				</c:forEach>
 				<!-- 
