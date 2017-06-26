@@ -25,7 +25,7 @@
 <body>
 	<%@include file = "cookerNavi.jsp" %>
 	<div class = container>
-	<h1>조리 목록</h1>
+	<h1>조리 대기</h1>
 		<button id = "button" class = "btn btn-primary">조리시작</button>
 		<table class ="table table-hover">
 			<tr>

@@ -20,7 +20,7 @@
 		$("#diet").addClass("w3-light-gray");
 		var currentPage = 1;
 		var v = 0;
-		openAPI();      
+		  
 		sideAll(1);
 		$("#sideAll").on("click",function(){
 			sideAll();
@@ -31,7 +31,7 @@
 			}
 		});
 		localStorage.clear();
-		
+		openAPI();    
 		if(!localStorage['init'] || isNaN(localStorage['count']) == true){
 			localStorage['init'] = "true";
 			localStorage['count'] = 0;   

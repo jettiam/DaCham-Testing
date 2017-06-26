@@ -19,7 +19,7 @@
 <script>
 	$(document).ready(function() {
 		$("#startWizard").click(function() {
-			alert("위자드를 시작해요.");
+			
 			$("#wizardResult").hide("slow");
 			$(".btn").show("slow");
 			getWizard(1);
@@ -54,7 +54,7 @@
 						r = eval(r);
 						if (r == "결과") {
 							document.getElementById("question").innerText = r;
-							alert(r);
+							
 							$(".btn").hide("slow");
 
 							var resultName = eval("json.q" + no

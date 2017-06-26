@@ -84,7 +84,7 @@
 			
 				$(data).each(function(index){
 					
-					str += "<tr id = 'cookResult1' data-code = '"+this.orderCode+"'>"+"<td>"+"<a href = '"+index+"' data-name = '"+this.sideDName+"'>"+this.sideDName+"</a>"+"</td>"+"<td>"+this.dietAmount+"</td>"+"</tr>"
+					str += "<tr id = 'cookResult1' data-code = '"+this.orderCode+"'>"+"<td>"+"<a href = '"+index+"' data-name = '"+this.sideDName+"'>"+this.sideDName+"</a>"+"</td>"+"<td>"+this.dietAmount+"인분</td>"+"</tr>"
 				});
 				$(".cook1").append(str);
 				
@@ -95,14 +95,14 @@
 </head>
 <%@include file = "cookerNavi.jsp" %>
 <body>
-	<div class="container">    
-		
+	<div class="container" style = "height : 600px;">    
+	   <div class = "row">
 		<div style="float: left; width: 33%;"> 
 			<h1>조리 대기</h1>     
 		       <table class = "cook1 table table-hover">
 		           <tr>            
 		              <th>음식명</th>
-		              <th>주문수</th>
+		              <th>조리량</th>
 		           </tr>
 		           <tr class = "cookResult1">
 		           </tr>
@@ -113,7 +113,7 @@
 			<table  class = "cook2 table table-hover">
 			             <tr>
 			               <th>음식명</th>
-			               <th>주문수</th>
+			               <th>조리량</th>
 			            </tr>
 			            <tr class = "cookResult2">
 			            </tr>
@@ -123,8 +123,8 @@
 			<h1>조리완료</h1>        
 			<table  class = "cook3 table table-hover">
 		             <tr>
-		               <th>음식명</th>
-		               <th>주문수</th>
+		               <th>음식명</th>          
+		               <th>조리량</th>        
 		            </tr>
 		             <tr class = "cookResult3">
 		             	
@@ -132,10 +132,11 @@
 		  		
 		  		</table>
 		</div>
-		<div style = " margin-top : 500px; position : absolute;">
-			<button id = "finishBtn" class = "btn btn-primary">마감</button>
-		</div>   
+	</div>
+		 
 	</div>    
-	
+	<div style = "float:right; margin-right: 150px;">                        
+			<button id = "finishBtn" class = "btn btn-primary">마감</button>
+	</div>  
 </body>
 </html>
