@@ -56,10 +56,10 @@
 	<sql id="foodsearch">
 		<if test="searchType != null">
 			<if test="searchType == 't'.toString()">
-				where foodMICode like CONCAT('%',#{keyword},'%')
+				where foodMName like CONCAT('%',#{keyword},'%')
 			</if>
 			<if test="searchType == 'c'.toString()">
-				where foodMName like CONCAT('%',#{keyword},'%')
+				where foodMICode like CONCAT('%',#{keyword},'%')  
 			</if>
 		</if>
 	</sql>
@@ -124,7 +124,7 @@
 	</select>
 	<!--orderList 페이지 내역 출력  -->
 	<select id="orderAll" resultType="OrderList">
-	select b.dietCode, b.orderCode,
+		select b.dietCode, b.orderCode,
 		b.id, a.dietName, b.orderDate, b.price,
 		b.orderItemCode,
 		b.transportNum, c.orderItemName
@@ -135,6 +135,35 @@
 		and
 		b.orderItemCode = c.orderItemCode and c.orderItemCode BETWEEN 2 and 3 
 	</select>
+	
+	<select id="orderAllSearch" resultType="OrderList">
+		select b.dietCode, b.orderCode,
+		b.id, a.dietName, b.orderDate, b.price,
+		b.orderItemCode,
+		b.transportNum, c.orderItemName
+		from diet a join
+		orderlist b join
+		orderitem c
+		where a.dietCode=b.dietCode 
+		and
+		b.orderItemCode = c.orderItemCode and c.orderItemCode BETWEEN 2 and 3 
+		<include refid="orderListSearch"></include>
+	</select>
+	<sql id="orderListSearch">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()"> 
+				and b.id like CONCAT('%',#{keyword},'%')
+			</if>
+			<if test="searchType == 'c'.toString()">
+				and a.dietName like CONCAT('%',#{keyword},'%')
+			</if>
+			<if test="searchType == 'a'.toString()">
+				and c.orderItemName like CONCAT('%',#{keyword},'%')
+			</if>
+		</if> 
+	</sql>
+		
+	
 	<select id="orderALlCount" resultType="Integer">
 	select count(b.orderCode)
 		from diet a join

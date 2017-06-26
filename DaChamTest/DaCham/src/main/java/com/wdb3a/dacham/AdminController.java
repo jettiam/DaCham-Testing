@@ -128,10 +128,7 @@ public class AdminController {
 	 
 	
 	@RequestMapping(value="/adminMain", method=RequestMethod.GET)
-	public String getadminMain(Model model, OrderList orderList) throws Exception{
-		List<OrderList> list=service.orderListAll(orderList);
-		model.addAttribute("list",list);
-		model.addAttribute("orderList",orderList);
+	public String getadminMain() throws Exception{
 		return "mate/admin/adminMain";
 	}
 	//도넛차트 컨트롤러
@@ -141,7 +138,7 @@ public class AdminController {
 		List<ChartList> chartList = service.chartList(); 
 		model.addAttribute("chartList", chartList);
 		return chartList;
-	}
+	} 
 	//막대그래프 컨트롤러{디폴트}
 	@RequestMapping(value="/adminMain2", method=RequestMethod.GET)
 	@ResponseBody
@@ -196,6 +193,7 @@ public class AdminController {
 	public String getfoodOrder(Model model, FoodMInven foodMInven) throws Exception{
 		List<FoodMInven> invenlist = service.foodStockList(foodMInven);
 		model.addAttribute("invenlist", invenlist);
+		model.addAttribute("foodMInven", foodMInven);
 		return "mate/admin/foodOrder";
 	}
 	@RequestMapping(value="/foodStock", method=RequestMethod.GET)

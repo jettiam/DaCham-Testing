@@ -29,4 +29,5 @@ public interface AdminMainService {
 	public List<FoodMInven> foodStockListAll() throws Exception; 
 	public int orderListCount() throws Exception;
 	public List<OrderList> orderAll(OrderList orderList) throws Exception;
+	public List<OrderList> orderAllSearch(OrderList orderList) throws Exception;
 }
