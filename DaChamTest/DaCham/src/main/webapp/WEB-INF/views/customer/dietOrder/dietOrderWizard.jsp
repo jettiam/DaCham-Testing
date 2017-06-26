@@ -19,7 +19,11 @@
 <script>
 	$(document).ready(function() {
 		$("#startWizard").click(function() {
+<<<<<<< HEAD
 			/* alert("위자드를 시작해요."); */
+=======
+			
+>>>>>>> branch 'master' of https://github.com/jettiam/DaCham-Testing.git
 			$("#wizardResult").hide("slow");
 			$(".btn").show("slow");
 			getWizard(1);
@@ -54,7 +58,11 @@
 						r = eval(r);
 						if (r == "결과") {
 							document.getElementById("question").innerText = r;
+<<<<<<< HEAD
 							/* alert(r); */
+=======
+							
+>>>>>>> branch 'master' of https://github.com/jettiam/DaCham-Testing.git
 							$(".btn").hide("slow");
 
 							var resultName = eval("json.q" + no

@@ -183,20 +183,23 @@ public class NutritionistAjaxController {
 	}
 	
 	//반찬 목록을 조회합니다.
-	@RequestMapping(value = "/sideAll/{page}",method = RequestMethod.GET)
-	public ResponseEntity<Map<String,Object>> sideAll(@PathVariable("page")int page){
+	@RequestMapping(value = "/sideAll/{page}/{foodGCode}",method = RequestMethod.GET)
+	public ResponseEntity<Map<String,Object>> sideAll(@PathVariable("page")int page,@PathVariable("foodGCode")String foodGCode){
 		 ResponseEntity<Map<String,Object>> entity = null;
 		 try {
 			Criteria criteria = new Criteria();
 			criteria.setPage(page);
 			criteria.setRecordsPerPage(7);
-			int totalCount = service.sideAllCount();
+			int totalCount = service.sideAllCount(foodGCode);
 			criteria.setTotalCount(totalCount);
-			List<Nutritionist> list = service.sideAll(criteria);
+			List<Nutritionist> list = service.sideAll(foodGCode,criteria);
 			Map<String,Object> map = new HashMap<>();
 			map.put("list", list);
 			map.put("criteria", criteria);
+		
 			entity = new ResponseEntity<>(map,HttpStatus.OK);
+			
+			System.out.println("리스트 출력"+list);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

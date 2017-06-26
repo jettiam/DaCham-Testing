@@ -10,9 +10,9 @@ public interface NutritionistService {
 	//반찬 검색용
 	public List<Nutritionist> listSearch(Nutritionist nutritionist) throws Exception;
 	// 반찬 전체를 조회합니다.(with 식품군, 조리법)
-	public List<Nutritionist> sideAll(Criteria criteria) throws Exception;
+	public List<Nutritionist> sideAll(String foodGCode,Criteria criteria) throws Exception;
 	//반찬 전체의 수량을 구합니다.
-	public int sideAllCount() throws Exception;
+	public int sideAllCount(String foodGCode) throws Exception;
 	//해당 메인페이지에 이달의 메뉴를 조회합니다.
 	public List<OrderList> thisMonth(Criteria criteria) throws Exception;
 	//이달의 메뉴의 개수를 구합니다.
