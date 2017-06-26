@@ -28,7 +28,9 @@
 	margin-top:23px;
 	margin-bottom:23px;
 }
-
+.logoBox{
+	margin-bottom:15px;
+}
 
 #sideBox {
 	float: right;
@@ -62,12 +64,12 @@
 
 </head>
 <body>
-	<div class="row">
+	<div class="w3-row logoBox">
 		<!-- 로고+고객정보 -->
 		<div class="col-sm-2 hidden-xs" id="logo" >
 			<!-- 로고박스 -->
 			<a href="main"><img class="img-responsive block-center"
-				src="../../dacham/resources/customerImage/dachamlogo.jpg"
+				src="resources/customerImage/dachamlogo.jpg"
 				max-width="100px" max-height="100px"></a>
 		</div>
 		<!-- 고객 로그인 페이지 -->

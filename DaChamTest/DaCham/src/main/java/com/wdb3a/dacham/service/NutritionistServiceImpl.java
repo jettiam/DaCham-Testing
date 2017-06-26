@@ -102,9 +102,9 @@ public class NutritionistServiceImpl implements NutritionistService {
 	}
 
 	@Override
-	public List<Nutritionist> sideAll() throws Exception {
+	public List<Nutritionist> sideAll(String foodGCode,Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.sideAll();
+		return dao.sideAll(foodGCode,criteria);
 	}
 
 	@Override
@@ -126,9 +126,9 @@ public class NutritionistServiceImpl implements NutritionistService {
 	}
 
 	@Override
-	public List<OrderList> thisMonth() throws Exception {
+	public List<OrderList> thisMonth(Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.thisMonth();
+		return dao.thisMonth(criteria);
 	}
 
 	@Override
@@ -147,6 +147,18 @@ public class NutritionistServiceImpl implements NutritionistService {
 	public int diseaseDietCount(String diseaseName) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.diseaseDietCount(diseaseName);
+	}
+
+	@Override
+	public int sideAllCount(String foodGCode) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.sideAllCount(foodGCode);
+	}
+
+	@Override
+	public int thisMonthCount() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.thisMonthCount();
 	}
 
 	

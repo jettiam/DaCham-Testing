@@ -17,7 +17,18 @@
 		from orderlist a join diet b
 		where a.dietCode = b.dietCode
 		and month(a.orderDate) between month(a.orderDate) and (month(a.orderDate)+1)
-		group by a.dietCode;
+		group by a.dietCode
+		limit #{startRecord},#{recordsPerPage}
+	</select>
+	<!-- 이달의 메뉴의 개수를 구합니다. -->
+	<select id = "thisMonthCount" resultType = "Integer">
+		select count(v.dietNAme) as count
+		from (select a.orderDate, b.dietName, b.dietImg 
+				from orderlist a join diet b
+				where a.dietCode = b.dietCode
+				and month(a.orderDate) between month(a.orderDate) and (month(a.orderDate)+1)
+				group by a.dietCode
+		) v
 	</select>
 	<!-- 반찬 전체를 조회합니다(with 식품군, 조리방법) -->
 	<select id = "sideAll" resultType = "com.wdb3a.dacham.bean.Nutritionist">
@@ -25,6 +36,16 @@
 		from sideDish a join foodGroup b join cookMethod c
 		where a.foodGCode = b.foodGCode
 		and a.cookMCode = c.cookMCode
+		and a.foodGCode = #{foodGCode}
+		limit #{criteria.startRecord},#{criteria.recordsPerPage}
+	</select>
+	<!-- 반찬 전체의 수량 구하기 -->
+	<select id = "sideAllCount" resultType = "Integer">
+		select count(a.sideDCode)
+		from sideDish a join foodGroup b join cookMethod c
+		where a.foodGCode = b.foodGCode
+		and a.cookMCode = c.cookMCode
+		and a.foodGCode = #{foodGCode}
 	</select>
 	<select id = "materialSearch" resultType = "com.wdb3a.dacham.bean.Nutritionist">
 		select *
@@ -47,8 +68,8 @@
 		where foodMName = #{foodMName}
 	</select>
 	<insert id = "createDiet">
-		insert into diet(diseaseCode, wizardCode, dietName, price, dietImg, spDietItem)
-		values (#{diseaseCode},#{wizardCode},#{dietName},#{price},#{dietImg},#{spDietItem})
+		insert into diet(diseaseCode, dietName, price, dietImg, spDietItem)
+		values (#{diseaseCode},#{dietName},#{price},#{dietImg},#{spDietItem})
 	</insert>
 	<select id="choiceDisease" resultType = "com.wdb3a.dacham.bean.Nutritionist">
 		select * from disease

@@ -5,7 +5,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%@include file="nutritionistNavi.jsp" %>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <link rel="stylesheet"
@@ -15,6 +15,7 @@
 
 <script>
 	$(document).ready(function(){
+		$("#wizard").addClass("w3-light-gray");
 		$("#regist").click(function(){
 			window.open("wizardMod", "", 'height=' + screen.height + ',width=' + screen.width + 'fullscreen=yes');
 		});
@@ -28,6 +29,7 @@
 </head>
 
 <body>
+<%@include file="nutritionistNavi.jsp" %>
 	<div class = "container">   
 		<div>
 			<input type = "datetime" name = "datetime" placeholder = "최근 위자드 갱신일" readonly>

@@ -27,6 +27,13 @@
 .optionView{
 	display:none;
 }
+.detailSideDImg{
+	max-width:150px;
+	max-height:100px;
+}
+#myHealthTable{
+	display:table;
+}
 @media only screen and (max-width: 736px) {
 	.myPageImg{
 		max-width: 50px;
@@ -117,15 +124,15 @@
 		</div>
 
 		<!-- 내 건강정보 -->
-		<div id="myHealthTableWrap">
-		<h2 class="text-center">내 건강정보</h2>
-			<table id="myHealthTable">
+		<div id="myHealthTableWrap" >
+		<h2 class="text-center">내 건강정보</h2><br>
+		<h3 class="text-center">${memberName}님의영양정보</h2>
+			<table id="myHealthTable" class="text-center center-block">
 				<tr>
 					<td><canvas id="myChart"></canvas></td>
-					<td><h2>${memberName}님의영양정보</h2> 아직 충분한 데이터가 존재하지 않습니다. <br>
-						주문을 하면 볼 수 있어요:)<br></td>
-				</tr>
+					</tr>
 			</table>
+			
 		</div>
 
 		<!-- 장바구니 -->
@@ -199,6 +206,78 @@ $(document).ready(function(){
 	    	$('#myOrderListTableWrap').hide();
 	        break;
 	    case 1:
+			var id = $("#customerId").val();
+			//1501022	2151813
+			/* alert(id); */
+	    	
+			$(".orderTr").remove();
+			$.ajax({
+				url:"customerAjax/myNutri",
+				headers : {
+		               "Content-Type" : "application/json",
+		               "X-HTTP-Method-Override" : "POST"
+		            },
+		            dataType : "json",
+				data:JSON.stringify({"id":id}),
+				type:"POST",
+				
+				success:function(data){
+				
+					cab=data.list[0].carbohydrate;
+					pro=data.list[0].protein;
+					fat=data.list[0].fat;
+					k=data.list[0].k;
+					ca=data.list[0].ca;
+					na=data.list[0].na;
+					
+					var ctx = document.getElementById("myChart");
+					var myChart = new Chart(ctx, {
+					    type: 'pie',
+					    data: {
+					        labels: [ "탄수화물",
+					                  "단백질",
+					                  "지방",
+					                  "나트륨",
+					                  "칼륨",
+					                  "칼슘"],
+					        datasets: [{
+					            label: '# of Votes',
+					            data: [cab, pro, fat, na, k, ca],
+					            backgroundColor: [
+					                'rgba(255, 99, 132, 1)',
+					                'rgba(54, 162, 235, 1)',
+					                'rgba(255, 206, 86, 1)',
+					                'rgba(75, 192, 192, 1)',
+					                'rgba(153, 102, 255, 1)',
+					                'rgba(255, 159, 64, 1)'
+					            ],
+					            borderColor: [
+					                'rgba(255,99,132,1)',
+					                'rgba(54, 162, 235, 1)',
+					                'rgba(255, 206, 86, 1)',
+					                'rgba(75, 192, 192, 1)',
+					                'rgba(153, 102, 255, 1)',
+					                'rgba(255, 159, 64, 1)'
+					            ],
+					        }]
+					    },
+					    options: {
+					/*         scales: {
+					            yAxes: [{
+					                ticks: {
+					                    beginAtZero:true
+					                }
+					            }]
+					        } */
+					           responsive: false,
+					           maintainAspectRatio: false
+					    }
+					});	
+					
+// 					$('#myHealthTable').append("<tr><td>총 섭취 칼로리 : "+data.list[0].kcal+"</td></tr>");
+				
+				}
+			});
 	    	$('#myInfoTableWrap').hide();
 	    	$('#myHealthTableWrap').show();
 	    	$('#myCartTableWrap').hide();    	
@@ -223,7 +302,7 @@ $(document).ready(function(){
 						var orderCode = data.list[i].orderCode;				
 						$('#myCartTable').append("<tr class='addTr' data-orderCode='"+data.list[i].orderCode+"'><td>"
 								+"<input type='checkbox' class='w3-check' name='cartCheck' value='"+data.list[i].dietCode+"' data-orderCode='"+data.list[i].orderCode+"'>"
-								+"</td><td><img class='myPageImg img-responsive pull-left' data-img="+data.list[i].dietImg+" src='displayFile?fileName="+data.list[i].dietImg
+								+"</td><td><img class='myPageImg img-responsive pull-left' data-img='"+data.list[i].dietImg+"' src='displayFile?fileName="+data.list[i].dietImg
 										+"' alt='이미지'>"
 										+"<span data-orderCode='"+data.list[i].orderCode+"' class='optiondown glyphicon glyphicon-chevron-down'>"						
 										+"주문상세</span></td><td class='dietName'>"+data.list[i].dietName
@@ -239,7 +318,7 @@ $(document).ready(function(){
 										+"<div class='"+orderCode+"_options' ></div>"
 										+"</td></tr>");
 								 for(var i=0; i<length; i++){
-									$("."+orderCode+"_options").html($("."+orderCode+"_options").html()+"<img src='"+value[i].sideDImg+"'/>"+value[i].sideDName);																		
+									$("."+orderCode+"_options").html($("."+orderCode+"_options").html()+"<div class='col-sm-2'><img class='detailSideDImg' src='displayFile?fileName="+value[i].sideDImg+"'/>"+value[i].sideDName+"</div>");																		
 								}	 						
 							}
 						})
@@ -283,7 +362,7 @@ $(document).ready(function(){
 					}else{
 						orderStatus="결제완료";
 					} */
-						$('#myOrderListTable').append("<tr class='orderTr'><td class='orderCode hidden-xs'>"+data.list[i].orderCode+"</td><td class='orderDate'>"+data.list[i].orderDate+"</td><td class='hidden-xs'><img class='img-responsive myPageImg' data-img="+data.list[i].dietImg+" src='displayFile?fileName="+data.list[i].dietImg+"' alt='이미지'></td><td class='dietName'>"+data.list[i].dietName+"</td><td class='dietAmount'>"+data.list[i].dietAmount+"</td><td class='price'><span>"+data.list[i].price+"</span>원"+"</td><td class='oItemCode' data-oItemCode='"+data.list[i].orderItemCode+"'>"+data.list[i].orderListStatus+"</td></tr>");
+						$('#myOrderListTable').append("<tr class='orderTr'><td class='orderCode hidden-xs'>"+data.list[i].orderCode+"</td><td class='orderDate'>"+data.list[i].orderDate+"</td><td class='hidden-xs'><img class='img-responsive myPageImg' data-img='"+data.list[i].dietImg+"' src='displayFile?fileName="+data.list[i].dietImg+"' alt='이미지'></td><td class='dietName'>"+data.list[i].dietName+"</td><td class='dietAmount'>"+data.list[i].dietAmount+"</td><td class='price'><span>"+data.list[i].price+"</span>원"+"</td><td class='oItemCode' data-oItemCode='"+data.list[i].orderItemCode+"'>"+data.list[i].orderListStatus+"</td></tr>");
 				}
 				}
 			});
@@ -366,7 +445,7 @@ $(document).ready(function(){
 		}
 		console.log(JSON.stringify(jsonData));
 		*/
-		alert(JSON.stringify(cartOrderInfo));
+		/* alert(JSON.stringify(cartOrderInfo)); */
 		$("#cartInfo").val(JSON.stringify(cartOrderInfo));
 		$("#cartForm").submit();
 	});
@@ -384,50 +463,10 @@ $(document).ready(function(){
 				
 	});
 	
-	var ctx = document.getElementById("myChart");
-	var myChart = new Chart(ctx, {
-	    type: 'pie',
-	    data: {
-	        labels: [ "탄수화물",
-	                  "단백질",
-	                  "지방",
-	                  "나트륨",
-	                  "칼륨",
-	                  "칼슘"],
-	        datasets: [{
-	            label: '# of Votes',
-	            data: [400, 90, 55, 10, 15, 20],
-	            backgroundColor: [
-	                'rgba(255, 99, 132, 1)',
-	                'rgba(54, 162, 235, 1)',
-	                'rgba(255, 206, 86, 1)',
-	                'rgba(75, 192, 192, 1)',
-	                'rgba(153, 102, 255, 1)',
-	                'rgba(255, 159, 64, 1)'
-	            ],
-	            borderColor: [
-	                'rgba(255,99,132,1)',
-	                'rgba(54, 162, 235, 1)',
-	                'rgba(255, 206, 86, 1)',
-	                'rgba(75, 192, 192, 1)',
-	                'rgba(153, 102, 255, 1)',
-	                'rgba(255, 159, 64, 1)'
-	            ],
-	        }]
-	    },
-	    options: {
-	/*         scales: {
-	            yAxes: [{
-	                ticks: {
-	                    beginAtZero:true
-	                }
-	            }]
-	        } */
-	           responsive: false,
-	           maintainAspectRatio: false
-	    }
-	});	
-});
+	
+
+
+});	
 function w3_open() {
     document.getElementById("mySidebar").style.display = "block";
     document.getElementById("myOverlay").style.display = "block";

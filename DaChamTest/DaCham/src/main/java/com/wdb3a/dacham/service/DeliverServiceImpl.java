@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.wdb3a.dacham.bean.Criteria;
 import com.wdb3a.dacham.bean.Deliver;
 import com.wdb3a.dacham.bean.Nutritionist;
 import com.wdb3a.dacham.bean.OrderList;
@@ -43,9 +44,14 @@ public class DeliverServiceImpl implements DeliverService {
 		dao.transportNum(orderList);
 	}
 	@Override
-	public List<OrderList> all() throws Exception {
+	public List<OrderList> all(String orderItemCode,Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.all();
+		return dao.all(orderItemCode,criteria);
+	}
+	@Override
+	public int allCount(String orderItemCode) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.allCount(orderItemCode);
 	}
 
 }

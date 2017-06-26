@@ -5,7 +5,6 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%@include file = "cookerNavi.jsp" %>
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <link rel="stylesheet"
@@ -25,6 +24,7 @@
 </style>
 <script>
 	$(document).ready(function(){
+		$("#cook").addClass("w3-light-gray");
 		$(document.body).on("click","#finishBtn",function(){
 			
 			
@@ -45,7 +45,7 @@
 					success : function(result){
 			
 						if(result == "SUCCESS"){
-							alert("완료되었습니다.");
+						
 							window.location.href = "cookList";
 						}
 					}
@@ -84,7 +84,7 @@
 			
 				$(data).each(function(index){
 					
-					str += "<tr id = 'cookResult1' data-code = '"+this.orderCode+"'>"+"<td>"+"<a href = '"+index+"' data-name = '"+this.sideDName+"'>"+this.sideDName+"</a>"+"</td>"+"<td>"+this.dietAmount+"</td>"+"</tr>"
+					str += "<tr id = 'cookResult1' data-code = '"+this.orderCode+"'>"+"<td>"+"<a href = '"+index+"' data-name = '"+this.sideDName+"'>"+this.sideDName+"</a>"+"</td>"+"<td>"+this.dietAmount+"인분</td>"+"</tr>"
 				});
 				$(".cook1").append(str);
 				
@@ -93,15 +93,16 @@
 	});
 </script>
 </head>
+<%@include file = "cookerNavi.jsp" %>
 <body>
-	<div>
-		
+	<div class="container" style = "height : 600px;">    
+	   <div class = "row">
 		<div style="float: left; width: 33%;"> 
 			<h1>조리 대기</h1>     
 		       <table class = "cook1 table table-hover">
 		           <tr>            
 		              <th>음식명</th>
-		              <th>주문수</th>
+		              <th>조리량</th>
 		           </tr>
 		           <tr class = "cookResult1">
 		           </tr>
@@ -112,7 +113,7 @@
 			<table  class = "cook2 table table-hover">
 			             <tr>
 			               <th>음식명</th>
-			               <th>주문수</th>
+			               <th>조리량</th>
 			            </tr>
 			            <tr class = "cookResult2">
 			            </tr>
@@ -122,18 +123,20 @@
 			<h1>조리완료</h1>        
 			<table  class = "cook3 table table-hover">
 		             <tr>
-		               <th>음식명</th>
-		               <th>주문수</th>
+		               <th>음식명</th>          
+		               <th>조리량</th>        
 		            </tr>
 		             <tr class = "cookResult3">
 		             	
-		             </tr>
+		             </tr>   
 		  		
 		  		</table>
 		</div>
-	</div>    
-	<div style = " margin-top : 500px; position : absolute;">
-		<button id = "finishBtn" class = "btn btn-primary">마감</button>
 	</div>
+		 
+	</div>    
+	<div style = "float:right; margin-right: 150px;">                        
+			<button id = "finishBtn" class = "btn btn-primary">마감</button>
+	</div>  
 </body>
 </html>

@@ -6,7 +6,7 @@
 <head>
  <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%@include file="nutritionistNavi.jsp" %>
+
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src = "../../../dacham/resources/openAPIjs/radarchart.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -17,10 +17,12 @@
 <script type="text/javascript" src="../../../dacham/resources/bootstrap-filestyle.min.js"> </script>	
 <script>
 	$(document).ready(function(){     
-		          
+		$("#diet").addClass("w3-light-gray");
+		var currentPage = 1;
+		var currentGroup = "";
 		var v = 0;
-		openAPI();      
-		sideAll();
+		  
+		sideAll(1,"01");
 		$("#sideAll").on("click",function(){
 			sideAll();
 		});
@@ -30,7 +32,7 @@
 			}
 		});
 		localStorage.clear();
-		
+		openAPI();    
 		if(!localStorage['init'] || isNaN(localStorage['count']) == true){
 			localStorage['init'] = "true";
 			localStorage['count'] = 0;   
@@ -39,13 +41,13 @@
 		$(document.body).on("click",".nameClick",function(){
 			$('#body').show();    
 			event.preventDefault();
-						
+			$(this).parent().parent().hide();	            		
 			var count = parseInt(localStorage['count']);
 			console.log(count);
 			var sideDImg = $(this).attr('data-img');
 			
 			var sideDCode = $(this).attr('data-code');
-
+			
 			$.getJSON("nutriAjax/allNutri/"+sideDCode,function(data){
 				var subCount = count - 1;
 				
@@ -67,11 +69,18 @@
 			Refresh();
 			v = count;
 		});
+		
 		$(document.body).on('click','.sideDImg',function(){
 			var count = parseInt(localStorage['count']);
-			var id = $(this).parent().attr('data-id');
+			var id = $(this).attr('data-id');
 			
-			$(this).remove();
+			var sideDCode = $('.sideDCode').val();
+			console.log("데이터:"+sideDCode);
+			var prev = $(this).prev().val();
+			$('.nameClick[data-code = "'+prev+'"]').parent().parent().show();   
+			$(this).prev().remove();
+			$(this).remove();       
+			
 			localStorage.removeItem(id+'_img');
 			localStorage.removeItem(id+'_codes');
 			localStorage.removeItem(id+'_kcal');
@@ -89,7 +98,7 @@
 		$(document.body).on("mouseover",".nameClick",function(){
 			var sideDCode = $(this).attr('data-code');
 			console.log("이것은"+sideDCode);
-			$.getJSON("nutriAjax/showKcal/"+sideDCode,function(data){
+			$.getJSON("nutriAjax/allNutri/"+sideDCode,function(data){
 				$("#sideDName").text(data.sideDName);
 				$("#kcal").text(data.kcal);
 				$("#carbohydrate").text(data.carbohydrate);
@@ -133,7 +142,7 @@
 				var sideDCode = localStorage[i + "_codes"];
 				
 				$('<input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '>').appendTo('.material');    
-				$('<img src = "displayFile?fileName='+sideDImg+'" style= "width: 75px; height: 25px;">').addClass("sideDImg").appendTo('.material');
+				$('<img src = "displayFile?fileName='+sideDImg+'" style= "width: 75px; height: 25px;">').attr('data-id',i).addClass("sideDImg").appendTo('.material');
 
 			}
 			
@@ -177,17 +186,60 @@
 				});
 				$(".searchTable").append(str);
 			});
-		});
+		});   
 		
-		function sideAll(){
+		$(".pagination").on("click","li a",function(){
+			event.preventDefault();
+			var replyPage = $(this).attr("href");
+			sideAll(replyPage,currentGroup);
+		});
+		$("#rice").on("click",function(){
+			sideAll(1,"01");
+		});
+		$("#soup").on("click",function(){
+			sideAll(1,"02");
+		});
+		$("#main1").on("click",function(){
+			sideAll(1,"03");
+		});
+		$("#main2").on("click",function(){
+			sideAll(1,"04");
+		});
+		$("#main3").on("click",function(){
+			sideAll(1,"05");
+		});
+		$("#main4").on("click",function(){
+			sideAll(1,"06");
+		});
+		function sideAll(page,foodGCode){
 			$(".searchResult").remove();
-			$.getJSON("nutriAjax/sideAll",function(data){
+			$.getJSON("nutriAjax/sideAll/"+page+"/"+foodGCode,function(data){
+				currentPage = page;
+				currentGroup = foodGCode;
+				console.log("이것만:"+foodGCode);
 				var str = "";
-				$(data).each(function(){
+				$(data.list).each(function(){
 					str += "<tr class = 'searchResult'><td><a class = 'nameClick' data-img = '"+this.sideDImg+"' data-code = '"+this.sideDCode+"'>"+this.sideDName+"</a></td>"+"<td>"+this.foodGName+"</td>"+"<td>"+this.cookMName+"</td></tr>"
 				});
+				
 				$(".searchTable").append(str);
+				printPaging(data.criteria);
 			});
+		}
+		function printPaging(criteria){
+			var str = "";
+					
+			if(criteria.prev){
+				str += "<li><a href=''"+(criteria.startPage-1)+"'>'" + "<<"+"</a></li>";
+			}
+			for(var i = criteria.startPage; i<=criteria.endPage; i++){
+				var strClass = criteria.page == i?"class = 'active'":"";
+				str += "<li "+strClass+"><a href ='"+i+"'>"+i + "</a></li>";
+			}
+			if(criteria.next){
+				str += "<li><a href=''"+(criteria.endPage+1)+"'>'" + ">>"+"</a></li>";
+			}
+			$(".pagination").html(str);
 		}
 	});
 	
@@ -199,7 +251,7 @@
   float:left;  }
   
  .box2 {
-  display:inline-block;  margin-left:10px; position : absolute;}
+  display:inline-block;  margin-left:10px;}       
   .div1 {
   float:left;  }
  .div2 {
@@ -223,25 +275,24 @@
 </style>
 </head>
 <body>
+<%@include file="nutritionistNavi.jsp" %>
 	<div class = "container">
 		<div class = "div1">
 			<div class = "box2">
 				<table class = "table table-hover">
 					<tr>
-						<th>반찬명&nbsp;&nbsp;</th>
 						<th>열량&nbsp;&nbsp;</th>
 						<th>탄수화물&nbsp;&nbsp;</th>
 						<th>단백질&nbsp;&nbsp;</th>
 						<th>지방&nbsp;&nbsp;</th>
 						<th>나트륨&nbsp;&nbsp;</th>    
-					</tr>
+					</tr>      
 					<tr>
-						<td id = "sideDName"></td>
-						<td id = "kcal"></td>
-						<td id = "carbohydrate"></td>
-						<td id = "protein"></td>
-						<td id = "fat"></td>
-						<td id = "na"></td>
+						<td id = "kcal">&nbsp;&nbsp;&nbsp;</td>
+						<td id = "carbohydrate">&nbsp;&nbsp;&nbsp;</td>
+						<td id = "protein">&nbsp;&nbsp;&nbsp;</td>
+						<td id = "fat">&nbsp;&nbsp;&nbsp;</td>
+						<td id = "na">&nbsp;&nbsp;&nbsp;</td>
 					</tr>
 				</table>
 			</div>
@@ -249,7 +300,13 @@
 			<div>
 				<input type = "text" name = "search" id = "keyword" placeholder = "반찬 검색란">
 				<button id = "search" class = "btn btn-primary">검색</button>
-				<button id=  "sideAll" class = "btn btn-primary">전체목록</button><br>
+				<br>
+				<button id = "rice" class = "btn btn-info">밥</button>
+				<button id = "soup" class = "btn btn-info">국</button>
+				<button id = "main1" class = "btn btn-info">메인 메뉴1</button>
+				<button id = "main2" class = "btn btn-info">메인 메뉴2</button>
+				<button id = "main3" class = "btn btn-info">메인 메뉴3</button>
+				<button id = "main4" class = "btn btn-info">메인 메뉴4</button>
 				<table class = "searchTable table table-hover">          
 					<tr>    
 						<th>반찬명</th>
@@ -261,6 +318,8 @@
 						</tr>
 						
 				</table>
+				<ul class = "pagination">
+				</ul>
 			</div>
 		</div>
 		<input type = "hidden" name = "kcal" id = "kcal">
@@ -283,12 +342,7 @@
 			</div>
 		
 			<div class = "div2" style = "border-left:1px solid #000; position:absolute; margin-top : 45px;"> 
-			    <h2>위자드 선택</h2>
-			   
-				    <input type = "radio" name = "wizardCode" value = "1"> 고위험군 당뇨병<br>
-					<input type = "radio" name = "wizardCode" value = "2"> 저위험 고지혈증<br>
-					<input type = "radio" name = "wizardCode" value = "3"> 주의 신부전증
-				       
+			  
 				<hr align = "left" width = "40%">
 				
 				<div class = "template">
@@ -322,7 +376,7 @@
 				</div>
 				<div id = "spDietItem">
 					<input type = "radio" name = "spDietItem" value = "0">특별식단
-					<input type = "radio" name = "spDietItem" value = "1">일반식단
+					<input type = "radio" name = "spDietItem" value = "1" checked>일반식단
 				</div>
 				
 			</div>
@@ -369,6 +423,6 @@
 		}
 	}
 	</script>
-	<script src = "../../../dacham/resources/openAPIjs/APIQuery.js"></script>
+	<script src = "resources/openAPIjs/APIQuery.js"></script>
 </body>
 </html>

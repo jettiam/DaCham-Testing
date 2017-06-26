@@ -8,7 +8,6 @@
 <head>
  <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%@include file="nutritionistNavi.jsp" %>
 <title>Insert title here</title>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src = "../../../dacham/resources/openAPIjs/radarchart.js"></script>
@@ -69,6 +68,7 @@
 </style>
 </head>
 <body>
+<%@include file="nutritionistNavi.jsp" %>
 	<div class = "container">
 		<div class = "div1">
 		
@@ -140,11 +140,12 @@
 						<td>
 							<select name = "foodGCode">
 								<option>식품군</option>
-								<option value = "01">곡류</option>
-								<option value = "02">조미류</option>
-								<option value = "03">채소군</option>
-								<option value = "04">생선류</option>
-								<option value = "05">고기류</option>
+								<option value = "01">밥</option>
+								<option value = "02">국</option>
+								<option value = "03">메인메뉴1</option>
+								<option value = "04">메인메뉴2</option>
+								<option value = "05">메인메뉴3</option>
+								<option value = "06">메인메뉴4</option>
 							</select>
 						</td>
 						<td>
@@ -173,6 +174,7 @@
 	<script>
 
 		$(document).ready(function(){
+			$("#side").addClass("w3-light-gray");
 			openAPI();
 			
 			var v = 0;
@@ -181,7 +183,7 @@
 			});
 			$("#regist").on("click",function(){
 				if(!localStorage['init'] || isNaN(localStorage['cnt'])==true || localStorage['cnt'] == 0){
-					alert("등록할 식재료를 선택하세요");
+					/* alert("등록할 식재료를 선택하세요"); */
 					event.preventDefault();
 				}
 				else{
@@ -288,14 +290,14 @@
 			$("#search").on("click",function(){
 				$(".searchResult").remove();
 				var search = $("#keyword").val();
-				alert("검색값:"+search);
+				/* alert("검색값:"+search); */
 				$.getJSON("nutriAjax/searching/"+search,function(data){
 					var str = "";
 					$(data).each(function(){
 						str += "<tr class = 'searchResult'><td>"+this.foodMCode+"</td>"+"<td>"+"<a class = 'nameClick' data-src = '"+this.foodMName+"' data-code = '"+this.foodMCode+"'>"+this.foodMName+"</a></td></tr>";
 					});
 					$(".searchTable").append(str);
-					alert(str);
+					/* alert(str); */
 				});
 			});
 			

@@ -12,7 +12,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <title>DaCham 다참소개</title>
 <style>
 #infoWrap {
@@ -100,8 +100,8 @@ img {
 	<%@include file="../../clientNavi.jsp"%>
 	<div id="dachamInfoMainImg">
 		<!-- 다참인포 메인이미지 -->
-		<img id="infotop" src="../../../dacham/resources/customerImage/dinfotop.jpg">
-		<img id="infotop_m" src="../../../dacham/resources/customerImage/dinfotop_m.png">
+		<img id="infotop" src="resources/customerImage/dinfotop.jpg">
+		<img id="infotop_m" src="resources/customerImage/dinfotop_m.png">
 	</div>
 
 	<div id="infoWrap">
@@ -116,7 +116,7 @@ img {
 			<br>
 			<div id="infoExplain">
 				<div id="infoExplainImgBox">
-					<img src="../../../dacham/resources/customerImage/dinfob.jpg"
+					<img src="resources/customerImage/dinfob.jpg"
 						id="infoExplainImg">
 				</div>
 				<div id="infoExplainText">

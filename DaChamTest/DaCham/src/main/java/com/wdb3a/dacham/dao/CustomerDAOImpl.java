@@ -83,4 +83,10 @@ public int getOneDCode(HashMap rInfo) throws Exception {
 	return sqlSession.selectOne(namespace+".getOneDCode", rInfo);
 }
 
+@Override
+public List<Customer> myNutri(String id) throws Exception {
+	// TODO Auto-generated method stub
+	return sqlSession.selectList(namespace+".myNutri",id);
+}
+
 }

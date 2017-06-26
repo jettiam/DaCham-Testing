@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="shortcut icon" href="resources/favicon/N.ico">
-<%@include file="nutritionistNavi.jsp" %>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -16,13 +16,19 @@
 	$(document).ready(function(){
 		orderList(1);
 		var currentPage = 1;
-		$(".pagination").on("click","li a",function(){
+		var doubleCurrentPage = 1;
+		$(".pagination1").on("click","li a",function(){
 			event.preventDefault();
 			var replyPage = $(this).attr("href");
 			orderList(replyPage);
 		});
+		$(".pagination2").on("click","li a",function(){
+			event.preventDefault();
+			var replyPage = $(this).attr("href");
+			thisMonth(replyPage);
+		});
 		
-		thisMonth();
+		thisMonth(1);
 		function orderList(page){
 			currentPage = page;
 			$(".orderResult").remove();
@@ -35,14 +41,16 @@
 				printPaging(data.criteria);
 			});             
 		}
-		function thisMonth(){
+		function thisMonth(page){
 			$(".monthResult").remove();
-			$.getJSON("nutriAjax/thisMonth",function(data){
+			$.getJSON("nutriAjax/thisMonth/"+page,function(data){
+				doubleCurrentPage = page;
 				var str = "";
-				$(data).each(function(){
+				$(data.list).each(function(){
 					str += "<ul class = 'monthResult'>"+"<li>"+"<img src = 'displayFile?fileName="+this.dietImg+"' style = 'width: 75px; height: 25px;'>"+this.dietName+"</li>"+"</ul>";
 				});
 				$(".thisMonth").append(str);
+				printPaging2(data.criteria);
 			});
 		}
 		function printPaging(criteria){
@@ -58,7 +66,22 @@
 			if(criteria.next){
 				str += "<li><a href=''"+(criteria.endPage+1)+"'>'" + ">>"+"</a></li>";
 			}
-			$(".pagination").html(str);
+			$(".pagination1").html(str);
+		}
+		function printPaging2(criteria){
+			var str = "";
+					
+			if(criteria.prev){
+				str += "<li><a href=''"+(criteria.startPage-1)+"'>'" + "<<"+"</a></li>";
+			}
+			for(var i = criteria.startPage; i<=criteria.endPage; i++){
+				var strClass = criteria.page == i?"class = 'active'":"";
+				str += "<li "+strClass+"><a href ='"+i+"'>"+i + "</a></li>";
+			}
+			if(criteria.next){
+				str += "<li><a href=''"+(criteria.endPage+1)+"'>'" + ">>"+"</a></li>";
+			}
+			$(".pagination2").html(str);
 		}
 	});
 </script>
@@ -75,8 +98,10 @@
 </style>
 </head>
 <body>
+<%@include file="nutritionistNavi.jsp" %>
   <div class = "container">
    <div class = "box1">
+   	  <h3>공지사항</h3>
       <div>
          <select>
             <option>등록자</option>
@@ -107,7 +132,7 @@
       </div>
    </div>
    <div class = "box2">
-   	
+   	  <h2>고객 식단 요청 리스트</h2>
       <table class = "orderTable table table-hover">      
          <tr>
             <th>번호&nbsp;&nbsp;&nbsp;</th>
@@ -120,7 +145,7 @@
             
          </tr>
       </table>
-      <ul class = "pagination">
+      <ul class = "pagination1 pagination">
       </ul>
    </div>
    <div class = "thisMonth">
@@ -128,6 +153,8 @@
       <hr align = "left" width = "20%">
      <ul class = "monthResult">
      	<li></li>
+     </ul>
+     <ul class = "pagination2 pagination">
      </ul>
    </div>
   </div> 

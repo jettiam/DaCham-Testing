@@ -14,7 +14,19 @@
 	href="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-light-green.css">
+
+<style>
+.dietImg{
+/* max-width:650px;
+max-height:350px; */
+}
+.sideDImg{
+/* max-width:250px;
+mat-height:200px; */
+}
+</style>
 <title>DaCham 식단상세보기</title>
 <script>
 	function getDishList(a) {
@@ -31,10 +43,10 @@
 											function(data) { //데이터 받아옴 data.list로 사용
 												for (var i = 0; i < data.list.length; i++) {
 													b
-															.append("<label><div class='foodGSideD' data-sideDCode='"+data.list[i].sideDCode+"'>"
-																	+ "<input type='radio' name='"+data.list[i].foodGCode+"' value='"+data.list[i].sideDCode+"' />"
-																	+ "<img src='http://via.placeholder.com/150x150'>"
-																	//<img class='sideDImg' src='displayFile?fileName="	+ data.list[i].sideDImg//+ "'>"
+															.append("<label><div class='' data-sideDCode='"+data.list[i].sideDCode+"'>"
+																	+ "<input type='radio' style='display:none' name='"+data.list[i].foodGCode+"' value='"+data.list[i].sideDCode+"' />"
+																	/* + "<img src='http://via.placeholder.com/150x150'>" */
+																	+"<img class='sideDImg' src='displayFile?fileName="	+ data.list[i].sideDImg+"'>"
 																	+ data.list[i].sideDName
 																	+ "  <table><tr><td>칼로리</td><td>탄수화물</td><td>단백질</td><td>지방</td><td>나트륨</td></tr><tr><td>"
 																	+ data.list[i].kcal
@@ -73,7 +85,7 @@
 				if(i==0){
 				div.append(
 							"<div class='column foodGSideD backColor' data-sideDCode='"+data.list[i].sideDCode+"'>"							
-							+"<img class='thumbnail' src='http://placehold.it/350x200'>"
+							+"<img class='thumbnail' src='displayFile?fileName="+data.list[i].sideDImg+"'>"
 							+"<h5 style='text-align:center'>"+data.list[i].sideDName+"</h5>"
 							+"<table class='table' >"
 							+"<tr><th>칼로리</th><td>"+kcal+"</td></tr>"
@@ -83,13 +95,13 @@
 							+"<tr><th>나트륨</th><td>"+na+"</td></tr>"
 							+"</table>"							
 							+"<a class='sideButton button hollow tiny expanded'>선택 하기</a>"
-							+"<input type='radio' name='"+foodGCode+"' value='"+data.list[i].sideDCode+"' checked='true'/>"
+							+"<input type='radio' style='display:none' name='"+foodGCode+"' value='"+data.list[i].sideDCode+"' checked='true'/>"
 							+"</div>"
 						);
 				}else{
 					div.append(
 							"<div class='column foodGSideD' data-sideDCode='"+data.list[i].sideDCode+"'>"		
-							+"<img class='thumbnail' src='http://placehold.it/350x200'>"
+							+"<img class='thumbnail' src='displayFile?fileName="+data.list[i].sideDImg+"'>"
 							+"<h5 style='text-align:center'>"+data.list[i].sideDName+"</h5>"
 							+"<table class='table' >"
 							+"<tr><th>칼로리</th><td>"+kcal+"</td></tr>"
@@ -99,7 +111,7 @@
 							+"<tr><th>나트륨</th><td>"+na+"</td></tr>"
 							+"</table>"							
 							+"<a class='sideButton button hollow tiny expanded'>선택 하기</a>"
-							+"<input type='radio' name='"+foodGCode+"' value='"+data.list[i].sideDCode+"' />"
+							+"<input type='radio' style='display:none' name='"+foodGCode+"' value='"+data.list[i].sideDCode+"' />"
 							+"</div>"
 						);
 				}				
@@ -107,11 +119,11 @@
 		});
 	}
 	
-	function activeRadio(btn){		
-		alert("클릭되었습니다.");
+/* 	function activeRadio(btn){		
+		//alert("클릭되었습니다."); 
 		var inputBtn = btn.find("input:radio");
 		inputBtn.attr("checked", true);
-	}
+	} */
 
 	function getCheckedList(a) {
 		var arrInx = 0;
@@ -136,9 +148,23 @@
 	}
 
 	$(document).ready(function() {
-		$(document).on("click", ".sideButton", function(){
-			activeRadio($(this).parent());
+		$(document).on("click", ".foodGSideD", function(){
+			var foodGCode= $(this).children("input").attr("name");
+			
+			$(this).siblings().removeClass("w3-theme-l4");
+			$(this).addClass("w3-theme-l4");
+			var img = $(this).children("img").attr("src");
+			//alert(img);
+			var sideDName=$(this).children("h5").text();			
+			//alert(foodGCode);
+			$(".defaultFood[data-foodGCode='"+foodGCode+"']>img").attr("src",img);
+			$(".defaultFood[data-foodGCode='"+foodGCode+"']>.defaultSideDName").text(sideDName);
+			console.log($(".defaultFood[data-foodGCode='"+foodGCode+"']>img"));
+			$(this).siblings().children(":input").removeAttr("checked");
+			$(this).children(":input").attr("checked",true);
+			//activeRadio($(this));
 		});
+		
 		getDish($("#panel1>div"), "01");
 		getDish($("#panel2>div"),"02");
 		getDish($("#panel3>div"), "03");
@@ -199,9 +225,18 @@
 
 	<div class="row">
 		<div class="medium-6 columns">
-			<img class="thumbnail" src="http://placehold.it/650x450">
+			<img class="thumbnail" class="dietImg" data-dietImg="${list[0].dietImg}" src='displayFile?fileName=${list[0].dietImg}'>
 			<div class="row small-up-3">
 				<!-- <img src="resources/customerImage/option_list.png"> -->
+				<c:forEach items="${list}" var="list">
+				<div class="column defaultFood" data-foodGCode='${list.foodGCode}'>
+						
+						<img class="thumbnail sideDImg" src='displayFile?fileName=${list.sideDImg}'>
+					
+					<div class="defaultSideDName">${list.sideDName}</div>
+				</div>
+				</c:forEach>
+				<!-- 
 				<div class="column">
 					<img class="thumbnail t1"
 						src="resources/customerImage/detail_option_img.png">
@@ -220,7 +255,7 @@
 				</div>
 				<div class="column">
 					<img class="thumbnail t6" src="http://placehold.it/250x200">
-				</div>
+				</div> -->				
 			</div>
 		</div>
 

@@ -104,9 +104,12 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 	}
 
 	@Override
-	public List<Nutritionist> sideAll() throws Exception {
+	public List<Nutritionist> sideAll(String foodGCode,Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".sideAll");
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("foodGCode", foodGCode);
+		map.put("criteria", criteria);
+		return sqlSession.selectList(namespace+".sideAll",map);
 	}
 
 	@Override
@@ -131,9 +134,9 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 	}
 
 	@Override
-	public List<OrderList> thisMonth() throws Exception {
+	public List<OrderList> thisMonth(Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".thisMonth");
+		return sqlSession.selectList(namespace+".thisMonth",criteria);
 	}
 
 	@Override
@@ -152,6 +155,18 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 	public int diseaseDietCount(String diseaseName) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace+".diseaseDietCount",diseaseName);
+	}
+
+	@Override
+	public int sideAllCount(String foodGCode) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".sideAllCount",foodGCode);
+	}
+
+	@Override
+	public int thisMonthCount() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".thisMonthCount");
 	}
 
 	

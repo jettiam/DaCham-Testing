@@ -1,68 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<!DOCTYPE>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<title>Insert title here</title>
-<!-- 상단 내비게이션 표시를 위한 임시 CSS -->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-indigo.css">
 <style>
-.naviBox {
-	background-color: lightgray;
-	margin-top: 10px;
+.w3-display-container{
+height:180px;
 }
-
-.box {
-	display: inline-block;
-	height: 50px;
-	padding: 0 20px;
-	font-size: 25px;
-	list-style-type: none;
+#headerBox{
+margin-bottom:20px;
 }
-.mateInfoBox{
-	float:right;
-	margin:20px 20px 0 0;
-	font-size:20px;
-}
-#logo{
-	margin :5px;
-}
-
 </style>
-<!-- 상단 내비게이션 표시를 위한 임시 CSS -->
-
-</head>
 <body>
 	<div id="headerBox">
 		<!-- 로고 -->
-		<div class="mateNavi">
-			<!-- 로고박스 -->
-			<a href="nutriMain"><img src="http://placehold.it/100x100" id="logo"></a>
-			<div class="mateInfoBox">
-				<!-- 이름 출력. 로그아웃 -->	
-				${EmpDept}<br>				
-				${EmpGrade} ${EmpName} | <a href="empLogout">로그아웃</a>
+		<div class="w3-container">
+			<!-- 로고박스 --> 
+			<div class="w3-display-container col-sm-1">			
+			<div class="w3-display-middle"><a href="nutriMain"><img src="resources/customerImage/dachamlogo.jpg" id="logo"></a>			
+			</div></div>			
+			<div class="w3-display-container col-sm-2"><div class="w3-display-middle h1">${EmpDept}</div></div>
+			<div class="col-sm-4"></div>
+			<div class="w3-display-container col-sm-4">								
+				<div class="w3-display-right h3">${EmpGrade} ${EmpName}<br><a href="empLogout">로그아웃</a></div>
 			</div>
 		</div>
-	</div>
+	
 	<!-- 상단 메뉴바 -->
-	<div class="naviBox">
-		<ul class="">
-			<!-- 메뉴 리스트 -->
-			<li class="box"><a href="wizard" id="dachamInfo">식단위자드 관리</a></li>
-			<li class="box"><a href="diet" id="dietOrder">식단관리</a></li>
-			<li class="box"><a href="side" id="menuShow">반찬관리</a></li>
-
-		</ul>
+	<div class="w3-bar w3-border w3-theme-d5 w3-xlarge">
+	<div class="w3-container">
+	  <a href="wizard" class="w3-bar-item w3-button w3-hover-light-gray" id="wizard">식단 위자드 관리</a>
+	  <a href="diet" class="w3-bar-item w3-button w3-hover-light-gray" id="diet">식단 관리</a>	 
+	 <a href="side"  class="w3-bar-item w3-button w3-hover-light-gray" id="side">반찬 관리</a>	
 	</div>
+	</div>
+	
+	</div>
+	
 </body>
-</html>

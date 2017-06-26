@@ -48,7 +48,7 @@ display:none;}
 	<div class="row">
 		<div class="col-sm-9" id="mainImgWrap">
 			<!-- 메인페이지 메인이미지 -->
-			<img class="img-responsive" src="../../dacham/resources/customerImage/dmain.jpg">
+			<img class="img-responsive" src="resources/customerImage/dmain.jpg">
 		</div>
 
 
@@ -58,23 +58,23 @@ display:none;}
 				<!-- 로그인박스 하단 작은 사이즈 식단 이미지 -->
 				<table>
 					<tr>
-						<td><a href="detailOrder?dietCode=1"><img src="../../dacham/resources/customerImage/dietImg/d01.JPG"
+						<td><a href="detailOrder?dietCode=1"><img src="resources/customerImage/dietImg/d01.JPG"
 							id=mainMenuImg class="mainMenuImg1 img-responsive"></a></td>
-						<td><a href="detailOrder?dietCode=2"><img src="../../dacham/resources/customerImage/dietImg/d02.JPG"
+						<td><a href="detailOrder?dietCode=2"><img src="resources/customerImage/dietImg/d02.JPG"
 							class="mainMenuImg2 img-responsive"></a></td>
 					</tr>
 
 					<tr>
-						<td><a href="detailOrder?dietCode=3"><img src="../../dacham/resources/customerImage/dietImg/d03.JPG"
+						<td><a href="detailOrder?dietCode=3"><img src="resources/customerImage/dietImg/d03.JPG"
 							class="mainMenuImg3 img-responsive"></a></td>
-						<td><a href="detailOrder?dietCode=3"><img src="../../dacham/resources/customerImage/dietImg/d05.JPG"
+						<td><a href="detailOrder?dietCode=3"><img src="resources/customerImage/dietImg/d05.JPG"
 							class="mainMenuImg4 img-responsive"></a></td>
 					</tr>
 
 					<tr>
-						<td><a href="detailOrder?dietCode=2"><img src="../../dacham/resources/customerImage/dietImg/m16.JPG"
+						<td><a href="detailOrder?dietCode=2"><img src="resources/customerImage/dietImg/m16.JPG"
 							class="mainMenuImg5 img-responsive"></a></td>
-						<td><a href="detailOrder?dietCode=1"><img src="../../dacham/resources/customerImage/dietImg/d20.JPG"
+						<td><a href="detailOrder?dietCode=1"><img src="resources/customerImage/dietImg/d20.JPG"
 							class="mainMenuImg6 img-responsive"></a></td>
 					</tr>
 				</table>
@@ -98,7 +98,7 @@ display:none;}
 </tr>
 </table>
 
-<table id = "mainShowNutriTable" class="table-bordered text-center table">
+<table id = "mainShowNutriTable" class="table-bordered text-center mainNT2">
 <tr class="NutriTable">
 <td class="NutriTable">칼로리</td>
 <td class="NutriTable">나트륨</td>

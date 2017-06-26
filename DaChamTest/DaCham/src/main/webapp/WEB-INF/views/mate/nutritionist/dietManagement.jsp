@@ -5,7 +5,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%@include file="nutritionistNavi.jsp" %>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -13,6 +13,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
 	$(document).ready(function(){
+		$("#diet").addClass("w3-light-gray");
 		var currentPage = 1;
 		var diseaseName = "";
 		$("#regist").click(function(){
@@ -80,6 +81,7 @@
 </style>
 </head>
 <body>
+<%@include file="nutritionistNavi.jsp" %>
 	<div class = "container">
    <div class = "box1">
       <table>
@@ -93,7 +95,7 @@
       </table>
       <nav>
          <ul class = "diseaseNation">
-            <li><a data-name = "당뇨병">당뇨병</a></li>
+            <li><a data-name = "당뇨">당뇨</a></li>
             <li><a data-name = "고지혈증">고지혈증</a></li>
             <li><a data-name = "심부전증">심부전증</a></li>
             <li><a data-name = "신부전증">신부전증</a></li>

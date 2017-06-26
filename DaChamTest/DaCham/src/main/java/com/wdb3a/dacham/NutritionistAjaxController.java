@@ -183,12 +183,23 @@ public class NutritionistAjaxController {
 	}
 	
 	//반찬 목록을 조회합니다.
-	@RequestMapping(value = "/sideAll",method = RequestMethod.GET)
-	public ResponseEntity<List<Nutritionist>> sideAll(){
-		 ResponseEntity<List<Nutritionist>> entity = null;
+	@RequestMapping(value = "/sideAll/{page}/{foodGCode}",method = RequestMethod.GET)
+	public ResponseEntity<Map<String,Object>> sideAll(@PathVariable("page")int page,@PathVariable("foodGCode")String foodGCode){
+		 ResponseEntity<Map<String,Object>> entity = null;
 		 try {
-			List<Nutritionist> list = service.sideAll();
-			entity = new ResponseEntity<>(list,HttpStatus.OK);
+			Criteria criteria = new Criteria();
+			criteria.setPage(page);
+			criteria.setRecordsPerPage(7);
+			int totalCount = service.sideAllCount(foodGCode);
+			criteria.setTotalCount(totalCount);
+			List<Nutritionist> list = service.sideAll(foodGCode,criteria);
+			Map<String,Object> map = new HashMap<>();
+			map.put("list", list);
+			map.put("criteria", criteria);
+		
+			entity = new ResponseEntity<>(map,HttpStatus.OK);
+			
+			System.out.println("리스트 출력"+list);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -259,12 +270,20 @@ public class NutritionistAjaxController {
 		return entity;
 	}
 	//해당 월에 대한 메뉴 표시
-	@RequestMapping(value=  "/thisMonth",method = RequestMethod.GET)
-	public ResponseEntity<List<OrderList>> thisMonth(){
-		ResponseEntity<List<OrderList>> entity = null;
+	@RequestMapping(value=  "/thisMonth/{page}",method = RequestMethod.GET)
+	public ResponseEntity<Map<String,Object>> thisMonth(@PathVariable("page")int page){
+		ResponseEntity<Map<String,Object>> entity = null;
 		try {
-			List<OrderList> list = service.thisMonth();
-			entity = new ResponseEntity<>(list,HttpStatus.OK);
+			Criteria criteria = new Criteria();
+			criteria.setPage(page);
+			int totalCount = service.thisMonthCount();
+			criteria.setRecordsPerPage(5);
+			criteria.setTotalCount(totalCount);
+			List<OrderList> list = service.thisMonth(criteria);
+			Map<String,Object> map = new HashMap<>();
+			map.put("list", list);
+			map.put("criteria", criteria);
+			entity = new ResponseEntity<>(map,HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

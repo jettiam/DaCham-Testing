@@ -6,7 +6,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%@include file = "cookerNavi.jsp" %>
+
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <link rel="stylesheet"
@@ -15,6 +15,7 @@
    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
 	$(document).ready(function(){
+		$("#cookList").addClass("w3-light-gray");
 		$("#button").on("click",function(){
 			window.location.href = "cook";
 		});
@@ -22,9 +23,9 @@
 </script>
 </head>
 <body>
-	
+	<%@include file = "cookerNavi.jsp" %>
 	<div class = container>
-	<h1>조리 목록</h1>
+	<h1>조리 대기</h1>
 		<button id = "button" class = "btn btn-primary">조리시작</button>
 		<table class ="table table-hover">
 			<tr>

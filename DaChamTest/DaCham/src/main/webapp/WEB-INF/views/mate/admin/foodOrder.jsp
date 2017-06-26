@@ -7,7 +7,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%@include file="../admin/upmenu.jsp"%>
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<link rel="stylesheet"
@@ -18,6 +18,7 @@
 
 </head>
 <body>
+<%@include file="../admin/upmenu.jsp"%>
 	<div class="container">
 	<div class="form-group row">
 	<div class="col-xs-2"> 
@@ -35,7 +36,7 @@
 	</div>
 	</div>
 	<div>
-		<table id="foodMTable" width="600" class="foodMTable table table-condensed">
+		<table id="foodMTable" class="foodMTable table table-condensed"> 
 			<tr>
 				<th>코드번호</th>
 				<th>식재료명</th>
@@ -87,6 +88,9 @@
 	</div>
 	<button id="foodMOrder" class = "btn btn-default">식재료 주문서 보내기</button>
 	</div>
+	<form id="foodMOrderForm" action="mailSending" method="post">  
+		<input type="hidden" name="foodMOrderInfo" id="foodMOrderInfo">
+	</form>
 
 	<script>
 	var divlength = $(".length .length2").size();
@@ -96,7 +100,7 @@
 			$(".foodStock").remove(); 
 			var str = "";
 			for(var i =0; i<data.length; i++){
-				str += "<tr class='foodStock'>"+"<td>"+data[i].foodMCode+"</td>"+"<td>"+data[i].foodMName+"</td>"+"<td>"+data[i].price+"</td>"+"<td><input type='text' class='Stock' size='4'></td>"+"<td>"+data[i].uint+"</td>"+"<td><button class='btn btn-primary'>주문</button></td>"+"</tr>"		 
+				str += "<tr class='foodStock'>"+"<td>"+data[i].foodMCode+"</td>"+"<td>"+data[i].foodMName+"</td>"+"<td>"+data[i].price+"</td>"+"<td><input type='text' class='Stock' size='4'></td>"+"<td>"+data[i].uint+"</td>"+"<td><button class='orderBtn btn btn-primary'>주문</button></td>"+"</tr>"		 
 			}
 			console.log(str);
 			$(".foodMTable").append(str); 
@@ -105,9 +109,43 @@
 	
 	
 			
-		$(document)
-				.ready(
-						function() {
+		$(document).ready(function() {
+			$("#foodMOrder").on("click", function(){
+				var foodMOrderInfo = {};
+				var y=0;
+				for(var i =1; i<=divlength; i++){
+
+					var foodMname = $("#foodMName"+i).val();
+					var price = $("#price"+i).val();
+					var foodMAmount = Number($("#foodMAmount"+i).val())*0.001;
+					var unit = $("#unit"+i).val();
+					 var jsonData ={					
+							"foodMname":foodMname,
+							"price":price,
+							"foodMAmount":foodMAmount,
+							"price":price,
+							"unit":unit
+					}	
+					foodMOrderInfo[y]=jsonData;
+					y++; 
+					
+					//alert(foodMname);
+					//alert(price);
+					//alert(foodMAmount);
+					//alert(unit);
+				}    
+				console.log(foodMOrderInfo);   
+				$("#foodMOrderInfo").val(JSON.stringify(foodMOrderInfo));
+				$("#foodMOrderForm").submit();
+
+			  
+				//alert(content.length);		 
+				//alert(content)
+			});
+			
+			
+			
+			
 							/* $("#foodMOrder")
 									.on(
 											"click",
@@ -192,15 +230,18 @@
 										+"</td>"+"<td>"
 										+$("#price"+i).val()
 										+"</td>"+"<td>"
-										+$("#foodMAmount"+i).val()
+										+Number($("#foodMAmount"+i).val())*0.001
 										+"</td>"+"<td>"
 										+$("#unit"+i).val()
-										+"</td>" 
+										+"</td> </tr>" 
 									} 
 									console.log(str);
 									$(".tables").append(str); 
 								
 							} 
+							
+								$("#foodStock").addClass("w3-light-gray");
+							
 						});
 	</script>
 </body>
