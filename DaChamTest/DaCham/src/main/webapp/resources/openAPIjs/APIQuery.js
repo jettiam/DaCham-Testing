@@ -6,7 +6,7 @@ function openAPI(){
 		var colorscale = d3.scale.category10();
 		
 		//Legend titles
-		var LegendOptions = ['선택 반찬의 영양정보'];
+		var LegendOptions = ['선택 반찬의 영양정보(g)'];
 		//Data
 		var protein = 0;
 		var carbohydrate = 0;
@@ -31,12 +31,12 @@ function openAPI(){
 		console.log("단백질"+fat);     
 		var d = [
 			  [
-				{axis: "단백질",value: protein},
-				{axis: "탄수화물",value: carbohydrate},
+				{axis: "단백질(g)",value: protein},
+				{axis: "탄수화물(g)",value: carbohydrate},
 				
-				{axis:"열량",value: kcal},
-				{axis:"나트륨",value:na},
-				{axis:"지방",value:fat}
+				{axis:"열량(kcal)",value: kcal*0.1},     
+				{axis:"나트륨(mg)",value:na*0.05},
+				{axis:"지방(g)",value:fat}   
 			  ]
 			  
 			];
@@ -45,7 +45,7 @@ function openAPI(){
 		var mycfg = {
 		w: w,
 		h: h,
-		maxValue: 1000,
+		maxValue: 500,
 		levels: 5,
 		ExtraWidthX: 300
 		}
