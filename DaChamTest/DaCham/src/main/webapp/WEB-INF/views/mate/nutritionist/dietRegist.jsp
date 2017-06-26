@@ -98,7 +98,7 @@
 		$(document.body).on("mouseover",".nameClick",function(){
 			var sideDCode = $(this).attr('data-code');
 			console.log("이것은"+sideDCode);
-			$.getJSON("nutriAjax/showKcal/"+sideDCode,function(data){
+			$.getJSON("nutriAjax/allNutri/"+sideDCode,function(data){
 				$("#sideDName").text(data.sideDName);
 				$("#kcal").text(data.kcal);
 				$("#carbohydrate").text(data.carbohydrate);
@@ -281,15 +281,13 @@
 			<div class = "box2">
 				<table class = "table table-hover">
 					<tr>
-						<th>반찬명&nbsp;&nbsp;</th>
 						<th>열량&nbsp;&nbsp;</th>
 						<th>탄수화물&nbsp;&nbsp;</th>
 						<th>단백질&nbsp;&nbsp;</th>
 						<th>지방&nbsp;&nbsp;</th>
 						<th>나트륨&nbsp;&nbsp;</th>    
-					</tr>
+					</tr>      
 					<tr>
-						<td id = "sideDName">&nbsp;&nbsp;&nbsp;</td>
 						<td id = "kcal">&nbsp;&nbsp;&nbsp;</td>
 						<td id = "carbohydrate">&nbsp;&nbsp;&nbsp;</td>
 						<td id = "protein">&nbsp;&nbsp;&nbsp;</td>
