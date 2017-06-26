@@ -228,7 +228,27 @@ public class AdminController {
 		}
 		
 		model.addAttribute("map", map);
-		
+		//미완성 식재료 다중 합친거
+				/*for(int i=0; i<jsonObj.size(); i++){
+				
+				JSONObject jsonObj1 = (JSONObject) jsonObj.get(i+"");
+				System.out.println("이건돌아가냐?1");
+				
+				System.out.println("이건돌아가냐?2");
+				
+				System.out.println(Integer.parseInt(jsonObj1.get("orderCode").toString()));
+				
+				String a = jsonObj1.get("orderCode").toString();
+				oCode.add(a);
+				  
+				}
+				List<FoodMAmountRead> foodMAmountRead1 = new ArrayList<FoodMAmountRead>();
+				//foodMAmountRead1 = service.foodMAmountRead(oCode);
+				foodMAmountRead1 = service.foodMAmountReadex(oCode);
+				 
+				model.addAttribute("map", foodMAmountRead1);
+				
+				*/
 		
 		return "mate/admin/foodOrder";
 	}
