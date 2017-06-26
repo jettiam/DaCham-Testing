@@ -93,20 +93,19 @@
 	<select id="chartList" resultType="ChartList"> <!--특정식단에 대한 이름, 판매량  -->
 		select diet.dietName, sum(orderList.dietAmount) as sellAmount
 		from orderlist, diet
-		where orderlist.dietCode = diet.dietCode and orderlist.orderItemCode
-		BETWEEN 3 and 5
+		where orderlist.dietCode = diet.dietCode and orderlist.orderItemCode = 8
 		GROUP by diet.dietName;
 	</select>
 	<select id="chartprice" resultType="ChartPrice"><!-- 날짜에 대한 매출,판매량  -->
 		select sum(price) as totalprice, orderDate, sum(dietAmount) as dietAmount
 		from orderlist
-		where orderItemCode BETWEEN 3 and 5 and orderDate BETWEEN CURDATE()-7 and CURDATE() 
+		where orderItemCode=8 and orderDate BETWEEN CURDATE()-7 and CURDATE() 
 		GROUP by orderDate;
 	</select>
 	<select id="chartprice1" resultType="ChartPrice"><!-- 날짜에 대한 매출,판매량  -->
 		select sum(price) as totalprice, orderDate, sum(dietAmount) as dietAmount
 		from orderlist
-		where orderItemCode BETWEEN 3 and 5 and orderDate BETWEEN #{startdate} and #{enddate} 
+		where orderItemCode=8 and orderDate BETWEEN #{startdate} and #{enddate} 
 		GROUP by orderDate;
 	</select>
 	<select id="all" resultType="OrderList">

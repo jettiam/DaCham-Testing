@@ -149,7 +149,7 @@
       </ul>
    </div>
    <div class = "thisMonth">
-      <h1> 월의 판매 식단</h1>
+      <h1> 이번 달의 판매 식단</h1>
       <hr align = "left" width = "20%">
      <ul class = "monthResult">
      	<li></li>

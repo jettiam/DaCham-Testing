@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h1>로그인 성공입니다.</h1>
-	<b>${EmpDept}</b>부서 </br>
+	<b>${EmpDept}</b>부서 <br/>
 	<b>${EmpName}</b>님 환영햅니ㅏ다 일하세요.
 	
 	</body>
