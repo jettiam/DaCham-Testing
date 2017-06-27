@@ -195,7 +195,7 @@ mat-height:200px; */
 			$("#setDietName").val($("#dietName").text());
 			$("#setPrice").val($("#dietPrice").text());
 			$("#setDietAmount").val($("#dietAmount").val());
-			$("#setDietImg").val($("#dietImg").attr("data-dietImg"));
+			$("#setDietImg").val($(".dietImg").attr("data-dietImg"));			
 			$("#orderForm").attr("action", "doOrder");
 			$("#orderForm").submit();
 		});
@@ -225,7 +225,7 @@ mat-height:200px; */
 
 	<div class="row">
 		<div class="medium-6 columns">
-			<img class="thumbnail" class="dietImg" data-dietImg="${list[0].dietImg}" src='displayFile?fileName=${list[0].dietImg}'>
+			<img class="thumbnail dietImg" data-dietImg="${list[0].dietImg}" src='displayFile?fileName=${list[0].dietImg}'>
 			<div class="row small-up-3">
 				<!-- <img src="resources/customerImage/option_list.png"> -->
 				<c:forEach items="${list}" var="list">
