@@ -110,6 +110,12 @@ public class AdminMainServiceImpl implements AdminMainService {
 		return dao.orderAll(orderList);
 	}
 
+	@Override
+	public List<OrderList> orderAllSearch(OrderList orderList) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.orderAllSearch(orderList);
+	}
+
 	
 	
 	

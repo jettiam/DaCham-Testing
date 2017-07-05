@@ -42,7 +42,7 @@
 					
 					
 					code = code.split(";").join(",");
-					alert(code);
+					//alert(code);
 				});
 
 				//등록 버튼 클릭시...
@@ -55,7 +55,7 @@
 							code = code.split("}\n'").join("},\n'");
 							code = code.split("'").join("\"");
 							code = "{\n" + code + "\n}";
-							alert("코드\n" + code);
+							//alert("코드\n" + code);
 							var wizard = code;
 
 							var xml = Blockly.Xml.workspaceToDom(workspace);

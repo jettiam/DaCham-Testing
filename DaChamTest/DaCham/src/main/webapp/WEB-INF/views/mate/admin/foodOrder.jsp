@@ -22,17 +22,23 @@
 	<div class="container">
 	<div class="form-group row">
 	<div class="col-xs-2"> 
-			<select class= "searchType form-control">
-				<option>코드번호</option>
-				<option>식재료명</option>
-			</select> 
+			<select name="searchType" class= "searchType form-control">
+				<option value="t"
+					<c:out value="${foodMInven.searchType eq 't'?'selected':'' }"/>>
+					식재료명</option>
+				<option value="c"
+					<c:out value="${foodMInven.searchType eq 'c'?'selected':'' }"/>>
+					코드번호</option>    
+			</select>
+			
 			
 	</div>
 	<div class="col-xs-2"> 
-	<input type="text" class="form-control">
+	<input type="text" name="keyword" id = "keyword" class="form-control">
 	</div>
 	<div class="col-xs-2"> 
-	<button class = "btn btn-default">검색</button>
+	<button id="search" class = "btn btn-default">검색</button>
+	<button id="searchAll" class = "btn btn-default">전체</button>
 	</div>
 	</div>
 	<div>
@@ -43,6 +49,7 @@
 				<th>단가</th>
 				<th>주문량</th>
 				<th>단위</th>
+				<th>재고량</th>  
 			</tr> 
 			<%-- <tr>
 				<c:forEach items="${invenlist}" var="board" varStatus="status">
@@ -142,81 +149,12 @@
 				//alert(content.length);		 
 				//alert(content)
 			});
-			
-			
-			
-			
-							/* $("#foodMOrder")
-									.on(
-											"click",
-											function() {
-												var count = $("#foodMTable tr").length;
-												//alert(count);
-												var foodMArray = new Array();
-
-												var foodMArrayObj = new Object();
-												for (var i = 0; i < 3; i++) {
-													var foodMObj = new Object();
-													foodMObj.foodMCode = $(
-															"#foodMOrder"
-																	+ i
-																	+ ">.foodMCode")
-															.attr(
-																	"data-foodMCode");
-													foodMObj.foodMName = $(
-															"#foodMOrder"
-																	+ i
-																	+ ">.foodMName")
-															.attr(
-																	"data-foodMName");
-													foodMObj.price = $(
-															"#foodMOrder" + i
-																	+ ">.price")
-															.attr("data-price");
-													foodMObj.foodMAmount = $(
-															"#foodMOrder"
-																	+ i
-																	+ ">.foodMAmount")
-															.attr(
-																	"data-foodMAmount");
-													foodMObj.unit = $(
-															"#foodMOrder" + i
-																	+ ">.unit")
-															.attr("data-unit");
-													foodMArray.push(foodMObj);
-												}
-												foodMArrayObj.foodMInfo = foodMArray;
-
-												$
-														.ajax({
-															url : 'adminSub/foodOrder',
-															data : JSON
-																	.stringify(foodMArrayObj),
-															dataType : 'text',
-															type : 'POST',
-															headers : {
-																"Content-Type" : "application/json",
-																"X-HTTP-Method-Override" : "POST"
-															},
-															success : function(
-																	data) {
-																if (data == "SUCCESS")
-																	alert("주문완료");
-
-															},
-															error : function() {
-																alert("메세지가 전송되었습니다")
-															}
-
-														});
-												console.log(foodMArray);
-											}); */
 							$(".foodMName1").on("click", function(){
 								var a = $(this).siblings()
 								alert(a); 
 							});
 							all();
-							foodStockall();
+						
 							function all(){
 								
 								
@@ -241,6 +179,20 @@
 							} 
 							
 								$("#foodStock").addClass("w3-light-gray");
+								
+								$("#search").on("click",function(){
+									$(".foodStock").remove();
+									
+									var str=""; 
+									var searchType = $(".searchType").val();
+									var keyword = $("#keyword").val();
+									$.getJSON("adminSub/foodOrder/"+searchType+"/"+keyword,function(data){
+									for(var i=0; i<data.length; i++){
+										str += "<tr class='foodStock'>"+"<td>"+data[i].foodMCode+"</td>"+"<td>"+data[i].foodMName+"</td>"+"<td>"+data[i].price+"</td>"+"<td><input type='text' class='Stock' size='4'></td>"+"<td>"+data[i].uint+"</td> <td>"+data[i].stock+"</td> <td><button class='orderBtn btn btn-primary'>주문</button></td>"+"</tr>"
+										}   
+									$(".foodMTable").append(str); 
+									});
+								});
 							
 						});
 	</script>
