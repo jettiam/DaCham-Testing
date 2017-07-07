@@ -44,9 +44,9 @@
 			$(this).parent().parent().hide();	            		
 			var count = parseInt(localStorage['count']);
 			console.log(count);
-			var sideDImg = $(this).attr('data-img');
-			
+			var sideDImg = $(this).attr('data-img');			
 			var sideDCode = $(this).attr('data-code');
+			var foodGCode = $(this).attr('data-foodGCode');
 			
 			$.getJSON("nutriAjax/allNutri/"+sideDCode,function(data){
 				var subCount = count - 1;
@@ -61,6 +61,7 @@
 			
 			localStorage[count + '_img'] = sideDImg;
 			localStorage[count + '_codes'] = sideDCode;
+			localStorage[count + '_foodGCode'] = foodGCode;
 			
 			++count;           
 			
@@ -134,15 +135,46 @@
 		
 		function Refresh(){
 			var count = parseInt(localStorage['count']);
-			$('.material').empty();	
+			$('.material>div').empty();	
 		
 		
 			for(var i = 0; i<count; i++){
 				var sideDImg = localStorage[i + "_img"];
 				var sideDCode = localStorage[i + "_codes"];
+				var foodGCode = localStorage[i + "_foodGCode"];	
+				switch(foodGCode){
+					case "01":
+						$('<input type="radio" name="foodG01">').appendTo('.foodG01'); 
+						$('<input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '>').appendTo('.foodG01');    
+						$('<img src = "displayFile?fileName='+sideDImg+'" style= "width: 75px; height: 25px;">').attr('data-id',i).addClass("sideDImg").appendTo('.foodG01');
+						break;
+					case "02":
+						$('<input type="radio" name="foodG01">').appendTo('.foodG02'); 
+						$('<input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '>').appendTo('.foodG02');    
+						$('<img src = "displayFile?fileName='+sideDImg+'" style= "width: 75px; height: 25px;">').attr('data-id',i).addClass("sideDImg").appendTo('.foodG02');
+						break;	
+					case "03":
+						$('<input type="radio" name="foodG01">').appendTo('.foodG03'); 
+						$('<input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '>').appendTo('.foodG03');    
+						$('<img src = "displayFile?fileName='+sideDImg+'" style= "width: 75px; height: 25px;">').attr('data-id',i).addClass("sideDImg").appendTo('.foodG03');
+						break;
+					case "04":
+						$('<input type="radio" name="foodG01">').appendTo('.foodG04'); 
+						$('<input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '>').appendTo('.foodG04');    
+						$('<img src = "displayFile?fileName='+sideDImg+'" style= "width: 75px; height: 25px;">').attr('data-id',i).addClass("sideDImg").appendTo('.foodG04');
+						break;
+					case "05":
+						$('<input type="radio" name="foodG01">').appendTo('.foodG05'); 
+						$('<input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '>').appendTo('.foodG05');    
+						$('<img src = "displayFile?fileName='+sideDImg+'" style= "width: 75px; height: 25px;">').attr('data-id',i).addClass("sideDImg").appendTo('.foodG05');
+						break;
+					case "06":
+						$('<input type="radio" name="foodG01">').appendTo('.foodG06'); 
+						$('<input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '>').appendTo('.foodG06');    
+						$('<img src = "displayFile?fileName='+sideDImg+'" style= "width: 75px; height: 25px;">').attr('data-id',i).addClass("sideDImg").appendTo('.foodG06');
+						break;	
+				}				
 				
-				$('<input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '>').appendTo('.material');    
-				$('<img src = "displayFile?fileName='+sideDImg+'" style= "width: 75px; height: 25px;">').attr('data-id',i).addClass("sideDImg").appendTo('.material');
 
 			}
 			
@@ -182,7 +214,7 @@
 			$.getJSON("nutriAjax/listSearch/"+search,function(data){
 				var str = "";
 				$(data).each(function(){
-					str += "<tr class = 'searchResult'><td><a class = 'nameClick' data-img = '"+this.sideDImg+"' data-code = '"+this.sideDCode+"'>"+this.sideDName+"</a></td>"+"<td>"+this.foodGName+"</td>"+"<td>"+this.cookMName+"</td></tr>"
+					str += "<tr class = 'searchResult'><td><a class = 'nameClick' data-foodGCode='"+this.foodGCode+"' data-img = '"+this.sideDImg+"' data-code = '"+this.sideDCode+"'>"+this.sideDName+"</a></td>"+"<td>"+this.foodGName+"</td>"+"<td>"+this.cookMName+"</td></tr>"
 				});
 				$(".searchTable").append(str);
 			});
@@ -219,7 +251,7 @@
 				console.log("이것만:"+foodGCode);
 				var str = "";
 				$(data.list).each(function(){
-					str += "<tr class = 'searchResult'><td><a class = 'nameClick' data-img = '"+this.sideDImg+"' data-code = '"+this.sideDCode+"'>"+this.sideDName+"</a></td>"+"<td>"+this.foodGName+"</td>"+"<td>"+this.cookMName+"</td></tr>"
+					str += "<tr class = 'searchResult'><td><a class = 'nameClick' data-foodGCode='"+currentGroup+"' data-img = '"+this.sideDImg+"' data-code = '"+this.sideDCode+"'>"+this.sideDName+"</a></td>"+"<td>"+this.foodGName+"</td>"+"<td>"+this.cookMName+"</td></tr>"
 				});
 				
 				$(".searchTable").append(str);
@@ -337,7 +369,12 @@
 			<div>                                
 				<h3>선택한 반찬</h3>
 				<div class = "material" style = "margin-bottom:50px; position:absolute;">   
-					
+					<div class="foodG01 col-sm-1">1</div>
+					<div class="foodG02 col-sm-1">2</div>
+					<div class="foodG03 col-sm-1">3</div>
+					<div class="foodG04 col-sm-1">4</div>
+					<div class="foodG05 col-sm-1">5</div>
+					<div class="foodG06 col-sm-1">6</div>
 				</div>
 			</div>
 		
