@@ -106,17 +106,19 @@ svg {
 </head>
 <body>
 	
-	<hr width="300">
-	<h1 id="alert" style="text-align: center;">다 참 위 자 드</h1>
-	<hr width="300">
+	<hr width="150">
+	<h3 id="alert" style="text-align: center;">다 참 위 자 드</h3>
+	<hr width="150">
 	
 	<div>
 		<button id="registWizard">등록</button>
 		<button id="cancle">취소</button>
 	</div>
+	<div id="graphWizard">
+	</div>
 	<span id="blockWizard">
 		<div id="blocklyDiv"
-			style="display: inline-block; height: 1000px; width: 1200px;"></div>
+			style="display: inline-block; height: 1000px; width: 100%;"></div>
 	  <xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox"
 			style="display: none"> <category name="1. 질문지 만들기"
 			colour="#89934a"> <block type="makeQSheet"></block> </category>
