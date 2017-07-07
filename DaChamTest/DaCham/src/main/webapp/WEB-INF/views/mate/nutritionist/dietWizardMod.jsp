@@ -206,8 +206,8 @@ svg {
 		var diagonal = d3.svg.diagonal().projection(function(d) {
 			return [ d.x, d.y ];
 		});
-		$("#blockWizard>svg").remove();
-		var svg = d3.select("#blockWizard").append("svg").attr(
+		$("#graphWizard>svg").remove();
+		var svg = d3.select("#graphWizard").append("svg").attr(
 				"width", width + margin.right + margin.left)
 				.attr("height",
 						height + margin.top + margin.bottom + 700)
