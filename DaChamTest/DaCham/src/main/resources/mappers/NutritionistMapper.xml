@@ -54,6 +54,10 @@
 	</select>
 	<select id="materialAmount" resultType = "com.wdb3a.dacham.bean.Nutritionist">
 		select * from foodmaterial
+		limit #{startRecord},#{recordsPerPage}
+	</select>
+	<select id = "materialTotal" resultType = "Integer">
+		select count(*) from foodmaterial
 	</select>
 	<insert id="createAmount">
 		insert into sidedinfo(sideDCode, foodMCode, foodMAmount)
