@@ -26,10 +26,31 @@
 </head>
 <body>
 <%@include file="nutritionistNavi.jsp" %>
-	<div>
+	<div class = "container">    
 		<div class = "buttonBox">
 			<button id = "update">수정</button>
 			<button>삭제</button>
+			
+		</div>
+		<div>
+				<table class = "table table-hover">
+					<tr>
+						<th>번호</th>
+						<th>고객id</th>
+						<th>상담명</th>
+						<th>상담일</th>
+						<th>금액</th>
+						<th>상태여부</th>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</table>
 		</div>
 	</div>
 </body>
