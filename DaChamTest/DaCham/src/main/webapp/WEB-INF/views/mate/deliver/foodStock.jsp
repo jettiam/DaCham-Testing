@@ -56,7 +56,7 @@
 				<tr>
 					<td>입고량</td>
 					<td><input type = "text" name = "inAmount"></td>
-					<td>코드번호</td>
+					<td>식재료이름</td>
 					<td>
 						<select name = "foodMCode">
 							<c:forEach items = "${list }" var = "v">
@@ -66,17 +66,10 @@
 					</td>
 				</tr>
 				<tr>
-					<td>출고량</td>
-					<td><input type = "text" name = "outAmount"></td>
 					<td>단위</td>
-					<td><input type = "text" name = "uint"></td>
+					<td><input type = "text" name = "uint"></td>          
 				</tr>
-				<tr>
-					<td>식재료이름</td>
-					<td><input type = "text" name = "foodMName"></td>
-					<td></td>
-					<td></td>
-				</tr>
+				                        
 			</table>
 			<button id = "regist" class = "btn btn-danger">확인</button>
 		</form>
