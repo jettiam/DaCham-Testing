@@ -169,6 +169,12 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 		return sqlSession.selectOne(namespace+".thisMonthCount");
 	}
 
+	@Override
+	public List<OrderList> specialList() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".specialList");
+	}
+
 	
 
 }

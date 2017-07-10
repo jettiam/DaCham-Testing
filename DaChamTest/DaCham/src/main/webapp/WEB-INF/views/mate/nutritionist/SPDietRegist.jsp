@@ -22,10 +22,12 @@
 </head>
 <body>
 <%@include file="nutritionistNavi.jsp" %>
-	<h1>특별식단 등록 페이지</h1>
-	<div>
-		<button>등록</button>
-		<button id = "cancle">취소</button>
+	<div class = "container">
+		<h1>특별식단 등록 페이지</h1>
+		<div>
+			<button>등록</button>
+			<button id = "cancle">취소</button>
+		</div>
 	</div>
 </body>
 </html>

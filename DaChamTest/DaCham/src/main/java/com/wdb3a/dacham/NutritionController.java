@@ -27,6 +27,7 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.wdb3a.dacham.bean.Nutritionist;
+import com.wdb3a.dacham.bean.OrderList;
 import com.wdb3a.dacham.bean.Testing5;
 import com.wdb3a.dacham.dao.MongoDAO;
 import com.wdb3a.dacham.service.NutritionistService;
@@ -149,7 +150,9 @@ public class NutritionController {
     * @return 스페셜식단 관리 페이지로 이동
     */
    @RequestMapping(value="/special",method = RequestMethod.GET)
-   public String getSpecial(){
+   public String getSpecial(Model model) throws Exception{
+	   List<OrderList> list = service.specialList();
+	   model.addAttribute("list",list);
 	   return "mate/nutritionist/SPDietMain";
    }
    /*

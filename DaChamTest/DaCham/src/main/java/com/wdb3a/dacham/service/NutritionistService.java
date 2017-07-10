@@ -43,4 +43,6 @@ public interface NutritionistService {
 	public int orderList() throws Exception;
 	//해당 반찬에 대한 영양정보
 	public Nutritionist allNutri(String sideDCode) throws Exception;
+	//해당 특별식단 메인 페이지의 리스트
+	public List<OrderList> specialList() throws Exception;
 }

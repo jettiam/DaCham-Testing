@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,28 +29,30 @@
 <%@include file="nutritionistNavi.jsp" %>
 	<div class = "container">    
 		<div class = "buttonBox">
-			<button id = "update">수정</button>
-			<button>삭제</button>
+			<button id = "update" class = "btn btn-default">수정</button>
+			<button class = "btn btn-default">삭제</button>  
 			
 		</div>
 		<div>
 				<table class = "table table-hover">
 					<tr>
+						<th>*</th>
 						<th>번호</th>
 						<th>고객id</th>
 						<th>상담명</th>
 						<th>상담일</th>
 						<th>금액</th>
-						<th>상태여부</th>
 					</tr>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
+					<c:forEach items = "${list }" var = "v">
+						<tr>
+							<td><input type = "radio" name = "orderCode" value = "${v.orderCode }"></td>
+							<td>${v.orderCode }</td>
+							<td>${v.id }</td>
+							<td>${v.counselContent }</td>
+							<td>${v.counselDate }</td>
+							<td>${v.price }</td>
+						</tr>
+					</c:forEach>
 				</table>
 		</div>
 	</div>
