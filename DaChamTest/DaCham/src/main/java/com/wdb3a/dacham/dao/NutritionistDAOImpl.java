@@ -92,9 +92,9 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 	}
 
 	@Override
-	public List<Nutritionist> materialAll() throws Exception {
+	public List<Nutritionist> materialAll(Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".materialAmount");
+		return sqlSession.selectList(namespace+".materialAmount",criteria);
 	}
 	//반찬 템플릿의 개수를 구합니다.
 	@Override
@@ -168,6 +168,20 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace+".thisMonthCount");
 	}
+
+	@Override
+	public List<OrderList> specialList() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".specialList");
+	}
+
+	@Override
+	public int materialTotal() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".materialTotal");
+	}
+
+	
 
 	
 

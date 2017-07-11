@@ -90,9 +90,9 @@ public class NutritionistServiceImpl implements NutritionistService {
 	}
 
 	@Override
-	public List<Nutritionist> materialAll() throws Exception {
+	public List<Nutritionist> materialAll(Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.materialAll();
+		return dao.materialAll(criteria);
 	}
 	//반찬 템플릿의 개수를 구합니다.
 	@Override
@@ -160,6 +160,19 @@ public class NutritionistServiceImpl implements NutritionistService {
 		// TODO Auto-generated method stub
 		return dao.thisMonthCount();
 	}
+
+	@Override
+	public List<OrderList> specialList() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.specialList();
+	}
+
+	@Override
+	public int materialTotal() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.materialTotal();
+	}
+
 
 	
 

@@ -70,12 +70,20 @@ public class NutritionistAjaxController {
 		}
 		return entity;
 	}
-	@RequestMapping(value = "/materialAll",method = RequestMethod.GET)
-	public ResponseEntity<List<Nutritionist>> materialView(){
-		ResponseEntity<List<Nutritionist>> entity = null;
+	@RequestMapping(value = "/materialAll/{page}",method = RequestMethod.GET)
+	public ResponseEntity<Map<String,Object>> materialView(@PathVariable("page")int page){
+		ResponseEntity<Map<String,Object>> entity = null;
 		try {
-			List<Nutritionist> list = service.materialAll();
-			entity = new ResponseEntity<>(list,HttpStatus.OK);
+			
+			Criteria criteria = new Criteria();
+			int totalCount = service.materialTotal();
+			criteria.setPage(page);
+			criteria.setTotalCount(totalCount);
+			List<Nutritionist> list = service.materialAll(criteria);
+			Map<String,Object> map = new HashMap<>();
+			map.put("criteria", criteria);
+			map.put("list", list);
+			entity = new ResponseEntity<>(map,HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

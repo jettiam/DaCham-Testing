@@ -19,7 +19,8 @@ public interface NutritionistService {
 	public int thisMonthCount() throws Exception;
 	public List<Nutritionist> materialSearch(Nutritionist nutritionist) throws Exception;
 	public Nutritionist materialView(String sideDCode) throws Exception;
-	public List<Nutritionist> materialAll() throws Exception;
+	public List<Nutritionist> materialAll(Criteria criteria) throws Exception;
+	public int materialTotal() throws Exception;
 	public void create(Nutritionist nutritionist) throws Exception;
 	public void createSide(Nutritionist nutritionist) throws Exception;
 	public void createAmount(Nutritionist nutritionist) throws Exception;
@@ -43,4 +44,7 @@ public interface NutritionistService {
 	public int orderList() throws Exception;
 	//해당 반찬에 대한 영양정보
 	public Nutritionist allNutri(String sideDCode) throws Exception;
+	//해당 특별식단 메인 페이지의 리스트
+	public List<OrderList> specialList() throws Exception;
+	
 }

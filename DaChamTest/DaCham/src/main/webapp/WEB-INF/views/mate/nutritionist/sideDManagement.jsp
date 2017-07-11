@@ -69,11 +69,12 @@
 		<nav>
 			<a href = "#" id = "categoryStart">반찬 찾아보기</a>
 			<ul class = "category">
-				<li><a data-name = "곡류">곡류</a></li>
-				<li><a data-name = "조미류">조미류</a></li>
-				<li><a data-name = "채소류">채소류</a></li>
-				<li><a data-name = "생선류">생선류</a></li>
-				<li><a data-name = "고기류">고기류</a></li>
+				<li><a data-name = "밥">밥</a></li>
+				<li><a data-name = "국">국</a></li>
+				<li><a data-name = "메인 메뉴1">메인 메뉴1</a></li>
+				<li><a data-name = "메인 메뉴2">메인 메뉴2</a></li>
+				<li><a data-name = "메인 메뉴3">메인 메뉴3</a></li>
+				<li><a data-name = "메인 메뉴4">메인 메뉴4</a></li>
 			</ul>
 		</nav>
 		<nav>

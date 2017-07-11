@@ -31,6 +31,7 @@ margin-bottom:20px;
 	  <a href="wizard" class="w3-bar-item w3-button w3-hover-light-gray" id="wizard">식단 위자드 관리</a>
 	  <a href="diet" class="w3-bar-item w3-button w3-hover-light-gray" id="diet">식단 관리</a>	 
 	 <a href="side"  class="w3-bar-item w3-button w3-hover-light-gray" id="side">반찬 관리</a>	
+	 <a href="special"  class="w3-bar-item w3-button w3-hover-light-gray" id="side">특별식단 관리</a>
 	</div>
 	</div>
 	

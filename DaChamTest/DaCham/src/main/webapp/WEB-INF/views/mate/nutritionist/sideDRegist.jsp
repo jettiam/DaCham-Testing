@@ -91,8 +91,10 @@
 						</tr>
 					
 				</table>
+				<ul class = "pagination">
+				</ul>
 		</div>
-	
+		
 	<input type = "hidden" id = "foodMName" name = "foodMName2">
 	<input type = "hidden" id =  "protein" name = "protein">
 	<input type = "hidden" id = "fat" name = "fat">
@@ -174,13 +176,21 @@
 	<script>
 
 		$(document).ready(function(){
+			var currentPage = 1;
 			$("#side").addClass("w3-light-gray");
 			openAPI();
 			
 			var v = 0;
 			$("#listAll").on("click",function(){
-				materialAll();
+				materialAll(1);
 			});
+			$(".pagination").on("click","li a",function(){
+				event.preventDefault();
+				var replyPage = $(this).attr("href");
+				
+				materialAll(replyPage);
+			});
+			
 			$("#regist").on("click",function(){
 				if(!localStorage['init'] || isNaN(localStorage['cnt'])==true || localStorage['cnt'] == 0){
 					/* alert("등록할 식재료를 선택하세요"); */
@@ -301,15 +311,32 @@
 				});
 			});
 			
-			function materialAll(){
+			function materialAll(page){
+				currentPage = page;
 				$(".searchResult").remove();
-				$.getJSON("nutriAjax/materialAll",function(data){
+				$.getJSON("nutriAjax/materialAll/"+page,function(data){
 					var str = "";
-					$(data).each(function(){
+					$(data.list).each(function(){
 						str += "<tr class = 'searchResult'><td>"+this.foodMCode+"</td>"+"<td>"+"<a class = 'nameClick' data-src = '"+this.foodMName+"' data-code = '"+this.foodMCode+"'>"+this.foodMName+"</a></td></tr>";
 					});
 					$(".searchTable").append(str);
+					printPaging(data.criteria);
 				});
+			}
+			function printPaging(criteria){
+				var str = "";
+						
+				if(criteria.prev){
+					str += "<li><a href='"+(criteria.startPage-1)+"'>" + "<<"+"</a></li>";
+				}
+				for(var i = criteria.startPage; i<=criteria.endPage; i++){
+					var strClass = criteria.page == i?"class = 'active'":"";
+					str += "<li "+strClass+"><a href ='"+i+"'>"+i + "</a></li>";
+				}
+				if(criteria.next){
+					str += "<li><a href='"+(criteria.endPage+1)+"'>" + ">>"+"</a></li>";   
+				}
+				$(".pagination").html(str);
 			}
 		});
 	</script>
