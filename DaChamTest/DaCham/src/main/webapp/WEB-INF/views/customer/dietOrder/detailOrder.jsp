@@ -74,7 +74,8 @@ mat-height:200px; */
 	// foodGCode : 각각 판넬에 들어가게 될 반찬들의 GCode(그룹코드)
 	function getDish(div, foodGCode){
 		var foodGCode= foodGCode;
-		$.getJSON("customerAjax/getfoodG/"+foodGCode, function(data){
+		var dietCode = $("#setDietCode").val();
+		$.getJSON("customerAjax/getfoodG/"+foodGCode+"/"+dietCode, function(data){
 			for(var i=0; i<data.list.length; i++){
 				var kcal = data.list[i].kcal.toFixed(0);
 				var carbo = data.list[i].carbohydrate.toFixed(0);

@@ -30,9 +30,9 @@ private CustomerDAO dao;
 		return dao.detailOrder(dietCode);
 	}
 	@Override
-	public List<Customer> sideDDetail(String foodGCode) throws Exception {
+	public List<Customer> sideDDetail(Customer customer) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.sideDDetail(foodGCode);
+		return dao.sideDDetail(customer);
 
 	}
 	@Override
