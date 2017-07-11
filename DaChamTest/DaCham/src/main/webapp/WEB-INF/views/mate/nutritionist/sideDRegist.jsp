@@ -58,7 +58,7 @@
  .box2 {
   display:inline-block;  margin-left:10px;}           
   .div1 {   
-  float:left;  }
+  float:left; width: 600px; }   
  .div2 {
   display:inline-block;  margin-left:10px;} 
   #body{
@@ -69,7 +69,7 @@
 </head>
 <body>
 <%@include file="nutritionistNavi.jsp" %>
-	<div class = "container">
+	<div class = "container" style = "width:1530px;">  
 		<div class = "div1">
 		
 				<div>
@@ -168,7 +168,7 @@
 		  </div> 
 		</div>
 	</form>
-		<div style = "margin-left:500px; margin-bottom : 1px;">                   
+		<div style = "margin-left:1000px; margin-bottom : 1px;">                   
 			<button id = "regist" class = "btn btn-success">등록</button>
 			<button id = "cancle" class = "btn btn-success">취소</button>
 		</div>
