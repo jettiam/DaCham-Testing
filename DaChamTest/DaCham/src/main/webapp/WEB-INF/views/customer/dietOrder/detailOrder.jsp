@@ -106,6 +106,13 @@ mat-height:200px; */
 		} */
 	}
 	$(document).ready(function() {
+		var kcal0=0;
+		var carbo0=0;
+		var protein0=0;
+		var fat0=0;
+		var na0=0;
+		var k0=0;
+		
 		$(document).on("click", ".foodGSideD", function(){
 			var foodGCode= $(this).parent().parent().attr("data-foodgcode");
 			console.log("식품군:"+foodGCode);
@@ -128,6 +135,7 @@ mat-height:200px; */
 		getDish($("#panel4>div"),"04");
 		getDish($("#panel5>div"), "05");
 		getDish($("#panel6>div"),"06");
+		
 		$("#dietAmount").keyup(function() {
 			var a = $("#dietAmount").val();
 			var price = $("#dietPrice").attr("data-basicPrice");
@@ -162,6 +170,8 @@ mat-height:200px; */
 			$("#orderForm").attr("action", "goMyCart");
 			$("#orderForm").submit();
 		});
+		
+		
 		function getDish(div, foodGCode){
 			var foodGCode= foodGCode;
 			var dietCode = $("#setDietCode").val();
@@ -172,18 +182,26 @@ mat-height:200px; */
 					var protein = data.list[i].protein.toFixed(0);
 					var fat = data.list[i].fat.toFixed(0);
 					var na = data.list[i].na.toFixed(0);
-					
+					var k = data.list[i].k.toFixed(0);
 					if(i==0){
+						kcal0+=Number(kcal);						
+						carbo0+=Number(carbo);
+						protein0+=Number(protein);
+						fat0+=Number(fat);
+						na0+=Number(na);
+						k0+=Number(k);
+						
 					div.append(
 								"<div class='column foodGSideD w3-theme-l4' data-sideDCode='"+data.list[i].sideDCode+"'>"							
 								+"<img class='thumbnail' src='displayFile?fileName="+data.list[i].sideDImg+"'>"
 								+"<h5 style='text-align:center'>"+data.list[i].sideDName+"</h5>"
 								+"<table class='table' >"
-								+"<tr><th>칼로리</th><td>"+kcal+"</td></tr>"
-								+"<tr><th>탄수화물</th><td>"+carbo+"</td></tr>"
-								+"<tr><th>단백질</th><td>"+protein+"</td></tr>"
-								+"<tr><th>지방</th><td>"+fat+"</td></tr>"
-								+"<tr><th>나트륨</th><td>"+na+"</td></tr>"
+								+"<tr><th>칼로리</th><td class='kcal'>"+kcal+"</td></tr>"
+								+"<tr><th>탄수화물</th><td class='carbo'>"+carbo+"</td></tr>"
+								+"<tr><th>단백질</th><td class='protein'>"+protein+"</td></tr>"
+								+"<tr><th>지방</th><td class='fat'>"+fat+"</td></tr>"
+								+"<tr><th>나트륨</th><td class='na'>"+na+"</td></tr>"
+								+"<tr><th>칼륨</th><td class='k'>"+k+"</td></tr>"
 								+"</table>"							
 								//+"<a class='sideButton button hollow tiny expanded'>선택 하기</a>"								
 								+"</div>"
@@ -194,20 +212,77 @@ mat-height:200px; */
 								+"<img class='thumbnail' src='displayFile?fileName="+data.list[i].sideDImg+"'>"
 								+"<h5 style='text-align:center'>"+data.list[i].sideDName+"</h5>"
 								+"<table class='table' >"
-								+"<tr><th>칼로리</th><td>"+kcal+"</td></tr>"
-								+"<tr><th>탄수화물</th><td>"+carbo+"</td></tr>"
-								+"<tr><th>단백질</th><td>"+protein+"</td></tr>"
-								+"<tr><th>지방</th><td>"+fat+"</td></tr>"
-								+"<tr><th>나트륨</th><td>"+na+"</td></tr>"
+								+"<tr><th>칼로리</th><td class='kcal'>"+kcal+"</td></tr>"
+								+"<tr><th>탄수화물</th><td class='carbo'>"+carbo+"</td></tr>"
+								+"<tr><th>단백질</th><td class='protein'>"+protein+"</td></tr>"
+								+"<tr><th>지방</th><td class='fat'>"+fat+"</td></tr>"
+								+"<tr><th>나트륨</th><td class='na'>"+na+"</td></tr>"
+								+"<tr><th>칼륨</th><td class='k'>"+k+"</td></tr>"
 								+"</table>"							
 								//+"<a class='sideButton button hollow tiny expanded'>선택 하기</a>"
 								+"</div>"
 							);
 					}				
 				}
+				if(foodGCode=="06"){
+					console.log(foodGCode+" 푸드코드");					
+					drawNutriChart(nutriInsert());
+				}
 			});
+			
+			
 		}
-	});
+		//영양정보 받아오는 함수
+		function nutriInsert(){
+			var nutriValue = new Array();
+			var kcal=0;
+			var carbo=0;
+			var protein=0;
+			var fat=0;
+			var na=0;
+			var k=0;
+			console.log($(".w3-theme-l4").length);
+			for(var i=0;i<$(".w3-theme-l4").length;i++){
+				kcal+=Number($(".w3-theme-l4 .kcal:eq("+i+")").text());
+				carbo+=Number($(".w3-theme-l4 .carbo:eq("+i+")").text());
+				protein+=Number($(".w3-theme-l4 .protein:eq("+i+")").text());
+				fat+=Number($(".w3-theme-l4 .fat:eq("+i+")").text());
+				na+=Number($(".w3-theme-l4 .na:eq("+i+")").text());
+				k+=Number($(".w3-theme-l4 .k:eq("+i+")").text());
+			}				
+			console.log("칼로리:"+kcal+",탄수화물:"+carbo+",단백질:"+protein+",지방:"+fat+",나트륨:"+na+",칼륨"+k);
+			if($(".w3-theme-l4").length==0){
+				nutriValue = [carbo0,protein0,fat0,na0,k0];
+				
+			}else{
+				nutriValue = [carbo,protein,fat,na,k];
+			}
+			console.log(nutriValue);
+			var nutriData ={
+					labels:["탄수화물","단백질","지방","나트륨","칼륨"],
+					 datasets: [{
+						 label:"영양정보",
+					        data: nutriValue
+					    }]
+			}
+			return nutriData;
+		}	
+		
+		//영양차트 함수
+		function drawNutriChart(nutriData){
+			var ctx = $("#nutriChart");
+			var myChart = new Chart(ctx, {
+			    type: 'radar',
+			    data: nutriData
+			});	
+		}
+		
+		
+		
+	});	
+	
+	
+	
 </script>
 <body>
 	<%@include file="../../clientNavi.jsp"%>
