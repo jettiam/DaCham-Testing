@@ -54,9 +54,9 @@ public class NutritionistServiceImpl implements NutritionistService {
 	}
 
 	@Override
-	public Nutritionist openAPI(String foodMName) throws Exception {
+	public Nutritionist openAPI(String foodMCode) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.openAPI(foodMName);
+		return dao.openAPI(foodMCode);
 	}
 
 	@Override

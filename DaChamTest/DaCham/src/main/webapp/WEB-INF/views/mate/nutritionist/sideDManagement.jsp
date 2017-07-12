@@ -53,7 +53,7 @@
 <title>Insert title here</title>
 <style>
 	.box1 {
-  float:left;  }
+  float:left; width: 150px;  }
  .box2 {
   display:inline-block;  margin-left:10px;}
   ul{

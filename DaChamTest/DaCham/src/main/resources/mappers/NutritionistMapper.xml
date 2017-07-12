@@ -69,7 +69,7 @@
 	</insert>
 	<select id="openAPI" resultType = "com.wdb3a.dacham.bean.Nutritionist">
 		select * from foodmaterial
-		where foodMName = #{foodMName}
+		where foodMCode = #{foodMCode}
 	</select>
 	<insert id = "createDiet">
 		insert into diet(diseaseCode, dietName, price, dietImg, spDietItem)
