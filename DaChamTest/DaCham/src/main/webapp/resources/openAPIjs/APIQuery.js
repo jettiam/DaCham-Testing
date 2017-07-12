@@ -6,7 +6,7 @@ function openAPI(){
 		var colorscale = d3.scale.category10();
 		
 		//Legend titles
-		var LegendOptions = ['선택 반찬의 영양정보(g)'];
+		var LegendOptions = ['선택 반찬의 영양정보'];
 		//Data
 		var protein = 0;
 		var carbohydrate = 0;

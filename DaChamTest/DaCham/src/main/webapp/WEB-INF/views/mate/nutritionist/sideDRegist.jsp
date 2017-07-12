@@ -230,13 +230,24 @@
 				++cnt;
 				
 				localStorage['cnt'] = cnt;
-				
+				$(this).parent().parent().hide();
 				Refresh();
 				v = cnt;
+				$.getJSON("nutriAjax/show/"+foodMCode,function(data){
+					var subCount = cnt - 1;
+					localStorage[subCount+"_kcal"] = data.kcal;
+					localStorage[subCount+"_carbohydrate"] = data.carbohydrate;
+					localStorage[subCount+"_protein"] = data.protein;
+					localStorage[subCount+"_fat"] = data.fat;
+					localStorage[subCount+"_na"] = data.na;
+					
+					openAPI();
+				});
 			});
 			$(document.body).on('click','.foodMName',function(){
 				var cnt = parseInt(localStorage['cnt']);
 				var id = $(this).parent().attr('data-id');
+				var foodMName = $(this).attr('data-name');
 				
 				$(this).parent().remove();
 				localStorage.removeItem(id+'_name');
@@ -247,21 +258,9 @@
 				
 				v = cnt;
 				cntChange(v);
+				openAPI();
 			});
 			
-			$(document.body).on('mouseover','.foodMName',function(){
-				var foodMName = $(this).attr('data-name');
-				
-				$.getJSON("nutriAjax/show/"+foodMName,function(data){
-					$("#foodMName").val(data.foodMName);
-					$("#protein").val(data.protein);
-					$("#fat").val(data.fat);
-					$("#na").val(data.na);
-					$("#carbohydrate").val(data.carbohydrate);
-					$("#fe").val(data.fe);
-					openAPI(); 
-				});
-			});	
 			
 			
 			function Refresh(){
