@@ -39,7 +39,8 @@ from
 	where si.foodMCode = f.foodMCode) a
 	group by a.sidedcode) f 
 where s.sideDCode=f.sideDcode and s.foodGCode=#{foodGCode}) result, dietinfo di
-where di.dietCode = #{dietCode} and result.sideDCode= di.sideDCode;
+where di.dietCode = #{dietCode} and result.sideDCode= di.sideDCode
+order by di.sideDType
   </select>
   <!-- 주문결제 -->
   <insert id="orderRegist">
