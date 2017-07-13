@@ -113,11 +113,11 @@ public class NutritionistAjaxController {
 		entity = new ResponseEntity<>(cnt2,HttpStatus.OK);
 		return entity;
 	}
-	@RequestMapping(value = "/show/{foodMName}",method = RequestMethod.GET)
-	public ResponseEntity<Nutritionist> openAPI(@PathVariable("foodMName")String foodMName){
+	@RequestMapping(value = "/show/{foodMCode}",method = RequestMethod.GET)
+	public ResponseEntity<Nutritionist> openAPI(@PathVariable("foodMCode")String foodMCode){
 		ResponseEntity<Nutritionist> entity = null;
 		try {
-			Nutritionist nutritionist = service.openAPI(foodMName);
+			Nutritionist nutritionist = service.openAPI(foodMCode);
 			entity = new ResponseEntity<>(nutritionist,HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

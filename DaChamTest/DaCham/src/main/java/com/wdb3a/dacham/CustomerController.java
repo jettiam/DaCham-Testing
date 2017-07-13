@@ -98,10 +98,15 @@ public String detailOrder(@RequestParam(value="dietCode") int dietCode, Model mo
  * @throws Exception
  */
 @RequestMapping(value="/doOrder",method=RequestMethod.GET)
-public String doOrder(Customer customer,Model model)throws Exception{
+public String doOrder(Customer customer,Model model,@RequestParam(value="sideDish") int sideDish[])throws Exception{
 	//serviceCu.orderRegist(customer);
 	System.out.println("오더에 들어감");
+	for(int i=0;i<sideDish.length;i++){
+		System.out.println(sideDish[i]);
+	}
+	
 	model.addAttribute("order", customer);
+	model.addAttribute("sideDCode",sideDish);
 	return "customer/dietOrder/orderRegister";
 }
 /**
@@ -151,9 +156,17 @@ for(int i=0; i< jsonObj.size();i++){
  * @throws Exception
  */
 @RequestMapping(value="/payment",method=RequestMethod.POST)
-public String payment(RedirectAttributes rttr,Customer customer)throws Exception{	
-	serviceCu.orderRegist(customer);	
+public String payment(RedirectAttributes rttr,Customer customer,@RequestParam(value="sideDCode") int sideDCode[])throws Exception{	
+	serviceCu.orderRegist(customer);
+	int recentCode = serviceCu.recentlyOrderCode(customer.getId());
+	for(int i=0;i<sideDCode.length;i++){		
+			HashMap options = new HashMap();
+			options.put("recentCode", recentCode);
+			options.put("sideCode", sideDCode[i]);
+			serviceCu.orderOptionRegist(options);
+		}	
 	rttr.addAttribute("status","3");
+	
 	//결제후 마이페이지로
 	return "redirect:myPage";
 }
@@ -176,10 +189,10 @@ public String goMyCart(@RequestParam(value="sideDish") List<String> sideDish, Cu
 	int recentCode = serviceCu.recentlyOrderCode(customer.getId());
 	for(String sCode : sideDish){
 	int code = Integer.parseInt(sCode);
-	HashMap options = new HashMap();
-	options.put("recentCode", recentCode);
-	options.put("sideCode", code);
-	serviceCu.orderOptionRegist(options);
+		HashMap options = new HashMap();
+		options.put("recentCode", recentCode);
+		options.put("sideCode", code);
+		serviceCu.orderOptionRegist(options);
 	}	
 	return "redirect:goCartList";
 }

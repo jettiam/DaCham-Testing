@@ -155,6 +155,11 @@
 		<input id="setDietAmount" type="hidden" name="dietAmount" value="${order.dietAmount}">
 		<input id="setPaymentItem" type="hidden" name="paymentItemCode"> 
 		<input id="customerId" type="hidden" name="id" value="${order.id }">
+		<c:if test="${order.detailOrder == true}">
+		<c:forEach items="${sideDCode }" var="side">	
+		<input id="sideDCode" type="hidden" name="sideDCode" value="${side}">
+		</c:forEach>	
+		</c:if>
 	</form>
 </body>
 </html>

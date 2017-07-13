@@ -26,6 +26,7 @@ import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.wdb3a.dacham.bean.Counsel;
 import com.wdb3a.dacham.bean.Nutritionist;
 import com.wdb3a.dacham.bean.OrderList;
 import com.wdb3a.dacham.bean.Testing5;
@@ -174,7 +175,11 @@ public class NutritionController {
     * @return 스페셜식단 등록 페이지로 이동
     */
    @RequestMapping(value="/SPRegist", method = RequestMethod.GET)
-   public String getSPRegist(){
+   public String getSPRegist(Model model,@RequestParam("customer")String customer) throws Exception{
+	   List<Nutritionist> overList = service.choiceDisease();
+	   model.addAttribute("overList",overList);
+	   Counsel counsel = service.specialView(customer);
+	   model.addAttribute("counsel",counsel);
 	   return "mate/nutritionist/SPDietRegist";
    }
    
