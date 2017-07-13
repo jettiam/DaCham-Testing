@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.wdb3a.dacham.bean.Counsel;
 import com.wdb3a.dacham.bean.Criteria;
 import com.wdb3a.dacham.bean.Nutritionist;
 import com.wdb3a.dacham.bean.OrderList;
@@ -171,6 +172,12 @@ public class NutritionistServiceImpl implements NutritionistService {
 	public int materialTotal() throws Exception {
 		// TODO Auto-generated method stub
 		return dao.materialTotal();
+	}
+
+	@Override
+	public Counsel specialView(String customer) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.specialView(customer);
 	}
 
 

@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.wdb3a.dacham.bean.Counsel;
 import com.wdb3a.dacham.bean.Criteria;
 import com.wdb3a.dacham.bean.Nutritionist;
 import com.wdb3a.dacham.bean.OrderList;
@@ -181,8 +182,9 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 		return sqlSession.selectOne(namespace+".materialTotal");
 	}
 
-	
-
-	
-
+	@Override
+	public Counsel specialView(String customer) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".specialView",customer);
+	}
 }

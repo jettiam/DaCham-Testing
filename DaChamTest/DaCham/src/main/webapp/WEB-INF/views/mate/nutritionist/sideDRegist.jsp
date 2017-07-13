@@ -249,8 +249,11 @@
 				var id = $(this).parent().attr('data-id');
 				var foodMName = $(this).attr('data-name');
 				
+				var prev = $(this).attr('data-name');
+				console.log("ㅇㅇㅇ"+prev);
+				$('.nameClick[data-src="'+prev+'"]').parent().parent().show();
 				$(this).parent().remove();
-				localStorage.removeItem(id+'_name');
+				localStorage.removeItem(id+'_name');    
 				localStorage.removeItem(id+'_code');
 				
 				--cnt;

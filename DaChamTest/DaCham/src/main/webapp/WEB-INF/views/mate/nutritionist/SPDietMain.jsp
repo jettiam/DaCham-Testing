@@ -13,9 +13,8 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
 	$(document).ready(function(){
-		$("#update").click(function(){
-			window.location.href = "SPRegist";
-		});
+		$("#special").addClass("w3-light-gray");
+		
 	});
 </script>
 <style>
@@ -23,7 +22,7 @@
 		float:right;
 	}
 </style>
-<title>Insert title here</title>
+<title>특별식단 관리 페이지</title>
 </head>
 <body>
 <%@include file="nutritionistNavi.jsp" %>
@@ -41,16 +40,14 @@
 						<th>고객id</th>
 						<th>상담명</th>
 						<th>상담일</th>
-						<th>금액</th>
 					</tr>
 					<c:forEach items = "${list }" var = "v">
 						<tr>
-							<td><input type = "radio" name = "orderCode" value = "${v.orderCode }"></td>
-							<td>${v.orderCode }</td>
-							<td>${v.id }</td>
-							<td>${v.counselContent }</td>
+							<td><input type = "radio" name = "counselCode" value = "${v.counselCode }"></td>
+							<td>${v.counselCode}</td>
+							<td>${v.customer }</td>
+							<td><a href = "#">${v.counselTitle }</a></td>   
 							<td>${v.counselDate }</td>
-							<td>${v.price }</td>
 						</tr>
 					</c:forEach>
 				</table>

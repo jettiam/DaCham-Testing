@@ -115,6 +115,7 @@
 													.val();
 											console.log("데이터:" + sideDCode);
 											var prev = $(this).prev().val();
+											console.log("ㄷㄷㄷ:"+prev);
 											$(
 													'.nameClick[data-code = "'
 															+ prev + '"]')
