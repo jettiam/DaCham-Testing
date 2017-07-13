@@ -46,7 +46,7 @@
 							<td><input type = "radio" name = "counselCode" value = "${v.counselCode }"></td>
 							<td>${v.counselCode}</td>
 							<td>${v.customer }</td>
-							<td><a href = "#">${v.counselTitle }</a></td>   
+							<td><a href = "SPRegist?customer=${v.customer }">${v.counselTitle }</a></td>   
 							<td>${v.counselDate }</td>
 						</tr>
 					</c:forEach>

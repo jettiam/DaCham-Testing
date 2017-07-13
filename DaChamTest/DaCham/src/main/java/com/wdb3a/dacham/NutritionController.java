@@ -175,10 +175,11 @@ public class NutritionController {
     * @return 스페셜식단 등록 페이지로 이동
     */
    @RequestMapping(value="/SPRegist", method = RequestMethod.GET)
-   public String getSPRegist(Model model) throws Exception{
+   public String getSPRegist(Model model,@RequestParam("customer")String customer) throws Exception{
 	   List<Nutritionist> overList = service.choiceDisease();
 	   model.addAttribute("overList",overList);
-	 
+	   Counsel counsel = service.specialView(customer);
+	   model.addAttribute("counsel",counsel);
 	   return "mate/nutritionist/SPDietRegist";
    }
    

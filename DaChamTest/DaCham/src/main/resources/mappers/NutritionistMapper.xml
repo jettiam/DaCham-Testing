@@ -159,7 +159,7 @@
 	</select>
 	<!-- 특별식단을 view -->
 	<select id = "specialView" resultType = "com.wdb3a.dacham.bean.Counsel">
-		select *
+		select a.customer, a.counselDate, b.address, b.tel, a.counselContent
 		from counsel a join member b
 		where a.customer = b.id
 		and a.customer = #{customer}
