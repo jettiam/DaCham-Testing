@@ -516,20 +516,20 @@
 		<h3><b>고객 요청 리스트</b></h3>
 		<table class = "table table-hover">
 			<tr>
-				<th>고객id</th>
-				<td></td>  
+				<td>고객id</td>
+				<td>${counsel.customer }</td>  
 			</tr>
 			<tr>
 				<th>등록일</th>
-				<td></td>
+				<td>${counsel.counselDate }</td>
 			</tr>
 			<tr>
 				<th>주소</th>
-				<td></td>
+				<td>${counsel.address }</td>
 			</tr>
 			<tr>
 				<th>전화번호</th>
-				<td></td>
+				<td>${counsel.tel }</td>
 			</tr>
 		</table>
 		<div class = "form-group">
