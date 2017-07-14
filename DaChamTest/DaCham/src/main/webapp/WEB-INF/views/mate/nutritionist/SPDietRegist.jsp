@@ -34,7 +34,7 @@
 						});
 						$("#cancle").click(function() {
 							if (window.confirm("정말로 취소하시겠습니까?")) {
-								window.location.href = "diet";
+								window.location.href = "special";
 							}
 						});
 						localStorage.clear();
@@ -472,7 +472,7 @@
 					});
 </script>
 
-<title>특별식단 등록 페이지</title>
+<title>특별식단 등록 페이지</title>	
 <!-- <style>
  .box1 {
   float:left;  }

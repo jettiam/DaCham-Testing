@@ -186,6 +186,12 @@ public class NutritionistServiceImpl implements NutritionistService {
 		dao.specialRegist(customer);
 	}
 
+	@Override
+	public List<Nutritionist> specialToggle(String customer) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.specialToggle(customer);
+	}
+
 
 	
 

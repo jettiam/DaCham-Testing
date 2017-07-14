@@ -213,7 +213,7 @@ public class NutritionController {
 	   }
 	   service.specialRegist(nutritionist.getCustomer());
 	   System.out.println("°í°´¾ÆÀÌµð:"+nutritionist.getCustomer());
-	   return "redirect:diet";
+	   return "redirect:special";
    }
     @ResponseBody
 	@RequestMapping("displayFile")

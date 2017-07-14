@@ -51,4 +51,6 @@ public interface NutritionistDAO {
 	public Counsel specialView(String customer) throws Exception;
 	//해당 특별식단의 고객 정보와 함께 등록
 	public void specialRegist(String customer) throws Exception;
+	//해당 고객요청에 등록된 특별식단 toggle
+	public List<Nutritionist> specialToggle(String customer) throws Exception;
 }
