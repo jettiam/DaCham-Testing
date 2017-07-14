@@ -164,4 +164,9 @@
 		where a.customer = b.id
 		and a.customer = #{customer}
 	</select>
+	<!-- 특별식단 고객 요청 등록 -->
+	<insert id = "specialRegist">
+		insert into orderlist(id, dietCode, orderDate, price, dietAmount, transportNum, orderItemCode, paymentItemCode)
+		values(#{customer},(select MAX(dietCode) from diet),now(),(select price from diet where dietCode = (select MAX(dietCode) from diet)),1,null,0,1)
+	</insert>
 </mapper>

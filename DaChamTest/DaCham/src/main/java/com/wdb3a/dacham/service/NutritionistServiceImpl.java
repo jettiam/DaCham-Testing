@@ -180,6 +180,12 @@ public class NutritionistServiceImpl implements NutritionistService {
 		return dao.specialView(customer);
 	}
 
+	@Override
+	public void specialRegist(String customer) throws Exception {
+		// TODO Auto-generated method stub
+		dao.specialRegist(customer);
+	}
+
 
 	
 

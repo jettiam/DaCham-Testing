@@ -41,6 +41,7 @@ public class Nutritionist {
 	private int wizardCode;
 	private int dietCode;
 	private String spDietItem;
+	private String customer;
 	
 	public String getFoodGCode() {
 		return foodGCode;
@@ -281,6 +282,12 @@ public class Nutritionist {
 	}
 	public void setSideDType(String sideDType) {
 		this.sideDType = sideDType;
+	}
+	public String getCustomer() {
+		return customer;
+	}
+	public void setCustomer(String customer) {
+		this.customer = customer;
 	}
 	
 	

@@ -49,4 +49,6 @@ public interface NutritionistService {
 	public List<OrderList> specialList() throws Exception;
 	//해당 특별식단의 고객 리스트를 view!
 	public Counsel specialView(String customer) throws Exception;
+	//해당 특별식단의 고객 정보와 함께 등록
+	public void specialRegist(String customer) throws Exception;
 }

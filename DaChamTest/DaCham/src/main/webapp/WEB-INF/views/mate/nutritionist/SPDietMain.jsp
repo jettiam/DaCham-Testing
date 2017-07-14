@@ -15,6 +15,9 @@
 	$(document).ready(function(){
 		$("#special").addClass("w3-light-gray");
 		
+		$("#detailDiet").on("click",function(){
+			$(this).after("<tr><td></td></tr>")
+		});
 	});
 </script>
 <style>
@@ -40,14 +43,16 @@
 						<th>고객id</th>
 						<th>상담명</th>
 						<th>상담일</th>
+						<th>식단상세</th>
 					</tr>
 					<c:forEach items = "${list }" var = "v">
-						<tr>
+						<tr id = "detail">
 							<td><input type = "radio" name = "counselCode" value = "${v.counselCode }"></td>
 							<td>${v.counselCode}</td>
 							<td>${v.customer }</td>
 							<td><a href = "SPRegist?customer=${v.customer }">${v.counselTitle }</a></td>   
 							<td>${v.counselDate }</td>
+							<td id = "detailDiet" data-id = "${v.customer }">상세보기</td>
 						</tr>
 					</c:forEach>
 				</table>
