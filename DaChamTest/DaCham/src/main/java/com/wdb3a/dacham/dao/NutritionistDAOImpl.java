@@ -187,4 +187,16 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace+".specialView",customer);
 	}
+
+	@Override
+	public void specialRegist(String customer) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.insert(namespace+".specialRegist",customer);
+	}
+
+	@Override
+	public List<Nutritionist> specialToggle(String customer) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".specialToggle",customer);
+	}
 }

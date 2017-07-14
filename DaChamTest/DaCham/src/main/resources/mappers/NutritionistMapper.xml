@@ -164,4 +164,19 @@
 		where a.customer = b.id
 		and a.customer = #{customer}
 	</select>
+	<!-- 특별식단 고객 요청 등록 -->
+	<insert id = "specialRegist">
+		insert into orderlist(id, dietCode, orderDate, price, dietAmount, transportNum, orderItemCode, paymentItemCode)
+		values(#{customer},(select MAX(dietCode) from diet),now(),(select price from diet where dietCode = (select MAX(dietCode) from diet)),1,null,0,1)
+	</insert>
+	<!-- 특별 고객이 등록한 특별식단 toggle -->
+	<select id = "specialToggle" resultType = "com.wdb3a.dacham.bean.Nutritionist">
+		select d.dietName, d.dietImg, d.price
+		from counsel a join member b join orderlist c join diet d
+		where a.customer = b.id
+		and b.id = c.id
+		and c.dietCode = d.dietCode
+		and a.customer = #{customer}
+		and d.spDietItem = 0
+	</select>
 </mapper>
