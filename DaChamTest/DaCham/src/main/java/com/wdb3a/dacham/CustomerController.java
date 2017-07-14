@@ -294,12 +294,13 @@ public String delete(@RequestParam(value="counselCode")int code,RedirectAttribut
 	return "redirect:counsel";
 	
 }
+
 @RequestMapping(value="/counselUpdate",method = RequestMethod.GET)
 /**
  * 
  * @return 고객 게시글 수정
  */
-	public void updateGET(int code, Model model) throws Exception{
+	public void updateGET(int code,Model model) throws Exception{
 	model.addAttribute(service.couselRead(code));
 	
 }
