@@ -5,7 +5,7 @@
 <mapper namespace="com.wdb3a.NutritionistMapper">
 	<!-- 반찬 목록을 검색합니다. -->
 	<select id = "listSearch" resultType = "com.wdb3a.dacham.bean.Nutritionist">	
-		select a.sideDName, b.foodGName, c.cookMName , a.sideDCode, a.sideDImg
+		select a.sideDName, b.foodGName, c.cookMName , a.sideDCode, a.sideDImg,a.foodGCode
 		from sideDish a join foodGroup b join cookMethod c
 		where a.foodGCode = b.foodGCode
 		and a.cookMCode = c.cookMCode
@@ -17,14 +17,35 @@
 		from orderlist a join diet b
 		where a.dietCode = b.dietCode
 		and month(a.orderDate) between month(a.orderDate) and (month(a.orderDate)+1)
-		group by a.dietCode;
+		group by a.dietCode
+		limit #{startRecord},#{recordsPerPage}
+	</select>
+	<!-- 이달의 메뉴의 개수를 구합니다. -->
+	<select id = "thisMonthCount" resultType = "Integer">
+		select count(v.dietNAme) as count
+		from (select a.orderDate, b.dietName, b.dietImg 
+				from orderlist a join diet b
+				where a.dietCode = b.dietCode
+				and month(a.orderDate) between month(a.orderDate) and (month(a.orderDate)+1)
+				group by a.dietCode
+		) v
 	</select>
 	<!-- 반찬 전체를 조회합니다(with 식품군, 조리방법) -->
 	<select id = "sideAll" resultType = "com.wdb3a.dacham.bean.Nutritionist">
-		select a.sideDName, b.foodGName, c.cookMName , a.sideDCode, a.sideDImg
+		select a.sideDName, b.foodGName, c.cookMName , a.sideDCode, a.sideDImg, a.foodGCode
 		from sideDish a join foodGroup b join cookMethod c
 		where a.foodGCode = b.foodGCode
 		and a.cookMCode = c.cookMCode
+		and a.foodGCode = #{foodGCode}
+		limit #{criteria.startRecord},#{criteria.recordsPerPage}
+	</select>
+	<!-- 반찬 전체의 수량 구하기 -->
+	<select id = "sideAllCount" resultType = "Integer">
+		select count(a.sideDCode)
+		from sideDish a join foodGroup b join cookMethod c
+		where a.foodGCode = b.foodGCode
+		and a.cookMCode = c.cookMCode
+		and a.foodGCode = #{foodGCode}
 	</select>
 	<select id = "materialSearch" resultType = "com.wdb3a.dacham.bean.Nutritionist">
 		select *
@@ -33,6 +54,10 @@
 	</select>
 	<select id="materialAmount" resultType = "com.wdb3a.dacham.bean.Nutritionist">
 		select * from foodmaterial
+		limit #{startRecord},#{recordsPerPage}
+	</select>
+	<select id = "materialTotal" resultType = "Integer">
+		select count(*) from foodmaterial
 	</select>
 	<insert id="createAmount">
 		insert into sidedinfo(sideDCode, foodMCode, foodMAmount)
@@ -44,7 +69,7 @@
 	</insert>
 	<select id="openAPI" resultType = "com.wdb3a.dacham.bean.Nutritionist">
 		select * from foodmaterial
-		where foodMName = #{foodMName}
+		where foodMCode = #{foodMCode}
 	</select>
 	<insert id = "createDiet">
 		insert into diet(diseaseCode, dietName, price, dietImg, spDietItem)
@@ -54,9 +79,9 @@
 		select * from disease
 	</select>
 	<insert id = "createDietInfo">
-		insert into dietinfo(dietCode, sideDCode)
-		values ((select MAX(dietCode) from diet),#{sideDCode})
-	</insert>
+		insert into dietinfo(dietCode, sideDCode,sideDType)
+		values ((select MAX(dietCode) from diet),#{sideDCode},#{sideDType})
+	</insert>	
 	<!-- 특정 반찬에 대한 영양 정보 -->
 	<select id="showKcal" resultType = "com.wdb3a.dacham.bean.Nutritionist">
 		select f.foodMName, a.sideDName, sum(f.kcal*a.cu) kcal, f.carbohydrate*a.cu carbohydrate, f.protein*a.cu protein, f.fat*cu fat, f.na*cu na
@@ -127,4 +152,21 @@
 		   group by a.sidedcode
 			having a.sidedcode = #{sideDCode};		
 	</select>
+	<!-- 특별식단의 상담 리스트를 조회 -->
+	<select id="specialList" resultType = "com.wdb3a.dacham.bean.Counsel">
+		select * from counsel
+		where counselItemCode = 2
+	</select>
+	<!-- 특별식단을 view -->
+	<select id = "specialView" resultType = "com.wdb3a.dacham.bean.Counsel">
+		select a.customer, a.counselDate, b.address, b.tel, a.counselContent
+		from counsel a join member b
+		where a.customer = b.id
+		and a.customer = #{customer}
+	</select>
+	<!-- 특별식단 고객 요청 등록 -->
+	<insert id = "specialRegist">
+		insert into orderlist(id, dietCode, orderDate, price, dietAmount, transportNum, orderItemCode, paymentItemCode)
+		values(#{customer},(select MAX(dietCode) from diet),now(),(select price from diet where dietCode = (select MAX(dietCode) from diet)),1,null,0,1)
+	</insert>
 </mapper>

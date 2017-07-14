@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.wdb3a.dacham.bean.Counsel;
 import com.wdb3a.dacham.bean.Criteria;
 import com.wdb3a.dacham.bean.Nutritionist;
 import com.wdb3a.dacham.bean.OrderList;
@@ -54,9 +55,9 @@ public class NutritionistServiceImpl implements NutritionistService {
 	}
 
 	@Override
-	public Nutritionist openAPI(String foodMName) throws Exception {
+	public Nutritionist openAPI(String foodMCode) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.openAPI(foodMName);
+		return dao.openAPI(foodMCode);
 	}
 
 	@Override
@@ -90,9 +91,9 @@ public class NutritionistServiceImpl implements NutritionistService {
 	}
 
 	@Override
-	public List<Nutritionist> materialAll() throws Exception {
+	public List<Nutritionist> materialAll(Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.materialAll();
+		return dao.materialAll(criteria);
 	}
 	//반찬 템플릿의 개수를 구합니다.
 	@Override
@@ -102,9 +103,9 @@ public class NutritionistServiceImpl implements NutritionistService {
 	}
 
 	@Override
-	public List<Nutritionist> sideAll() throws Exception {
+	public List<Nutritionist> sideAll(String foodGCode,Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.sideAll();
+		return dao.sideAll(foodGCode,criteria);
 	}
 
 	@Override
@@ -126,9 +127,9 @@ public class NutritionistServiceImpl implements NutritionistService {
 	}
 
 	@Override
-	public List<OrderList> thisMonth() throws Exception {
+	public List<OrderList> thisMonth(Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.thisMonth();
+		return dao.thisMonth(criteria);
 	}
 
 	@Override
@@ -148,6 +149,43 @@ public class NutritionistServiceImpl implements NutritionistService {
 		// TODO Auto-generated method stub
 		return dao.diseaseDietCount(diseaseName);
 	}
+
+	@Override
+	public int sideAllCount(String foodGCode) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.sideAllCount(foodGCode);
+	}
+
+	@Override
+	public int thisMonthCount() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.thisMonthCount();
+	}
+
+	@Override
+	public List<OrderList> specialList() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.specialList();
+	}
+
+	@Override
+	public int materialTotal() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.materialTotal();
+	}
+
+	@Override
+	public Counsel specialView(String customer) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.specialView(customer);
+	}
+
+	@Override
+	public void specialRegist(String customer) throws Exception {
+		// TODO Auto-generated method stub
+		dao.specialRegist(customer);
+	}
+
 
 	
 

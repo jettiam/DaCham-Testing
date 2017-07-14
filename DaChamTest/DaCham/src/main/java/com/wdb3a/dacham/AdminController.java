@@ -10,14 +10,20 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -52,13 +58,77 @@ import com.wdb3a.dacham.service.AdminMainService;
 public class AdminController {
 	@Inject
 	private AdminMainService service; 
-	
+	 @Autowired
+	  private JavaMailSender mailSender;
+	//자바 메일 테스팅
+	// mailForm
+	  @RequestMapping(value = "/mailForm")
+	  public String mailForm() {
+	   
+	    return "mate/admin/mailForm";
+	  }  
+	 
+	  // mailSending 코드
+	  @RequestMapping(value = "/mailSending", method=RequestMethod.POST)
+	  public String mailSending(String foodMOrderInfo) throws Exception {
+	    String toString = "";
+	    String setfrom = "dudtka4971@gmail.com";         
+	    String tomail  = "dudtka4971@naver.com"; 
+	    String title   = "이번 식재료 주문 내역서입니다";      // 제목
+	    int totalprice; 
+	    JSONParser jsonParser = new JSONParser(); 
+		JSONObject jsonObj = (JSONObject) jsonParser.parse(foodMOrderInfo);
+		System.out.println(jsonObj); 
+		for(int i=0; i<jsonObj.size(); i++){
+			JSONObject jsonObj1 = (JSONObject) jsonObj.get(i+"");
+			totalprice = (int) (Integer.parseInt(jsonObj1.get("price").toString()) * Double.parseDouble(jsonObj1.get("foodMAmount").toString()));
+			System.out.println(jsonObj1);
+			System.out.println(jsonObj1.get("foodMname").toString());
+			toString = toString + "\n" + "식재료명 : " +jsonObj1.get("foodMname").toString() + "단가 : "+  jsonObj1.get("price").toString() + " 주문량 :" + jsonObj1.get("foodMAmount").toString() + jsonObj1.get("unit").toString() + " 총가격 : " + totalprice + "원";  
+		} 
+		String content = toString;    // 내용
+		try {
+	      MimeMessage message = mailSender.createMimeMessage();
+	      MimeMessageHelper messageHelper 
+	                        = new MimeMessageHelper(message, true, "UTF-8");
+	 
+	      messageHelper.setFrom(setfrom);  // 보내는사람 생략하거나 하면 정상작동을 안함
+	      messageHelper.setTo(tomail);     // 받는사람 이메일
+	      messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
+	      messageHelper.setText(content);  // 메일 내용
+	     
+	      mailSender.send(message);
+	    } catch(Exception e){
+	      System.out.println(e);
+	    }
+		
+		//("식재료명 :" + bookObject.get("foodMName") + " 단가 :"+bookObject.get("price") + " 주문량 :" + bookObject.get("foodMAmount") + " 단위 : " + bookObject.get("unit"));
+	    //String tomail  = request.getParameter("tomail");     // 받는 사람 이메일
+	  
+	   // String title   = request.getParameter("title");      // 제목
+	    //String content = request.getParameter("content");    // 내용
+	  
+	    /*try {
+	      MimeMessage message = mailSender.createMimeMessage();
+	      MimeMessageHelper messageHelper 
+	                        = new MimeMessageHelper(message, true, "UTF-8");
+	 
+	      messageHelper.setFrom(setfrom);  // 보내는사람 생략하거나 하면 정상작동을 안함
+	      messageHelper.setTo(tomail);     // 받는사람 이메일
+	      messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
+	      messageHelper.setText(content);  // 메일 내용
+	     
+	      mailSender.send(message);
+	    } catch(Exception e){
+	      System.out.println(e);
+	    }*/
+	   
+	    return "redirect:orderList";  
+	  }
+	 
 	
 	@RequestMapping(value="/adminMain", method=RequestMethod.GET)
-	public String getadminMain(Model model, OrderList orderList) throws Exception{
-		List<OrderList> list=service.orderListAll(orderList);
-		model.addAttribute("list",list);
-		model.addAttribute("orderList",orderList);
+	public String getadminMain() throws Exception{
 		return "mate/admin/adminMain";
 	}
 	//도넛차트 컨트롤러
@@ -68,7 +138,7 @@ public class AdminController {
 		List<ChartList> chartList = service.chartList(); 
 		model.addAttribute("chartList", chartList);
 		return chartList;
-	}
+	} 
 	//막대그래프 컨트롤러{디폴트}
 	@RequestMapping(value="/adminMain2", method=RequestMethod.GET)
 	@ResponseBody
@@ -123,6 +193,7 @@ public class AdminController {
 	public String getfoodOrder(Model model, FoodMInven foodMInven) throws Exception{
 		List<FoodMInven> invenlist = service.foodStockList(foodMInven);
 		model.addAttribute("invenlist", invenlist);
+		model.addAttribute("foodMInven", foodMInven);
 		return "mate/admin/foodOrder";
 	}
 	@RequestMapping(value="/foodStock", method=RequestMethod.GET)
@@ -157,7 +228,27 @@ public class AdminController {
 		}
 		
 		model.addAttribute("map", map);
-		
+		//미완성 식재료 다중 합친거
+				/*for(int i=0; i<jsonObj.size(); i++){
+				
+				JSONObject jsonObj1 = (JSONObject) jsonObj.get(i+"");
+				System.out.println("이건돌아가냐?1");
+				
+				System.out.println("이건돌아가냐?2");
+				
+				System.out.println(Integer.parseInt(jsonObj1.get("orderCode").toString()));
+				
+				String a = jsonObj1.get("orderCode").toString();
+				oCode.add(a);
+				  
+				}
+				List<FoodMAmountRead> foodMAmountRead1 = new ArrayList<FoodMAmountRead>();
+				//foodMAmountRead1 = service.foodMAmountRead(oCode);
+				foodMAmountRead1 = service.foodMAmountReadex(oCode);
+				 
+				model.addAttribute("map", foodMAmountRead1);
+				
+				*/
 		
 		return "mate/admin/foodOrder";
 	}

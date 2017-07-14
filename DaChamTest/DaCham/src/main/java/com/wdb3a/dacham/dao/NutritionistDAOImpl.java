@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.wdb3a.dacham.bean.Counsel;
 import com.wdb3a.dacham.bean.Criteria;
 import com.wdb3a.dacham.bean.Nutritionist;
 import com.wdb3a.dacham.bean.OrderList;
@@ -56,9 +57,9 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 	}
 
 	@Override
-	public Nutritionist openAPI(String foodMName) throws Exception {
+	public Nutritionist openAPI(String foodMCode) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne(namespace+".openAPI",foodMName);
+		return sqlSession.selectOne(namespace+".openAPI",foodMCode);
 	}
 
 	@Override
@@ -92,9 +93,9 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 	}
 
 	@Override
-	public List<Nutritionist> materialAll() throws Exception {
+	public List<Nutritionist> materialAll(Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".materialAmount");
+		return sqlSession.selectList(namespace+".materialAmount",criteria);
 	}
 	//반찬 템플릿의 개수를 구합니다.
 	@Override
@@ -104,9 +105,12 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 	}
 
 	@Override
-	public List<Nutritionist> sideAll() throws Exception {
+	public List<Nutritionist> sideAll(String foodGCode,Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".sideAll");
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("foodGCode", foodGCode);
+		map.put("criteria", criteria);
+		return sqlSession.selectList(namespace+".sideAll",map);
 	}
 
 	@Override
@@ -131,9 +135,9 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 	}
 
 	@Override
-	public List<OrderList> thisMonth() throws Exception {
+	public List<OrderList> thisMonth(Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".thisMonth");
+		return sqlSession.selectList(namespace+".thisMonth",criteria);
 	}
 
 	@Override
@@ -154,6 +158,39 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 		return sqlSession.selectOne(namespace+".diseaseDietCount",diseaseName);
 	}
 
-	
+	@Override
+	public int sideAllCount(String foodGCode) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".sideAllCount",foodGCode);
+	}
 
+	@Override
+	public int thisMonthCount() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".thisMonthCount");
+	}
+
+	@Override
+	public List<OrderList> specialList() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".specialList");
+	}
+
+	@Override
+	public int materialTotal() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".materialTotal");
+	}
+
+	@Override
+	public Counsel specialView(String customer) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".specialView",customer);
+	}
+
+	@Override
+	public void specialRegist(String customer) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.insert(namespace+".specialRegist",customer);
+	}
 }

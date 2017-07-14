@@ -16,7 +16,7 @@ margin-bottom:20px;
 		<div class="w3-container">
 			<!-- 로고박스 --> 
 			<div class="w3-display-container col-sm-1">			
-			<div class="w3-display-middle"><a href="nutriMain"><img src="resources/customerImage/dachamlogo.jpg" id="logo"></a>			
+			<div class="w3-display-middle"><a href="nutriMain"><img src="resources/customerImage/dachamlogo.png" id="logo"></a>			
 			</div></div>			
 			<div class="w3-display-container col-sm-2"><div class="w3-display-middle h1">${EmpDept}</div></div>
 			<div class="col-sm-4"></div>
@@ -31,6 +31,7 @@ margin-bottom:20px;
 	  <a href="wizard" class="w3-bar-item w3-button w3-hover-light-gray" id="wizard">식단 위자드 관리</a>
 	  <a href="diet" class="w3-bar-item w3-button w3-hover-light-gray" id="diet">식단 관리</a>	 
 	 <a href="side"  class="w3-bar-item w3-button w3-hover-light-gray" id="side">반찬 관리</a>	
+	 <a href="special"  class="w3-bar-item w3-button w3-hover-light-gray" id="special">특별식단 관리</a>
 	</div>
 	</div>
 	

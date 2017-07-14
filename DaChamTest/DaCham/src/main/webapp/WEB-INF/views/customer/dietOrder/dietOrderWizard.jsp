@@ -11,13 +11,15 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <script src="resources/json2.js"></script>
 <script>
 	$(document).ready(function() {
 		$("#startWizard").click(function() {
-			alert("위자드를 시작해요.");
+			/* alert("위자드를 시작해요."); */
 			$("#wizardResult").hide("slow");
 			$(".btn").show("slow");
 			getWizard(1);
@@ -52,7 +54,7 @@
 						r = eval(r);
 						if (r == "결과") {
 							document.getElementById("question").innerText = r;
-							alert(r);
+							/* alert(r); */
 							$(".btn").hide("slow");
 
 							var resultName = eval("json.q" + no
@@ -118,13 +120,13 @@ li {
 	list-style-type: none;
 }
 </style>
+<link rel="stylesheet" href="resources/style.css">
 <title></title>
 </head>
 <body>
 	<%@include file="../../clientNavi.jsp"%>
 	
-	<link rel="stylesheet"
-	href="resources/style.css">
+	
 	<section class="purpose section">
 	
                 <div class="container">
@@ -197,7 +199,7 @@ li {
                 </div>
                 <hr>
          
-	<div id="ground">
+	<div id="ground" class="container">
 		<h2 id="startWizard">
 			위자드 시작하기
 		</h2>

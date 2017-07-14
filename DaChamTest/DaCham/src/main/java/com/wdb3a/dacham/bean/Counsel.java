@@ -13,6 +13,9 @@ private String counselTitle;
 private Date counselDate;
 private String counselContent;
 private String counselRec;
+private String address;
+private String tel;
+
 public int getCounselCode() {
 	return counselCode;
 }
@@ -66,6 +69,18 @@ public String getCounselItemName() {
 }
 public void setCounselItemName(String counselItemName) {
 	this.counselItemName = counselItemName;
+}
+public String getAddress() {
+	return address;
+}
+public void setAddress(String address) {
+	this.address = address;
+}
+public String getTel() {
+	return tel;
+}
+public void setTel(String tel) {
+	this.tel = tel;
 }
 
 }

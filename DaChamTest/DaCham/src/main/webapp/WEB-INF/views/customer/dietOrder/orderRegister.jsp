@@ -12,6 +12,8 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <title>DaCham 주문하기</title>
 <style>
 .orderRegistWrap {
@@ -153,6 +155,11 @@
 		<input id="setDietAmount" type="hidden" name="dietAmount" value="${order.dietAmount}">
 		<input id="setPaymentItem" type="hidden" name="paymentItemCode"> 
 		<input id="customerId" type="hidden" name="id" value="${order.id }">
+		<c:if test="${order.detailOrder == true}">
+		<c:forEach items="${sideDCode }" var="side">	
+		<input id="sideDCode" type="hidden" name="sideDCode" value="${side}">
+		</c:forEach>	
+		</c:if>
 	</form>
 </body>
 </html>

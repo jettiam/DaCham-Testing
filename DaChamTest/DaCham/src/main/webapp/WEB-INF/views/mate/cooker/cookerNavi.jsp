@@ -16,7 +16,7 @@ margin-bottom:20px;
 		<div class="w3-container">
 			<!-- 로고박스 --> 
 			<div class="w3-display-container col-sm-1">			
-			<div class="w3-display-middle"><a href="cookMain"><img src="resources/customerImage/dachamlogo.jpg" id="logo"></a>			
+			<div class="w3-display-middle"><a href="cookMain"><img src="resources/customerImage/dachamlogo.png" id="logo"></a>			
 			</div></div>			
 			<div class="w3-display-container col-sm-2"><div class="w3-display-middle h1">${EmpDept}</div></div>
 			<div class="col-sm-4"></div>

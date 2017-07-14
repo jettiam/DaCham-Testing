@@ -58,23 +58,23 @@ display:none;}
 				<!-- 로그인박스 하단 작은 사이즈 식단 이미지 -->
 				<table>
 					<tr>
-						<td><a href="detailOrder?dietCode=1"><img src="resources/customerImage/dietImg/d01.JPG"
+						<td><a href="detailOrder?dietCode=51"><img src="resources/customerImage/dietImg/d01.JPG"
 							id=mainMenuImg class="mainMenuImg1 img-responsive"></a></td>
-						<td><a href="detailOrder?dietCode=2"><img src="resources/customerImage/dietImg/d02.JPG"
+						<td><a href="detailOrder?dietCode=52"><img src="resources/customerImage/dietImg/d02.JPG"
 							class="mainMenuImg2 img-responsive"></a></td>
 					</tr>
 
 					<tr>
-						<td><a href="detailOrder?dietCode=3"><img src="resources/customerImage/dietImg/d03.JPG"
+						<td><a href="detailOrder?dietCode=53"><img src="resources/customerImage/dietImg/d03.JPG"
 							class="mainMenuImg3 img-responsive"></a></td>
-						<td><a href="detailOrder?dietCode=3"><img src="resources/customerImage/dietImg/d05.JPG"
+						<td><a href="detailOrder?dietCode=54"><img src="resources/customerImage/dietImg/d05.JPG"
 							class="mainMenuImg4 img-responsive"></a></td>
 					</tr>
 
 					<tr>
-						<td><a href="detailOrder?dietCode=2"><img src="resources/customerImage/dietImg/m16.JPG"
+						<td><a href="detailOrder?dietCode=55"><img src="resources/customerImage/dietImg/m16.JPG"
 							class="mainMenuImg5 img-responsive"></a></td>
-						<td><a href="detailOrder?dietCode=1"><img src="resources/customerImage/dietImg/d20.JPG"
+						<td><a href="detailOrder?dietCode=56"><img src="resources/customerImage/dietImg/d20.JPG"
 							class="mainMenuImg6 img-responsive"></a></td>
 					</tr>
 				</table>

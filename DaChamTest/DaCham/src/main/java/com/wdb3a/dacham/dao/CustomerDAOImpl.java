@@ -31,9 +31,10 @@ public class CustomerDAOImpl implements CustomerDAO {
 
 
 	@Override
-	public List<Customer> sideDDetail(String foodGCode) throws Exception {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".sideDDetail",foodGCode);
+	public List<Customer> sideDDetail(Customer customer) throws Exception {
+		// TODO Auto-generated method stub		
+		
+		return sqlSession.selectList(namespace+".sideDDetail",customer);
 
 	}
 

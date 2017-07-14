@@ -8,7 +8,7 @@
   <select id="dietList" resultType="Customer">
   	select d.dietCode, d.dietName, s.sideDImg
 	from diet d,dietinfo di, sidedish s
-	where d.diseaseCode=#{diseaseCode} and di.dietCode=d.dietCode and di.sideDCode=s.sideDCode
+	where d.diseaseCode=#{diseaseCode} and di.dietCode=d.dietCode and di.sideDCode=s.sideDCode and di.sideDType=0
 	order by d.dietCode
 
   </select>
@@ -16,20 +16,31 @@
   <select id="detailOrder" resultType="Customer">
     select d.dietImg, d.dietCode, d.dietName, d.price, s.sideDImg, s.sideDName,s.foodGCode
 	from diet d,dietinfo di, sidedish s
-	where d.dietCode=#{dietCode} and di.dietCode=d.dietCode and di.sideDCode=s.sideDCode
+	where d.dietCode=#{dietCode} and di.dietCode=d.dietCode and di.sideDCode=s.sideDCode and di.sideDType=0
 	order by s.foodGcode  
   </select>
   
   <!-- 특정 식품군 반찬 정보 띄우는 쿼리문 영양정보 포함 -->
   <select id="sideDDetail" resultType="Customer">
-  select s.sideDCode, s.sidedImg,s.sideDname,s.foodGCode, f.kcal,f.carbohydrate,f.protein,f.fat,f.na
+  <!-- select s.sideDCode, s.sidedImg,s.sideDname,s.foodGCode, f.kcal,f.carbohydrate,f.protein,f.fat,f.na
 from sidedish s,(select a.sideDcode,sum(kcal) kcal,sum(carbohydrate) carbohydrate, sum(protein) protein, sum(fat) fat, sum(na) na
 from 
 (select si.sideDCode,(si.foodMAmount/100)*f.kcal kcal,(si.foodMAmount/100)*f.protein protein,(si.foodMAmount/100)*f.carbohydrate carbohydrate,(si.foodMAmount/100)*f.na na,(si.foodMAmount/100)*f.fat fat
 	from sidedinfo si,foodmaterial f
 	where si.foodMCode = f.foodMCode) a
 	group by a.sidedcode) f 
-where s.sideDCode=f.sideDcode and s.foodGCode=#{foodGCode};
+where s.sideDCode=f.sideDcode and s.foodGCode=#{foodGCode}; -->
+select result.sideDCode, result.sidedImg,result.sideDname,result.foodGCode, result.kcal,result.carbohydrate,result.protein,result.fat,result.na,result.k
+from  (select s.sideDCode, s.sidedImg,s.sideDname,s.foodGCode, f.kcal,f.carbohydrate,f.protein,f.fat,f.na,f.k
+from sidedish s,(select a.sideDcode,sum(kcal) kcal,sum(carbohydrate) carbohydrate, sum(protein) protein, sum(fat) fat, sum(na) na,sum(k) k
+from 
+(select si.sideDCode,(si.foodMAmount/100)*f.kcal kcal,(si.foodMAmount/100)*f.protein protein,(si.foodMAmount/100)*f.carbohydrate carbohydrate,(si.foodMAmount/100)*f.na na,(si.foodMAmount/100)*f.fat fat,(si.foodMAmount/100)*f.k k
+	from sidedinfo si,foodmaterial f
+	where si.foodMCode = f.foodMCode) a
+	group by a.sidedcode) f 
+where s.sideDCode=f.sideDcode and s.foodGCode=#{foodGCode}) result, dietinfo di
+where di.dietCode = #{dietCode} and result.sideDCode= di.sideDCode
+order by di.sideDType
   </select>
   <!-- 주문결제 -->
   <insert id="orderRegist">

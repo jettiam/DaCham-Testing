@@ -25,7 +25,7 @@
 			
 			var orderCode = $('input:radio[name="chk"]:checked').val();     
 			var data = $(".transportNum"+orderCode).val();
-			alert("def:"+data);
+			
 			
 				$.ajax({
 					type : "put",	

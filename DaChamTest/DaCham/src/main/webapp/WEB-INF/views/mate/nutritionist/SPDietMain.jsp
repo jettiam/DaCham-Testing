@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,8 +13,10 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
 	$(document).ready(function(){
-		$("#update").click(function(){
-			window.location.href = "SPRegist";
+		$("#special").addClass("w3-light-gray");
+		
+		$("#detailDiet").on("click",function(){
+			$(this).after("<tr><td></td></tr>")
 		});
 	});
 </script>
@@ -22,14 +25,37 @@
 		float:right;
 	}
 </style>
-<title>Insert title here</title>
+<title>특별식단 관리 페이지</title>
 </head>
 <body>
 <%@include file="nutritionistNavi.jsp" %>
-	<div>
+	<div class = "container">    
 		<div class = "buttonBox">
-			<button id = "update">수정</button>
-			<button>삭제</button>
+			<button id = "update" class = "btn btn-default">수정</button>
+			<button class = "btn btn-default">삭제</button>  
+			
+		</div>
+		<div>
+				<table class = "table table-hover">
+					<tr>
+						<th>*</th>
+						<th>번호</th>
+						<th>고객id</th>
+						<th>상담명</th>
+						<th>상담일</th>
+						<th>식단상세</th>
+					</tr>
+					<c:forEach items = "${list }" var = "v">
+						<tr id = "detail">
+							<td><input type = "radio" name = "counselCode" value = "${v.counselCode }"></td>
+							<td>${v.counselCode}</td>
+							<td>${v.customer }</td>
+							<td><a href = "SPRegist?customer=${v.customer }">${v.counselTitle }</a></td>   
+							<td>${v.counselDate }</td>
+							<td id = "detailDiet" data-id = "${v.customer }">상세보기</td>
+						</tr>
+					</c:forEach>
+				</table>
 		</div>
 	</div>
 </body>

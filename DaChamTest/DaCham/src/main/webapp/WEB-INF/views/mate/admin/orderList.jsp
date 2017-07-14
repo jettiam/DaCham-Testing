@@ -145,7 +145,7 @@
 					}
 
 				});
-			});
+			}); 
 		});
 		//검색
 	$("#search").on("click",function(){
@@ -156,11 +156,11 @@
 		var keyword = $("#keyword").val(); 
 		$.getJSON("adminSub/orderList/"+searchType+"/"+keyword,function(data){
 		for(var i=0; i<data.length; i++){
-			str += "<tr class='orderListTable'><td>"+"<input type='checkBox' id='"+data[i].orderCode+"' value='"+data[i].orderCode+"' name='che'</td>"+"<td>"+data[i].orderCode+"</td>"+"<td>"+data[i].id+"</td>"+"<td>"+"<a data-src='"+data[i].orderCode+"' class='orderCode'>"+data[i].dietName+"</a> </td>"+"<td>"+data[i].orderDate+"</td>"+"<td>"+data[i].price+"</td>"+"<td>"+data[i].orderItemName+"</td>"+"<td>"+data[i].transportNum+"</td> </tr>"
+			str += "<tr class='orderListTable'><td>"+"<input type='checkBox' id='"+data[i].orderCode+"' value='"+data[i].orderCode+"' name='che'</td>"+"<td>"+data[i].orderCode+"</td>"+"<td>"+data[i].id+"</td>"+"<td>"+"<a data-src='"+data[i].orderCode+"' class='orderCode'>"+data[i].dietName+"</a> </td>"+"<td>"+data[i].orderDate+"</td>"+"<td>"+data[i].price+"</td>"+"<td>"+data[i].orderItemName+"</td> </tr>"
 			}  
 		$(".tables").append(str); 
 		});
-	});
+	}); 
 	$("#searchAll").on("click", function(){
 		all(); 
 	});
@@ -235,15 +235,15 @@
 			<select name = "searchType" class="searchType form-control">
 	   			</option>
 	   			<option value = "t"
-	   			<c:out value="${order.searchType eq 't'?'selected':'' }"/>>
+	   			<c:out value="${orderList.searchType eq 't'?'selected':'' }"/>>
 	   			고객id
 	   			</option>
 	   			<option value = "c"
-	   			<c:out value="${order.searchType eq 'c'?'selected':'' }"/>>
+	   			<c:out value="${orderList.searchType eq 'c'?'selected':'' }"/>>
 	   			식단명
 	   			</option>
 	   			<option value = "a"
-	   			<c:out value="${order.searchType eq 'a'?'selected':'' }"/>>
+	   			<c:out value="${orderList.searchType eq 'a'?'selected':'' }"/>>
 	   			진행상태
 	   			</option>
 			</select> 

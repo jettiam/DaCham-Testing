@@ -2,6 +2,7 @@ package com.wdb3a.dacham.dao;
 
 import java.util.List;
 
+import com.wdb3a.dacham.bean.Counsel;
 import com.wdb3a.dacham.bean.Criteria;
 import com.wdb3a.dacham.bean.Nutritionist;
 import com.wdb3a.dacham.bean.OrderList;
@@ -10,16 +11,21 @@ public interface NutritionistDAO {
 //	반찬 목록을 검색합니다.
 	public List<Nutritionist> listSearch(Nutritionist nutritionist) throws Exception;
 // 반찬 전체를 조회합니다.(with 식품군, 조리법)
-	public List<Nutritionist> sideAll() throws Exception;
+	public List<Nutritionist> sideAll(String foodGCode,Criteria criteria) throws Exception;
+	//반찬 전체의 수량을 구합니다.
+	public int sideAllCount(String foodGCode) throws Exception;
 	//해당 메인페이지에 이달의 메뉴를 조회합니다.
-	public List<OrderList> thisMonth() throws Exception;
+	public List<OrderList> thisMonth(Criteria criteria) throws Exception;
+	//이달의 메뉴의 개수를 구합니다.
+	public int thisMonthCount() throws Exception;
 	public List<Nutritionist> materialSearch(Nutritionist nutritionist) throws Exception;
 	public Nutritionist materialView(String sideDCode) throws Exception;
-	public List<Nutritionist> materialAll() throws Exception;
+	public List<Nutritionist> materialAll(Criteria criteria) throws Exception;
+	public int materialTotal() throws Exception;
 	public void create(Nutritionist nutritionist) throws Exception;
 	public void createSide(Nutritionist nutritionist) throws Exception;
 	public void createAmount(Nutritionist nutritionist) throws Exception;
-	public Nutritionist openAPI(String foodMName) throws Exception;
+	public Nutritionist openAPI(String foodMCode) throws Exception;
 	public void createDiet(Nutritionist nutritionist) throws Exception;
 	public List<Nutritionist> choiceDisease() throws Exception;
 	public void createDietInfo(Nutritionist nutritionist) throws Exception;
@@ -39,4 +45,10 @@ public interface NutritionistDAO {
 	public int orderList() throws Exception;
 	//해당 반찬에 대한 영양정보
 	public Nutritionist allNutri(String sideDCode) throws Exception;
+	//해당 특별식단 메인 페이지의 리스트
+	public List<OrderList> specialList() throws Exception;
+	//해당 특별식단의 고객 리스트를 view!
+	public Counsel specialView(String customer) throws Exception;
+	//해당 특별식단의 고객 정보와 함께 등록
+	public void specialRegist(String customer) throws Exception;
 }

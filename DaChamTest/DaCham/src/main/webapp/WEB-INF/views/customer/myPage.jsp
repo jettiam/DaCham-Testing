@@ -27,6 +27,10 @@
 .optionView{
 	display:none;
 }
+.detailSideDImg{
+	max-width:150px;
+	max-height:100px;
+}
 #myHealthTable{
 	display:table;
 }
@@ -204,7 +208,7 @@ $(document).ready(function(){
 	    case 1:
 			var id = $("#customerId").val();
 			//1501022	2151813
-			alert(id);
+			/* alert(id); */
 	    	
 			$(".orderTr").remove();
 			$.ajax({
@@ -298,7 +302,7 @@ $(document).ready(function(){
 						var orderCode = data.list[i].orderCode;				
 						$('#myCartTable').append("<tr class='addTr' data-orderCode='"+data.list[i].orderCode+"'><td>"
 								+"<input type='checkbox' class='w3-check' name='cartCheck' value='"+data.list[i].dietCode+"' data-orderCode='"+data.list[i].orderCode+"'>"
-								+"</td><td><img class='myPageImg img-responsive pull-left' data-img="+data.list[i].dietImg+" src='displayFile?fileName="+data.list[i].dietImg
+								+"</td><td><img class='myPageImg img-responsive pull-left' data-img='"+data.list[i].dietImg+"' src='displayFile?fileName="+data.list[i].dietImg
 										+"' alt='이미지'>"
 										+"<span data-orderCode='"+data.list[i].orderCode+"' class='optiondown glyphicon glyphicon-chevron-down'>"						
 										+"주문상세</span></td><td class='dietName'>"+data.list[i].dietName
@@ -314,7 +318,7 @@ $(document).ready(function(){
 										+"<div class='"+orderCode+"_options' ></div>"
 										+"</td></tr>");
 								 for(var i=0; i<length; i++){
-									$("."+orderCode+"_options").html($("."+orderCode+"_options").html()+"<img src='"+value[i].sideDImg+"'/>"+value[i].sideDName);																		
+									$("."+orderCode+"_options").html($("."+orderCode+"_options").html()+"<div class='col-sm-2'><img class='detailSideDImg' src='displayFile?fileName="+value[i].sideDImg+"'/>"+value[i].sideDName+"</div>");																		
 								}	 						
 							}
 						})
@@ -358,7 +362,7 @@ $(document).ready(function(){
 					}else{
 						orderStatus="결제완료";
 					} */
-						$('#myOrderListTable').append("<tr class='orderTr'><td class='orderCode hidden-xs'>"+data.list[i].orderCode+"</td><td class='orderDate'>"+data.list[i].orderDate+"</td><td class='hidden-xs'><img class='img-responsive myPageImg' data-img="+data.list[i].dietImg+" src='displayFile?fileName="+data.list[i].dietImg+"' alt='이미지'></td><td class='dietName'>"+data.list[i].dietName+"</td><td class='dietAmount'>"+data.list[i].dietAmount+"</td><td class='price'><span>"+data.list[i].price+"</span>원"+"</td><td class='oItemCode' data-oItemCode='"+data.list[i].orderItemCode+"'>"+data.list[i].orderListStatus+"</td></tr>");
+						$('#myOrderListTable').append("<tr class='orderTr'><td class='orderCode hidden-xs'>"+data.list[i].orderCode+"</td><td class='orderDate'>"+data.list[i].orderDate+"</td><td class='hidden-xs'><img class='img-responsive myPageImg' data-img='"+data.list[i].dietImg+"' src='displayFile?fileName="+data.list[i].dietImg+"' alt='이미지'></td><td class='dietName'>"+data.list[i].dietName+"</td><td class='dietAmount'>"+data.list[i].dietAmount+"</td><td class='price'><span>"+data.list[i].price+"</span>원"+"</td><td class='oItemCode' data-oItemCode='"+data.list[i].orderItemCode+"'>"+data.list[i].orderListStatus+"</td></tr>");
 				}
 				}
 			});
@@ -441,7 +445,7 @@ $(document).ready(function(){
 		}
 		console.log(JSON.stringify(jsonData));
 		*/
-		alert(JSON.stringify(cartOrderInfo));
+		/* alert(JSON.stringify(cartOrderInfo)); */
 		$("#cartInfo").val(JSON.stringify(cartOrderInfo));
 		$("#cartForm").submit();
 	});

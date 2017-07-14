@@ -16,13 +16,19 @@
 	$(document).ready(function(){
 		orderList(1);
 		var currentPage = 1;
-		$(".pagination").on("click","li a",function(){
+		var doubleCurrentPage = 1;
+		$(".pagination1").on("click","li a",function(){
 			event.preventDefault();
 			var replyPage = $(this).attr("href");
 			orderList(replyPage);
 		});
+		$(".pagination2").on("click","li a",function(){
+			event.preventDefault();
+			var replyPage = $(this).attr("href");
+			thisMonth(replyPage);
+		});
 		
-		thisMonth();
+		thisMonth(1);
 		function orderList(page){
 			currentPage = page;
 			$(".orderResult").remove();
@@ -35,14 +41,16 @@
 				printPaging(data.criteria);
 			});             
 		}
-		function thisMonth(){
+		function thisMonth(page){
 			$(".monthResult").remove();
-			$.getJSON("nutriAjax/thisMonth",function(data){
+			$.getJSON("nutriAjax/thisMonth/"+page,function(data){
+				doubleCurrentPage = page;
 				var str = "";
-				$(data).each(function(){
+				$(data.list).each(function(){
 					str += "<ul class = 'monthResult'>"+"<li>"+"<img src = 'displayFile?fileName="+this.dietImg+"' style = 'width: 75px; height: 25px;'>"+this.dietName+"</li>"+"</ul>";
 				});
 				$(".thisMonth").append(str);
+				printPaging2(data.criteria);
 			});
 		}
 		function printPaging(criteria){
@@ -58,7 +66,22 @@
 			if(criteria.next){
 				str += "<li><a href=''"+(criteria.endPage+1)+"'>'" + ">>"+"</a></li>";
 			}
-			$(".pagination").html(str);
+			$(".pagination1").html(str);
+		}
+		function printPaging2(criteria){
+			var str = "";
+					
+			if(criteria.prev){
+				str += "<li><a href=''"+(criteria.startPage-1)+"'>'" + "<<"+"</a></li>";
+			}
+			for(var i = criteria.startPage; i<=criteria.endPage; i++){
+				var strClass = criteria.page == i?"class = 'active'":"";
+				str += "<li "+strClass+"><a href ='"+i+"'>"+i + "</a></li>";
+			}
+			if(criteria.next){
+				str += "<li><a href=''"+(criteria.endPage+1)+"'>'" + ">>"+"</a></li>";
+			}
+			$(".pagination2").html(str);
 		}
 	});
 </script>
@@ -78,6 +101,7 @@
 <%@include file="nutritionistNavi.jsp" %>
   <div class = "container">
    <div class = "box1">
+   	  <h3>공지사항</h3>
       <div>
          <select>
             <option>등록자</option>
@@ -121,14 +145,16 @@
             
          </tr>
       </table>
-      <ul class = "pagination">
+      <ul class = "pagination1 pagination">
       </ul>
    </div>
    <div class = "thisMonth">
-      <h1> 월의 판매 식단</h1>
+      <h1> 이번 달의 판매 식단</h1>
       <hr align = "left" width = "20%">
      <ul class = "monthResult">
      	<li></li>
+     </ul>
+     <ul class = "pagination2 pagination">
      </ul>
    </div>
   </div> 
