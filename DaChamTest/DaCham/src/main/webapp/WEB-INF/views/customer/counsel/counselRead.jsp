@@ -26,8 +26,17 @@
 				$("#counselRead").submit();
 			}
 		});
+		
+		$("#counselUpdate").on("click",function(){
+			formObj.attr("action","/counselUpdate");
+			formObj.attr("method","get");
+			formObj.submit();
+		}
+	});
+		
 	});
 	
+
 </script>
 </head>
 <body>
@@ -38,9 +47,10 @@
 			제목 : <input type = "text" name = "counselTitle" value = "${read.counselTitle }" readonly><br>
 			작성자 : <input type = "text" name = "${read.customer}" value = "${read.customer}" readonly>
 			작성일 : <input type = "text" name = "regdate" value = "${read.counselDate}"readonly><br><br>
-			내용 : <textarea name = "content" readonly>${read.counselContent}</textarea>
+			내용 : <textarea name = "content" >${read.counselContent}</textarea>
 		
 		</form>
+		<button id = "counselUpdate" class="btn btn-warning myPageBtn">수정</button>
 		<button id = "counselDelete" class="btn btn-warning myPageBtn">삭제</button>
 		
 	</div>

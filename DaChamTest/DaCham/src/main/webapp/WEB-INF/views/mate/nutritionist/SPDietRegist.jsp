@@ -34,7 +34,7 @@
 						});
 						$("#cancle").click(function() {
 							if (window.confirm("정말로 취소하시겠습니까?")) {
-								window.location.href = "diet";
+								window.location.href = "special";
 							}
 						});
 						localStorage.clear();
@@ -351,7 +351,7 @@
 							$("#registForm .foodType").attr("type","hidden");
 							$("#registForm .foodType").attr("name","sideDType");
 							$("#registForm").attr("method", "post");
-							$("#registForm").attr("action", "diet");
+							$("#registForm").attr("action", "SPDiet");
 							$("#registForm").submit();
 						});
 
@@ -472,7 +472,7 @@
 					});
 </script>
 
-<title>특별식단 등록 페이지</title>
+<title>특별식단 등록 페이지</title>	
 <!-- <style>
  .box1 {
   float:left;  }
@@ -517,7 +517,7 @@
 		<table class = "table table-hover">
 			<tr>
 				<td>고객id</td>
-				<td>${counsel.customer }</td>  
+				<td id = "customer">${counsel.customer }</td>  
 			</tr>
 			<tr>
 				<th>등록일</th>
@@ -534,7 +534,7 @@
 		</table>
 		<div class = "form-group">
 			<label for = "comment">상세내용:</label>
-			<textarea class = "form-control" rows = "5" id = "comment">${counsel.counselContent }</textarea>
+			<textarea class = "form-control" readonly = "readonly" rows = "5" id = "comment">${counsel.counselContent }</textarea>
 		</div>
 	</div>  
 	<div class="container">
@@ -615,6 +615,7 @@
 
 		<div class="col-sm-12">
 			<form id="registForm" enctype="multipart/form-data">
+				<input type = "hidden" name = "customer" value = "${counsel.customer }">
 				<div class="div2">
 					<div id="test">
 						<select name="diseaseCode">

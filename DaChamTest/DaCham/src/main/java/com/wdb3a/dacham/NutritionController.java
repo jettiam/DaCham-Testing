@@ -182,7 +182,39 @@ public class NutritionController {
 	   model.addAttribute("counsel",counsel);
 	   return "mate/nutritionist/SPDietRegist";
    }
-   
+   @RequestMapping(value = "/SPDiet",method = RequestMethod.POST)
+   public String postSPDietRegist(Model model, Nutritionist nutritionist, MultipartFile file,@RequestParam("sideDType")String[] sideDType,@RequestParam("count")int count) throws Exception{
+	   System.out.println("이제 등록되려 합니다.");
+	  String savedName = UploadFileUtils.uploadFile(file.getOriginalFilename(), uploadPath, file.getBytes());
+	   model.addAttribute("savedName",savedName);
+	   System.out.println("총합:"+count);
+	   nutritionist.setDietImg(savedName);
+	   service.createDiet(nutritionist);
+	   /*for(int i = 0; i<count; i++){		   
+		   System.out.println("코드번호 : " + sideDCode[i]);
+		   nutritionist.setSideDCode(sideDCode[i]);
+		   service.createDietInfo(nutritionist);
+		   System.out.println("정보 등록 완료" + (i+1) + "개");
+	   }*/
+	   for(int i=0; i<count;i++){
+		   int sideDTypeUnDefault = sideDType[i].indexOf("_1");
+		   if(sideDTypeUnDefault==-1){
+			   int sideDTypeDefault = sideDType[i].indexOf("_0");
+			   nutritionist.setSideDType("0");
+			   nutritionist.setSideDCode(sideDType[i].substring(0,sideDTypeDefault));
+			   System.out.println("디폴트 반찬코드: "+sideDType[i].substring(0,sideDTypeDefault)+" 디폴트:"+nutritionist.getSideDType());
+			   service.createDietInfo(nutritionist);
+		   }else{
+			   nutritionist.setSideDType("1");
+			   nutritionist.setSideDCode(sideDType[i].substring(0,sideDTypeUnDefault));
+			   System.out.println("언디폴트 반찬코드: "+sideDType[i].substring(0,sideDTypeUnDefault)+" 디폴트:"+nutritionist.getSideDType());
+			   service.createDietInfo(nutritionist);
+		   }
+	   }
+	   service.specialRegist(nutritionist.getCustomer());
+	   System.out.println("고객아이디:"+nutritionist.getCustomer());
+	   return "redirect:special";
+   }
     @ResponseBody
 	@RequestMapping("displayFile")
 	public ResponseEntity<byte[]> displayFile(String fileName) throws Exception{

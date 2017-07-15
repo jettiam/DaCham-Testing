@@ -6,7 +6,6 @@ public class Counsel {
 private int counselCode;
 private String counselItemCode;
 private String counselItemName;
-
 private String customer;
 private String adviser;
 private String counselTitle;

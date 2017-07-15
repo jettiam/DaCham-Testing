@@ -26,6 +26,9 @@ max-height:350px; */
 /* max-width:250px;
 mat-height:200px; */
 }
+.nutriTable{
+text-align: center !important;
+}
 </style>
 <title>DaCham 식단상세보기</title>
 <script>
@@ -49,7 +52,11 @@ $(document).ready(function() {
 		$(".defaultFood[data-foodGCode='"+foodGCode+"']>img").attr("src",img);
 		$(".defaultFood[data-foodGCode='"+foodGCode+"']>.defaultSideDName").text(sideDName);
 		console.log($(".defaultFood[data-foodGCode='"+foodGCode+"']>img"));
-		
+		count=0;
+		$(".chartjs-hidden-iframe").remove();
+		$("#nutriChart").remove();
+		$(".nutriChart").append('<canvas id="nutriChart"></canvas>');
+		drawNutriChart(nutriInsert(count));
 		//activeRadio($(this));
 	});	
 
@@ -267,9 +274,12 @@ $(document).ready(function() {
 		}				
 		console.log("칼로리:"+kcal+",탄수화물:"+carbo+",단백질:"+protein+",지방:"+fat+",나트륨:"+na+",칼륨"+k);
 			if(count==6){
-				nutriValue = [carbo0,protein0,fat0,na0,k0];
+				nutriValue = [carbo0,protein0,fat0,na0/100, k0/100];
+				$(".nutriInfoTable").append("<td>"+kcal0+"</td><td>"+carbo0+"</td><td>"+protein0+"</td><td>"+fat0+"</td><td>"+na0+"</td><td>"+k0+"</td>")
 			}else{
-				nutriValue = [carbo,protein,fat,na,k];						
+				nutriValue = [carbo,protein,fat,na/100,k/100];	
+				$(".nutriInfoTable td").remove();
+				$(".nutriInfoTable").append("<td>"+kcal+"</td><td>"+carbo+"</td><td>"+protein+"</td><td>"+fat+"</td><td>"+na+"</td><td>"+k+"</td>")
 			}
 		
 		console.log(nutriValue);
@@ -289,6 +299,7 @@ $(document).ready(function() {
 		var myChart = new Chart(ctx, {
 		    type: 'radar',
 		    data: nutriData
+		    
 		});	
 	}	
 	
@@ -365,8 +376,14 @@ $(document).ready(function() {
 			</div>
 			</div>
 			<!-- 영양차트 -->
-			<div>
+			<div class="nutriChart">
 				<canvas id="nutriChart"></canvas>
+			</div>
+			<div class="center-block">
+				<table class="table nutriTable">
+					<tr><th>칼로리<br>(Kcal)</th><th>탄수화물<br>(g)</th><th>단백질<br>(g)</th><th>지방<br>(g)</th><th>칼륨<br>(mg)</th><th>나트륨<br>(mg)</th></tr>
+					<tr class="nutriInfoTable"></tr>
+				</table>
 			</div>
 		</div>
 	</div>
