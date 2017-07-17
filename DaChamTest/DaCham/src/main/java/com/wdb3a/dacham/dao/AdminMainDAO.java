@@ -6,6 +6,7 @@ import org.springframework.aop.ThrowsAdvice;
 
 import com.wdb3a.dacham.bean.FoodMInven;
 import com.wdb3a.dacham.bean.OrderList;
+import com.wdb3a.dacham.bean.AppTest;
 import com.wdb3a.dacham.bean.ChartList;
 import com.wdb3a.dacham.bean.ChartPrice;
 import com.wdb3a.dacham.bean.Criteria;
@@ -29,5 +30,6 @@ public interface AdminMainDAO {
 	public List<OrderList> orderAllSearch(OrderList orderList) throws Exception;
 	public List<FoodMInven> foodStockListAll() throws Exception;
 	public int orderListCount() throws Exception;
+	public String appTest(String id) throws Exception;
 	
 }

@@ -10,6 +10,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import com.wdb3a.dacham.bean.AppTest;
 import com.wdb3a.dacham.bean.ChartList;
 import com.wdb3a.dacham.bean.ChartPrice;
 import com.wdb3a.dacham.bean.Criteria;
@@ -116,6 +117,14 @@ public class AdminMainServiceImpl implements AdminMainService {
 		return dao.orderAllSearch(orderList);
 	}
 
+	@Override
+	public String appTest(String id) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("¼­ºñ½ºµÊ");
+		return dao.appTest(id);
+	}
+
+	
 	
 	
 	

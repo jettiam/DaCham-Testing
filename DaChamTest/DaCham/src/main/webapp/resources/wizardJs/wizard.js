@@ -9,7 +9,7 @@ Blockly.Blocks['makeQSheet'] = {
       .setCheck(null)
       .appendField("질문지 번호: ")
       .appendField(new Blockly.FieldNumber(1), "q_no");
-    this.setColour("#89934a");
+    this.setColour("#000000");
     this.setTooltip('');
     this.setHelpUrl('');
   }
