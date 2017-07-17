@@ -49,6 +49,28 @@ public class LoginDAOImpl implements LoginDAO {
 		return sqlSession.selectOne(namespace+".selectEmp", id);
 	}
 
+	@Override
+	public int idCheck(String id) throws Exception {
+		// TODO Auto-generated method stub		
+		int idCheck=0;
+		String idConfirm =sqlSession.selectOne(namespace+".idChecked",id)+"";
+		System.out.println("아이디"+idConfirm);
+		//member.setId(sqlSession.selectOne(namespace+".idCheck",id));
+		//idCheck 1이면 중복, 0이면 중복아님)
+		if(idConfirm.equals("null")){
+			idCheck=0;
+		}else{
+			idCheck=1;
+		}
+		return idCheck;
+	}
+
+	@Override
+	public void insertToken(Member member) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace+".insertToken",member);
+	}
+
 
 
 	

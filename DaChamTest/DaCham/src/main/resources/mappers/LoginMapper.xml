@@ -23,5 +23,14 @@ select *
 from member
 where id=#{id}
 </select>
-
+<!-- 중복아이디 체크용 -->
+<select id="idChecked" resultType="Member">
+	select id
+	from member
+	where id=#{id}
+</select>
+<!-- 도매상 토큰 삽입 -->
+<update id="insertToken">
+update member set token=#{token} where id=#{id}
+</update>
 </mapper>
