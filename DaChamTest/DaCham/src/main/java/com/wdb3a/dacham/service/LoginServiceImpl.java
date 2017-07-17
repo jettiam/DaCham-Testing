@@ -69,6 +69,24 @@ public class LoginServiceImpl implements LoginService {
 		return dao.getEmp(id);
 	}
 
+	@Override
+	public int idCheck(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.idCheck(id);
+	}
+
+	@Override
+	public void insertToken(Member member) throws Exception {
+		// TODO Auto-generated method stub
+		dao.insertToken(member);
+	}
+
+	@Override
+	public void join(Member member) throws Exception {
+		dao.join(member);
+		
+	}
+
 	
 
 }
