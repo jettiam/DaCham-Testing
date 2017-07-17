@@ -144,6 +144,7 @@ svg {
 			<span></span>
 			<button id="prevCount">이전 찾기</button>
 			<button id="nextCount">다음 찾기</button>
+			<button id="closeCount">닫기</button>
 		</div>
 	</div>
 	<span id="blockWizard">
@@ -396,21 +397,34 @@ svg {
 		workspace.addChangeListener(drawGraph);
 
 		$(document).ready(function() {
-
 			$("#searchBtn").click(function() {
 				var num = $("#searchNum").val();
+				num = num.split(" ").join("&nbsp;");
 				alert(num + "에 대하여 찾습니다.");
 				
 				var searchedBox = document.getElementsByClassName("blocklyText");
+				var selectList = new Array();
+				var sCount = 0;
 				var count = 0;
 				for(var i=0; i<searchedBox.length; i++){
-					if(searchedBox[i]){
-						
-					}
+					if(searchedBox[i].innerHTML==num){					
+						$("#showAllCount").show();						
+						console.log(searchedBox[i].innerHTML);
+						selectList[sCount] = searchedBox[i];
+						sCount ++;
+						count++;
+					}	
 				}
 				if(count == 0){
 					alert("검색 값이 없습니다.");
+				}else{
+					console.log(selectList);
+					var parent = selectList[0].parentNode.parentNode;
+					$(parent).addClass("blocklySelected");
+					
+					selectList[0].scrollIntoView(true);
 				}
+				
 			});
 
 			drawGraph();
