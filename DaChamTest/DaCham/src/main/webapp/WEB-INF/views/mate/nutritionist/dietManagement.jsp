@@ -56,14 +56,14 @@
 			var str = "";
 					
 			if(criteria.prev){
-				str += "<li><a href=''"+(criteria.startPage-1)+"'>'" + "<<"+"</a></li>";
+				str += "<li><a href='"+(criteria.startPage-1)+"'>" + "<<"+"</a></li>";
 			}
 			for(var i = criteria.startPage; i<=criteria.endPage; i++){
 				var strClass = criteria.page == i?"class = 'active'":"";
 				str += "<li "+strClass+"><a href ='"+i+"'>"+i + "</a></li>";
 			}
 			if(criteria.next){
-				str += "<li><a href=''"+(criteria.endPage+1)+"'>'" + ">>"+"</a></li>";
+				str += "<li><a href='"+(criteria.endPage+1)+"'>" + ">>"+"</a></li>";
 			}
 			$(".pagination").html(str);
 		}

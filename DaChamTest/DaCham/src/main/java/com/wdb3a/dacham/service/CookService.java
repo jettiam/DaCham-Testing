@@ -12,6 +12,7 @@ public interface CookService {
 	public List<Cook> readycook() throws Exception;
 	public List<Cook> finishcook() throws Exception;
 	public void transportNum2(OrderList order) throws Exception;
-	
-
+	public List<Cook> readyScreen() throws Exception;
+	public List<Cook> cookScreen() throws Exception;
+	public List<Cook> endScreen() throws Exception;
 }

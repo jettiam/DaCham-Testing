@@ -3,6 +3,7 @@ package com.wdb3a.dacham.bean;
 public class Nutritionist {
 	private String sideDCode;
 	private String sideDName;
+	private String sideDType;
 	private String recipe;
 	private String sideDImg;
 	private int foodMAmount;
@@ -40,6 +41,7 @@ public class Nutritionist {
 	private int wizardCode;
 	private int dietCode;
 	private String spDietItem;
+	private String customer;
 	
 	public String getFoodGCode() {
 		return foodGCode;
@@ -275,6 +277,20 @@ public class Nutritionist {
 	public void setSpDietItem(String spDietItem) {
 		this.spDietItem = spDietItem;
 	}
+	public String getSideDType() {
+		return sideDType;
+	}
+	public void setSideDType(String sideDType) {
+		this.sideDType = sideDType;
+	}
+	public String getCustomer() {
+		return customer;
+	}
+	public void setCustomer(String customer) {
+		this.customer = customer;
+	}
+	
+	
 	
 }
 

@@ -58,7 +58,7 @@
  .box2 {
   display:inline-block;  margin-left:10px;}           
   .div1 {   
-  float:left;  }
+  float:left; width: 600px; }   
  .div2 {
   display:inline-block;  margin-left:10px;} 
   #body{
@@ -69,7 +69,7 @@
 </head>
 <body>
 <%@include file="nutritionistNavi.jsp" %>
-	<div class = "container">
+	<div class = "container" style = "width:1530px;">  
 		<div class = "div1">
 		
 				<div>
@@ -91,8 +91,10 @@
 						</tr>
 					
 				</table>
+				<ul class = "pagination">
+				</ul>
 		</div>
-	
+		
 	<input type = "hidden" id = "foodMName" name = "foodMName2">
 	<input type = "hidden" id =  "protein" name = "protein">
 	<input type = "hidden" id = "fat" name = "fat">
@@ -166,7 +168,7 @@
 		  </div> 
 		</div>
 	</form>
-		<div style = "margin-left:500px; margin-bottom : 1px;">                   
+		<div style = "margin-left:1000px; margin-bottom : 1px;">                   
 			<button id = "regist" class = "btn btn-success">등록</button>
 			<button id = "cancle" class = "btn btn-success">취소</button>
 		</div>
@@ -174,13 +176,21 @@
 	<script>
 
 		$(document).ready(function(){
+			var currentPage = 1;
 			$("#side").addClass("w3-light-gray");
 			openAPI();
 			
 			var v = 0;
 			$("#listAll").on("click",function(){
-				materialAll();
+				materialAll(1);
 			});
+			$(".pagination").on("click","li a",function(){
+				event.preventDefault();
+				var replyPage = $(this).attr("href");
+				
+				materialAll(replyPage);
+			});
+			
 			$("#regist").on("click",function(){
 				if(!localStorage['init'] || isNaN(localStorage['cnt'])==true || localStorage['cnt'] == 0){
 					/* alert("등록할 식재료를 선택하세요"); */
@@ -220,16 +230,30 @@
 				++cnt;
 				
 				localStorage['cnt'] = cnt;
-				
+				$(this).parent().parent().hide();
 				Refresh();
 				v = cnt;
+				$.getJSON("nutriAjax/show/"+foodMCode,function(data){
+					var subCount = cnt - 1;
+					localStorage[subCount+"_kcal"] = data.kcal;
+					localStorage[subCount+"_carbohydrate"] = data.carbohydrate;
+					localStorage[subCount+"_protein"] = data.protein;
+					localStorage[subCount+"_fat"] = data.fat;
+					localStorage[subCount+"_na"] = data.na;
+					
+					openAPI();
+				});
 			});
 			$(document.body).on('click','.foodMName',function(){
 				var cnt = parseInt(localStorage['cnt']);
 				var id = $(this).parent().attr('data-id');
+				var foodMName = $(this).attr('data-name');
 				
+				var prev = $(this).attr('data-name');
+				console.log("ㅇㅇㅇ"+prev);
+				$('.nameClick[data-src="'+prev+'"]').parent().parent().show();
 				$(this).parent().remove();
-				localStorage.removeItem(id+'_name');
+				localStorage.removeItem(id+'_name');    
 				localStorage.removeItem(id+'_code');
 				
 				--cnt;
@@ -237,21 +261,9 @@
 				
 				v = cnt;
 				cntChange(v);
+				openAPI();
 			});
 			
-			$(document.body).on('mouseover','.foodMName',function(){
-				var foodMName = $(this).attr('data-name');
-				
-				$.getJSON("nutriAjax/show/"+foodMName,function(data){
-					$("#foodMName").val(data.foodMName);
-					$("#protein").val(data.protein);
-					$("#fat").val(data.fat);
-					$("#na").val(data.na);
-					$("#carbohydrate").val(data.carbohydrate);
-					$("#fe").val(data.fe);
-					openAPI(); 
-				});
-			});	
 			
 			
 			function Refresh(){
@@ -301,15 +313,32 @@
 				});
 			});
 			
-			function materialAll(){
+			function materialAll(page){
+				currentPage = page;
 				$(".searchResult").remove();
-				$.getJSON("nutriAjax/materialAll",function(data){
+				$.getJSON("nutriAjax/materialAll/"+page,function(data){
 					var str = "";
-					$(data).each(function(){
+					$(data.list).each(function(){
 						str += "<tr class = 'searchResult'><td>"+this.foodMCode+"</td>"+"<td>"+"<a class = 'nameClick' data-src = '"+this.foodMName+"' data-code = '"+this.foodMCode+"'>"+this.foodMName+"</a></td></tr>";
 					});
 					$(".searchTable").append(str);
+					printPaging(data.criteria);
 				});
+			}
+			function printPaging(criteria){
+				var str = "";
+						
+				if(criteria.prev){
+					str += "<li><a href='"+(criteria.startPage-1)+"'>" + "<<"+"</a></li>";
+				}
+				for(var i = criteria.startPage; i<=criteria.endPage; i++){
+					var strClass = criteria.page == i?"class = 'active'":"";
+					str += "<li "+strClass+"><a href ='"+i+"'>"+i + "</a></li>";
+				}
+				if(criteria.next){
+					str += "<li><a href='"+(criteria.endPage+1)+"'>" + ">>"+"</a></li>";   
+				}
+				$(".pagination").html(str);
 			}
 		});
 	</script>

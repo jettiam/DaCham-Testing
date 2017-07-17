@@ -5,6 +5,7 @@ import java.sql.Date;
 public class Customer {
 private int dietCode;
 private int sideDCode;
+private int sideDish;
 private String dietName;
 private int price;
 private String dietImg;
@@ -226,6 +227,12 @@ public double getK() {
 }
 public void setK(double k) {
 	this.k = k;
+}
+public int getSideDish() {
+	return sideDish;
+}
+public void setSideDish(int sideDish) {
+	this.sideDish = sideDish;
 }
 
 }

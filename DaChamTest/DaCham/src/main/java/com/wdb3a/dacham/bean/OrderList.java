@@ -22,7 +22,8 @@ public class OrderList {
 	private String transportNum;
 	private String searchType;
 	private String keyword;
-	
+	private Date counselDate;
+	private String counselContent;
 	
 	public String getOrderItemName() {
 		return orderItemName;
@@ -112,6 +113,18 @@ public class OrderList {
 	}
 	public String getOrderItemCode() {
 		return orderItemCode;
+	}
+	public Date getCounselDate() {
+		return counselDate;
+	}
+	public void setCounselDate(Date counselDate) {
+		this.counselDate = counselDate;
+	}
+	public String getCounselContent() {
+		return counselContent;
+	}
+	public void setCounselContent(String counselContent) {
+		this.counselContent = counselContent;
 	}
 	public void setOrderItemCode(String orderItem) {
 		this.orderItemCode = orderItem;

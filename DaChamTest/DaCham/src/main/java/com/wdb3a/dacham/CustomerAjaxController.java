@@ -40,13 +40,15 @@ public class CustomerAjaxController {
 
 		return entity;
 	}
-	@RequestMapping(value="getfoodG/{foodGCode}",method=RequestMethod.GET)
-	public ResponseEntity<Map<String, Object>> getDetailSideD(@PathVariable("foodGCode") String foodGCode){
-		System.out.println("식품군 "+foodGCode);
+	@RequestMapping(value="getfoodG/{foodGCode}/{dietCode}",method=RequestMethod.GET)
+	public ResponseEntity<Map<String, Object>> getDetailSideD(@PathVariable("foodGCode") String foodGCode,@PathVariable("dietCode") String dietCode,Customer customer){
+		System.out.println("식품군:"+foodGCode+" 식단코드:"+dietCode);
 		ResponseEntity<Map<String, Object>> entity = null;
-		List<Customer> list;
-		try {
-			list = service.sideDDetail(foodGCode);
+		List<Customer> list;		
+		customer.setFoodGCode(foodGCode);
+		customer.setDietCode(Integer.parseInt(dietCode));
+		try {			
+			list = service.sideDDetail(customer);
 			Map<String, Object> map = new HashMap<>();
 			map.put("list", list);
 			entity = new ResponseEntity<>(map,HttpStatus.OK);
