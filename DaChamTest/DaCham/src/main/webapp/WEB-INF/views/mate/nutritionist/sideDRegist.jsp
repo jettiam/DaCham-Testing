@@ -58,7 +58,7 @@
  .box2 {
   display:inline-block;  margin-left:10px;}           
   .div1 {   
-  float:left;  }
+  float:left; width: 600px; }   
  .div2 {
   display:inline-block;  margin-left:10px;} 
   #body{
@@ -69,7 +69,7 @@
 </head>
 <body>
 <%@include file="nutritionistNavi.jsp" %>
-	<div class = "container">
+	<div class = "container" style = "width:1530px;">  
 		<div class = "div1">
 		
 				<div>
@@ -168,7 +168,7 @@
 		  </div> 
 		</div>
 	</form>
-		<div style = "margin-left:500px; margin-bottom : 1px;">                   
+		<div style = "margin-left:1000px; margin-bottom : 1px;">                   
 			<button id = "regist" class = "btn btn-success">등록</button>
 			<button id = "cancle" class = "btn btn-success">취소</button>
 		</div>
@@ -230,16 +230,30 @@
 				++cnt;
 				
 				localStorage['cnt'] = cnt;
-				
+				$(this).parent().parent().hide();
 				Refresh();
 				v = cnt;
+				$.getJSON("nutriAjax/show/"+foodMCode,function(data){
+					var subCount = cnt - 1;
+					localStorage[subCount+"_kcal"] = data.kcal;
+					localStorage[subCount+"_carbohydrate"] = data.carbohydrate;
+					localStorage[subCount+"_protein"] = data.protein;
+					localStorage[subCount+"_fat"] = data.fat;
+					localStorage[subCount+"_na"] = data.na;
+					
+					openAPI();
+				});
 			});
 			$(document.body).on('click','.foodMName',function(){
 				var cnt = parseInt(localStorage['cnt']);
 				var id = $(this).parent().attr('data-id');
+				var foodMName = $(this).attr('data-name');
 				
+				var prev = $(this).attr('data-name');
+				console.log("ㅇㅇㅇ"+prev);
+				$('.nameClick[data-src="'+prev+'"]').parent().parent().show();
 				$(this).parent().remove();
-				localStorage.removeItem(id+'_name');
+				localStorage.removeItem(id+'_name');    
 				localStorage.removeItem(id+'_code');
 				
 				--cnt;
@@ -247,21 +261,9 @@
 				
 				v = cnt;
 				cntChange(v);
+				openAPI();
 			});
 			
-			$(document.body).on('mouseover','.foodMName',function(){
-				var foodMName = $(this).attr('data-name');
-				
-				$.getJSON("nutriAjax/show/"+foodMName,function(data){
-					$("#foodMName").val(data.foodMName);
-					$("#protein").val(data.protein);
-					$("#fat").val(data.fat);
-					$("#na").val(data.na);
-					$("#carbohydrate").val(data.carbohydrate);
-					$("#fe").val(data.fe);
-					openAPI(); 
-				});
-			});	
 			
 			
 			function Refresh(){

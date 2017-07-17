@@ -17,7 +17,7 @@
 	$(document).ready(function(){
 		$("#cookList").addClass("w3-light-gray");
 		$("#button").on("click",function(){
-			window.location.href = "cook";
+			window.location.href = "cookScreen";
 		});
 	});
 </script>

@@ -69,7 +69,7 @@
 	</insert>
 	<select id="openAPI" resultType = "com.wdb3a.dacham.bean.Nutritionist">
 		select * from foodmaterial
-		where foodMName = #{foodMName}
+		where foodMCode = #{foodMCode}
 	</select>
 	<insert id = "createDiet">
 		insert into diet(diseaseCode, dietName, price, dietImg, spDietItem)
@@ -79,9 +79,9 @@
 		select * from disease
 	</select>
 	<insert id = "createDietInfo">
-		insert into dietinfo(dietCode, sideDCode)
-		values ((select MAX(dietCode) from diet),#{sideDCode})
-	</insert>
+		insert into dietinfo(dietCode, sideDCode,sideDType)
+		values ((select MAX(dietCode) from diet),#{sideDCode},#{sideDType})
+	</insert>	
 	<!-- 특정 반찬에 대한 영양 정보 -->
 	<select id="showKcal" resultType = "com.wdb3a.dacham.bean.Nutritionist">
 		select f.foodMName, a.sideDName, sum(f.kcal*a.cu) kcal, f.carbohydrate*a.cu carbohydrate, f.protein*a.cu protein, f.fat*cu fat, f.na*cu na
@@ -153,11 +153,30 @@
 			having a.sidedcode = #{sideDCode};		
 	</select>
 	<!-- 특별식단의 상담 리스트를 조회 -->
-	<select id="specialList" resultType = "com.wdb3a.dacham.bean.OrderList">
-		select a.orderCode,c.counselContent, c.counselDate ,a.id, a.price
-		from orderlist a join member b join counsel c
-		where a.id = b.id
-		and a.id = c.customer
-		order by a.orderCode desc    
+	<select id="specialList" resultType = "com.wdb3a.dacham.bean.Counsel">
+		select * from counsel
+		where counselItemCode = 2
+	</select>
+	<!-- 특별식단을 view -->
+	<select id = "specialView" resultType = "com.wdb3a.dacham.bean.Counsel">
+		select a.customer, a.counselDate, b.address, b.tel, a.counselContent
+		from counsel a join member b
+		where a.customer = b.id
+		and a.customer = #{customer}
+	</select>
+	<!-- 특별식단 고객 요청 등록 -->
+	<insert id = "specialRegist">
+		insert into orderlist(id, dietCode, orderDate, price, dietAmount, transportNum, orderItemCode, paymentItemCode)
+		values(#{customer},(select MAX(dietCode) from diet),now(),(select price from diet where dietCode = (select MAX(dietCode) from diet)),1,null,0,1)
+	</insert>
+	<!-- 특별 고객이 등록한 특별식단 toggle -->
+	<select id = "specialToggle" resultType = "com.wdb3a.dacham.bean.Nutritionist">
+		select d.dietName, d.dietImg, d.price
+		from counsel a join member b join orderlist c join diet d
+		where a.customer = b.id
+		and b.id = c.id
+		and c.dietCode = d.dietCode
+		and a.customer = #{customer}
+		and d.spDietItem = 0
 	</select>
 </mapper>

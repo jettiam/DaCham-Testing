@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.wdb3a.dacham.bean.Counsel;
 import com.wdb3a.dacham.bean.Criteria;
 import com.wdb3a.dacham.bean.Nutritionist;
 import com.wdb3a.dacham.bean.OrderList;
@@ -54,9 +55,9 @@ public class NutritionistServiceImpl implements NutritionistService {
 	}
 
 	@Override
-	public Nutritionist openAPI(String foodMName) throws Exception {
+	public Nutritionist openAPI(String foodMCode) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.openAPI(foodMName);
+		return dao.openAPI(foodMCode);
 	}
 
 	@Override
@@ -172,6 +173,25 @@ public class NutritionistServiceImpl implements NutritionistService {
 		// TODO Auto-generated method stub
 		return dao.materialTotal();
 	}
+
+	@Override
+	public Counsel specialView(String customer) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.specialView(customer);
+	}
+
+	@Override
+	public void specialRegist(String customer) throws Exception {
+		// TODO Auto-generated method stub
+		dao.specialRegist(customer);
+	}
+
+	@Override
+	public List<Nutritionist> specialToggle(String customer) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.specialToggle(customer);
+	}
+
 
 	
 

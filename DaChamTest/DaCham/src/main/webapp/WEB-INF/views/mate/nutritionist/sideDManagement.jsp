@@ -50,10 +50,10 @@
 		});
 	});
 </script>
-<title>Insert title here</title>
+<title>반찬 관리 페이지</title>
 <style>
 	.box1 {
-  float:left;  }
+  float:left; width: 150px;  }
  .box2 {
   display:inline-block;  margin-left:10px;}
   ul{

@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.wdb3a.dacham.bean.Counsel;
 import com.wdb3a.dacham.bean.Criteria;
 import com.wdb3a.dacham.bean.Nutritionist;
 import com.wdb3a.dacham.bean.OrderList;
@@ -56,9 +57,9 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 	}
 
 	@Override
-	public Nutritionist openAPI(String foodMName) throws Exception {
+	public Nutritionist openAPI(String foodMCode) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne(namespace+".openAPI",foodMName);
+		return sqlSession.selectOne(namespace+".openAPI",foodMCode);
 	}
 
 	@Override
@@ -181,6 +182,21 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 		return sqlSession.selectOne(namespace+".materialTotal");
 	}
 
-	
+	@Override
+	public Counsel specialView(String customer) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".specialView",customer);
+	}
 
+	@Override
+	public void specialRegist(String customer) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.insert(namespace+".specialRegist",customer);
+	}
+
+	@Override
+	public List<Nutritionist> specialToggle(String customer) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".specialToggle",customer);
+	}
 }

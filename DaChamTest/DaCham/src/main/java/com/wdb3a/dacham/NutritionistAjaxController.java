@@ -113,11 +113,11 @@ public class NutritionistAjaxController {
 		entity = new ResponseEntity<>(cnt2,HttpStatus.OK);
 		return entity;
 	}
-	@RequestMapping(value = "/show/{foodMName}",method = RequestMethod.GET)
-	public ResponseEntity<Nutritionist> openAPI(@PathVariable("foodMName")String foodMName){
+	@RequestMapping(value = "/show/{foodMCode}",method = RequestMethod.GET)
+	public ResponseEntity<Nutritionist> openAPI(@PathVariable("foodMCode")String foodMCode){
 		ResponseEntity<Nutritionist> entity = null;
 		try {
-			Nutritionist nutritionist = service.openAPI(foodMName);
+			Nutritionist nutritionist = service.openAPI(foodMCode);
 			entity = new ResponseEntity<>(nutritionist,HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -306,6 +306,22 @@ public class NutritionistAjaxController {
 		try {
 			Nutritionist nutritionist = service.allNutri(sideDCode);
 			entity = new ResponseEntity<>(nutritionist,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	//해당 특별고객에 대한 특별식단 표시
+	@RequestMapping(value = "/specialToggle/{customer}",method = RequestMethod.GET)
+	public ResponseEntity<List<Nutritionist>> specialToggle(@PathVariable("customer")String customer){
+		ResponseEntity<List<Nutritionist>> entity = null;
+		try {
+			System.out.println("고객아이디:"+customer);
+			List<Nutritionist> list = service.specialToggle(customer);
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+			System.out.println("the list"+list);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

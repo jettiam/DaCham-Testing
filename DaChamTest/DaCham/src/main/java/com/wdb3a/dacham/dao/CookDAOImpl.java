@@ -40,5 +40,20 @@ public class CookDAOImpl implements CookDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".finishcook");
 	}
+	@Override
+	public List<Cook> readyScreen() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".readyScreen");
+	}
+	@Override
+	public List<Cook> cookScreen() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".cookScreen");
+	}
+	@Override
+	public List<Cook> endScreen() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".endScreen");
+	}
 
 }

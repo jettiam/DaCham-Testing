@@ -115,6 +115,7 @@
 													.val();
 											console.log("데이터:" + sideDCode);
 											var prev = $(this).prev().val();
+											console.log("ㄷㄷㄷ:"+prev);
 											$(
 													'.nameClick[data-code = "'
 															+ prev + '"]')
@@ -226,8 +227,8 @@
 													"sideDImg center-block")
 											.appendTo('.foodG01');
 									$(
-											'<input type="radio" name="foodG01" value="'+sideDCode+'_1"><span>'
-													+ sideDName + '</span>')
+											'<input type="radio" name="foodG01" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
+													+ sideDName + '</label>')
 											.appendTo('.foodG01');
 									break;
 								case "02":
@@ -242,8 +243,8 @@
 													"sideDImg center-block")
 											.appendTo('.foodG02');
 									$(
-											'<input type="radio" name="foodG02" value="'+sideDCode+'_1"><span>'
-													+ sideDName + '</span>')
+											'<input type="radio" name="foodG02" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
+											+ sideDName + '</label>')
 											.appendTo('.foodG02');
 									break;
 								case "03":
@@ -258,8 +259,8 @@
 													"sideDImg center-block")
 											.appendTo('.foodG03');
 									$(
-											'<input type="radio" name="foodG03" value="'+sideDCode+'_1"><span>'
-													+ sideDName + '</span>')
+											'<input type="radio" name="foodG03" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
+											+ sideDName + '</label>')
 											.appendTo('.foodG03');
 									break;
 								case "04":
@@ -274,8 +275,8 @@
 													"sideDImg center-block")
 											.appendTo('.foodG04');
 									$(
-											'<input type="radio" name="foodG04" value="'+sideDCode+'_1"><span>'
-													+ sideDName + '</span>')
+											'<input type="radio" name="foodG04" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
+											+ sideDName + '</label>')
 											.appendTo('.foodG04');
 									break;
 								case "05":
@@ -290,8 +291,8 @@
 													"sideDImg center-block")
 											.appendTo('.foodG05');
 									$(
-											'<input type="radio" name="foodG05" value="'+sideDCode+'_1"><span>'
-													+ sideDName + '</span>')
+											'<input type="radio" name="foodG05" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
+											+ sideDName + '</label>')
 											.appendTo('.foodG05');
 									break;
 								case "06":
@@ -306,8 +307,8 @@
 													"sideDImg center-block")
 											.appendTo('.foodG06');
 									$(
-											'<input type="radio" name="foodG06" value="'+sideDCode+'_1"><span>'
-													+ sideDName + '</span>')
+											'<input type="radio" name="foodG06" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
+											+ sideDName + '</label>')
 											.appendTo('.foodG06');
 									break;
 								}
@@ -333,22 +334,25 @@
 
 						$("#regist").on("click", function() {
 							var sideDLength = $(".material input[type='hidden']").length;
-							for(var i=0;i<sideDLength;i++){
-								var sideDCode = $(".material input[type='hidden']").eq(i).val();
-								$("<input type='hidden' name='sideDCode'>").val(sideDCode).appendTo("#registForm");
-								var sideDType = $(".material input[type='radio']").eq(i).val();
-								var radioChecked = $(".material input[type='radio']:checked").eq(i).val();
-								console.log("라디오 확인용:"+radioChecked);								
-								if(radioChecked==undefined){
-									$("<input type='hidden' name='sideDType'>").val(sideDType).appendTo("#registForm");
-								}else{
-									sideDType=sideDType.replace("_1","_0");
-									$("<input type='hidden' name='sideDType'>").val(sideDType).appendTo("#registForm");
-								}
+							$(".material input[type='radio']:checked").clone().appendTo("#registForm");							
+							//checked 먼저 넣고 바꾸기							
+							for(var i=0;i<$("#registForm .foodType:checked").length;i++){
+								var sideDType=$("#registForm .foodType").eq(i).val().replace("_1","_0");
+								$("#registForm .foodType").eq(i).val(sideDType);
 							}
+							$("#registForm .foodType").attr("type","hidden");
+							
+							/* for(var i=0;i<sideDLength;i++){
+								var sideDCode = $(".material input[type='hidden']").eq(i).val();
+								$("<input type='hidden' name='sideDCode'>").val(sideDCode).appendTo("#registForm");							
+							} */
+							$(".material input[type='radio']").clone().appendTo("#registForm");	
+							$("#registForm .foodType:checked").remove();
+							$("#registForm .foodType").attr("type","hidden");
+							$("#registForm .foodType").attr("name","sideDType");
 							$("#registForm").attr("method", "post");
 							$("#registForm").attr("action", "diet");
-							//$("#registForm").submit();
+							$("#registForm").submit();
 						});
 
 						$(".templateErase").on("click", function() {
