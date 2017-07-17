@@ -88,6 +88,19 @@ body {
 	font-family: 'Jeju Gothic';
 }
 
+#sideController{
+	width : 150px;
+	height : 400px;
+	background-color: red;
+	position : fixed;
+	top: 100px;
+	right : 1000px;
+	
+}
+
+
+
+
 .blocklyTreeRoot {
 	margin-top: 8px;
 }
@@ -136,16 +149,6 @@ svg {
 			<input type="text" name=t1 value="text" size=20> <input
 				type="submit" name=b1 value="Find">
 		</form>
-
-		<input id="searchNum" type="text"> 에대하여
-		<button id="searchBtn">찾기</button>
-
-		<div id="showAllCount" style="display: none;">
-			<span></span>
-			<button id="prevCount">이전 찾기</button>
-			<button id="nextCount">다음 찾기</button>
-			<button id="closeCount">닫기</button>
-		</div>
 	</div>
 	<span id="blockWizard">
 		<div id="blocklyDiv"
@@ -159,8 +162,20 @@ svg {
 		<block type="resultsheet"></block></category> <category name="5. 결과지 블록모음">
 		<block type="d1"></block> <block type="d2"></block> <block type="d3"></block>
 		</category></xml>
-
 	</span>
+	
+	<div id="sideController"> 
+		<input id="searchNum" type="text">
+		에대하여
+		<button id="searchBtn">찾기</button>
+
+		<div id="showAllCount" style="display: none;">
+			<span></span>
+			<button id="prevCount">이전 찾기</button>
+			<button id="nextCount">다음 찾기</button>
+			<button id="closeCount">닫기</button>
+		</div>
+	</div>
 
 	<script>
 		//#blocklyDiv에 블록 inject.
