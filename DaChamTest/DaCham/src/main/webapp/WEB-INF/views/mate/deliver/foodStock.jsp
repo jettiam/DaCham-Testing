@@ -28,7 +28,7 @@
 			$("#foodStockForm").attr("method","post");
 			$("#foodStockForm").attr("action","deliverRegist");
 			$("#foodStockForm").submit();
-			alert("클릭됨");      
+			alert("등록완료");      
 		});
 	});
 </script>

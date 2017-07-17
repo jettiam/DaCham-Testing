@@ -13,4 +13,7 @@ public interface CookDAO {
 	public List<Cook> readycook() throws Exception;
 	public List<Cook> finishcook() throws Exception;
 	public void transportNum2(OrderList orderList) throws Exception;
+	public List<Cook> readyScreen() throws Exception;
+	public List<Cook> cookScreen() throws Exception;
+	public List<Cook> endScreen() throws Exception;
 }
