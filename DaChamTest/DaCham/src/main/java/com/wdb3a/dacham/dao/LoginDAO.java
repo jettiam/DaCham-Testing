@@ -23,4 +23,7 @@ public interface LoginDAO {
 	
 	//모바일 로그인시 토큰 업데이트
 	public void insertToken(Member member) throws Exception;
+	
+	//회원가입
+	public void join(Member member) throws Exception;
 }

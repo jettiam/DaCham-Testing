@@ -275,11 +275,81 @@ $(document).ready(function() {
 		console.log("칼로리:"+kcal+",탄수화물:"+carbo+",단백질:"+protein+",지방:"+fat+",나트륨:"+na+",칼륨"+k);
 			if(count==6){
 				nutriValue = [carbo0,protein0,fat0,na0/100, k0/100];
-				$(".nutriInfoTable").append("<td>"+kcal0+"</td><td>"+carbo0+"</td><td>"+protein0+"</td><td>"+fat0+"</td><td>"+na0+"</td><td>"+k0+"</td>")
+				$(".nutriInfoTable").append("<td class='kcalSign w3-green'>"+kcal0+"</td><td class='carboSign w3-green'>"+carbo0+"</td><td class='proteinSign w3-green'>"+protein0+"</td><td class='fatSign w3-green'>"+fat0+"</td><td class='naSign w3-green'>"+na0+"</td><td class='kSign w3-green'>"+k0+"</td>")
+				localStorage.clear();
+				localStorage['kcal']=kcal0;
+				localStorage['carbo']=carbo0;
+				localStorage['protein']=protein0;
+				localStorage['fat']=fat0;
+				localStorage['na']=na0;
+				localStorage['k']=k0;
 			}else{
 				nutriValue = [carbo,protein,fat,na/100,k/100];	
 				$(".nutriInfoTable td").remove();
-				$(".nutriInfoTable").append("<td>"+kcal+"</td><td>"+carbo+"</td><td>"+protein+"</td><td>"+fat+"</td><td>"+na+"</td><td>"+k+"</td>")
+				$(".fatSign").removeClass("w3-orange");
+				$(".fatSign").removeClass("w3-red");
+				$(".kSign").removeClass("w3-orange");
+				$(".kSign").removeClass("w3-red");
+				$(".naSign").removeClass("w3-orange");
+				$(".naSign").removeClass("w3-red");
+				$(".proteinSign").removeClass("w3-orange");
+				$(".proteinSign").removeClass("w3-red");
+				$(".carboSign").removeClass("w3-orange");
+				$(".carboSign").removeClass("w3-red");
+				$(".kcalSign").removeClass("w3-orange");
+				$(".kcalSign").removeClass("w3-red");
+
+				$(".nutriInfoTable").append("<td class='kcalSign'>"+kcal+"</td><td class='carboSign'>"+carbo+"</td><td class='proteinSign'>"+protein+"</td><td class='fatSign'>"+fat+"</td><td class='naSign'>"+na+"</td><td class='kSign'>"+k+"</td>")
+				var kcalSign = Number(kcal)-Number(localStorage['kcal']);				
+				var carboSign = Number(carbo)-Number(localStorage['carbo']);
+				var proteinSign = Number(protein)-Number(localStorage['protein']);
+				var fatSign = Number(fat)-Number(localStorage['fat']);
+				var naSign = Number(na)-Number(localStorage['na']);
+				var kSign = Number(k)-Number(localStorage['k']);
+				console.log("칼로리차:"+kcalSign+" 탄수화물차:"+carboSign+" 단백질차:"+proteinSign+" 지방차:"+fatSign+" 나트륨차:"+naSign+" 칼륨차:"+kSign);
+				if(kcalSign>=100 && kcalSign<200){
+					$(".kcalSign").addClass("w3-orange");
+				}else if(kcalSign>=200){
+					$(".kcalSign").addClass("w3-red");
+				}else{
+					$(".kcalSign").addClass("w3-green");
+				}
+				if(carboSign>=50 && carboSign<100){
+					$(".carboSign").addClass("w3-orange");
+				}else if(carboSign>=100){
+					$(".carboSign").addClass("w3-red");
+				}else{
+					$(".carboSign").addClass("w3-green");
+				}
+				if(proteinSign>=50 && proteinSign<100){
+					$(".proteinSign").addClass("w3-orange");
+				}else if(proteinSign>=100){
+					$(".proteinSign").addClass("w3-red");
+				}else{
+					$(".proteinSign").addClass("w3-green");
+				}
+				if(naSign>=100 && naSign<200){
+					$(".naSign").addClass("w3-orange");
+				}else if(naSign>=200){
+					$(".naSign").addClass("w3-red");
+				}else{
+					$(".naSign").addClass("w3-green");
+				}
+				if(kSign>=100 && kSign<200){
+					$(".kSign").addClass("w3-orange");
+				}else if(kSign>=200){
+					$(".kSign").addClass("w3-red");
+				}else{
+					$(".kSign").addClass("w3-green");
+				}
+				if(fatSign>=50 && fatSign<100){
+					$(".fatSign").addClass("w3-orange");
+				}else if(fatSign>=100){
+					$(".fatSign").addClass("w3-red");
+				}else{
+					$(".fatSign").addClass("w3-green");
+				}
+				
 			}
 		
 		console.log(nutriValue);
@@ -381,7 +451,7 @@ $(document).ready(function() {
 			</div>
 			<div class="center-block">
 				<table class="table nutriTable">
-					<tr><th>칼로리<br>(Kcal)</th><th>탄수화물<br>(g)</th><th>단백질<br>(g)</th><th>지방<br>(g)</th><th>칼륨<br>(mg)</th><th>나트륨<br>(mg)</th></tr>
+					<tr><th class="kcalSign w3-green">칼로리<br>(Kcal)</th><th class="carboSign w3-green">탄수화물<br>(g)</th><th class="proteinSign w3-green">단백질<br>(g)</th><th class="fatSign w3-green">지방<br>(g)</th><th class="naSign w3-green">나트륨<br>(mg)</th><th class="kSign w3-green">칼륨<br>(mg)</th></tr>
 					<tr class="nutriInfoTable"></tr>
 				</table>
 			</div>

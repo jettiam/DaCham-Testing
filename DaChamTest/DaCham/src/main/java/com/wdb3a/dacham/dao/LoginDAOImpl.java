@@ -71,6 +71,12 @@ public class LoginDAOImpl implements LoginDAO {
 		sqlSession.update(namespace+".insertToken",member);
 	}
 
+	@Override
+	public void join(Member member) throws Exception {
+		sqlSession.update(namespace+".join",member);
+		
+	}
+
 
 
 	

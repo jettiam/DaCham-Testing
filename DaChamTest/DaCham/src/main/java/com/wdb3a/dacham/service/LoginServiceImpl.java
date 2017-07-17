@@ -81,6 +81,12 @@ public class LoginServiceImpl implements LoginService {
 		dao.insertToken(member);
 	}
 
+	@Override
+	public void join(Member member) throws Exception {
+		dao.join(member);
+		
+	}
+
 	
 
 }

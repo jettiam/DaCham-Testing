@@ -222,4 +222,15 @@ public class LoginController {
 			return entity;			
 		}
 		
+		@RequestMapping(value="join",method = RequestMethod.POST)
+		public String joinPost(Member member){
+			try {
+				service.join(member);
+				return "main";
+			} catch (Exception e) {				
+				e.printStackTrace();
+				return "customer/join";
+			}			
+		}
+		
 }
