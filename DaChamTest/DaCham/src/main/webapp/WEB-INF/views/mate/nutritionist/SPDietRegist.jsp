@@ -537,6 +537,9 @@
 			<textarea class = "form-control" readonly = "readonly" rows = "5" id = "comment">${counsel.counselContent }</textarea>
 		</div>
 	</div>  
+	<input type = "hidden" name = "counselItemCode" value = "${counsel.counselItemCode }">
+	<c:choose>
+	<c:when test = "${counsel.counselItemCode == 2 }">     
 	<div class="container">
 		<div class="col-sm-12">
 			<div class="col-sm-2 text-center h3">밥</div>
@@ -656,7 +659,34 @@
 		</div>
 
 	</div>
+	</c:when>
+	<c:when test = "${counsel.counselItemCode == 5 }">
+		<div class = "container">
+			<h1 id = "h1Text"></h1>
+			<table class = "optional table table-hover">
+				
+			</table>             
+		</div>
+		
+	</c:when>
+	</c:choose>
 	<script>
+		//이미 등록된 특별식단의 반찬을 보여주는 기능
+		var customer ='${counsel.customer}';
+		
+		optional(customer);
+		console.log("빌려온 아이디:"+customer);  
+		function optional(customer){
+			var str = "";
+			$.getJSON("nutriAjax/specialToggle/"+customer,function(data){
+				$(data).each(function(){
+					str += "<tr><td>"+this.sideDName+"</td><td>"+"<img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width : 75px; height : 25px;'></td></tr>";
+					$("#h1Text").text(this.dietName);
+				});
+				$(".optional").append(str);   
+				
+			});
+		}
 		//이미지를 업로드하면 미리 볼 수 있는 기능
 		function previewImage(targetObj, View_area) {
 			var preview = document.getElementById(View_area);

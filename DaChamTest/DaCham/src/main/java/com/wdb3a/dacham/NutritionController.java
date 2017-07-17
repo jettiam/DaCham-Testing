@@ -212,6 +212,7 @@ public class NutritionController {
 		   }
 	   }
 	   service.specialRegist(nutritionist.getCustomer());
+	   service.specialComplete(nutritionist.getCustomer());
 	   System.out.println("°í°´¾ÆÀÌµð:"+nutritionist.getCustomer());
 	   return "redirect:special";
    }

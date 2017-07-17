@@ -199,4 +199,10 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".specialToggle",customer);
 	}
+
+	@Override
+	public void specialComplete(String customer) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace+".specialComplete",customer);
+	}
 }

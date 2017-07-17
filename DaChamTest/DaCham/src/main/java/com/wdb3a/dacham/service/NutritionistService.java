@@ -53,4 +53,6 @@ public interface NutritionistService {
 	public void specialRegist(String customer) throws Exception;
 	//해당 고객요청에 등록된 특별식단 toggle
 	public List<Nutritionist> specialToggle(String customer) throws Exception;
+	//특별식단이 등록되면 표시
+	public void specialComplete(String customer) throws Exception;
 }
