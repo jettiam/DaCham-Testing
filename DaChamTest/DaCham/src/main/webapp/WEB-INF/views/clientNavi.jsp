@@ -54,6 +54,16 @@
 	color: #EDA900;
 }
 
+#join{
+padding-right:20px;
+
+}
+#idPwSearch{
+
+} 
+.joinBox{
+float:right;
+}
 @media only screen and (max-width: 736px) {
 
 }
@@ -87,8 +97,9 @@
 					<div class="form-group col-sm-2">
 						<input type="submit" class="btn btn-warning" value="로그인">
 					</div>
-				</form>
-
+				</form> 
+			<div class="joinBox"><a href="join" id="join">회원가입</a><a href="idPwSearch" id="idPwSearch">아이디/비밀번호찾기</a></div>
+			
 			</div>
 		</c:if>
 		<c:if test="${not empty sessionScope.memberName}">
@@ -135,7 +146,6 @@
 <!--로그인함수  -->
 <script>
 	$(document).ready(function() {
-
 		var result = $("#loginResult").val();
 		if (result == "0") {
 			alert("비밀번호가 틀렸습니다. 다시 확인해주세요.");
@@ -152,6 +162,8 @@
 		$("#naviMenuBtn").on("click", function() {
 			$(".ulBox").toggle();
 		});
+		
+	
 	});
 </script>
 

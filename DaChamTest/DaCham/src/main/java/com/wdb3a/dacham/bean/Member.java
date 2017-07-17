@@ -16,6 +16,7 @@ public class Member {
 	private Date joinDate;
 	private Date outDate;
 	private String photoImg;
+	private String token;
 	
 	public Date getJoinDate() {
 		return joinDate;
@@ -121,5 +122,15 @@ public class Member {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+
+
+	public String getToken() {
+		return token;
+	}
+
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 }

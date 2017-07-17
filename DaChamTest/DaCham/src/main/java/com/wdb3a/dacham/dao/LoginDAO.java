@@ -17,4 +17,10 @@ public interface LoginDAO {
 	
 	//관리자용
 	public Emp getEmp(String id) throws Exception;
+	
+	//중복아이디 체크용
+	public int idCheck(String id) throws Exception;
+	
+	//모바일 로그인시 토큰 업데이트
+	public void insertToken(Member member) throws Exception;
 }
