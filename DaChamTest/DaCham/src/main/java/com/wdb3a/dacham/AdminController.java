@@ -81,10 +81,10 @@ public class AdminController {
 		System.out.println(jsonObj); 
 		for(int i=0; i<jsonObj.size(); i++){
 			JSONObject jsonObj1 = (JSONObject) jsonObj.get(i+"");
-			totalprice = (int) (Integer.parseInt(jsonObj1.get("price").toString()) * Double.parseDouble(jsonObj1.get("foodMAmount").toString()));
-			System.out.println(jsonObj1);
+			totalprice = (int) (Integer.parseInt(jsonObj1.get("price").toString()) * Double.parseDouble(jsonObj1.get("totalAmount").toString()));
+			System.out.println(jsonObj1); 
 			System.out.println(jsonObj1.get("foodMname").toString());
-			toString = toString + "\n" + "식재료명 : " +jsonObj1.get("foodMname").toString() + "단가 : "+  jsonObj1.get("price").toString() + " 주문량 :" + jsonObj1.get("foodMAmount").toString() + jsonObj1.get("unit").toString() + " 총가격 : " + totalprice + "원";  
+			toString = toString + "\n" + "식재료명 : " +jsonObj1.get("foodMname").toString() + "단가 : "+  jsonObj1.get("price").toString() + " 주문량 :" + jsonObj1.get("totalAmount").toString() + jsonObj1.get("unit").toString() + " 총가격 : " + totalprice + "원";  
 		} 
 		String content = toString;    // 내용
 		try {

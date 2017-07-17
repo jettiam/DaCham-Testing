@@ -85,7 +85,7 @@
 					<div class="length2">
 					<input type="hidden" id ="foodMName${count}" name="foodMName" value="${j.foodMName}">
 					<input type="hidden" id ="price${count}" name="price" value="${j.price}">
-					<input type="hidden" id ="foodMAmount${count}" name="foodMAmount" value="${j.foodMAmount}">
+					<input type="hidden" id ="totalAmount${count}" name="totalAmount" value="${j.totalAmount}">
 					<input type="hidden" id ="unit${count}" name="unit" value="${j.unit}">
 					<input type="hidden" id ="foodMCode${count}" name="foodMCode" value="${j.foodMCode}">
 					</div>	  		  
@@ -94,9 +94,13 @@
 		</table>
 	</div>
 	<button id="foodMOrder" class = "btn btn-default">식재료 주문서 보내기</button>
+	<button id="foodAppOrder" class="btn btn-default">앱 알람 보내기</button>
 	</div>
 	<form id="foodMOrderForm" action="mailSending" method="post">  
 		<input type="hidden" name="foodMOrderInfo" id="foodMOrderInfo">
+	</form>
+	<form id="foodMAppOrderForm" action="AppSending" method="post">  
+		<input type="hidden" name="foodMAppOrderInfo" id="foodMAppOrderInfo">
 	</form>
 
 	<script>
@@ -117,19 +121,19 @@
 	
 			
 		$(document).ready(function() {
-			$("#foodMOrder").on("click", function(){
+			 $("#foodAppOrder").on("click", function(){
+				alert("눌려짐");
 				var foodMOrderInfo = {};
 				var y=0;
 				for(var i =1; i<=divlength; i++){
-
 					var foodMname = $("#foodMName"+i).val();
 					var price = $("#price"+i).val();
-					var foodMAmount = Number($("#foodMAmount"+i).val())*0.001;
+					var totalAmount = Number($("#totalAmount"+i).val())*0.001;
 					var unit = $("#unit"+i).val();
 					 var jsonData ={					
 							"foodMname":foodMname,
 							"price":price,
-							"foodMAmount":foodMAmount,
+							"totalAmount":totalAmount,
 							"price":price,
 							"unit":unit
 					}	
@@ -138,6 +142,36 @@
 					
 					//alert(foodMname);
 					//alert(price);
+					//alert(foodMAmount);
+					//alert(unit);
+				}    
+				console.log(foodMOrderInfo); 
+				$("#foodMAppOrderInfo").val(JSON.stringify(foodMOrderInfo));
+				$("#foodMAppOrderForm").submit();
+			}); 
+			 
+			$("#foodMOrder").on("click", function(){
+				
+				var foodMOrderInfo = {};
+				var y=0;
+				for(var i =1; i<=divlength; i++){
+
+					var foodMname = $("#foodMName"+i).val();
+					var price = $("#price"+i).val();
+					var totalAmount = Number($("#totalAmount"+i).val())*0.001;
+					var unit = $("#unit"+i).val();
+					 var jsonData ={					
+							"foodMname":foodMname,
+							"price":price,
+							"totalAmount":totalAmount,
+							"price":price,
+							"unit":unit
+					}	
+					foodMOrderInfo[y]=jsonData;
+					y++; 
+					
+					//alert(foodMname);
+					//alert(price); 
 					//alert(foodMAmount);
 					//alert(unit);
 				}    
@@ -168,7 +202,7 @@
 										+"</td>"+"<td>"
 										+$("#price"+i).val()
 										+"</td>"+"<td>"
-										+Number($("#foodMAmount"+i).val())*0.001
+										+Number($("#totalAmount"+i).val())*0.001
 										+"</td>"+"<td>"
 										+$("#unit"+i).val()
 										+"</td> </tr>" 
