@@ -94,7 +94,6 @@
 		</table>
 	</div>
 	<button id="foodMOrder" class = "btn btn-default">식재료 주문서 보내기</button>
-	<button id="foodAppOrder" class="btn btn-default">앱 알람 보내기</button>
 	</div>
 	<form id="foodMOrderForm" action="mailSending" method="post">  
 		<input type="hidden" name="foodMOrderInfo" id="foodMOrderInfo">
@@ -121,35 +120,6 @@
 	
 			
 		$(document).ready(function() {
-			 $("#foodAppOrder").on("click", function(){
-				alert("눌려짐");
-				var foodMOrderInfo = {};
-				var y=0;
-				for(var i =1; i<=divlength; i++){
-					var foodMname = $("#foodMName"+i).val();
-					var price = $("#price"+i).val();
-					var totalAmount = Number($("#totalAmount"+i).val())*0.001;
-					var unit = $("#unit"+i).val();
-					 var jsonData ={					
-							"foodMname":foodMname,
-							"price":price,
-							"totalAmount":totalAmount,
-							"price":price,
-							"unit":unit
-					}	
-					foodMOrderInfo[y]=jsonData;
-					y++; 
-					
-					//alert(foodMname);
-					//alert(price);
-					//alert(foodMAmount);
-					//alert(unit);
-				}    
-				console.log(foodMOrderInfo); 
-				$("#foodMAppOrderInfo").val(JSON.stringify(foodMOrderInfo));
-				$("#foodMAppOrderForm").submit();
-			}); 
-			 
 			$("#foodMOrder").on("click", function(){
 				
 				var foodMOrderInfo = {};
