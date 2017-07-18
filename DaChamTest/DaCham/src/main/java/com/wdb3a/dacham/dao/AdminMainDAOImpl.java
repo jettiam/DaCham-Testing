@@ -7,9 +7,11 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.wdb3a.dacham.bean.AppTest;
 import com.wdb3a.dacham.bean.ChartList;
 import com.wdb3a.dacham.bean.ChartPrice;
 import com.wdb3a.dacham.bean.Criteria;
+import com.wdb3a.dacham.bean.Diet;
 import com.wdb3a.dacham.bean.FoodMAmountRead;
 import com.wdb3a.dacham.bean.FoodMInven;
 import com.wdb3a.dacham.bean.OrderList;
@@ -108,7 +110,31 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 	public List<OrderList> orderAllSearch(OrderList orderist) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".orderAllSearch", orderist);
-	}   
+	}
+
+	@Override
+	public String appTest(String id) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("dao됨");
+		return sqlSession.selectOne(namespace+".AppTest", id);
+	}
+
+	@Override
+	public List<Diet> dietAll() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".DietAll");
+	}
+
+	@Override
+	public void dietPriceUp(Diet diet) throws Exception {
+		System.out.println("되니나?");
+		sqlSession.update(namespace+".dietPriceUp", diet);
+		System.out.println("되니?");
+	}
+
+	
+
+	 
 
 	
 

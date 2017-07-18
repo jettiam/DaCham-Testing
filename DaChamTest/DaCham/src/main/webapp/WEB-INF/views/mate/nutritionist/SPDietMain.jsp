@@ -65,23 +65,20 @@
 						<th>고객id</th>
 						<th>상담명</th>
 						<th>상담일</th>
-						<th>식단상세</th>
+						
 					</tr>
 					<c:forEach items = "${list }" var = "v">
 						<tr class = "detail">
 							<td><input type = "radio" name = "counselCode" value = "${v.counselCode }"></td>
-							<td>${v.counselCode}</td>
+							   
+							<td>${v.counselCode}</td>   
 							<td>${v.customer }</td>
 							<td><a href = "SPRegist?customer=${v.customer }">${v.counselTitle }</a></td>   
-							<td>${v.counselDate }</td>
-							<td><span data-id = "${v.customer }" class = "detailDiet glyphicon glyphicon-chevron-down">상세보기</span></td>
-							<tr class = "optionSpecial">
-								<th>식단명</th>
-								<th>식단가격</th>
-							</tr>
-							<tr>
+							<td>${v.counselDate }</td>						
+							
 						</tr>
 					</c:forEach>
+					                  
 				</table>
 		</div>
 	</div>

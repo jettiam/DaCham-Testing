@@ -8,12 +8,13 @@
 	<select id="listAll" resultType="OrderList">
 		select b.dietCode, b.orderCode,
 		b.id, a.dietName, b.orderDate, b.price,
-		b.orderItemCode, 
+		b.orderItemCode,
 		b.transportNum, c.orderItemName
 		from diet a join
 		orderlist b join
 		orderitem c
-		where a.dietCode=b.dietCode
+		where
+		a.dietCode=b.dietCode
 		and
 		b.orderItemCode = c.orderItemCode
 		<include refid="search"></include>
@@ -29,13 +30,15 @@
 			<if test="searchType == 'a'.toString()">
 				and c.orderItemName like CONCAT('%',#{keyword},'%')
 			</if>
-		</if> 
+		</if>
 	</sql>
 
 	<select id="read" resultType="OrderList">
-		select b.dietCode, b.orderCode, b.id, a.dietName, b.orderDate,
+		select b.dietCode, b.orderCode,
+		b.id, a.dietName, b.orderDate,
 		b.price,
-		b.orderItemCode, b.transportNum, c.id, c.name, c.address,
+		b.orderItemCode, b.transportNum,
+		c.id, c.name, c.address,
 		c.tel
 		from
 		diet a join orderlist b join member c
@@ -45,7 +48,7 @@
 		and orderCode=#{orderCode};
 	</select>
 
-<!--식재료 재고량  -->
+	<!--식재료 재고량 -->
 	<select id="foodStockList" resultType="FoodMInven">
 		select foodMICode, foodMCode, foodMName, inAmount, inDate, outAmount,
 		uint,
@@ -59,11 +62,11 @@
 				where foodMName like CONCAT('%',#{keyword},'%')
 			</if>
 			<if test="searchType == 'c'.toString()">
-				where foodMICode like CONCAT('%',#{keyword},'%')  
+				where foodMICode like CONCAT('%',#{keyword},'%')
 			</if>
 		</if>
 	</sql>
-	
+
 
 	<update id="refundupdate">
 		update orderlist set orderItemCode=6
@@ -77,55 +80,59 @@
 		orderCode=#{orderCode}
 		and orderItemCode = 2
 	</update>
-<!--특정 식단에 대한 식재료 검색  -->
+	<!--특정 식단에 대한 식재료 검색 -->
 	<select id="foodMAmountRead" resultType="FoodMAmountRead">
 		select
-		sum(b.foodMAmount),b.foodMCode,f.foodMName, f.price, f.unit, a.orderCode
+		sum(b.foodMAmount) totalAmount ,b.foodMCode,f.foodMName, f.price,
+		f.unit,
+		a.orderCode
 		from (select
-		d.sideDcode, o.orderCode from orderlist o, dietinfo d where
+		d.sideDcode, o.orderCode from orderlist
+		o,
+		dietinfo d where
 		o.ordercode=#{orderCode}
-		and o.dietCode=d.dietCode) a, sidedinfo
+		and o.dietCode=d.dietCode)
+		a,
+		sidedinfo
 		b,foodmaterial f
 		where a.sideDCode=b.sideDCode and
 		b.foodMCode=f.foodMCode
 		group by f.foodMName;
 	</select>
-	<!-- 쿼리 미완성  -->
-	<!-- <select id="foodMAmountRead" resultType="FoodMAmountRead">
-		select
-		sum(b.foodMAmount) foodMAmount ,b.foodMCode,f.foodMName, f.price, f.unit, a.orderCode 
-		from (select
-		d.sideDcode, o.orderCode from orderlist o, dietinfo d where
-		o.ordercode in
-		<foreach collection="oCode" item="item" index="index" separator="," open="(" close=")">
-                    #{orderCode}
-        </foreach>
-		and o.dietCode=d.dietCode) a, sidedinfo
-		b,foodmaterial f
-		where a.sideDCode=b.sideDCode and
-		b.foodMCode=f.foodMCode
-		group by f.foodMName
-	</select>  -->
-	<select id="chartList" resultType="ChartList"> <!--특정식단에 대한 이름, 판매량  -->
+	<!-- 쿼리 미완성 -->
+	<!-- <select id="foodMAmountRead" resultType="FoodMAmountRead"> select sum(b.foodMAmount) 
+		foodMAmount ,b.foodMCode,f.foodMName, f.price, f.unit, a.orderCode from (select 
+		d.sideDcode, o.orderCode from orderlist o, dietinfo d where o.ordercode in 
+		<foreach collection="oCode" item="item" index="index" separator="," open="(" 
+		close=")"> #{orderCode} </foreach> and o.dietCode=d.dietCode) a, sidedinfo 
+		b,foodmaterial f where a.sideDCode=b.sideDCode and b.foodMCode=f.foodMCode 
+		group by f.foodMName </select> -->
+	<select id="chartList" resultType="ChartList"> <!--특정식단에 대한 이름, 판매량 -->
 		select diet.dietName, sum(orderList.dietAmount) as sellAmount
-		from orderlist, diet
-		where orderlist.dietCode = diet.dietCode and orderlist.orderItemCode = 8
+		from
+		orderlist, diet
+		where orderlist.dietCode = diet.dietCode and
+		orderlist.orderItemCode = 8
 		GROUP by diet.dietName;
 	</select>
-	<select id="chartprice" resultType="ChartPrice"><!-- 날짜에 대한 매출,판매량  -->
-		select sum(price) as totalprice, orderDate, sum(dietAmount) as dietAmount
+	<select id="chartprice" resultType="ChartPrice"><!-- 날짜에 대한 매출,판매량 -->
+		select sum(price) as totalprice, orderDate, sum(dietAmount) as
+		dietAmount
 		from orderlist
-		where orderItemCode=8 and orderDate BETWEEN CURDATE()-7 and CURDATE() 
+		where orderItemCode=8 and orderDate BETWEEN
+		CURDATE()-7 and CURDATE()
 		GROUP by orderDate;
 	</select>
-	<select id="chartprice1" resultType="ChartPrice"><!-- 날짜에 대한 매출,판매량  -->
-		select sum(price) as totalprice, orderDate, sum(dietAmount) as dietAmount
+	<select id="chartprice1" resultType="ChartPrice"><!-- 날짜에 대한 매출,판매량 -->
+		select sum(price) as totalprice, orderDate, sum(dietAmount) as
+		dietAmount
 		from orderlist
-		where orderItemCode=8 and orderDate BETWEEN #{startdate} and #{enddate} 
+		where orderItemCode=8 and orderDate BETWEEN
+		#{startdate} and #{enddate}
 		GROUP by orderDate;
 	</select>
 	<select id="all" resultType="OrderList">
-	select b.dietCode, b.orderCode,
+		select b.dietCode, b.orderCode,
 		b.id, a.dietName, b.orderDate, b.price,
 		b.orderItemCode,
 		b.transportNum, c.orderItemName
@@ -134,10 +141,12 @@
 		orderitem c
 		where a.dietCode=b.dietCode
 		and
-		b.orderItemCode = c.orderItemCode
-		limit #{startRecord}, #{recordsPerPage}
+		b.orderItemCode =
+		c.orderItemCode
+		limit #{startRecord},
+		#{recordsPerPage}
 	</select>
-	<!--orderList 페이지 내역 출력  -->
+	<!--orderList 페이지 내역 출력 -->
 	<select id="orderAll" resultType="OrderList">
 		select b.dietCode, b.orderCode,
 		b.id, a.dietName, b.orderDate, b.price,
@@ -146,11 +155,12 @@
 		from diet a join
 		orderlist b join
 		orderitem c
-		where a.dietCode=b.dietCode 
+		where a.dietCode=b.dietCode
 		and
-		b.orderItemCode = c.orderItemCode and c.orderItemCode BETWEEN 2 and 3 
+		b.orderItemCode =
+		c.orderItemCode and c.orderItemCode BETWEEN 2 and 3
 	</select>
-	
+
 	<select id="orderAllSearch" resultType="OrderList">
 		select b.dietCode, b.orderCode,
 		b.id, a.dietName, b.orderDate, b.price,
@@ -159,14 +169,14 @@
 		from diet a join
 		orderlist b join
 		orderitem c
-		where a.dietCode=b.dietCode 
+		where a.dietCode=b.dietCode
 		and
-		b.orderItemCode = c.orderItemCode and c.orderItemCode BETWEEN 2 and 3 
+		b.orderItemCode = c.orderItemCode and c.orderItemCode BETWEEN 2 and 3
 		<include refid="orderListSearch"></include>
 	</select>
 	<sql id="orderListSearch">
 		<if test="searchType != null">
-			<if test="searchType == 't'.toString()"> 
+			<if test="searchType == 't'.toString()">
 				and b.id like CONCAT('%',#{keyword},'%')
 			</if>
 			<if test="searchType == 'c'.toString()">
@@ -175,18 +185,37 @@
 			<if test="searchType == 'a'.toString()">
 				and c.orderItemName like CONCAT('%',#{keyword},'%')
 			</if>
-		</if> 
+		</if>
 	</sql>
-		
-	
+
+
 	<select id="orderALlCount" resultType="Integer">
-	select count(b.orderCode)
+		select count(b.orderCode)
 		from diet a join
 		orderlist b join
 		orderitem c
-		where a.dietCode=b.dietCode
+		where
+		a.dietCode=b.dietCode
 		and
 		b.orderItemCode = c.orderItemCode
 	</select>
+
+	<select id="AppTest" resultType="String">
+		select token
+		from member
+		where id = #{id}
+	</select>
+
+	<select id="DietAll" resultType="Diet">
+		select a.price, a.dietCode, a.dietName, a.price, a.dietImg, b.diseaseName
+		from diet a join disease b
+		where a.diseaseCode=b.diseaseCode
+	</select>
+
+	<update id="dietPriceUp"> 
+		update diet
+		set price = #{price}
+		where dietCode = #{dietCode} 
+	</update>
 
 </mapper>

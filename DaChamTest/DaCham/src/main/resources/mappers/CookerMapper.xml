@@ -40,16 +40,45 @@
   </select>
  
   <select id ="readycook" resultType = "Cook">
-  select a.orderCode, b.sideDName, sum(a.dietAmount) as dietAmount, a.orderItemCode
+  select a.orderCode, b.sideDName,b.sideDImg, sum(a.dietAmount) as dietAmount, a.orderItemCode
 	from orderlist a join sidedish b join dietinfo c
 	where a.dietCode = c.dietCode
 	and c.sideDCode = b.sideDCode
 	and a.orderItemCode = 3 
 	group by b.sideDName
   </select>
+  <select id = "readyScreen" resultType = "Cook">
+  	select a.orderCode, b.dietName, b.dietImg,a.orderItemCode, a.orderDate, c.orderItemName
+	from orderlist a join diet b join orderitem c
+	where a.dietCode = b.dietCode
+	and a.orderItemCode = c.orderItemCode
+	and a.orderItemCode = 3
+	group by b.dietName
+	order by a.orderDate
+	limit 0,3
+  </select>
   <update id = "transportNum2">
   		update orderlist set orderItemCode = 5
   		where orderCode = #{orderCode}
   	</update>
-  
+  <select id = "cookScreen" resultType = "Cook">
+  	select a.orderCode, b.dietName, b.dietImg,a.orderItemCode, a.orderDate,  c.orderItemName
+	from orderlist a join diet b join orderitem c
+	where a.dietCode = b.dietCode
+	and a.orderItemCode = c.orderItemCode
+	and a.orderItemCode = 4
+	group by b.dietName
+	order by a.orderDate
+	limit 0,3
+  </select>
+  <select id = "endScreen" resultType = "Cook">
+  	select a.orderCode, b.dietName, b.dietImg,a.orderItemCode, a.orderDate, c.orderItemName
+	from orderlist a join diet b join orderitem c
+	where a.dietCode = b.dietCode
+	and a.orderItemCode = c.orderItemCode
+	and a.orderItemCode = 5
+	group by b.dietName    
+	order by a.orderDate
+	limit 0,3
+  </select>
 </mapper>

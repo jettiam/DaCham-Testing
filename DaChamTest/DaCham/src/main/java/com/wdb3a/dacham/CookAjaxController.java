@@ -51,6 +51,44 @@ public class CookAjaxController {
 		}
 		return entity;
 	}
-	
-	
+	@RequestMapping(value = "/readyScreen",method = RequestMethod.GET)
+	public ResponseEntity<List<Cook>> readyScreen(){
+		ResponseEntity<List<Cook>> entity = null;
+		try{
+			List<Cook> list = service.readyScreen();
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		}catch(Exception e){
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	@RequestMapping(value = "/cookScreen",method = RequestMethod.GET)
+	public ResponseEntity<List<Cook>> cookScreen(){
+		ResponseEntity<List<Cook>> entity = null;
+		
+		try {
+			List<Cook> list = service.cookScreen();
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	@RequestMapping(value = "/endScreen",method = RequestMethod.GET)
+	public ResponseEntity<List<Cook>> endScreen(){
+		ResponseEntity<List<Cook>> entity = null;
+		
+		try {
+			List<Cook> list = service.endScreen();
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
 }

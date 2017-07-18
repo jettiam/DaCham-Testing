@@ -314,14 +314,60 @@ public class NutritionistAjaxController {
 		return entity;
 	}
 	//해당 특별고객에 대한 특별식단 표시
-	@RequestMapping(value = "/specialToggle/{customer}",method = RequestMethod.GET)
-	public ResponseEntity<List<Nutritionist>> specialToggle(@PathVariable("customer")String customer){
+	@RequestMapping(value = "/specialToggle/{customer}/{dietCode}",method = RequestMethod.GET)
+	public ResponseEntity<List<Nutritionist>> specialToggle(@PathVariable("customer")String customer,@PathVariable("dietCode")int dietCode){
+		System.out.println("스페셜 토글 컨트롤러입니다.");
 		ResponseEntity<List<Nutritionist>> entity = null;
+		Nutritionist nutritionist = new Nutritionist();
 		try {
+			nutritionist.setCustomer(customer);
+			nutritionist.setDietCode(dietCode);
 			System.out.println("고객아이디:"+customer);
-			List<Nutritionist> list = service.specialToggle(customer);
+			List<Nutritionist> list = service.specialToggle(nutritionist);
 			entity = new ResponseEntity<>(list,HttpStatus.OK);
 			System.out.println("the list"+list);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	//해당 특별식단에 대한 코드를 가져와 증북 방지
+	@RequestMapping(value = "/specialCode/{customer}",method = RequestMethod.GET)
+	public ResponseEntity<List<Nutritionist>> specialCode(@PathVariable("customer")String customer){
+		ResponseEntity<List<Nutritionist>> entity = null;	
+		try {			
+			List<Nutritionist> list = service.specialCode(customer);
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	//해당 특별식단을 추가 등록하길 원할 때 페이지를 갱신함
+	@RequestMapping(value = "/reRegist/{customer}",method = RequestMethod.PUT)
+	public ResponseEntity<String> reRegist(@PathVariable("customer")String customer){
+		ResponseEntity<String> entity = null;
+		try {
+			service.reRegist(customer);
+			entity = new ResponseEntity<>("SUCCESS",HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	//원래대로 되돌림
+	@RequestMapping(value = "/rollback/{customer}",method = RequestMethod.PUT)
+	public ResponseEntity<String> rollback(@PathVariable("customer")String customer){
+		ResponseEntity<String> entity = null;
+		try {
+			service.specialComplete(customer);
+			entity = new ResponseEntity<>("SUCCESS",HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

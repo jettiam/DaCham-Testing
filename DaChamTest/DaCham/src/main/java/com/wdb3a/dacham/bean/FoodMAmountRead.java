@@ -7,9 +7,16 @@ public class FoodMAmountRead {
 	private String unit;
 	private String foodMCode;
 	private int orderCode;
+	private String totalAmount;
 	
 	
 	
+	public String getTotalAmount() {
+		return totalAmount;
+	}
+	public void setTotalAmount(String totalAmount) {
+		this.totalAmount = totalAmount;
+	}
 	public int getOrderCode() {
 		return orderCode;
 	}

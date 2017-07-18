@@ -52,5 +52,13 @@ public interface NutritionistService {
 	//해당 특별식단의 고객 정보와 함께 등록
 	public void specialRegist(String customer) throws Exception;
 	//해당 고객요청에 등록된 특별식단 toggle
-	public List<Nutritionist> specialToggle(String customer) throws Exception;
+	public List<Nutritionist> specialToggle(Nutritionist nutritionist) throws Exception;
+	//특별식단이 등록되면 표시
+	public void specialComplete(String customer) throws Exception;
+	//해당 특별식단의 코드를 조회하여 중복 체크
+	public List<Nutritionist> specialCode(String customer) throws Exception;
+	//해당 특별식단을 추가 등록하길 원할 때의 메소드
+	public void reRegist(String customer) throws Exception;
+	//해당 특별식단을 장바구니에서 볼 수 있게 옵션에 저장
+	public void optionInsert(Nutritionist nutritionist) throws Exception;
 }

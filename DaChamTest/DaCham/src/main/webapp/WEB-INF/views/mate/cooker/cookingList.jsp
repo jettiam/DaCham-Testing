@@ -17,7 +17,7 @@
 	$(document).ready(function(){
 		$("#cookList").addClass("w3-light-gray");
 		$("#button").on("click",function(){
-			window.location.href = "cook";
+			window.location.href = "cookScreen";
 		});
 	});
 </script>
@@ -35,7 +35,7 @@
 			</tr>
 			<c:forEach items = "${list }" var = "b">
 				<tr>
-					<td><a href = "#">${b.sideDName }</a></td>
+					<td><a href = "#">${b.dietName }</a></td>
 					<td>${b.dietAmount }</td>
 					<td>${b.orderItemName}</td>
 				</tr>
@@ -50,7 +50,7 @@
 			</tr>
 			<c:forEach items = "${list2 }" var ="y">
 			<tr>
-				<td><a href ="#">${y. sideDName }</a></td>
+				<td><a href ="#">${y. dietName }</a></td>
 				<td>${y.dietAmount }</td>
 				<td>${y.orderItemName }</td>
 			</tr>

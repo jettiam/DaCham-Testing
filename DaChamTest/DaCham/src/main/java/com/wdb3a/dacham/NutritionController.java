@@ -183,13 +183,15 @@ public class NutritionController {
 	   return "mate/nutritionist/SPDietRegist";
    }
    @RequestMapping(value = "/SPDiet",method = RequestMethod.POST)
-   public String postSPDietRegist(Model model, Nutritionist nutritionist, MultipartFile file,@RequestParam("sideDType")String[] sideDType,@RequestParam("count")int count) throws Exception{
+   public String postSPDietRegist(Model model, Nutritionist nutritionist, MultipartFile file,@RequestParam("sideDType")String[] sideDType,@RequestParam("count")int count,@RequestParam("counselCode")int counselCode) throws Exception{
 	   System.out.println("이제 등록되려 합니다.");
 	  String savedName = UploadFileUtils.uploadFile(file.getOriginalFilename(), uploadPath, file.getBytes());
 	   model.addAttribute("savedName",savedName);
 	   System.out.println("총합:"+count);
+	   System.out.println("상담코드:"+counselCode);
 	   nutritionist.setDietImg(savedName);
 	   service.createDiet(nutritionist);
+	   service.specialRegist(nutritionist.getCustomer());
 	   /*for(int i = 0; i<count; i++){		   
 		   System.out.println("코드번호 : " + sideDCode[i]);
 		   nutritionist.setSideDCode(sideDCode[i]);
@@ -204,6 +206,7 @@ public class NutritionController {
 			   nutritionist.setSideDCode(sideDType[i].substring(0,sideDTypeDefault));
 			   System.out.println("디폴트 반찬코드: "+sideDType[i].substring(0,sideDTypeDefault)+" 디폴트:"+nutritionist.getSideDType());
 			   service.createDietInfo(nutritionist);
+			   service.optionInsert(nutritionist);
 		   }else{
 			   nutritionist.setSideDType("1");
 			   nutritionist.setSideDCode(sideDType[i].substring(0,sideDTypeUnDefault));
@@ -211,7 +214,11 @@ public class NutritionController {
 			   service.createDietInfo(nutritionist);
 		   }
 	   }
-	   service.specialRegist(nutritionist.getCustomer());
+	   //게시판에 있는 text를 가져와서 String 변수에 저장시키고(쿼리1)
+	   
+	   //마지막에 제일 최근에 등록된 식단 코드를 가져오는 쿼리2
+	   //a태그를 해서 String에 붙이고, String을 위에 식단코드 주소를 a태그에 
+	   service.specialComplete(nutritionist.getCustomer());
 	   System.out.println("고객아이디:"+nutritionist.getCustomer());
 	   return "redirect:special";
    }

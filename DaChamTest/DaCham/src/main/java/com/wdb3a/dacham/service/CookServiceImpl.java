@@ -41,5 +41,20 @@ public class CookServiceImpl implements CookService {
 		// TODO Auto-generated method stub
 		return dao.finishcook();
 	}
+	@Override
+	public List<Cook> readyScreen() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.readyScreen();
+	}
+	@Override
+	public List<Cook> cookScreen() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.cookScreen();
+	}
+	@Override
+	public List<Cook> endScreen() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.endScreen();
+	}
 	
 }
