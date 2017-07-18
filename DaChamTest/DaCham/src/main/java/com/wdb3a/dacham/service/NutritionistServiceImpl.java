@@ -187,9 +187,21 @@ public class NutritionistServiceImpl implements NutritionistService {
 	}
 
 	@Override
-	public List<Nutritionist> specialToggle(String customer) throws Exception {
+	public List<Nutritionist> specialToggle(Nutritionist nutritionist) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.specialToggle(customer);
+		return dao.specialToggle(nutritionist);
+	}
+
+	@Override
+	public void specialComplete(String customer) throws Exception {
+		// TODO Auto-generated method stub
+		dao.specialComplete(customer);
+	}
+
+	@Override
+	public List<Nutritionist> specialCode(String customer) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.specialCode(customer);
 	}
 
 

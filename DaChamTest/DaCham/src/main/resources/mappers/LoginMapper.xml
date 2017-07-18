@@ -33,4 +33,8 @@ where id=#{id}
 <update id="insertToken">
 update member set token=#{token} where id=#{id}
 </update>
+<!-- 회원가입 -->
+<insert id="join">
+INSERT INTO member (id, passwd, name, address, tel, email, deptCode, gradeCode, joinDate) VALUES (#{id}, #{passwd}, #{name}, #{address}, #{tel}, #{email}, '회원', '일반회원', now());
+</insert>
 </mapper>

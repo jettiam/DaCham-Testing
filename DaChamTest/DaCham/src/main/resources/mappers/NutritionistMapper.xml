@@ -155,11 +155,11 @@
 	<!-- 특별식단의 상담 리스트를 조회 -->
 	<select id="specialList" resultType = "com.wdb3a.dacham.bean.Counsel">
 		select * from counsel
-		where counselItemCode = 2
+		where counselItemCode = 2 or counselItemCode = 5
 	</select>
 	<!-- 특별식단을 view -->
 	<select id = "specialView" resultType = "com.wdb3a.dacham.bean.Counsel">
-		select a.customer, a.counselDate, b.address, b.tel, a.counselContent
+		select a.customer, a.counselDate, b.address, b.tel, a.counselContent, a.counselItemCode
 		from counsel a join member b
 		where a.customer = b.id
 		and a.customer = #{customer}
@@ -169,9 +169,28 @@
 		insert into orderlist(id, dietCode, orderDate, price, dietAmount, transportNum, orderItemCode, paymentItemCode)
 		values(#{customer},(select MAX(dietCode) from diet),now(),(select price from diet where dietCode = (select MAX(dietCode) from diet)),1,null,0,1)
 	</insert>
+	<!-- 특별식단 등록이 완료되면 표시함 -->
+	<update id = "specialComplete">
+		update counsel set counselItemCode = 5
+		where customer = #{customer}
+	</update>
 	<!-- 특별 고객이 등록한 특별식단 toggle -->
 	<select id = "specialToggle" resultType = "com.wdb3a.dacham.bean.Nutritionist">
-		select d.dietName, d.dietImg, d.price
+		select a.sideDName, a.sideDCode, a.sideDImg, c.dietName, c.dietCode
+		from sidedish a join dietinfo b join (select d.dietCode,d.dietName, d.dietImg, d.price 
+		from counsel a join member b join orderlist c join diet d
+		where a.customer = b.id
+		and b.id = c.id
+		and c.dietCode = d.dietCode
+		and a.customer = #{customer}
+		and d.spDietItem = 0) c
+		where a.sideDCode = b.sideDCode
+		and b.dietCode = c.dietCode
+		and c.dietCode = #{dietCode}
+	</select>
+	<!-- 특별식단에 있는 특별식단 코드만 불러오기 -->
+	<select id = "specialCode" resultType = "com.wdb3a.dacham.bean.Nutritionist">
+		select d.dietCode,d.dietName, d.dietImg, d.price 
 		from counsel a join member b join orderlist c join diet d
 		where a.customer = b.id
 		and b.id = c.id

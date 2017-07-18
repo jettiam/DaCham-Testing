@@ -16,4 +16,5 @@ public interface LoginService {
 	public Emp getEmp(String id) throws Exception;
 	public int idCheck(String id) throws Exception;
 	public void insertToken(Member member) throws Exception;
+	public void join(Member member) throws Exception ;
 }

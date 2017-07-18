@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.wdb3a.dacham.bean.AppTest;
 import com.wdb3a.dacham.bean.ChartList;
 import com.wdb3a.dacham.bean.ChartPrice;
 import com.wdb3a.dacham.bean.Criteria;
@@ -108,7 +109,17 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 	public List<OrderList> orderAllSearch(OrderList orderist) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".orderAllSearch", orderist);
-	}   
+	}
+
+	@Override
+	public String appTest(String id) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("daoµÊ");
+		return sqlSession.selectOne(namespace+".AppTest", id);
+	}
+
+
+	 
 
 	
 
