@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.wdb3a.dacham.bean.ChartList;
 import com.wdb3a.dacham.bean.Criteria;
+import com.wdb3a.dacham.bean.Diet;
 import com.wdb3a.dacham.bean.FoodMAmountRead;
 import com.wdb3a.dacham.bean.FoodMInven;
 import com.wdb3a.dacham.bean.OrderList;
@@ -59,7 +60,7 @@ public class AdminSubController {
 		return entity;
 	}
    //작업요청
-   @RequestMapping(value = "/orderList2",method = RequestMethod.PUT)
+   @RequestMapping(value = "/orderList2", method = RequestMethod.PUT)
 	public ResponseEntity<String> transportNum1(@RequestBody OrderList order){
 		ResponseEntity<String> entity = null;
 		try {
@@ -177,7 +178,37 @@ public class AdminSubController {
  		}
  		return entity;
  	}
-  
+   
+   @RequestMapping(value = "/dietAll",method = RequestMethod.GET)
+ 	public ResponseEntity<List<Diet>> dietAll(){
+ 		ResponseEntity<List<Diet>> entity = null;
+ 		try {
+ 			List<Diet> list = service.dietAll();
+ 			entity = new ResponseEntity<>(list,HttpStatus.OK);
+ 		} catch (Exception e) {
+ 			// TODO Auto-generated catch block
+ 			e.printStackTrace();
+ 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+ 		}
+ 		return entity;
+ 	}
+   
+   //가격 업데이트
+   @RequestMapping(value = "/priceUp", method = RequestMethod.PUT)
+	public ResponseEntity<String> priceUp(@RequestBody Diet diet){
+		ResponseEntity<String> entity = null;
+		System.out.println(diet.getPrice()); 
+		try {
+			service.dietPriceUp(diet);
+			System.out.println("야");
+			entity = new ResponseEntity<>("SUCCESS",HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
    
    
 

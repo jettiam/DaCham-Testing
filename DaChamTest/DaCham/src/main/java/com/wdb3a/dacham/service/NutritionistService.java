@@ -57,4 +57,8 @@ public interface NutritionistService {
 	public void specialComplete(String customer) throws Exception;
 	//해당 특별식단의 코드를 조회하여 중복 체크
 	public List<Nutritionist> specialCode(String customer) throws Exception;
+	//해당 특별식단을 추가 등록하길 원할 때의 메소드
+	public void reRegist(String customer) throws Exception;
+	//해당 특별식단을 장바구니에서 볼 수 있게 옵션에 저장
+	public void optionInsert(Nutritionist nutritionist) throws Exception;
 }

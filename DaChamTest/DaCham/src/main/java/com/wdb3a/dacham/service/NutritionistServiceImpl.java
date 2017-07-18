@@ -204,6 +204,18 @@ public class NutritionistServiceImpl implements NutritionistService {
 		return dao.specialCode(customer);
 	}
 
+	@Override
+	public void reRegist(String customer) throws Exception {
+		// TODO Auto-generated method stub
+		dao.reRegist(customer);
+	}
+
+	@Override
+	public void optionInsert(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		dao.optionInsert(nutritionist);
+	}
+
 
 	
 

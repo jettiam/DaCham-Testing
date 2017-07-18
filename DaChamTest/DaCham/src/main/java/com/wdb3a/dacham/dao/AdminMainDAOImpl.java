@@ -11,6 +11,7 @@ import com.wdb3a.dacham.bean.AppTest;
 import com.wdb3a.dacham.bean.ChartList;
 import com.wdb3a.dacham.bean.ChartPrice;
 import com.wdb3a.dacham.bean.Criteria;
+import com.wdb3a.dacham.bean.Diet;
 import com.wdb3a.dacham.bean.FoodMAmountRead;
 import com.wdb3a.dacham.bean.FoodMInven;
 import com.wdb3a.dacham.bean.OrderList;
@@ -118,6 +119,20 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 		return sqlSession.selectOne(namespace+".AppTest", id);
 	}
 
+	@Override
+	public List<Diet> dietAll() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".DietAll");
+	}
+
+	@Override
+	public void dietPriceUp(Diet diet) throws Exception {
+		System.out.println("되니나?");
+		sqlSession.update(namespace+".dietPriceUp", diet);
+		System.out.println("되니?");
+	}
+
+	
 
 	 
 

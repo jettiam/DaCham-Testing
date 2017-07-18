@@ -83,13 +83,16 @@
 	<!--특정 식단에 대한 식재료 검색 -->
 	<select id="foodMAmountRead" resultType="FoodMAmountRead">
 		select
-		sum(b.foodMAmount) totalAmount ,b.foodMCode,f.foodMName, f.price, f.unit,
+		sum(b.foodMAmount) totalAmount ,b.foodMCode,f.foodMName, f.price,
+		f.unit,
 		a.orderCode
 		from (select
-		d.sideDcode, o.orderCode from orderlist o,
+		d.sideDcode, o.orderCode from orderlist
+		o,
 		dietinfo d where
 		o.ordercode=#{orderCode}
-		and o.dietCode=d.dietCode) a,
+		and o.dietCode=d.dietCode)
+		a,
 		sidedinfo
 		b,foodmaterial f
 		where a.sideDCode=b.sideDCode and
@@ -138,7 +141,8 @@
 		orderitem c
 		where a.dietCode=b.dietCode
 		and
-		b.orderItemCode = c.orderItemCode
+		b.orderItemCode =
+		c.orderItemCode
 		limit #{startRecord},
 		#{recordsPerPage}
 	</select>
@@ -153,7 +157,8 @@
 		orderitem c
 		where a.dietCode=b.dietCode
 		and
-		b.orderItemCode = c.orderItemCode and c.orderItemCode BETWEEN 2 and 3
+		b.orderItemCode =
+		c.orderItemCode and c.orderItemCode BETWEEN 2 and 3
 	</select>
 
 	<select id="orderAllSearch" resultType="OrderList">
@@ -197,8 +202,20 @@
 
 	<select id="AppTest" resultType="String">
 		select token
-		from member  
+		from member
 		where id = #{id}
 	</select>
+
+	<select id="DietAll" resultType="Diet">
+		select a.price, a.dietCode, a.dietName, a.price, a.dietImg, b.diseaseName
+		from diet a join disease b
+		where a.diseaseCode=b.diseaseCode
+	</select>
+
+	<update id="dietPriceUp"> 
+		update diet
+		set price = #{price}
+		where dietCode = #{dietCode} 
+	</update>
 
 </mapper>

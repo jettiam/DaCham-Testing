@@ -32,8 +32,24 @@
 						$("#sideAll").on("click", function() {
 							sideAll();
 						});
-						$("#cancle").click(function() {
+						$("#cancle").click(function(){
+							var customer = '${counsel.customer}';
 							if (window.confirm("정말로 취소하시겠습니까?")) {
+								if(${counsel.counselItemCode} == 2){
+									$.ajax({
+										url : "nutriAjax/rollback/"+customer,
+										type : "PUT",
+										headers : {
+											"Content-Type" : "application/json",
+											"X-HTTP-Method-Override" : "PUT"
+										},
+										success : function(result){
+											if(result == "SUCCESS"){
+												
+											}
+										}
+									});
+								}
 								window.location.href = "special";
 							}
 						});
@@ -55,8 +71,8 @@
 											var foodGCode= $(this).attr("data-foodGCode");
 											var foodGLength = $(".foodG"+foodGCode+">img").length;
 											console.log("푸드그룹랭스 "+foodGLength);
-											if(foodGLength>4){
-												alert("다섯가지 이상 선택할 수 없습니다.");												
+											if(foodGLength>0){
+												alert("한가지 이상 선택할 수 없습니다.");												
 											}else{ 
 											$(this).parent().parent().hide();
 											var count = parseInt(localStorage['count']);
@@ -227,7 +243,7 @@
 													"sideDImg center-block")
 											.appendTo('.foodG01');
 									$(
-											'<input type="radio" name="foodG01" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
+											'<input type="radio" name="foodG01" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'" checked><label for="'+sideDCode+'">'
 													+ sideDName + '</label>')
 											.appendTo('.foodG01');
 									break;
@@ -243,7 +259,7 @@
 													"sideDImg center-block")
 											.appendTo('.foodG02');
 									$(
-											'<input type="radio" name="foodG02" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
+											'<input type="radio" name="foodG02" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'" checked><label for="'+sideDCode+'">'
 											+ sideDName + '</label>')
 											.appendTo('.foodG02');
 									break;
@@ -259,13 +275,13 @@
 													"sideDImg center-block")
 											.appendTo('.foodG03');
 									$(
-											'<input type="radio" name="foodG03" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
+											'<input type="radio" name="foodG03" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'" checked><label for="'+sideDCode+'">'
 											+ sideDName + '</label>')
 											.appendTo('.foodG03');
 									break;
 								case "04":
 									$(
-											'<input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '>')
+											'<input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + ' >')
 											.appendTo('.foodG04');
 									$(
 											'<img src = "displayFile?fileName='
@@ -275,13 +291,13 @@
 													"sideDImg center-block")
 											.appendTo('.foodG04');
 									$(
-											'<input type="radio" name="foodG04" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
+											'<input type="radio" name="foodG04" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'" checked><label for="'+sideDCode+'">'
 											+ sideDName + '</label>')
 											.appendTo('.foodG04');
 									break;
 								case "05":
 									$(
-											'<input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '>')
+											'<input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + ' >')
 											.appendTo('.foodG05');
 									$(
 											'<img src = "displayFile?fileName='
@@ -291,7 +307,7 @@
 													"sideDImg center-block")
 											.appendTo('.foodG05');
 									$(
-											'<input type="radio" name="foodG05" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
+											'<input type="radio" name="foodG05" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+' "checked><label for="'+sideDCode+'">'
 											+ sideDName + '</label>')
 											.appendTo('.foodG05');
 									break;
@@ -307,7 +323,7 @@
 													"sideDImg center-block")
 											.appendTo('.foodG06');
 									$(
-											'<input type="radio" name="foodG06" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
+											'<input type="radio" name="foodG06" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'" checked><label for="'+sideDCode+'">'
 											+ sideDName + '</label>')
 											.appendTo('.foodG06');
 									break;
@@ -514,6 +530,7 @@
 	<%@include file="nutritionistNavi.jsp"%>
 	<div class = "container">
 		<h3><b>고객 요청 리스트</b></h3>
+		<input type = "hidden" name = "counselCode" value = "${counsel.counselCode }">
 		<table class = "table table-hover">
 			<tr>
 				<td>고객id</td>
@@ -537,7 +554,7 @@
 			<textarea class = "form-control" readonly = "readonly" rows = "5" id = "comment">${counsel.counselContent }</textarea>
 		</div>
 	</div>  
-	<input type = "hidden" name = "counselItemCode" value = "${counsel.counselItemCode }">
+	
 	<c:choose>
 	<c:when test = "${counsel.counselItemCode == 2 }">     
 	<div class="container">
@@ -618,6 +635,7 @@
 
 		<div class="col-sm-12">
 			<form id="registForm" enctype="multipart/form-data">
+				<input type = "hidden" name = "counselItemCode" value = "${counsel.counselItemCode }">
 				<input type = "hidden" name = "customer" value = "${counsel.customer }">
 				<div class="div2">
 					<div id="test">
@@ -662,6 +680,10 @@
 	</c:when>
 	<c:when test = "${counsel.counselItemCode == 5 }">
 		<div class = "container">
+			<div>
+				<button id = "reRegist" class = "btn btn-danger">추가등록</button>
+				<button id = "cancle" class = "btn btn-warning">작업취소</button>
+			</div>
 			<h1 id = "h1Text"></h1>
 			<table class = "optional table table-hover">
 				
@@ -669,14 +691,15 @@
 			<table class = "optional2 table table-hover">
 			
 			</table>
-			<div>
-				<button id = "cancle">작업취소</button>
-				<button id = "reRegist">추가등록</button>
-			</div>
+			
 		</div>
 		
 	</c:when>
 	</c:choose>
+	
+	
+	
+	
 	<script>
 		//이미 등록된 특별식단의 반찬을 보여주는 기능
 		$(document).ready(function(){
@@ -684,6 +707,24 @@
 			
 			optional(customer);
 			console.log("빌려온 아이디:"+customer);  
+			
+			$("#reRegist").on("click",function(){
+				$.ajax({
+					url : "nutriAjax/reRegist/"+customer,
+					type : "PUT",
+					dataType : "jsonp",
+					headers : {
+						"Content-Type" : "application/json",
+						"X-HTTP-Method-Override" : "PUT"
+					},
+					success : function(result){
+						if(result == "SUCCESS"){
+							
+						}
+					}
+				});
+				window.location.reload();
+			});
 			
 			function optional(customer){
 				var str = "";
