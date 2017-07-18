@@ -88,18 +88,33 @@ body {
 	font-family: 'Jeju Gothic';
 }
 
-#sideController{
-	width : 150px;
-	height : 400px;
-	background-color: red;
-	position : fixed;
+#sideController {
+	width: 150px;
+	height: 400px;
+	position: fixed;
 	top: 100px;
-	right : 1000px;
+	left: 90%;
+	z-index: 100;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+	left: 0%;
+}
+
+li {
+	list-style-type: none;
+}
+
+.sideNaviStart {
 	
 }
 
-
-
+.sideNavi {
+	height: 60px;
+	background-color: #de413b;
+}
 
 .blocklyTreeRoot {
 	margin-top: 8px;
@@ -163,18 +178,25 @@ svg {
 		<block type="d1"></block> <block type="d2"></block> <block type="d3"></block>
 		</category></xml>
 	</span>
-	
-	<div id="sideController"> 
-		<input id="searchNum" type="text">
-		에대하여
-		<button id="searchBtn">찾기</button>
 
-		<div id="showAllCount" style="display: none;">
-			<span></span>
-			<button id="prevCount">이전 찾기</button>
-			<button id="nextCount">다음 찾기</button>
-			<button id="closeCount">닫기</button>
-		</div>
+	<!-- 오른쪽 컨트롤 네비 바 -->
+	<div id="sideController">
+		<ul>
+			<li class="sideNaviStart"><img src="resources/wizardIcon.png"
+				width="130px;"></li>
+			<li class="sideNavi"><div>위자드 도우미</div></li>
+			<li class="sideNavi">위자드 블록 검색 <input id="searchNum" type="text">에
+				대하여
+				<button id="searchBtn">찾기</button>
+				<div id="showAllCount" style="display: none;">
+					<span></span>
+					<button id="prevCount">이전 찾기</button>
+					<button id="nextCount">다음 찾기</button>
+					<button id="closeCount">닫기</button>
+				</div>
+			</li>
+			<li><img src="resources/wizardIconBottom.png"></li>
+		</ul>
 	</div>
 
 	<script>
@@ -248,6 +270,7 @@ svg {
 			var diagonal = d3.svg.diagonal().projection(function(d) {
 				return [ d.y, d.x ];
 			});
+
 			$("#graphWizard>svg").remove();
 			var svg = d3
 					.select("#graphWizard")
@@ -290,9 +313,35 @@ svg {
 					return d.children || d._children ? -13 : 13;
 				}).attr("dy", ".35em").attr("text-anchor", function(d) {
 					return d.children || d._children ? "end" : "start";
-				}).text(function(d) {
-					return d.name;
-				}).style("fill-opacity", 1e-6);
+				}).text(
+						function(d) {
+							console.log(d.name + "q번호임.");
+							var q = eval("plainJson.q" + d.name);
+							var keyArr = new Array();
+							var cnt = 0;
+							for ( var key in q) {
+								//console.log(key);
+								keyArr[cnt] = key;
+								cnt++;
+							}
+
+							console.log(keyArr);
+							//console.log(q);
+							//console.log(eval(q));
+
+							//console.log(keyArr);
+							if (keyArr[0] != undefined) {
+								return (d.name+ ". ");
+							} else {
+								return d.name + "번 질문지 작성되지 않았습니다.";
+							}
+						}).style("fill-opacity", 1e-6);
+			
+				
+				
+				
+				
+				
 				// Transition nodes to their new position.
 				var nodeUpdate = node.transition().duration(duration).attr(
 						"transform", function(d) {
@@ -362,6 +411,7 @@ svg {
 			}
 
 		}
+
 		function searchSheet(num) {
 			alert(num + "번 질문지를 찾을꺼에요:)");
 			var txt = $("#blocklyDiv").text();
@@ -369,81 +419,51 @@ svg {
 			alert(txt);
 		}
 
-		var TRange = null;
-
-		function findString(str) {
-			if (parseInt(navigator.appVersion) < 4)
-				return;
-			var strFound;
-			if (navigator.appName == "Netscape") {
-
-				// NAVIGATOR-SPECIFIC CODE
-
-				strFound = self.find(str);
-
-				if (!strFound) {
-					strFound = self.find(str, 0, 1);
-					while (self.find(str, 0, 1))
-						continue;
-				}
-			}
-			if (navigator.appName.indexOf("Microsoft") != -1) {
-
-				// EXPLORER-SPECIFIC CODE
-
-				if (TRange != null) {
-					TRange.collapse(false);
-					strFound = TRange.findText(str);
-					if (strFound)
-						TRange.select();
-				}
-				if (TRange == null || strFound == 0) {
-					TRange = self.document.body.createTextRange();
-					strFound = TRange.findText(str);
-
-					if (strFound)
-						TRange.select();
-				}
-			}
-			if (!strFound)
-				alert("String '" + str + "' not found!");
-		}
-
 		workspace.addChangeListener(drawGraph);
 
-		$(document).ready(function() {
-			$("#searchBtn").click(function() {
-				var num = $("#searchNum").val();
-				num = num.split(" ").join("&nbsp;");
-				alert(num + "에 대하여 찾습니다.");
-				
-				var searchedBox = document.getElementsByClassName("blocklyText");
-				var selectList = new Array();
-				var sCount = 0;
-				var count = 0;
-				for(var i=0; i<searchedBox.length; i++){
-					if(searchedBox[i].innerHTML==num){					
-						$("#showAllCount").show();						
-						console.log(searchedBox[i].innerHTML);
-						selectList[sCount] = searchedBox[i];
-						sCount ++;
-						count++;
-					}	
-				}
-				if(count == 0){
-					alert("검색 값이 없습니다.");
-				}else{
-					console.log(selectList);
-					var parent = selectList[0].parentNode.parentNode;
-					$(parent).addClass("blocklySelected");
-					
-					selectList[0].scrollIntoView(true);
-				}
-				
-			});
+		$(document)
+				.ready(
+						function() {
+							$("#searchBtn")
+									.click(
+											function() {
+												var num = $("#searchNum").val();
+												num = num.split(" ").join(
+														"&nbsp;");
+												alert(num + "에 대하여 찾습니다.");
 
-			drawGraph();
-		});
+												var searchedBox = document
+														.getElementsByClassName("blocklyText");
+												var selectList = new Array();
+												var sCount = 0;
+												var count = 0;
+												for (var i = 0; i < searchedBox.length; i++) {
+													if (searchedBox[i].innerHTML == num) {
+														$("#showAllCount")
+																.show();
+														console
+																.log(searchedBox[i].innerHTML);
+														selectList[sCount] = searchedBox[i];
+														sCount++;
+														count++;
+													}
+												}
+												if (count == 0) {
+													alert("검색 값이 없습니다.");
+												} else {
+													console.log(selectList);
+													var parent = selectList[0].parentNode.parentNode;
+													$(parent).addClass(
+															"blocklySelected");
+
+													selectList[0]
+															.scrollIntoView(true);
+												}
+
+											});
+
+							drawGraph();
+						});
 	</script>
 </body>
 </html>
