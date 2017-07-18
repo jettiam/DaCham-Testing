@@ -52,7 +52,9 @@ public interface NutritionistDAO {
 	//해당 특별식단의 고객 정보와 함께 등록
 	public void specialRegist(String customer) throws Exception;
 	//해당 고객요청에 등록된 특별식단 toggle
-	public List<Nutritionist> specialToggle(String customer) throws Exception;
-	//특별식단이 등록되면 표시
+	public List<Nutritionist> specialToggle(Nutritionist nutritionist) throws Exception;
+	//해당 특별식단이 등록되면 표시
 	public void specialComplete(String customer) throws Exception;
+	//해당 특별식단의 코드를 조회하여 중복 체크
+	public List<Nutritionist> specialCode(String customer) throws Exception;
 }

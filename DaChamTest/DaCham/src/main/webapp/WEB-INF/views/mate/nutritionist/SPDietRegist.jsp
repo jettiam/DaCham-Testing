@@ -666,27 +666,50 @@
 			<table class = "optional table table-hover">
 				
 			</table>             
+			<table class = "optional2 table table-hover">
+			
+			</table>
+			<div>
+				<button id = "cancle">작업취소</button>
+				<button id = "reRegist">추가등록</button>
+			</div>
 		</div>
 		
 	</c:when>
 	</c:choose>
 	<script>
 		//이미 등록된 특별식단의 반찬을 보여주는 기능
-		var customer ='${counsel.customer}';
-		
-		optional(customer);
-		console.log("빌려온 아이디:"+customer);  
-		function optional(customer){
-			var str = "";
-			$.getJSON("nutriAjax/specialToggle/"+customer,function(data){
-				$(data).each(function(){
-					str += "<tr><td>"+this.sideDName+"</td><td>"+"<img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width : 75px; height : 25px;'></td></tr>";
-					$("#h1Text").text(this.dietName);
+		$(document).ready(function(){
+			var customer ='${counsel.customer}';
+			
+			optional(customer);
+			console.log("빌려온 아이디:"+customer);  
+			
+			function optional(customer){
+				var str = "";
+				var stv = "";
+				$.getJSON("nutriAjax/specialCode/"+customer,function(data){
+					$(data).each(function(){
+						stv += "<input type = 'text' class = 'SPDietCode' name = 'dietName' data-code = '"+this.dietCode+"'value = '"+this.dietName+"'>";     
+					});
+					$(".optional").append(stv);        
 				});
-				$(".optional").append(str);   
-				
+			}
+			$(document.body).on("click",".SPDietCode",function(data){
+				$(".trText").remove();    
+				var dietCode = $(this).attr('data-code');  
+				var str = "";
+				console.log("스페셜 코드:"+dietCode);  
+				$.getJSON("nutriAjax/specialToggle/"+customer+"/"+dietCode,function(data){   
+					$(data).each(function(){
+						str += "<tr class = 'trText'><td>"+this.sideDName+"</td><td>"+"<img src = 'displayFile?fileName="+this.sideDImg+"'style = 'width:75px; height : 25px;'></td></tr>";
+						console.log("반찬이름:"+this.sideDName);
+					});
+					$(".optional2").append(str);
+				});
 			});
-		}
+		});
+		
 		//이미지를 업로드하면 미리 볼 수 있는 기능
 		function previewImage(targetObj, View_area) {
 			var preview = document.getElementById(View_area);
