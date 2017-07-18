@@ -11,6 +11,10 @@
 		and a.cookMCode = c.cookMCode
 		and a.sideDName like CONCAT('%',#{search},'%') 
 	</select>
+	<!-- 가장 최신의 식단을 조회합니다. -->
+	<select id = "maxDiet" resultType = "Integer">
+		select MAX(dietCode) from diet
+	</select>
 	<!-- 해당 메인페이지에 이달의 메뉴를 조회합니다. -->
 	<select id = "thisMonth" resultType = "OrderList">
 		select a.orderDate, b.dietName, b.dietImg 
@@ -208,4 +212,14 @@
 		insert into orderoptions(orderCode, sideDCode)
 		values((select MAX(orderCode) from orderlist), #{sideDCode})
 	</insert>
+	<!-- 특별식단 상담 리스트의 답변을 조회함 -->
+	<select id = "answer" resultType = "String">
+		select answer from counsel
+		where counselCode = #{counselCode}
+	</select>
+	<!-- 특별식단 상담 답변에 링크를 걸어줌 -->
+	<update id="answers">
+		update counsel set answer = #{answer}
+		where counselCode = #{counselCode}
+	</update>
 </mapper>

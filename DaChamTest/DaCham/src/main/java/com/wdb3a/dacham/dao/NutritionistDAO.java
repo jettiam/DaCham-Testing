@@ -12,6 +12,8 @@ public interface NutritionistDAO {
 	public List<Nutritionist> listSearch(Nutritionist nutritionist) throws Exception;
 // 반찬 전체를 조회합니다.(with 식품군, 조리법)
 	public List<Nutritionist> sideAll(String foodGCode,Criteria criteria) throws Exception;
+	//해당 식단에서 가장 최신의 식단을 구합니다.
+	public int maxDiet() throws Exception;
 	//반찬 전체의 수량을 구합니다.
 	public int sideAllCount(String foodGCode) throws Exception;
 	//해당 메인페이지에 이달의 메뉴를 조회합니다.
@@ -61,4 +63,8 @@ public interface NutritionistDAO {
 	public void reRegist(String customer) throws Exception;
 	//해당 특별식단을 장바구니에서 볼 수 있게 옵션에 저장
 	public void optionInsert(Nutritionist nutritionist) throws Exception;
+	//해당 특별식단에 해당하는 게시판 번호에 있는 답변을 조회함
+	public String answer(int counselCode) throws Exception;
+	//해당 특별식단에 있는 답변에 링크를 걸어줌
+	public void answers(Nutritionist nutritionist) throws Exception;
 }

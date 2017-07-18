@@ -635,7 +635,7 @@
 
 		<div class="col-sm-12">
 			<form id="registForm" enctype="multipart/form-data">
-				<input type = "hidden" name = "counselItemCode" value = "${counsel.counselItemCode }">
+				<input type = "hidden" name = "counselCode" value = "${counsel.counselCode }">
 				<input type = "hidden" name = "customer" value = "${counsel.customer }">
 				<div class="div2">
 					<div id="test">

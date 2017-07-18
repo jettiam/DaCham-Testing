@@ -223,4 +223,22 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 		// TODO Auto-generated method stub
 		sqlSession.insert(namespace+".optionInsert",nutritionist);
 	}
+
+	@Override
+	public String answer(int counselCode) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".answer",counselCode);
+	}
+
+	@Override
+	public void answers(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace+".answers",nutritionist);
+	}
+
+	@Override
+	public int maxDiet() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".maxDiet");
+	}
 }

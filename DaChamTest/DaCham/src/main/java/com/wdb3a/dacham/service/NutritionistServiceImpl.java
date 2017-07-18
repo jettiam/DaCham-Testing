@@ -216,6 +216,24 @@ public class NutritionistServiceImpl implements NutritionistService {
 		dao.optionInsert(nutritionist);
 	}
 
+	@Override
+	public String answer(int counselCode) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.answer(counselCode);
+	}
+
+	@Override
+	public void answers(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		dao.answers(nutritionist);
+	}
+
+	@Override
+	public int maxDiet() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.maxDiet();
+	}
+
 
 	
 
