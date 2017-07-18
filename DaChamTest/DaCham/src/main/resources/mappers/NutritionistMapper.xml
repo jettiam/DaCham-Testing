@@ -159,7 +159,7 @@
 	</select>
 	<!-- 특별식단을 view -->
 	<select id = "specialView" resultType = "com.wdb3a.dacham.bean.Counsel">
-		select a.customer, a.counselDate, b.address, b.tel, a.counselContent, a.counselItemCode
+		select a.customer,a.counselCode, a.counselDate, b.address, b.tel, a.counselContent, a.counselItemCode
 		from counsel a join member b
 		where a.customer = b.id
 		and a.customer = #{customer}
@@ -203,4 +203,9 @@
 		update counsel set counselItemCode = 2
 		where customer = #{customer}
 	</update>
+	<!-- 특별식단의 디폴트 반찬 옵션에 입력함 -->
+	<insert id = "optionInsert">
+		insert into orderoptions(orderCode, sideDCode)
+		values((select MAX(orderCode) from orderlist), #{sideDCode})
+	</insert>
 </mapper>

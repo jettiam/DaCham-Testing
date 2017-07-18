@@ -210,6 +210,12 @@ public class NutritionistServiceImpl implements NutritionistService {
 		dao.reRegist(customer);
 	}
 
+	@Override
+	public void optionInsert(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		dao.optionInsert(nutritionist);
+	}
+
 
 	
 

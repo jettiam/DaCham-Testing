@@ -59,4 +59,6 @@ public interface NutritionistService {
 	public List<Nutritionist> specialCode(String customer) throws Exception;
 	//해당 특별식단을 추가 등록하길 원할 때의 메소드
 	public void reRegist(String customer) throws Exception;
+	//해당 특별식단을 장바구니에서 볼 수 있게 옵션에 저장
+	public void optionInsert(Nutritionist nutritionist) throws Exception;
 }

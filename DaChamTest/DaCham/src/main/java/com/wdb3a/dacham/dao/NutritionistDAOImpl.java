@@ -217,4 +217,10 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 		// TODO Auto-generated method stub
 		sqlSession.update(namespace + ".reRegist",customer);
 	}
+
+	@Override
+	public void optionInsert(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.insert(namespace+".optionInsert",nutritionist);
+	}
 }
