@@ -195,14 +195,20 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 	}
 
 	@Override
-	public List<Nutritionist> specialToggle(String customer) throws Exception {
+	public List<Nutritionist> specialToggle(Nutritionist nutritionist) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".specialToggle",customer);
+		return sqlSession.selectList(namespace+".specialToggle",nutritionist);
 	}
 
 	@Override
 	public void specialComplete(String customer) throws Exception {
 		// TODO Auto-generated method stub
 		sqlSession.update(namespace+".specialComplete",customer);
+	}
+
+	@Override
+	public List<Nutritionist> specialCode(String customer) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".specialCode",customer);
 	}
 }

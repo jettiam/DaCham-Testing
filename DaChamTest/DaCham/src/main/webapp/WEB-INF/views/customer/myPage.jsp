@@ -124,15 +124,43 @@
 		</div>
 
 		<!-- 내 건강정보 -->
-		<div id="myHealthTableWrap" >
-		<h2 class="text-center">내 건강정보</h2><br>
-		<h3 class="text-center">${memberName}님의영양정보</h2>
+		<div id="myHealthTableWrap" class="row">
+		<h2 class="text-center">${memberName}님의 건강정보</h2><br>
+		<div class="col-sm-6">
+		<h3 class="text-center">영양정보</h2>
 			<table id="myHealthTable" class="text-center center-block">
 				<tr>
 					<td><canvas id="myChart"></canvas></td>
 					</tr>
 			</table>
-			
+		</div>
+		<div class="col-sm-6">
+			<h3 class="text-center">측정기록</h2>
+			여기에 값넣고 차트
+		</div>
+		<div class="row">
+		<div class="col-sm-12">			
+			  <div class="form-group col-sm-3 col-sm-offset-3">
+			    <label for="LowBooldP">최저혈압</label>
+			    <input type="number" class="form-control" id="lowBooldP" placeholder="단위(Hg)" min="0">
+			  </div>
+			  <div class="form-group col-sm-3">
+			    <label for="HighBooldP">최고혈압</label>
+			    <input type="number" class="form-control" id="highBooldP" placeholder="단위(Hg)" min="0">
+			  </div>
+		</div>
+		<div class="col-sm-12 center-block">
+			  <div class="form-group col-sm-3 col-sm-offset-3">
+			    <label for="LowBooldS">공복혈당</label>
+			    <input type="number" class="form-control" id="lowBooldS" placeholder="단위(mg/dL)" min="0">
+			  </div>
+			  <div class="form-group col-sm-3">
+			    <label for="highBooldS">식후혈당</label>
+			    <input type="number" class="form-control" id="highBooldS" placeholder="단위(mg/dL)" min="0">
+			  </div>			
+		</div>
+		<div class="col-sm-12 text-center"><button class="btn btn-primary" id="measureRegist">등록</button></div>
+		</div>	
 		</div>
 
 		<!-- 장바구니 -->
@@ -462,10 +490,39 @@ $(document).ready(function(){
 		}			
 				
 	});
-	
-	
 
-
+/*건강측정정보 등록*/
+	$("#measureRegist").click(function () {
+		var lowBooldP = $("#lowBooldP").val();
+		var highBooldP = $("#highBooldP").val();
+		var lowBooldS = $("#lowBooldS").val();
+		var highBooldS = $("#highBooldS").val();
+		
+		if(lowBooldP==""){
+			lowBooldP=0;
+			if(highBooldP==""){
+				highBooldP=0;
+				if(lowBooldS==""){
+					lowBooldS=0;
+					if(highBooldS==""){
+						highBooldS=0;
+					}
+				}
+			}
+		}
+		console.log("최혈"+lowBooldP+"고혈"+highBooldP+"공혈"+lowBooldS+"후혈"+highBooldS);
+		$.ajax({
+			url:"customerAjax/",
+			headers : {
+	               "Content-Type" : "application/json",
+	               "X-HTTP-Method-Override" : "POST"
+	            },
+	            dataType : "json",
+			data:JSON.stringify({"id":id}),
+			type:"POST",			
+			success:function(data){}
+		});
+	});
 });	
 function w3_open() {
     document.getElementById("mySidebar").style.display = "block";
