@@ -190,11 +190,12 @@ public class NutritionController {
 	   System.out.println("총합:"+count);
 	   System.out.println("상담코드:"+counselCode);
 	   String answer = service.answer(counselCode);
-	   int maxDiet = service.maxDiet();
+	  
 	   nutritionist.setDietImg(savedName);
 	   service.createDiet(nutritionist);
 	   service.specialRegist(nutritionist.getCustomer());
-	   answer = "<a href = 'detailOrder?dietCode="+maxDiet+"'>"+"click here!"+"</a>";
+	   int maxDiet = service.maxDiet();
+	   answer = "<a href = 'detailOrder?dietCode="+maxDiet+"'>"+"Please click to enter your diet!"+"</a>";
 	   System.out.println("식단의 코드:"+maxDiet);
 	   nutritionist.setAnswer(answer);
 	   nutritionist.setCounselCode(counselCode);
