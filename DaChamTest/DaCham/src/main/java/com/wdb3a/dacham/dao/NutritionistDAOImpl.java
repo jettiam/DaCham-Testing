@@ -211,4 +211,10 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".specialCode",customer);
 	}
+
+	@Override
+	public void reRegist(String customer) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace + ".reRegist",customer);
+	}
 }

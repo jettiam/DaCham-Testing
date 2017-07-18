@@ -198,4 +198,9 @@
 		and a.customer = #{customer}
 		and d.spDietItem = 0
 	</select>
+	<!-- 특별식단 추가 등록하고 싶으면 전환함 -->
+	<update id="reRegist">
+		update counsel set counselItemCode = 2
+		where customer = #{customer}
+	</update>
 </mapper>
