@@ -2,6 +2,8 @@ package com.wdb3a.dacham;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
@@ -14,16 +16,21 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.IOUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -47,6 +54,7 @@ import com.wdb3a.dacham.bean.FoodMAmountRead;
 import com.wdb3a.dacham.bean.FoodMInven;
 import com.wdb3a.dacham.bean.OrderList;
 import com.wdb3a.dacham.service.AdminMainService;
+import com.wdb3a.dacham.util.MediaUtils;
 
 /**
  * 커밋을 위한 주석 수정(5월 24일)
@@ -59,6 +67,10 @@ import com.wdb3a.dacham.service.AdminMainService;
 public class AdminController {
 	@Inject
 	private AdminMainService service;
+	private static final Logger logger = LoggerFactory.getLogger(NutritionController.class);
+
+	@Resource(name="uploadPath")
+	private String uploadPath;
 	@Autowired
 	private JavaMailSender mailSender;
 	public final static String AUTH_KEY_FCM = "AAAAnH0aVew:APA91bEQ6th6gQGJTZ9LqE_xLEct3i4CZgYLMEeL5K2EeCSJ8M8nZcAxFabBEWTVMJs6sWujl9-bdgicoUtXiJCW7FkuIfGr2xxxtYFBg65lR6WsQzOUExKCNtshqoNUuuam8DrLj_Gd";
@@ -335,4 +347,41 @@ public class AdminController {
 	public String getnotice() {
 		return "mate/admin/notice";
 	}
+	 @ResponseBody
+		@RequestMapping("displayFileAdmin")
+		public ResponseEntity<byte[]> displayFile(String fileName) throws Exception{
+			ResponseEntity<byte[]> entity = null;
+			
+			String ext = fileName.substring(fileName.lastIndexOf(".")+1);
+			
+			MediaType mediaType = MediaUtils.getMediaType(ext);
+			
+			InputStream in = null;
+			
+			logger.info("File Name: " + fileName);
+			
+			HttpHeaders headers = new HttpHeaders();
+			//uploadPath : resources/upload
+			//fileName : /2017/05/18/ThumbNail_rose_XXXXX.jpg
+			try{
+				in = new FileInputStream(uploadPath+fileName);
+				if(mediaType != null){
+					headers.setContentType(mediaType);
+				}else{
+					fileName = fileName.substring(fileName.indexOf("_")+1);
+					headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+					String fN = new String(fileName.getBytes("UTF-8"),"ISO-8859-1");
+					headers.add("Content-Disposition", "attachment; filename=\""+fN+"\"");
+				}
+				byte[] data = IOUtils.toByteArray(in);
+				entity = new ResponseEntity<byte[]>(data, headers, HttpStatus.CREATED);
+			}catch(Exception e){
+				e.printStackTrace();
+				entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			}finally{
+				in.close();
+			}
+			
+			return entity;
+		}
 }
