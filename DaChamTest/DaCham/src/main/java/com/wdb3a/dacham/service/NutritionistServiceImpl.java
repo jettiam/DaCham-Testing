@@ -175,9 +175,9 @@ public class NutritionistServiceImpl implements NutritionistService {
 	}
 
 	@Override
-	public Counsel specialView(String customer) throws Exception {
+	public Counsel specialView(int counselCode) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.specialView(customer);
+		return dao.specialView(counselCode);
 	}
 
 	@Override

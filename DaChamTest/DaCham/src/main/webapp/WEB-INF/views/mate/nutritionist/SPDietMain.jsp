@@ -73,7 +73,7 @@
 							   
 							<td>${v.counselCode}</td>   
 							<td>${v.customer }</td>
-							<td><a href = "SPRegist?customer=${v.customer }">${v.counselTitle }</a></td>   
+							<td><a href = "SPRegist?counselCode=${v.counselCode }">${v.counselTitle }</a></td>   
 							<td>${v.counselDate }</td>						
 							
 						</tr>

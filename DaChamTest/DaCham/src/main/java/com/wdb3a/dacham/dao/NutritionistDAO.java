@@ -50,7 +50,7 @@ public interface NutritionistDAO {
 	//해당 특별식단 메인 페이지의 리스트
 	public List<OrderList> specialList() throws Exception;
 	//해당 특별식단의 고객 리스트를 view!
-	public Counsel specialView(String customer) throws Exception;
+	public Counsel specialView(int counselCode) throws Exception;
 	//해당 특별식단의 고객 정보와 함께 등록
 	public void specialRegist(String customer) throws Exception;
 	//해당 고객요청에 등록된 특별식단 toggle

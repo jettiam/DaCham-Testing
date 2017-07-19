@@ -183,9 +183,9 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 	}
 
 	@Override
-	public Counsel specialView(String customer) throws Exception {
+	public Counsel specialView(int counselCode) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne(namespace+".specialView",customer);
+		return sqlSession.selectOne(namespace+".specialView",counselCode);
 	}
 
 	@Override

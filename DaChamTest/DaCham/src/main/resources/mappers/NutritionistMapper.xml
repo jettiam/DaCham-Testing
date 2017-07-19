@@ -166,7 +166,7 @@
 		select a.customer,a.counselCode, a.counselDate, b.address, b.tel, a.counselContent, a.counselItemCode
 		from counsel a join member b
 		where a.customer = b.id
-		and a.customer = #{customer}
+		and a.counselCode = #{counselCode}
 	</select>
 	<!-- 특별식단 고객 요청 등록 -->
 	<insert id = "specialRegist">
@@ -219,7 +219,7 @@
 	</select>
 	<!-- 특별식단 상담 답변에 링크를 걸어줌 -->
 	<update id="answers">
-		update counsel set answer = #{answer}
+		update counsel set answer = #{answer}, adviser = 'nutri'
 		where counselCode = #{counselCode}
 	</update>
 </mapper>
