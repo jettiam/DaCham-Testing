@@ -138,6 +138,42 @@ public class AdminMainServiceImpl implements AdminMainService {
 		System.out.println("µÇ´Ï2?");
 	}
 
+	@Override
+	public void dietSell(int dietCode) throws Exception {
+		dao.dietSell(dietCode);
+		
+	}
+
+	@Override
+	public void dietSellStop(int dietCode) throws Exception {
+		dao.dietSellStop(dietCode);
+		
+	}
+
+	@Override
+	public List<Diet> disease1() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.disease1();
+	}
+
+	@Override
+	public List<Diet> disease2() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.disease2();
+	}
+
+	@Override
+	public List<Diet> disease3() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.disease3();
+	}
+
+	@Override
+	public List<Diet> disease4() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.disease4();
+	}
+
 	
 	
 	

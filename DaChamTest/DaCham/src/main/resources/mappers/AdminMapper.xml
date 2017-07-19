@@ -207,7 +207,7 @@
 	</select>
 
 	<select id="DietAll" resultType="Diet">
-		select a.price, a.dietCode, a.dietName, a.price, a.dietImg, b.diseaseName
+		select a.price, a.dietCode, a.dietName, a.price, a.dietImg, b.diseaseName, a.spDietItem
 		from diet a join disease b
 		where a.diseaseCode=b.diseaseCode
 	</select>
@@ -217,5 +217,39 @@
 		set price = #{price}
 		where dietCode = #{dietCode} 
 	</update>
+	
+	<update id="dietSell">
+	update diet set spDietItem = 1
+	where spDietItem = 2 and dietCode = #{dietCode}
+	</update>
+	
+	<update id="dietSellStop">
+	update diet set spDietItem = 2
+	where spDietItem = 1 and dietCode = #{dietCode}
+	</update>
+	
+	<select id="disease1" resultType="Diet">
+	select a.price, a.dietCode, a.dietName, a.price, a.dietImg, b.diseaseName, a.spDietItem
+		from diet a join disease b
+		where a.diseaseCode=b.diseaseCode and diseaseName = '당뇨'
+	</select>
+	
+	<select id="disease2" resultType="Diet">
+	select a.price, a.dietCode, a.dietName, a.price, a.dietImg, b.diseaseName, a.spDietItem
+		from diet a join disease b
+		where a.diseaseCode=b.diseaseCode and diseaseName = '고지혈증'
+	</select>
+	
+	<select id="disease3" resultType="Diet">
+	select a.price, a.dietCode, a.dietName, a.price, a.dietImg, b.diseaseName, a.spDietItem
+		from diet a join disease b
+		where a.diseaseCode=b.diseaseCode and diseaseName = '심부전증'
+	</select>
+	
+	<select id="disease4" resultType="Diet">
+	select a.price, a.dietCode, a.dietName, a.price, a.dietImg, b.diseaseName, a.spDietItem
+		from diet a join disease b
+		where a.diseaseCode=b.diseaseCode and diseaseName = '신부전증'
+	</select>
 
 </mapper>

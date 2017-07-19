@@ -178,7 +178,7 @@ public class AdminSubController {
  		}
  		return entity;
  	}
-   
+   //식단 다 보여줘
    @RequestMapping(value = "/dietAll",method = RequestMethod.GET)
  	public ResponseEntity<List<Diet>> dietAll(){
  		ResponseEntity<List<Diet>> entity = null;
@@ -209,7 +209,62 @@ public class AdminSubController {
 		}
 		return entity;
 	}
+ 
+   @RequestMapping(value = "/disease1",method = RequestMethod.GET)
+	public ResponseEntity<List<Diet>> disease1(){
+		ResponseEntity<List<Diet>> entity = null;
+		try {
+			List<Diet> list = service.disease1();
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
    
+   @RequestMapping(value = "/disease2",method = RequestMethod.GET)
+	public ResponseEntity<List<Diet>> disease2(){
+		ResponseEntity<List<Diet>> entity = null;
+		try {
+			List<Diet> list = service.disease2();
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+   
+   @RequestMapping(value = "/disease3",method = RequestMethod.GET)
+	public ResponseEntity<List<Diet>> disease3(){
+		ResponseEntity<List<Diet>> entity = null;
+		try {
+			List<Diet> list = service.disease3();
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+
+   @RequestMapping(value = "/disease4",method = RequestMethod.GET)
+	public ResponseEntity<List<Diet>> disease4(){
+		ResponseEntity<List<Diet>> entity = null;
+		try {
+			List<Diet> list = service.disease4();
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
    
 
 }
