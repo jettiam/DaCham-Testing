@@ -36,6 +36,24 @@
 			all(1, diseaseName);
 			
 		});
+		
+		$(".deleteDiet").on("click",function(){
+			var ans = confirm("삭제하면 되돌릴 수 없습니다. 정말로 식단을 삭제하시겠습니까?");
+			if(ans == false) return;
+			
+			var dietCode = $('input:radio[name="radio"]:checked').val();
+			$.ajax({
+				type : "DELETE",
+				url : 'nutriAjax/remove/'+dietCode,
+				success : function(data){
+					if(data == "SUCCESS"){
+						alert("삭제되어버렸습니다.");
+						
+						all(currentPage,diseaseName);
+					}
+				}
+			});
+		});
 		function all(page, diseaseName){
 			currentPage = page;
 			console.log(diseaseName);
@@ -106,7 +124,7 @@
       <div>
          <button id = "regist" class = "btn btn-default">식단 등록</button>
          <button class = "btn btn-default">식단 수정</button>
-         <button class = "btn btn-default">식단 삭제</button>   
+<!--          <button class = "deleteDiet btn btn-default">식단 삭제</button>    -->
       </div>
       <div>
          <table class = "dietDiseaseOverview table table-hover">

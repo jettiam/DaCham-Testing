@@ -132,6 +132,42 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 		System.out.println("µÇ´Ï?");
 	}
 
+	@Override
+	public void dietSell(int dietCode) throws Exception {
+		sqlSession.update(namespace+".dietSell", dietCode);
+		
+	}
+
+	@Override
+	public void dietSellStop(int dietCode) throws Exception {
+		sqlSession.update(namespace+".dietSellStop", dietCode);
+		
+	}
+
+	@Override
+	public List<Diet> disease1() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".disease1");
+	}
+
+	@Override
+	public List<Diet> disease2() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".disease2");
+	}
+
+	@Override
+	public List<Diet> disease3() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".disease3");
+	}
+
+	@Override
+	public List<Diet> disease4() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".disease4");
+	}
+
 	
 
 	 

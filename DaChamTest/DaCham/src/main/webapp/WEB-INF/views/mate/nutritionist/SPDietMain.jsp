@@ -52,11 +52,7 @@
 <body>
 <%@include file="nutritionistNavi.jsp" %>
 	<div class = "container">    
-		<div class = "buttonBox">
-			<button id = "update" class = "btn btn-default">수정</button>
-			<button class = "btn btn-default">삭제</button>  
-			
-		</div>
+		
 		<div>
 				<table class = "table table-hover">
 					<tr>
@@ -73,7 +69,7 @@
 							   
 							<td>${v.counselCode}</td>   
 							<td>${v.customer }</td>
-							<td><a href = "SPRegist?customer=${v.customer }">${v.counselTitle }</a></td>   
+							<td><a href = "SPRegist?counselCode=${v.counselCode }">${v.counselTitle }</a></td>   
 							<td>${v.counselDate }</td>						
 							
 						</tr>

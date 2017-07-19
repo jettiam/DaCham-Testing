@@ -50,7 +50,7 @@ public interface NutritionistService {
 	//해당 특별식단 메인 페이지의 리스트
 	public List<OrderList> specialList() throws Exception;
 	//해당 특별식단의 고객 리스트를 view!
-	public Counsel specialView(String customer) throws Exception;
+	public Counsel specialView(int counselCode) throws Exception;
 	//해당 특별식단의 고객 정보와 함께 등록
 	public void specialRegist(String customer) throws Exception;
 	//해당 고객요청에 등록된 특별식단 toggle
@@ -67,4 +67,20 @@ public interface NutritionistService {
 	public String answer(int counselCode) throws Exception;
 	//해당 특별식단에 있는 답변에 링크를 걸어줌
 	public void answers(Nutritionist nutritionist) throws Exception;
+	//해당 반찬 지우기 1탄
+	public void remove1(String sideDCode) throws Exception;
+	//해당 반찬 지우기 2탄
+	public void remove2(String sideDCode) throws Exception;
+	//해당 반찬 지우기 3탄
+	public void remove3(String sideDCode) throws Exception;
+	//해당 반찬 지우기 0
+	public void remove0(String sideDCode) throws Exception;
+	//해당 식단 지우기0
+	public void delete0(int dietCode) throws Exception;
+	//해당 식단 지우기 1탄
+	public void delete1(int dietCode) throws Exception;
+	//해당 식단 지우기 2탄
+	public void delete2(int dietCode) throws Exception;
+	//해당 식단 지우기 3탄
+	public void delete3(int dietCode) throws Exception;
 }
