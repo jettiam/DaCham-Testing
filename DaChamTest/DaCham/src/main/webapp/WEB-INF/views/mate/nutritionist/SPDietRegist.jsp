@@ -522,7 +522,7 @@
 }
 
 .material {
-	height: 550px
+	height: 250px
 }
 </style>
 </head>
@@ -663,8 +663,7 @@
 						</div>
 					</div>
 					<div id="spDietItem">
-						<input type="radio" name="spDietItem" value="0" checked>특별식단 <input
-							type="radio" name="spDietItem" value="1">일반식단
+						<input type="hidden" name="spDietItem" value="0" checked> 
 					</div>
 
 				</div>
@@ -689,7 +688,10 @@
 				
 			</table>             
 			<table class = "optional2 table table-hover">
-			
+				<tr>
+					<th>반찬</th>
+					<th>이미지</th>
+				</tr>
 			</table>
 			
 		</div>
@@ -731,7 +733,7 @@
 				var stv = "";
 				$.getJSON("nutriAjax/specialCode/"+customer,function(data){
 					$(data).each(function(){
-						stv += "<input type = 'text' class = 'SPDietCode' name = 'dietName' data-code = '"+this.dietCode+"'value = '"+this.dietName+"'>";     
+						stv += "<input type = 'text' class = 'SPDietCode' name = 'dietName' data-code = '"+this.dietCode+"'value = '"+this.dietName+"' readonly>";     
 					});
 					$(".optional").append(stv);        
 				});
@@ -743,7 +745,7 @@
 				console.log("스페셜 코드:"+dietCode);  
 				$.getJSON("nutriAjax/specialToggle/"+customer+"/"+dietCode,function(data){   
 					$(data).each(function(){
-						str += "<tr class = 'trText'><td>"+this.sideDName+"</td><td>"+"<img src = 'displayFile?fileName="+this.sideDImg+"'style = 'width:75px; height : 25px;'></td></tr>";
+						str += "<tr class = 'trText'><td>"+this.sideDName+"</td><td>"+"<img src = 'displayFile?fileName="+this.sideDImg+"'style = 'width:105px; height : 50px;'></td></tr>";
 						console.log("반찬이름:"+this.sideDName);
 					});
 					$(".optional2").append(str);

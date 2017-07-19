@@ -67,4 +67,20 @@ public interface NutritionistDAO {
 	public String answer(int counselCode) throws Exception;
 	//해당 특별식단에 있는 답변에 링크를 걸어줌
 	public void answers(Nutritionist nutritionist) throws Exception;
+	//해당 반찬 지우기 1탄
+	public void remove1(String sideDCode) throws Exception;
+	//해당 반찬 지우기 2탄
+	public void remove2(String sideDCode) throws Exception;
+	//해당 반찬 지우기 3탄
+	public void remove3(String sideDCode) throws Exception;
+	//해당 반찬 지우기 0
+	public void remove0(String sideDCode) throws Exception;
+	//해당 식단 지우기0
+	public void delete0(int dietCode) throws Exception;
+	//해당 식단 지우기 1탄
+	public void delete1(int dietCode) throws Exception;
+	//해당 식단 지우기 2탄
+	public void delete2(int dietCode) throws Exception;
+	//해당 식단 지우기 3탄
+	public void delete3(int dietCode) throws Exception;
 }

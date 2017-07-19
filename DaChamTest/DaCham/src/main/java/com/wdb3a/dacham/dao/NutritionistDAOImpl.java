@@ -241,4 +241,52 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace+".maxDiet");
 	}
+
+	@Override
+	public void remove1(String sideDCode) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.delete(namespace+".remove1",sideDCode);
+	}
+
+	@Override
+	public void remove2(String sideDCode) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.delete(namespace+".remove2",sideDCode);
+	}
+
+	@Override
+	public void remove3(String sideDCode) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.delete(namespace+".remove3",sideDCode);
+	}
+
+	@Override
+	public void remove0(String sideDCode) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.delete(namespace+".remove0",sideDCode);
+	}
+
+	@Override
+	public void delete0(int dietCode) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.delete(namespace+".delete0",dietCode);
+	}
+
+	@Override
+	public void delete1(int dietCode) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.delete(namespace+".delete1",dietCode);
+	}
+
+	@Override
+	public void delete2(int dietCode) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.delete(namespace+".delete2",dietCode);
+	}
+
+	@Override
+	public void delete3(int dietCode) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.delete(namespace+".delete3",dietCode);
+	}
 }

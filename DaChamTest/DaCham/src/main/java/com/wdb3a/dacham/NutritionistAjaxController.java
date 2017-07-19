@@ -375,4 +375,38 @@ public class NutritionistAjaxController {
 		}
 		return entity;
 	}
+	//반찬 삭제
+	@RequestMapping(value = "/delete/{sideDCode}",method = RequestMethod.DELETE)
+	public ResponseEntity<String> deleter(@PathVariable("sideDCode")String sideDCode){
+		ResponseEntity<String> entity = null;
+		try {
+			service.remove0(sideDCode);
+			service.remove1(sideDCode);
+			service.remove2(sideDCode);
+			service.remove3(sideDCode);
+			entity = new ResponseEntity<>("SUCCESS",HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	//식단 삭제
+	@RequestMapping(value = "/remove/{dietCode}",method = RequestMethod.DELETE)
+	public ResponseEntity<String> remover(@PathVariable("dietCode")int dietCode){
+		ResponseEntity<String> entity = null;
+		try {
+			service.delete0(dietCode);
+			service.delete1(dietCode);
+			service.delete2(dietCode);
+			service.delete3(dietCode);
+			entity = new ResponseEntity<>("SUCCESS",HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
 }
