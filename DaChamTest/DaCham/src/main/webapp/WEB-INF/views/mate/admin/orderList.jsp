@@ -18,21 +18,6 @@
 <script>
 	var object = new Object();
 	var booler = false; 
-	 /*디테일뷰 상세보기 css */
-	 jQuery.fn.center = function() {
-		this.css("position", "absolute");
-		this.css("top", Math.max(0, (($(window).height() - $(this)
-				.outerHeight()) / 2)
-				+ $(window).scrollTop())
-				+ "px");
-		this.css("left", Math.max(0,
-				(($(window).width() - $(this).outerWidth()) / 2)
-						+ $(window).scrollLeft())
-				+ "px");
-		this.css("background-color", "#dddddd");
-		return this;
-	} 
-	 
 	$(document).ready(function() {
 		$("#orderList").addClass("w3-light-gray");
 		var formObj = $("form[role='form']");
@@ -47,13 +32,6 @@
 			}
 		});
 		
-		/*  $("#foodOrder").click(function() {
-			 object.value = data;
-			 alert(data);
-			 var values = JSON.stringify(object);
-			     $('input[name=orderCode]').val(values);
-			     $("#formid").submit();
-		});  */
 		//체크박스 된 값의 orderCode값 출력
 	 	var y = 0;
 		$("#foodOrder").on('click', function(){
@@ -84,13 +62,13 @@
 			$.getJSON("adminSub/orderAll",function(data){
 				console.log(data); 
 				$(".orderListTable").remove();
-				var str = "";
+				var str = "";  
 				for(var i =0; i<data.length; i++){
-					str += "<tr class='orderListTable'><td>"+"<input type='checkBox' id='"+data[i].orderCode+"' value='"+data[i].orderCode+"' name='che'</td>"+"<td class='orderCode'>"+data[i].orderCode+"</td>"+"<td class='id'>"+data[i].id+"</td>"+"<td>"+"<a data-src='"+data[i].orderCode+"' class='dietName'>"+data[i].dietName+"</a> </td>"+"<td class='orderDate'>"+data[i].orderDate+"</td>"+"<td class='price'>"+data[i].price+"</td>"+"<td class='orderItemName'>"+data[i].orderItemName+"</td></tr>"		 
+					str += "<tr class='orderListTable'><td>"+"<input type='checkBox' id='"+data[i].orderCode+"' value='"+data[i].orderCode+"' name='che'</td>"+"<td class='orderCode'>"+data[i].orderCode+"</td>"+"<td class='id'>"+data[i].id+"</td>"+"<td>"+"<a data-src='"+data[i].orderCode+"' class='dietName' data-toggle='modal' href='#myModal'>"+data[i].dietName+"</a> </td>"+"<td class='orderDate'>"+data[i].orderDate+"</td>"+"<td class='price'>"+data[i].price+"</td>"+"<td class='orderItemName'>"+data[i].orderItemName+"</td></tr>"		 
 				} 
 				console.log(str);
 				$(".tables").append(str); 
-			});
+			});    
 		}
 		//환불 버튼
 		$('#refund').click(function() {
@@ -167,6 +145,12 @@
 	//디테일 뷰
 	$(document).on("click", ".dietName" , function() {  
 			 var orderCode = $(this).attr("data-src");  
+			 $("#orderName").empty();
+				$("#orderAddRess").empty();
+				$("#orderPrice").empty();
+				$("#orderDietName").empty();
+				$("#orderOrderDate").empty();
+				$("#orderTel").empty();  
 			 $.ajax({
 				type : "post",
 				url : "adminMain4",
@@ -182,37 +166,14 @@
 					$("#orderDietName").append(data[0].dietName);
 					$("#orderOrderDate").append(data[0].orderDate);
 					$("#orderTel").append(data[0].tel);
-					$("#read").show();
-					$("#read").center(); 
 				},
 				error : function() {
 					alert("실패");
 				}
 			});
 		});
-		/* //$("#checkBoxId").is(":checked"))
-		if ($(this).attr("checked")) {
-			// checked
-			return;
-		} */
-
 	});
 </script>
-<style>
-#read {
-	display: none;
-}
-
-.font {
-	text-align: center;
-	font-size: 15pt;
-	color: #93DAFF;
-}
-</style>
-
-
-
-
 
 
 </head>
@@ -222,13 +183,6 @@
 	<form id='formid' method='post' action='foodOrder'>
 		<input type="hidden" name="orderCode">
 	</form>
-	<!-- <div>
-		<a class="font">전체주문|&nbsp;&nbsp;</a> <a class="font">|결제
-			대기주문|&nbsp;&nbsp;</a> <a class="font">|결제 완료 주문|&nbsp;&nbsp;</a> <a
-			class="font">|배송중 주문|&nbsp;&nbsp;</a> <a class="font">|완료된주문|&nbsp;&nbsp;</a>
-		<a class="font">|취소된 주문|&nbsp;&nbsp;</a>
-	</div> -->
-
 	<div>
 		<div class="form-group row">
 		<div class="col-xs-2"> 
@@ -278,8 +232,18 @@
 		<button id="refund" class="btn btn-default">환불</button>
 	</div>
 
-	<div id="read" class="read">
-		<table width="600" border="1">
+		
+		 <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">×</button>
+          <h4 class="modal-title">상세 내역</h4>
+        </div>
+        <div class="modal-body">  
+         <table class="table table-bordered">    
 			<tr>
 				<th>고객이름</th>
 				<td id="orderName"></td>
@@ -299,8 +263,18 @@
 				<td id="orderTel"></td>
 			</tr>
 		</table>
-		<button id="close">닫기</button>
-		</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+
+
+		
 		</div>
 </body>
 </html>

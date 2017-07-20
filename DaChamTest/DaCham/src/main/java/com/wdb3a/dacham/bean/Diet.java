@@ -9,6 +9,14 @@ public class Diet {
 	private int diseaseCode;
 	private String spDietItem;
 	private int wizardCode;
+	private String diseaseName;
+	 
+	public String getDiseaseName() {
+		return diseaseName;
+	}
+	public void setDiseaseName(String diseaseName) {
+		this.diseaseName = diseaseName;
+	}
 	public int getDietCode() {
 		return dietCode;
 	}

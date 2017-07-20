@@ -11,6 +11,10 @@
 		and a.cookMCode = c.cookMCode
 		and a.sideDName like CONCAT('%',#{search},'%') 
 	</select>
+	<!-- 가장 최신의 식단을 조회합니다. -->
+	<select id = "maxDiet" resultType = "Integer">
+		select MAX(dietCode) from diet
+	</select>
 	<!-- 해당 메인페이지에 이달의 메뉴를 조회합니다. -->
 	<select id = "thisMonth" resultType = "OrderList">
 		select a.orderDate, b.dietName, b.dietImg 
@@ -159,10 +163,10 @@
 	</select>
 	<!-- 특별식단을 view -->
 	<select id = "specialView" resultType = "com.wdb3a.dacham.bean.Counsel">
-		select a.customer, a.counselDate, b.address, b.tel, a.counselContent, a.counselItemCode
+		select a.customer,a.counselCode, a.counselDate, b.address, b.tel, a.counselContent, a.counselItemCode
 		from counsel a join member b
 		where a.customer = b.id
-		and a.customer = #{customer}
+		and a.counselCode = #{counselCode}
 	</select>
 	<!-- 특별식단 고객 요청 등록 -->
 	<insert id = "specialRegist">
@@ -197,5 +201,71 @@
 		and c.dietCode = d.dietCode
 		and a.customer = #{customer}
 		and d.spDietItem = 0
+	</select>
+	<!-- 특별식단 추가 등록하고 싶으면 전환함 -->
+	<update id="reRegist">
+		update counsel set counselItemCode = 2
+		where customer = #{customer}
+	</update>
+	<!-- 특별식단의 디폴트 반찬 옵션에 입력함 -->
+	<insert id = "optionInsert">
+		insert into orderoptions(orderCode, sideDCode)
+		values((select MAX(orderCode) from orderlist), #{sideDCode})
+	</insert>
+	<!-- 특별식단 상담 리스트의 답변을 조회함 -->
+	<select id = "answer" resultType = "String">
+		select answer from counsel
+		where counselCode = #{counselCode}
+	</select>
+	<!-- 특별식단 상담 답변에 링크를 걸어줌 -->
+	<update id="answers">
+		update counsel set answer = #{answer}, adviser = 'nutri'
+		where counselCode = #{counselCode}
+	</update>
+	<!-- 반찬 지우기 옵션 -->
+	<delete id = "remove0">
+		delete from orderoptions
+		where sideDCode = #{sideDCode}
+	</delete>
+	<!-- 반찬 지우기 1탄 -->
+	<delete id = "remove1">
+		delete from sidedinfo
+		where sideDCode = #{sideDCode}
+	</delete>
+	<!-- 반찬 지우기 2탄 -->
+	<delete id = "remove2">
+		delete from dietinfo
+		where sideDCode = #{sideDCode}
+	</delete>
+	<!-- 반찬 지우기 3탄 -->
+	<delete id = "remove3">
+		delete from sidedish
+		where sideDCode = #{sideDCode}
+	</delete>
+	<!-- 식단 지우기 시작 -->
+	<delete id = "delete0">
+		delete from dietinfo
+		where dietCode = #{dietCode}
+	</delete>
+	<!-- 식단 지우기 1탄 -->
+	<delete id = "delete1">
+		delete from orderoptions
+		where orderCode in (select orderCode from orderlist where dietCode = #{dietCode})
+	</delete>
+	<!-- 식단 지우기 2탄 -->
+	<delete id = "delete2">
+		delete from orderlist
+		where dietCode = #{dietCode}
+	</delete>
+	<!-- 식단 지우기 3탄 -->
+	<delete id = "delete3">
+		delete from diet
+		where dietCode = #{dietCode}
+	</delete>
+	<!-- 반찬코드에 속한 식재료 불러오기(수정) -->
+	<select id = "sideMaterial">
+		select * from sidedinfo a join sidedish b
+		where a.sideDCode = b.sideDCode
+		and a.sideDCode = #{sideDCode}
 	</select>
 </mapper>

@@ -20,6 +20,7 @@
 			window.location.href = "sideDRegist";
 		});
 		var foodGName = "";
+		var cookMName = "";
 		$(".category li a").on("click",function(){
 			event.preventDefault();
 			foodGName = $(this).attr("data-name");
@@ -28,7 +29,7 @@
 		});
 		$(".category2 li a").on("click",function(){
 			event.preventDefault();
-			var cookMName = $(this).attr("data-name");
+			cookMName = $(this).attr("data-name");
 			$(".searchResult").remove();
 			
 			$('.category2').hide();
@@ -38,7 +39,7 @@
 				console.log(data);
 				var str = "";
 				$(data).each(function(){
-					str += "<tr class = 'searchResult'>"+"<td>"+"<input type = 'radio' name = 'radio' value = '"+this.sideCode+"'>"+"</td>"+"<td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width: 75px; height: 25px;'></td>"+"<td>"+this.sideDName+"</td>"+"</tr>"
+					str += "<tr class = 'searchResult'>"+"<td>"+"<input type = 'radio' name = 'radio' value = '"+this.sideDCode+"'>"+"</td>"+"<td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width: 75px; height: 25px;'></td>"+"<td>"+this.sideDName+"</td>"+"</tr>"
 				});
 				$(".searchTable").append(str);
 			});
@@ -47,6 +48,34 @@
 			event.preventDefault();
 			$('.category').show();
 			$("#categoryStart").hide();
+		});
+		$(".updateSide").on("click",function(){
+			var sideDCode = $('input:radio[name="radio"]:checked').val();
+			window.open("sideModify?sideDCode="+sideDCode, "", 'height=' + screen.height + ',width=' + screen.width + 'fullscreen=yes');
+		});
+		$(".deleteSide").on("click",function(){
+			var ans = confirm("삭제하면 되돌릴 수 없습니다. 정말로 반찬을 삭제하시겠습니까?");
+			if(ans == false) return;
+			var sideDCode = $('input:radio[name="radio"]:checked').val();
+			$.ajax({
+				type : "DELETE",			
+				url : 'nutriAjax/delete/'+sideDCode,
+				success : function(data){
+					if(data =="SUCCESS"){
+						alert("삭제되버렸습니다.");
+						$(".searchResult").remove();
+						$.getJSON("nutriAjax/categorySearch/"+foodGName+"/"+cookMName,function(data){
+							console.log(data);
+							var str = "";
+							$(data).each(function(){
+								str += "<tr class = 'searchResult'>"+"<td>"+"<input type = 'radio' name = 'radio' value = '"+this.sideDCode+"'>"+"</td>"+"<td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width: 75px; height: 25px;'></td>"+"<td>"+this.sideDName+"</td>"+"</tr>"
+							});
+							$(".searchTable").append(str);
+						});
+					}
+				}
+			});
+			
 		});
 	});
 </script>
@@ -64,6 +93,8 @@
 <body>
 <%@include file="nutritionistNavi.jsp" %>
    <div class = "container">
+    <form>
+    </form>
 	<div class = "box1">
 		<b>반찬 카테고리</b>
 		<nav>
@@ -92,8 +123,8 @@
 	<div class = "box2">
 		<div>
 			<button id = "regist" class = "btn btn-primary">반찬 등록</button>
-			<button class = "btn btn-primary">반찬 수정</button>
-			<button class = "btn btn-primary">반찬 삭제</button>
+			<button class = "updateSide btn btn-primary">반찬 수정</button>
+<!-- 			<button class = "deleteSide btn btn-primary">반찬 삭제</button> -->
 		</div>
 		<div>
 			<table class = "searchTable table table-hover">

@@ -14,6 +14,8 @@ private String counselContent;
 private String counselRec;
 private String address;
 private String tel;
+private String answer;
+
 
 public int getCounselCode() {
 	return counselCode;
@@ -80,6 +82,12 @@ public String getTel() {
 }
 public void setTel(String tel) {
 	this.tel = tel;
+}
+public String getAnswer() {
+	return answer;
+}
+public void setAnswer(String answer) {
+	this.answer = answer;
 }
 
 }

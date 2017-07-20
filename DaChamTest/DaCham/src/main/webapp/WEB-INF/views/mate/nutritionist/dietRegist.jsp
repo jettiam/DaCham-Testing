@@ -624,8 +624,7 @@
 						</div>
 					</div>
 					<div id="spDietItem">
-						<input type="radio" name="spDietItem" value="0">특별식단 <input
-							type="radio" name="spDietItem" value="1" checked>일반식단
+						 <input type="hidden" name="spDietItem" value="1" checked>
 					</div>
 
 				</div>

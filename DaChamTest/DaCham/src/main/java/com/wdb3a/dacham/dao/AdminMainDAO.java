@@ -10,6 +10,7 @@ import com.wdb3a.dacham.bean.AppTest;
 import com.wdb3a.dacham.bean.ChartList;
 import com.wdb3a.dacham.bean.ChartPrice;
 import com.wdb3a.dacham.bean.Criteria;
+import com.wdb3a.dacham.bean.Diet;
 import com.wdb3a.dacham.bean.FoodMAmountRead;
 
 public interface AdminMainDAO {
@@ -31,5 +32,13 @@ public interface AdminMainDAO {
 	public List<FoodMInven> foodStockListAll() throws Exception;
 	public int orderListCount() throws Exception;
 	public String appTest(String id) throws Exception;
+	public List<Diet> dietAll() throws Exception;
+	public void dietPriceUp(Diet diet) throws Exception;
+	public void dietSell(int dietCode) throws Exception;
+	public void dietSellStop(int dietCode) throws Exception;
+	public List<Diet> disease1() throws Exception;
+	public List<Diet> disease2() throws Exception;
+	public List<Diet> disease3() throws Exception;
+	public List<Diet> disease4() throws Exception;
 	
 }

@@ -14,6 +14,7 @@ import com.wdb3a.dacham.bean.AppTest;
 import com.wdb3a.dacham.bean.ChartList;
 import com.wdb3a.dacham.bean.ChartPrice;
 import com.wdb3a.dacham.bean.Criteria;
+import com.wdb3a.dacham.bean.Diet;
 import com.wdb3a.dacham.bean.FoodMAmountRead;
 import com.wdb3a.dacham.bean.FoodMInven;
 import com.wdb3a.dacham.bean.OrderList;
@@ -122,6 +123,55 @@ public class AdminMainServiceImpl implements AdminMainService {
 		// TODO Auto-generated method stub
 		System.out.println("서비스됨");
 		return dao.appTest(id);
+	}
+
+	@Override
+	public List<Diet> dietAll() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.dietAll();
+	}
+
+	@Override
+	public void dietPriceUp(Diet diet) throws Exception {
+		System.out.println("되니1?");
+		dao.dietPriceUp(diet);
+		System.out.println("되니2?");
+	}
+
+	@Override
+	public void dietSell(int dietCode) throws Exception {
+		dao.dietSell(dietCode);
+		
+	}
+
+	@Override
+	public void dietSellStop(int dietCode) throws Exception {
+		dao.dietSellStop(dietCode);
+		
+	}
+
+	@Override
+	public List<Diet> disease1() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.disease1();
+	}
+
+	@Override
+	public List<Diet> disease2() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.disease2();
+	}
+
+	@Override
+	public List<Diet> disease3() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.disease3();
+	}
+
+	@Override
+	public List<Diet> disease4() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.disease4();
 	}
 
 	

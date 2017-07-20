@@ -18,27 +18,6 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
-<style>
-#read {
-	display: none;
-	width: 300px;
-	/* background-color: gray; */ 
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	margin-top: -50px;
-	margin-left: -150px;
-	padding: 10px;
-	z-index: 1000;
-}
-
-#close {
-	float: right;
-}
-.tables{
-
-}
-</style>
 </head>
 <body>
 <%@include file="../admin/upmenu.jsp"%>
@@ -142,7 +121,7 @@
 			</ul>
 		</div>
 	</div>
-	<div id="read" class="read" >  
+	<!-- <div id="read" class="read" >  
 		<table  border="1" class="table table-bordered">
 			<tr>
 				<th>고객이름</th>
@@ -155,7 +134,7 @@
 				<td id="orderPrice"></td>
 				<th>식단명</th>
 				<td id="orderDietName"></td>
-			</tr>
+			</tr>  
 			<tr>
 				<th>주문일</th>
 				<td id="orderOrderDate"></td>
@@ -164,8 +143,46 @@
 			</tr>
 		</table>
 		<button id="close">닫기</button>
-		</div>
+		</div> -->
 </div>
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">×</button>
+          <h4 class="modal-title">상세보기</h4>
+        </div>
+        <div class="modal-body">   
+		<table  border="1" class="table table-bordered">
+			<tr>
+				<th>고객이름</th>
+				<td id="orderName"></td>
+				<th>배달주소</th>
+				<td id="orderAddRess"></td>
+			</tr>
+			<tr>
+				<th>가격</th>
+				<td id="orderPrice"></td>
+				<th>식단명</th>
+				<td id="orderDietName"></td>
+			</tr>  
+			<tr>
+				<th>주문일</th>
+				<td id="orderOrderDate"></td>
+				<th>전화번호</th>
+				<td id="orderTel"></td>
+			</tr>
+		</table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
 </body>
 <script>
 	google.charts.load('current', {
@@ -231,20 +248,6 @@
 	       	      }
 		 });   
 	      }
-		/* 디테일뷰 상세보기 css 
-		 jQuery.fn.center = function() {
-			this.css("position", "absolute");
-			this.css("top", Math.max(0, (($(window).height() - $(this)
-					.outerHeight()) / 2)
-					+ $(window).scrollTop())
-					+ "px");
-			this.css("left", Math.max(0,
-					(($(window).width() - $(this).outerWidth()) / 2)
-							+ $(window).scrollLeft())
-					+ "px");
-			this.css("background-color", "#dddddd");
-			return this;   
-		}  */
 	function getDefaultDate() {// 해당 일 계산
 
 		var now = new Date();
@@ -354,20 +357,16 @@
 		$("#notice").click(function() {
 			window.location.href = "notice";
 		});
-		$("#close").click(function() {
-			$("#read").css("display", "none");
-			$("#orderName").empty();
-			$("#orderAddRess").empty();
-			$("#orderPrice").empty();
-			$("#orderDietName").empty();
-			$("#orderOrderDate").empty();
-			$("#orderTel").empty(); 
-		});
-		
 		all(1);
 		
 		$(document).on("click", ".orderCode" , function() {  
 			 var orderCode = $(this).attr("data-src"); 
+			 $("#orderName").empty();
+				$("#orderAddRess").empty();
+				$("#orderPrice").empty();
+				$("#orderDietName").empty();
+				$("#orderOrderDate").empty();
+				$("#orderTel").empty();   
 			 $.ajax({
 				type : "post",
 				url : "adminMain4",
@@ -382,9 +381,8 @@
 					$("#orderPrice").append(data[0].price);
 					$("#orderDietName").append(data[0].dietName);
 					$("#orderOrderDate").append(data[0].orderDate);
-					$("#orderTel").append(data[0].tel);
-					$("#read").show();
-					$("#read").center(); 
+					$("#orderTel").append(data[0].tel); 
+					//$("#read").center(); 
 				},
 				error : function() {
 					alert("실패");
@@ -414,18 +412,7 @@
 		var replyPage = $(this).attr("href");
 		all(replyPage);
 	});
-	/* function orderList(page){
-		currentPage = page;
-		$(".orderResult").remove();
-		$.getJSON("nutriAjax/orderList/"+page,function(data){
-			var str = "";
-			$(data.list).each(function(){
-				str += "<tr class = 'orderResult'><td>"+this.orderCode+"</td>"+"<td>"+this.id+"</td>"+"<td>"+this.dietName+"</td>"+"<td>"+this.orderDate+"</td>"+"<td>"+this.price+"</td>"+"</tr>"
-			});
-			$(".orderTable").append(str);
-			printPaging(data.criteria);
-		});             
-	} */
+
 	function all(page){
 		$.getJSON("adminSub/all/"+page,function(data){
 			console.log(data); 
@@ -435,7 +422,7 @@
 				if(data.list[i].transportNum == null){
 					data.list[i].transportNum = ""; 
 				}
-				str += "<tr class='orderListTable'>"+"<td>"+data.list[i].orderCode+"</td>"+"<td>"+data.list[i].id+"</td>"+"<td>"+"<a data-src='"+data.list[i].orderCode+"' class='orderCode'>"+data.list[i].dietName+"</a> </td>"+"<td>"+data.list[i].orderDate+"</td>"+"<td>"+data.list[i].price+"</td>"+"<td>"+data.list[i].orderItemName+"</td>"+"<td>"+data.list[i].transportNum+"</td> </tr>"		 
+				str += "<tr class='orderListTable'>"+"<td>"+data.list[i].orderCode+"</td>"+"<td>"+data.list[i].id+"</td>"+"<td>"+"<a data-src='"+data.list[i].orderCode+"' class='orderCode' data-toggle='modal' href='#myModal'>"+data.list[i].dietName+"</a> </td>"+"<td>"+data.list[i].orderDate+"</td>"+"<td>"+data.list[i].price+"</td>"+"<td>"+data.list[i].orderItemName+"</td>"+"<td>"+data.list[i].transportNum+"</td> </tr>"		 
 			}
 			console.log(str);
 			$(".tables").append(str);
