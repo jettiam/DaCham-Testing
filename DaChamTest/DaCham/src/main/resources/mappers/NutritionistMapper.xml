@@ -263,9 +263,28 @@
 		where dietCode = #{dietCode}
 	</delete>
 	<!-- 반찬코드에 속한 식재료 불러오기(수정) -->
-	<select id = "sideMaterial">
-		select * from sidedinfo a join sidedish b
+	<select id = "sideMaterial" resultType = "com.wdb3a.dacham.bean.Nutritionist">
+		select * from sidedinfo a join sidedish b join foodmaterial c
 		where a.sideDCode = b.sideDCode
+		and a.foodMCode = c.foodMCode
 		and a.sideDCode = #{sideDCode}
 	</select>
+	<!-- 반찬코드에 속한 반찬 재료 불러오기(수정) -->
+	<select id = "sideOver" resultType = "com.wdb3a.dacham.bean.Nutritionist">
+		select * from sidedish a join cookMethod b join foodgroup c
+		where a.cookMCode = b.cookMCode
+		and a.foodGCode = c.foodGCode
+		and a.sideDCode = #{sideDCode}
+	</select>
+	<!-- 반찬 수정 -->
+	<update id = "sideModify">
+		update sidedish set foodGCode = #{foodGCode}, cookMCode = #{cookMCode}, sideDName = #{sideDName},
+		recipe = #{recipe}, sideDImg = #{sideDImg}
+		where sideDCode = #{sideDCode}
+	</update>
+	<!-- 반찬 수정 2탄 -->
+	<update id = "modifyCross">
+		update sidedinfo set foodMCode = #{foodMCode}, foodMAmount = #{foodMAmount}
+		where sideDCode = #{sideDCode}
+	</update>
 </mapper>

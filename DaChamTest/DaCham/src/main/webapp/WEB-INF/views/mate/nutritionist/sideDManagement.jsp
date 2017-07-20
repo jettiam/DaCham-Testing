@@ -51,7 +51,7 @@
 		});
 		$(".updateSide").on("click",function(){
 			var sideDCode = $('input:radio[name="radio"]:checked').val();
-			window.open("sideModify?sideDCode="+sideDCode, "", 'height=' + screen.height + ',width=' + screen.width + 'fullscreen=yes');
+			window.location.href = "sideModify?sideDCode="+sideDCode;
 		});
 		$(".deleteSide").on("click",function(){
 			var ans = confirm("삭제하면 되돌릴 수 없습니다. 정말로 반찬을 삭제하시겠습니까?");

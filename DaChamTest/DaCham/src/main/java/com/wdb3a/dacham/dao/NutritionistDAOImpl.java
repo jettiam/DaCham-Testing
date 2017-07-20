@@ -295,4 +295,22 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".sideMaterial",sideDCode);
 	}
+
+	@Override
+	public Nutritionist sideOver(String sideDCode) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".sideOver",sideDCode);
+	}
+
+	@Override
+	public void sideModify(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace+".sideModify",nutritionist);
+	}
+
+	@Override
+	public void modifyCross(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace+".modifyCross",nutritionist);
+	}
 }

@@ -288,6 +288,24 @@ public class NutritionistServiceImpl implements NutritionistService {
 		return dao.sideMaterial(sideDCode);
 	}
 
+	@Override
+	public Nutritionist sideOver(String sideDCode) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.sideOver(sideDCode);
+	}
+
+	@Override
+	public void sideModify(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		dao.sideModify(nutritionist);
+	}
+
+	@Override
+	public void modifyCross(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		dao.modifyCross(nutritionist);
+	}
+
 
 	
 
