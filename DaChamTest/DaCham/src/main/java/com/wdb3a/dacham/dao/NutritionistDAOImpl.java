@@ -289,4 +289,10 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 		// TODO Auto-generated method stub
 		sqlSession.delete(namespace+".delete3",dietCode);
 	}
+
+	@Override
+	public List<Nutritionist> sideMaterial(String sideDCode) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".sideMaterial",sideDCode);
+	}
 }

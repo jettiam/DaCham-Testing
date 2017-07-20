@@ -282,6 +282,12 @@ public class NutritionistServiceImpl implements NutritionistService {
 		dao.delete3(dietCode);
 	}
 
+	@Override
+	public List<Nutritionist> sideMaterial(String sideDCode) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.sideMaterial(sideDCode);
+	}
+
 
 	
 

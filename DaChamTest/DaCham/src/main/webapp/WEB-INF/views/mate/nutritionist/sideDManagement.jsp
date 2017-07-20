@@ -49,6 +49,10 @@
 			$('.category').show();
 			$("#categoryStart").hide();
 		});
+		$(".updateSide").on("click",function(){
+			var sideDCode = $('input:radio[name="radio"]:checked').val();
+			window.open("sideModify?sideDCode="+sideDCode, "", 'height=' + screen.height + ',width=' + screen.width + 'fullscreen=yes');
+		});
 		$(".deleteSide").on("click",function(){
 			var ans = confirm("삭제하면 되돌릴 수 없습니다. 정말로 반찬을 삭제하시겠습니까?");
 			if(ans == false) return;
@@ -119,7 +123,7 @@
 	<div class = "box2">
 		<div>
 			<button id = "regist" class = "btn btn-primary">반찬 등록</button>
-			<button class = "btn btn-primary">반찬 수정</button>
+			<button class = "updateSide btn btn-primary">반찬 수정</button>
 <!-- 			<button class = "deleteSide btn btn-primary">반찬 삭제</button> -->
 		</div>
 		<div>

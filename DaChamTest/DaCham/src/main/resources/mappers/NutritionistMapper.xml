@@ -262,4 +262,10 @@
 		delete from diet
 		where dietCode = #{dietCode}
 	</delete>
+	<!-- 반찬코드에 속한 식재료 불러오기(수정) -->
+	<select id = "sideMaterial">
+		select * from sidedinfo a join sidedish b
+		where a.sideDCode = b.sideDCode
+		and a.sideDCode = #{sideDCode}
+	</select>
 </mapper>

@@ -409,4 +409,19 @@ public class NutritionistAjaxController {
 		}
 		return entity;
 	}
+	//식재료 출력(수정)
+	@RequestMapping(value = "/sideMaterial/{sideDCode}",method = RequestMethod.GET)
+	public ResponseEntity<List<Nutritionist>> sideMaterial(@PathVariable("sideDCode")String sideDCode){
+		ResponseEntity<List<Nutritionist>> entity = null;
+		
+		try {
+			List<Nutritionist> list = service.sideMaterial(sideDCode);
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
 }

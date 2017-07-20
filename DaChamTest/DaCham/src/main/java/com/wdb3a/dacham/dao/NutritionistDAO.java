@@ -83,4 +83,6 @@ public interface NutritionistDAO {
 	public void delete2(int dietCode) throws Exception;
 	//해당 식단 지우기 3탄
 	public void delete3(int dietCode) throws Exception;
+	//해당 반찬코드에 속하는 식재료들 출력(수정)
+	public List<Nutritionist> sideMaterial(String sideDCode) throws Exception;
 }

@@ -232,6 +232,10 @@ public class NutritionController {
 	   System.out.println("°í°´¾ÆÀÌµð:"+nutritionist.getCustomer());
 	   return "redirect:special";
    }
+   @RequestMapping(value = "sideModify",method = RequestMethod.GET)
+   public String getSideModify(){
+	   return "mate/nutritionist/sideModify";
+   }
     @ResponseBody
 	@RequestMapping("displayFile")
 	public ResponseEntity<byte[]> displayFile(String fileName) throws Exception{
