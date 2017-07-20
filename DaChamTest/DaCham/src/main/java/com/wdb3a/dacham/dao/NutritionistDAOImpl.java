@@ -309,8 +309,14 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 	}
 
 	@Override
-	public void modifyCross(Nutritionist nutritionist) throws Exception {
+	public void modifyCross1(String sideDCode) throws Exception {
 		// TODO Auto-generated method stub
-		sqlSession.update(namespace+".modifyCross",nutritionist);
+		sqlSession.delete(namespace+".modifyCross1",sideDCode);
+	}
+
+	@Override
+	public void modifyCross2(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.insert(namespace+".modifyCross2",nutritionist);
 	}
 }

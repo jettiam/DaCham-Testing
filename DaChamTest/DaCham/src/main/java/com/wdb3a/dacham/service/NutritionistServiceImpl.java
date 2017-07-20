@@ -301,9 +301,15 @@ public class NutritionistServiceImpl implements NutritionistService {
 	}
 
 	@Override
-	public void modifyCross(Nutritionist nutritionist) throws Exception {
+	public void modifyCross1(String sideDCode) throws Exception {
 		// TODO Auto-generated method stub
-		dao.modifyCross(nutritionist);
+		dao.modifyCross1(sideDCode);
+	}
+
+	@Override
+	public void modifyCross2(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		dao.modifyCross2(nutritionist);
 	}
 
 

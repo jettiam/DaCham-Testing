@@ -246,11 +246,12 @@ public class NutritionController {
 		System.out.println("총합:"+cnt);
 		nutritionist.setSideDImg(savedName);
 	    service.sideModify(nutritionist);
+	    service.modifyCross1(nutritionist.getSideDCode());
 	    for(int i = 0; i< cnt;i++){
 	    	System.out.println("코드번호 : "+foodMCode[i]);
 			nutritionist.setFoodMCode(foodMCode[i]);
 			nutritionist.setFoodMAmount(foodMAmount[i]);
-			service.modifyCross(nutritionist);
+			service.modifyCross2(nutritionist);
 	    }
 	    return "redirect:side";
    }

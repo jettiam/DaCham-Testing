@@ -27,7 +27,7 @@
 			var str = "";
 			$(data).each(function(){
 				foodMCode = this.foodMCode;	
-				str += "<tr class = 'materialResult'><td class = 'foodMName' data-code = '"+foodMCode+"'>"+this.foodMName+"</td><td>"+"<input type = 'text' name = 'foodAmount' class = 'foodMAmount' value = '"+this.foodMAmount+"'>"+"</td></tr>"
+				str += "<tr class = 'materialResult'><td>"+"<input type = 'hidden' name = 'foodMCode' value = '"+foodMCode+"'>"+"</td><td class = 'foodMName' data-code = '"+foodMCode+"'>"+this.foodMName+"</td><td>"+"<input type = 'text' name = 'foodMAmount' class = 'foodMAmount' value = '"+this.foodMAmount+"'>"+"</td></tr>"
 			});
 			$(".material").append(str);
 			v = $('.materialResult').length;    	         
@@ -38,13 +38,13 @@
 		$(document.body).on("click",".nameClick",function(){
 			var foodMName = $(this).attr('data-src');
 			foodMCode = $(this).attr('data-code');
-			$(".material").append("<tr class = 'materialResult'><td class = 'foodMName' data-code = '"+foodMCode+"'>"+foodMName+"</td><td>"+"<input type = 'text' name = 'foodAmount' class = 'foodMAmount'>"+"</td></tr>");
+			$(".material").append("<tr class = 'materialResult'><td>"+"<input type = 'hidden' name = 'foodMCode' value = '"+foodMCode+"'>"+"</td><td class = 'foodMName' data-code = '"+foodMCode+"'>"+foodMName+"</td><td>"+"<input type = 'text' name = 'foodMAmount' class = 'foodMAmount'>"+"</td></tr>");
 			v = $('.materialResult').length; 
 			cntChange(v);
 		});
 		$(document.body).on("click",'.foodMName',function(){   
 			$(this).parent().remove();   
-			v = $('.materialResult').length; 
+			v = $('.materialResult').length;     
 			cntChange(v);
 		});
 		
@@ -83,8 +83,6 @@
 			if(window.confirm("정말로 수정하시겠습니까?")){
 				$("form").attr("action","sideModify");
 				$("form").attr("method","post");
-				$("form").append($(".foodMName").val());
-				$("form").append($(".foodMAmount").val());
 				$("form").submit();
 			}
 		});
@@ -158,6 +156,7 @@
 				<h3>지우시려면 클릭하세요</h3>    
 				<table class = "material table table-hover">
 					<tr>
+						<th></th>
 						<th>식재료명&nbsp;&nbsp;</th>
 						<th>재료량&nbsp;&nbsp;</th>
 					</tr>

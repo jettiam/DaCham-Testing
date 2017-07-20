@@ -283,8 +283,12 @@
 		where sideDCode = #{sideDCode}
 	</update>
 	<!-- 반찬 수정 2탄 -->
-	<update id = "modifyCross">
-		update sidedinfo set foodMCode = #{foodMCode}, foodMAmount = #{foodMAmount}
+	<delete id = "modifyCross1">
+		delete from sidedinfo
 		where sideDCode = #{sideDCode}
-	</update>
+	</delete>
+	<insert id = "modifyCross2">
+		insert into sidedinfo(sideDCode, foodMCode, foodMAmount)
+		values (#{sideDCode},#{foodMCode},#{foodMAmount})
+	</insert>
 </mapper>
