@@ -183,7 +183,7 @@
 			<div class = "form-group">
 				<label for = "foodGCode">식품군 선택</label>
 				<select name = "foodGCode" class = "form-control"> 
-					<option value = "${nutritionist.foodGCode }" checked>${nutritionist.foodGName }</option>
+					<option value = "${nutritionist.foodGCode }" selected>${nutritionist.foodGName }</option>
 					<option>식품군</option>
 					<option value = "01">밥</option>
 					<option value = "02">국</option>
@@ -196,7 +196,7 @@
 			<div class = "form-group">
 				<label for = "cookMCode">조리법 선택</label>
 				<select name = "cookMCode" class = "form-control">
-					<option value = "${nutritionist.cookMCode }" checked>${nutritionist.cookMName }</option>
+					<option value = "${nutritionist.cookMCode }" selected>${nutritionist.cookMName }</option>
 					<option>조리방법</option>
 					<option value = "01">튀김</option>
 					<option value = "02">구이</option>
