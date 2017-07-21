@@ -42,6 +42,8 @@ public class Nutritionist {
 	private int dietCode;
 	private String spDietItem;
 	private String customer;
+	private String answer;
+	private int counselCode;
 	
 	public String getFoodGCode() {
 		return foodGCode;
@@ -288,6 +290,18 @@ public class Nutritionist {
 	}
 	public void setCustomer(String customer) {
 		this.customer = customer;
+	}
+	public String getAnswer() {
+		return answer;
+	}
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
+	public int getCounselCode() {
+		return counselCode;
+	}
+	public void setCounselCode(int counselCode) {
+		this.counselCode = counselCode;
 	}
 	
 	

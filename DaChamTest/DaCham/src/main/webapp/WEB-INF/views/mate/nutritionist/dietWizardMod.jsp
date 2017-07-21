@@ -116,6 +116,8 @@ li {
 	background-color: #de413b;
 }
 
+
+
 .blocklyTreeRoot {
 	margin-top: 8px;
 }
@@ -291,7 +293,7 @@ svg {
 						.links(nodes);
 				// Normalize for fixed-depth.
 				nodes.forEach(function(d) {
-					d.y = d.depth * 180;
+					d.y = d.depth * 240;
 				});
 				// Update the nodes…
 				var node = svg.selectAll("g.node").data(nodes, function(d) {
@@ -310,38 +312,106 @@ svg {
 							return d._children ? "lightsteelblue" : "#fff";
 						});
 				nodeEnter.append("text").attr("x", function(d) {
-					return d.children || d._children ? -13 : 13;
+					//return d.children || d._children ? -13 : 13;
+					return d.children || d._children ? 3 : -3;
 				}).attr("dy", ".35em").attr("text-anchor", function(d) {
 					return d.children || d._children ? "end" : "start";
-				}).text(
+				}).text(function(d) {
+					//console.log(d.name + "q번호임.");
+					var q = eval("plainJson.q" + d.name);
+					var keyArr = new Array();
+					var cnt = 0;
+					for ( var key in q) {
+						//console.log(key);
+						keyArr[cnt] = key;
+						cnt++;
+					}
+
+					//console.log(keyArr);
+					//console.log(q);
+					//console.log(eval(q));
+
+					//console.log(keyArr);
+					/* if (keyArr[0] != undefined) {
+						return (d.name+ ". ");
+					} else {
+						return d.name + "번 질문지 작성되지 않았습니다.";
+					} */
+					return d.name;
+				}).style("fill-opacity", 1e-6);
+				
+				
+				var answerLength; //질분지 블록이 있을 때 답변의 수만큼 text append 하기 위한 변수.
+				
+				nodeEnter.append('svg:text').attr('x', 0).attr('y', 0).attr(
+						'class', 'id').append('svg:tspan').attr('x', 16).attr(
+						'dy', 0).text(
 						function(d) {
-							console.log(d.name + "q번호임.");
 							var q = eval("plainJson.q" + d.name);
 							var keyArr = new Array();
 							var cnt = 0;
 							for ( var key in q) {
-								//console.log(key);
 								keyArr[cnt] = key;
 								cnt++;
 							}
-
-							console.log(keyArr);
-							//console.log(q);
-							//console.log(eval(q));
-
-							//console.log(keyArr);
 							if (keyArr[0] != undefined) {
-								return (d.name+ ". ");
+								var rtn = eval("plainJson.q" + d.name + "."
+										+ keyArr[0]);
+								return rtn;
 							} else {
-								return d.name + "번 질문지 작성되지 않았습니다.";
+								return "질문 블록을 만들어주세요";
 							}
-						}).style("fill-opacity", 1e-6);
-			
+						}).attr('class', function(d) {				
+						return "class";				
+				}).attr('font-size', function() {
+					return '15px';
+				})
+				.style("fill", function(d){
+					var q = eval("plainJson.q" + d.name);
+					var keyArr = new Array();
+					var cnt = 0;
+					for ( var key in q) {
+						keyArr[cnt] = key;
+						cnt++;
+					}
+					if (keyArr[0] != undefined) {
+						return "#000000";
+					} else {
+						return "#CC3D3D";
+					}
+				})
+				.append('svg:tspan').attr('x', 16).attr('dy', 12).text(
+						function(d) {
+							var q = eval("plainJson.q" + d.name);
+							var keyArr = new Array();
+							var cnt = 0;
+							for ( var key in q) {
+								keyArr[cnt] = key;
+								cnt++;
+							}
+							if (keyArr[0] != undefined) {
+								var answerRtn ="";
+								var answer = eval("plainJson.q"+d.name+"."+keyArr[1]);			
+								for(i=0; i<answer.length; i++){
+									answerRtn += answer[i].link + ". " + answer[i].answer + "   ";
+								}								
+							}
+							return answerRtn;
+						}).attr('font-size', '11px');
+
+				var answerNodeStr = "nodeEnter.append('svg:text')";
 				
-				
-				
-				
-				
+
+				/*  .append('svg:tspan')
+				 .attr('x', 100)
+				 .attr('dy', 20)
+				 .text(function(d) { return "1"; })
+				 .append('svg:tspan')
+				 .attr('x', 150)
+				 .attr('dy', 20)			  
+				 .text(function(d) { return "2"; })
+				 .attr('font-size', '20px'); */
+
 				// Transition nodes to their new position.
 				var nodeUpdate = node.transition().duration(duration).attr(
 						"transform", function(d) {

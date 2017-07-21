@@ -31,7 +31,7 @@
 			formObj.attr("action","/counselUpdate");
 			formObj.attr("method","get");
 			formObj.submit();
-		}
+		});
 	});
 		
 	});
@@ -59,7 +59,7 @@
 	<div>
 		작성자 : <input type = "text" name = "admin" value = "관리자">
 		작성일 : <input type = "text" name = "regdate"><br>
-		내용 : <textarea name = "content">답변입니다.</textarea>
+		내용 : ${read.answer}
 	</div>
 	<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>

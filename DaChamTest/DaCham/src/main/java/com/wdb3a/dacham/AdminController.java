@@ -384,4 +384,25 @@ public class AdminController {
 			
 			return entity;
 		}
+		@RequestMapping(value="/dietSell",method=RequestMethod.GET)
+		public String dietSell(@RequestParam(value="dietCode") int dietCode[])throws Exception{
+		   //serviceCu.orderRegist(customer);
+		   System.out.println("오더에 들어감");
+		   for(int i=0;i<dietCode.length;i++){
+		      service.dietSell(dietCode[i]);  
+		   }
+		   
+		   //model.addAttribute("order", customer);
+		   //model.addAttribute("sideDCode",sideDish);
+		   return "mate/admin/dietManagement";
+		}
+		
+		@RequestMapping(value="/dietSellStop",method=RequestMethod.GET)
+		public String dietSellStop(@RequestParam(value="dietCode") int dietCode[])throws Exception{
+		   System.out.println("오더에 들어감");
+		   for(int i=0;i<dietCode.length;i++){
+		      service.dietSellStop(dietCode[i]);  
+		   } 
+		   return "mate/admin/dietManagement";
+		}
 }

@@ -175,9 +175,9 @@ public class NutritionistServiceImpl implements NutritionistService {
 	}
 
 	@Override
-	public Counsel specialView(String customer) throws Exception {
+	public Counsel specialView(int counselCode) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.specialView(customer);
+		return dao.specialView(counselCode);
 	}
 
 	@Override
@@ -214,6 +214,102 @@ public class NutritionistServiceImpl implements NutritionistService {
 	public void optionInsert(Nutritionist nutritionist) throws Exception {
 		// TODO Auto-generated method stub
 		dao.optionInsert(nutritionist);
+	}
+
+	@Override
+	public String answer(int counselCode) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.answer(counselCode);
+	}
+
+	@Override
+	public void answers(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		dao.answers(nutritionist);
+	}
+
+	@Override
+	public int maxDiet() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.maxDiet();
+	}
+
+	@Override
+	public void remove1(String sideDCode) throws Exception {
+		// TODO Auto-generated method stub
+		dao.remove1(sideDCode);
+	}
+
+	@Override
+	public void remove2(String sideDCode) throws Exception {
+		// TODO Auto-generated method stub
+		dao.remove2(sideDCode);
+	}
+
+	@Override
+	public void remove3(String sideDCode) throws Exception {
+		// TODO Auto-generated method stub
+		dao.remove3(sideDCode);
+	}
+
+	@Override
+	public void remove0(String sideDCode) throws Exception {
+		// TODO Auto-generated method stub
+		dao.remove0(sideDCode);
+	}
+
+	@Override
+	public void delete0(int dietCode) throws Exception {
+		// TODO Auto-generated method stub
+		dao.delete0(dietCode);
+	}
+
+	@Override
+	public void delete1(int dietCode) throws Exception {
+		// TODO Auto-generated method stub
+		dao.delete1(dietCode);
+	}
+
+	@Override
+	public void delete2(int dietCode) throws Exception {
+		// TODO Auto-generated method stub
+		dao.delete2(dietCode);
+	}
+
+	@Override
+	public void delete3(int dietCode) throws Exception {
+		// TODO Auto-generated method stub
+		dao.delete3(dietCode);
+	}
+
+	@Override
+	public List<Nutritionist> sideMaterial(String sideDCode) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.sideMaterial(sideDCode);
+	}
+
+	@Override
+	public Nutritionist sideOver(String sideDCode) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.sideOver(sideDCode);
+	}
+
+	@Override
+	public void sideModify(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		dao.sideModify(nutritionist);
+	}
+
+	@Override
+	public void modifyCross1(String sideDCode) throws Exception {
+		// TODO Auto-generated method stub
+		dao.modifyCross1(sideDCode);
+	}
+
+	@Override
+	public void modifyCross2(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		dao.modifyCross2(nutritionist);
 	}
 
 
