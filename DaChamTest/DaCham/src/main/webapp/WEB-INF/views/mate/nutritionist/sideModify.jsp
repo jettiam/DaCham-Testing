@@ -175,7 +175,7 @@
 			<div>
 				<h2>반찬 사진</h2>
 					<div id = "View_area">
-						<img id = "prev_View_area" src="displayFile?fileName=${nutritionist.sideDImg }">
+						<img id = "prev_View_area" src="displayFile?fileName=${nutritionist.sideDImg }" style = "width:100px; height : 100px;">
 					</div>
 					
 					<input type = "file" class = "filestyle" data-input = "false" name = "file" placeholder = "식단이미지 올리기" id = "profile_pt" onchange = "previewImage(this,'View_area')">

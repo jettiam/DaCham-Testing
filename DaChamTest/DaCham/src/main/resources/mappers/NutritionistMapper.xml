@@ -291,4 +291,5 @@
 		insert into sidedinfo(sideDCode, foodMCode, foodMAmount)
 		values (#{sideDCode},#{foodMCode},#{foodMAmount})
 	</insert>
+	<!-- 식단코드에 속한 식단 재료 불러오기(수정) -->
 </mapper>
