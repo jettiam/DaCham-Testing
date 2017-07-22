@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri  ="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import = "com.wdb3a.dacham.bean.Nutritionist" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -183,7 +184,7 @@
 				<label for = "diseaseCode">질병 선택</label>
 				<select name = "diseaseCode" class = "form-control"> 
 					<c:forEach var = "o" items = "${overList }">
-						<option value = "${o.diseaseCode }">${o.diseaseName }, ${o.judgement}</option>
+						<option value="${o.diseaseCode }" <c:out value="${o.diseaseCode eq cloneDisease ? 'selected':''}"/>>${o.diseaseName }, ${o.judgement }</option>						
 					</c:forEach>					
 				</select>				
 			</div>

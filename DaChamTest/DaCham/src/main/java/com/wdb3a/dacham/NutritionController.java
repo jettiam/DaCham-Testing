@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -258,11 +259,12 @@ public class NutritionController {
    }
    //수정을 위한 식단 정보 출력
    @RequestMapping(value = "dietModify",method = RequestMethod.GET)
-   public String getDietModify(Model model, @RequestParam("dietCode")int dietCode) throws Exception{
+   public String getDietModify(Model model, @RequestParam("dietCode")int dietCode,HttpServletRequest request) throws Exception{
 	   Nutritionist nutritionist = service.dietOver(dietCode);
 	   List<Nutritionist> overList = service.choiceDisease();
 	   model.addAttribute("overList",overList);
 	   model.addAttribute("nutritionist",nutritionist);
+	   model.addAttribute("cloneDisease", nutritionist.getDiseaseCode());
 	   return "mate/nutritionist/dietModify";
    }
    //식단 수정
