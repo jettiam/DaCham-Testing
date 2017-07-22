@@ -28,6 +28,13 @@
 				window.location.href = "diet";
 			}
 		});
+		$(".update").on("click",function(){
+			if(window.confirm("정말로 수정하시겠습니까?")){
+				$("form").attr("action","dietModify");
+				$("form").attr("method","post");
+				$("form").submit();
+			}
+		});
 		$("#search")
 		.on(
 				"click",
@@ -182,7 +189,7 @@
 			</div>
 			<div class = "form-group">
 				<label for = "sideDName">식단의 이름</label>
-				<input type = "text" name = "sideDName" value = "${nutritionist.dietName }" class = "form-control">
+				<input type = "text" name = "dietName" value = "${nutritionist.dietName }" class = "form-control">
 			</div>
 			<div class = "form-group">
 				<label for = "price">식단의 가격</label>
@@ -198,7 +205,7 @@
 			</div>
 		</form>
 		<div>
-			<button id="update" class="btn btn-danger">수정</button>
+			<button id="update" class="update btn btn-danger">수정</button>
 			<button id="cancle" class="btn btn-warning">취소</button>
 		</div>
 	</div>
