@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 import com.wdb3a.dacham.bean.Customer;
+import com.wdb3a.dacham.bean.Measure;
 
 @Repository
 public class CustomerDAOImpl implements CustomerDAO {
@@ -88,6 +89,27 @@ public int getOneDCode(HashMap rInfo) throws Exception {
 public List<Customer> myNutri(String id) throws Exception {
 	// TODO Auto-generated method stub
 	return sqlSession.selectList(namespace+".myNutri",id);
+}
+
+@Override
+public int insertMeasure(Measure measure) throws Exception {
+	int check = sqlSession.selectOne(namespace+".measureCheck",measure);
+	System.out.println("건강입력 중복확인"+check);
+	if(check==0){
+		sqlSession.insert(namespace+".insertMeasure", measure);
+		//0성공
+		return check;
+	}else{
+		//1 실패
+		return 1;
+	}	
+	
+}
+
+@Override
+public List<Measure> measureRead(String id) throws Exception {
+	// TODO Auto-generated method stub
+	return sqlSession.selectList(namespace+".measureRead", id);
 }
 
 }

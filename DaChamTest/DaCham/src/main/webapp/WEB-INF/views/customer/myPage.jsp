@@ -127,7 +127,7 @@
 		<div id="myHealthTableWrap" class="row">
 		<h2 class="text-center">${memberName}님의 건강정보</h2><br>
 		<div class="col-sm-6">
-		<h3 class="text-center">영양정보</h2>
+		<h3 class="text-center">영양정보</h3>
 			<table id="myHealthTable" class="text-center center-block">
 				<tr>
 					<td><canvas id="myChart"></canvas></td>
@@ -135,28 +135,31 @@
 			</table>
 		</div>
 		<div class="col-sm-6">
-			<h3 class="text-center">측정기록</h2>
-			여기에 값넣고 차트
+			<h3 class="text-center">측정기록</h3>
+			<div>
+				<canvas id="measureChart"></canvas>
+			</div>
 		</div>
+		
 		<div class="row">
 		<div class="col-sm-12">			
 			  <div class="form-group col-sm-3 col-sm-offset-3">
-			    <label for="LowBooldP">최저혈압</label>
-			    <input type="number" class="form-control" id="lowBooldP" placeholder="단위(Hg)" min="0">
+			    <label for="LowBooldP">최저혈압(Hg)</label>
+			    <input type="number" class="form-control" id="lowBooldP" placeholder="단위(Hg)" min="0" value="0">
 			  </div>
 			  <div class="form-group col-sm-3">
-			    <label for="HighBooldP">최고혈압</label>
-			    <input type="number" class="form-control" id="highBooldP" placeholder="단위(Hg)" min="0">
+			    <label for="HighBooldP">최고혈압(Hg)</label>
+			    <input type="number" class="form-control" id="highBooldP" placeholder="단위(Hg)" min="0" value="0">
 			  </div>
 		</div>
 		<div class="col-sm-12 center-block">
 			  <div class="form-group col-sm-3 col-sm-offset-3">
-			    <label for="LowBooldS">공복혈당</label>
-			    <input type="number" class="form-control" id="lowBooldS" placeholder="단위(mg/dL)" min="0">
+			    <label for="LowBooldS">공복혈당(mg/dL)</label>
+			    <input type="number" class="form-control" id="lowBooldS" placeholder="단위(mg/dL)" min="0" value="0">
 			  </div>
 			  <div class="form-group col-sm-3">
-			    <label for="highBooldS">식후혈당</label>
-			    <input type="number" class="form-control" id="highBooldS" placeholder="단위(mg/dL)" min="0">
+			    <label for="highBooldS">식후혈당(mg/dL)</label>
+			    <input type="number" class="form-control" id="highBooldS" placeholder="단위(mg/dL)" min="0" value="0">
 			  </div>			
 		</div>
 		<div class="col-sm-12 text-center"><button class="btn btn-primary" id="measureRegist">등록</button></div>
@@ -306,6 +309,7 @@ $(document).ready(function(){
 				
 				}
 			});
+			readMeasure();
 	    	$('#myInfoTableWrap').hide();
 	    	$('#myHealthTableWrap').show();
 	    	$('#myCartTableWrap').hide();    	
@@ -490,15 +494,18 @@ $(document).ready(function(){
 		}			
 				
 	});
-
+	$("#lowBooldP").keyup(function(){
+		var lowBooldP = $("#lowBooldP").val();
+	});
 /*건강측정정보 등록*/
 	$("#measureRegist").click(function () {
 		var lowBooldP = $("#lowBooldP").val();
 		var highBooldP = $("#highBooldP").val();
 		var lowBooldS = $("#lowBooldS").val();
 		var highBooldS = $("#highBooldS").val();
+		var id = $("#customerId").val();
 		
-		if(lowBooldP==""){
+		if(lowBooldP=="" || lowBooldP<0){
 			lowBooldP=0;
 			if(highBooldP==""){
 				highBooldP=0;
@@ -512,17 +519,114 @@ $(document).ready(function(){
 		}
 		console.log("최혈"+lowBooldP+"고혈"+highBooldP+"공혈"+lowBooldS+"후혈"+highBooldS);
 		$.ajax({
-			url:"customerAjax/",
+			url:"customerAjax/insertMeasure",
 			headers : {
-	               "Content-Type" : "application/json",
+	               "Content-Type" : "application/json; charset=utf-8;", 
+	               "X-HTTP-Method-Override" : "POST"
+	            },
+	            dataType : "text",
+			data:JSON.stringify({"id":id, 
+				"lowBooldP":lowBooldP,
+				"highBooldP":highBooldP,
+				"lowBooldS":lowBooldS,
+				"highBooldS":highBooldS
+			}),
+			
+			type:"POST",			
+			success:function(data){				
+					alert("성공이닭! 오늘 저녁은 치킨이닭!");					
+					console.log(data);
+				
+			}
+		});
+	});
+	
+	//건강정보 불러오기
+	function readMeasure(){
+		var id = $("#customerId").val()
+		
+		$.ajax({
+			url:"customerAjax/measureRead",
+			headers : {
+	               "Content-Type" : "application/json; charset=utf-8;", 
 	               "X-HTTP-Method-Override" : "POST"
 	            },
 	            dataType : "json",
-			data:JSON.stringify({"id":id}),
+			data:JSON.stringify({"id":id			
+			}),
+			
 			type:"POST",			
-			success:function(data){}
+			success:function(data){											
+					console.log(data);
+					var date = new Array();
+					var lowBloodP = new Array();
+					var highBloodP = new Array();
+					var lowBloodS = new Array();
+					var highBloodS = new Array();
+					var x = 0;
+					console.log(data.list.length);
+					console.log(data.list[0].measureDate);
+					for(var i=0;i<data.list.length;i++){
+						date[x] = data.list[i].measureDate;
+						lowBloodP[x]=data.list[i].reading; //최저혈압
+						i++;
+						highBloodP[x]=data.list[i].reading;
+						i++;
+						lowBloodS[x]=data.list[i].reading;
+						i++;
+						highBloodS[x]=data.list[i].reading;
+						x++;					
+					}
+					console.log("날짜"+date);
+					console.log("최저혈압"+lowBloodP);
+					console.log("최고혈압"+highBloodP);
+					console.log("공복혈당"+lowBloodS);
+					console.log("식후혈당"+highBloodS);
+					var ctx = $("#measureChart");
+					var chart = new Chart(ctx, {
+					    // The type of chart we want to create
+					    type: 'line',
+
+					    // The data for our dataset
+					    data: {
+					        labels: date,
+					        datasets: [{
+					            label: "최저혈압",
+					            backgroundColor: 'rgb(255, 99, 132)',
+					            borderColor: 'rgb(255, 99, 132)',
+					            data: lowBloodP,
+					            fill:false,},
+					            {
+						            label: "최고혈압",
+						            backgroundColor: 'rgb(99, 255, 132)',
+						            borderColor: 'rgb(99, 255, 132)',
+						            data: highBloodP,
+						            fill:false,},
+						       {
+							     	 label: "공복혈당",
+							         backgroundColor: 'rgb(132, 99, 225)',
+							         borderColor: 'rgb(132, 99, 225)',
+							         data: lowBloodS,
+							         fill:false,},
+							  {
+								   label: "식후혈당",
+								   backgroundColor: 'rgb(30, 12, 225)',
+								   borderColor: 'rgb(30, 12, 225)',
+								   data: highBloodS,
+								   fill:false,}
+					            
+					        ]
+					    },
+
+					    // Configuration options go here
+					    options: {}
+					});
+			}
 		});
-	});
+		
+	};
+	
+	
 });	
 function w3_open() {
     document.getElementById("mySidebar").style.display = "block";

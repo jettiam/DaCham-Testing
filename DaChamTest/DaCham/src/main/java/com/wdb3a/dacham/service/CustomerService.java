@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.wdb3a.dacham.bean.Customer;
+import com.wdb3a.dacham.bean.Measure;
 
 public interface CustomerService {
 
@@ -22,5 +23,6 @@ public interface CustomerService {
 	public int getOneDCode(HashMap rInfo) throws Exception;
 	
 	public List<Customer> myNutri(String id) throws Exception;
-	
+	public int insertMeasure(Measure measure) throws Exception;
+	public List<Measure> measureRead(String id) throws Exception;
 }

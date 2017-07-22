@@ -8,7 +8,7 @@
   <select id="dietList" resultType="Customer">
   	select d.dietCode, d.dietName, s.sideDImg
 	from diet d,dietinfo di, sidedish s
-	where d.diseaseCode=#{diseaseCode} and di.dietCode=d.dietCode and di.sideDCode=s.sideDCode and di.sideDType=0
+	where d.diseaseCode=#{diseaseCode} and di.dietCode=d.dietCode and di.sideDCode=s.sideDCode and di.sideDType=0 and d.spDietitem=1
 	order by d.dietCode
 
   </select>
@@ -118,6 +118,21 @@ from orderlist ol, orderoptions op
 where ol.id=#{id} and ol.ordercode=op.ordercode) u
 where u.sideDcode=n.sideDcode;
 </select>
+<!-- 고객 건강정보입력 -->
+<insert id="insertMeasure">
+INSERT INTO measure (id, measureICode, measureDate, reading) VALUES (#{id},#{measureICode}, now(), #{reading})
+</insert>
+<!-- 건강정보 중첩확인 -->
+<select id="measureCheck" resultType="int">
+select count(id) from measure where id=#{id} and measureicode=#{measureICode} and  measureDate =str_to_date(now(),'%Y-%m-%d')
+</select>
+<!-- 건강정보 불러오기 -->
+<select id="measureRead" resultType="Measure">
+select m.measureDate,m.reading,mi.measureName,mi.measureUnit,m.measureICode
+from measure m, measureitem mi
+where m.id=#{id} and m.measureICode = mi.measureICode
+order BY m.measureDate, m.measureICode
 
 
+</select>
   </mapper>

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wdb3a.dacham.bean.Customer;
+import com.wdb3a.dacham.bean.Measure;
 import com.wdb3a.dacham.service.CustomerService;
 
 @RestController
@@ -153,4 +154,81 @@ public class CustomerAjaxController {
 		}
 		return entity;
 		}
+	/**
+	 * 건강정보 삽입
+	 * @param measure
+	 * @return 성공유무 문자열
+	 */
+	@RequestMapping(value="insertMeasure",method=RequestMethod.POST)
+	public ResponseEntity<String> insertHealth(@RequestBody Measure measure ){
+		ResponseEntity<String> entity = null;
+		
+		System.out.println("아이디 "+measure.getId());
+		String lowBoloodP;
+		String highBoloodP;
+		String lowBoloodS;
+		String highBoloodS;
+		
+		try {
+			measure.setMeasureICode("01");
+			measure.setReading(measure.getLowBooldP());
+			int checkCode = service.insertMeasure(measure);
+			if(checkCode==0){
+				lowBoloodP = "lowBoloodP:SUCCESS";
+			}else{
+				lowBoloodP = "lowBoloodP:FAIL";
+			}
+			//0성공,1중복
+			measure.setMeasureICode("02");
+			measure.setReading(measure.getHighBooldP());
+			checkCode = service.insertMeasure(measure);
+			if(checkCode==0){
+				highBoloodP = "highBoloodP:SUCCESS";
+			}else{
+				highBoloodP = "highBoloodP:FAIL";
+			}
+			measure.setMeasureICode("03");
+			measure.setReading(measure.getLowBooldS());
+			checkCode = service.insertMeasure(measure);
+			if(checkCode==0){
+				lowBoloodS = "lowBoloodS:SUCCESS";
+			}else{
+				lowBoloodS = "lowBoloodS:FAIL";
+			}
+			measure.setMeasureICode("04");
+			measure.setReading(measure.getHighBooldS());
+			checkCode = service.insertMeasure(measure);
+			if(checkCode==0){
+				highBoloodS = "highBoloodS:SUCCESS";
+			}else{
+				highBoloodS = "highBoloodS:FAIL";
+			}
+			String result = lowBoloodP+highBoloodP+lowBoloodS+highBoloodS;
+			entity = new ResponseEntity<String>(result,HttpStatus.OK);
+		} catch (Exception e) {			
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;		
+	}
+	@RequestMapping(value="measureRead",method=RequestMethod.POST)
+	public ResponseEntity<Map<String, Object>> measureRead(@RequestBody Customer cu){
+		System.out.println(cu.getId());
+		ResponseEntity<Map<String, Object>> entity = null;
+		List<Measure> list;
+		try {
+			list = service.measureRead(cu.getId());
+			Map<String, Object> map = new HashMap<>();
+			System.out.println("건강정보 리스트 불러옴");
+			map.put("list", list);
+			entity = new ResponseEntity<>(map,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+		
 }

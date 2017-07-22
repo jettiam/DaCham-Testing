@@ -92,4 +92,8 @@ public interface NutritionistDAO {
 	//해당 반찬을 수정 2탄
 	public void modifyCross1(String sideDCode) throws Exception;
 	public void modifyCross2(Nutritionist nutritionist) throws Exception;
+	//해당 식단코드에 속하는 값들 출력(수정)
+	public Nutritionist dietOver(int dietCode) throws Exception;
+	//해당 식단을 수정
+	public void dietModify(Nutritionist nutritionist) throws Exception;
 }

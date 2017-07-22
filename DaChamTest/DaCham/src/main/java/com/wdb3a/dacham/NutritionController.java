@@ -232,6 +232,7 @@ public class NutritionController {
 	   System.out.println("고객아이디:"+nutritionist.getCustomer());
 	   return "redirect:special";
    }
+   //수정을 위한 반찬 정보 출력
    @RequestMapping(value = "sideModify",method = RequestMethod.GET)
    public String getSideModify(Model model,@RequestParam("sideDCode")String sideDCode) throws Exception{
 	   Nutritionist nutritionist = service.sideOver(sideDCode);
@@ -255,7 +256,24 @@ public class NutritionController {
 	    }
 	    return "redirect:side";
    }
- 
+   //수정을 위한 식단 정보 출력
+   @RequestMapping(value = "dietModify",method = RequestMethod.GET)
+   public String getDietModify(Model model, @RequestParam("dietCode")int dietCode) throws Exception{
+	   Nutritionist nutritionist = service.dietOver(dietCode);
+	   List<Nutritionist> overList = service.choiceDisease();
+	   model.addAttribute("overList",overList);
+	   model.addAttribute("nutritionist",nutritionist);
+	   return "mate/nutritionist/dietModify";
+   }
+   //식단 수정
+   @RequestMapping(value = "dietModify",method = RequestMethod.POST)
+   public String postDietModify(Model model, Nutritionist nutritionist, MultipartFile file) throws Exception{
+	   String savedName = UploadFileUtils.uploadFile(file.getOriginalFilename() ,uploadPath,file.getBytes());
+		model.addAttribute("savedName", savedName);
+		nutritionist.setDietImg(savedName);
+		service.dietModify(nutritionist);
+		return "redirect:diet";
+   }
    
     @ResponseBody
 	@RequestMapping("displayFile")

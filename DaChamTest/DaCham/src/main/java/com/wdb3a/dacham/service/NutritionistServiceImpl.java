@@ -312,6 +312,18 @@ public class NutritionistServiceImpl implements NutritionistService {
 		dao.modifyCross2(nutritionist);
 	}
 
+	@Override
+	public Nutritionist dietOver(int dietCode) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.dietOver(dietCode);
+	}
+
+	@Override
+	public void dietModify(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		dao.dietModify(nutritionist);
+	}
+
 
 	
 

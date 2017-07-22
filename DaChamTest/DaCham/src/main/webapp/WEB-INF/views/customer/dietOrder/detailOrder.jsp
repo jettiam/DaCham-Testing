@@ -367,10 +367,12 @@ $(document).ready(function() {
 	function drawNutriChart(nutriData){
 		var ctx = $("#nutriChart");
 		var myChart = new Chart(ctx, {
-		    type: 'radar',
+		    type: 'polarArea',
 		    data: nutriData
 		    
-		});	
+		});
+		
+	//
 	}	
 	
 </script>

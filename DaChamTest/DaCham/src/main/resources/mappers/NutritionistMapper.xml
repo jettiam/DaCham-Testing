@@ -291,4 +291,14 @@
 		insert into sidedinfo(sideDCode, foodMCode, foodMAmount)
 		values (#{sideDCode},#{foodMCode},#{foodMAmount})
 	</insert>
+	<!-- 식단코드에 속한 식단 재료 불러오기(수정) -->
+	<select id = "dietOver" resultType = "com.wdb3a.dacham.bean.Nutritionist">
+		select * from diet 
+		where dietCode = #{dietCode}
+	</select>
+	<!-- 식단 수정 -->
+	<update id = "dietModify">
+		update diet set diseaseCode = #{diseaseCode}, dietName = #{dietName}, price = #{price}, dietImg = #{dietImg}
+		where dietCode = #{dietCode}
+	</update>
 </mapper>
