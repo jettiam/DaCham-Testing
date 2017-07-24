@@ -161,7 +161,7 @@ display:none;
 </div>
 <div id="dietList" class="container text-center">	
 </div>
-</div>
+</div> 
 </div>
 <br><br><br><br><br><br>
 </body>
