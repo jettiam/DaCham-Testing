@@ -301,4 +301,12 @@
 		update diet set diseaseCode = #{diseaseCode}, dietName = #{dietName}, price = #{price}, dietImg = #{dietImg}
 		where dietCode = #{dietCode}
 	</update>
+	<!-- 수정 페이지의 식품군별 식단 정렬 -->
+	<select id = "groupSide" resultType = "com.wdb3a.dacham.bean.Nutritionist">
+		select * from sidedish a join dietinfo b join diet c
+		where a.sideDCode = b.sideDCode
+		and b.dietCode = c.dietCode
+		and a.foodGCode = #{foodGCode}
+		and b.dietCode = #{dietCode}
+	</select>
 </mapper>

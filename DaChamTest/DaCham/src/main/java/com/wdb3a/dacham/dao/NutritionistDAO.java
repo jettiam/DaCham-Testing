@@ -96,4 +96,6 @@ public interface NutritionistDAO {
 	public Nutritionist dietOver(int dietCode) throws Exception;
 	//해당 식단을 수정
 	public void dietModify(Nutritionist nutritionist) throws Exception;
+	//해당 식단 수정 페이지에서 수정을 위해 식품군별로 반찬 조회
+	public List<Nutritionist> groupSide(Nutritionist nutritionist) throws Exception;
 }

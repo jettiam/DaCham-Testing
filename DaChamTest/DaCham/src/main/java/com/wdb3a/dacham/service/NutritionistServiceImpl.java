@@ -324,6 +324,12 @@ public class NutritionistServiceImpl implements NutritionistService {
 		dao.dietModify(nutritionist);
 	}
 
+	@Override
+	public List<Nutritionist> groupSide(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.groupSide(nutritionist);
+	}
+
 
 	
 

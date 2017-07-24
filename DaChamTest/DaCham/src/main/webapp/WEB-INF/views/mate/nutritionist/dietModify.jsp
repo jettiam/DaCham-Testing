@@ -19,8 +19,19 @@
 	$(document).ready(function(){
 		var currentPage = 1;
 		var currentGroup = "";
+		var dietCode = ${nutritionist.dietCode}
 		var v = 0;
 		sideAll(1, "01");
+		  
+		groupSelector1("01",dietCode);
+		groupSelector2("02",dietCode);
+		groupSelector3("03",dietCode);
+		groupSelector4("04",dietCode);
+		groupSelector5("05",dietCode);
+		groupSelector6("06",dietCode);
+		
+		
+		
 		$("#sideAll").on("click", function() {
 			sideAll();
 		});
@@ -91,6 +102,74 @@
 		$("#main4").on("click", function() {
 			sideAll(1, "06");
 		});
+		
+		function groupSelector1(foodGCode,dietCode){
+			$(".groupResult1").remove();
+			$.getJSON("nutriAjax/groupSide/"+foodGCode+"/"+dietCode,function(data){
+				var str = "";
+				$(data).each(function(){
+					str += "<tr class = 'groupResult1'><td><input type = 'radio' class = 'groupRadio' name = 'sideDType1' value = '"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;'></td><td>"+this.sideDName+"</td></tr>"
+				});    
+				$(".foodGroup1").append(str);   
+				$(".groupRadio:input[value = '0']").prop("checked",true);
+			});
+		}
+		function groupSelector2(foodGCode,dietCode){
+			$(".groupResult2").remove();
+			$.getJSON("nutriAjax/groupSide/"+foodGCode+"/"+dietCode,function(data){
+				var str = "";
+				$(data).each(function(){
+					str += "<tr class = 'groupResult2'><td><input type = 'radio' class = 'groupRadio' name = 'sideDType2' value = '"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;'></td><td>"+this.sideDName+"</td></tr>"
+				});
+				$(".foodGroup2").append(str);
+				$(".groupRadio:input[value = '0']").prop("checked",true);
+			});
+		}
+		function groupSelector3(foodGCode,dietCode){
+			$(".groupResult3").remove();
+			$.getJSON("nutriAjax/groupSide/"+foodGCode+"/"+dietCode,function(data){
+				var str = "";
+				$(data).each(function(){
+					str += "<tr class = 'groupResult3'><td><input type = 'radio' class = 'groupRadio' name = 'sideDType3' value = '"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;'></td><td>"+this.sideDName+"</td></tr>"
+				});
+				$(".foodGroup3").append(str);
+				$(".groupRadio:input[value = '0']").prop("checked",true);
+			});
+		}
+		function groupSelector4(foodGCode,dietCode){
+			$(".groupResult4").remove();
+			$.getJSON("nutriAjax/groupSide/"+foodGCode+"/"+dietCode,function(data){
+				var str = "";
+				$(data).each(function(){
+					str += "<tr class = 'groupResult4'><td><input type = 'radio' class = 'groupRadio' name = 'sideDType4' value = '"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;'></td><td>"+this.sideDName+"</td></tr>"
+				});
+				 	
+				$(".foodGroup4").append(str);
+				$(".groupRadio:input[value = '0']").prop("checked",true);
+			});
+		}
+		function groupSelector5(foodGCode,dietCode){
+			$(".groupResult5").remove();
+			$.getJSON("nutriAjax/groupSide/"+foodGCode+"/"+dietCode,function(data){
+				var str = "";
+				$(data).each(function(){
+					str += "<tr class = 'groupResult5'><td><input type = 'radio' class = 'groupRadio' name = 'sideDType5' value = '"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;'></td><td>"+this.sideDName+"</td></tr>"
+				});
+				$(".foodGroup5").append(str);
+				$(".groupRadio:input[value = '0']").prop("checked",true);
+			});
+		}
+		function groupSelector6(foodGCode,dietCode){
+			$(".groupResult6").remove();
+			$.getJSON("nutriAjax/groupSide/"+foodGCode+"/"+dietCode,function(data){
+				var str = "";
+				$(data).each(function(){
+					str += "<tr class = 'groupResult6'><td><input type = 'radio' class = 'groupRadio' name = 'sideDType6' value = '"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;'></td><td>"+this.sideDName+"</td></tr>"
+				});
+				$(".foodGroup6").append(str);
+				$(".groupRadio:input[value = '0']").prop("checked",true);
+			});
+		}
 		function sideAll(page, foodGCode) {
 			
 			$(".searchResult").remove();
@@ -146,11 +225,99 @@
 	});
 		
 </script>
-<title>식단 수정 페이지</title>       
+<title>식단 수정 페이지</title>
+<style>
+.sideDImg {
+	max-height: 80px
+}
+
+.material {
+	height: 450px         
+}
+</style>             
 </head>
 <body>
 	<div class = "container">
-		<h2>&nbsp;식단 수정 페이지입니다.</h2>        
+		<h2>&nbsp;식단 수정 페이지입니다.</h2>
+		<div class = "material">   
+			<div class = "col-sm-2">
+				<h2>밥</h2>
+				<table class = "foodGroup1">
+					<tr>
+						<th>&nbsp;&nbsp;&nbsp;</th>
+						<th>반찬사진&nbsp;&nbsp;&nbsp;</th>
+						<th>반찬명&nbsp;&nbsp;&nbsp;</th>
+					</tr>
+					<tr class = "groupResult1">
+					</tr>
+				</table>
+			</div>  
+			<div class = "col-sm-2">
+				<h2>국</h2>
+				<table class = "foodGroup2">
+					<tr>
+						<th>&nbsp;&nbsp;&nbsp;</th>
+						<th>반찬사진&nbsp;&nbsp;&nbsp;</th>
+						<th>반찬명&nbsp;&nbsp;&nbsp;</th>
+					</tr>
+					<tr class = "groupResult2">
+						
+					</tr>
+				</table>
+			</div> 
+			<div class = "col-sm-2">
+				<h2>메인 메뉴1</h2>
+				<table class = "foodGroup3">
+					<tr>
+						<th>&nbsp;&nbsp;&nbsp;</th>
+						<th>반찬사진&nbsp;&nbsp;&nbsp;</th>
+						<th>반찬명&nbsp;&nbsp;&nbsp;</th>
+					</tr>
+					<tr class = "groupResult3">
+						
+					</tr>
+				</table>
+			</div>  
+			<div class = "col-sm-2">
+				<h2>메인 메뉴2</h2>
+				<table class = "foodGroup4">   
+					<tr>
+						<th>&nbsp;&nbsp;&nbsp;</th>
+						<th>반찬사진&nbsp;&nbsp;&nbsp;</th>
+						<th>반찬명&nbsp;&nbsp;&nbsp;</th>
+					</tr>
+					<tr class = "groupResult4">
+						
+					</tr>
+				</table>
+			</div>  
+			<div class = "col-sm-2">
+				<h2>메인 메뉴3</h2>
+				<table class = "foodGroup5">
+					<tr>
+						<th>&nbsp;&nbsp;&nbsp;</th>
+						<th>반찬사진&nbsp;&nbsp;&nbsp;</th>
+						<th>반찬명&nbsp;&nbsp;&nbsp;</th>
+					</tr>
+					<tr class = "groupResult5">
+						
+					</tr>
+				</table>
+			</div>  
+			<div class = "col-sm-2">
+				<h2>메인 메뉴4</h2>
+				<table class = "foodGroup6">    
+					<tr>
+						<th>&nbsp;&nbsp;&nbsp;</th>
+						<th>반찬사진&nbsp;&nbsp;&nbsp;</th>
+						<th>반찬명&nbsp;&nbsp;&nbsp;</th>
+					</tr>
+					<tr class = "groupResult6">
+						
+					</tr>
+				</table>
+			</div>       
+		</div>                        
 		<div class="div1 col-sm-12">
 			<div class="col-sm-6">
 				<input type="text" name="search" id="keyword" placeholder="반찬 검색란">

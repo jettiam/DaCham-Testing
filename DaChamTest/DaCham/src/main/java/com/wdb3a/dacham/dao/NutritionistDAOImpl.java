@@ -331,4 +331,10 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 		// TODO Auto-generated method stub
 		sqlSession.update(namespace+".dietModify",nutritionist);
 	}
+
+	@Override
+	public List<Nutritionist> groupSide(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".groupSide",nutritionist);
+	}
 }

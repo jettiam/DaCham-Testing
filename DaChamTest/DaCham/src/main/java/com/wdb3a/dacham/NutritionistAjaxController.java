@@ -424,4 +424,21 @@ public class NutritionistAjaxController {
 		}
 		return entity;
 	}
+	//반찬 출력(수정)
+	@RequestMapping(value = "/groupSide/{foodGCode}/{dietCode}",method = RequestMethod.GET)
+	public ResponseEntity<List<Nutritionist>> groupSide(@PathVariable("foodGCode")String foodGCode, @PathVariable("dietCode")int dietCode){
+		ResponseEntity<List<Nutritionist>> entity = null;
+		Nutritionist nutritionist = new Nutritionist();
+		nutritionist.setFoodGCode(foodGCode);
+		nutritionist.setDietCode(dietCode);
+		try {
+			List<Nutritionist> list = service.groupSide(nutritionist);
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
 }
