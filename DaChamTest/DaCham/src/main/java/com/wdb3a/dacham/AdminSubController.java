@@ -32,6 +32,7 @@ import com.wdb3a.dacham.bean.Criteria;
 import com.wdb3a.dacham.bean.Diet;
 import com.wdb3a.dacham.bean.FoodMAmountRead;
 import com.wdb3a.dacham.bean.FoodMInven;
+import com.wdb3a.dacham.bean.Member;
 import com.wdb3a.dacham.bean.OrderList;
 import com.wdb3a.dacham.service.AdminMainService;
 
@@ -265,7 +266,32 @@ public class AdminSubController {
 		}
 		return entity;
 	}
+   @RequestMapping(value = "/memberAll",method = RequestMethod.GET)
+	public ResponseEntity<List<Member>> memberAll(){
+		ResponseEntity<List<Member>> entity = null;
+		try {
+			List<Member> list = service.memberAll();
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
    
-
+   @RequestMapping(value = "/memberUserInfo/{id}",method = RequestMethod.GET)
+	public ResponseEntity<Member> memberAll(@PathVariable("id")String id){
+		ResponseEntity<Member> entity = null;
+		try {
+			Member member = service.memberUserInfo(id);
+			entity = new ResponseEntity<>(member,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
 }
 

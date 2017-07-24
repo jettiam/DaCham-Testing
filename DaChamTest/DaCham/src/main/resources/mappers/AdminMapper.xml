@@ -251,5 +251,17 @@
 		from diet a join disease b
 		where a.diseaseCode=b.diseaseCode and diseaseName = '신부전증'
 	</select>
+	
+	<insert id="empjoin">
+	INSERT INTO member (id, passwd, name, address, tel, email, deptCode, gradeCode, joinDate, path_e, education, salary, bank_name, bank_user, Account_Number, PhotoImg) VALUES (#{id}, #{passwd}, #{name}, #{address}, #{tel}, #{email}, #{deptCode}, #{gradeCode}, now(), #{path_e}, #{education},#{salary}, #{bank_name}, #{bank_user}, #{Account_Number}, #{photoImg})
+	</insert>
+	
+	<select id="memberAll" resultType="Member">
+	select id, passwd, name, address, tel, email, deptCode, gradeCode, joinDate, outDate, photoImg, path_e, education, salary, bank_name, bank_user, Account_Number from member
+	</select>
+	
+	<select id="memberUserInfo" resultType="String">
+	select id, passwd, name, address, tel, email, deptCode, gradeCode, joinDate, outDate, photoImg, path_e, education, salary, bank_name, bank_user, Account_Number from member where id=#{id}
+	</select>
 
-</mapper>
+</mapper> 

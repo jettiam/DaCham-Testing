@@ -46,15 +46,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.wdb3a.dacham.bean.ChartList;
 import com.wdb3a.dacham.bean.ChartPrice;
 import com.wdb3a.dacham.bean.Customer;
 import com.wdb3a.dacham.bean.FoodMAmountRead;
 import com.wdb3a.dacham.bean.FoodMInven;
+import com.wdb3a.dacham.bean.Member;
 import com.wdb3a.dacham.bean.OrderList;
 import com.wdb3a.dacham.service.AdminMainService;
 import com.wdb3a.dacham.util.MediaUtils;
+import com.wdb3a.dacham.util.UploadFileUtils;
 
 /**
  * 커밋을 위한 주석 수정(5월 24일)
@@ -405,4 +408,14 @@ public class AdminController {
 		   } 
 		   return "mate/admin/dietManagement";
 		}
+		
+		@RequestMapping(value="empjoin",method = RequestMethod.POST)
+		public String joinPost(Member member, MultipartFile file) throws Exception{
+			String savedName = UploadFileUtils.uploadFile(file.getOriginalFilename(), uploadPath, file.getBytes());
+			member.setPhotoImg(savedName);
+			service.empjoin(member);  
+			return "mate/admin/adminMain";	
+		}
+		
+		
 }

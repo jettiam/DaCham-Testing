@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.aop.ThrowsAdvice;
 
 import com.wdb3a.dacham.bean.FoodMInven;
+import com.wdb3a.dacham.bean.Member;
 import com.wdb3a.dacham.bean.OrderList;
 import com.wdb3a.dacham.bean.AppTest;
 import com.wdb3a.dacham.bean.ChartList;
@@ -35,10 +36,12 @@ public interface AdminMainDAO {
 	public List<Diet> dietAll() throws Exception;
 	public void dietPriceUp(Diet diet) throws Exception;
 	public void dietSell(int dietCode) throws Exception;
-	public void dietSellStop(int dietCode) throws Exception;
+	public void dietSellStop(int dietCode) throws Exception;  
 	public List<Diet> disease1() throws Exception;
 	public List<Diet> disease2() throws Exception;
 	public List<Diet> disease3() throws Exception;
 	public List<Diet> disease4() throws Exception;
-	
+	public void empjoin(Member member) throws Exception;
+	public List<Member> memberAll() throws Exception;
+	public Member memberUserInfo(String id) throws Exception;    
 }

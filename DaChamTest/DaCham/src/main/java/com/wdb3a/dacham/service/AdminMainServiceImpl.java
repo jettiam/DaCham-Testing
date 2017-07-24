@@ -17,6 +17,7 @@ import com.wdb3a.dacham.bean.Criteria;
 import com.wdb3a.dacham.bean.Diet;
 import com.wdb3a.dacham.bean.FoodMAmountRead;
 import com.wdb3a.dacham.bean.FoodMInven;
+import com.wdb3a.dacham.bean.Member;
 import com.wdb3a.dacham.bean.OrderList;
 import com.wdb3a.dacham.dao.AdminMainDAO;
 
@@ -172,6 +173,23 @@ public class AdminMainServiceImpl implements AdminMainService {
 	public List<Diet> disease4() throws Exception {
 		// TODO Auto-generated method stub
 		return dao.disease4();
+	}
+
+	@Override
+	public void empjoin(Member member) throws Exception {
+		dao.empjoin(member);
+	}
+
+	@Override
+	public List<Member> memberAll() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.memberAll(); 
+	}
+
+	@Override
+	public Member memberUserInfo(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.memberUserInfo(id);
 	}
 
 	

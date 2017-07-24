@@ -13,7 +13,7 @@
    values(#{counselItemCode}, #{customer}, #{counselTitle}, #{counselContent},now())
 </insert>
 <select id="counselRead" resultType="Counsel">
-   select c.counselTitle, c.counselContent,c.customer,c.counselDate,i.counselItemName,c.counselCode, c.answer
+   select c.counselTitle, c.counselContent,c.customer,c.counselDate,c.adviser,i.counselItemName,c.counselCode, c.answer
 	from counsel c,counselItem i
    where c.counselItemCode=i.counselItemCode and c.counselCode=#{counselCode}
 </select>
