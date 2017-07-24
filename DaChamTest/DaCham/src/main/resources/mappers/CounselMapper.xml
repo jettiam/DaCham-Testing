@@ -21,7 +21,7 @@
  delete from counsel where counselCode=#{counselCode}
 </delete>
 <update id="update">
-   update counsel set title=#{counselTitle}, content=#{counselContent}
+   update counsel set counselTitle=#{counselTitle}, counselContent=#{counselContent}, counselItemCode=#{counselItemCode}
    where counselCode=#{counselCode}
 </update>
 

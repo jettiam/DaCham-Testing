@@ -18,7 +18,7 @@
 <script>
 	$(document).ready(function () {
 		$("#update").click(function () {
-			submit();
+			$("#form").submit();
 		});
 	});
 </script>
@@ -27,7 +27,7 @@
 <%@include file="../../clientNavi.jsp" %>
 <div class="container">
 <div id="counselWriteWrap">
-<form method = "post" action="counselUpdate" >
+<form method = "post" action="counselUpdate" id="form">
 	 <div class="form-inline form-group">	
 		<label for="counselItemCode">문의분류</label>
 		<select class="form-control" id="counselItemCode" name = "counselItemCode">
@@ -48,7 +48,7 @@
 		 <textarea name = "counselContent" class="form-control" rows="10">${read.counselContent }</textarea><br>
 		
 		</div>
-		<input type="hidden" name="counselcode" value="${read.counselCode }">
+		<input type="hidden" name="counselCode" value="${read.counselCode }">
 	</form>
 	<div class="form-group">
 		<button id = "update" class="btn btn-warning myPageBtn">등록</button>
