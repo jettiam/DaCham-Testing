@@ -35,8 +35,13 @@
 	  		</if>
 	  	</if>
   	</sql>
+<select id="counselInfo" resultType="Counselor">
+select a.id, a.name, a.joinDate, a.tel, a.email, address
+from member a
+where a.gradeCode ='일반회원'
 
-
+</select>
+	
 <select id = "viewCounsel" resultType = "Counselor">
 	select counselTitle, counselContent
 	from counsel
