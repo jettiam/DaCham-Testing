@@ -35,16 +35,37 @@
 	  		</if>
 	  	</if>
   	</sql>
-<select id="counselInfo" resultType="Counselor">
-select a.id, a.name, a.joinDate, a.tel, a.email, address
-from member a
-where a.gradeCode ='일반회원'
 
-</select>
-	
+
 <select id = "viewCounsel" resultType = "Counselor">
 	select counselTitle, counselContent
 	from counsel
 	where counselCode = #{counselCode} 
 </select>
+<select id = "linkCounsel" resultType = "Counselor">
+	select * from counsel a join counselitem b
+	where a.counselItemCode = b.counselItemCode
+</select>
+<select id = "selectCounsel" resultType = "Counselor">
+	select * from counsel a join counselitem b
+	where a.counselItemCode = b.counselItemCode
+	and  a.counselCode = #{couselCode}
+</select>
+<select id=  "counselMember" resultType = "Counselor">
+	select * from member a join counsel b
+	where a.id = b.customer
+	and b.counselCode = #{couselCode}
+</select>
+<select id = "orderList" resultType = "Counselor">
+	select * from orderlist a join diet b join paymentitem c join orderitem d join counsel e
+	where a.dietCode = b.dietCode
+	and a.paymentItemCode = c.paymentItemCode
+	and a.orderItemCode = d.orderItemCode
+	and a.id = e.customer
+	and e.counselCode = #{couselCode}
+</select>
+<update id = "counselUpdate">
+	update counsel set answer = #{answer}, adviser = 'counselor'
+	where counselCode = #{couselCode}
+</update>
 </mapper>
