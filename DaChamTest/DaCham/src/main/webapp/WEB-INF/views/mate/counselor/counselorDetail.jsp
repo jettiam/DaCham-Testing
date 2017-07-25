@@ -26,6 +26,7 @@ $(document).ready(function(){
 	var id = "";
 	var couselCode = 0;
 	var answer = "";
+	var currentPage = 0;
 	$(document.body).on("click",".counselCode",function(){
 		couselCode = $(this).attr('data-code');
 		$(".answers").val(" ");
@@ -48,16 +49,27 @@ $(document).ready(function(){
 			$(".address").text(data.address);
 			
 		});
-		$.getJSON("counselAjax/orderList/"+couselCode,function(data){
+		orderList(1,couselCode);
+	});
+	$(".pagination").on("click","li a",function(){
+		event.preventDefault();
+		var replyPage = $(this).attr("href");
+		
+		orderList(replyPage, couselCode);                  
+	});
+	function orderList(page,couselCode){
+		currentPage = page;
+		$.getJSON("counselAjax/orderList/"+page+"/"+couselCode,function(data){
 			$(".orderResult").remove();
 			var str = "";
-			$(data).each(function(){
+			$(data.list).each(function(){
 				str += "<tr class = 'orderResult'><td>"+this.orderCode+"</td><td>"+this.id+"</td><td>"+this.dietName+"</td><td>"+this.orderDate+"</td><td>"+this.paymentItemName+"</td><td>"+this.orderItemName+"</td></tr>";
 			});
+			
 			$(".order").append(str);
+			printPaging(data.criteria);
 		});
-	});
-	
+	}
 	$("#answer").on("click",function(){
 		var couselCode = $(".counselCode").val();
 		var answer = $(".answers").val();
@@ -72,21 +84,43 @@ $(document).ready(function(){
 			success : function(result){
 				console.log("result:"+result);
 				if(result == "SUCCESS"){
-					alert("수정되었습니다.");	
+					alert("수정되었습니다.");
+					linkAll();
 				}
 			}
 		});
 	});
 	
 	function linkAll(){
+		var customer = '${customer}';
 		$(".answerResult").remove();
-		$.getJSON("counselAjax/linkCounsel",function(data){
+		$.getJSON("counselAjax/linkCounsel/"+customer,function(data){
 			var str = "";
 			$(data).each(function(){
-				str += "<tr class = 'answerResult'><td class = 'counselCode' data-code = '"+this.counselCode+"' data-id = '"+this.customer+"'><a href = '#'>"+this.counselCode+"</a></td><td>"+this.counselitemName+"</td><td>"+this.counselTitle+"</td><td>"+this.counselDate+"</td></tr>"
+				if(this.adviser == null){
+					str += "<tr class = 'answerResult'><td class = 'counselCode' data-code = '"+this.counselCode+"' data-id = '"+this.customer+"'><a href = '#'>"+this.counselCode+"</a></td><td>"+this.counselitemName+"</td><td>"+this.counselTitle+"</td><td>"+this.counselDate+"</td><td>미응답</td></tr>";
+				}
+				else{
+					str += "<tr class = 'answerResult'><td class = 'counselCode' data-code = '"+this.counselCode+"' data-id = '"+this.customer+"'><a href = '#'>"+this.counselCode+"</a></td><td>"+this.counselitemName+"</td><td>"+this.counselTitle+"</td><td>"+this.counselDate+"</td><td>응답완료</td></tr>";
+				}
 			});
 			$(".link").append(str);
 		});
+	}
+	function printPaging(criteria){
+		var str = "";
+				
+		if(criteria.prev){
+			str += "<li><a href='"+(criteria.startPage-1)+"'>" + "<<"+"</a></li>";
+		}
+		for(var i = criteria.startPage; i<=criteria.endPage; i++){
+			var strClass = criteria.page == i?"class = 'active'":"";
+			str += "<li "+strClass+"><a href ='"+i+"'>"+i + "</a></li>";
+		}
+		if(criteria.next){
+			str += "<li><a href='"+(criteria.endPage+1)+"'>" + ">>"+"</a></li>";
+		}
+		$(".pagination").html(str);
 	}
 });
 
@@ -111,7 +145,7 @@ $(document).ready(function(){
          </div>
          <br><br>
          <div style = "border:1px solid gold;">   
-            <h4>고객의  상담이력</h4><br>   
+            <h4>${name }님의 상담내역 </h4><br>                
             <select>
                <option>제목</option>
                <option>내용</option>
@@ -184,7 +218,10 @@ $(document).ready(function(){
                   <td>결제현황</td>
                   <td>주문현황</td>
                </tr>
+               
             </table>
+            <ul class = "pagination">
+       		  </ul>
          </div>
       </div>
       <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
