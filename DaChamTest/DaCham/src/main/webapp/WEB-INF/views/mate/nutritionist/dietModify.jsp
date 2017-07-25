@@ -14,7 +14,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript"
-	src="../../../dacham/resources/bootstrap-filestyle.min.js"></script>
+	src="resources/bootstrap-filestyle.min.js"></script>
 <script>
 	$(document).ready(function(){
 		var currentPage = 1;
@@ -102,13 +102,52 @@
 		$("#main4").on("click", function() {
 			sideAll(1, "06");
 		});
+		$(document.body).on("click",".nameClick",function(){
+			var foodGCode = $(this).attr("data-foodgcode");
+			var sideDImg = $(this).attr('data-img');
+			var sideDName = $(this).attr('data-name');
+			if(foodGCode == '01'){
+				var str = "";
+				str = "<tr class = 'groupResult1'><td><input type = 'radio' class = 'groupRadio' name = 'sideDType1' value = '1'></td><td><img src = 'displayFile?fileName="+sideDImg+"' style = 'width:80px; height:60px;'></td><td>"+sideDName+"</td></tr>";
+				$(".foodGroup1").append(str);      
+			}
+			else if(foodGCode == '02'){
+				var str = "";
+				str = "<tr class = 'groupResult2'><td><input type = 'radio' class = 'groupRadio' name = 'sideDType1' value = '1'></td><td><img src = 'displayFile?fileName="+sideDImg+"' style = 'width:80px; height:60px;'></td><td>"+sideDName+"</td></tr>";
+				$(".foodGroup2").append(str);      
+			}
+			else if(foodGCode == '03'){
+				var str = "";
+				str = "<tr class = 'groupResult3'><td><input type = 'radio' class = 'groupRadio' name = 'sideDType1' value = '1'></td><td><img src = 'displayFile?fileName="+sideDImg+"' style = 'width:80px; height:60px;'></td><td>"+sideDName+"</td></tr>";
+				$(".foodGroup3").append(str);      
+			}
+			else if(foodGCode == '04'){
+				var str = "";
+				str = "<tr class = 'groupResult4'><td><input type = 'radio' class = 'groupRadio' name = 'sideDType1' value = '1'></td><td><img src = 'displayFile?fileName="+sideDImg+"' style = 'width:80px; height:60px;'></td><td>"+sideDName+"</td></tr>";
+				$(".foodGroup4").append(str);      
+			}
+			else if(foodGCode == '05'){
+				var str = "";
+				str = "<tr class = 'groupResult5'><td><input type = 'radio' class = 'groupRadio' name = 'sideDType1' value = '1'></td><td><img src = 'displayFile?fileName="+sideDImg+"' style = 'width:80px; height:60px;'></td><td>"+sideDName+"</td></tr>";
+				$(".foodGroup5").append(str);      
+			}
+			else if(foodGCode == '06'){
+				var str = "";
+				str = "<tr class = 'groupResult6'><td><input type = 'radio' class = 'groupRadio' name = 'sideDType1' value = '1'></td><td><img src = 'displayFile?fileName="+sideDImg+"' style = 'width:80px; height:60px;'></td><td>"+sideDName+"</td></tr>";
+				$(".foodGroup6").append(str);      
+			}
+		});
+		
+		$(document.body).on("click",".sideDImg",function(data){
+			$(this).parent().parent().remove();   
+		});
 		
 		function groupSelector1(foodGCode,dietCode){
 			$(".groupResult1").remove();
 			$.getJSON("nutriAjax/groupSide/"+foodGCode+"/"+dietCode,function(data){
 				var str = "";
 				$(data).each(function(){
-					str += "<tr class = 'groupResult1'><td><input type = 'radio' class = 'groupRadio' name = 'sideDType1' value = '"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;'></td><td>"+this.sideDName+"</td></tr>"
+					str += "<tr class = 'groupResult1'><td><input type = 'radio' class = 'groupRadio' name = 'sideDType1' value = '"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+this.sideDName+"</td></tr>";
 				});    
 				$(".foodGroup1").append(str);   
 				$(".groupRadio:input[value = '0']").prop("checked",true);
@@ -119,7 +158,7 @@
 			$.getJSON("nutriAjax/groupSide/"+foodGCode+"/"+dietCode,function(data){
 				var str = "";
 				$(data).each(function(){
-					str += "<tr class = 'groupResult2'><td><input type = 'radio' class = 'groupRadio' name = 'sideDType2' value = '"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;'></td><td>"+this.sideDName+"</td></tr>"
+					str += "<tr class = 'groupResult2'><td><input type = 'radio' class = 'groupRadio' name = 'sideDType2' value = '"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+this.sideDName+"</td></tr>"
 				});
 				$(".foodGroup2").append(str);
 				$(".groupRadio:input[value = '0']").prop("checked",true);
@@ -130,7 +169,7 @@
 			$.getJSON("nutriAjax/groupSide/"+foodGCode+"/"+dietCode,function(data){
 				var str = "";
 				$(data).each(function(){
-					str += "<tr class = 'groupResult3'><td><input type = 'radio' class = 'groupRadio' name = 'sideDType3' value = '"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;'></td><td>"+this.sideDName+"</td></tr>"
+					str += "<tr class = 'groupResult3'><td><input type = 'radio' class = 'groupRadio' name = 'sideDType3' value = '"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+this.sideDName+"</td></tr>"
 				});
 				$(".foodGroup3").append(str);
 				$(".groupRadio:input[value = '0']").prop("checked",true);
@@ -141,7 +180,7 @@
 			$.getJSON("nutriAjax/groupSide/"+foodGCode+"/"+dietCode,function(data){
 				var str = "";
 				$(data).each(function(){
-					str += "<tr class = 'groupResult4'><td><input type = 'radio' class = 'groupRadio' name = 'sideDType4' value = '"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;'></td><td>"+this.sideDName+"</td></tr>"
+					str += "<tr class = 'groupResult4'><td><input type = 'radio' class = 'groupRadio' name = 'sideDType4' value = '"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+this.sideDName+"</td></tr>"
 				});
 				 	
 				$(".foodGroup4").append(str);
@@ -153,7 +192,7 @@
 			$.getJSON("nutriAjax/groupSide/"+foodGCode+"/"+dietCode,function(data){
 				var str = "";
 				$(data).each(function(){
-					str += "<tr class = 'groupResult5'><td><input type = 'radio' class = 'groupRadio' name = 'sideDType5' value = '"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;'></td><td>"+this.sideDName+"</td></tr>"
+					str += "<tr class = 'groupResult5'><td><input type = 'radio' class = 'groupRadio' name = 'sideDType5' value = '"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+this.sideDName+"</td></tr>"
 				});
 				$(".foodGroup5").append(str);
 				$(".groupRadio:input[value = '0']").prop("checked",true);
@@ -164,7 +203,7 @@
 			$.getJSON("nutriAjax/groupSide/"+foodGCode+"/"+dietCode,function(data){
 				var str = "";
 				$(data).each(function(){
-					str += "<tr class = 'groupResult6'><td><input type = 'radio' class = 'groupRadio' name = 'sideDType6' value = '"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;'></td><td>"+this.sideDName+"</td></tr>"
+					str += "<tr class = 'groupResult6'><td><input type = 'radio' class = 'groupRadio' name = 'sideDType6' value = '"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+this.sideDName+"</td></tr>"
 				});
 				$(".foodGroup6").append(str);
 				$(".groupRadio:input[value = '0']").prop("checked",true);
@@ -185,7 +224,7 @@
 								$(data.list)
 										.each(
 												function() {
-													str += "<tr class = 'searchResult'><td><a class = 'nameClick' data-foodGCode='"+currentGroup+"' data-img = '"+this.sideDImg+"' data-code = '"+this.sideDCode+"'>"
+													str += "<tr class = 'searchResult'><td><a class = 'nameClick' data-foodGCode='"+currentGroup+"' data-img = '"+this.sideDImg+"' data-code = '"+this.sideDCode+"' data-name = '"+this.sideDName+"'>"
 															+ this.sideDName
 															+ "</a></td>"
 															+ "<td>"

@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <script src="http://d3js.org/d3.v3.min.js"></script>
-<script src="../../../dacham/resources/openAPIjs/radarchart.js"></script>
+<script src="resources/openAPIjs/radarchart.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <link rel="stylesheet"
@@ -16,7 +16,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript"
-	src="../../../dacham/resources/bootstrap-filestyle.min.js">
+	src="resources/bootstrap-filestyle.min.js">
 	
 </script>
 <script>

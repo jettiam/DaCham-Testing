@@ -10,13 +10,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>반찬 등록 페이지</title>
 <script src="http://d3js.org/d3.v3.min.js"></script>
-<script src = "../../../dacham/resources/openAPIjs/radarchart.js"></script>
+<script src = "resources/openAPIjs/radarchart.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../../../dacham/resources/bootstrap-filestyle.min.js"> </script>
+<script type="text/javascript" src="resources/bootstrap-filestyle.min.js"> </script>
 <script>
 		//이미지를 업로드하면 미리 볼 수 있는 기능
 		function previewImage(targetObj, View_area){
@@ -342,6 +342,6 @@
 			}
 		});
 	</script>
-	<script src = "../../../dacham/resources/openAPIjs/APIQuery2.js"></script>
+	<script src = "resources/openAPIjs/APIQuery2.js"></script>
 </body>
 </html>

@@ -5,7 +5,7 @@
   <mapper namespace="com.wdb3a.CounselMapper">
   <select id="counselList" resultType="Counsel">
   select c.counselCode, i.counselItemName,c.customer,c.counselTitle,c.counselDate,c.adviser
-  from counsel c, counselItem i
+  from counsel c, counselitem i
   where c.counselItemCode=i.counselItemCode order by c.counselCode desc
   </select>
   <insert id="write">
@@ -14,7 +14,7 @@
 </insert>
 <select id="counselRead" resultType="Counsel">
    select c.counselTitle, c.counselContent,c.customer,c.counselDate,c.adviser,i.counselItemName,c.counselCode, c.answer
-	from counsel c,counselItem i
+	from counsel c,counselitem i
    where c.counselItemCode=i.counselItemCode and c.counselCode=#{counselCode}
 </select>
 <delete id="delete">
