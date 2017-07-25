@@ -309,4 +309,14 @@
 		and a.foodGCode = #{foodGCode}
 		and b.dietCode = #{dietCode}
 	</select>
+	<!-- 식단에 속하는 반찬들을 삭제(수정) -->
+	<delete id = "updateCross1">
+		delete from dietinfo
+		where dietCode = #{dietCode}
+	</delete>
+	<!-- 페이지에 있는 반찬들을 다시 넣기 -->
+	<insert id = "updateCross2">
+		insert into dietinfo(dietCode, sideDCode,sideDType)
+		values (#{dietCode},#{sideDCode},#{sideDType})
+	</insert>	
 </mapper>
