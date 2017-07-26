@@ -11,12 +11,12 @@
 <script src="resources/wizardJs/d3.v3.min.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="../../../dacham/resources/wizardJs/blockly_compressed.js"></script>
-<script src="../../../dacham/resources/wizardJs/blocks_compressed.js"></script>
+<script src="resources/wizardJs/blockly_compressed.js"></script>
+<script src="resources/wizardJs/blocks_compressed.js"></script>
 <script
-	src="../../../dacham/resources/wizardJs/javascript_compressed.js"></script>
-<script src="../../../dacham/resources/wizardJs/ko.js"></script>
-<script src="../../../dacham/resources/wizardJs/wizard.js"></script>
+	src="resources/wizardJs/javascript_compressed.js"></script>
+<script src="resources/wizardJs/ko.js"></script>
+<script src="resources/wizardJs/wizard.js"></script>
 
 <script>
 	$(document).ready(

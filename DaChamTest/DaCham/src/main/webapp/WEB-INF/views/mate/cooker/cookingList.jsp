@@ -19,6 +19,10 @@
 		$("#button").on("click",function(){
 			window.location.href = "cookScreen";
 		});
+		
+		$("#startCookBtn").on("click", function(){
+			window.open("cookScreen", "", "height=1024, width=1366, fullscreen=yes");
+		})
 	});
 </script>
 </head>
@@ -26,7 +30,7 @@
 	<%@include file = "cookerNavi.jsp" %>
 	<div class = container>
 	<h1>조리 대기</h1>
-		<button id = "button" class = "btn btn-primary">조리시작</button>
+		<button id = "startCookBtn" class = "btn btn-primary">조리시작</button>
 		<table class ="table table-hover">
 			<tr>
 				<th>음식명</th>
@@ -36,7 +40,7 @@
 			<c:forEach items = "${list }" var = "b">
 				<tr>
 					<td><a href = "#">${b.dietName }</a></td>
-					<td>${b.dietAmount }</td>
+					<td>${b.dietAmount}</td>
 					<td>${b.orderItemName}</td>
 				</tr>
 			</c:forEach>			

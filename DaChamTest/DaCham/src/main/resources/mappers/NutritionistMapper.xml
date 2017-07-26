@@ -6,7 +6,7 @@
 	<!-- 반찬 목록을 검색합니다. -->
 	<select id = "listSearch" resultType = "com.wdb3a.dacham.bean.Nutritionist">	
 		select a.sideDName, b.foodGName, c.cookMName , a.sideDCode, a.sideDImg,a.foodGCode
-		from sideDish a join foodGroup b join cookMethod c
+		from sidedish a join foodGroup b join cookMethod c
 		where a.foodGCode = b.foodGCode
 		and a.cookMCode = c.cookMCode
 		and a.sideDName like CONCAT('%',#{search},'%') 
@@ -37,7 +37,7 @@
 	<!-- 반찬 전체를 조회합니다(with 식품군, 조리방법) -->
 	<select id = "sideAll" resultType = "com.wdb3a.dacham.bean.Nutritionist">
 		select a.sideDName, b.foodGName, c.cookMName , a.sideDCode, a.sideDImg, a.foodGCode
-		from sideDish a join foodGroup b join cookMethod c
+		from sidedish a join foodgroup b join cookmethod c
 		where a.foodGCode = b.foodGCode
 		and a.cookMCode = c.cookMCode
 		and a.foodGCode = #{foodGCode}
@@ -46,7 +46,7 @@
 	<!-- 반찬 전체의 수량 구하기 -->
 	<select id = "sideAllCount" resultType = "Integer">
 		select count(a.sideDCode)
-		from sideDish a join foodGroup b join cookMethod c
+		from sidedish a join foodgroup b join cookmethod c
 		where a.foodGCode = b.foodGCode
 		and a.cookMCode = c.cookMCode
 		and a.foodGCode = #{foodGCode}
