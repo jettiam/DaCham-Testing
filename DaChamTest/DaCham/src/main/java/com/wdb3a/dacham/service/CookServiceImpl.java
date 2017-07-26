@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.wdb3a.dacham.bean.Cook;
+import com.wdb3a.dacham.bean.CookingItem;
 import com.wdb3a.dacham.bean.FoodMInven;
 import com.wdb3a.dacham.bean.OrderList;
 import com.wdb3a.dacham.dao.CookDAO;
@@ -55,6 +56,14 @@ public class CookServiceImpl implements CookService {
 	public List<Cook> endScreen() throws Exception {
 		// TODO Auto-generated method stub
 		return dao.endScreen();
+	}
+	
+	
+	
+	@Override
+	public List<CookingItem> getCookingItemList() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.getCookingItemList();
 	}
 	
 }
