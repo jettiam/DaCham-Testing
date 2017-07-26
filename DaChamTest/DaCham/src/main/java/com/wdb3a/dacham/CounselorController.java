@@ -1,8 +1,11 @@
 package com.wdb3a.dacham;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +41,8 @@ public class CounselorController {
 	}
 	
 	@RequestMapping(value="/detail", method = RequestMethod.GET)
-	public String getDetail(@RequestParam("customer")String customer,@RequestParam("name")String name,Model model){
+	public String getDetail(@RequestParam("customer")String customer,@RequestParam("name")String name,Model model) throws Exception{
+		
 		model.addAttribute("customer",customer);
 		model.addAttribute("name",name);
 		return "mate/counselor/counselorDetail";
