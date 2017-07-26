@@ -8,7 +8,7 @@ public class Counselor {
 	private String name;
 	private String email;
 	private String counselitemName;
-	private String costomer;
+	private String customer;
 	private String adviser;
 	private Date counselDate;
 	private String counselCoutent;
@@ -25,6 +25,14 @@ public class Counselor {
 	private String keyword;
 	private String keyword2;
 	private String searchType2;
+	private int orderCode;
+	private String dietName;
+	private Date orderDate;
+	private String orderItemName;
+	private String paymentItemName;
+	private String answer;
+	
+	
 	public int getCouselCode() {
 		return couselCode;
 	}
@@ -55,11 +63,11 @@ public class Counselor {
 	public void setCounselitemName(String counselitemName) {
 		this.counselitemName = counselitemName;
 	}
-	public String getCostomer() {
-		return costomer;
+	public String getCustomer() {
+		return customer;
 	}
-	public void setCostomer(String costomer) {
-		this.costomer = costomer;
+	public void setCostomer(String customer) {
+		this.customer = customer;
 	}
 	public String getAdviser() {
 		return adviser;
@@ -156,6 +164,45 @@ public class Counselor {
 	}
 	public void setSearchType2(String searchType2) {
 		this.searchType2 = searchType2;
+	}
+	public int getOrderCode() {
+		return orderCode;
+	}
+	public void setOrderCode(int orderCode) {
+		this.orderCode = orderCode;
+	}
+	public String getDietName() {
+		return dietName;
+	}
+	public void setDietName(String dietName) {
+		this.dietName = dietName;
+	}
+	public Date getOrderDate() {
+		return orderDate;
+	}
+	public void setOrderDate(Date orderDate) {
+		this.orderDate = orderDate;
+	}
+	public String getOrderItemName() {
+		return orderItemName;
+	}
+	public void setOrderItemName(String orderItemName) {
+		this.orderItemName = orderItemName;
+	}
+	public String getPaymentItemName() {
+		return paymentItemName;
+	}
+	public void setPaymentItemName(String paymentItemName) {
+		this.paymentItemName = paymentItemName;
+	}
+	public void setCustomer(String customer) {
+		this.customer = customer;
+	}
+	public String getAnswer() {
+		return answer;
+	}
+	public void setAnswer(String answer) {
+		this.answer = answer;
 	}
 	
 	

@@ -37,6 +37,12 @@
 			
 		});
 		
+		$(".modifyDiet").on("click",function(){
+			var dietCode = 0;
+			dietCode = $('input:radio[name="radio"]:checked').val();
+			window.location.href =  "dietModify?dietCode="+dietCode;	
+		});
+		
 		$(".deleteDiet").on("click",function(){
 			var ans = confirm("삭제하면 되돌릴 수 없습니다. 정말로 식단을 삭제하시겠습니까?");
 			if(ans == false) return;
@@ -123,7 +129,7 @@
    <div class = "box2">
       <div>
          <button id = "regist" class = "btn btn-default">식단 등록</button>
-         <button class = "btn btn-default">식단 수정</button>
+         <button class = "modifyDiet btn btn-default">식단 수정</button>
 <!--          <button class = "deleteDiet btn btn-default">식단 삭제</button>    -->
       </div>
       <div>

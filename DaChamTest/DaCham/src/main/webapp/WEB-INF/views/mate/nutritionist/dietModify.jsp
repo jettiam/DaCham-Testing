@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri  ="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import = "com.wdb3a.dacham.bean.Nutritionist" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,19 +14,97 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript"
-	src="../../../dacham/resources/bootstrap-filestyle.min.js"></script>
+	src="resources/bootstrap-filestyle.min.js"></script>
 <script>
 	$(document).ready(function(){
+		
+	
 		var currentPage = 1;
 		var currentGroup = "";
+		var dietCode = ${nutritionist.dietCode}
 		var v = 0;
 		sideAll(1, "01");
+		  
+		groupSelector1("01",dietCode);
+		groupSelector2("02",dietCode);
+		groupSelector3("03",dietCode);
+		groupSelector4("04",dietCode);
+		groupSelector5("05",dietCode);
+		groupSelector6("06",dietCode);
+		
+		
+		
 		$("#sideAll").on("click", function() {
 			sideAll();
 		});
 		$("#cancle").click(function() {
 			if (window.confirm("정말로 취소하시겠습니까?")) {
 				window.location.href = "diet";
+			}
+		});
+		$(".update").on("click",function(){
+			v = $(".material input[type='hidden']").length;
+			console.log("길이왕:"+v);          
+			var length1 = $(".foodGroup1 input[type='hidden']").length;
+			console.log("길이맨:"+length1);
+			
+			var length2 = $(".foodGroup2 input[type='hidden']").length;
+			console.log("길이맨:"+length2);
+			
+			var length3 = $(".foodGroup3 input[type='hidden']").length;
+			console.log("길이맨:"+length3);
+			
+			var length4 = $(".foodGroup4 input[type='hidden']").length;
+			console.log("길이맨:"+length4);
+			
+			var length5 = $(".foodGroup5 input[type='hidden']").length;
+			console.log("길이맨:"+length5);
+			
+			var length6 = $(".foodGroup6 input[type='hidden']").length;
+			console.log("길이맨:"+length6);
+			
+			
+			
+			$("form").append($(".foodGroup1"));
+			$("form").append($(".foodGroup2"));
+			$("form").append($(".foodGroup3"));
+			$("form").append($(".foodGroup4"));
+			$("form").append($(".foodGroup5"));
+			$("form").append($(".foodGroup6"));
+			
+			$(".foodGroup1 input[type='radio']").val('1');
+			$(".foodGroup1 input[type='radio']:checked").val('0');
+			
+			$(".foodGroup2 input[type='radio']").val('1');
+			$(".foodGroup2 input[type='radio']:checked").val('0');
+			
+			$(".foodGroup3 input[type='radio']").val('1');
+			$(".foodGroup3 input[type='radio']:checked").val('0');
+			
+			$(".foodGroup4 input[type='radio']").val('1');
+			$(".foodGroup4 input[type='radio']:checked").val('0');
+			
+			$(".foodGroup5 input[type='radio']").val('1');
+			$(".foodGroup5 input[type='radio']:checked").val('0');
+			
+			$(".foodGroup6 input[type='radio']").val('1');
+			$(".foodGroup6 input[type='radio']:checked").val('0');
+			
+			$('<input type = "hidden" id = "cnt" name = "count" value = "'+v+'">').appendTo("form");
+			$('<input type = "hidden" id = "cnt" name = "length1" value = "'+length1+'">').appendTo("form");
+			$('<input type = "hidden" id = "cnt" name = "length2" value = "'+length2+'">').appendTo("form");
+			$('<input type = "hidden" id = "cnt" name = "length3" value = "'+length3+'">').appendTo("form");
+			$('<input type = "hidden" id = "cnt" name = "length4" value = "'+length4+'">').appendTo("form");
+			$('<input type = "hidden" id = "cnt" name = "length5" value = "'+length5+'">').appendTo("form");
+			$('<input type = "hidden" id = "cnt" name = "length6" value = "'+length6+'">').appendTo("form");
+			
+			
+			if(window.confirm("정말로 수정하시겠습니까?")){
+				
+				
+				$("form").attr("action","dietModify");
+				$("form").attr("method","post");
+				$("form").submit();
 			}
 		});
 		$("#search")
@@ -83,6 +162,115 @@
 		$("#main4").on("click", function() {
 			sideAll(1, "06");
 		});
+		$(document.body).on("click",".nameClick",function(){
+			var foodGCode = $(this).attr("data-foodgcode");
+			var sideDImg = $(this).attr('data-img');
+			var sideDName = $(this).attr('data-name');
+			var sideDCode = $(this).attr('data-code');
+			if(foodGCode == '01'){
+				var str = "";
+				str = "<tr class = 'groupResult1'><td><input type = 'hidden' name = 'sideDCode1' value = "+sideDCode+"><input type = 'radio' class = 'groupRadio' name = 'sideDType1' value = '1'></td><td><img src = 'displayFile?fileName="+sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+sideDName+"</td></tr>";
+				$(".foodGroup1").append(str);      
+			}
+			else if(foodGCode == '02'){
+				var str = "";
+				str = "<tr class = 'groupResult2'><td><input type = 'hidden' name = 'sideDCode2' value = "+sideDCode+"><input type = 'radio' class = 'groupRadio' name = 'sideDType2' value = '1'></td><td><img src = 'displayFile?fileName="+sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+sideDName+"</td></tr>";
+				$(".foodGroup2").append(str);      
+			}
+			else if(foodGCode == '03'){
+				var str = "";
+				str = "<tr class = 'groupResult3'><td><input type = 'hidden' name = 'sideDCode3' value = "+sideDCode+"><input type = 'radio' class = 'groupRadio' name = 'sideDType3' value = '1'></td><td><img src = 'displayFile?fileName="+sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+sideDName+"</td></tr>";
+				$(".foodGroup3").append(str);      
+			}
+			else if(foodGCode == '04'){
+				var str = "";
+				str = "<tr class = 'groupResult4'><td><input type = 'hidden' name = 'sideDCode4' value = "+sideDCode+"><input type = 'radio' class = 'groupRadio' name = 'sideDType4' value = '1'></td><td><img src = 'displayFile?fileName="+sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+sideDName+"</td></tr>";
+				$(".foodGroup4").append(str);      
+			}
+			else if(foodGCode == '05'){
+				var str = "";
+				str = "<tr class = 'groupResult5'><td><input type = 'hidden' name = 'sideDCode5' value = "+sideDCode+"><input type = 'radio' class = 'groupRadio' name = 'sideDType5' value = '1'></td><td><img src = 'displayFile?fileName="+sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+sideDName+"</td></tr>";
+				$(".foodGroup5").append(str);      
+			}
+			else if(foodGCode == '06'){
+				var str = "";
+				str = "<tr class = 'groupResult6'><td><input type = 'hidden' name = 'sideDCode6' value = "+sideDCode+"><input type = 'radio' class = 'groupRadio' name = 'sideDType6' value = '1'></td><td><img src = 'displayFile?fileName="+sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+sideDName+"</td></tr>";
+				$(".foodGroup6").append(str);      
+			}
+		});
+		
+		$(document.body).on("click",".sideDImg",function(data){
+			$(this).parent().parent().remove();   
+		});
+		
+		function groupSelector1(foodGCode,dietCode){
+			$(".groupResult1").remove();
+			$.getJSON("nutriAjax/groupSide/"+foodGCode+"/"+dietCode,function(data){
+				var str = "";
+				$(data).each(function(){
+					str += "<tr class = 'groupResult1'><td><input type = 'hidden' name = 'sideDCode1' value = '"+this.sideDCode+"'><input type = 'radio' class = 'groupRadio' name = 'sideDType1' value = '"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+this.sideDName+"</td></tr>";
+				});    
+				$(".foodGroup1").append(str);   
+				$(".groupRadio:input[value = '0']").prop("checked",true);
+			});
+		}
+		function groupSelector2(foodGCode,dietCode){
+			$(".groupResult2").remove();
+			$.getJSON("nutriAjax/groupSide/"+foodGCode+"/"+dietCode,function(data){
+				var str = "";
+				$(data).each(function(){
+					str += "<tr class = 'groupResult2'><td><input type = 'hidden' name = 'sideDCode2' value = '"+this.sideDCode+"'><input type = 'radio' class = 'groupRadio' name = 'sideDType2' value = '"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+this.sideDName+"</td></tr>"
+				});
+				$(".foodGroup2").append(str);
+				$(".groupRadio:input[value = '0']").prop("checked",true);
+			});
+		}
+		function groupSelector3(foodGCode,dietCode){
+			$(".groupResult3").remove();
+			$.getJSON("nutriAjax/groupSide/"+foodGCode+"/"+dietCode,function(data){
+				var str = "";
+				$(data).each(function(){
+					str += "<tr class = 'groupResult3'><td><input type = 'hidden' name = 'sideDCode3' value = '"+this.sideDCode+"'><input type = 'radio' class = 'groupRadio' name = 'sideDType3' value = '"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+this.sideDName+"</td></tr>"
+				});
+				$(".foodGroup3").append(str);
+				$(".groupRadio:input[value = '0']").prop("checked",true);
+			});
+		}
+		function groupSelector4(foodGCode,dietCode){
+			$(".groupResult4").remove();
+			$.getJSON("nutriAjax/groupSide/"+foodGCode+"/"+dietCode,function(data){
+				var str = "";
+				$(data).each(function(){
+					str += "<tr class = 'groupResult4'><td><input type = 'hidden' name = 'sideDCode4' value = '"+this.sideDCode+"'><input type = 'radio' class = 'groupRadio' name = 'sideDType4' value = '"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+this.sideDName+"</td></tr>"
+				});
+				 	
+				$(".foodGroup4").append(str);
+				$(".groupRadio:input[value = '0']").prop("checked",true);
+			});
+		}
+		function groupSelector5(foodGCode,dietCode){
+			$(".groupResult5").remove();
+			$.getJSON("nutriAjax/groupSide/"+foodGCode+"/"+dietCode,function(data){
+				var str = "";
+				$(data).each(function(){
+					str += "<tr class = 'groupResult5'><td><input type = 'hidden' name = 'sideDCode5' value = '"+this.sideDCode+"'><input type = 'radio' class = 'groupRadio' name = 'sideDType5' value = '"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+this.sideDName+"</td></tr>"
+				});
+				$(".foodGroup5").append(str);
+				$(".groupRadio:input[value = '0']").prop("checked",true);
+			});
+		}
+		function groupSelector6(foodGCode,dietCode){
+			$(".groupResult6").remove();
+			$.getJSON("nutriAjax/groupSide/"+foodGCode+"/"+dietCode,function(data){
+				var str = "";
+				$(data).each(function(){
+					str += "<tr class = 'groupResult6'><td><input type = 'hidden' name = 'sideDCode6' value = '"+this.sideDCode+"'><input type = 'radio' class = 'groupRadio' name = 'sideDType6' value = '"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+this.sideDName+"</td></tr>"
+				});
+				$(".foodGroup6").append(str);
+				$(".groupRadio:input[value = '0']").prop("checked",true);
+			});
+			         
+		}
 		function sideAll(page, foodGCode) {
 			
 			$(".searchResult").remove();
@@ -98,7 +286,7 @@
 								$(data.list)
 										.each(
 												function() {
-													str += "<tr class = 'searchResult'><td><a class = 'nameClick' data-foodGCode='"+currentGroup+"' data-img = '"+this.sideDImg+"' data-code = '"+this.sideDCode+"'>"
+													str += "<tr class = 'searchResult'><td><a class = 'nameClick' data-foodGCode='"+currentGroup+"' data-img = '"+this.sideDImg+"' data-code = '"+this.sideDCode+"' data-name = '"+this.sideDName+"'>"
 															+ this.sideDName
 															+ "</a></td>"
 															+ "<td>"
@@ -113,6 +301,15 @@
 								printPaging(data.criteria);
 							});
 		}
+		
+		
+		function cntChange(v) {
+			$.getJSON("nutriAjax/" + v, function(data) {
+				$("#cnt").val(data);
+
+			});
+		}
+		
 		
 		function printPaging(criteria) {
 			var str = "";
@@ -138,11 +335,99 @@
 	});
 		
 </script>
-<title>식단 수정 페이지</title>       
+<title>식단 수정 페이지</title>
+<style>
+.sideDImg {
+	max-height: 80px
+}
+
+.material {
+	height: 450px         
+}
+</style>             
 </head>
 <body>
 	<div class = "container">
-		<h2>&nbsp;식단 수정 페이지입니다.</h2>        
+		<h2>&nbsp;식단 수정 페이지입니다.</h2>
+		<div class = "material">   
+			<div class = "col-sm-2">
+				<h2>밥</h2>
+				<table class = "foodGroup1">
+					<tr>
+						<th>&nbsp;&nbsp;&nbsp;</th>
+						<th>반찬사진&nbsp;&nbsp;&nbsp;</th>
+						<th>반찬명&nbsp;&nbsp;&nbsp;</th>
+					</tr>
+					<tr class = "groupResult1">
+					</tr>
+				</table>
+			</div>  
+			<div class = "col-sm-2">
+				<h2>국</h2>
+				<table class = "foodGroup2">
+					<tr>
+						<th>&nbsp;&nbsp;&nbsp;</th>
+						<th>반찬사진&nbsp;&nbsp;&nbsp;</th>
+						<th>반찬명&nbsp;&nbsp;&nbsp;</th>
+					</tr>
+					<tr class = "groupResult2">
+						
+					</tr>
+				</table>
+			</div> 
+			<div class = "col-sm-2">
+				<h2>메인 메뉴1</h2>
+				<table class = "foodGroup3">
+					<tr>
+						<th>&nbsp;&nbsp;&nbsp;</th>
+						<th>반찬사진&nbsp;&nbsp;&nbsp;</th>
+						<th>반찬명&nbsp;&nbsp;&nbsp;</th>
+					</tr>
+					<tr class = "groupResult3">
+						
+					</tr>
+				</table>
+			</div>  
+			<div class = "col-sm-2">
+				<h2>메인 메뉴2</h2>
+				<table class = "foodGroup4">   
+					<tr>
+						<th>&nbsp;&nbsp;&nbsp;</th>
+						<th>반찬사진&nbsp;&nbsp;&nbsp;</th>
+						<th>반찬명&nbsp;&nbsp;&nbsp;</th>
+					</tr>
+					<tr class = "groupResult4">
+						
+					</tr>
+				</table>
+			</div>  
+			<div class = "col-sm-2">
+				<h2>메인 메뉴3</h2>
+				<table class = "foodGroup5">
+					<tr>
+						<th>&nbsp;&nbsp;&nbsp;</th>
+						<th>반찬사진&nbsp;&nbsp;&nbsp;</th>
+						<th>반찬명&nbsp;&nbsp;&nbsp;</th>
+					</tr>
+					<tr class = "groupResult5">
+						
+					</tr>
+				</table>
+			</div>  
+			<div class = "col-sm-2">
+				<h2>메인 메뉴4</h2>
+				<table class = "foodGroup6">    
+					<tr>
+						<th>&nbsp;&nbsp;&nbsp;</th>
+						<th>반찬사진&nbsp;&nbsp;&nbsp;</th>
+						<th>반찬명&nbsp;&nbsp;&nbsp;</th>
+					</tr>
+					<tr class = "groupResult6">
+						
+					</tr>
+				</table>
+			</div>       
+		</div>                        
 		<div class="div1 col-sm-12">
 			<div class="col-sm-6">
 				<input type="text" name="search" id="keyword" placeholder="반찬 검색란">
@@ -176,13 +461,13 @@
 				<label for = "diseaseCode">질병 선택</label>
 				<select name = "diseaseCode" class = "form-control"> 
 					<c:forEach var = "o" items = "${overList }">
-						<option value = "${o.diseaseCode }">${o.diseaseName }, ${o.judgement}</option>
+						<option value="${o.diseaseCode }" <c:out value="${o.diseaseCode eq cloneDisease ? 'selected':''}"/>>${o.diseaseName }, ${o.judgement }</option>						
 					</c:forEach>					
 				</select>				
 			</div>
 			<div class = "form-group">
 				<label for = "sideDName">식단의 이름</label>
-				<input type = "text" name = "sideDName" value = "${nutritionist.dietName }" class = "form-control">
+				<input type = "text" name = "dietName" value = "${nutritionist.dietName }" class = "form-control">
 			</div>
 			<div class = "form-group">
 				<label for = "price">식단의 가격</label>
@@ -198,7 +483,7 @@
 			</div>
 		</form>
 		<div>
-			<button id="update" class="btn btn-danger">수정</button>
+			<button id="update" class="update btn btn-danger">수정</button>
 			<button id="cancle" class="btn btn-warning">취소</button>
 		</div>
 	</div>

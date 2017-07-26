@@ -87,7 +87,7 @@
 
 			<div id="nutriInfoImgList">
 				<a href="nutritionInfoDetail"><img
-					src="../../../dacham/resources/customerImage/tomato.jpg"
+					src="resources/customerImage/tomato.jpg"
 					id="nutriInfoImg">
 
 					<div class="overlay">
@@ -101,7 +101,7 @@
 
 		<div id="nutriInfoImgList">
 			<a href="nutritionInfoDetail2"><img
-				src="../../../dacham/resources/customerImage/broccoli.jpg"
+				src="resources/customerImage/broccoli.jpg"
 				id="nutriInfoImg">
 
 				<div class="overlay">
@@ -117,7 +117,7 @@
 
 		<div id="nutriInfoImgList">
 			<a href="nutritionInfoDetail"><img
-				src="../../../dacham/resources/customerImage/shutterstock.jpg"
+				src="resources/customerImage/shutterstock.jpg"
 				id="nutriInfoImg">
 
 				<div class="overlay">
@@ -134,7 +134,7 @@
 
 		<div id="nutriInfoImgList">
 			<a href="nutritionInfoDetail"><img
-				src="../../../dacham/resources/customerImage/fruit.jpg"
+				src="resources/customerImage/fruit.jpg"
 				id="nutriInfoImg">
 
 				<div class="overlay">
@@ -149,7 +149,7 @@
 
 		<div id="nutriInfoImgList">
 			<a href="nutritionInfoDetail"><img
-				src="../../../dacham/resources/customerImage/gusal.jpg"
+				src="resources/customerImage/gusal.jpg"
 				id="nutriInfoImg">
 
 				<div class="overlay">
@@ -164,7 +164,7 @@
 
 		<div id="nutriInfoImgList">
 			<a href="nutritionInfoDetail"><img
-				src="../../../dacham/resources/customerImage/salmon.jpg"
+				src="resources/customerImage/salmon.jpg"
 				id="nutriInfoImg">
 
 				<div class="overlay">

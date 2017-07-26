@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.wdb3a.dacham.bean.Counselor;
+import com.wdb3a.dacham.bean.Criteria;
 import com.wdb3a.dacham.dao.CounselorDAO;
 @Service
 public class CounselorServiceImpl implements CounselorService {
@@ -46,5 +47,59 @@ public class CounselorServiceImpl implements CounselorService {
 	public Counselor viewCounsel(int counselCode) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.viewCounsel(counselCode);
+	}
+
+	@Override
+	public List<Counselor> linkCounsel(String customer) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.linkCounsel(customer);
+	}
+
+	@Override
+	public Counselor selectCounsel(int couselCode) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectCounsel(couselCode);
+	}
+
+	@Override
+	public Counselor counselMember(int couselCode) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.counselMember(couselCode);
+	}
+
+	@Override
+	public List<Counselor> orderList(int couselCode,Criteria criteria) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.orderList(couselCode,criteria);
+	}
+
+	@Override
+	public void counselUpdate(Counselor counselor) throws Exception {
+		// TODO Auto-generated method stub
+		dao.counselUpdate(counselor);
+	}
+
+	@Override
+	public List<Counselor> counselorListAll() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.counselorListAll();
+	}
+
+	@Override
+	public List<Counselor> counselorseList2All() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.counselorseList2All();
+	}
+
+	@Override
+	public int orderListCount(int couselCode) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.orderListCount(couselCode);
+	}
+
+	@Override
+	public void counselInsert(Counselor counselor) throws Exception {
+		// TODO Auto-generated method stub
+		dao.counselInsert(counselor);
 	}
 }

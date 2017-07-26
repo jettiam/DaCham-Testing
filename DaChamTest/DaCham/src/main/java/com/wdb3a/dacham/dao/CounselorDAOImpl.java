@@ -1,6 +1,8 @@
 package com.wdb3a.dacham.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -8,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.wdb3a.dacham.bean.Counselor;
+import com.wdb3a.dacham.bean.Criteria;
 @Repository
 public class CounselorDAOImpl implements CounselorDAO {
 	private static final String namespace="com.wdb3a.CounselorMapper";
@@ -46,5 +49,62 @@ public class CounselorDAOImpl implements CounselorDAO {
 	public Counselor viewCounsel(int counselCode) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace+".viewCounsel",counselCode);
+	}
+
+	@Override
+	public List<Counselor> linkCounsel(String customer) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".linkCounsel",customer);
+	}
+
+	@Override
+	public Counselor selectCounsel(int couselCode) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".selectCounsel",couselCode);
+	}
+
+	@Override
+	public Counselor counselMember(int couselCode) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".counselMember",couselCode);
+	}
+
+	@Override
+	public List<Counselor> orderList(int couselCode,Criteria criteria) throws Exception {
+		// TODO Auto-generated method stub
+		Map<String,Object> map = new HashMap<>();
+		map.put("couselCode", couselCode);
+		map.put("criteria", criteria);
+		return sqlSession.selectList(namespace+".orderList",map);
+	}
+
+	@Override
+	public void counselUpdate(Counselor counselor) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace+".counselUpdate",counselor);
+	}
+
+	@Override
+	public List<Counselor> counselorListAll() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".counselorListAll");
+	}
+
+	@Override
+	public List<Counselor> counselorseList2All() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".counselorseList2All");
+	}
+
+	@Override
+	public int orderListCount(int couselCode) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".orderListCount",couselCode);
+	}
+
+	@Override
+	public void counselInsert(Counselor counselor) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.insert(namespace+".counselInsert",counselor);
 	}
 }

@@ -48,7 +48,7 @@
 	<%@include file="../../clientNavi.jsp"%>
 
 	<div id="">
-		<img src="../../../dacham/resources/customerImage/Broccolit.jpg"
+		<img src="resources/customerImage/Broccolit.jpg"
 			id="nutriInfoDetailTitleImg">
 
 	</div>
@@ -72,7 +72,7 @@
 				미세먼지로 인한 호흡기 손상을 악화시킬 우려가 있다. 조금이라도 과학적으로 근거를 갖춘 두 가지 식품을 소개한다.</h4>
 		</div>
 		<div id="nutriInfoDetailImg">
-			<img src="../../../dacham/resources/customerImage/greentea.png"
+			<img src="resources/customerImage/greentea.png"
 				id="nutriInfoDetailImg">
 			<div id="nutritionInfoTitleBox">
 				<h3>녹차</h3>
@@ -96,7 +96,7 @@
 
 		</div>
 		<div id="nutriInfoDetailImg">
-			<img src="../../../dacham/resources/customerImage/brocoli2.png"
+			<img src="resources/customerImage/brocoli2.png"
 				id="nutriInfoDetailImg">
 			<div id="nutritionInfoTitleBox">
 				<h3>브로콜리</h3>

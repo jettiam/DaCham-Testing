@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -17,12 +17,93 @@
 <script>
 	$(document).ready(function(){
 		$("#counselorList").addClass("w3-light-gray");
-		$(".counselTitle a").on("click",function(){
-			var counselCode = $(this).attr('data-code');
-			$.getJSON("counselAjax/views/"+counselCode,function(data){           
-				$(".box2").html("<table border = '1'><tr><td>제목</td><td><b>"+data.counselTitle+"</b></td></tr><tr><td>내용</td><td>"+data.counselContent+"</td></tr></table>")
+		$(".searchResult1").remove();
+		$.getJSON("counselAjax/counselorListAll",function(data){
+			var str = "";
+			$(data).each(function(){
+				str += "<tr class = 'searchResult1'><td>"+this.id+"</td><td><a class = 'nameClick' data-name = '"+this.id+"'>"+this.name+"</a></td><td>"+this.address+"</td><td>"+this.tel+"</td><td>"+this.email+"</td><td>"+this.deptCode+"</td><td>"+this.gradeCode+"</td><td>"+this.joinDate+"</td></tr>";
+			});
+			$(".search1").append(str);
+		});
+		
+		
+		$(".searchResult2").remove();
+		$.getJSON("counselAjax/counselorseList2All",function(data){
+			var str = "";
+			$(data).each(function(){
+				str += "<tr class = 'searchResult2'><td>"+this.counselCode+"</td><td class = 'counselTitle'><a data-code = '"+this.counselCode+"' data-name = '"+this.name+"' data-id = '"+this.id+"'>"+this.counselTitle+"</a></td><td>"+this.name+"</td><td>"+this.id+"</td><td>"+this.counselDate+"</td></tr>";
+			});
+			$(".search2").append(str);
+		});
+		
+		
+		$(document.body).on("click",".nameClick",function(){
+			var name = $(this).attr('data-name');
+			$(".answer").empty();
+			$(".answer").append("<textarea id = 'answers' name = 'answer'></textarea>");
+			$(".answer").append("<input type = 'hidden' class = 'id'  name = 'id' value = '"+name+"'>");
+			$(".answer").append("<button id = 'button'>답변등록</button>");
+			linkAll(name);
+		});
+		
+		$(document.body).on("click","#button",function(){
+			var customer = $('.id').val();
+			var answer = $('#answers').val();
+			
+			$.ajax({
+				type : "POST",
+				url : 'counselAjax/counselInsert/'+customer+"/"+answer,
+				headers : {
+					"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "POST",
+				},
+				success : function(result){
+					if(result == "SUCCESS"){
+						alert("등록되었습니다.");
+					}
+				}
 			});
 		});
+		
+		$("#search").on("click",function(){
+			$(".searchResult1").remove();
+			
+			var str = "";
+			var searchType = $(".searchType").val();
+			var keyword = $("#keyword").val();
+			$.getJSON("counselAjax/listAll/"+searchType+"/"+keyword,function(data){
+				$(data).each(function(){
+					str += "<tr class = 'searchResult1'><td>"+this.id+"</td><td>"+this.name+"</td><td>"+this.address+"</td><td>"+this.tel+"</td><td>"+this.email+"</td><td>"+this.deptCode+"</td><td>"+this.gradeCode+"</td><td>"+this.joinDate+"</td></tr>";
+				});
+				$(".search1").append(str);
+			});
+		});
+		$("#Search").on("click",function(){
+			$(".searchResult2").remove();
+			
+			var str = "";
+			var searchType = $(".searchType2").val();
+			var keyword = $("#keyword2").val();
+			$.getJSON("counselAjax/counselorseList2/"+searchType+"/"+keyword,function(data){
+				$(data).each(function(){
+					str += "<tr class = 'searchResult2'><td>"+this.counselCode+"</td><td class = 'counselTitle'><a data-code = '"+this.counselCode+"' data-name = '"+this.name+"' data-id = '"+this.id+"'>"+this.counselTitle+"</a></td><td>"+this.name+"</td><td>"+this.id+"</td><td>"+this.counselDate+"</td></tr>";
+				});
+				$(".search2").append(str);
+			});
+		});
+		
+		function linkAll(customer){
+			$(".answerResult").remove();
+			$.getJSON("counselAjax/linkCounsel/"+customer,function(data){
+				var str = "";
+				$(data).each(function(){
+					
+						str += "<tr class = 'answerResult'><td class = 'counselCode' data-code = '"+this.counselCode+"' data-id = '"+this.customer+"'><a href = '#'>"+this.counselCode+"</a></td><td>"+this.customer+"</td><td>"+this.answer+"</td></tr>";
+				
+				});
+				$(".link").append(str);
+			});
+		}
 	});
 </script>
 <style>
@@ -34,110 +115,70 @@
 </head>
 <body>
 <%@include file = "counselorNavi.jsp" %>
-   <div class = "box1">
-   	<form>
-      <div>
-			<select name = "searchType">
-				<option value = "n"
-	   			<c:out value="${Counselor.searchType==null?'selected':'' }"/>>
-	   			----------
-	   			</option>
-	   			<option value = "t"
-	   			<c:out value="${Counselor.searchType eq 't'?'selected':'' }"/>>
-	   			고객id
-	   			</option>
-	   			<option value = "c"
-	   			<c:out value="${Counselor.searchType eq 'c'?'selected':'' }"/>>
-	   			고객이름
-	   			</option>
-			</select>
-			<input type = "text" name = "keyword" placeholder = "검색어 입력란">
-			<button id = "search">검색</button>
-		</div>
-	
-      <div>
-      <table border ="1">
-         <tr>
-         			<th>고객id</th>
-					<th>고객이름</th>
-					<th>주소</th>
-					<th>전화번호</th>
-					<th>Email</th>
-					<th>부서</th>
-					<th>직급</th>
-					<th>가입일</th>
-					<th>상담사</th>
-					<th>상담일시</th>
-					<th>상담내용</th>
-					
-         </tr>
-         <c:forEach items = "${list }" var = "c">
-					<tr>
-						<td>${c.id }</td>
-						<td>${c.name }</td>
-						<td>${c.address } </td>
-						<td>${c.tel }</td>
-						<td>${c.email }</td>
-						<td>${c.deptCode }</td>
-						<td>${c.gradeCode }</td>
-						<td>${c.joinDate }</td>
-						<td>${c.counselTitle }</td>
-						<td>${c.counselDate }</td>
-						<td>${c.counselContent }</td>
-					</tr>
-		</c:forEach>
-      </table>
-      </form>
-      <form>
-       <div>
-			<select name = "SearchType">
-				<option value = "n"
-	   			<c:out value="${Counselor.searchType2==null?'selected':'' }"/>>
-	   			----------
-	   			</option>
-	   			<option value = "y"
-	   			<c:out value="${Counselor.searchType2 eq 't'?'selected':'' }"/>>
-	   			작성자이름
-	   			</option>
-	   			<option value = "u"
-	   			<c:out value="${Counselor.searchType2 eq 'c'?'selected':'' }"/>>
-	   			작성자ID
-	   			</option>
-			</select>
-			<input type = "text" name = "keyword2" placeholder = "검색어 입력란">
-			<button id = "Search">검색</button>
-	 </div>
-  
-      
-      <div>
-	     <table border ="1">
-            <tr>
-               <th>번호</th>
-               <th>글제목</th>
-               <th>작성자이름</th>
-               <th>작성자ID</th>
-               <th>작성일</th>
-             
-            </tr>
-            <c:forEach items = "${list2 }" var = "n">
-					<tr>
-						<td>${n.counselCode }</td>
-						<td class = "counselTitle"><a data-code = "${n.counselCode }">${n.counselTitle }</a></td>
-						<td>${n.name }</td>
-						<td>${n.id } </td>
-						<td>${n.counselDate }</td>
+	<div class = "container">   
+	   <div class = "box1">
+	   
+	   		 <h3>고객의 정보</h3>
+	      <div>
+				<select name = "searchType" class= "searchType">
+					<option value = "n"
+		   			<c:out value="${Counselor.searchType==null?'selected':'' }"/>>
+		   			----------
+		   			</option>
+		   			<option value = "t"
+		   			<c:out value="${Counselor.searchType eq 't'?'selected':'' }"/>>
+		   			고객id
+		   			</option>
+		   			<option value = "c"
+		   			<c:out value="${Counselor.searchType eq 'c'?'selected':'' }"/>>
+		   			고객이름
+		   			</option>
+				</select>
+				<input type = "text" name = "keyword" id = "keyword" placeholder = "검색어 입력란">
+				<button id = "search">검색</button>
+			</div>
+		
+	      
+	     <div style = "border:1px solid gold;">
+	      <table border ="1" class = "search1 table table-hover">
+	         <tr>
+	         			<th>고객id</th>
+						<th>고객이름</th>
+						<th>주소</th>
+						<th>전화번호</th>
+						<th>Email</th>
+						<th>부서</th>
+						<th>직급</th>
+						<th>가입일</th>
 						
-					</tr>
-		</c:forEach>
-         </table>
-      </div>
-   	</form>
-   </div>
-   <div class = "box2">
-      
-   </div>
-   <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-   <br><br><br><br><br><br>
-  
+						
+	         </tr>
+	       	 <tr class = "searchResult1">
+	       	 </tr>
+	      </table>
+	      </div>
+	      <div>
+	      		<table class = "link table table-hover">
+               <tr>   
+                  <th>번호</th>
+                  <th>고객아이디</th>
+                  <th>답변</th>
+               </tr>
+               <tr class = "answerResult">
+                  
+               </tr>
+            </table>
+	      </div>
+	      <form>
+		      <div class = "answer">
+		      </div>
+	      </form>	  
+	   </div>
+	   <div class = "box2">
+	      
+	   </div>
+	   <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	   <br><br><br><br><br><br>
+	  </div>
 </body>
 </html>

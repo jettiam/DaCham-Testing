@@ -12,7 +12,7 @@
 <script
    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
-<script>
+<script>  
 $(function(){
 	$("#cookFood").addClass("w3-light-gray");
 });
@@ -46,7 +46,7 @@ $(function(){
 			<table class = "table table-hover">
 				<tr>
 					<th>식재료명</th>
-					<th>식재료량</th>
+					<th>추가된 입고량</th>
 					<th>요청양</th>
 					<th>단위</th>
 				</tr>

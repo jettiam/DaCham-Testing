@@ -324,6 +324,24 @@ public class NutritionistServiceImpl implements NutritionistService {
 		dao.dietModify(nutritionist);
 	}
 
+	@Override
+	public List<Nutritionist> groupSide(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.groupSide(nutritionist);
+	}
+
+	@Override
+	public void updateCross1(int dietCode) throws Exception {
+		// TODO Auto-generated method stub
+		dao.updateCross1(dietCode);
+	}
+
+	@Override
+	public void updateCross2(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		dao.updateCross2(nutritionist);
+	}
+
 
 	
 

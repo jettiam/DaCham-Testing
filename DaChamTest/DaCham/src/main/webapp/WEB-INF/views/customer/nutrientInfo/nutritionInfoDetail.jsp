@@ -46,7 +46,7 @@ position:relative;
 	<%@include file="../../clientNavi.jsp"%>
 	
 		<div id="">
-		<img src="../../../dacham/resources/customerImage/colorcherrytomato.jpg" id="nutriInfoDetailTitleImg">
+		<img src="resources/customerImage/colorcherrytomato.jpg" id="nutriInfoDetailTitleImg">
 		
 		</div>
 	<div id="nutriInfoDetailWrap">
@@ -59,7 +59,7 @@ position:relative;
           또한, 시큼한 맛을 내는 구연산, 사과산 등의 유기산이 풍부하여 위액분비를 촉진시켜 소화를 돕고, 
           육류섭취로 인한 체내 산성화를 방지하며 춘곤증과 피로회복에 도움을 준다.</h4> </div>
       <div id="nutriInfoDetailImg">
-		<img src="../../../dacham/resources/customerImage/tomato2.jpg" id="nutriInfoDetailImg">
+		<img src="resources/customerImage/tomato2.jpg" id="nutriInfoDetailImg">
 		<div id="nutritionInfoTitleBox"><h3>방울토마토의 효능과 칼로리 </h3></div>
 		<div id="nutritionInfoTextBox"> <h4>1. 항암 효과 = 토마토의 대표적인 성분인 라이코펜(lycopene)은 
 		 카로티노이드계 색소 물질로서 세포의 산화를 막아 
@@ -82,7 +82,7 @@ position:relative;
 		  
 	</div>
 	<div id="nutriInfoDetailImg">
-		<img src="../../../dacham/resources/customerImage/nutriinfodetail1.JPG" id="nutriInfoDetailImg">
+		<img src="resources/customerImage/nutriinfodetail1.JPG" id="nutriInfoDetailImg">
 		<div id="nutritionInfoTitleBox"><h3>▷방울토마토 브로콜리 샐러드  </h3></div>
 		<div id="nutritionInfoTextBox"> 
 		<h4>[재료] 방울토마토 7개, 브로콜리 20g, 양상추 25g, 
@@ -94,7 +94,7 @@ position:relative;
  </h4> </div>
 		  
 	<div id="nutriInfoDetailImg">
-		<img src="../../../dacham/resources/customerImage/nutriinfodetail2.JPG" id="nutriInfoDetailImg">
+		<img src="resources/customerImage/nutriinfodetail2.JPG" id="nutriInfoDetailImg">
 		<div id="nutritionInfoTitleBox"><h3>▷ 방울토마토 두부 구이  </h3></div>
 		<div id="nutritionInfoTextBox"> 
 		<h4>[재료] 방울토마토 10개, 두부 2조각, 소금, 후추, 
