@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wdb3a.dacham.bean.Cook;
+import com.wdb3a.dacham.bean.CookingItem;
 import com.wdb3a.dacham.bean.FoodMInven;
 import com.wdb3a.dacham.service.CookService;
 import com.wdb3a.dacham.util.MediaUtils;
@@ -55,16 +56,19 @@ public class CookerController {
 	}
 	@RequestMapping(value="/cook", method=RequestMethod.GET)
 	public String getcook(Model model)throws Exception{
-		List<Cook> list = service.readycook();
-		
+		List<Cook> list = service.readycook();		
 		model.addAttribute("list",list);
 	
 		return "/mate/cooker/cook";
 	}
+	
 	@RequestMapping(value = "/cookScreen",method = RequestMethod.GET)
-	public String cookScreen() throws Exception{
+	public String cookScreen(Model model) throws Exception{
+		List<CookingItem> list = service.getCookingItemList();
+		model.addAttribute("list", list);
 		return "/mate/cooker/cookScreen";
 	}
+	
 	@ResponseBody
 	@RequestMapping("displayCookFile")
 	public ResponseEntity<byte[]> displayFile(String fileName) throws Exception{
