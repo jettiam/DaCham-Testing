@@ -114,15 +114,17 @@ public class LoginController {
 					Member dbResult = service.getMember(id);
 					session.setAttribute("memberName", dbResult.getName());
 					session.setAttribute("customerId", dbResult.getId());
-					session.setAttribute("passwd", dbResult.getPasswd());
+					//session.setAttribute("passwd", dbResult.getPasswd());
 					session.setAttribute("address", dbResult.getAddress());
 					session.setAttribute("tel", dbResult.getTel());
 					session.setAttribute("email", dbResult.getEmail());
 					session.setAttribute("joinDate", dbResult.getJoinDate());
 					session.setAttribute("gradeCode", dbResult.getGradeCode());
-					
+					session.setAttribute("deptCode",dbResult.getDeptCode());
 					model.addAttribute("result", result);					
 					return "main";
+				}else if(result==3){
+					return "mate/wholesaler";
 				}else{
 					model.addAttribute("result", result);
 					return "main";

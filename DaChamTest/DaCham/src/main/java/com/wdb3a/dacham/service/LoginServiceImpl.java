@@ -20,7 +20,11 @@ public class LoginServiceImpl implements LoginService {
 		Member dbResult = dao.getMember(id);
 		if(dbResult != null){
 			if(pw.equals(dbResult.getPasswd())){
-				return 1; //로그인 성공.
+				if(dbResult.getDeptCode().equals("도매상")){
+					return 3;//도매상 로그인 성공
+				}else{
+					return 1; //로그인 성공.
+				}				
 			}else{
 				return 0; // 아이디 있으나 비밀번호 틀림
 			}
