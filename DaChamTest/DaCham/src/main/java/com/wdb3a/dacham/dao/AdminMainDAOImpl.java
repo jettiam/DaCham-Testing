@@ -187,6 +187,23 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 		return sqlSession.selectOne(namespace+".memberUserInfo", id); 
 	}
 
+	@Override
+	public void joinOut(String id) throws Exception {
+		sqlSession.update(namespace+".joinOut", id);  
+	}
+
+	@Override
+	public void empUpdate(Member member) throws Exception {
+		sqlSession.update(namespace+".empUpdate", member);
+		
+	}
+
+	@Override
+	public void insertFoodM(FoodMAmountRead foodMAmountRead) throws Exception {
+		sqlSession.insert(namespace+".insertFoodM", foodMAmountRead);
+		
+	}
+
 	
 
 	

@@ -21,7 +21,7 @@ function all(){
 		$(".foodStock").remove(); 
 		var str = "";
 		for(var i =0; i<data.length; i++){
-			str += "<tr class='foodStock'>"+"<td>"+data[i].foodMICode+"</td>"+"<td>"+data[i].foodMName+"</td>"+"<td>"+data[i].price+"</td>"+"<td>"+data[i].uint+"</td>"+"<td>"+data[i].inAmount+"</td>"+"<td>"+data[i].outAmount+"</td>"+"<td>"+data[i].stock+"</td> </tr>"		 
+			str += "<tr class='foodStock'>"+"<td>"+data[i].foodMICode+"</td>"+"<td>"+data[i].foodMName+"</td>"+"<td>"+data[i].price+"</td>"+"<td>"+data[i].unit+"</td>"+"<td>"+data[i].inAmount+"</td>"+"<td>"+data[i].outAmount+"</td>"+"<td>"+data[i].stock+"</td> </tr>"		 
 		}
 		console.log(str);
 		$(".tables").append(str); 
@@ -41,13 +41,13 @@ function all(){
 			var keyword = $("#keyword").val();
 			$.getJSON("adminSub/foodOrder/"+searchType+"/"+keyword,function(data){
 			for(var i=0; i<data.length; i++){
-				str += "<tr class='foodStock'>"+"<td>"+data[i].foodMICode+"</td>"+"<td>"+data[i].foodMName+"</td>"+"<td>"+data[i].price+"</td>"+"<td>"+data[i].uint+"</td>"+"<td>"+data[i].inAmount+"</td>"+"<td>"+data[i].outAmount+"</td>"+"<td>"+data[i].stock+"</td> </tr>"		 
+				str += "<tr class='foodStock'>"+"<td>"+data[i].foodMICode+"</td>"+"<td>"+data[i].foodMName+"</td>"+"<td>"+data[i].price+"</td>"+"<td>"+data[i].unit+"</td>"+"<td>"+data[i].inAmount+"</td>"+"<td>"+data[i].outAmount+"</td>"+"<td>"+data[i].stock+"</td> </tr>"		 
 				}    
 			$(".tables").append(str); 
 			});     
 		});  
 	
-});      
+});          
 </script>
 </head>
 <body>

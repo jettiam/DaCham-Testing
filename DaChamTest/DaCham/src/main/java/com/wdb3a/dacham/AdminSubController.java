@@ -15,7 +15,7 @@ import org.json.simple.JSONValue;
 import org.junit.runner.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.ResponseEntity;  
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Controller;
@@ -280,9 +280,10 @@ public class AdminSubController {
 		return entity;
 	}
    
-   @RequestMapping(value = "/memberUserInfo/{id}",method = RequestMethod.GET)
+   @RequestMapping(value = "/userMemberInfo/{id}",method = RequestMethod.GET)
 	public ResponseEntity<Member> memberAll(@PathVariable("id")String id){
-		ResponseEntity<Member> entity = null;
+		System.out.println(id);
+	   	ResponseEntity<Member> entity = null;  
 		try {
 			Member member = service.memberUserInfo(id);
 			entity = new ResponseEntity<>(member,HttpStatus.OK);
@@ -291,7 +292,35 @@ public class AdminSubController {
 			e.printStackTrace();
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		return entity;
+		return entity;  
 	}
+   //회원수정
+   @RequestMapping(value = "/empUpdate", method = RequestMethod.PUT)
+  	public ResponseEntity<String> empUpdate(@RequestBody Member member){
+  		ResponseEntity<String> entity = null;
+  		try {
+  			service.empUpdate(member);  
+  			entity = new ResponseEntity<>("SUCCESS",HttpStatus.OK);
+  		} catch (Exception e) {
+  			// TODO Auto-generated catch block
+  			e.printStackTrace();
+  			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+  		}
+  		return entity;
+  	}
+   
+   @RequestMapping(value = "/empUpdate/{id}", method = RequestMethod.PUT)
+ 	public ResponseEntity<String> empOut(@PathVariable("id")String id){
+ 		ResponseEntity<String> entity = null;
+ 		try {
+ 			service.joinOut(id);   
+ 			entity = new ResponseEntity<>("SUCCESS",HttpStatus.OK);
+ 		} catch (Exception e) {
+ 			// TODO Auto-generated catch block
+ 			e.printStackTrace();
+ 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+ 		}
+ 		return entity;
+ 	}
 }
 

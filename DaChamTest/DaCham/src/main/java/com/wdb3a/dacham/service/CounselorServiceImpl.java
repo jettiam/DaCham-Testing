@@ -96,4 +96,10 @@ public class CounselorServiceImpl implements CounselorService {
 		// TODO Auto-generated method stub
 		return dao.orderListCount(couselCode);
 	}
+
+	@Override
+	public void counselInsert(Counselor counselor) throws Exception {
+		// TODO Auto-generated method stub
+		dao.counselInsert(counselor);
+	}
 }

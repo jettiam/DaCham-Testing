@@ -43,5 +43,8 @@ public interface AdminMainDAO {
 	public List<Diet> disease4() throws Exception;
 	public void empjoin(Member member) throws Exception;
 	public List<Member> memberAll() throws Exception;
-	public Member memberUserInfo(String id) throws Exception;    
+	public Member memberUserInfo(String id) throws Exception;
+	public void joinOut(String id) throws Exception;
+	public void empUpdate(Member member) throws Exception;
+	public void insertFoodM(FoodMAmountRead foodMAmountRead) throws Exception;
 }

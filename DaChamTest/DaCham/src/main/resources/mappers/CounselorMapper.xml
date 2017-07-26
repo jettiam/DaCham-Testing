@@ -4,9 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wdb3a.CounselorMapper">
 <select id = "counselorListAll"  resultType="Counselor">
-	select  a.id , a.name , a.address, a.tel, a.email, a.deptCode, a.gradeCode, a.joinDate, b.counselTitle, b.counselDate, b.counselContent
-	from member a join counsel b
-	where a.id = b.customer
+	select  a.id , a.name , a.address, a.tel, a.email, a.deptCode, a.gradeCode, a.joinDate
+	from member a 
+	
 </select>
 <select id = "counselorseList2All" resultType="Counselor">
 	select  b.counselCode,b.counselTitle ,a.name, a.id, b.counselDate, b.counselContent
@@ -55,7 +55,8 @@
 <select id = "linkCounsel" resultType = "Counselor">
 	select * from counsel a join counselitem b
 	where a.counselItemCode = b.counselItemCode
-	and a.customer = #{customer}	
+	and a.customer = #{customer}
+	and counselTitle not in('전화')	
 </select>
 <select id = "selectCounsel" resultType = "Counselor">
 	select * from counsel a join counselitem b
@@ -88,4 +89,12 @@
 	update counsel set answer = #{answer}, adviser = 'counselor'
 	where counselCode = #{couselCode}
 </update>
+<insert id = "counselInsert">
+	insert into counsel(answer,counselItemCode,counselTitle,counselDate,counselContent,customer)
+	values(#{answer},4,'전화',now(),'전화',#{customer});
+</insert>
+<select id = "counselTuning" resultType = "Counselor">
+	select counselCode,answer,counselDate from counsel
+	where customer = #{customer}
+</select>
 </mapper>
