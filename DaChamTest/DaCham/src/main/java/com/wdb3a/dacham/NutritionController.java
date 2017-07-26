@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.wdb3a.dacham.bean.Counsel;
 import com.wdb3a.dacham.bean.Nutritionist;
@@ -116,9 +117,10 @@ public class NutritionController {
    }
    
    @RequestMapping(value = "/side", method = RequestMethod.POST)
-   public String postSideRegist(Model model, Nutritionist nutritionist, MultipartFile file, @RequestParam("foodMCode")String[] foodMCode,@RequestParam("cnt")int cnt,@RequestParam("foodMAmount")int[] foodMAmount) throws Exception{
-	   System.out.println("파일 업로드");
-	   String savedName = UploadFileUtils.uploadFile(file.getOriginalFilename() ,uploadPath,file.getBytes());
+   public String postSideRegist(MultipartHttpServletRequest request,Model model, Nutritionist nutritionist, MultipartFile file, @RequestParam("foodMCode")String[] foodMCode,@RequestParam("cnt")int cnt,@RequestParam("foodMAmount")int[] foodMAmount) throws Exception{
+	   System.out.println("파일 업로드 : "+uploadPath);
+	   
+	   String savedName = UploadFileUtils.uploadFile(request,file.getOriginalFilename() ,uploadPath,file.getBytes());
 		model.addAttribute("savedName", savedName);
 		System.out.println("총합:"+cnt);
 		nutritionist.setSideDImg(savedName);
@@ -133,9 +135,9 @@ public class NutritionController {
 	    return "redirect:side";
    }
    @RequestMapping(value = "/diet",method = RequestMethod.POST)
-   public String postDietRegist(Model model, Nutritionist nutritionist, MultipartFile file,@RequestParam("sideDType")String[] sideDType,@RequestParam("count")int count) throws Exception{
+   public String postDietRegist(MultipartHttpServletRequest request,Model model, Nutritionist nutritionist, MultipartFile file,@RequestParam("sideDType")String[] sideDType,@RequestParam("count")int count) throws Exception{
 	   System.out.println("이제 등록되려 합니다.");
-	  String savedName = UploadFileUtils.uploadFile(file.getOriginalFilename(), uploadPath, file.getBytes());
+	  String savedName = UploadFileUtils.uploadFile(request,file.getOriginalFilename(), uploadPath, file.getBytes());
 	   model.addAttribute("savedName",savedName);
 	   System.out.println("총합:"+count);
 	   nutritionist.setDietImg(savedName);
@@ -184,9 +186,9 @@ public class NutritionController {
 	   return "mate/nutritionist/SPDietRegist";
    }
    @RequestMapping(value = "/SPDiet",method = RequestMethod.POST)
-   public String postSPDietRegist(Model model, Nutritionist nutritionist, MultipartFile file,@RequestParam("sideDType")String[] sideDType,@RequestParam("count")int count,@RequestParam("counselCode")int counselCode) throws Exception{
+   public String postSPDietRegist(MultipartHttpServletRequest request,Model model, Nutritionist nutritionist, MultipartFile file,@RequestParam("sideDType")String[] sideDType,@RequestParam("count")int count,@RequestParam("counselCode")int counselCode) throws Exception{
 	   System.out.println("이제 등록되려 합니다.");
-	  String savedName = UploadFileUtils.uploadFile(file.getOriginalFilename(), uploadPath, file.getBytes());
+	  String savedName = UploadFileUtils.uploadFile(request,file.getOriginalFilename(), uploadPath, file.getBytes());
 	   model.addAttribute("savedName",savedName);
 	   System.out.println("총합:"+count);
 	   System.out.println("상담코드:"+counselCode);
@@ -242,8 +244,8 @@ public class NutritionController {
    }
    //반찬 수정
    @RequestMapping(value = "sideModify",method = RequestMethod.POST)
-   public String postSideModify(Model model,Nutritionist nutritionist,MultipartFile file,@RequestParam("cnt")int cnt,@RequestParam("foodMCode")String[] foodMCode, @RequestParam("foodMAmount")int[] foodMAmount) throws Exception{
-	   String savedName = UploadFileUtils.uploadFile(file.getOriginalFilename() ,uploadPath,file.getBytes());
+   public String postSideModify(MultipartHttpServletRequest request,Model model,Nutritionist nutritionist,MultipartFile file,@RequestParam("cnt")int cnt,@RequestParam("foodMCode")String[] foodMCode, @RequestParam("foodMAmount")int[] foodMAmount) throws Exception{
+	   String savedName = UploadFileUtils.uploadFile(request,file.getOriginalFilename() ,uploadPath,file.getBytes());
 		model.addAttribute("savedName", savedName);
 		System.out.println("총합:"+cnt);
 		nutritionist.setSideDImg(savedName);
@@ -269,8 +271,8 @@ public class NutritionController {
    }
    //식단 수정
    @RequestMapping(value = "dietModify",method = RequestMethod.POST)
-   public String postDietModify(Model model, Nutritionist nutritionist, MultipartFile file) throws Exception{
-	   String savedName = UploadFileUtils.uploadFile(file.getOriginalFilename() ,uploadPath,file.getBytes());
+   public String postDietModify(MultipartHttpServletRequest request,Model model, Nutritionist nutritionist, MultipartFile file) throws Exception{
+	   String savedName = UploadFileUtils.uploadFile(request,file.getOriginalFilename() ,uploadPath,file.getBytes());
 		model.addAttribute("savedName", savedName);
 		nutritionist.setDietImg(savedName);
 		service.dietModify(nutritionist);
@@ -279,11 +281,11 @@ public class NutritionController {
    
     @ResponseBody
 	@RequestMapping("displayFile")
-	public ResponseEntity<byte[]> displayFile(String fileName) throws Exception{
+	public ResponseEntity<byte[]> displayFile(HttpServletRequest request,String fileName) throws Exception{
 		ResponseEntity<byte[]> entity = null;
-		
+		System.out.println("이미지 로딩");
 		String ext = fileName.substring(fileName.lastIndexOf(".")+1);
-		
+		String path = request.getSession().getServletContext().getRealPath("");
 		MediaType mediaType = MediaUtils.getMediaType(ext);
 		
 		InputStream in = null;
@@ -293,8 +295,9 @@ public class NutritionController {
 		HttpHeaders headers = new HttpHeaders();
 		//uploadPath : resources/upload
 		//fileName : /2017/05/18/ThumbNail_rose_XXXXX.jpg
+		System.out.println(path+uploadPath+fileName);
 		try{
-			in = new FileInputStream(uploadPath+fileName);
+			in = new FileInputStream(path+uploadPath+fileName);
 			if(mediaType != null){
 				headers.setContentType(mediaType);
 			}else{

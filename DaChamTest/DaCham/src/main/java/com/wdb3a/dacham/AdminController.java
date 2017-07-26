@@ -47,6 +47,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.wdb3a.dacham.bean.ChartList;
 import com.wdb3a.dacham.bean.ChartPrice;
@@ -410,8 +411,8 @@ public class AdminController {
 		}
 		
 		@RequestMapping(value="empjoin",method = RequestMethod.POST)
-		public String joinPost(Member member, MultipartFile file) throws Exception{
-			String savedName = UploadFileUtils.uploadFile(file.getOriginalFilename(), uploadPath, file.getBytes());
+		public String joinPost(MultipartHttpServletRequest request,Member member, MultipartFile file) throws Exception{
+			String savedName = UploadFileUtils.uploadFile(request,file.getOriginalFilename(), uploadPath, file.getBytes());
 			member.setPhotoImg(savedName);
 			service.empjoin(member);  
 			return "mate/admin/adminMain";	
