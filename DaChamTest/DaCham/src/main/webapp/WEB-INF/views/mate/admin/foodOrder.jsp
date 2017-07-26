@@ -57,7 +57,7 @@
 					<td class="foodMName1" data-foodMCode="${board.foodMName}">${board.foodMName}</td>
 					<td>${board.dietName}&nbsp;&nbsp;</td>
 					<td>${board.price}&nbsp;&nbsp;</a></td>
-					<td>${board.uint }&nbsp;&nbsp;</td>
+					<td>${board.unit }&nbsp;&nbsp;</td>
 					<td><input type="text">&nbsp;&nbsp;</td>
 
 					<td>${board.outAmount}</td> 
@@ -88,6 +88,7 @@
 					<input type="hidden" id ="totalAmount${count}" name="totalAmount" value="${j.totalAmount}">
 					<input type="hidden" id ="unit${count}" name="unit" value="${j.unit}">
 					<input type="hidden" id ="foodMCode${count}" name="foodMCode" value="${j.foodMCode}">
+					<input type="hidden" id ="orderCode" name="orderCode" value="${j.orderCode}">
 					</div>	  		  
 				</c:forEach> 
 			</c:forEach> 
@@ -104,18 +105,18 @@
 
 	<script>
 	var divlength = $(".length .length2").size();
-	function foodStockall(){
+	/* function foodStockall(){
 		$.getJSON("adminSub/foodStockAll",function(data){
 			console.log(data); 
 			$(".foodStock").remove(); 
 			var str = "";
 			for(var i =0; i<data.length; i++){
-				str += "<tr class='foodStock'>"+"<td>"+data[i].foodMCode+"</td>"+"<td>"+data[i].foodMName+"</td>"+"<td>"+data[i].price+"</td>"+"<td><input type='text' class='Stock' size='4'></td>"+"<td>"+data[i].uint+"</td>"+"<td><button class='orderBtn btn btn-primary'>주문</button></td>"+"</tr>"		 
+				str += "<tr class='foodStock'>"+"<td id='foodMCode' data-code='"+data[i].foodMCode+"'>"+data[i].foodMCode+"</td>"+"<td id='foodMName' data-code='"+data[i].foodMName+"'>"+data[i].foodMName+"</td>"+"<td id='price' data-code='"+data[i].price+"'>"+data[i].price+"</td>"+"<td><input type='text' class='Stock' size='4'></td>"+"<td>"+data[i].unit+"</td>"+"<td><button class='orderBtn btn btn-primary'>주문</button></td>"+"</tr>"		 
 			}
 			console.log(str);
 			$(".foodMTable").append(str); 
 		});  
-	} 
+	}  */  
 	
 	
 			
@@ -153,12 +154,12 @@
 				//alert(content.length);		 
 				//alert(content)
 			});
-							$(".foodMName1").on("click", function(){
+							/* $(".foodMName1").on("click", function(){
 								var a = $(this).siblings()
 								alert(a); 
-							});
+							}); */
 							all();
-						
+						  
 							function all(){
 								
 								
@@ -192,11 +193,24 @@
 									var keyword = $("#keyword").val();
 									$.getJSON("adminSub/foodOrder/"+searchType+"/"+keyword,function(data){
 									for(var i=0; i<data.length; i++){
-										str += "<tr class='foodStock'>"+"<td>"+data[i].foodMCode+"</td>"+"<td>"+data[i].foodMName+"</td>"+"<td>"+data[i].price+"</td>"+"<td><input type='text' class='Stock' size='4'></td>"+"<td>"+data[i].uint+"</td> <td>"+data[i].stock+"</td> <td><button class='orderBtn btn btn-primary'>주문</button></td>"+"</tr>"
+										str += "<tr class='foodStock'>"+"<td id='foodMCode' data-code='"+data[i].foodMCode+"'>"+data[i].foodMCode+"</td>"+"<td id='foodMName' data-code='"+data[i].foodMName+"'>"+data[i].foodMName+"</td>"+"<td id='price' data-code='"+data[i].price+"'>"+data[i].price+"</td>"+"<td><input type='text' class='Stock' size='4'></td>"+"<td id='unit' data-code='"+data[i].unit+"'>"+data[i].unit+"</td>"+"<td><button class='orderBtn btn btn-primary'>주문</button></td>"+"</tr>"
 										}   
 									$(".foodMTable").append(str); 
 									});
 								});
+								
+								$(document.body).on("click", ".orderBtn" ,function(){
+									var Stock = $(".Stock").val();
+									var foodMCode = $("#foodMCode").attr('data-code');
+									var foodMName = $("#foodMName").attr('data-code');
+									var price = $("#price").attr('data-code');
+									var unit = $("#unit").attr('data-code');
+									var str="";
+										str += "<tr><td>"+foodMCode+"</td>"+"<td>"+foodMName+"</td>"+"<td>"+price+"</td>"+"<td>"+Stock+"</td>"+"<td>"+unit+"</td><tr>";
+									$(".tables").append(str);
+									alert(foodMName+"가 "+Stock+unit+"만큼 추가 주문되었습니다"); 
+									
+								})  
 							
 						});
 	</script>

@@ -30,6 +30,7 @@ import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.aggregation.ArrayOperators.In;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -90,6 +91,8 @@ public class AdminController {
 	// mailSending 코드
 	@RequestMapping(value = "/mailSending", method = RequestMethod.POST)
 	public String mailSending(String foodMOrderInfo) throws Exception {
+		
+		
 		System.out.println("ddd");
 		String authKey = AUTH_KEY_FCM; // You FCM AUTH key
 		System.out.println(authKey);
@@ -105,6 +108,18 @@ public class AdminController {
 		System.out.println(jsonObj);
 		for (int i = 0; i < jsonObj.size(); i++) {
 			JSONObject jsonObj1 = (JSONObject) jsonObj.get(i + "");
+			/*FoodMAmountRead foodMAmountRead = new FoodMAmountRead();
+			System.out.println(foodMAmountRead);
+			//foodMAmountRead.setFoodMCode(jsonObj1.get("foodMCode").toString());
+			foodMAmountRead.setFoodMName(jsonObj1.get("foodMName").toString());
+			foodMAmountRead.setInAmount(jsonObj1.get("inAmount").toString());
+			foodMAmountRead.setUnit(jsonObj1.get("unit").toString());
+			foodMAmountRead.setPrice(Integer.parseInt(jsonObj1.get("price").toString()));
+			foodMAmountRead.setOrderCode(Integer.parseInt(jsonObj1.get("orderCode").toString()));
+			
+			  
+			service.insertFoodM(foodMAmountRead);*/
+			
 			totalprice = (int) (Integer.parseInt(jsonObj1.get("price").toString())
 					* Double.parseDouble(jsonObj1.get("totalAmount").toString()));
 			System.out.println(jsonObj1);
@@ -112,6 +127,10 @@ public class AdminController {
 			toString = toString + "\n" + "식재료명 : " + jsonObj1.get("foodMname").toString() + "단가 : "
 					+ jsonObj1.get("price").toString() + " 주문량 :" + jsonObj1.get("totalAmount").toString()
 					+ jsonObj1.get("unit").toString() + " 총가격 : " + totalprice + "원";
+			System.out.println(toString);
+			
+			
+			
 		}
 		String content = toString; // 내용
 		try {
