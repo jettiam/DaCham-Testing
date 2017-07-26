@@ -22,4 +22,5 @@ public interface CounselorDAO {
 	public List<Counselor> orderList(int couselCode,Criteria criteria) throws Exception;
 	public int orderListCount(int couselCode) throws Exception;
 	public void counselUpdate(Counselor counselor) throws Exception;
+	public void counselInsert(Counselor counselor) throws Exception;
 }

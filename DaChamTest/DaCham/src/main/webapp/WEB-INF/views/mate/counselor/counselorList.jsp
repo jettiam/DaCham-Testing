@@ -21,7 +21,7 @@
 		$.getJSON("counselAjax/counselorListAll",function(data){
 			var str = "";
 			$(data).each(function(){
-				str += "<tr class = 'searchResult1'><td>"+this.id+"</td><td>"+this.name+"</td><td>"+this.address+"</td><td>"+this.tel+"</td><td>"+this.email+"</td><td>"+this.deptCode+"</td><td>"+this.gradeCode+"</td><td>"+this.joinDate+"</td></tr>";
+				str += "<tr class = 'searchResult1'><td>"+this.id+"</td><td><a class = 'nameClick' data-name = '"+this.id+"'>"+this.name+"</a></td><td>"+this.address+"</td><td>"+this.tel+"</td><td>"+this.email+"</td><td>"+this.deptCode+"</td><td>"+this.gradeCode+"</td><td>"+this.joinDate+"</td></tr>";
 			});
 			$(".search1").append(str);
 		});
@@ -35,12 +35,34 @@
 			});
 			$(".search2").append(str);
 		});
-		$(document.body).on("click",".counselTitle a",function(){
-			var counselCode = $(this).attr('data-code');
-			var customer = $(this).attr('data-id');	
-			var name = '';
-			name = $(this).attr('data-name');
-			window.location.href = "detail?customer="+customer+"&name="+name;           
+		
+		
+		$(document.body).on("click",".nameClick",function(){
+			var name = $(this).attr('data-name');
+			$(".answer").empty();
+			$(".answer").append("<textarea id = 'answers' name = 'answer'></textarea>");
+			$(".answer").append("<input type = 'hidden' class = 'id'  name = 'id' value = '"+name+"'>");
+			$(".answer").append("<button id = 'button'>답변등록</button>");
+			linkAll(name);
+		});
+		
+		$(document.body).on("click","#button",function(){
+			var customer = $('.id').val();
+			var answer = $('#answers').val();
+			
+			$.ajax({
+				type : "POST",
+				url : 'counselAjax/counselInsert/'+customer+"/"+answer,
+				headers : {
+					"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "POST",
+				},
+				success : function(result){
+					if(result == "SUCCESS"){
+						alert("등록되었습니다.");
+					}
+				}
+			});
 		});
 		
 		$("#search").on("click",function(){
@@ -69,6 +91,19 @@
 				$(".search2").append(str);
 			});
 		});
+		
+		function linkAll(customer){
+			$(".answerResult").remove();
+			$.getJSON("counselAjax/linkCounsel/"+customer,function(data){
+				var str = "";
+				$(data).each(function(){
+					
+						str += "<tr class = 'answerResult'><td class = 'counselCode' data-code = '"+this.counselCode+"' data-id = '"+this.customer+"'><a href = '#'>"+this.counselCode+"</a></td><td>"+this.customer+"</td><td>"+this.answer+"</td></tr>";
+				
+				});
+				$(".link").append(str);
+			});
+		}
 	});
 </script>
 <style>
@@ -122,45 +157,22 @@
 	       	 </tr>
 	      </table>
 	      </div>
-	      
-	      
-	      <h3>전체 상담 내역</h3>         
-	       <div>
-				<select name = "SearchType" class = "searchType2">
-					<option value = "n"
-		   			<c:out value="${Counselor.searchType2==null?'selected':'' }"/>>
-		   			----------
-		   			</option>
-		   			<option value = "y"
-		   			<c:out value="${Counselor.searchType2 eq 'y'?'selected':'' }"/>>
-		   			작성자이름
-		   			</option>
-		   			<option value = "u"
-		   			<c:out value="${Counselor.searchType2 eq 'u'?'selected':'' }"/>>
-		   			작성자ID
-		   			</option>
-				</select>
-				<input type = "text" name = "keyword2" id = "keyword2" placeholder = "검색어 입력란">
-				<button id = "Search">검색</button>
-		 </div>
-	  
-	      
 	      <div>
-	      	
-		     <table border ="1" class = "search2 table table-hover">            
-	            <tr>
-	               <th>번호</th>
-	               <th>글제목</th>
-	               <th>작성자이름</th>
-	               <th>작성자ID</th>
-	               <th>작성일</th>
-	             
-	            </tr>
-	            <tr class = "searchResult2">
-	            </tr>
-	         </table>
+	      		<table class = "link table table-hover">
+               <tr>   
+                  <th>번호</th>
+                  <th>고객아이디</th>
+                  <th>답변</th>
+               </tr>
+               <tr class = "answerResult">
+                  
+               </tr>
+            </table>
 	      </div>
-	  
+	      <form>
+		      <div class = "answer">
+		      </div>
+	      </form>	  
 	   </div>
 	   <div class = "box2">
 	      

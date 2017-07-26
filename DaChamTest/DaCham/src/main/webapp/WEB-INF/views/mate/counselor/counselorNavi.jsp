@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<script src = "http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-indigo.css">
 <style>
@@ -29,10 +30,17 @@ margin-bottom:20px;
 	<div class="w3-bar w3-border w3-theme-d5 w3-xlarge">
 	<div class="w3-container">
 	  <a href="counselorList" class="w3-bar-item w3-button w3-hover-light-gray" id="counselorList">고객상담</a>
-	  <a href="detail" class="w3-bar-item w3-button w3-hover-light-gray" id="detail">상담내역</a>	 
+	  <a href="#" id = "detail" class="w3-bar-item w3-button w3-hover-light-gray" id="detail">상담내역</a>	 
 	</div>
 	</div>
 	
 	</div>
-	
+	<script>
+		$(document).ready(function(){
+			$("#detail").on("click",function(){
+				alert("메인으로 돌아가야 합니다.");
+				window.location.href = "counselorMain";
+			});
+		});
+	</script>
 </body>

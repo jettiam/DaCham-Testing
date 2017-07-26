@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.wdb3a.dacham.bean.Cook;
+import com.wdb3a.dacham.bean.CookingItem;
 import com.wdb3a.dacham.bean.FoodMInven;
 import com.wdb3a.dacham.bean.OrderList;
 @Repository
@@ -54,6 +55,13 @@ public class CookDAOImpl implements CookDAO {
 	public List<Cook> endScreen() throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".endScreen");
+	}
+	
+	
+	@Override
+	public List<CookingItem> getCookingItemList() throws Exception {
+		// DB에서 조리해야할 반찬목록 가져옴.
+		return sqlSession.selectList(namespace+".selectCookingItem");
 	}
 
 }

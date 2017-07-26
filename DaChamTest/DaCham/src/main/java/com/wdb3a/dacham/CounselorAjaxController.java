@@ -171,4 +171,20 @@ public class CounselorAjaxController {
 		}
 		return entity;
 	}
+	@RequestMapping(value = "/counselInsert/{customer}/{answer}",method = RequestMethod.POST)
+	public ResponseEntity<String> counselInsert(@PathVariable("customer")String customer,@PathVariable("answer")String answer){
+		ResponseEntity<String> entity = null;
+		Counselor counselor = new Counselor();
+		counselor.setCustomer(customer);
+		counselor.setAnswer(answer);
+		try {
+			service.counselInsert(counselor);
+			entity = new ResponseEntity<>("SUCCESS",HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
 }

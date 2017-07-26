@@ -20,6 +20,7 @@
 </style>
 <script>
 $(document).ready(function(){
+	
 	$("#detail").addClass("w3-light-gray");
 	
 	linkAll();
