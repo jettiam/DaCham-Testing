@@ -5,13 +5,7 @@
 <html>
 <head>
 <style>
- #counselWriteWrap{ 
- 
-	width: 600px; 
-	height: 100%; 
-	margin: 0 auto; 
- 	/*text-align: center;*/
- } 
+
 
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -38,11 +32,11 @@
 </head>
 <body>
 <%@include file="../../clientNavi.jsp" %>
-<div id="counselWriteWrap">
-	 <div class="form-inline">
-	<form method = "post" action="write" >
-		<label for="exampleInputName2">문의분류</label>
-		<select class="form-control" id="exampleInputName2" name = "counselItemCode">
+<div class="container">
+<form method = "post" action="write" >
+	 <div class="form-inline form-group">	
+		<label for="exampleInputName1">문의분류</label>
+		<select class="form-control" id="exampleInputName1" name = "counselItemCode">
 			<option value="1">식단문의</option>
 			<option value="2">특별식단</option>
 			<option value="3">배송문의</option>
@@ -50,20 +44,21 @@
 		</select>
 		
 		<label for="exampleInputName2">아이디</label> 
-		<input type = "text" class="form-control " id="exampleInputName2" name = "customer" value = "${sessionScope.customerId}" readonly><br><br>
+		<input type = "text" class="form-control " id="exampleInputName2" name = "customer" value = "${sessionScope.customerId}" readonly>
+	</div>
+					
+		<div class="form-group">
+		 <input type = "text" class="form-control" id="disabledInput"  name ="counselTitle" placeHolder = "TITLE">
 		</div>
-						
-		<div class="col-sm-10">
-		 <input type = "text" class="form-control" id="disabledInput"  name ="counselTitle" placeholder = "TITLE">
-		<br>
-		 <textarea name = "counselContent" class="form-control" rows="10"></textarea><br>
+		<div class="form-group">
+		 <textarea name = "counselContent" class="form-control" rows="10"></textarea><br>		
+		</div>
 		
 	</form>
-	<div>
+	<div class="form-group">
 		<button id = "insert" class="btn btn-warning myPageBtn">등록</button>
 		<button id = "cancle" class="btn btn-warning myPageBtn">취소</button>
-		</div>
 	</div>
-	</div>
+</div>
 </body>
 </html>

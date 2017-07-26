@@ -18,8 +18,12 @@
 		<typeAlias alias="ChartList" type="com.wdb3a.dacham.bean.ChartList"/>
 		<typeAlias alias="ChartPrice" type="com.wdb3a.dacham.bean.ChartPrice"/>
 		<typeAlias alias="Diet" type="com.wdb3a.dacham.bean.Diet"/>
+<<<<<<< HEAD
 			
 		<typeAlias alias="CookingItem" type="com.wdb3a.dacham.bean.CookingItem" />		
+=======
+		<typeAlias alias="Measure" type="com.wdb3a.dacham.bean.Measure"/>
+>>>>>>> branch 'master' of git@github.com:jettiam/DaCham-Testing.git
 	
 
 

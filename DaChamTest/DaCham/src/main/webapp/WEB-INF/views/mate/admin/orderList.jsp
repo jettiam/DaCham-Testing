@@ -212,7 +212,7 @@
 
 	<form role="form" method="post">
 		<div class="divs" id="a1">
-			<table width="600" class="tables table table-condensed">    
+			<table class="tables table table-condensed">    
 				<tr>
 					<th><input type="checkBox" id="allCheck">전체</th>
 					<th>주문번호</th>

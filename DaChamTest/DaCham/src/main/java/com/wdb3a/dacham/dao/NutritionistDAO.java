@@ -85,4 +85,21 @@ public interface NutritionistDAO {
 	public void delete3(int dietCode) throws Exception;
 	//해당 반찬코드에 속하는 식재료들 출력(수정)
 	public List<Nutritionist> sideMaterial(String sideDCode) throws Exception;
+	//해당 반찬코드에 속하는 값들 출력(수정)
+	public Nutritionist sideOver(String sideDCode) throws Exception;
+	//해당 반찬을 수정
+	public void sideModify(Nutritionist nutritionist) throws Exception;
+	//해당 반찬을 수정 2탄
+	public void modifyCross1(String sideDCode) throws Exception;
+	public void modifyCross2(Nutritionist nutritionist) throws Exception;
+	//해당 식단코드에 속하는 값들 출력(수정)
+	public Nutritionist dietOver(int dietCode) throws Exception;
+	//해당 식단을 수정
+	public void dietModify(Nutritionist nutritionist) throws Exception;
+	//해당 식단 수정 페이지에서 수정을 위해 식품군별로 반찬 조회
+	public List<Nutritionist> groupSide(Nutritionist nutritionist) throws Exception;
+	//해당 식단 수정 페이지에서 수정을 위해 모든 반찬을 삭제
+	public void updateCross1(int dietCode) throws Exception;
+	//해당 식단 수정 페이지에서 수정을 위해 페이지에 있는 반찬을 재등록
+	public void updateCross2(Nutritionist nutritionist) throws Exception;
 }

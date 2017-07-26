@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -232,10 +233,50 @@ public class NutritionController {
 	   System.out.println("고객아이디:"+nutritionist.getCustomer());
 	   return "redirect:special";
    }
+   //수정을 위한 반찬 정보 출력
    @RequestMapping(value = "sideModify",method = RequestMethod.GET)
-   public String getSideModify(){
+   public String getSideModify(Model model,@RequestParam("sideDCode")String sideDCode) throws Exception{
+	   Nutritionist nutritionist = service.sideOver(sideDCode);
+	   model.addAttribute("nutritionist",nutritionist);
 	   return "mate/nutritionist/sideModify";
    }
+   //반찬 수정
+   @RequestMapping(value = "sideModify",method = RequestMethod.POST)
+   public String postSideModify(Model model,Nutritionist nutritionist,MultipartFile file,@RequestParam("cnt")int cnt,@RequestParam("foodMCode")String[] foodMCode, @RequestParam("foodMAmount")int[] foodMAmount) throws Exception{
+	   String savedName = UploadFileUtils.uploadFile(file.getOriginalFilename() ,uploadPath,file.getBytes());
+		model.addAttribute("savedName", savedName);
+		System.out.println("총합:"+cnt);
+		nutritionist.setSideDImg(savedName);
+	    service.sideModify(nutritionist);
+	    service.modifyCross1(nutritionist.getSideDCode());
+	    for(int i = 0; i< cnt;i++){
+	    	System.out.println("코드번호 : "+foodMCode[i]);
+			nutritionist.setFoodMCode(foodMCode[i]);
+			nutritionist.setFoodMAmount(foodMAmount[i]);
+			service.modifyCross2(nutritionist);
+	    }
+	    return "redirect:side";
+   }
+   //수정을 위한 식단 정보 출력
+   @RequestMapping(value = "dietModify",method = RequestMethod.GET)
+   public String getDietModify(Model model, @RequestParam("dietCode")int dietCode,HttpServletRequest request) throws Exception{
+	   Nutritionist nutritionist = service.dietOver(dietCode);
+	   List<Nutritionist> overList = service.choiceDisease();
+	   model.addAttribute("overList",overList);
+	   model.addAttribute("nutritionist",nutritionist);
+	   model.addAttribute("cloneDisease", nutritionist.getDiseaseCode());
+	   return "mate/nutritionist/dietModify";
+   }
+   //식단 수정
+   @RequestMapping(value = "dietModify",method = RequestMethod.POST)
+   public String postDietModify(Model model, Nutritionist nutritionist, MultipartFile file) throws Exception{
+	   String savedName = UploadFileUtils.uploadFile(file.getOriginalFilename() ,uploadPath,file.getBytes());
+		model.addAttribute("savedName", savedName);
+		nutritionist.setDietImg(savedName);
+		service.dietModify(nutritionist);
+		return "redirect:diet";
+   }
+   
     @ResponseBody
 	@RequestMapping("displayFile")
 	public ResponseEntity<byte[]> displayFile(String fileName) throws Exception{

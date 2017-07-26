@@ -308,23 +308,26 @@ public String delete(@RequestParam(value="counselCode")int code,RedirectAttribut
 	
 }
 
-@RequestMapping(value="/counselUpdate",method = RequestMethod.GET)
 /**
  * 
  * @return 고객 게시글 수정
  */
-	public void updateGET(int code,Model model) throws Exception{
-	model.addAttribute(service.couselRead(code));
-	
+@RequestMapping(value="/counselUpdate",method = RequestMethod.GET)
+	public String counselUpdate(int counselCode,Model model) throws Exception{
+	model.addAttribute("read",service.couselRead(counselCode));
+	return "customer/counsel/counselUpdate";
 }
 
-@RequestMapping(value="/counselUpdate",method = RequestMethod.POST)
 /**
  * 
  * @return 고객 게시글 수정 후 게시글 목록으로 리다이렉트 
  */
-	public String updatePOST(Counsel counsel,RedirectAttributes rttr) throws Exception {
-	
+@RequestMapping(value="/counselUpdate",method = RequestMethod.POST)
+	public String updatePOST(Counsel counsel) throws Exception {
+	System.out.println(counsel.getCounselCode());
+	System.out.println(counsel.getCounselTitle());
+	System.out.println(counsel.getCounselContent());
+	System.out.println(counsel.getCounselItemCode());
 	service.update(counsel);
 	
 	return "redirect:counsel";

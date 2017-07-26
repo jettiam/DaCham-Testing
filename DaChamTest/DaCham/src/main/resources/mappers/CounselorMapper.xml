@@ -3,6 +3,16 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wdb3a.CounselorMapper">
+<select id = "counselorListAll"  resultType="Counselor">
+	select  a.id , a.name , a.address, a.tel, a.email, a.deptCode, a.gradeCode, a.joinDate, b.counselTitle, b.counselDate, b.counselContent
+	from member a join counsel b
+	where a.id = b.customer
+</select>
+<select id = "counselorseList2All" resultType="Counselor">
+	select  b.counselCode,b.counselTitle ,a.name, a.id, b.counselDate, b.counselContent
+	from member a join counsel b
+	where a.id =b.customer
+</select>
 <select id="counselorList" resultType="Counselor">
 		select  a.id , a.name , a.address, a.tel, a.email, a.deptCode, a.gradeCode, a.joinDate, b.counselTitle, b.counselDate, b.counselContent
 		from member a join counsel b
@@ -27,7 +37,7 @@
 </select>
 <sql id = "Search">
 	  	<if test = "searchType2 != null">
-	  		<if test="searchType == 'y'.toString()">
+	  		<if test="searchType2 == 'y'.toString()">
 	  			and a.name like CONCAT('%',#{keyword2},'%')
 	  		</if>
 	  		<if test="searchType2 == 'u'.toString()">
@@ -42,4 +52,40 @@
 	from counsel
 	where counselCode = #{counselCode} 
 </select>
+<select id = "linkCounsel" resultType = "Counselor">
+	select * from counsel a join counselitem b
+	where a.counselItemCode = b.counselItemCode
+	and a.customer = #{customer}	
+</select>
+<select id = "selectCounsel" resultType = "Counselor">
+	select * from counsel a join counselitem b
+	where a.counselItemCode = b.counselItemCode
+	and  a.counselCode = #{couselCode}
+</select>
+<select id = "counselMember" resultType = "Counselor">
+	select * from member a join counsel b
+	where a.id = b.customer
+	and b.counselCode = #{couselCode}
+</select>
+<select id = "orderList" resultType = "Counselor">
+	select * from orderlist a join diet b join paymentitem c join orderitem d join counsel e
+	where a.dietCode = b.dietCode
+	and a.paymentItemCode = c.paymentItemCode
+	and a.orderItemCode = d.orderItemCode
+	and a.id = e.customer
+	and e.counselCode = #{couselCode}
+	limit #{criteria.startRecord},#{criteria.recordsPerPage}
+</select>
+<select id = "orderListCount" resultType = "Integer">
+	select count(*) from orderlist a join diet b join paymentitem c join orderitem d join counsel e
+	where a.dietCode = b.dietCode
+	and a.paymentItemCode = c.paymentItemCode
+	and a.orderItemCode = d.orderItemCode
+	and a.id = e.customer
+	and e.counselCode = #{couselCode}
+</select>
+<update id = "counselUpdate">
+	update counsel set answer = #{answer}, adviser = 'counselor'
+	where counselCode = #{couselCode}
+</update>
 </mapper>
