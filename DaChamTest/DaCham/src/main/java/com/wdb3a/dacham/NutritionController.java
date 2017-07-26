@@ -271,13 +271,9 @@ public class NutritionController {
    }
    //식단 수정
    @RequestMapping(value = "dietModify",method = RequestMethod.POST)
-<<<<<<< HEAD
-   public String postDietModify(Model model, Nutritionist nutritionist, MultipartFile file,@RequestParam("length1")int length1,@RequestParam("length2")int length2,@RequestParam("length3")int length3,@RequestParam("length4")int length4,@RequestParam("length5")int length5,@RequestParam("length6")int length6,@RequestParam("sideDType1")String[] sideDType1,@RequestParam("sideDType2")String[] sideDType2,@RequestParam("sideDType3")String[] sideDType3,@RequestParam("sideDType4")String[] sideDType4,@RequestParam("sideDType5")String[] sideDType5,@RequestParam("sideDType6")String[] sideDType6, @RequestParam("sideDCode1")String[] sideDCode1, @RequestParam("sideDCode2")String[] sideDCode2, @RequestParam("sideDCode3")String[] sideDCode3, @RequestParam("sideDCode4")String[] sideDCode4, @RequestParam("sideDCode5")String[] sideDCode5, @RequestParam("sideDCode6")String[] sideDCode6) throws Exception{
-	   String savedName = UploadFileUtils.uploadFile(file.getOriginalFilename() ,uploadPath,file.getBytes());
-=======
-   public String postDietModify(MultipartHttpServletRequest request,Model model, Nutritionist nutritionist, MultipartFile file) throws Exception{
+   public String postDietModify(MultipartHttpServletRequest request, Model model, Nutritionist nutritionist, MultipartFile file,@RequestParam("length1")int length1,@RequestParam("length2")int length2,@RequestParam("length3")int length3,@RequestParam("length4")int length4,@RequestParam("length5")int length5,@RequestParam("length6")int length6,@RequestParam("sideDType1")String[] sideDType1,@RequestParam("sideDType2")String[] sideDType2,@RequestParam("sideDType3")String[] sideDType3,@RequestParam("sideDType4")String[] sideDType4,@RequestParam("sideDType5")String[] sideDType5,@RequestParam("sideDType6")String[] sideDType6, @RequestParam("sideDCode1")String[] sideDCode1, @RequestParam("sideDCode2")String[] sideDCode2, @RequestParam("sideDCode3")String[] sideDCode3, @RequestParam("sideDCode4")String[] sideDCode4, @RequestParam("sideDCode5")String[] sideDCode5, @RequestParam("sideDCode6")String[] sideDCode6) throws Exception{
 	   String savedName = UploadFileUtils.uploadFile(request,file.getOriginalFilename() ,uploadPath,file.getBytes());
->>>>>>> branch 'master' of https://github.com/jettiam/DaCham-Testing.git
+
 		model.addAttribute("savedName", savedName);
 		nutritionist.setDietImg(savedName);
 		service.dietModify(nutritionist);
