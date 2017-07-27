@@ -18,4 +18,6 @@ public interface CookService {
 	public List<Cook> endScreen() throws Exception;
 	
 	public List<CookingItem> getCookingItemList() throws Exception;
+	public void updateOptionsItemCode(int orderItemCode, int sideDCode) throws Exception;
+	
 }

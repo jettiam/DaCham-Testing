@@ -1,5 +1,6 @@
 package com.wdb3a.dacham.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -62,6 +63,14 @@ public class CookDAOImpl implements CookDAO {
 	public List<CookingItem> getCookingItemList() throws Exception {
 		// DB에서 조리해야할 반찬목록 가져옴.
 		return sqlSession.selectList(namespace+".selectCookingItem");
+	}
+	
+	@Override
+	public void updateOptionsItemCode(int orderItemCode, int sideDCode) throws Exception {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("orderItemCode", orderItemCode);
+		map.put("sideDCode", sideDCode);
+		sqlSession.update(namespace+".updateOptionsItemCode", map);		
 	}
 
 }

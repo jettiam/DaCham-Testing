@@ -2,10 +2,9 @@
 <!DOCTYPE configuration
     PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
 <configuration>
-	<typeAliases>
-		
-		
+	<typeAliases>		
 		<typeAlias alias="Emp" type="com.wdb3a.dacham.bean.Emp" />
 		<typeAlias alias="Member" type="com.wdb3a.dacham.bean.Member" />
 		<typeAlias alias="OrderList" type="com.wdb3a.dacham.bean.OrderList"/>
@@ -18,6 +17,7 @@
 		<typeAlias alias="ChartList" type="com.wdb3a.dacham.bean.ChartList"/>
 		<typeAlias alias="ChartPrice" type="com.wdb3a.dacham.bean.ChartPrice"/>
 		<typeAlias alias="Diet" type="com.wdb3a.dacham.bean.Diet"/>
+<<<<<<< HEAD
 		<typeAlias alias="foodMaterial" type="com.wdb3a.dacham.bean.FoodMaterial"/>
   
 			
@@ -28,5 +28,10 @@
 	
 
 
+=======
+		
+		<typeAlias alias="CookingItem" type="com.wdb3a.dacham.bean.CookingItem" />		
+		<typeAlias alias="Measure" type="com.wdb3a.dacham.bean.Measure"/>
+>>>>>>> branch 'master' of https://github.com/jettiam/DaCham-Testing.git
 	</typeAliases>
 </configuration>

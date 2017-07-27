@@ -66,4 +66,10 @@ public class CookServiceImpl implements CookService {
 		return dao.getCookingItemList();
 	}
 	
+	
+	@Override
+	public void updateOptionsItemCode(int orderItemCode, int sideDCode) throws Exception {
+		dao.updateOptionsItemCode(orderItemCode, sideDCode);		
+	}
+	
 }

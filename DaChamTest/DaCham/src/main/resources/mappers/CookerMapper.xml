@@ -122,10 +122,16 @@
 		from
 		orderoptions a, orderlist b, sidedish c
 		where a.orderCode = b.orderCode and
-		b.orderItemCode = 3 and
+		a.orderItemCode = 3 and
 		a.sideDCode = c.sideDCode
 		group by sideDcode;
 	</select>
-
+	
+	
+	<update id="updateOptionsItemCode" parameterType="HashMap">
+		update orderoptions set orderItemCode= #{orderItemCode}
+		where sideDCode = #{sideDCode};
+	</update>
+	
 
 </mapper>
