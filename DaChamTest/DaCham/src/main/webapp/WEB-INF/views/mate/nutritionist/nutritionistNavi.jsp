@@ -41,7 +41,7 @@ margin-bottom:20px;
 	</c:if>
 	<c:if test = "${empty sessionScope.EmpName }">
 		<script>
-			alert("영양사 정보로 로그인을 하셔야 합니다.")
+			alert("영양사의 정보로 로그인을 하셔야 합니다.")
 			window.location.href = "main2";
 		</script>
 	</c:if>
