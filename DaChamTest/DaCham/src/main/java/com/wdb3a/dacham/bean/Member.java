@@ -25,7 +25,8 @@ public class Member {
 	private String bank_name;
 	private String bank_user;
 	private String Account_Number;
-	  
+	private Date birthday;
+	private int diseaseCode;
 	public String getPath_e() {
 		return path_e;
 	}
@@ -200,5 +201,25 @@ public class Member {
 
 	public void setToken(String token) {
 		this.token = token;
+	}
+
+
+	public Date getBirthday() {
+		return birthday;
+	}
+
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+
+
+	public int getDiseaseCode() {
+		return diseaseCode;
+	}
+
+
+	public void setDiseaseCode(int diseaseCode) {
+		this.diseaseCode = diseaseCode;
 	}
 }

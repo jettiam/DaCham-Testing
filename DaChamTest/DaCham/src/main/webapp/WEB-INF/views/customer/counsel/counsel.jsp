@@ -21,6 +21,14 @@
 		$("#write").on("click",function(){
 			window.location.href = "write";
 		});
+		$(".counselRead").on("click",function(){
+			if("${customerId}"!=$(this).attr("data-id")){
+				event.preventDefault();
+				alert("비밀글입니다.");
+			}else{
+				
+			}
+		});
 	});
 </script>
 <style>
@@ -58,7 +66,7 @@ width:600px;
 			<tr>
 				<td>${counsel.counselItemName}</td>			
 				<td>${counsel.counselCode }</td>
-				<td><a href = "read?counselCode=${counsel.counselCode}">${counsel.counselTitle }</a></td>
+				<td><a href = "read?counselCode=${counsel.counselCode}" data-id="${counsel.customer}" class="counselRead">${counsel.counselTitle }</a></td>
 				<td>${counsel.customer}</td>
 				<td>${counsel.counselDate }</td>
 				<c:if test="${empty counsel.adviser}">
@@ -70,8 +78,7 @@ width:600px;
 			</tr>
 			</c:forEach>
 		</table>
-	
-		
+			
 		<div>
 		<c:if test="${empty sessionScope.memberName}">
 			로그인 후 이용해주세요.

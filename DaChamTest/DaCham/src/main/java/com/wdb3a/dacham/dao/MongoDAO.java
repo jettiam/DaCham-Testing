@@ -35,7 +35,7 @@ public class MongoDAO {
 	}
 	
 	public List<Testing5> getTestingWizard(){
-		List<Testing5> tt = mongoTemplate.findAll(Testing5.class, "testing5");
+		List<Testing5> tt = mongoTemplate.findAll(Testing5.class, "testing5");		
 		return tt;
 	}
 	public void wizardFindTest(){

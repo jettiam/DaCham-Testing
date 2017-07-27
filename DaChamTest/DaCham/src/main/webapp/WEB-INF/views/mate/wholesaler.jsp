@@ -5,9 +5,21 @@
 <head>
  <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>다참 식재료 도매</title>
+<script>
+	$(document).ready(function(){
+		function foodOrderList(){
+			
+		}
+	});
+</script>
 </head>
 <body>
-도매상 페이지 로그인 성공!
+<div class="container"></div>
 </body>
 </html>

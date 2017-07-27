@@ -356,9 +356,16 @@ $(document).ready(function() {
 		var nutriData ={
 				labels:["탄수화물","단백질","지방","나트륨","칼륨"],
 				 datasets: [{
-					 label:"영양정보",
-				        data: nutriValue
-				    }]
+					 label:"영양정보",					
+				     backgroundColor:[
+				    	 'rgba(255, 99, 132, 0.5)',
+			                'rgba(54, 162, 235, 0.5)',
+			                'rgba(255, 206, 86, 0.5)',
+			                'rgba(75, 192, 192, 0.5)',
+			                'rgba(153, 102, 255, 0.5)',
+				     ],
+				     data: nutriValue
+				}]
 		}
 		return nutriData;
 	}	
@@ -370,9 +377,8 @@ $(document).ready(function() {
 		    type: 'polarArea',
 		    data: nutriData
 		    
-		});
-		
-	//
+		});		
+	
 	}	
 	
 </script>
