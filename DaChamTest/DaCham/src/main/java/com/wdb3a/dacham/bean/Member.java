@@ -27,6 +27,28 @@ public class Member {
 	private String Account_Number;
 	private Date birthday;
 	private int diseaseCode;
+	private String keyword;
+	private String searchType;
+	
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+
+	public String getSearchType() {
+		return searchType;
+	}
+
+
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
+	}
+
+
+
 	public String getPath_e() {
 		return path_e;
 	}

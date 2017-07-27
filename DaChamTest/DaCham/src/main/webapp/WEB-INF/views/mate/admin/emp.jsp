@@ -381,42 +381,15 @@ function previewImage(targetObj, View_area) {
 </script>
 </head>
 <style>
-#jb-container {
-	width: 940px;
-	margin: 0px auto;
-	padding: 20px;
-	border: 1px solid #bcbcbc;
-}
-
-#jb-sidebar-left {
-	width: 160px;
-	padding: 20px;
-	margin-right: 20px;
-	margin-bottom: 20px;
-	float: left;
-	border: 1px solid #bcbcbc;
-}
-
-#jb-content {
-	width: 450px;
-	padding: 20px;
-	margin-bottom: 20px;
-	float: left;
-	border: 1px solid #bcbcbc;
-}
-
-#jb-sidebar-right {
-	width: 160px;
-	padding: 20px;
-	margin-bottom: 20px;
-	float: right;
-	border: 1px solid #bcbcbc;
+.topMar{
+	margin-top: 4cm;  
 }
 </style>
 <body>
 	<%@include file="../admin/upmenu.jsp"%>
 	<div id=".container-fluid">
-		<div class="col-sm-2">
+		<div class="topMar">
+		<div class="col-sm-1">
 		</div>
 		<form action="empjoin" method="post" class="form-horizontal" 
 			id="joinForm" enctype="multipart/form-data">
@@ -574,14 +547,14 @@ function previewImage(targetObj, View_area) {
 				</div>
 				
 		</form>
-  
-
-		<div class="text-right">
-			<button id="join" class="btn btn-primary">회원가입</button>
-			<button id="cancle" class="btn btn-primary">취소</button>
+  		</div>
 		</div>
+		<div class="col-sm-offset-10">      
+			<button id="join" class="btn btn-default">회원가입</button>
+			<button id="cancle" class="btn btn-default">취소</button>
 		</div>
-	</div>
+		
+	
 
 </body>
 </html>

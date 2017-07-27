@@ -88,7 +88,7 @@
 					<input type="hidden" id ="totalAmount${count}" name="totalAmount" value="${j.totalAmount}">
 					<input type="hidden" id ="unit${count}" name="unit" value="${j.unit}">
 					<input type="hidden" id ="foodMCode${count}" name="foodMCode" value="${j.foodMCode}">
-					<input type="hidden" id ="orderCode" name="orderCode" value="${j.orderCode}">
+					<input type="hidden" id ="orderCode${count}" name="orderCode" value="${j.orderCode}">
 					</div>	  		  
 				</c:forEach> 
 			</c:forEach> 
@@ -131,12 +131,16 @@
 					var price = $("#price"+i).val();
 					var totalAmount = Number($("#totalAmount"+i).val())*0.001;
 					var unit = $("#unit"+i).val();
+					var orderCode = $("#orderCode"+i).val();
+					var foodMCode = $("#foodMCode"+i).val(); 
 					 var jsonData ={					
-							"foodMname":foodMname,
+							"foodMName":foodMname,
 							"price":price,
 							"totalAmount":totalAmount,
 							"price":price,
-							"unit":unit
+							"unit":unit,
+							"orderCode":orderCode,
+							"foodMCode":foodMCode
 					}	
 					foodMOrderInfo[y]=jsonData;
 					y++; 
@@ -191,25 +195,27 @@
 									var str=""; 
 									var searchType = $(".searchType").val();
 									var keyword = $("#keyword").val();
-									$.getJSON("adminSub/foodOrder/"+searchType+"/"+keyword,function(data){
+									$.getJSON("adminSub/foodMaterial/"+searchType+"/"+keyword,function(data){
 									for(var i=0; i<data.length; i++){
 										str += "<tr class='foodStock'>"+"<td id='foodMCode' data-code='"+data[i].foodMCode+"'>"+data[i].foodMCode+"</td>"+"<td id='foodMName' data-code='"+data[i].foodMName+"'>"+data[i].foodMName+"</td>"+"<td id='price' data-code='"+data[i].price+"'>"+data[i].price+"</td>"+"<td><input type='text' class='Stock' size='4'></td>"+"<td id='unit' data-code='"+data[i].unit+"'>"+data[i].unit+"</td>"+"<td><button class='orderBtn btn btn-primary'>주문</button></td>"+"</tr>"
-										}   
+										}    
 									$(".foodMTable").append(str); 
 									});
 								});
 								
 								$(document.body).on("click", ".orderBtn" ,function(){
-									var Stock = $(".Stock").val();
-									var foodMCode = $("#foodMCode").attr('data-code');
-									var foodMName = $("#foodMName").attr('data-code');
-									var price = $("#price").attr('data-code');
-									var unit = $("#unit").attr('data-code');
+									var Stock = $(this).parent().prev().prev().children().val();
+									
+									var foodMCode = $(this).parent().prev().prev().prev().prev().prev().attr('data-code');
+									var foodMName = $(this).parent().prev().prev().prev().prev().attr('data-code');
+									
+									var price = $(this).parent().prev().prev().prev().attr('data-code');
+									var unit = $(this).parent().prev().attr('data-code');
+				   
 									var str="";
 										str += "<tr><td>"+foodMCode+"</td>"+"<td>"+foodMName+"</td>"+"<td>"+price+"</td>"+"<td>"+Stock+"</td>"+"<td>"+unit+"</td><tr>";
 									$(".tables").append(str);
-									alert(foodMName+"가 "+Stock+unit+"만큼 추가 주문되었습니다"); 
-									
+									alert(foodMName+"가 "+Stock+unit+"만큼 추가 주문되었습니다");    									
 								})  
 							
 						});

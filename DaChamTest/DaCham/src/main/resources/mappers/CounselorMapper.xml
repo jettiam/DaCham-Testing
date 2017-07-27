@@ -4,9 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wdb3a.CounselorMapper">
 <select id = "counselorListAll"  resultType="Counselor">
-	select  a.id , a.name , a.address, a.tel, a.email, a.deptCode, a.gradeCode, a.joinDate
-	from member a 
-	
+	select  a.id , a.name , a.address, a.tel, a.email, a.deptCode, a.gradeCode, a.joinDate, b.diseaseName,b.judgement
+	from member a  join disease b
+	where a.diseaseCode = b.diseaseCode
+	and a.gradeCode = '일반회원'
 </select>
 <select id = "counselorseList2All" resultType="Counselor">
 	select  b.counselCode,b.counselTitle ,a.name, a.id, b.counselDate, b.counselContent
@@ -64,8 +65,9 @@
 	and  a.counselCode = #{couselCode}
 </select>
 <select id = "counselMember" resultType = "Counselor">
-	select * from member a join counsel b
+	select * from member a join counsel b join disease c
 	where a.id = b.customer
+	and a.diseaseCode = c.diseaseCode
 	and b.counselCode = #{couselCode}
 </select>
 <select id = "orderList" resultType = "Counselor">

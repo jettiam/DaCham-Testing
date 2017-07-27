@@ -21,7 +21,7 @@
 		$.getJSON("counselAjax/counselorListAll",function(data){
 			var str = "";
 			$(data).each(function(){
-				str += "<tr class = 'searchResult1'><td>"+this.id+"</td><td><a class = 'nameClick' data-name = '"+this.id+"'>"+this.name+"</a></td><td>"+this.address+"</td><td>"+this.tel+"</td><td>"+this.email+"</td><td>"+this.deptCode+"</td><td>"+this.gradeCode+"</td><td>"+this.joinDate+"</td></tr>";
+				str += "<tr class = 'searchResult1'><td>"+this.id+"</td><td><a class = 'nameClick' data-name = '"+this.id+"'>"+this.name+"</a></td><td>"+this.address+"</td><td>"+this.tel+"</td><td>"+this.email+"</td><td>"+this.deptCode+"</td><td>"+this.gradeCode+"</td><td>"+this.joinDate+"</td><td>"+this.diseaseName+"</td><td>"+this.judgement+"</td></tr>";
 			});
 			$(".search1").append(str);
 		});
@@ -150,6 +150,8 @@
 						<th>부서</th>
 						<th>직급</th>
 						<th>가입일</th>
+						<th>질병이름</th>
+						<th>위험군</th>
 						
 						
 	         </tr>
@@ -177,6 +179,7 @@
 	   <div class = "box2">
 	      
 	   </div>
+	   
 	   <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	   <br><br><br><br><br><br>
 	  </div>

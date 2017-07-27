@@ -32,6 +32,7 @@ import com.wdb3a.dacham.bean.Criteria;
 import com.wdb3a.dacham.bean.Diet;
 import com.wdb3a.dacham.bean.FoodMAmountRead;
 import com.wdb3a.dacham.bean.FoodMInven;
+import com.wdb3a.dacham.bean.FoodMaterial;
 import com.wdb3a.dacham.bean.Member;
 import com.wdb3a.dacham.bean.OrderList;
 import com.wdb3a.dacham.service.AdminMainService;
@@ -315,6 +316,42 @@ public class AdminSubController {
  		try {
  			service.joinOut(id);   
  			entity = new ResponseEntity<>("SUCCESS",HttpStatus.OK);
+ 		} catch (Exception e) {
+ 			// TODO Auto-generated catch block
+ 			e.printStackTrace();
+ 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+ 		}
+ 		return entity;
+ 	}
+   //식재료 주문
+   @RequestMapping(value = "/foodMaterial/{searchType}/{keyword}", method = RequestMethod.GET)
+	public ResponseEntity<List<FoodMaterial>> foodMaterialSearch(@PathVariable("searchType")String searchType,@PathVariable("keyword")String keyword){
+		ResponseEntity<List<FoodMaterial>> entity = null;
+		System.out.println("asdasd");
+		try {
+			FoodMaterial foodMaterial = new FoodMaterial();
+			foodMaterial.setSearchType(searchType);
+			foodMaterial.setKeyword(keyword);
+			List<FoodMaterial> list = service.foodMaterialSearch(foodMaterial);
+			entity = new ResponseEntity<>(list,HttpStatus.OK); 
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+   //회원 검색
+   @RequestMapping(value = "/customer/{searchType}/{keyword}", method = RequestMethod.GET)
+ 	public ResponseEntity<List<Member>> customerSearch(@PathVariable("searchType")String searchType,@PathVariable("keyword")String keyword){
+ 		ResponseEntity<List<Member>> entity = null;
+ 		System.out.println("asdasd");
+ 		try {
+ 			Member member = new Member();
+ 			member.setSearchType(searchType);
+ 			member.setKeyword(keyword);
+ 			List<Member> list = service.memberSearch(member);
+ 			entity = new ResponseEntity<>(list,HttpStatus.OK); 
  		} catch (Exception e) {
  			// TODO Auto-generated catch block
  			e.printStackTrace();

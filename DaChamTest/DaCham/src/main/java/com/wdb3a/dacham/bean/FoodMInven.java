@@ -10,15 +10,21 @@ public class FoodMInven {
 	private int inAmount;
 	private Date inDate;
 	private int outAmount;
-	private String uint;
+	private String unit;
 	private int price;
 	private Date exDate;
 	private int stock;
 	private String keyword;
 	private String searchType;
 	
+	 
 	
-	
+	public String getUnit() {
+		return unit;
+	}
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
 	public String getFoodMICode() {
 		return foodMICode;
 	}
@@ -61,12 +67,7 @@ public class FoodMInven {
 	public void setOutAmount(int outAmount) {
 		this.outAmount = outAmount;
 	}
-	public String getUint() {
-		return uint;
-	}
-	public void setUint(String uint) {
-		this.uint = uint;
-	}
+	
 	public int getPrice() {
 		return price;
 	}

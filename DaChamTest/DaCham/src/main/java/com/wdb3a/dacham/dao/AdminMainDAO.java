@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.aop.ThrowsAdvice;
 
 import com.wdb3a.dacham.bean.FoodMInven;
+import com.wdb3a.dacham.bean.FoodMaterial;
 import com.wdb3a.dacham.bean.Member;
 import com.wdb3a.dacham.bean.OrderList;
 import com.wdb3a.dacham.bean.AppTest;
@@ -46,5 +47,8 @@ public interface AdminMainDAO {
 	public Member memberUserInfo(String id) throws Exception;
 	public void joinOut(String id) throws Exception;
 	public void empUpdate(Member member) throws Exception;
-	public void insertFoodM(FoodMAmountRead foodMAmountRead) throws Exception;
+	public void insertFoodM(FoodMAmountRead foodMAmountRead) throws Exception;  
+	public void foodMUpdate(int orderCode) throws Exception;
+	public List<FoodMaterial> foodMaterialSearch(FoodMaterial foodMaterial) throws Exception;
+	public List<Member> memberSearch(Member member) throws Exception;
 }
