@@ -25,7 +25,27 @@ public class Member {
 	private String bank_name;
 	private String bank_user;
 	private String Account_Number;
-	  
+	private String keyword;
+	private String searchType;
+	
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+
+	public String getSearchType() {
+		return searchType;
+	}
+
+
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
+	}
+
+
 	public String getPath_e() {
 		return path_e;
 	}

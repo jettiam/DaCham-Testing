@@ -13,6 +13,7 @@ import com.wdb3a.dacham.bean.Criteria;
 import com.wdb3a.dacham.bean.Diet;
 import com.wdb3a.dacham.bean.FoodMAmountRead;
 import com.wdb3a.dacham.bean.FoodMInven;
+import com.wdb3a.dacham.bean.FoodMaterial;
 import com.wdb3a.dacham.bean.Member;
 import com.wdb3a.dacham.bean.OrderList;
 
@@ -48,4 +49,7 @@ public interface AdminMainService {
 	public void joinOut(String id) throws Exception; 
 	public void empUpdate(Member member) throws Exception;
 	public void insertFoodM(FoodMAmountRead foodMAmountRead) throws Exception;
+	public void foodMUpdate(int orderCode) throws Exception;
+	public List<FoodMaterial> foodMaterialSearch(FoodMaterial foodMaterial) throws Exception;
+	public List<Member> memberSearch(Member member) throws Exception;
 }
