@@ -31,6 +31,30 @@ public class Counselor {
 	private String orderItemName;
 	private String paymentItemName;
 	private String answer;
+	private int diseaseCode;
+	private String diseaseName;
+	private String judgement;
+	
+	
+	
+	public int getDiseaseCode() {
+		return diseaseCode;
+	}
+	public void setDiseaseCode(int diseaseCode) {
+		this.diseaseCode = diseaseCode;
+	}
+	public String getDiseaseName() {
+		return diseaseName;
+	}
+	public void setDiseaseName(String diseaseName) {
+		this.diseaseName = diseaseName;
+	}
+	public String getJudgement() {
+		return judgement;
+	}
+	public void setJudgement(String judgement) {
+		this.judgement = judgement;
+	}
 	
 	
 	public int getCouselCode() {

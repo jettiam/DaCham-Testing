@@ -47,7 +47,7 @@ margin-bottom:20px;
 	<script>
 		$(document).ready(function(){
 			$("#detail").on("click",function(){
-				alert("메인으로 돌아가야 합니다.");
+				alert("고객을 선택해주세요.");
 				window.location.href = "counselorMain";
 			});
 		});
