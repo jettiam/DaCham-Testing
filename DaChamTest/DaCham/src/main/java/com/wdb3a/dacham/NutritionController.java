@@ -271,11 +271,51 @@ public class NutritionController {
    }
    //식단 수정
    @RequestMapping(value = "dietModify",method = RequestMethod.POST)
-   public String postDietModify(MultipartHttpServletRequest request,Model model, Nutritionist nutritionist, MultipartFile file) throws Exception{
+   public String postDietModify(MultipartHttpServletRequest request, Model model, Nutritionist nutritionist, MultipartFile file,@RequestParam("length1")int length1,@RequestParam("length2")int length2,@RequestParam("length3")int length3,@RequestParam("length4")int length4,@RequestParam("length5")int length5,@RequestParam("length6")int length6,@RequestParam("sideDType1")String[] sideDType1,@RequestParam("sideDType2")String[] sideDType2,@RequestParam("sideDType3")String[] sideDType3,@RequestParam("sideDType4")String[] sideDType4,@RequestParam("sideDType5")String[] sideDType5,@RequestParam("sideDType6")String[] sideDType6, @RequestParam("sideDCode1")String[] sideDCode1, @RequestParam("sideDCode2")String[] sideDCode2, @RequestParam("sideDCode3")String[] sideDCode3, @RequestParam("sideDCode4")String[] sideDCode4, @RequestParam("sideDCode5")String[] sideDCode5, @RequestParam("sideDCode6")String[] sideDCode6) throws Exception{
 	   String savedName = UploadFileUtils.uploadFile(request,file.getOriginalFilename() ,uploadPath,file.getBytes());
+
 		model.addAttribute("savedName", savedName);
 		nutritionist.setDietImg(savedName);
 		service.dietModify(nutritionist);
+		service.updateCross1(nutritionist.getDietCode());
+		
+		for(int i = 0; i<length1;i++){
+			System.out.println("이 반찬들은:"+ sideDCode1[i]);
+			System.out.println("이 타입들은:"+ sideDType1[i]);
+			nutritionist.setSideDType(sideDType1[i]);
+			nutritionist.setSideDCode(sideDCode1[i]);
+			service.updateCross2(nutritionist);
+		}
+		for(int i = 0; i<length2;i++){
+			System.out.println("이 반찬들은:"+ sideDCode2[i]);
+			nutritionist.setSideDType(sideDType2[i]);
+			nutritionist.setSideDCode(sideDCode2[i]);
+			service.updateCross2(nutritionist);
+		}
+		for(int i = 0; i<length3;i++){
+			System.out.println("이 반찬들은:"+ sideDCode3[i]);
+			nutritionist.setSideDType(sideDType3[i]);
+			nutritionist.setSideDCode(sideDCode3[i]);
+			service.updateCross2(nutritionist);
+		}
+		for(int i = 0; i<length4;i++){
+			System.out.println("이 반찬들은:"+ sideDCode4[i]);
+			nutritionist.setSideDType(sideDType4[i]);
+			nutritionist.setSideDCode(sideDCode4[i]);
+			service.updateCross2(nutritionist);
+		}
+		for(int i = 0; i<length5;i++){
+			System.out.println("이 반찬들은:"+ sideDCode5[i]);
+			nutritionist.setSideDType(sideDType5[i]);
+			nutritionist.setSideDCode(sideDCode5[i]);
+			service.updateCross2(nutritionist);
+		}
+		for(int i = 0; i<length6;i++){
+			System.out.println("이 반찬들은:"+ sideDCode6[i]);
+			nutritionist.setSideDType(sideDType6[i]);
+			nutritionist.setSideDCode(sideDCode6[i]);
+			service.updateCross2(nutritionist);
+		}
 		return "redirect:diet";
    }
    

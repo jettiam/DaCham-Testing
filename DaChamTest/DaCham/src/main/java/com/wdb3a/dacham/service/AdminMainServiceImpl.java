@@ -192,6 +192,22 @@ public class AdminMainServiceImpl implements AdminMainService {
 		return dao.memberUserInfo(id);
 	}
 
+	@Override
+	public void joinOut(String id) throws Exception {
+		dao.joinOut(id);
+	}
+
+	@Override
+	public void empUpdate(Member member) throws Exception {
+		dao.empUpdate(member);
+		
+	}
+
+	@Override
+	public void insertFoodM(FoodMAmountRead foodMAmountRead) throws Exception {
+		dao.insertFoodM(foodMAmountRead); 		
+	}
+
 	
 	
 	

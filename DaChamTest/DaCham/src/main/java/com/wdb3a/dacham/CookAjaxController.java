@@ -91,4 +91,18 @@ public class CookAjaxController {
 		}
 		return entity;
 	}
+	
+	@RequestMapping(value="updateOptionsItemCode")
+	public ResponseEntity<String> updateOptionsItem(int orderItemCode, int sideDCode){
+		ResponseEntity<String> entity = null;	
+		try {
+			service.updateOptionsItemCode(orderItemCode, sideDCode);
+			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}		
+		return entity;		
+	}
 }

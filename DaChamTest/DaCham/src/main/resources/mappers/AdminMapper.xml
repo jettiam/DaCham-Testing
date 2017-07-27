@@ -51,7 +51,7 @@
 	<!--식재료 재고량 -->
 	<select id="foodStockList" resultType="FoodMInven">
 		select foodMICode, foodMCode, foodMName, inAmount, inDate, outAmount,
-		uint,
+		unit,
 		price, exDate, inAmount-outAmount as stock
 		from foodminven
 		<include refid="foodsearch"></include>
@@ -203,65 +203,130 @@
 	<select id="AppTest" resultType="String">
 		select token
 		from member
-		where id = #{id}
+		where id
+		= #{id}
 	</select>
 
 	<select id="DietAll" resultType="Diet">
-		select a.price, a.dietCode, a.dietName, a.price, a.dietImg, b.diseaseName, a.spDietItem
-		from diet a join disease b
+		select a.price, a.dietCode,
+		a.dietName, a.price, a.dietImg, b.diseaseName, a.spDietItem
+		from diet a
+		join disease b
 		where a.diseaseCode=b.diseaseCode
 	</select>
 
-	<update id="dietPriceUp"> 
+	<update id="dietPriceUp">
 		update diet
 		set price = #{price}
-		where dietCode = #{dietCode} 
+		where dietCode =
+		#{dietCode}
 	</update>
-	
+
 	<update id="dietSell">
-	update diet set spDietItem = 1
-	where spDietItem = 2 and dietCode = #{dietCode}
+		update diet set spDietItem = 1
+		where spDietItem = 2
+		and dietCode = #{dietCode}
 	</update>
-	
+
 	<update id="dietSellStop">
-	update diet set spDietItem = 2
-	where spDietItem = 1 and dietCode = #{dietCode}
+		update diet set spDietItem = 2
+		where spDietItem = 1
+		and dietCode = #{dietCode}
 	</update>
-	
+
 	<select id="disease1" resultType="Diet">
-	select a.price, a.dietCode, a.dietName, a.price, a.dietImg, b.diseaseName, a.spDietItem
-		from diet a join disease b
-		where a.diseaseCode=b.diseaseCode and diseaseName = '당뇨'
+		select a.price, a.dietCode,
+		a.dietName, a.price, a.dietImg, b.diseaseName,
+		a.spDietItem
+		from diet a
+		join disease b
+		where
+		a.diseaseCode=b.diseaseCode and diseaseName = '당뇨'
 	</select>
-	
+
 	<select id="disease2" resultType="Diet">
-	select a.price, a.dietCode, a.dietName, a.price, a.dietImg, b.diseaseName, a.spDietItem
-		from diet a join disease b
-		where a.diseaseCode=b.diseaseCode and diseaseName = '고지혈증'
+		select a.price, a.dietCode,
+		a.dietName, a.price, a.dietImg, b.diseaseName,
+		a.spDietItem
+		from diet a
+		join disease b
+		where
+		a.diseaseCode=b.diseaseCode and diseaseName =
+		'고지혈증'
 	</select>
-	
+
 	<select id="disease3" resultType="Diet">
-	select a.price, a.dietCode, a.dietName, a.price, a.dietImg, b.diseaseName, a.spDietItem
-		from diet a join disease b
-		where a.diseaseCode=b.diseaseCode and diseaseName = '심부전증'
+		select a.price, a.dietCode,
+		a.dietName, a.price, a.dietImg, b.diseaseName,
+		a.spDietItem
+		from diet a
+		join disease b
+		where
+		a.diseaseCode=b.diseaseCode and diseaseName =
+		'심부전증'
 	</select>
-	
+
 	<select id="disease4" resultType="Diet">
-	select a.price, a.dietCode, a.dietName, a.price, a.dietImg, b.diseaseName, a.spDietItem
-		from diet a join disease b
-		where a.diseaseCode=b.diseaseCode and diseaseName = '신부전증'
+		select a.price, a.dietCode,
+		a.dietName, a.price, a.dietImg, b.diseaseName,
+		a.spDietItem
+		from diet a
+		join disease b
+		where
+		a.diseaseCode=b.diseaseCode and diseaseName =
+		'신부전증'
 	</select>
-	
+
 	<insert id="empjoin">
-	INSERT INTO member (id, passwd, name, address, tel, email, deptCode, gradeCode, joinDate, path_e, education, salary, bank_name, bank_user, Account_Number, PhotoImg) VALUES (#{id}, #{passwd}, #{name}, #{address}, #{tel}, #{email}, #{deptCode}, #{gradeCode}, now(), #{path_e}, #{education},#{salary}, #{bank_name}, #{bank_user}, #{Account_Number}, #{photoImg})
+		INSERT INTO member (id, passwd, name, address, tel,
+		email, deptCode,
+		gradeCode, joinDate, path_e, education, salary,
+		bank_name, bank_user,
+		Account_Number, PhotoImg) VALUES (#{id},
+		#{passwd}, #{name},
+		#{address}, #{tel}, #{email}, #{deptCode},
+		#{gradeCode}, now(),
+		#{path_e}, #{education},#{salary}, #{bank_name},
+		#{bank_user},
+		#{Account_Number}, #{photoImg})
 	</insert>
-	
+
 	<select id="memberAll" resultType="Member">
-	select id, passwd, name, address, tel, email, deptCode, gradeCode, joinDate, outDate, photoImg, path_e, education, salary, bank_name, bank_user, Account_Number from member
+		select id, passwd, name,
+		address, tel, email, deptCode, gradeCode, joinDate,
+		outDate, photoImg,
+		path_e, education, salary, bank_name, bank_user,
+		Account_Number from
+		member
 	</select>
-	
-	<select id="memberUserInfo" resultType="String">
-	select id, passwd, name, address, tel, email, deptCode, gradeCode, joinDate, outDate, photoImg, path_e, education, salary, bank_name, bank_user, Account_Number from member where id=#{id}
+
+	<select id="memberUserInfo" resultType="Member">
+		select id, passwd, name,
+		address, tel, email, deptCode, gradeCode, joinDate,
+		outDate, photoImg,
+		path_e, education, salary, bank_name, bank_user,
+		Account_Number from
+		member where id=#{id}
 	</select>
+
+	<update id="joinOut">
+		update member set outDate=now()
+		where id=#{id}
+	</update>
+
+	<update id="empUpdate">
+		update member set education=#{education},
+		salary=#{salary}, bank_name=#{bank_name}, bank_user=#{bank_user},
+		address=#{address}, tel=#{tel}, email=#{email}, deptCode=#{deptCode},
+		gradeCode=#{gradeCode}
+		where id=#{id}
+	</update>
+
+	<insert id="insertFoodM">
+		insert into foodminven(foodMCode, foodMName, inAmount, unit, price,
+		foodMStatus, orderCode) values (#{foodMCode}, #{foodMName},
+		#{inAmount}, #{unit}, #{price}, 0, #{orderCode})
+
+	</insert>
 
 </mapper> 

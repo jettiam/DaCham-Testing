@@ -8,14 +8,21 @@ public class FoodMAmountRead {
 	private String foodMCode;
 	private int orderCode;
 	private String totalAmount;
+	private String inAmount;
 	
 	
-	
+	public String getInAmount() {
+		return inAmount;
+	}
+	public void setInAmount(String inAmount) {
+		this.inAmount = inAmount;
+	}
 	public String getTotalAmount() {
 		return totalAmount;
 	}
 	public void setTotalAmount(String totalAmount) {
 		this.totalAmount = totalAmount;
+		this.inAmount = totalAmount;
 	}
 	public int getOrderCode() {
 		return orderCode;
