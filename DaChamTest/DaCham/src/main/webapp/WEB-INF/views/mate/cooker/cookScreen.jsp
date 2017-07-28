@@ -118,13 +118,11 @@
 	function cookEnd(){
 		var sideDCode = $(this).parent().find("span:first").text();
 		updateOptionsItemCode(5, sideDCode);
-		alert(sideDCode);
+		
 		
 		var content = "<p><span>"+$(this).siblings().text()+"</span></p>";
 		$(this).parent().remove();
-		$("#cookFinish>.container").append(content);
-		
-		
+		$("#cookFinish>.container").append(content);		
 	}
 
 	function updateOptionsItemCode(orderItemCode, sideDCode){
@@ -141,8 +139,7 @@
 					alert("성공...");
 				}else{
 					console.log(data);
-				}
-			
+				}			
 			}
 		});
 	}	
@@ -229,6 +226,11 @@ body {
 	float: left;
 }
 
+#cookContinue>.container {
+	width: 560px;
+	height: 480px;
+}
+
 .C {
 	height: 140px;
 	width: 556px;
@@ -264,7 +266,17 @@ body {
 			<div class="row">
 				<div id="cookContinue" class="box X">
 					<h2>조리중</h2>
-					<div class="container"></div>
+					<div class="container">
+					<c:forEach items="${list}" var="list">
+							<c:if test="${list.optionsOrderItemCode==4}">
+							<p>
+								<span>${list.sideDCode} </span>
+								<span>${list.sideDName} ${list.cookingAmount}인분</span>
+								<button class='end'>완료</button>
+							</p>
+							</c:if>
+					</c:forEach>	
+					</div>
 				</div>
 				<div class="box C mintColor">
 					<h3>다참</h3>
@@ -274,11 +286,13 @@ body {
 					<h2>조리 대기</h2>
 					<div class="container">
 						<c:forEach items="${list}" var="list">
+							<c:if test="${list.optionsOrderItemCode==3}">
 							<p>
 								<span>${list.sideDCode} </span>
 								<span>${list.sideDName} ${list.cookingAmount}인분</span>
 								<button class="start">시작</button>
 							</p>
+							</c:if>
 						</c:forEach>
 					</div>
 				</div>
@@ -286,11 +300,12 @@ body {
 			<div class="row">
 				<div id="cookFinish" class="box Z">
 					<h2>조리 완료</h2>
-					<div class="container"></div>
+					<div class="container">
+					
+					</div>
 				</div>
 				<div class="box Q">
-					<button>중간저장</button>
-					<button>종료</button>
+					<button onclick="window.close();">종료</button>
 				</div>
 			</div>
 		</div>
@@ -319,50 +334,5 @@ body {
 			</tr>
 		</c:forEach>
 	</table>
-	<div class="container">
-		<div>
-			<button id="present">현황</button>
-			<button id="list">조리목록</button>
-		</div>
-		<div>
-			<h1>조리대기</h1>
-			<table class="cook1">
-				<tr>
-					<th>음식이미지&nbsp;&nbsp;&nbsp;</th>
-					<th>식단이름&nbsp;&nbsp;&nbsp;</th>
-					<th>식단주문날짜&nbsp;&nbsp;&nbsp;</th>
-				</tr>
-				<tr class="cookResult1">
-				</tr>
-			</table>
-		</div>
-		<div>
-			<h1>조리중</h1>
-			<table class="cook2">
-				<tr>
-					<th>음식이미지&nbsp;&nbsp;&nbsp;</th>
-					<th>식단이름&nbsp;&nbsp;&nbsp;</th>
-					<th>식단주문날짜&nbsp;&nbsp;&nbsp;</th>
-				</tr>
-				<tr class="cookResult2">
-
-				</tr>
-			</table>
-		</div>
-		<div>
-			<h1>조리완료</h1>
-			<table class="cook3">
-				<tr>
-					<th>음식이미지&nbsp;&nbsp;&nbsp;</th>
-					<th>식단이름&nbsp;&nbsp;&nbsp;</th>
-					<th>식단주문날짜&nbsp;&nbsp;&nbsp;</th>
-				</tr>
-				<tr class="cookResult3">
-
-				</tr>
-			</table>
-		</div>
-
-	</div>
 </body>
 </html>
