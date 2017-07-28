@@ -333,6 +333,12 @@
 								.appendTo("#registForm");
 
 						$("#regist").on("click", function() {
+							var length1 = $(".foodG01 input[type ='hidden']").length;
+							var length2 = $(".foodG02 input[type ='hidden']").length;
+							var length3 = $(".foodG03 input[type ='hidden']").length;
+							var length4 = $(".foodG04 input[type ='hidden']").length;
+							var length5 = $(".foodG05 input[type ='hidden']").length;
+							var length6 = $(".foodG06 input[type ='hidden']").length;
 							var sideDLength = $(".material input[type='hidden']").length;
 							$(".material input[type='radio']:checked").clone().appendTo("#registForm");							
 							//checked 먼저 넣고 바꾸기							
@@ -350,9 +356,30 @@
 							$("#registForm .foodType:checked").remove();
 							$("#registForm .foodType").attr("type","hidden");
 							$("#registForm .foodType").attr("name","sideDType");
-							$("#registForm").attr("method", "post");
-							$("#registForm").attr("action", "diet");
-							$("#registForm").submit();
+							
+							
+							if($("#dietNameText").val() == ""){
+								alert("식단명을 지으셔야 합니다.");
+							}
+							else if($("#prev_View_area").attr("src") == "http://placehold.it/100x100"){
+								alert("이미지 좀 선택하세요");
+							}		
+							else if($("#priceText").val() == ""){
+								alert("식단가격을 정하셔야 합니다.");
+							}
+							else if((length1 <= 0) || (length2 <= 0) || (length3 <= 0) || (length4 <= 0) || (length5 <= 0) || (length6 <= 0)){
+								alert("최소한 한 개 이상의 반찬은 선택하셔야 합니다.");
+							}
+							else if($(".diseaseCodeId option:selected").val() == '0' || $(".diseaseCodeId option:selected").val() == '-1'){
+								alert("질병을 선택해 주세요");
+							}
+											
+							else{
+								$("#registForm").attr("method", "post");
+								$("#registForm").attr("action", "diet");
+								$("#registForm").submit();	
+							}
+							
 						});
 
 						$(".templateErase").on("click", function() {
@@ -600,7 +627,7 @@
 
 
 					<div id="test">
-						<select name="diseaseCode">
+						<select name="diseaseCode"  class = "diseaseCodeId">
 							<c:forEach items="${overList }" var="v">
 								<option value="${v.diseaseCode }">${v.diseaseName },
 									${v.judgement}</option>
@@ -609,11 +636,11 @@
 					</div>
 					<div id="dietName">
 						<!-- 식단의 이름을 지어줌 -->
-						<input type="text" name="dietName" placeholder="식단 이름 짓기">
+						<input type="text" id = "dietNameText" name="dietName" placeholder="식단 이름 짓기">
 					</div>
 					<div id="price">
 						<!-- 식단의 가격을 지어줌 -->
-						<input type="number" name="price" placeholder="식단 가격 짓기">
+						<input type="number" id = "priceText" name="price" placeholder="식단 가격 짓기">
 					</div>
 					<div id="dietImg">
 						<input type="file" class="filestyle" data-input="false"

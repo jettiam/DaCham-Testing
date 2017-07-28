@@ -43,60 +43,24 @@
 			}
 		});
 		$(".update").on("click",function(){
-			v = $(".material input[type='hidden']").length;
-			console.log("길이왕:"+v);          
-			var length1 = $(".foodGroup1 input[type='hidden']").length;
-			console.log("길이맨:"+length1);
+			var sideDLength = $(".material input[type='hidden']").length;
+			$(".material input[type='radio']:checked").clone().appendTo("form");	
+			//checked 먼저 넣고 변경하기
+			for(var i=0;i<$("form .groupRadio:checked").length;i++){
+				var sideDType=$("form .groupRadio").eq(i).val().replace("_1","_0");
+				$("form .groupRadio").eq(i).val(sideDType);
+			}
 			
-			var length2 = $(".foodGroup2 input[type='hidden']").length;
-			console.log("길이맨:"+length2);
+			$("form .groupRadio").attr('type','hidden');
 			
-			var length3 = $(".foodGroup3 input[type='hidden']").length;
-			console.log("길이맨:"+length3);
-			
-			var length4 = $(".foodGroup4 input[type='hidden']").length;
-			console.log("길이맨:"+length4);
-			
-			var length5 = $(".foodGroup5 input[type='hidden']").length;
-			console.log("길이맨:"+length5);
-			
-			var length6 = $(".foodGroup6 input[type='hidden']").length;
-			console.log("길이맨:"+length6);
+			$(".material input[type='radio']").clone().appendTo("form");
+			$("form .groupRadio:checked").remove();
+			$("form .groupRadio").attr("type","hidden");
+			$("form .groupRadio").attr("name","sideDType");
 			
 			
+			$('<input type = "hidden" id = "cnt" name = "count" value = "'+sideDLength+'">').appendTo("form");
 			
-			$("form").append($(".foodGroup1"));
-			$("form").append($(".foodGroup2"));
-			$("form").append($(".foodGroup3"));
-			$("form").append($(".foodGroup4"));
-			$("form").append($(".foodGroup5"));
-			$("form").append($(".foodGroup6"));
-			
-			$(".foodGroup1 input[type='radio']").val('1');
-			$(".foodGroup1 input[type='radio']:checked").val('0');
-			
-			$(".foodGroup2 input[type='radio']").val('1');
-			$(".foodGroup2 input[type='radio']:checked").val('0');
-			
-			$(".foodGroup3 input[type='radio']").val('1');
-			$(".foodGroup3 input[type='radio']:checked").val('0');
-			
-			$(".foodGroup4 input[type='radio']").val('1');
-			$(".foodGroup4 input[type='radio']:checked").val('0');
-			
-			$(".foodGroup5 input[type='radio']").val('1');
-			$(".foodGroup5 input[type='radio']:checked").val('0');
-			
-			$(".foodGroup6 input[type='radio']").val('1');
-			$(".foodGroup6 input[type='radio']:checked").val('0');
-			
-			$('<input type = "hidden" id = "cnt" name = "count" value = "'+v+'">').appendTo("form");
-			$('<input type = "hidden" id = "cnt" name = "length1" value = "'+length1+'">').appendTo("form");
-			$('<input type = "hidden" id = "cnt" name = "length2" value = "'+length2+'">').appendTo("form");
-			$('<input type = "hidden" id = "cnt" name = "length3" value = "'+length3+'">').appendTo("form");
-			$('<input type = "hidden" id = "cnt" name = "length4" value = "'+length4+'">').appendTo("form");
-			$('<input type = "hidden" id = "cnt" name = "length5" value = "'+length5+'">').appendTo("form");
-			$('<input type = "hidden" id = "cnt" name = "length6" value = "'+length6+'">').appendTo("form");
 			
 			
 			if(window.confirm("정말로 수정하시겠습니까?")){
@@ -167,34 +131,35 @@
 			var sideDImg = $(this).attr('data-img');
 			var sideDName = $(this).attr('data-name');
 			var sideDCode = $(this).attr('data-code');
+			$(this).parent().parent().remove();
 			if(foodGCode == '01'){
 				var str = "";
-				str = "<tr class = 'groupResult1'><td><input type = 'hidden' name = 'sideDCode1' value = "+sideDCode+"><input type = 'radio' class = 'groupRadio' name = 'sideDType1' value = '1'></td><td><img src = 'displayFile?fileName="+sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+sideDName+"</td></tr>";
+				str = "<tr class = 'groupResult1'><td><input type = 'hidden' name = 'sideDCode' value = "+sideDCode+"><input type = 'radio' class = 'groupRadio' name = 'foodG01' value = '"+sideDCode+"_1'></td><td><img src = 'displayFile?fileName="+sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+sideDName+"</td></tr>";
 				$(".foodGroup1").append(str);      
 			}
 			else if(foodGCode == '02'){
 				var str = "";
-				str = "<tr class = 'groupResult2'><td><input type = 'hidden' name = 'sideDCode2' value = "+sideDCode+"><input type = 'radio' class = 'groupRadio' name = 'sideDType2' value = '1'></td><td><img src = 'displayFile?fileName="+sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+sideDName+"</td></tr>";
+				str = "<tr class = 'groupResult2'><td><input type = 'hidden' name = 'sideDCode' value = "+sideDCode+"><input type = 'radio' class = 'groupRadio' name = 'foodG02' value = '"+sideDCode+"_1'></td><td><img src = 'displayFile?fileName="+sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+sideDName+"</td></tr>";
 				$(".foodGroup2").append(str);      
 			}
 			else if(foodGCode == '03'){
 				var str = "";
-				str = "<tr class = 'groupResult3'><td><input type = 'hidden' name = 'sideDCode3' value = "+sideDCode+"><input type = 'radio' class = 'groupRadio' name = 'sideDType3' value = '1'></td><td><img src = 'displayFile?fileName="+sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+sideDName+"</td></tr>";
+				str = "<tr class = 'groupResult3'><td><input type = 'hidden' name = 'sideDCode' value = "+sideDCode+"><input type = 'radio' class = 'groupRadio' name = 'foodG03' value = '"+sideDCode+"_1'></td><td><img src = 'displayFile?fileName="+sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+sideDName+"</td></tr>";
 				$(".foodGroup3").append(str);      
 			}
 			else if(foodGCode == '04'){
 				var str = "";
-				str = "<tr class = 'groupResult4'><td><input type = 'hidden' name = 'sideDCode4' value = "+sideDCode+"><input type = 'radio' class = 'groupRadio' name = 'sideDType4' value = '1'></td><td><img src = 'displayFile?fileName="+sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+sideDName+"</td></tr>";
+				str = "<tr class = 'groupResult4'><td><input type = 'hidden' name = 'sideDCode' value = "+sideDCode+"><input type = 'radio' class = 'groupRadio' name = 'foodG04' value = '"+sideDCode+"_1'></td><td><img src = 'displayFile?fileName="+sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+sideDName+"</td></tr>";
 				$(".foodGroup4").append(str);      
 			}
 			else if(foodGCode == '05'){
 				var str = "";
-				str = "<tr class = 'groupResult5'><td><input type = 'hidden' name = 'sideDCode5' value = "+sideDCode+"><input type = 'radio' class = 'groupRadio' name = 'sideDType5' value = '1'></td><td><img src = 'displayFile?fileName="+sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+sideDName+"</td></tr>";
+				str = "<tr class = 'groupResult5'><td><input type = 'hidden' name = 'sideDCode' value = "+sideDCode+"><input type = 'radio' class = 'groupRadio' name = 'foodG05' value = '"+sideDCode+"_1'></td><td><img src = 'displayFile?fileName="+sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+sideDName+"</td></tr>";
 				$(".foodGroup5").append(str);      
 			}
 			else if(foodGCode == '06'){
 				var str = "";
-				str = "<tr class = 'groupResult6'><td><input type = 'hidden' name = 'sideDCode6' value = "+sideDCode+"><input type = 'radio' class = 'groupRadio' name = 'sideDType6' value = '1'></td><td><img src = 'displayFile?fileName="+sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+sideDName+"</td></tr>";
+				str = "<tr class = 'groupResult6'><td><input type = 'hidden' name = 'sideDCode' value = "+sideDCode+"><input type = 'radio' class = 'groupRadio' name = 'foodG06' value = '"+sideDCode+"_1'></td><td><img src = 'displayFile?fileName="+sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+sideDName+"</td></tr>";
 				$(".foodGroup6").append(str);      
 			}
 		});
@@ -207,67 +172,103 @@
 			$(".groupResult1").remove();
 			$.getJSON("nutriAjax/groupSide/"+foodGCode+"/"+dietCode,function(data){
 				var str = "";
-				$(data).each(function(){
-					str += "<tr class = 'groupResult1'><td><input type = 'hidden' name = 'sideDCode1' value = '"+this.sideDCode+"'><input type = 'radio' class = 'groupRadio' name = 'sideDType1' value = '"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+this.sideDName+"</td></tr>";
-				});    
+				var code = new Array();
+				$(data).each(function(i){         
+					str += "<tr class = 'groupResult1'><td><input type = 'hidden' name = 'sideDCode' value = '"+this.sideDCode+"'><input type = 'radio' class = 'groupRadio' name = 'foodG01' value = '"+this.sideDCode+"_"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+this.sideDName+"</td></tr>";
+					code[i] = this.sideDCode; 	
+					console.log("식단코드배열:"+code[i]);
+				});
+				
+				
 				$(".foodGroup1").append(str);   
-				$(".groupRadio:input[value = '0']").prop("checked",true);
+				
+				for(var i = 0; i< $('.foodGroup1 input[type="hidden"]').length;i++){
+					$(".groupRadio:input[value = '"+code[i]+"_0']").prop("checked",true);	
+					console.log("코드배열2: "+code[i]);
+				}        
 			});
 		}
 		function groupSelector2(foodGCode,dietCode){
 			$(".groupResult2").remove();
 			$.getJSON("nutriAjax/groupSide/"+foodGCode+"/"+dietCode,function(data){
 				var str = "";
-				$(data).each(function(){
-					str += "<tr class = 'groupResult2'><td><input type = 'hidden' name = 'sideDCode2' value = '"+this.sideDCode+"'><input type = 'radio' class = 'groupRadio' name = 'sideDType2' value = '"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+this.sideDName+"</td></tr>"
+				var code = new Array();
+				$(data).each(function(i){
+					str += "<tr class = 'groupResult2'><td><input type = 'hidden' name = 'sideDCode' value = '"+this.sideDCode+"'><input type = 'radio' class = 'groupRadio' name = 'foodG02' value = '"+this.sideDCode+"_"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+this.sideDName+"</td></tr>"
+					code[i] = this.sideDCode; 	
+					console.log("식단코드배열:"+code[i]);
 				});
 				$(".foodGroup2").append(str);
-				$(".groupRadio:input[value = '0']").prop("checked",true);
+				for(var i = 0; i< $('.foodGroup2 input[type="hidden"]').length;i++){
+					$(".groupRadio:input[value = '"+code[i]+"_0']").prop("checked",true);	
+					console.log("코드배열2: "+code[i]);
+				}        
 			});
 		}
 		function groupSelector3(foodGCode,dietCode){
 			$(".groupResult3").remove();
 			$.getJSON("nutriAjax/groupSide/"+foodGCode+"/"+dietCode,function(data){
 				var str = "";
-				$(data).each(function(){
-					str += "<tr class = 'groupResult3'><td><input type = 'hidden' name = 'sideDCode3' value = '"+this.sideDCode+"'><input type = 'radio' class = 'groupRadio' name = 'sideDType3' value = '"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+this.sideDName+"</td></tr>"
+				var code = new Array();
+				$(data).each(function(i){
+					str += "<tr class = 'groupResult3'><td><input type = 'hidden' name = 'sideDCode' value = '"+this.sideDCode+"'><input type = 'radio' class = 'groupRadio' name = 'foodG03' value = '"+this.sideDCode+"_"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+this.sideDName+"</td></tr>"
+					code[i] = this.sideDCode; 	
+					console.log("식단코드배열:"+code[i]);
 				});
 				$(".foodGroup3").append(str);
-				$(".groupRadio:input[value = '0']").prop("checked",true);
+				for(var i = 0; i< $('.foodGroup3 input[type="hidden"]').length;i++){
+					$(".groupRadio:input[value = '"+code[i]+"_0']").prop("checked",true);	
+					console.log("코드배열2: "+code[i]);
+				}     
 			});
 		}
 		function groupSelector4(foodGCode,dietCode){
 			$(".groupResult4").remove();
 			$.getJSON("nutriAjax/groupSide/"+foodGCode+"/"+dietCode,function(data){
 				var str = "";
-				$(data).each(function(){
-					str += "<tr class = 'groupResult4'><td><input type = 'hidden' name = 'sideDCode4' value = '"+this.sideDCode+"'><input type = 'radio' class = 'groupRadio' name = 'sideDType4' value = '"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+this.sideDName+"</td></tr>"
+				var code = new Array();
+				$(data).each(function(i){
+					str += "<tr class = 'groupResult4'><td><input type = 'hidden' name = 'sideDCode' value = '"+this.sideDCode+"'><input type = 'radio' class = 'groupRadio' name = 'foodG04' value = '"+this.sideDCode+"_"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+this.sideDName+"</td></tr>"
+					code[i] = this.sideDCode;
 				});
 				 	
 				$(".foodGroup4").append(str);
-				$(".groupRadio:input[value = '0']").prop("checked",true);
+				for(var i = 0; i< $('.foodGroup4 input[type="hidden"]').length;i++){
+					$(".groupRadio:input[value = '"+code[i]+"_0']").prop("checked",true);	
+					console.log("코드배열2: "+code[i]);
+				}   
 			});
 		}
 		function groupSelector5(foodGCode,dietCode){
 			$(".groupResult5").remove();
 			$.getJSON("nutriAjax/groupSide/"+foodGCode+"/"+dietCode,function(data){
 				var str = "";
-				$(data).each(function(){
-					str += "<tr class = 'groupResult5'><td><input type = 'hidden' name = 'sideDCode5' value = '"+this.sideDCode+"'><input type = 'radio' class = 'groupRadio' name = 'sideDType5' value = '"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+this.sideDName+"</td></tr>"
+				var code = new Array();
+				$(data).each(function(i){
+					str += "<tr class = 'groupResult5'><td><input type = 'hidden' name = 'sideDCode' value = '"+this.sideDCode+"'><input type = 'radio' class = 'groupRadio' name = 'foodG05' value = '"+this.sideDCode+"_"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+this.sideDName+"</td></tr>";
+					code[i] = this.sideDCode;										
 				});
 				$(".foodGroup5").append(str);
-				$(".groupRadio:input[value = '0']").prop("checked",true);
+				for(var i = 0; i< $('.foodGroup5 input[type="hidden"]').length;i++){
+					$(".groupRadio:input[value = '"+code[i]+"_0']").prop("checked",true);	
+					console.log("코드배열2: "+code[i]);
+				}   
 			});
 		}
 		function groupSelector6(foodGCode,dietCode){
 			$(".groupResult6").remove();
 			$.getJSON("nutriAjax/groupSide/"+foodGCode+"/"+dietCode,function(data){
 				var str = "";
-				$(data).each(function(){
-					str += "<tr class = 'groupResult6'><td><input type = 'hidden' name = 'sideDCode6' value = '"+this.sideDCode+"'><input type = 'radio' class = 'groupRadio' name = 'sideDType6' value = '"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+this.sideDName+"</td></tr>"
+				var code = new Array();
+				$(data).each(function(i){
+					str += "<tr class = 'groupResult6'><td><input type = 'hidden' name = 'sideDCode' value = '"+this.sideDCode+"'><input type = 'radio' class = 'groupRadio' name = 'foodG06' value = '"+this.sideDCode+"_"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+this.sideDName+"</td></tr>"
+					code[i] = this.sideDCode;
 				});
 				$(".foodGroup6").append(str);
-				$(".groupRadio:input[value = '0']").prop("checked",true);
+				for(var i = 0; i< $('.foodGroup6 input[type="hidden"]').length;i++){
+					$(".groupRadio:input[value = '"+code[i]+"_0']").prop("checked",true);	
+					console.log("코드배열6: "+code[i]);
+				}   
 			});
 			         
 		}

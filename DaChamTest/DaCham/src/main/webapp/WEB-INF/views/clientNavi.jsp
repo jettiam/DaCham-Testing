@@ -157,11 +157,7 @@ float:right;
 
 		} else {
 
-		}
-
-		$("#naviMenuBtn").on("click", function() {
-			$(".ulBox").toggle();
-		});
+		}		
 		
 	
 	});

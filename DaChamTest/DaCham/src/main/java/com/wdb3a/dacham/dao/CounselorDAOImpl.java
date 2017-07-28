@@ -67,6 +67,7 @@ public class CounselorDAOImpl implements CounselorDAO {
 	public Counselor counselMember(int couselCode) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace+".counselMember",couselCode);
+		
 	}
 
 	@Override

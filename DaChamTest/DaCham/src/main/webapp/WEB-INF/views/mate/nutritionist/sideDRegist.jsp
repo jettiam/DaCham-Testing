@@ -141,7 +141,6 @@
 					<tr>
 						<td>
 							<select name = "foodGCode">
-								<option>식품군</option>
 								<option value = "01">밥</option>
 								<option value = "02">국</option>
 								<option value = "03">메인메뉴1</option>
@@ -152,7 +151,6 @@
 						</td>
 						<td>
 							<select name = "cookMCode">	
-								<option>조리방법</option>
 								<option value = "01">튀김</option>
 								<option value = "02">구이</option>
 								<option value = "03">조림</option>
@@ -193,10 +191,16 @@
 			
 			$("#regist").on("click",function(){
 				if(!localStorage['init'] || isNaN(localStorage['cnt'])==true || localStorage['cnt'] == 0){
-					/* alert("등록할 식재료를 선택하세요"); */
+					alert("등록할 식재료를 선택하세요");
 					event.preventDefault();
 				}
-				else{
+				else if($("#prev_View_area").attr("src") == "http://placehold.it/100x100"){
+					alert("이미지 좀 선택하세요");
+				}		
+				else if($(".foodMAmountClass").val() == ""){
+					alert("식재료량을 기재하세요!!");
+				}
+				else{ 
 					$("#registForm").attr("method","post");
 					$("#registForm").attr("action","side");
 					$("#registForm").submit();	
@@ -277,7 +281,7 @@
 					var item = $('<tr></tr>').addClass('item').attr('data-id',i);
 					$('<td></td>').html('<input type = "hidden" name = "foodMCode" value = '+foodMCode + '>').appendTo(item);    
 					$('<td>'+foodMName+'</td>').addClass("foodMName").attr('name','foodMName').attr('data-name',foodMName).appendTo(item);
-					$('<td></td>').html('<input type ="text" name = "foodMAmount" maxlength="4" size="1" >').appendTo(item);
+					$('<td></td>').html('<input type ="text" class = "foodMAmountClass" name = "foodMAmount" maxlength="4" size="1" >').appendTo(item);
 					item.appendTo(".material");
 					
 				}

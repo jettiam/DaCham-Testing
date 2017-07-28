@@ -21,7 +21,7 @@ function all(){
 		$(".foodStock").remove(); 
 		var str = "";
 		for(var i =0; i<data.length; i++){
-			str += "<tr class='foodStock'>"+"<td>"+data[i].foodMICode+"</td>"+"<td>"+data[i].foodMName+"</td>"+"<td>"+data[i].price+"</td>"+"<td>"+data[i].unit+"</td>"+"<td>"+data[i].inAmount+"</td>"+"<td>"+data[i].outAmount+"</td>"+"<td>"+data[i].stock+"</td> </tr>"		 
+			str += "<tr class='foodStock'>"+"<td>"+data[i].foodMName+"</td>"+"<td>"+data[i].inAmount+"</td>"+"<td>"+data[i].outAmount+"</td>"+"<td>"+data[i].stock+"</td>"+"<td>"+data[i].unit+"</td></tr>"			 
 		}
 		console.log(str);
 		$(".tables").append(str); 
@@ -41,7 +41,7 @@ function all(){
 			var keyword = $("#keyword").val();
 			$.getJSON("adminSub/foodOrder/"+searchType+"/"+keyword,function(data){
 			for(var i=0; i<data.length; i++){
-				str += "<tr class='foodStock'>"+"<td>"+data[i].foodMICode+"</td>"+"<td>"+data[i].foodMName+"</td>"+"<td>"+data[i].price+"</td>"+"<td>"+data[i].unit+"</td>"+"<td>"+data[i].inAmount+"</td>"+"<td>"+data[i].outAmount+"</td>"+"<td>"+data[i].stock+"</td> </tr>"		 
+				str += "<tr class='foodStock'>"+"<td>"+data[i].foodMName+"</td>"+"<td>"+data[i].inAmount+"</td>"+"<td>"+data[i].outAmount+"</td>"+"<td>"+data[i].stock+"</td>"+"<td>"+data[i].unit+"</td></tr>"		 
 				}    
 			$(".tables").append(str); 
 			});     
@@ -74,13 +74,11 @@ function all(){
 	<div>
 		<table width="600" class="tables table table-condensed">
 			<tr>
-				<th>코드번호</th>
 				<th>식재료명</th>
-				<th>단가</th>
-				<th>단위</th>
 				<th>입고량</th>
 				<th>출고량</th>
-				<th>재고량</th>    
+				<th>재고량</th> 
+				<th>단위</th>   
 
 			</tr>
 		</table>

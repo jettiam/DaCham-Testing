@@ -14,6 +14,7 @@ import com.wdb3a.dacham.bean.Criteria;
 import com.wdb3a.dacham.bean.Diet;
 import com.wdb3a.dacham.bean.FoodMAmountRead;
 import com.wdb3a.dacham.bean.FoodMInven;
+import com.wdb3a.dacham.bean.FoodMaterial;
 import com.wdb3a.dacham.bean.Member;
 import com.wdb3a.dacham.bean.OrderList;
 @Repository
@@ -202,6 +203,24 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 	public void insertFoodM(FoodMAmountRead foodMAmountRead) throws Exception {
 		sqlSession.insert(namespace+".insertFoodM", foodMAmountRead);
 		
+	}
+
+	@Override
+	public void foodMUpdate(int orderCode) throws Exception {
+		sqlSession.insert(namespace+".foodMUpdate", orderCode); 
+		
+	}
+
+	@Override
+	public List<FoodMaterial> foodMaterialSearch(FoodMaterial foodMaterial) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".foodMaterial", foodMaterial);
+	}
+
+	@Override
+	public List<Member> memberSearch(Member member) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".memberSearch", member); 
 	}
 
 	

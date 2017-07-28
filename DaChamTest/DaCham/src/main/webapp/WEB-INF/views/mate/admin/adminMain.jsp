@@ -428,7 +428,8 @@
 			$(".tables").append(str);
 			printPaging(data.criteria);  
 		});  
-	}   
+	}
+	
 	function printPaging(criteria){  
 		var str = "";
 				

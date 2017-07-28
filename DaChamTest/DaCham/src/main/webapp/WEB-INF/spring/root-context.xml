@@ -12,10 +12,15 @@
 
 	<!--  <mongo:mongo host ="ds111123.mlab.com" port="11123" />	 -->
 	
+<<<<<<< HEAD
 	<!-- <mongo:mongo-client host="ds111123.mlab.com" port="11123" credentials="admin:admin@admin">
 	</mongo:mongo-client> -->
 	
 	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate"> 
+=======
+
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+>>>>>>> branch 'master' of git@github.com:jettiam/DaCham-Testing.git
 		<constructor-arg ref="mongo"/>
 		<constructor-arg name="databaseName" value="mongo" />
 		<constructor-arg name="userCredentials" ref="userCredentials"/>
@@ -39,21 +44,35 @@
 	</bean>
 
 
+<<<<<<< HEAD
  	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">		
+=======
+
+ 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">		
+>>>>>>> branch 'master' of git@github.com:jettiam/DaCham-Testing.git
 		<property name="url" value="jdbc:mariadb://106.249.38.73:33060/dacham" /> 
 		<property name="driverClassName" value="org.mariadb.jdbc.Driver" />
 		<property name="username" value="root" />
 		<property name="password" value="1234" />
-	</bean> 
+	</bean>
+	
 	<!-- mysql 서버용 -->
+<<<<<<< HEAD
 	<!--  	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+=======
+<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+>>>>>>> branch 'master' of git@github.com:jettiam/DaCham-Testing.git
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />		
 		<property name="url" value="jdbc:mysql://localhost:3306/redbud" /> 		
 		<property name="username" value="redbud" />
 		<property name="password" value="fpemqjem1*" />
+<<<<<<< HEAD
 	</bean>		 -->
+=======
+	</bean> -->
+>>>>>>> branch 'master' of git@github.com:jettiam/DaCham-Testing.git
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />

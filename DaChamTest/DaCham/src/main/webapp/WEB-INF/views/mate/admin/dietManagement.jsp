@@ -40,7 +40,7 @@ function disease1(){
 							+ data[i].dietName
 							+ "</td>"
 							+ "<td><input type='text' value='" + data[i].price + "'>"
-							+ "&nbsp&nbsp<button class='priceUpdate btn btn-primary' data-price='"+data[i].dietCode+"'>가격수정</button>"
+							+ "&nbsp&nbsp<button class='priceUpdate btn btn-default' data-price='"+data[i].dietCode+"'>가격수정</button>"
 							+ "</td>"
 							+ "<td>"
 							+ data[i].diseaseName
@@ -78,7 +78,7 @@ function disease2(){
 							+ data[i].dietName
 							+ "</td>"
 							+ "<td><input type='text' value='" + data[i].price + "'>"
-							+ "&nbsp&nbsp<button class='priceUpdate btn btn-primary' data-price='"+data[i].dietCode+"'>가격수정</button>"
+							+ "&nbsp&nbsp<button class='priceUpdate btn btn-default' data-price='"+data[i].dietCode+"'>가격수정</button>"
 							+ "</td>"
 							+ "<td>"
 							+ data[i].diseaseName
@@ -116,7 +116,7 @@ function disease3(){
 							+ data[i].dietName
 							+ "</td>"
 							+ "<td><input type='text' value='" + data[i].price + "'>"
-							+ "&nbsp&nbsp<button class='priceUpdate btn btn-primary' data-price='"+data[i].dietCode+"'>가격수정</button>"
+							+ "&nbsp&nbsp<button class='priceUpdate btn btn-default' data-price='"+data[i].dietCode+"'>가격수정</button>"
 							+ "</td>"
 							+ "<td>"
 							+ data[i].diseaseName
@@ -154,7 +154,7 @@ function disease4(){
 							+ data[i].dietName
 							+ "</td>"
 							+ "<td><input type='text' value='" + data[i].price + "'>"
-							+ "&nbsp&nbsp<button class='priceUpdate btn btn-primary' data-price='"+data[i].dietCode+"'>가격수정</button>"
+							+ "&nbsp&nbsp<button class='priceUpdate btn btn-default' data-price='"+data[i].dietCode+"'>가격수정</button>"
 							+ "</td>"
 							+ "<td>"
 							+ data[i].diseaseName
@@ -197,7 +197,7 @@ function disease4(){
 															+ data[i].dietName
 															+ "</td>"
 															+ "<td><input type='text' value='" + data[i].price + "'>"
-															+ "&nbsp&nbsp<button class='priceUpdate btn btn-primary' data-price='"+data[i].dietCode+"'>가격수정</button>"
+															+ "&nbsp&nbsp<button class='priceUpdate btn btn-default' data-price='"+data[i].dietCode+"'>가격수정</button>"
 															+ "</td>"
 															+ "<td>"
 															+ data[i].diseaseName
@@ -292,6 +292,7 @@ function disease4(){
 <body>
 	<%@include file="../admin/upmenu.jsp"%>
 	<div class="container"> 
+	
 		<div>
 		<ul class="nav nav-pills">    
 			<li role="presentation" class="active"><a href="#" onclick="disease1();">당뇨</a></li>
@@ -312,7 +313,7 @@ function disease4(){
 				</tr>
 			</table>
 		</div>
-		<div>
+		<div class="col-sm-offset-10">
 			<button id="dietSell" class="btn btn-default">판매</button>
 			<button id="dietSellStop" class="btn btn-default">판매중지</button>
 		</div>

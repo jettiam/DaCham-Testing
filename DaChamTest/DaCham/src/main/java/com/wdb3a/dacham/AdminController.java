@@ -94,9 +94,9 @@ public class AdminController {
 	public String mailSending(String foodMOrderInfo) throws Exception {
 		
 		
-		System.out.println("ddd");
+		//System.out.println("ddd");
 		String authKey = AUTH_KEY_FCM; // You FCM AUTH key
-		System.out.println(authKey);
+		//System.out.println(authKey); 
 		String FMCurl = API_URL_FCM;
 		String token = service.appTest("test");
 		String toString = "";
@@ -106,29 +106,30 @@ public class AdminController {
 		int totalprice;
 		JSONParser jsonParser = new JSONParser();
 		JSONObject jsonObj = (JSONObject) jsonParser.parse(foodMOrderInfo);
-		System.out.println(jsonObj);
+		int orderCode;  
+		//System.out.println(jsonObj); 
 		for (int i = 0; i < jsonObj.size(); i++) {
 			JSONObject jsonObj1 = (JSONObject) jsonObj.get(i + "");
-			/*FoodMAmountRead foodMAmountRead = new FoodMAmountRead();
-			System.out.println(foodMAmountRead);
-			//foodMAmountRead.setFoodMCode(jsonObj1.get("foodMCode").toString());
-			foodMAmountRead.setFoodMName(jsonObj1.get("foodMName").toString());
-			foodMAmountRead.setInAmount(jsonObj1.get("inAmount").toString());
-			foodMAmountRead.setUnit(jsonObj1.get("unit").toString());
-			foodMAmountRead.setPrice(Integer.parseInt(jsonObj1.get("price").toString()));
-			foodMAmountRead.setOrderCode(Integer.parseInt(jsonObj1.get("orderCode").toString()));
-			
-			  
-			service.insertFoodM(foodMAmountRead);*/
+			FoodMAmountRead foodMAmountRead4 = new FoodMAmountRead();   
+			System.out.println(foodMOrderInfo);      
+			foodMAmountRead4.setFoodMCode(jsonObj1.get("foodMCode").toString());
+			foodMAmountRead4.setFoodMName(jsonObj1.get("foodMName").toString());
+			foodMAmountRead4.setInAmount(jsonObj1.get("totalAmount").toString());
+			foodMAmountRead4.setUnit(jsonObj1.get("unit").toString());  
+			foodMAmountRead4.setPrice(Integer.parseInt(jsonObj1.get("price").toString()));
+			foodMAmountRead4.setOrderCode(Integer.parseInt(jsonObj1.get("orderCode").toString()));
+			orderCode = Integer.parseInt(jsonObj1.get("orderCode").toString());
+			service.insertFoodM(foodMAmountRead4);
+			service.foodMUpdate(orderCode);
 			
 			totalprice = (int) (Integer.parseInt(jsonObj1.get("price").toString())
 					* Double.parseDouble(jsonObj1.get("totalAmount").toString()));
-			System.out.println(jsonObj1);
-			System.out.println(jsonObj1.get("foodMname").toString());
-			toString = toString + "\n" + "식재료명 : " + jsonObj1.get("foodMname").toString() + "단가 : "
+			//System.out.println(jsonObj1);
+			//System.out.println(jsonObj1.get("foodMname").toString());
+			toString = toString + "\n" + "식재료명 : " + jsonObj1.get("foodMName").toString() + "단가 : "
 					+ jsonObj1.get("price").toString() + " 주문량 :" + jsonObj1.get("totalAmount").toString()
 					+ jsonObj1.get("unit").toString() + " 총가격 : " + totalprice + "원";
-			System.out.println(toString);
+			//System.out.println(toString);
 			
 			
 			
@@ -257,8 +258,9 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/customer")
-	public String getcustomer() {
-		return "mate/admin/customer";
+	public String getcustomer(Model model, Member member) throws Exception{
+		model.addAttribute("member", member);
+		return "mate/admin/customer"; 
 	}
 
 	@RequestMapping(value = "/customerInfo")

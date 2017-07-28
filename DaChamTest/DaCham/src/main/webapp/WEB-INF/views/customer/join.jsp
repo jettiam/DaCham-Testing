@@ -136,6 +136,10 @@
 		$("#joinCancel").click(function(){
 			window.location.href="main";
 		});
+		$("#test").click(function() {
+			var b=$("#birthday").val();
+			alert(b);
+		});
 	});
 </script>
 </head>
@@ -173,6 +177,13 @@
 				<div class="col-sm-4" id="nameCheck" data-nameCheck="false"></div>				
 			</div>
 			<div class="form-group">
+				<label for="birthday" class="control-label col-sm-2 col-sm-offset-1">생년월일</label>
+				<div class="col-sm-3">
+					<input type="date" id="birthday" name="birthday" class="form-control" value="1990-01-01">
+				</div>
+				<div class="col-sm-4" id="birthdayCheck" data-birthdayCheck="false"></div>				
+			</div>
+			<div class="form-group">
 				<label for="tel" class="control-label col-sm-2 col-sm-offset-1">휴대폰번호</label>
 				<div class="col-sm-3">
 					<input type="tel" id="tel" name="tel" class="form-control ">
@@ -193,13 +204,29 @@
 				</div>
 					<div class="col-sm-4" id="addressCheck" data-addressCheck="false"></div>				
 			</div>
+			<div class="form-group">
+			
+				<label for="address" class="control-label col-sm-2 col-sm-offset-1">질환</label>
+				<div class="col-sm-3">
+					<select name="diseaseCode" class="form-control ">
+					<option value="-1">없음</option>
+					<option value="1">당뇨병</option>
+					<option value="4">신부전증</option>
+					<option value="16">심부전증</option>
+					<option value="13">고지혈증</option>
+					<option value="0">기타</option>
+					</select>
+				</div>
+					<div class="col-sm-4" id="" data-diseaseCodeCheck="false">앓고 있는 만성질환을 선택해주세요</div>				
+			</div>
 			
 		</form>
 		<div class="text-center">
 				<button id="joinRegist" class="btn btn-primary">회원가입</button>
 				<button id="joinCancel" class="btn btn-primary">취소</button>
-			</div>
+				
 		</div>
+	</div>
 	
 </body>
 </html>
