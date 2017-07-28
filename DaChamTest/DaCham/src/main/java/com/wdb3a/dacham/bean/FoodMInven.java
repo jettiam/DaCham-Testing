@@ -16,7 +16,8 @@ public class FoodMInven {
 	private int stock;
 	private String keyword;
 	private String searchType;
-	
+	private Date orderDate;
+	private int foodMStatus;
 	 
 	
 	public String getUnit() {
@@ -97,6 +98,18 @@ public class FoodMInven {
 	}
 	public void setSearchType(String searchType) {
 		this.searchType = searchType;
+	}
+	public Date getOrderDate() {
+		return orderDate;
+	}
+	public void setOrderDate(Date orderDate) {
+		this.orderDate = orderDate;
+	}
+	public int getFoodMStatus() {
+		return foodMStatus;
+	}
+	public void setFoodMStatus(int foodMStatus) {
+		this.foodMStatus = foodMStatus;
 	}
 	
 	
