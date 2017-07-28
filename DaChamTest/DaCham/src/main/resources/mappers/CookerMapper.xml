@@ -111,27 +111,31 @@
 
 	<!-- 조리 해야할(orderItemCode=3) sideDcode와 조리량을 select -->
 	<select id="selectCookingItem" resultType="CookingItem">
-		select a.orderCode as orderCode,
+		select a.orderCode as
+		orderCode,
 		a.sideDCode as sideDCode,
 		c.sideDImg as sideDImg,
-		c.sideDName as sideDName,
+		c.sideDName
+		as sideDName,
 		b.orderItemCode as orderOrderItemCode,
 		a.orderItemCode as
 		optionsOrderItemCode,
 		sum(b.dietAmount) as cookingAmount
 		from
 		orderoptions a, orderlist b, sidedish c
-		where a.orderCode = b.orderCode and
-		a.orderItemCode = 3 and
+		where a.orderCode = b.orderCode
+		and
 		a.sideDCode = c.sideDCode
 		group by sideDcode;
 	</select>
-	
-	
+
+
 	<update id="updateOptionsItemCode" parameterType="HashMap">
-		update orderoptions set orderItemCode= #{orderItemCode}
-		where sideDCode = #{sideDCode};
+		update
+		orderoptions set orderItemCode= #{orderItemCode}
+		where sideDCode =
+		#{sideDCode};
 	</update>
-	
+
 
 </mapper>

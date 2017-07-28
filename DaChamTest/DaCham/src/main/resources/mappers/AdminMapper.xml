@@ -96,6 +96,14 @@
 		orderCode=#{orderCode}
 		and orderItemCode = 10
 	</update>
+	
+	<!-- orderoptions에 있는 orderItemCode = 3으로 업데이트 -->
+	<update id="workupdateOptions">
+		update orderoptions set orderItemCode = 3
+		where orderCode = #{orderCode};
+	</update>
+	
+	
 	<!--특정 식단에 대한 식재료 검색 -->
 	<select id="foodMAmountRead" resultType="FoodMAmountRead">
 		select

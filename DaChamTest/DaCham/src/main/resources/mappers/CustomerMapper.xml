@@ -80,10 +80,10 @@ from orderlist
 where id=#{id};
 </select>
 
-<!-- 사용자 주문 식단(반찬옵션) 에 insert 하기 위한 쿼리문, 리턴 없음 -->
+<!-- 사용자 주문 식단(반찬옵션) 에 insert 하기 위한 쿼리문, 리턴 없음 (마지막 1은 itemCode 장바구니)-->
 <insert id="registOrderOption" parameterType="hashmap">
 insert into orderoptions
-values( #{recentCode}, #{sideCode},3);
+values( #{recentCode}, #{sideCode}, 1 );
 </insert>
 
 <!-- 주문에 대한 옵션(반찬들) 가져오는 쿼리문, 리턴 Customer(반찬이름, 반찬이미지) -->
