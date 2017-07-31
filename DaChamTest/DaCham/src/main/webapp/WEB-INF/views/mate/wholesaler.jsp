@@ -13,15 +13,14 @@
 <title>다참 식재료 도매</title>
 <script>
 	$(document).ready(function(){
-		foodOrderList();
+		foodOrderList(); 
 		function foodOrderList(){
-			$.getJSON("wholse/foodMOrderList",function(data){
-				console.log(data);
-				for(var i=0;data.list.length;i++){
+			$.getJSON("wholesale/foodMOrderList",function(data){
+				var length=data.list.length;							
+				for(var i=0;i<length;i++){
 					console.log(i+":"+data.list[i].orderDate);
-					/* $("#foodMList").append("<tr>"+data.list[i].orderDate+" 주문목록</tr>"); */
-					$("#foodMList").append("<tr>주문목록</tr>");
-				}
+					$("#foodMList").append("<tr><td><a href='foodMOrderListDetail?orderDate="+data.list[i].orderDate+"'>"+data.list[i].orderDate+" 주문목록</a></td></tr>");				
+				} 
 			});
 
 		}
@@ -34,6 +33,7 @@
 <table class="table" id="foodMList">
 
 </table>
+
 </div>
 </body>
 </html>

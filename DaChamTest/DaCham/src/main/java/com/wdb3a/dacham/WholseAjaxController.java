@@ -16,7 +16,7 @@ import com.wdb3a.dacham.bean.FoodMInven;
 import com.wdb3a.dacham.service.WholseService;
 
 @RestController
-@RequestMapping(value = "wholse")
+@RequestMapping(value = "wholesale")
 public class WholseAjaxController {
 	@Inject
 	private WholseService service;
@@ -28,9 +28,7 @@ public class WholseAjaxController {
 		
 		try {
 			list = service.foodMOrderList();
-			System.out.println(list.get(0).getOrderDate());
-			System.out.println(list.get(1).getOrderDate());
-			System.out.println(list.get(2).getOrderDate());			
+						
 			Map<String, Object> map = new HashMap<>();
 			map.put("list", list);
 			entity = new ResponseEntity<>(map, HttpStatus.OK);

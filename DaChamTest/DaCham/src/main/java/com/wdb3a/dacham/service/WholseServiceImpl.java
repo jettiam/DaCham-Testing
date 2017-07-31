@@ -20,4 +20,10 @@ private WholseDAO dao;
 		return dao.foodMOrderList();
 	}
 
+	@Override
+	public List<FoodMInven> foodMOrderListDetail(String orderDate) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.foodMOrderListDetail(orderDate);
+	}
+
 }

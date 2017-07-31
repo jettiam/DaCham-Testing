@@ -4,6 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wdb3a.WholseMapper">
 	<select id="foodMOrderList" resultType="FoodMInven">
-		select orderDate from foodminven group by orderDate
+		select orderDate from foodminven where orderCode is not null group by orderDate order by orderDate desc
+	</select>
+	<select id="foodMOrderListDetail" resultType="FoodMInven">
+		select orderDate,foodMName, sum(inAmount) inAmount,unit,sum(inAmount)*price price,foodMStatus from foodminven
+		where orderDate=#{orderDate} and orderCode is not null
+		group by foodMName order by foodMStatus,foodMName
 	</select>
 </mapper>

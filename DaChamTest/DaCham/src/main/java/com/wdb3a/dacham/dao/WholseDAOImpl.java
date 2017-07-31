@@ -17,8 +17,14 @@ public class WholseDAOImpl implements WholseDAO {
 	private SqlSession sqlSession;
 
 	@Override
-	public List<FoodMInven> foodMOrderList() throws Exception {
-		System.out.println("식재료리스트 여기까지옴");
+	public List<FoodMInven> foodMOrderList() throws Exception {		
 		return sqlSession.selectList(namespace+".foodMOrderList");
+	}
+
+	@Override
+	public List<FoodMInven> foodMOrderListDetail(String orderDate) throws Exception {
+		System.out.println("식재료 디테일");
+		System.out.println(orderDate);
+		return sqlSession.selectList(namespace+".foodMOrderListDetail",orderDate);
 	}
 }
