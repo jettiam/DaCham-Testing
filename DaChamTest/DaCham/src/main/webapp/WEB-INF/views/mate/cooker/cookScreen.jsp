@@ -11,101 +11,17 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" />
+<link rel="stylesheet" href="resources/jquery.countup.css">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
-	cookAll1();
-	function cookAll1() {
-		$
-				.getJSON(
-						"cookAjax/readyScreen",
-						function(data) {
-							$(".cookResult1").remove();
-							var str = "";
-
-							$(data)
-									.each(
-											function() {
-
-												str += "<tr id = 'cookResult1' data-code = '"+this.orderCode+"'>"
-														+ "<td>"
-														+ "<img src = 'displayCookFile?fileName='"
-														+ this.dietImg
-														+ "'>"
-														+ "</td>"
-														+ "<td>"
-														+ this.dietName
-														+ "</td>"
-														+ "<td>"
-														+ this.orderDate
-														+ "</td>" + "</tr>"
-											});
-							$(".cook1").append(str);
-
-						});
-	}
-	cookAll2();
-	function cookAll2() {
-		$
-				.getJSON(
-						"cookAjax/cookScreen",
-						function(data) {
-							$(".cookResult2").remove();
-							var str = "";
-
-							$(data)
-									.each(
-											function() {
-												str += "<tr id = 'cookResult2' data-code = '"+this.orderCode+"'>"
-														+ "<td>"
-														+ "<img src = 'displayCookFile?fileName='"
-														+ this.dietImg
-														+ "'>"
-														+ "</td>"
-														+ "<td>"
-														+ this.dietName
-														+ "</td>"
-														+ "<td>"
-														+ this.orderDate
-														+ "</td>" + "</tr>"
-											});
-							$(".cook2").append(str);
-						});
-	}
-	cookAll3();
-	function cookAll3() {
-		$
-				.getJSON(
-						"cookAjax/endScreen",
-						function(data) {
-							$(".cookResult3").remove();
-							var str = "";
-
-							$(data)
-									.each(
-											function() {
-												str += "<tr id = 'cookResult3' data-code = '"+this.orderCode+"'>"
-														+ "<td>"
-														+ "<img src = 'displayCookFile?fileName='"
-														+ this.dietImg
-														+ "'>"
-														+ "</td>"
-														+ "<td>"
-														+ this.dietName
-														+ "</td>"
-														+ "<td>"
-														+ this.orderDate
-														+ "</td>" + "</tr>"
-											});
-							$(".cook3").append(str);
-						});
-	}
-
 	function cookStart() {	
-		//var sideDCode = $(this).siblings().html();
+		
 		var content = "<p>"+
 		"<span>" + $(this).siblings().text() +
-		"</span> <button class='end'>완료</button> </p>"
+		"</span><span class='newCountup'></span><button class='end'>완료</button> </p>"
 		
 		
 		
@@ -113,7 +29,15 @@
 		$("#cookContinue>.container").append(content);
 		var sideDCode = $(this).parent().find("span:first").text();
 		updateOptionsItemCode(4,sideDCode);
+		
+		var newSpan = $("#cookContinue>.container>p:last-child>.newCountup");
+		newSpan.countup();
+		$(".countDays, .countDiv0").attr("style", "display: none");
+		
+		
+		
 	};
+	
 	
 	function cookEnd(){
 		var sideDCode = $(this).parent().find("span:first").text();
@@ -162,10 +86,19 @@
 						$(".todayDate>h1").text(todayDate);
 
 					});
-
 	$(document).on("click", "#cookWait .container .start", cookStart);
 	$(document).on("click", "#cookContinue .container .end", cookEnd);
+
+	$(function(){
+		$('.countup').each(function(){			
+			$(this).countup();
+			$(".countDays, .countDiv0").attr("style", "display: none");
+		});
+	});
+		
+	
 </script>
+
 <style>
 @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
 
@@ -267,15 +200,15 @@ body {
 				<div id="cookContinue" class="box X">
 					<h2>조리중</h2>
 					<div class="container">
-					<c:forEach items="${list}" var="list">
+						<c:forEach items="${list}" var="list">
 							<c:if test="${list.optionsOrderItemCode==4}">
-							<p>
-								<span>${list.sideDCode} </span>
-								<span>${list.sideDName} ${list.cookingAmount}인분</span>
-								<button class='end'>완료</button>
-							</p>
+								<p>
+									<span style='display:none;'>${list.sideDCode} </span> <span>${list.sideDName}
+										${list.cookingAmount}인분</span> <span class="countup"></span>
+									<button class='end'>완료</button>
+								</p>
 							</c:if>
-					</c:forEach>	
+						</c:forEach>
 					</div>
 				</div>
 				<div class="box C mintColor">
@@ -287,11 +220,11 @@ body {
 					<div class="container">
 						<c:forEach items="${list}" var="list">
 							<c:if test="${list.optionsOrderItemCode==3}">
-							<p>
-								<span>${list.sideDCode} </span>
-								<span>${list.sideDName} ${list.cookingAmount}인분</span>
-								<button class="start">시작</button>
-							</p>
+								<p>
+									<span>${list.sideDCode} </span> <span>${list.sideDName}
+										${list.cookingAmount}인분</span>
+									<button class="start">시작</button>
+								</p>
 							</c:if>
 						</c:forEach>
 					</div>
@@ -300,9 +233,7 @@ body {
 			<div class="row">
 				<div id="cookFinish" class="box Z">
 					<h2>조리 완료</h2>
-					<div class="container">
-					
-					</div>
+					<div class="container"></div>
 				</div>
 				<div class="box Q">
 					<button onclick="window.close();">종료</button>
@@ -310,6 +241,8 @@ body {
 			</div>
 		</div>
 	</div>
+
+	<script src="resources/jquery.countup.js"></script>
 
 	<h1>↓↓↓여기서부터 잘라낼 부분 개발 확인용 ↓↓↓</h1>
 	<table class="table">

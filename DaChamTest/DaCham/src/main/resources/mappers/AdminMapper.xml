@@ -54,18 +54,24 @@
 		outAmount, unit, inAmount-outAmount as stock
 		from foodminven
 		group by foodMName
+	</select>
+	
+	<select id="foodStockListSearch" resultType="FoodMInven">
+		select foodMName, sum(inAmount) as inAmount, sum(outAmount) as
+		outAmount, unit
+		from foodminven
+		group by foodMName
 		<include refid="foodsearch"></include>
 	</select>
 	<sql id="foodsearch">
 		<if test="searchType != null">
 			<if test="searchType == 't'.toString()">
-				where foodMName like CONCAT('%',#{keyword},'%')
-			</if>
-			<if test="searchType == 'c'.toString()">
-				where foodMICode like CONCAT('%',#{keyword},'%')
+				having foodMName like CONCAT('%',#{keyword},'%')
 			</if>
 		</if>
 	</sql>
+	
+	
 	<!--식재료 추가주문 -->
 	<select id="foodMaterial" resultType="foodMaterial">
 		select foodMCode, foodMName, price, unit
@@ -96,14 +102,6 @@
 		orderCode=#{orderCode}
 		and orderItemCode = 10
 	</update>
-	
-	<!-- orderoptions에 있는 orderItemCode = 3으로 업데이트 -->
-	<update id="workupdateOptions">
-		update orderoptions set orderItemCode = 3
-		where orderCode = #{orderCode};
-	</update>
-	
-	
 	<!--특정 식단에 대한 식재료 검색 -->
 	<select id="foodMAmountRead" resultType="FoodMAmountRead">
 		select
@@ -370,9 +368,9 @@
 	<insert id="insertFoodM">
 		insert into foodminven(foodMCode, foodMName,
 		inAmount, unit, price,
-		foodMStatus, orderCode) values (#{foodMCode},
+		foodMStatus, orderCode, orderDate) values (#{foodMCode},
 		#{foodMName},
-		#{inAmount}, #{unit}, #{price}, 0, #{orderCode})
+		#{inAmount}, #{unit}, #{price}, 0, #{orderCode}, now())
 
 	</insert>
 
@@ -383,5 +381,20 @@
 		and
 		orderItemCode = 2
 	</update>
+	
+	<insert id="insertFoodMAdd">
+		insert into foodminven(foodMCode, foodMName,
+		inAmount, unit, price,
+		foodMStatus, orderDate) values (#{foodMCode},
+		#{foodMName},
+		#{inAmount}, #{unit}, #{price}, 0, now()) 
 
+	</insert>
+	
+	<!-- orderoptions에 있는 orderItemCode = 3으로 업데이트 -->
+   <update id="workupdateOptions">
+      update orderoptions set orderItemCode = 3
+      where orderCode = #{orderCode};
+   </update>
+   
 </mapper> 
