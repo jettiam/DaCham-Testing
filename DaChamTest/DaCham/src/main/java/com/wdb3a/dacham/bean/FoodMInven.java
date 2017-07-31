@@ -19,6 +19,8 @@ public class FoodMInven {
 	private Date orderDate;
 	private int foodMStatus;
 	private String foodMCheck; 
+	private int foodMCheck1;
+	private int foodMCheck2;
 	
 	public String getUnit() {
 		return unit;
@@ -126,6 +128,18 @@ public class FoodMInven {
 	}
 	public void setInAmount(double inAmount) {
 		this.inAmount = Math.round(inAmount*100d) / 100d;
+	}
+	public int getFoodMCheck1() {
+		return foodMCheck1;
+	}
+	public void setFoodMCheck1(int foodMCheck1) {
+		this.foodMCheck1 = foodMCheck1;
+	}
+	public int getFoodMCheck2() {
+		return foodMCheck2;
+	}
+	public void setFoodMCheck2(int foodMCheck2) {
+		this.foodMCheck2 = foodMCheck2;
 	}
 	
 	
