@@ -13,13 +13,27 @@
 <title>다참 식재료 도매</title>
 <script>
 	$(document).ready(function(){
+		foodOrderList(); 
 		function foodOrderList(){
-			
+			$.getJSON("wholesale/foodMOrderList",function(data){
+				var length=data.list.length;							
+				for(var i=0;i<length;i++){
+					console.log(i+":"+data.list[i].orderDate);
+					$("#foodMList").append("<tr><td><a href='foodMOrderListDetail?orderDate="+data.list[i].orderDate+"'>"+data.list[i].orderDate+" 주문목록</a></td></tr>");				
+				} 
+			});
+
 		}
 	});
 </script>
 </head>
 <body>
-<div class="container"></div>
+<div class="container">
+<h3 class="text-center">식재료 주문 목록</h3>
+<table class="table" id="foodMList">
+
+</table>
+
+</div>
 </body>
 </html>

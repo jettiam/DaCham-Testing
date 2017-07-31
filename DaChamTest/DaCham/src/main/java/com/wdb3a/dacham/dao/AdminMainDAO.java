@@ -51,4 +51,5 @@ public interface AdminMainDAO {
 	public void foodMUpdate(int orderCode) throws Exception;
 	public List<FoodMaterial> foodMaterialSearch(FoodMaterial foodMaterial) throws Exception;
 	public List<Member> memberSearch(Member member) throws Exception;
+	public void insertFoodMAdd(FoodMAmountRead foodMAmountRead) throws Exception;
 }

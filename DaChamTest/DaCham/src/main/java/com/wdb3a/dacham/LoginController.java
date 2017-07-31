@@ -124,6 +124,9 @@ public class LoginController {
 					model.addAttribute("result", result);					
 					return "main";
 				}else if(result==3){
+					Member dbResult = service.getMember(id);
+					session.setAttribute("memberName", dbResult.getName());
+					session.setAttribute("customerId", dbResult.getId());
 					return "mate/wholesaler";
 				}else{
 					model.addAttribute("result", result);

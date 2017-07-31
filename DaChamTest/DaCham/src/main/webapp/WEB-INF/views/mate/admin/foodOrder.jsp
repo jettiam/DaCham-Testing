@@ -20,6 +20,7 @@
 <body>
 <%@include file="../admin/upmenu.jsp"%>
 	<div class="container">
+	<h2>식재료 추가 주문</h2>
 	<div class="form-group row">
 	<div class="col-xs-2"> 
 			<select name="searchType" class= "searchType form-control">
@@ -42,6 +43,7 @@
 	</div>
 	</div>
 	<div>
+		
 		<table id="foodMTable" class="foodMTable table table-condensed"> 
 			<tr>
 				<th>코드번호</th>
@@ -69,6 +71,7 @@
 	</div>
 	
 	<div>
+		<h2>식단에 포함된 식재료</h2>
 		<table id="foodMTable" class="tables table table-condensed"> 
 			<tr>
 				<th>식재료코드</th>
@@ -77,6 +80,7 @@
 				<th>주문량</th>
 				<th>단위</th>
 			</tr>
+			
 		
 			<div class="length">
 			<c:forEach var="i" items="${map}">  
@@ -96,14 +100,17 @@
 	</div>
 	<button id="foodMOrder" class = "btn btn-default">식재료 주문서 보내기</button>
 	</div>
-	<form id="foodMOrderForm" action="mailSending" method="post">  
+	<form class="foodMOrderForm" action="mailSending" method="post">  
 		<input type="hidden" name="foodMOrderInfo" id="foodMOrderInfo">
+		
+		<input type="hidden" name="cnt" id="cnt">
 	</form>
 	<form id="foodMAppOrderForm" action="AppSending" method="post">  
 		<input type="hidden" name="foodMAppOrderInfo" id="foodMAppOrderInfo">
 	</form>
 
 	<script>
+	
 	var divlength = $(".length .length2").size();
 	/* function foodStockall(){
 		$.getJSON("adminSub/foodStockAll",function(data){
@@ -152,7 +159,8 @@
 				}    
 				console.log(foodMOrderInfo);   
 				$("#foodMOrderInfo").val(JSON.stringify(foodMOrderInfo));
-				$("#foodMOrderForm").submit();
+				$(".foodMOrderForm").submit();
+				
 
 			  
 				//alert(content.length);		 
@@ -202,7 +210,7 @@
 									$(".foodMTable").append(str); 
 									});
 								});
-								
+								var cnt=0;
 								$(document.body).on("click", ".orderBtn" ,function(){
 									var Stock = $(this).parent().prev().prev().children().val();
 									
@@ -211,11 +219,20 @@
 									
 									var price = $(this).parent().prev().prev().prev().attr('data-code');
 									var unit = $(this).parent().prev().attr('data-code');
-				   
+				   				    cnt++;  
+				   					//alert(cnt);    
 									var str="";
 										str += "<tr><td>"+foodMCode+"</td>"+"<td>"+foodMName+"</td>"+"<td>"+price+"</td>"+"<td>"+Stock+"</td>"+"<td>"+unit+"</td><tr>";
 									$(".tables").append(str);
-									alert(foodMName+"가 "+Stock+unit+"만큼 추가 주문되었습니다");    									
+									alert(foodMName+"가 "+Stock+unit+"만큼 추가 주문되었습니다");
+									$(".foodMOrderForm").append("<input type='hidden' value='"+Stock+"'"+"name='StockAdd'>");
+									$(".foodMOrderForm").append("<input type='hidden' value='"+foodMCode+"'"+"name='foodMCodeAdd'>");
+									$(".foodMOrderForm").append("<input type='hidden' value='"+foodMName+"'"+"name='foodMNameAdd'>");
+									$(".foodMOrderForm").append("<input type='hidden' value='"+price+"'"+"name='priceAdd'>");
+									$(".foodMOrderForm").append("<input type='hidden' value='"+unit+"'"+"name='unitAdd'>");
+									$("#cnt").val(cnt);
+									
+									
 								})  
 							
 						});

@@ -43,7 +43,8 @@
 
 
 
- 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">		
+
+   	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">		
 
 		<property name="url" value="jdbc:mariadb://106.249.38.73:33060/dacham" /> 
 		<property name="driverClassName" value="org.mariadb.jdbc.Driver" />

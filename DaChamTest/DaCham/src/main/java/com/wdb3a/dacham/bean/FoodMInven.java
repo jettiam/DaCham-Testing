@@ -16,9 +16,16 @@ public class FoodMInven {
 	private int stock;
 	private String keyword;
 	private String searchType;
+	private int totalAmount;
 	
 	 
 	
+	public int getTotalAmount() {
+		return totalAmount;
+	}
+	public void setTotalAmount(int totalAmount) {
+		this.totalAmount = totalAmount;
+	}
 	public String getUnit() {
 		return unit;
 	}

@@ -40,7 +40,7 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 	@Override
 	public List<FoodMInven> foodStockList(FoodMInven foodMInven) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".foodStockList", foodMInven);
+		return sqlSession.selectList(namespace+".foodStockListSearch", foodMInven);
 	}
 
 	@Override
@@ -51,7 +51,6 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 	@Override
 	public void workUpdate(OrderList list) throws Exception {
 		sqlSession.update(namespace+".workupdate", list);
-		sqlSession.update(namespace+".workupdateOptions", list);
 		
 	}
 
@@ -222,6 +221,12 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 	public List<Member> memberSearch(Member member) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".memberSearch", member); 
+	}
+
+	@Override
+	public void insertFoodMAdd(FoodMAmountRead foodMAmountRead) throws Exception {
+		sqlSession.insert(namespace+".insertFoodMAdd", foodMAmountRead);
+		
 	}
 
 	
