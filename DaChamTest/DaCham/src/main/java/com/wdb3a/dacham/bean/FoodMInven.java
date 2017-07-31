@@ -6,7 +6,7 @@ public class FoodMInven {
 	private String foodMICode;
 	private String foodMCode;
 	private String foodMName;
-	private int foodMAmount;
+	private double foodMAmount;
 	private double inAmount;
 	private Date inDate;
 	private int outAmount;
@@ -21,15 +21,10 @@ public class FoodMInven {
 	private String foodMCheck; 
 	private int foodMCheck1;
 	private int foodMCheck2;
-	private int totalAmount;	
+	private double totalAmount;	
 	 
 	
-	public int getTotalAmount() {
-		return totalAmount;
-	}
-	public void setTotalAmount(int totalAmount) {
-		this.totalAmount = totalAmount;
-	}
+
 	public String getUnit() {
 		return unit;
 	}
@@ -54,12 +49,7 @@ public class FoodMInven {
 	public void setFoodMName(String foodMName) {
 		this.foodMName = foodMName;
 	}
-	public int getFoodMAmount() {
-		return foodMAmount;
-	}
-	public void setFoodMAmount(int foodMAmount) {
-		this.foodMAmount = foodMAmount;
-	}
+
 	public double getInAmount() {
 		return inAmount;
 	}
@@ -138,6 +128,18 @@ public class FoodMInven {
 	}
 	public void setFoodMCheck(String foodMCheck) {
 		this.foodMCheck = foodMCheck;
+	}
+	public double getFoodMAmount() {
+		return foodMAmount;
+	}
+	public void setFoodMAmount(double foodMAmount) {
+		this.foodMAmount = foodMAmount;
+	}
+	public double getTotalAmount() {
+		return totalAmount;
+	}
+	public void setTotalAmount(double totalAmount) {
+		this.totalAmount = totalAmount;
 	}
 	
 	
