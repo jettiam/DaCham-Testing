@@ -164,14 +164,15 @@ public class AdminSubController {
   	}
    //foodStock 리스트출력
    @RequestMapping(value = "/foodOrder/{searchType}/{keyword}", method = RequestMethod.GET)
- 	public ResponseEntity<List<FoodMInven>> foodStockSearch(@PathVariable("searchType")String searchType,@PathVariable("keyword")String keyword){
+ 	public ResponseEntity<List<FoodMInven>> foodStockSearch(@PathVariable("searchType")String searchType, @PathVariable("keyword")String keyword){
  		ResponseEntity<List<FoodMInven>> entity = null;
  		System.out.println("asdasd");
  		try {
  			FoodMInven foodMInven = new FoodMInven();
  			foodMInven.setSearchType(searchType);
  			foodMInven.setKeyword(keyword);
- 			List<FoodMInven> list = service.foodStockList(foodMInven);
+ 			foodMInven.setTotalAmount(foodMInven.getInAmount()-foodMInven.getOutAmount());
+ 			List<FoodMInven> list = service.foodStockList(foodMInven);  
  			entity = new ResponseEntity<>(list,HttpStatus.OK);
  		} catch (Exception e) {
  			// TODO Auto-generated catch block

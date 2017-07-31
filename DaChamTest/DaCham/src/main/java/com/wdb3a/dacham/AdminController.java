@@ -91,10 +91,10 @@ public class AdminController {
 
 	// mailSending 코드
 	@RequestMapping(value = "/mailSending", method = RequestMethod.POST)
-	public String mailSending(String foodMOrderInfo) throws Exception {
+	public String mailSending(String foodMOrderInfo, @RequestParam("StockAdd")int[] StockAdd, @RequestParam("foodMCodeAdd")String[] foodMCodeAdd, @RequestParam("foodMNameAdd")String[] foodMNameAdd, @RequestParam("priceAdd")int[] priceAdd,@RequestParam("unitAdd")String[] unitAdd, @RequestParam("cnt")int cnt) throws Exception {
 		
 		
-		//System.out.println("ddd");
+		
 		String authKey = AUTH_KEY_FCM; // You FCM AUTH key
 		//System.out.println(authKey); 
 		String FMCurl = API_URL_FCM;
@@ -106,9 +106,10 @@ public class AdminController {
 		int totalprice;
 		JSONParser jsonParser = new JSONParser();
 		JSONObject jsonObj = (JSONObject) jsonParser.parse(foodMOrderInfo);
-		int orderCode;  
+		int orderCode;
+		int totalPriceAdd=0;
 		//System.out.println(jsonObj); 
-		for (int i = 0; i < jsonObj.size(); i++) {
+		for (int i = 0; i < jsonObj.size(); i++) { 
 			JSONObject jsonObj1 = (JSONObject) jsonObj.get(i + "");
 			FoodMAmountRead foodMAmountRead4 = new FoodMAmountRead();   
 			System.out.println(foodMOrderInfo);      
@@ -129,11 +130,34 @@ public class AdminController {
 			toString = toString + "\n" + "식재료명 : " + jsonObj1.get("foodMName").toString() + "단가 : "
 					+ jsonObj1.get("price").toString() + " 주문량 :" + jsonObj1.get("totalAmount").toString()
 					+ jsonObj1.get("unit").toString() + " 총가격 : " + totalprice + "원";
-			//System.out.println(toString);
-			
-			
-			
+			//System.out.println(toString);	
 		}
+		System.out.println("되니?");
+		System.out.println(cnt);  
+		for(int z=0; z<cnt; z++){     
+			 
+			totalPriceAdd = priceAdd[z]*StockAdd[z];
+			System.out.println(totalPriceAdd);
+			System.out.println(foodMNameAdd[z]);
+			System.out.println(priceAdd[z]);
+			System.out.println(StockAdd[z]);
+			System.out.println(unitAdd[z]); 
+			FoodMAmountRead foodMAmountRead5 = new FoodMAmountRead();
+			foodMAmountRead5.setFoodMCode(foodMCodeAdd[z]);
+			foodMAmountRead5.setFoodMName(foodMNameAdd[z]);
+			foodMAmountRead5.setInAmount(StockAdd[z]+""); 
+			foodMAmountRead5.setUnit(unitAdd[z]);
+			foodMAmountRead5.setPrice(priceAdd[z]);
+			  
+			service.insertFoodMAdd(foodMAmountRead5);
+			
+			System.out.println(cnt);      
+		
+			toString = toString + "\n" + "식재료명 : " + foodMNameAdd[z] + "단가 : "
+					+ priceAdd[z] + " 주문량 :" + StockAdd[z] 
+					+ unitAdd[z] + " 총가격 : " + totalPriceAdd + "원"; 
+		}
+		 
 		String content = toString; // 내용
 		try {
 			MimeMessage message = mailSender.createMimeMessage();

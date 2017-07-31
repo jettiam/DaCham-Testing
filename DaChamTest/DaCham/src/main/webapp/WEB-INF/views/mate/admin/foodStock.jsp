@@ -36,16 +36,19 @@ function all(){
 		$("#search").on("click",function(){
 			$(".foodStock").remove();
 			
-			var str=""; 
+			var str="";  
 			var searchType = $(".searchType").val();
 			var keyword = $("#keyword").val();
 			$.getJSON("adminSub/foodOrder/"+searchType+"/"+keyword,function(data){
 			for(var i=0; i<data.length; i++){
-				str += "<tr class='foodStock'>"+"<td>"+data[i].foodMName+"</td>"+"<td>"+data[i].inAmount+"</td>"+"<td>"+data[i].outAmount+"</td>"+"<td>"+data[i].stock+"</td>"+"<td>"+data[i].unit+"</td></tr>"		 
+				str += "<tr class='foodStock'>"+"<td>"+data[i].foodMName+"</td>"+"<td>"+data[i].inAmount+"</td>"+"<td>"+data[i].outAmount+"</td>"+"<td>"+data[i].totalAmount+"</td>"+"<td>"+data[i].unit+"</td></tr>"		 
 				}    
 			$(".tables").append(str); 
-			});     
-		});  
+			});       
+		}); 
+		$("#searchAll").on("click", function(){
+			all(); 
+		});
 	
 });          
 </script>
@@ -60,9 +63,6 @@ function all(){
 			<option value="t"
 				<c:out value="${foodMInven.searchType eq 't'?'selected':'' }"/>>
 				식재료명</option>
-			<option value="c"
-				<c:out value="${foodMInven.searchType eq 'c'?'selected':'' }"/>>
-				코드번호</option>
 		</select>
 		</div>
 		<div class="col-xs-3"> 

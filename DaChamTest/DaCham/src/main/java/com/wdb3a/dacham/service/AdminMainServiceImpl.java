@@ -226,6 +226,12 @@ public class AdminMainServiceImpl implements AdminMainService {
 		return dao.memberSearch(member);
 	}
 
+	@Override
+	public void insertFoodMAdd(FoodMAmountRead foodMAmountRead) throws Exception {
+		dao.insertFoodMAdd(foodMAmountRead);
+		
+	}
+
 	
 	
 	

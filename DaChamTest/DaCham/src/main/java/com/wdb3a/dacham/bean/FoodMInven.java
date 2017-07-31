@@ -7,7 +7,7 @@ public class FoodMInven {
 	private String foodMCode;
 	private String foodMName;
 	private int foodMAmount;
-	private double inAmount;
+	private int inAmount;
 	private Date inDate;
 	private int outAmount;
 	private String unit;
@@ -16,10 +16,16 @@ public class FoodMInven {
 	private int stock;
 	private String keyword;
 	private String searchType;
-	private Date orderDate;
-	private int foodMStatus;
-	private String foodMCheck; 
+	private int totalAmount;
 	
+	 
+	
+	public int getTotalAmount() {
+		return totalAmount;
+	}
+	public void setTotalAmount(int totalAmount) {
+		this.totalAmount = totalAmount;
+	}
 	public String getUnit() {
 		return unit;
 	}
@@ -50,7 +56,12 @@ public class FoodMInven {
 	public void setFoodMAmount(int foodMAmount) {
 		this.foodMAmount = foodMAmount;
 	}
-	
+	public int getInAmount() {
+		return inAmount;
+	}
+	public void setInAmount(int inAmount) {
+		this.inAmount = inAmount;
+	}
 	public Date getInDate() {
 		return inDate;
 	}
@@ -67,12 +78,8 @@ public class FoodMInven {
 	public int getPrice() {
 		return price;
 	}
-	
 	public void setPrice(int price) {
 		this.price = price;
-	}
-	public void setPrice(double price) {
-		this.price = (int)price;
 	}
 	public Date getExDate() {
 		return exDate;
@@ -97,35 +104,6 @@ public class FoodMInven {
 	}
 	public void setSearchType(String searchType) {
 		this.searchType = searchType;
-	}
-	public Date getOrderDate() {
-		return orderDate;
-	}
-	public void setOrderDate(Date orderDate) {
-		this.orderDate = orderDate;
-	}
-	public int getFoodMStatus() {
-		return foodMStatus;
-	}
-	public void setFoodMStatus(int foodMStatus) {
-		this.foodMStatus = foodMStatus;
-		if(foodMStatus==0){
-			this.foodMCheck = "미완료";
-		}else{
-			this.foodMCheck = "완료";
-		}
-	}
-	public String getFoodMCheck() {
-		return foodMCheck;
-	}
-	public void setFoodMCheck(String foodMCheck) {
-		this.foodMCheck = foodMCheck;	
-	}
-	public double getInAmount() {
-		return inAmount;
-	}
-	public void setInAmount(double inAmount) {
-		this.inAmount = Math.round(inAmount*100d) / 100d;
 	}
 	
 	
