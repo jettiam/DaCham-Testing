@@ -38,7 +38,7 @@ public class WholseAjaxController {
 		}
 		return entity;		
 	}
-	
+	 
 	
 	
 
