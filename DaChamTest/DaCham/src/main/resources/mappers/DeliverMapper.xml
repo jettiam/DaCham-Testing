@@ -24,23 +24,41 @@
 	  	</if>
   	</sql>
   	<insert id = "createDeliver">
-  		insert into foodminven(inDate, price,inAmount,foodMCode, uint, outAmount,exDate,foodMName )
-  		values (#{inDate},#{price},#{inAmount},#{foodMCode},#{uint},0,#{exDate},(select foodMName from foodmaterial where foodMCode = #{foodMCode}))
+  		insert into foodminven(inDate, price,inAmount,foodMCode, unit, outAmount,exDate,foodMName )
+  		values (#{inDate},#{price},#{inAmount},#{foodMCode},#{unit},0,#{exDate},(select foodMName from foodmaterial where foodMCode = #{foodMCode}))
   	</insert>
   	<select id = "deliverName" resultType = "com.wdb3a.dacham.bean.Nutritionist">
   		select foodMCode, foodMName
   		from foodmaterial
   	</select>
   	<select id = "showDeliver" resultType = "com.wdb3a.dacham.bean.Deliver">
-  		select a.foodMCode, a.foodMImg, a.foodMName, b.inDate, b.price, b.uint
-		from foodmaterial a join foodminven b
-		where a.foodMCode = b.foodMCode
+  		select *
+		from foodminven b join orderlist c join orderitem d
+		where b.orderCode = c.orderCode
+		and c.orderItemCode = d.orderItemCode
+		and d.orderItemCode = 9
 		<include refid="searchDeliver"></include>
+		
+  	</select>
+  	<select id = "showDeliverAll" resultType = "com.wdb3a.dacham.bean.Deliver">
+  		select *         
+		from foodminven b join orderlist c join orderitem d
+		where b.orderCode = c.orderCode
+		and c.orderItemCode = d.orderItemCode
+		and d.orderItemCode = 9
+		order by b.foodMStatus
+  	</select>
+  	<select id = "showCount" resultType = "Integer">
+  		select count(*)
+		from foodminven b join orderlist c join orderitem d
+		where b.orderCode = c.orderCode
+		and c.orderItemCode = d.orderItemCode
+		and d.orderItemCode = 9
   	</select>
   	<sql id = "searchDeliver">
 	  	<if test = "searchType != null">
 	  		<if test="searchType == 't'.toString()">
-	  			and a.foodMCode like CONCAT('%',#{keyword},'%')
+	  			and b.foodMCode like CONCAT('%',#{keyword},'%')
 	  		</if>
 	  		<if test="searchType == 'c'.toString()">
 	  			and b.foodMName like CONCAT('%',#{keyword},'%')
@@ -61,7 +79,7 @@
 		order by a.orderCode desc
 		limit #{criteria.startRecord}, #{criteria.recordsPerPage}
   	</select>
-  	<select id = "allCount" resultType = "Integer">
+  	<select id = "allCount" resultType = "Integer">	
   		select count(a.orderCode)
   		from orderlist a join member b join diet c join orderitem d
 		where a.id = b.id
@@ -69,4 +87,28 @@
 		and a.orderItemCode = d.orderItemCode
 		and a.orderItemCode = #{orderItemCode}
   	</select>
+  	<update id = "changer">
+ 		update orderlist set orderItemCode = 10
+ 		where orderCode = #{orderCode}  		
+   	</update>
+   	<update id = "todaySynchro">
+   		update foodminven set inDate = now()
+   		where orderCode = #{orderCode}
+   	</update>
+   	<select id = "completeAll" resultType = "com.wdb3a.dacham.bean.Deliver">
+   		select *         
+		from foodminven b join orderlist c join orderitem d
+		where b.orderCode = c.orderCode
+		and c.orderItemCode = d.orderItemCode
+		and d.orderItemCode = 10
+		order by b.foodMStatus
+		limit #{startRecord},#{recordsPerPage}
+   	</select>
+   	<select id = "completeAllCount" resultType = "Integer">
+   		select count(*)         
+		from foodminven b join orderlist c join orderitem d
+		where b.orderCode = c.orderCode
+		and c.orderItemCode = d.orderItemCode
+		and d.orderItemCode = 10
+   	</select>
 </mapper>

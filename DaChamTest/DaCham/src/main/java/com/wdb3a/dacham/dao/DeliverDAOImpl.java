@@ -58,5 +58,35 @@ public class DeliverDAOImpl implements DeliverDAO{
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace+".allCount",orderItemCode);
 	}
+	@Override
+	public int showDeliverCount() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".showCount");
+	}
+	@Override
+	public List<Deliver> showDeliverAll() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".showDeliverAll");
+	}
+	@Override
+	public void changer(int orderCode) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace+".changer",orderCode);
+	}
+	@Override
+	public void todaySynchro(int orderCode) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace+".todaySynchro",orderCode);
+	}
+	@Override
+	public List<Deliver> completeAll(Criteria criteria) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".completeAll",criteria);
+	}
+	@Override
+	public int completeAllCount() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".completeAllCount");
+	}
 
 }

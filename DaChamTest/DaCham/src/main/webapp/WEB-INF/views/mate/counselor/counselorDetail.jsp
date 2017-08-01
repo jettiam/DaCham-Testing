@@ -39,10 +39,7 @@ $(document).ready(function(){
    $(document.body).on("click",".counselCode",function(){
       couselCode = $(this).attr('data-code');
       $(".answers").val(" ");
-      
-      
       selectCounsel(couselCode);          
-      
       selectMember(couselCode);
       orderList(1,couselCode);
    });
@@ -58,6 +55,7 @@ $(document).ready(function(){
          $(".id").text(data.id);
          id = data.id;
          $(".name").text(data.name);
+         $(".birthday").text(data.birthday);
          $(".joinDate").text(data.joinDate);
          $(".tel").text(data.tel);
          $(".email").text(data.email);
@@ -115,6 +113,27 @@ $(document).ready(function(){
          }
       });
    });
+   $("#search").on("click",function(){
+	   var keyword = $(".keyword").val();
+	   orderListSearch(couselCode,keyword);
+   });
+   $("#listAll").on("click",function(){
+	   $(".pagination").show();
+	   orderList(1,couselCode);
+   });
+   function orderListSearch(couselCode,keyword){
+	   
+	   
+	   $.getJSON("counselAjax/orderListSearch/"+couselCode+"/"+keyword,function(data){
+		   $(".orderResult").remove();
+		   $(".pagination").hide();
+		   var str = "";
+		   $(data).each(function(){
+			   str += "<tr class = 'orderResult'><td>"+this.orderCode+"</td><td>"+this.id+"</td><td>"+this.dietName+"</td><td>"+this.orderDate+"</td><td>"+this.paymentItemName+"</td><td>"+this.orderItemName+"</td></tr>";
+		   });
+		   $(".order").append(str);
+	   });
+   }
    
    function linkAll(){
       var customer = '${customer}';
@@ -172,21 +191,16 @@ $(document).ready(function(){
          </div>
          <div style = "border:1px solid gold;">
             <textarea placeholder = "답변내용 입력" class = "answers"></textarea>
-            <button id = "answer">답변</button>
+            <button id = "answer" class = "btn btn-success">답변</button>
          </div>
          <br><br>
          <div style = "border:1px solid gold;">   
             <h4>${name }님의 상담내역 </h4><br>                
-            <select>
-               <option>제목</option>
-               <option>내용</option>
-            </select>
-            <input type = "text" name = "keyword">
-            <button id = "search">검색</button>
+               
             <table class = "link table table-hover">
                <tr>   
                   <th>번호</th>
-                  <th>분류</th>
+                  <th>상담분류</th>
                   <th>제목</th>
                   <th>등록일</th>
                   <th>답변여부</th>
@@ -206,6 +220,10 @@ $(document).ready(function(){
             <tr>
                <th>이름</th>
                <td class = "name">고객 성함</td>  
+            </tr>
+            <tr>
+            	<th>생일</th>
+            	<td class ="birthday">생일</td>
             </tr>
             <tr>
                <th>가입일</th>
@@ -234,12 +252,9 @@ $(document).ready(function(){
          </table>
          <div style = "border:1px solid gold;">
                <h4>식단 주문목록</h4><br>   
-            <select>
-               <option>제목</option>
-               <option>내용</option>
-            </select>   
-            <input type = "text" name = "keyword">
-            <button id = "search">검색</button>
+            <input type = "text" name = "keyword" class = "keyword" placeholder = "식단명을 찾으려면 검색">   
+            <button id = "search" class = "btn btn-default">검색</button>
+            <button id = "listAll" class = "btn btn-default">전체식단</button>
             <table class = "order table table-hover">
                <tr>   
                   <th>번호</th>

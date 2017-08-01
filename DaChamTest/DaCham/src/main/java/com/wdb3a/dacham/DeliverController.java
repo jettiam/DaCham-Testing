@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wdb3a.dacham.bean.Deliver;
@@ -49,9 +50,9 @@ public class DeliverController {
 	@RequestMapping(value="/deliverFood", method=RequestMethod.GET)
 	public String getFood(Model model,Deliver deliver) throws Exception{
 		List<Nutritionist> list = service.listMaterial();
-		List<Deliver> overList = service.showDeliver(deliver);
+		
 		model.addAttribute("list",list);
-		model.addAttribute("overList",overList);
+		
 		model.addAttribute("deliver",deliver);
 		return "/mate/deliver/foodStock";
 	}
@@ -59,6 +60,15 @@ public class DeliverController {
 	public String createDeliver(Deliver deliver) throws Exception{
 		service.createDeliver(deliver);
 		return "redirect:deliverFood";
+	}
+	
+	@RequestMapping(value = "/changer",method = RequestMethod.POST)
+	public String changer(@RequestParam("orderCode")int[] orderCode,@RequestParam("length") int length) throws Exception{
+		for(int i = 0; i<length; i++){
+			service.changer(orderCode[i]);
+			service.todaySynchro(orderCode[i]);
+		}
+		return "redirect:deliverMain";
 	}
 	
 	 @ResponseBody

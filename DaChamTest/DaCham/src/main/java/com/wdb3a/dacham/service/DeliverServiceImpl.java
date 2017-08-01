@@ -53,5 +53,35 @@ public class DeliverServiceImpl implements DeliverService {
 		// TODO Auto-generated method stub
 		return dao.allCount(orderItemCode);
 	}
+	@Override
+	public int showDeliverCount() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.showDeliverCount();
+	}
+	@Override
+	public List<Deliver> showDeliverAll() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.showDeliverAll();
+	}
+	@Override
+	public void changer(int orderCode) throws Exception {
+		// TODO Auto-generated method stub
+		dao.changer(orderCode);
+	}
+	@Override
+	public void todaySynchro(int orderCode) throws Exception {
+		// TODO Auto-generated method stub
+		dao.todaySynchro(orderCode);
+	}
+	@Override
+	public List<Deliver> completeAll(Criteria criteria) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.completeAll(criteria);
+	}
+	@Override
+	public int completeAllCount() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.completeAllCount();
+	}
 
 }
