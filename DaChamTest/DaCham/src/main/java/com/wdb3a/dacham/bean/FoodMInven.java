@@ -121,6 +121,11 @@ public class FoodMInven {
 		return foodMStatus;
 	}
 	public void setFoodMStatus(int foodMStatus) {
+		if(foodMStatus==0){
+			this.foodMCheck = "미완료";
+		}else{
+			this.foodMCheck = "완료";
+		}
 		this.foodMStatus = foodMStatus;
 	}
 	public String getFoodMCheck() {
