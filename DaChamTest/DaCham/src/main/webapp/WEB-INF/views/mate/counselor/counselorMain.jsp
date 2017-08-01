@@ -19,6 +19,7 @@
   float:left;  }
  .box2 {
   display:inline-block;  margin-left:20px;}  
+  .nameClick { color: blue; text-decoration: underline;}
 </style>
 <script>
    $(document).ready(function(){
@@ -26,7 +27,7 @@
       $.getJSON("counselAjax/counselorseList2All",function(data){
          var str = "";
          $(data).each(function(){
-            str += "<tr class = 'searchResult2'><td>"+this.counselCode+"</td><td class = 'counselTitle'><a data-code = '"+this.counselCode+"' data-name = '"+this.name+"' data-id = '"+this.id+"'>"+this.counselTitle+"</a></td><td>"+this.name+"</td><td>"+this.id+"</td><td>"+this.counselDate+"</td></tr>";
+            str += "<tr class = 'searchResult2'><td>"+this.counselCode+"</td><td class = 'counselTitle'><a class = 'nameClick' data-code = '"+this.counselCode+"' data-name = '"+this.name+"' data-id = '"+this.id+"'>"+this.counselTitle+"</a></td><td>"+this.name+"</td><td>"+this.id+"</td><td>"+this.counselDate+"</td></tr>";
          });
          $(".search2").append(str);
       });
@@ -47,7 +48,7 @@
          var keyword = $("#keyword2").val();
          $.getJSON("counselAjax/counselorseList2/"+searchType+"/"+keyword,function(data){
             $(data).each(function(){
-               str += "<tr class = 'searchResult2'><td>"+this.counselCode+"</td><td class = 'counselTitle'><a data-code = '"+this.counselCode+"' data-name = '"+this.name+"' data-id = '"+this.id+"'>"+this.counselTitle+"</a></td><td>"+this.name+"</td><td>"+this.id+"</td><td>"+this.counselDate+"</td></tr>";
+               str += "<tr class = 'searchResult2'><td>"+this.counselCode+"</td><td class = 'counselTitle'><a class = 'nameClick' data-code = '"+this.counselCode+"' data-name = '"+this.name+"' data-id = '"+this.id+"'>"+this.counselTitle+"</a></td><td>"+this.name+"</td><td>"+this.id+"</td><td>"+this.counselDate+"</td></tr>";
             });
             $(".search2").append(str);
          });
@@ -94,36 +95,7 @@
                </tr>
             </table>
          </div>   
-      </div>
-          <div>
-          <select>
-                  <option>등록자</option>
-                  <option>제목</option>
-                  <option>내용</option>
-            </select>
-               <input type = "text" name = "keyword">
-               <button id = "search"> 검색 </button>
-         </div>
-         <div>
-           
-            <table border = "1">
-               <tr>
-                  <th>번호</th>
-                  <th>제목</th>
-                  <th>등록자</th>
-                  <th>등록일</th>
-                  <th>조회수</th>
-               </tr>
-               <tr>
-                  <td>1</td>
-                  <td>영양관리주간목록</td>
-                  <td>배송팀장</td>
-                  <td>2017.05.05</td>
-                  <td>0</td>
-               </tr>
-            </table>
-         </div>
-      </div>
+      
       <div class = "box2">
          
          

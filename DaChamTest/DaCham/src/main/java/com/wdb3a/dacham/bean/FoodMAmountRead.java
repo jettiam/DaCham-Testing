@@ -3,26 +3,26 @@ package com.wdb3a.dacham.bean;
 public class FoodMAmountRead {
 	private String foodMName;
 	private int price;
-	private int foodMAmount;
+	private double foodMAmount;
 	private String unit;
 	private String foodMCode;
 	private int orderCode;
-	private String totalAmount;
-	private String inAmount;
+	private double totalAmount;
+	private double inAmount;
 	
 	
-	public String getInAmount() {
+	public double getInAmount() {
 		return inAmount;
 	}
-	public void setInAmount(String inAmount) {
+	public void setInAmount(double inAmount) {
 		this.inAmount = inAmount;
 	}
-	public String getTotalAmount() {
+	public double getTotalAmount() {
 		return totalAmount;
 	}
-	public void setTotalAmount(String totalAmount) {
-		this.totalAmount = totalAmount;
-		this.inAmount = totalAmount;
+	public void setTotalAmount(double totalAmount) {
+		this.totalAmount = Math.round(totalAmount*1000d)/1000d;
+		this.inAmount = Math.round(totalAmount*1000d)/1000d; 
 	}
 	public int getOrderCode() {
 		return orderCode;
@@ -42,11 +42,11 @@ public class FoodMAmountRead {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public int getFoodMAmount() {
+	public double getFoodMAmount() {
 		return foodMAmount;
 	}
-	public void setFoodMAmount(int foodMAmount) {
-		this.foodMAmount = foodMAmount;
+	public void setFoodMAmount(double foodMAmount) {
+		this.foodMAmount =  Math.round(foodMAmount*1000d)/1000d;
 	}
 	public String getUnit() {
 		return unit;

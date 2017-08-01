@@ -187,4 +187,21 @@ public class CounselorAjaxController {
 		}
 		return entity;
 	}
+	@RequestMapping(value = "/orderListSearch/{couselCode}/{keyword}",method = RequestMethod.GET)
+	public ResponseEntity<List<Counselor>> orderListSearch(@PathVariable("couselCode")int couselCode,@PathVariable("keyword")String keyword){
+		ResponseEntity<List<Counselor>> entity = null;
+		Counselor counselor = new Counselor();
+		counselor.setKeyword(keyword);
+		counselor.setCouselCode(couselCode);
+		try {
+			List<Counselor> list = service.orderListSearch(counselor);
+			System.out.println("식단 검색 목록:"+list);
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
 }

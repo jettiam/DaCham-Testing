@@ -41,6 +41,7 @@ function all(){
 			var keyword = $("#keyword").val();
 			$.getJSON("adminSub/foodOrder/"+searchType+"/"+keyword,function(data){
 			for(var i=0; i<data.length; i++){
+				 
 				str += "<tr class='foodStock'>"+"<td>"+data[i].foodMName+"</td>"+"<td>"+data[i].inAmount+"</td>"+"<td>"+data[i].outAmount+"</td>"+"<td>"+data[i].stock+"</td>"+"<td>"+data[i].unit+"</td></tr>"		 
 				}    
 			$(".tables").append(str); 
@@ -49,6 +50,20 @@ function all(){
 		$("#searchAll").on("click", function(){
 			all(); 
 		});
+		
+		function allSub(){
+			$.getJSON("adminSub/foodStockStopAll",function(data){
+				console.log(data); 
+				$(".foodStockStop").remove(); 
+				var str = "";
+				for(var i =0; i<data.length; i++){
+					str += "<tr class='foodStockStop'>"+"<td>"+data[i].foodMName+"</td>"+"<td>"+data[i].inAmount+"</td>"+"<td>"+data[i].unit+"</td><td>"+data[i].price+"</td></tr>"			 
+				}
+				console.log(str);
+				$(".tablesStop").append(str); 
+			});  
+		}
+		allSub(); 
 	
 });          
 </script>
@@ -72,18 +87,30 @@ function all(){
 		<button id="searchAll" class = "btn btn-default">전체</button>
 	</div>
 	<div>
+	<h2>식재료 현황</h2>
 		<table width="600" class="tables table table-condensed">
 			<tr>
 				<th>식재료명</th>
 				<th>입고량</th>
 				<th>출고량</th>
 				<th>재고량</th> 
-				<th>단위</th>   
-
+				<th>단위</th>     
 			</tr>
 		</table>
 	</div>
 	<button id="foodOrder" class = "btn btn-default">식재료주문</button> 
+	
+	<div>
+	<h2>식재료 주문 대기</h2>
+		<table width="600" class="tablesStop table table-condensed">
+			<tr>
+				<th>식재료명</th>
+				<th>주문량</th> 
+				<th>단위</th>
+				<th>총가격</th>  
+			</tr>
+		</table>
+	</div>
 	</div>
 </body>
 </html>
