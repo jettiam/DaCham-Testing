@@ -232,6 +232,12 @@ public class AdminMainServiceImpl implements AdminMainService {
 		
 	}
 
+	@Override
+	public List<FoodMInven> foodStockListStop() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.foodStockListStop();
+	}
+
 	
 	
 	
