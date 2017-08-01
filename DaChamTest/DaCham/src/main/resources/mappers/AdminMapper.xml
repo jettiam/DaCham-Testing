@@ -51,19 +51,21 @@
 	<!--식재료 재고량 -->
 	<select id="foodStockList" resultType="FoodMInven">
 		select foodMName,
-		sum(inAmount) as inAmount, sum(outAmount) as
-		outAmount, unit,
-		sum(inAmount)-sum(outAmount) as stock
-		from foodminven
+		sum(inAmount) as inAmount, COALESCE(sum(outAmount),0) as
+		outAmount, unit, foodMStatus, 
+		sum(inAmount)-COALESCE(sum(outAmount),0) as stock
+		from foodminven where foodMStatus = 1  
 		group by foodMName
 	</select>
 
 	<select id="foodStockListSearch" resultType="FoodMInven">
-		select foodMName, sum(inAmount) as inAmount, sum(outAmount) as
-		outAmount, unit, sum(inAmount)-sum(outAmount) as stock
-		from foodminven
+		select foodMName,
+		sum(inAmount) as inAmount, COALESCE(sum(outAmount),0) as
+		outAmount, unit, foodMStatus, 
+		sum(inAmount)-COALESCE(sum(outAmount),0) as stock
+		from foodminven where foodMStatus = 1
 		group by foodMName
-		<include refid="foodsearch"></include>
+		<include refid="foodsearch"></include>   
 	</select>
 	<sql id="foodsearch">
 		<if test="searchType != null">
@@ -72,6 +74,13 @@
 			</if>
 		</if>
 	</sql>
+	
+	<!-- 식재료 주문 대기  -->
+	<select id="foodStockListStop" resultType="FoodMInven">
+		select foodMName, sum(inAmount) as inAmount, unit, foodMStatus, sum(inAmount)*price as price
+		from foodminven where foodMStatus = 0
+		group by foodMName
+	</select>
 
 
 	<!--식재료 추가주문 -->

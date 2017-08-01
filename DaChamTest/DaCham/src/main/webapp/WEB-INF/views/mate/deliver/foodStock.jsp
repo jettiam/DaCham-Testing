@@ -25,6 +25,8 @@
 	$(document).ready(function(){
 		var currentPage = 1;
 		
+		$(".action2").hide();
+		
 		showDeliverAll();
 		
 		showDeliver('t','감자');
@@ -52,7 +54,7 @@
 				alert("nope! This can't be activited!");
 			}
 			else if(length == 0){
-				alert("아니 사용자님, 식재료 발주를 받으셔야죠. 빼애애액!");
+				alert("식재료를 발주받으세요");
 			}
 			else{
 				$("form").attr("action","changer");
@@ -60,6 +62,25 @@
 				$("form").submit();	
 			}
 			  
+		});
+		$(document.body).on("click",".overButton",function(){
+			var foodMCode = $(this).attr('data-vcode');
+			$.ajax({
+				type : "PUT",
+				url : "deliverAjax/overButton/"+foodMCode,
+				headers : {
+					"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "PUT"
+				},
+				success : function(data){
+					if(data == "SUCCESS"){
+						alert("입고처리입니다.");
+					}
+				},
+				error : function(){
+					alert("오류 발생");
+				}
+			});
 		});
 		
 		$("#search").on("click",function(){
@@ -76,9 +97,14 @@
 				var str = "";
 				
 				$(data).each(function(){
-					str += "<tr class = 'actionResult'><td><input type = 'hidden' class = 'orderCode' name = 'orderCode' value = '"+this.orderCode+"'>"+this.foodMCode+"</td><td>"+this.foodMName+"</td><td>"+this.inDate+"</td><td>"+this.price+"</td><td>"+this.unit+"</td><td class = 'foodMStatus' data-value = '"+this.foodMStatus+"'>"+this.foodMStatus+"</td><td>"+this.orderItemName+"</td></tr>";   
+					if(this.foodMStatus == 0){
+						str += "<tr class = 'actionResult'><td><input type = 'hidden' class = 'orderCode' name = 'orderCode' value = '"+this.orderCode+"'>"+this.foodMCode+"</td><td>"+this.foodMName+"</td><td>"+this.orderDate+"</td><td>"+this.inAmount+"</td><td>"+this.unit+"</td><td class = 'foodMStatus' data-value = '"+this.foodMStatus+"'>"+"<button class = 'overButton' data-vcode = '"+this.foodMCode+"'>입고확인</button>"+"</td></tr>";
+					}
+					else{
+						str += "<tr class = 'actionResult'><td><input type = 'hidden' class = 'orderCode' name = 'orderCode' value = '"+this.orderCode+"'>"+this.foodMCode+"</td><td>"+this.foodMName+"</td><td>"+this.orderDate+"</td><td>"+this.inAmount+"</td><td>"+this.unit+"</td><td class = 'foodMStatus' data-value = '"+this.foodMStatus+"'>"+"<button class = 'overButton' data-vcode = '"+this.foodMCode+"'>입고 상태중</button>"+"</td></tr>";
+					}
 				});
-				$(".action1").append(str);
+				$(".action1").append(str);                 
 			});
 		}
 		
@@ -89,7 +115,7 @@
 			$.getJSON("deliverAjax/showDeliver/"+searchType+"/"+keyword,function(data){
 				var str = "";
 				$(data).each(function(){
-					str += "<tr class = 'actionResult'><td>"+this.foodMCode+"</td><td>"+this.foodMName+"</td><td>"+this.inDate+"</td><td>"+this.unit+"</td><td>"+this.orderItemName+"</td></tr>";
+					str += "<tr class = 'actionResult'><td>"+this.foodMCode+"</td><td>"+this.foodMName+"</td><td>"+this.orderDate+"</td><td>"+this.inDate+"</td><td>"+this.unit+"</td><td>"+this.orderItemName+"</td></tr>";
 				});
 				$(".action1").append(str);
 				
@@ -104,18 +130,20 @@
 		
 		$("#completeAll").on("click",function(){
 			$("#changer").hide();
-			alert("입고 목록 퐁~");
+			alert("입고 목록");
 			completeAll(1);
 		});
 		function completeAll(page){
-			$(".actionResult").remove();
+			$(".action1").hide();
+			$(".actionResult2").remove();
+			$(".action2").show();
 			
 			$.getJSON("deliverAjax/completeAll/"+page,function(data){
 				var str = "";
 				$(data.list).each(function(){
-					str += "<tr class = 'actionResult'><td><input type = 'hidden' class = 'orderCode' name = 'orderCode' value = '"+this.orderCode+"'>"+this.foodMCode+"</td><td>"+this.foodMName+"</td><td>"+this.inDate+"</td><td>"+this.price+"</td><td>"+this.unit+"</td><td class = 'foodMStatus' data-value = '"+this.foodMStatus+"'>"+this.foodMStatus+"</td><td>"+this.orderItemName+"</td></tr>";
+					str += "<tr class = 'actionResult2'><td><input type = 'hidden' class = 'orderCode' name = 'orderCode' value = '"+this.orderCode+"'>"+this.foodMCode+"</td><td>"+this.foodMName+"</td><td>"+this.inDate+"</td><td>"+this.inAmount+"</td><td>"+this.unit+"</td><td>"+this.orderItemName+"</td></tr>";   
 				});
-				$(".action1").append(str);
+				$(".action2").append(str);
 				printPaging(data.criteria);
 			});
 		}
@@ -200,7 +228,7 @@
 <!-- 			</div> -->
 			<div>
 				<button id = "changer" class = "btn btn-success">식재료입고</button>
-				<button id = "completeAll" class = "btn btn-warning">입고된 목록 퐁</button>                  
+				<button id = "completeAll" class = "btn btn-warning">입고된 목록</button>                  
 			</div>
 			<br><br>
 			<form>
@@ -210,16 +238,28 @@
 							<th>코드번호&nbsp;</th>
 							      
 							<th>식재료명&nbsp;</th>
-							<th>입고날짜&nbsp;</th>
-							<th>단가&nbsp;</th>
+							<th>주문날짜&nbsp;</th>
+							
+							<th>수량&nbsp;</th>
 							<th>단위&nbsp;</th>
-							<th>푸드엠스테이터스</th>
-							<th>상태여부 </th>                 
+							<th>입고여부&nbsp;</th>         
 						</tr>
 						
 							<tr class = "actionResult">
 							</tr>
 						
+					</table>
+					<table class = "action2 table table-hover">
+						<tr>
+							<th>코드번호</th>
+							<th>식재료명</th>
+							<th>입고날짜</th>
+							<th>수량</th>
+							<th>단위</th>
+							<th>입고여부</th>
+						</tr>
+						<tr class = "actionResult2">
+						</tr>
 					</table>
 					<ul class = "pagination">
 					</ul>       

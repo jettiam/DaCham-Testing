@@ -229,6 +229,12 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 		
 	}
 
+	@Override
+	public List<FoodMInven> foodStockListStop() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".foodStockListStop");
+	}
+
 	
 
 	

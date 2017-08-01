@@ -88,5 +88,10 @@ public class DeliverDAOImpl implements DeliverDAO{
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace+".completeAllCount");
 	}
+	@Override
+	public void overButton(int foodMCode) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace+".overButton",foodMCode);
+	}
 
 }

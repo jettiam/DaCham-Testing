@@ -153,8 +153,8 @@ public class AdminSubController {
   	public ResponseEntity<List<FoodMInven>> foodStockAll(){
   		ResponseEntity<List<FoodMInven>> entity = null;
   		try {
-  			List<FoodMInven> list = service.foodStockListAll();
-  			entity = new ResponseEntity<>(list,HttpStatus.OK);
+  			List<FoodMInven> list = service.foodStockListAll(); 
+  			entity = new ResponseEntity<>(list,HttpStatus.OK); 
   		} catch (Exception e) {
   			// TODO Auto-generated catch block
   			e.printStackTrace();
@@ -162,7 +162,7 @@ public class AdminSubController {
   		}
   		return entity;
   	}
-   //foodStock 리스트출력
+   //foodStock 리스트 검색 출력
    @RequestMapping(value = "/foodOrder/{searchType}/{keyword}", method = RequestMethod.GET)
  	public ResponseEntity<List<FoodMInven>> foodStockSearch(@PathVariable("searchType")String searchType, @PathVariable("keyword")String keyword){
  		ResponseEntity<List<FoodMInven>> entity = null;
@@ -170,8 +170,7 @@ public class AdminSubController {
  		try {
  			FoodMInven foodMInven = new FoodMInven();
  			foodMInven.setSearchType(searchType);
- 			foodMInven.setKeyword(keyword);
- 			foodMInven.setTotalAmount(foodMInven.getInAmount()-foodMInven.getOutAmount());
+ 			foodMInven.setKeyword(keyword); 
  			List<FoodMInven> list = service.foodStockList(foodMInven);  
  			entity = new ResponseEntity<>(list,HttpStatus.OK);
  		} catch (Exception e) {
@@ -181,6 +180,20 @@ public class AdminSubController {
  		}
  		return entity;
  	}
+   //foodStock 대기중 리스트 출력
+   @RequestMapping(value = "/foodStockStopAll",method = RequestMethod.GET)
+  	public ResponseEntity<List<FoodMInven>> foodStockStopAll(){
+  		ResponseEntity<List<FoodMInven>> entity = null;
+  		try {
+  			List<FoodMInven> list = service.foodStockListStop(); 
+  			entity = new ResponseEntity<>(list,HttpStatus.OK); 
+  		} catch (Exception e) {
+  			// TODO Auto-generated catch block
+  			e.printStackTrace();
+  			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+  		}
+  		return entity;
+  	}
    //식단 다 보여줘
    @RequestMapping(value = "/dietAll",method = RequestMethod.GET)
  	public ResponseEntity<List<Diet>> dietAll(){

@@ -6,7 +6,7 @@ public class Deliver {
 	private int foodMICode;
 	private int foodMCode;
 	private String foodMName;
-	private int inAmount;
+	private double inAmount;
 	private Date inDate;
 	private int outAmount;
 	private String unit;
@@ -17,8 +17,15 @@ public class Deliver {
 	private String keyword;
 	private String orderItemName;
 	private int foodMStatus;
+	private Date orderDate;
 	
 	
+	public Date getOrderDate() {
+		return orderDate;
+	}
+	public void setOrderDate(Date orderDate) {
+		this.orderDate = orderDate;
+	}
 	private int orderCode;
 	
 	private int page = 1;
@@ -51,10 +58,10 @@ public class Deliver {
 	public void setFoodMName(String foodMName) {
 		this.foodMName = foodMName;
 	}
-	public int getInAmount() {
+	public double getInAmount() {
 		return inAmount;
 	}
-	public void setInAmount(int inAmount) {
+	public void setInAmount(double inAmount) {
 		this.inAmount = inAmount;
 	}
 	public Date getInDate() {

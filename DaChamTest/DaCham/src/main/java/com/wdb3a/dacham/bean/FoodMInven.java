@@ -13,7 +13,7 @@ public class FoodMInven {
 	private String unit;
 	private int price;
 	private Date exDate;
-	private int stock;
+	private double stock; 
 	private String keyword;
 	private String searchType;
 	private Date orderDate;
@@ -54,7 +54,7 @@ public class FoodMInven {
 		return inAmount;
 	}
 	public void setInAmount(double inAmount) {
-		this.inAmount = Math.round(inAmount*1000d)/1000d;
+		this.inAmount = Math.round(inAmount*1000d)/1000d;    
 	}
 	public Date getInDate() {
 		return inDate;
@@ -81,11 +81,11 @@ public class FoodMInven {
 	public void setExDate(Date exDate) {
 		this.exDate = exDate;
 	}
-	public int getStock() {
+	public double getStock() {
 		return stock;
 	}
-	public void setStock(int stock) {
-		this.stock = stock;
+	public void setStock(double stock) {
+		this.stock = Math.round(stock*1000d)/1000d; ; 
 	}
 	public String getKeyword() {
 		return keyword;

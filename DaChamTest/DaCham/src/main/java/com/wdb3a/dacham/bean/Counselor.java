@@ -34,9 +34,16 @@ public class Counselor {
 	private int diseaseCode;
 	private String diseaseName;
 	private String judgement;
+	private Date birthday;
 	
 	
 	
+	public Date getBirthday() {
+		return birthday;
+	}
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
 	public int getDiseaseCode() {
 		return diseaseCode;
 	}

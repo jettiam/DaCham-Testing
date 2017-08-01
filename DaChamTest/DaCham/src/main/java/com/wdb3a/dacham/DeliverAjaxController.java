@@ -138,7 +138,7 @@ public class DeliverAjaxController {
 			Map<String,Object> map = new HashMap<>();
 			map.put("list", list);
 			map.put("criteria", criteria);
-			System.out.println("»ß¸®»ß¸®:"+list);
+			System.out.println("list:"+list);
 			entity = new ResponseEntity<>(map,HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -147,4 +147,18 @@ public class DeliverAjaxController {
 		}
 		return entity;
 	}
+	@RequestMapping(value = "/overButton/{foodMCode}",method = RequestMethod.PUT)
+	public ResponseEntity<String> overButton(@PathVariable("foodMCode")int foodMCode){
+		ResponseEntity<String> entity = null;
+		try {
+			service.overButton(foodMCode);
+			entity = new ResponseEntity<>("SUCCESS",HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
 }
+
