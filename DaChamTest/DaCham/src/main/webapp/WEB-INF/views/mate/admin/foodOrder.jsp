@@ -37,9 +37,9 @@
 	<div class="col-xs-2"> 
 	<input type="text" name="keyword" id = "keyword" class="form-control">
 	</div>
-	<div class="col-xs-2"> 
+	<div class="col-xs-4">   
 	<button id="search" class = "btn btn-default">검색</button>
-	<button id="searchAll" class = "btn btn-default">전체</button>
+	<button id="searchAll" class = "btn btn-default" data-toggle='modal' href='#myModal'>주문내역서 보기</button>
 	</div>
 	</div>
 	<div>
@@ -69,6 +69,7 @@
 			</tr> --%>
 		</table>
 	</div>
+	
 	
 	<div>
 		<h2>식단에 포함된 식재료</h2>
@@ -102,12 +103,43 @@
 	</div>
 	<form class="foodMOrderForm" action="mailSending" method="post">  
 		<input type="hidden" name="foodMOrderInfo" id="foodMOrderInfo">
-		
+	</form>
+	<form class="foodMOrderSubForm" action="mailSendingSub" method="post">  
 		<input type="hidden" name="cnt" id="cnt">
 	</form>
+	
 	<form id="foodMAppOrderForm" action="AppSending" method="post">  
 		<input type="hidden" name="foodMAppOrderInfo" id="foodMAppOrderInfo">
 	</form>
+	
+	<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">×</button>
+          <h4 class="modal-title">상세보기</h4>
+        </div>
+        <div class="modal-body">   
+		<table class="modalTable table table-condensed">
+			<tr>
+				<th>식재료코드</th>
+				<th>식재료명</th>
+				<th>단가</th>
+				<th>주문량</th>
+				<th>단위</th>
+			</tr> 
+		</table>
+        </div>
+        <div class="modal-footer">
+        <button id="foodMOrderSub" class = "btn btn-default">추가 식재료 주문서 보내기</button>    
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
 
 	<script>
 	
@@ -128,6 +160,9 @@
 	
 			
 		$(document).ready(function() {
+			$("#foodMOrderSub").on("click", function(){
+				$(".foodMOrderSubForm").submit();
+			})
 			$("#foodMOrder").on("click", function(){
 				
 				var foodMOrderInfo = {};
@@ -210,10 +245,11 @@
 									$(".foodMTable").append(str); 
 									});
 								});
-								var cnt=0;
+								var cnt=0; 
+							 
 								$(document.body).on("click", ".orderBtn" ,function(){
 									var Stock = $(this).parent().prev().prev().children().val();
-									
+									//empty($(this).parent().prev().prev().children());  
 									var foodMCode = $(this).parent().prev().prev().prev().prev().prev().attr('data-code');
 									var foodMName = $(this).parent().prev().prev().prev().prev().attr('data-code');
 									
@@ -223,15 +259,15 @@
 				   					//alert(cnt);    
 									var str="";
 										str += "<tr><td>"+foodMCode+"</td>"+"<td>"+foodMName+"</td>"+"<td>"+price+"</td>"+"<td>"+Stock+"</td>"+"<td>"+unit+"</td><tr>";
-									$(".tables").append(str);
+									$(".modalTable").append(str);
 									alert(foodMName+"가 "+Stock+unit+"만큼 추가 주문되었습니다");
-									$(".foodMOrderForm").append("<input type='hidden' value='"+Stock+"'"+"name='StockAdd'>");
-									$(".foodMOrderForm").append("<input type='hidden' value='"+foodMCode+"'"+"name='foodMCodeAdd'>");
-									$(".foodMOrderForm").append("<input type='hidden' value='"+foodMName+"'"+"name='foodMNameAdd'>");
-									$(".foodMOrderForm").append("<input type='hidden' value='"+price+"'"+"name='priceAdd'>");
-									$(".foodMOrderForm").append("<input type='hidden' value='"+unit+"'"+"name='unitAdd'>");
+									$(".foodMOrderSubForm").append("<input type='hidden' value='"+Stock+"'"+"name='StockAdd'>");
+									$(".foodMOrderSubForm").append("<input type='hidden' value='"+foodMCode+"'"+"name='foodMCodeAdd'>");
+									$(".foodMOrderSubForm").append("<input type='hidden' value='"+foodMName+"'"+"name='foodMNameAdd'>");
+									$(".foodMOrderSubForm").append("<input type='hidden' value='"+price+"'"+"name='priceAdd'>");
+									$(".foodMOrderSubForm").append("<input type='hidden' value='"+unit+"'"+"name='unitAdd'>");
 									$("#cnt").val(cnt);
-									
+									$(this).parent().prev().prev().children().val(""); 
 									
 								})  
 							
