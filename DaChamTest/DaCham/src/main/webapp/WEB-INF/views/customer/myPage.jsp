@@ -72,7 +72,7 @@
 		<div id="myInfoTableWrap">
 		<h2 class="text-center">내 정보</h2>
 		<div class="col-sm-3"></div><div class="col-sm-6 center-block">
-			<table id="myInfoTable" class="table table-bordered">
+			<table id="myInfoTable" class="table table-bordered table-condensed table-responsive">
 				<tr>
 					<td>고객명</td>
 					<td><input type="text" name="name" value="${memberName}"
@@ -128,7 +128,7 @@
 		<h2 class="text-center">${memberName}님의 건강정보</h2><br>
 		<div class="col-sm-6">
 		<h3 class="text-center">영양정보</h3>
-			<table id="myHealthTable" class="text-center center-block">
+			<table id="myHealthTable" class="text-center center-block table-condensed table-responsive">
 				<tr>
 					<td><canvas id="myChart"></canvas></td>
 					</tr>
@@ -171,7 +171,7 @@
 			<h2 class="text-center">장바구니</h2>
 			<div class="col-sm-1"></div>
 			<div class="col-sm-10" style="padding:0px;">
-			<table id="myCartTable" class="table text-center">
+			<table id="myCartTable" class="table text-center table-condensed table-responsive">
 				<thead>
 				<tr>
 					<td><input type="checkbox" class="w3-check" id="checkAllCart"></td>
@@ -199,7 +199,7 @@
 		<h2 class="text-center">주문내역</h2>
 		<div class="col-sm-1"></div>
 			<div class="col-sm-10" style="padding:0px;">
-		<table id="myOrderListTable" class="table table-striped table-bordered text-center">
+		<table id="myOrderListTable" class="table table-striped table-bordered text-center table-condensed table-responsive">
 				<tr>
 					<td class="hidden-xs" onclick="w3.sortHTML('#myOrderListTable', '.orderTr', 'td:nth-child(1)')" style="cursor:pointer">주문번호</td>
 					<td onclick="w3.sortHTML('#myOrderListTable', '.orderTr', 'td:nth-child(2)')" style="cursor:pointer">주문일자</td>

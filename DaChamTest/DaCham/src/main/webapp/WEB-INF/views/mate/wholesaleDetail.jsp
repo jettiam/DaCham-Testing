@@ -48,7 +48,7 @@ padding: 20px 0;
 <h3 class="text-center foodMDetailHeader">${list[0].orderDate} 주문 상세내역</h3>
 <div class="text-right col-sm-3 col-sm-offset-9 totalPrice">총 가격 : <span id="totalPrice"></span>원 <button class="btn btn-primary wholesaler">목록</button></div>
 <table class="table">
-<tr><td>식재료명</td><td>주문량</td><td>단위</td><td>가격</td><td>납품상태</td></tr>
+<tr><th>식재료명</th><th>주문량</th><th>단위</th><th>가격</th><th>납품상태</th></tr>
 <c:forEach items="${list}" var="list">
 <tr><td>${list.foodMName}</td><td>${list.inAmount}</td><td>${list.unit}</td><td><span class="price">${list.price}</span>원</td><td>${list.foodMCheck}</td></tr>
 </c:forEach>

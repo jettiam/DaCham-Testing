@@ -26,4 +26,12 @@ private WholseDAO dao;
 		return dao.foodMOrderListDetail(orderDate);
 	}
 
+	@Override
+	public List<FoodMInven> foodMOrderListDetailAdd(String orderDate) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.foodMOrderListDetailAdd(orderDate);
+	}
+
+	
+
 }
