@@ -158,11 +158,32 @@ public class CounselorAjaxController {
 		}
 		return entity;
 	}
-	@RequestMapping(value = "/counselorseList2All",method = RequestMethod.GET)
-	public ResponseEntity<List<Counselor>> counselorseList2All(){
+	/**
+	 * 미상담 목록
+	 * @return
+	 */
+	@RequestMapping(value = "/unfinCounselList",method = RequestMethod.GET)
+	public ResponseEntity<List<Counselor>> unfinCounselList(){
 		ResponseEntity<List<Counselor>> entity = null;
 		try {
 			List<Counselor> list = service.counselorseList2All();
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	/**
+	 * 상담완료 목록
+	 * @return
+	 */
+	@RequestMapping(value = "/finCounselList",method = RequestMethod.GET)
+	public ResponseEntity<List<Counselor>> finCounselList(){
+		ResponseEntity<List<Counselor>> entity = null;
+		try {
+			List<Counselor> list = service.finCounselList();
 			entity = new ResponseEntity<>(list,HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -180,6 +201,23 @@ public class CounselorAjaxController {
 		try {
 			service.counselInsert(counselor);
 			entity = new ResponseEntity<>("SUCCESS",HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	@RequestMapping(value = "/orderListSearch/{couselCode}/{keyword}",method = RequestMethod.GET)
+	public ResponseEntity<List<Counselor>> orderListSearch(@PathVariable("couselCode")int couselCode,@PathVariable("keyword")String keyword){
+		ResponseEntity<List<Counselor>> entity = null;
+		Counselor counselor = new Counselor();
+		counselor.setKeyword(keyword);
+		counselor.setCouselCode(couselCode);
+		try {
+			List<Counselor> list = service.orderListSearch(counselor);
+			System.out.println("식단 검색 목록:"+list);
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

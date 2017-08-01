@@ -7,7 +7,7 @@ public class Counselor {
 	private int counselCode;
 	private String name;
 	private String email;
-	private String counselitemName;
+	private String counselItemName;
 	private String customer;
 	private String adviser;
 	private Date counselDate;
@@ -81,11 +81,11 @@ public class Counselor {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getCounselitemName() {
-		return counselitemName;
+	public String getCounselItemName() {
+		return counselItemName;
 	}
-	public void setCounselitemName(String counselitemName) {
-		this.counselitemName = counselitemName;
+	public void setCounselitemName(String counselItemName) {
+		this.counselItemName = counselItemName;
 	}
 	public String getCustomer() {
 		return customer;
