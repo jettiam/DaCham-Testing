@@ -94,7 +94,7 @@
          var couselCode = $(this).attr("data-code");
             var answer = $('.answerReturn').val();
            if($('.answerReturn').val() == ""){
-        	   alert("제발 답변을 입력하세요");
+        	   alert("답변을 입력하세요");
            } 
            else{
         	   $.ajax({

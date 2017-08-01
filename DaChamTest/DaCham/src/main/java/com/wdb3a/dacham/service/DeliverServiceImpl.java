@@ -83,5 +83,10 @@ public class DeliverServiceImpl implements DeliverService {
 		// TODO Auto-generated method stub
 		return dao.completeAllCount();
 	}
+	@Override
+	public void overButton(int foodMCode) throws Exception {
+		// TODO Auto-generated method stub
+		dao.overButton(foodMCode);
+	}
 
 }

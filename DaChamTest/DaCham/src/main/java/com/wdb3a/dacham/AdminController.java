@@ -107,10 +107,10 @@ public class AdminController {
 			FoodMAmountRead foodMAmountRead5 = new FoodMAmountRead();
 			foodMAmountRead5.setFoodMCode(foodMCodeAdd[z]);
 			foodMAmountRead5.setFoodMName(foodMNameAdd[z]);
-			foodMAmountRead5.setInAmount(StockAdd[z]+""); 
+			foodMAmountRead5.setInAmount(StockAdd[z]); 
 			foodMAmountRead5.setUnit(unitAdd[z]);
 			foodMAmountRead5.setPrice(priceAdd[z]);
-			  
+			   
 			service.insertFoodMAdd(foodMAmountRead5);
 			
 			System.out.println(cnt);     
@@ -162,20 +162,20 @@ public class AdminController {
 			System.out.println(foodMOrderInfo);      
 			foodMAmountRead4.setFoodMCode(jsonObj1.get("foodMCode").toString());
 			foodMAmountRead4.setFoodMName(jsonObj1.get("foodMName").toString());
-			foodMAmountRead4.setInAmount(jsonObj1.get("totalAmount").toString());
+			foodMAmountRead4.setInAmount(Double.parseDouble(jsonObj1.get("totalAmount").toString()));
 			foodMAmountRead4.setUnit(jsonObj1.get("unit").toString());  
 			foodMAmountRead4.setPrice(Integer.parseInt(jsonObj1.get("price").toString()));
 			foodMAmountRead4.setOrderCode(Integer.parseInt(jsonObj1.get("orderCode").toString()));
 			orderCode = Integer.parseInt(jsonObj1.get("orderCode").toString());
 			service.insertFoodM(foodMAmountRead4);
 			service.foodMUpdate(orderCode);
-			
+			double totalAmount = Math.round((Double.parseDouble(jsonObj1.get("totalAmount").toString()))*1000d)/1000d;
 			totalprice = (int) (Integer.parseInt(jsonObj1.get("price").toString())
 					* Double.parseDouble(jsonObj1.get("totalAmount").toString()));
 			//System.out.println(jsonObj1);
 			//System.out.println(jsonObj1.get("foodMname").toString());
 			toString = toString + "\n" + "식재료명 : " + jsonObj1.get("foodMName").toString() + "단가 : "
-					+ jsonObj1.get("price").toString() + " 주문량 :" + jsonObj1.get("totalAmount").toString()
+					+ jsonObj1.get("price").toString() + " 주문량 :"  + totalAmount
 					+ jsonObj1.get("unit").toString() + " 총가격 : " + totalprice + "원";
 			//System.out.println(toString);	
 		}

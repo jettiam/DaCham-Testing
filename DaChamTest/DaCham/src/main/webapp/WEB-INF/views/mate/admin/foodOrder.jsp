@@ -210,9 +210,13 @@
 							function all(){
 								
 								
-									var str = "";
-									$(".foodOrder").remove();  
-									for(var i =1; i<=divlength; i++){
+									 var str = "";
+									//var food[] = new Array();
+									$(".foodOrder").remove();
+									/* for(var i=1; var i =1; i<=divlength; i++){
+										food[i][] = {$("#foodMName"+i).val(), Number($("#totalAmount"+i).val())*0.001}
+									}  */
+									 for(var i =1; i<=divlength; i++){
 										str += "<tr class='foodOrder'><td>"
 										+$("#foodMCode"+i).val()
 										+"</td>"+"<td>"
@@ -220,11 +224,15 @@
 										+"</td>"+"<td>"
 										+$("#price"+i).val()
 										+"</td>"+"<td>"
-										+Number($("#totalAmount"+i).val())*0.001
+										+(Number($("#totalAmount"+i).val())*0.001).toFixed(3) 
 										+"</td>"+"<td>"
 										+$("#unit"+i).val()
 										+"</td> </tr>" 
-									} 
+									}  
+									 
+										
+									
+									alert($("input[name='foodMName']").length);  
 									console.log(str);
 									$(".tables").append(str); 
 								
