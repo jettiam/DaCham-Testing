@@ -99,6 +99,12 @@
 </script>
 
 <style>
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+
+* {
+	font-family: 'Jeju Gothic', sans-serif;
+}
+
 #ground {
 	width: 320px;
 	height: 100px;
@@ -125,109 +131,121 @@ li {
 </head>
 <body>
 	<%@include file="../../clientNavi.jsp"%>
-	
-	
+	<!-- 위자드 실행 영역 -->
 	<section class="purpose section">
+		<div class="container">
+			<h2 class="title">Dacham Wizard</h2>
+			<div id="ground" class="container">
+			<h2 id="startWizard">위자드 시작하기</h2>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">	
+							<h3>col-sm-6</h3>
+							<p>내용 들어갈 자리</p>
+							<p>내용 들어갈 자리</p>				
+				</div>
+				<div class="col-sm-12">	
+							<h3>col-sm-12</h3>
+							<p>내용 들어갈 자리</p>
+							<p>내용 들어갈 자리</p>						
+				</div>
+				<div class="col-sm-4">	
+							<h3>여기는 ROWROW</h3>
+							<p>내용 들어갈 자리</p>
+							<p>내용 들어갈 자리</p>				
+				</div>
+			</div>
 	
-                <div class="container">
-                    <h2 class="title">Wizard 3 STEP</h2>
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="vira-card">
-                                <div class="vira-card-header">
-                                    <div class="card-icon">
-                                        <span class="fa fa-one" aria-hidden="true">
-                                        	<img src="resources/number-1.png" width="60" height="60"/>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="vira-card-content">
-                                    <h3>간편한 실행</h3>
-                                    <p>
-                                        다참 위자드를 실행 하세요.
-                                    </p>
-                                    <p>
-                                        다참 위자드가 당신에게 맞는 식단을 추천해줄꺼에요.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="vira-card">
-                                <div class="vira-card-header">
-                                    <div class="card-icon">
-                                        <span class="fa fa-two" aria-hidden="true">
-                                        	<img src="resources/number-2.png" width="60" height="60"/>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="vira-card-content">
-                                    <h3>맞춤화된 단계</h3>
-                                    <p>
-                                       질환, 건강측정 정보 등을 선택하세요.
-                                    </p>
-                                   	<p>
-                                       개인에 따라 질문지의 단계에 차이가 있을 수 있어요.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="vira-card">
-                                <div class="vira-card-header">
-                                    <div class="card-icon">
-                                        <span class="fa fa-bicycle" aria-hidden="true">
-                                        <img src="resources/number-3.png" width="60" height="60"/>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="vira-card-content">
-                                    <h3>알맞은 식단 추천</h3>
-                                    <p>
-                                        응답을 통해 사용자에게 최적화된 식단을 추천합니다.
-                                    </p>
-                                    <p>
-                                    	반찬이 마음에 안들까봐 걱정하지 마세요.
-                                    </P>
-                                    <p>
-                                    	식단 구매 메뉴에서 우리는 많은 선택지를 제공합니다.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-         
-	<div id="ground" class="container">
-		<h2 id="startWizard">
-			위자드 시작하기
-		</h2>
-	</div>
 
-	<ul>
-		<h3 id="question"></h3>
-		<li class="btn" id="1" data-id=""></li>
-		<li class="btn" id="2" data-id=""></li>
-		<li class="btn" id="3" data-id=""></li>
-		<li class="btn" id="4" data-id=""></li>
-	</ul>
-	<div id="wizardResult" style="display: none">
-		고객님의 위자드 결과
-		<h2 id="resultName"></h2>
-		<h2 id="resultJudg"></h2>
-		<button id="showResultDiet">추천식단 보기</button>
-	</div>
-	<!-- 시간이 된다면 추가할 파트
+		<div class="row">
+		<ul>
+			<h3 id="question"></h3>
+			<li class="btn" id="1" data-id=""></li>
+			<li class="btn" id="2" data-id=""></li>
+			<li class="btn" id="3" data-id=""></li>
+			<li class="btn" id="4" data-id=""></li>
+		</ul>
+		<div id="wizardResult" style="display: none">
+			고객님의 위자드 결과
+			<h2 id="resultName"></h2>
+			<h2 id="resultJudg"></h2>
+			<button id="showResultDiet">추천식단 보기</button>
+		</div>
+		<!-- 시간이 된다면 추가할 파트
 	<div id="resultDiet" class=".col-md-8 col-md-offset-4">
 		추천식단 목록
 	</div> -->
-	   </section>
-	
-	<form id="ResultDiet" method="GET">
-		<input id="rName" type="hidden" name="rName">
-		<input id="rJudg" type="hidden" name="rJudg">
-	</form>
+		</div>
+
+		<form id="ResultDiet" method="GET">
+			<input id="rName" type="hidden" name="rName"> <input
+				id="rJudg" type="hidden" name="rJudg">
+		</form>
+
+</div>
+	</section>
+
+
+	<section class="purpose section">
+		<div class="container">
+			<h2 class="title">About Wizard</h2>
+			<div class="row">
+				<div class="col-sm-4">
+					<div class="vira-card">
+						<div class="vira-card-header">
+							<div class="card-icon">
+								<span class="fa fa-one" aria-hidden="true"> <img
+									src="resources/number-1.png" width="60" height="60" />
+								</span>
+							</div>
+						</div>
+						<div class="vira-card-content">
+							<h3>간편한 실행</h3>
+							<p>다참 위자드를 실행 하세요.</p>
+							<p>다참 위자드가 당신에게 맞는 식단을 추천해줄꺼에요.</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="vira-card">
+						<div class="vira-card-header">
+							<div class="card-icon">
+								<span class="fa fa-two" aria-hidden="true"> <img
+									src="resources/number-2.png" width="60" height="60" />
+								</span>
+							</div>
+						</div>
+						<div class="vira-card-content">
+							<h3>맞춤화된 단계</h3>
+							<p>질환, 건강측정 정보 등을 선택하세요.</p>
+							<p>개인에 따라 질문지의 단계에 차이가 있을 수 있어요.</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="vira-card">
+						<div class="vira-card-header">
+							<div class="card-icon">
+								<span class="fa fa-bicycle" aria-hidden="true"> <img
+									src="resources/number-3.png" width="60" height="60" />
+								</span>
+							</div>
+						</div>
+						<div class="vira-card-content">
+							<h3>알맞은 식단 추천</h3>
+							<p>응답을 통해 사용자에게 최적화된 식단을 추천합니다.</p>
+							<p>반찬이 마음에 안들까봐 걱정하지 마세요.</P>
+							<p>식단 구매 메뉴에서 우리는 많은 선택지를 제공합니다.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr>
+	</section>
+
+
+
 
 </body>
 </html>
