@@ -27,4 +27,12 @@ public class WholseDAOImpl implements WholseDAO {
 		System.out.println(orderDate);
 		return sqlSession.selectList(namespace+".foodMOrderListDetail",orderDate);
 	}
+
+	@Override
+	public List<FoodMInven> foodMOrderListDetailAdd(String orderDate) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".foodMOrderListDetailAdd",orderDate);
+	}
+
+	
 }

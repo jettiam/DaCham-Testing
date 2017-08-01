@@ -28,6 +28,13 @@ public class WholseController {
 		model.addAttribute("list",list);
 		return "mate/wholesaleDetail";
 	}
+	@RequestMapping(value="/foodMOrderListDetailAdd",method=RequestMethod.GET)
+	public String foodMOrderListDetailAdd(@RequestParam("orderDate") String orderDate,Model model) throws Exception{
+		List<FoodMInven> list = service.foodMOrderListDetailAdd(orderDate);
+		
+		model.addAttribute("list",list);
+		return "mate/wholesaleDetail";
+	}
 	@RequestMapping(value="/wholesaler",method=RequestMethod.GET)
 	public String wholesaler() throws Exception{
 		System.out.println("µÇ¶ó");
