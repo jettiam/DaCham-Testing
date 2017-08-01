@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wdb3a.CookerMapper">
 	<select id="foodStock" resultType="FoodMInven">
-		select b.foodMName, c.foodMAmount, a.inAmount, a.uint
+		select b.foodMName, c.foodMAmount, a.inAmount, a.unit
 		from foodMInven a
 		join sideDInfo c join foodMaterial b
 		where b.foodMCode = c.foodMCode

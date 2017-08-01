@@ -95,41 +95,9 @@
             </table>
          </div>   
       </div>
-          <div>
-          <select>
-                  <option>등록자</option>
-                  <option>제목</option>
-                  <option>내용</option>
-            </select>
-               <input type = "text" name = "keyword">
-               <button id = "search"> 검색 </button>
-         </div>
-         <div>
-           
-            <table border = "1">
-               <tr>
-                  <th>번호</th>
-                  <th>제목</th>
-                  <th>등록자</th>
-                  <th>등록일</th>
-                  <th>조회수</th>
-               </tr>
-               <tr>
-                  <td>1</td>
-                  <td>영양관리주간목록</td>
-                  <td>배송팀장</td>
-                  <td>2017.05.05</td>
-                  <td>0</td>
-               </tr>
-            </table>
-         </div>
-      </div>
-      <div class = "box2">
-         
-         
-      </div>
-      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-      <br><br><br><br><br><br>
-     </div>
+      </div>   
+    
+      
+    
 </body>
 </html>
