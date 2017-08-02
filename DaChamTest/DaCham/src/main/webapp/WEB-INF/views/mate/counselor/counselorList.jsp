@@ -8,7 +8,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <link rel="stylesheet"
@@ -16,6 +15,7 @@
 <script
    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
+
    $(document).ready(function(){
       $("#counselorList").addClass("w3-light-gray");
       $(".searchResult1").remove();
@@ -142,65 +142,63 @@
          });
       }
    });
+
 </script>
 <style>
  .box1 {
   float:left;  }
  .box2 {
-  display:inline-block;  margin-left:20px;}
- 
-.nameClick { color: blue; text-decoration: underline;}
-</style> 
+  display:inline-block;  margin-left:20px;}  
+</style>
 </head>
 <body>
 <%@include file = "counselorNavi.jsp" %>
-   <div class = "container">   
-      <div class = "box1">
-      
-             <h3>고객의 정보</h3>
-         <div>
-            <select name = "searchType" class= "searchType">
-               <option value = "n"
-                  <c:out value="${Counselor.searchType==null?'selected':'' }"/>>
-                  ----------
-                  </option>
-                  <option value = "t"
-                  <c:out value="${Counselor.searchType eq 't'?'selected':'' }"/>>
-                  고객id
-                  </option>
-                  <option value = "c"
-                  <c:out value="${Counselor.searchType eq 'c'?'selected':'' }"/>>
-                  고객이름
-                  </option>
-            </select>
-            <input type = "text" name = "keyword" id = "keyword" placeholder = "검색어 입력란">
-            <button id = "search">검색</button>
-         </div>
-      
-         
-        <div style = "border:1px solid gold;">
-         <table border ="1" class = "search1 table table-hover">
-            <tr>
-                  <th>고객id</th>
-                  <th>고객이름</th>
-                  <th>생일</th>
-                  <th>주소</th>
-                  <th>전화번호</th>
-                  <th>Email</th>
-                  <th>부서</th>
-                  <th>직급</th>
-                  <th>가입일</th>
-                  <th>질병이름</th>
-                  <th>위험군</th>
-                  
-                  
-            </tr>
-              <tr class = "searchResult1">
-              </tr>
-         </table>
-         </div>
-         <div>
-               <table class = "link table table-hover">
+	<div class = "container">   
+	   <div class = "box1">
+	   
+	   		 <h3>고객의 정보</h3>
+	      <div>
+				<select name = "searchType" class= "searchType">
+					<option value = "n"
+		   			<c:out value="${Counselor.searchType==null?'selected':'' }"/>>
+		   			----------
+		   			</option>
+		   			<option value = "t"
+		   			<c:out value="${Counselor.searchType eq 't'?'selected':'' }"/>>
+		   			고객id
+		   			</option>
+		   			<option value = "c"
+		   			<c:out value="${Counselor.searchType eq 'c'?'selected':'' }"/>>
+		   			고객이름
+		   			</option>
+				</select>
+				<input type = "text" name = "keyword" id = "keyword" placeholder = "검색어 입력란">
+				<button id = "search">검색</button>
+			</div>
+		
+	      
+	     <div style = "border:1px solid gold;">
+	      <table border ="1" class = "search1 table table-hover">
+	         <tr>
+	         			<th>고객id</th>
+						<th>고객이름</th>
+						<th>주소</th>
+						<th>전화번호</th>
+						<th>Email</th>
+						<th>부서</th>
+						<th>직급</th>
+						<th>가입일</th>
+						<th>질병이름</th>
+						<th>위험군</th>
+						
+						
+	         </tr>
+	       	 <tr class = "searchResult1">
+	       	 </tr>
+	      </table>
+	      </div>
+	      <div>
+	      		<table class = "link table table-hover">
                <tr>   
                   <th>번호</th>
                   <th>고객아이디</th>
@@ -210,19 +208,18 @@
                   
                </tr>
             </table>
-         </div>
-         <form>
-            <div class = "answer">
-            </div>
-         </form>     
-      </div>
-      <br><br><br><br>
-      <div class = "box2">
-         
-      </div>
-      
-      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-      <br><br><br><br><br><br>
-     </div>
+	      </div>
+	      <form>
+		      <div class = "answer">
+		      </div>
+	      </form>	  
+	   </div>
+	   <div class = "box2">
+	      
+	   </div>
+	   
+	   <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	   <br><br><br><br><br><br>
+	  </div>
 </body>
 </html>

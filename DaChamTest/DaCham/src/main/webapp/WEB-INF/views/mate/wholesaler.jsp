@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>     
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,12 +66,17 @@
 </head>
 <body>
 <div class="container">
-
 <h3 class="text-center foodMList">식재료 주문 목록</h3>
+<div class="text-right"><a href="empLogout" >로그아웃</a></div>
 <table class="table" id="foodMList">
 <tr><th>주문일</th><th>주문</th><th>추가 주문</th></tr>
 </table>
-
+<c:if test = "${sessionScope.deptCode != '도매상'}">
+		<script>
+			alert("도매상으로 로그인을 하셔야 합니다.")
+			window.location.href = "empLogout";
+</script>
+</c:if> 
 </div>
 </body>
 </html>

@@ -114,4 +114,10 @@ public class CounselorDAOImpl implements CounselorDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".orderListSearch",counselor);
 	}
+
+	@Override
+	public List<Counselor> finCounselList() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".finCounselList");
+	}
 }

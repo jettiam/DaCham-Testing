@@ -22,4 +22,5 @@ public interface CounselorService {
 	public void counselUpdate(Counselor counselor) throws Exception;
 	public void counselInsert(Counselor counselor) throws Exception;
 	public List<Counselor> orderListSearch(Counselor counselor) throws Exception;
+	public List<Counselor> finCounselList() throws Exception;
 }

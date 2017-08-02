@@ -54,5 +54,11 @@ padding: 20px 0;
 </c:forEach>
 </table>
 </div>
+<c:if test = "${sessionScope.deptCode != '도매상'}">
+		<script>
+			alert("도매상으로 로그인을 하셔야 합니다.")
+			window.location.href = "empLogout";
+</script>
+</c:if> 
 </body>
 </html>

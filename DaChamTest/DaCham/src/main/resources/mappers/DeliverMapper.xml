@@ -37,6 +37,7 @@
 		where b.orderCode = c.orderCode
 		and c.orderItemCode = d.orderItemCode
 		and d.orderItemCode = 9
+
 		<include refid="searchDeliver"></include>
 		
   	</select>

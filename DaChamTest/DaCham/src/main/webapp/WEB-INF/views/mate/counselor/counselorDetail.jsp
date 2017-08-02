@@ -82,7 +82,7 @@ $(document).ready(function(){
    function selectCounsel(couselCode){
       $.getJSON("counselAjax/selectCounsel/"+couselCode,function(data){
          $(".counselCode").val(data.counselCode);
-         $(".counselItemName").val(data.counselitemName);
+         $(".counselItemName").val(data.counselItemName);
          $(".counselTitle").val(data.counselTitle);
          $(".counselContent").val(data.counselContent);   
          $(".answer2").val(data.answer);
@@ -142,10 +142,10 @@ $(document).ready(function(){
          var str = "";
          $(data).each(function(){
             if(this.adviser == null){
-               str += "<tr class = 'answerResult'><td class = 'counselCode' data-code = '"+this.counselCode+"' data-id = '"+this.customer+"'><a href = '#'>"+this.counselCode+"</a></td><td>"+this.counselitemName+"</td><td>"+this.counselTitle+"</td><td>"+this.counselDate+"</td><td>미응답</td></tr>";
+               str += "<tr class = 'answerResult'><td class = 'counselCode' data-code = '"+this.counselCode+"' data-id = '"+this.customer+"'><a href = '#'>"+this.counselCode+"</a></td><td>"+this.counselItemName+"</td><td>"+this.counselTitle+"</td><td>"+this.counselDate+"</td><td>미응답</td></tr>";
             }
             else{
-               str += "<tr class = 'answerResult'><td class = 'counselCode' data-code = '"+this.counselCode+"' data-id = '"+this.customer+"'><a href = '#'>"+this.counselCode+"</a></td><td>"+this.counselitemName+"</td><td>"+this.counselTitle+"</td><td>"+this.counselDate+"</td><td>응답완료</td></tr>";
+               str += "<tr class = 'answerResult'><td class = 'counselCode' data-code = '"+this.counselCode+"' data-id = '"+this.customer+"'><a href = '#'>"+this.counselCode+"</a></td><td>"+this.counselItemName+"</td><td>"+this.counselTitle+"</td><td>"+this.counselDate+"</td><td>응답완료</td></tr>";
             }
          });
          $(".link").append(str);

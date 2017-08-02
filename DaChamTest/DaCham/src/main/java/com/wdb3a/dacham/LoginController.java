@@ -125,6 +125,7 @@ public class LoginController {
 					return "main";
 				}else if(result==3){
 					Member dbResult = service.getMember(id);
+					session.setAttribute("deptCode", dbResult.getDeptCode());
 					session.setAttribute("memberName", dbResult.getName());
 					session.setAttribute("customerId", dbResult.getId());
 					return "mate/wholesaler";
@@ -169,7 +170,7 @@ public class LoginController {
 					session.setAttribute("EmpName", dbResult.getName());
 					session.setAttribute("EmpDept", dbResult.getDeptCode());
 					session.setAttribute("EmpGrade", dbResult.getGradeCode());
-				
+					session.setAttribute("deptCode", dbResult.getDeptCode());
 					model.addAttribute("result",dbResult);
 					
 					if(dbResult.getDeptCode().equals("영양사")){
@@ -186,6 +187,8 @@ public class LoginController {
 					}
 					else if(dbResult.getDeptCode().equals("고객대응팀")){
 						return "/mate/counselor/counselorMain";
+					}else if(dbResult.getDeptCode().equals("도매상")){
+						return "/mate/wholesaler";
 					}
 					return "mate/mateMain";
 				}else{

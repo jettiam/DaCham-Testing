@@ -105,8 +105,9 @@
 		<div class = "div2">	
 			<br><br>
 			<div class = "box1">
+				<h4>지우려면 이름 클릭</h4>
 				<table class = "material" style = "position:absolute;">          
-					<tr>
+					<tr>   
 						<th></th>  
 						<th>식재료&nbsp;&nbsp;  </th>
 						<th>양(g)&nbsp;&nbsp;   </th>
@@ -219,6 +220,16 @@
 					window.location.href = "side";	
 				}
 			});
+			
+			$(document.body).on("focusout",".foodMAmountClass",function(){
+				var cnt = parseInt(localStorage['cnt']);
+				
+				var foodMAmount = $(this).val();
+				
+				localStorage[cnt + '_amount'] = foodMAmount;
+				
+				
+			});
 			$(document.body).on("click",".nameClick",function(){
 				event.preventDefault();
 				
@@ -281,7 +292,7 @@
 					var item = $('<tr></tr>').addClass('item').attr('data-id',i);
 					$('<td></td>').html('<input type = "hidden" name = "foodMCode" value = '+foodMCode + '>').appendTo(item);    
 					$('<td>'+foodMName+'</td>').addClass("foodMName").attr('name','foodMName').attr('data-name',foodMName).appendTo(item);
-					$('<td></td>').html('<input type ="text" class = "foodMAmountClass" name = "foodMAmount" maxlength="4" size="1" >').appendTo(item);
+					$('<td></td>').append('<input type ="text" class = "foodMAmountClass" name = "foodMAmount" maxlength="4" size="1" >').appendTo(item);
 					item.appendTo(".material");
 					
 				}

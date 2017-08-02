@@ -158,11 +158,32 @@ public class CounselorAjaxController {
 		}
 		return entity;
 	}
-	@RequestMapping(value = "/counselorseList2All",method = RequestMethod.GET)
-	public ResponseEntity<List<Counselor>> counselorseList2All(){
+	/**
+	 * 미상담 목록
+	 * @return
+	 */
+	@RequestMapping(value = "/unfinCounselList",method = RequestMethod.GET)
+	public ResponseEntity<List<Counselor>> unfinCounselList(){
 		ResponseEntity<List<Counselor>> entity = null;
 		try {
 			List<Counselor> list = service.counselorseList2All();
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	/**
+	 * 상담완료 목록
+	 * @return
+	 */
+	@RequestMapping(value = "/finCounselList",method = RequestMethod.GET)
+	public ResponseEntity<List<Counselor>> finCounselList(){
+		ResponseEntity<List<Counselor>> entity = null;
+		try {
+			List<Counselor> list = service.finCounselList();
 			entity = new ResponseEntity<>(list,HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

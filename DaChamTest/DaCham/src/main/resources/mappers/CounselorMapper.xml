@@ -10,11 +10,21 @@ select  a.id , a.name ,a.birthday, a.address, a.tel, a.email, a.deptCode, a.grad
 	and a.gradeCode = '일반회원'
 
 </select>
+<!-- 미답변 상담목록 -->
 <select id = "counselorseList2All" resultType="Counselor">
-   select  b.counselCode,b.counselTitle ,a.name, a.id, b.counselDate, b.counselContent
-   from member a join counsel b
-   where a.id =b.customer
+   select  b.counselCode, b.counselDate,c.counselItemName,b.counselTitle ,a.name, b.customer
+   from member a, counsel b, counselItem c
+   where a.id =b.customer and c.counselItemCode=b.counselItemCode and b.adviser is null
+   order by b.counselDate
 </select>
+<!-- 상담완료 목록 -->
+<select id = "finCounselList" resultType="Counselor">
+   select  b.counselCode, b.counselDate,c.counselItemName,b.counselTitle ,a.name, b.customer
+   from member a, counsel b, counselItem c
+   where a.id =b.customer and c.counselItemCode=b.counselItemCode and b.adviser is not null
+   order by b.counselDate
+</select>
+
 <select id="counselorList" resultType="Counselor">
      select  a.id , a.name ,a.birthday, a.address, a.tel, a.email, a.deptCode, a.gradeCode, a.joinDate, b.diseaseName,b.judgement
 	from member a  join disease b

@@ -24,12 +24,23 @@
 <script>
    $(document).ready(function(){
       $(".searchResult2").remove();
-      $.getJSON("counselAjax/counselorseList2All",function(data){
+      //미상담 목록
+      $.getJSON("counselAjax/unfinCounselList",function(data){
          var str = "";
          $(data).each(function(){
-            str += "<tr class = 'searchResult2'><td>"+this.counselCode+"</td><td class = 'counselTitle'><a class = 'nameClick' data-code = '"+this.counselCode+"' data-name = '"+this.name+"' data-id = '"+this.id+"'>"+this.counselTitle+"</a></td><td>"+this.name+"</td><td>"+this.id+"</td><td>"+this.counselDate+"</td></tr>";
+            //str += "<tr class = 'searchResult2'><td>"+this.counselCode+"</td><td class = 'counselTitle'><a class = 'nameClick' data-code = '"+this.counselCode+"' data-name = '"+this.name+"' data-id = '"+this.id+"'>"+this.counselTitle+"</a></td><td>"+this.name+"</td><td>"+this.id+"</td><td>"+this.counselDate+"</td></tr>";
+         	str += "<tr class='searchResult2'><td>"+this.counselCode+"</td><td>"+this.counselItemName+"</td><td class='counselTitle'><a class = 'nameClick' data-code = '"+this.counselCode+"' data-name = '"+this.name+"' data-id = '"+this.customer+"'>"+this.counselTitle+"</a></td><td>"+this.customer+"</td><td>"+this.counselDate+"</td></tr>";
          });
-         $(".search2").append(str);
+         $("#unfinCounselList").append(str);
+      });
+      //상담 완료 목록
+      $.getJSON("counselAjax/finCounselList",function(data){
+         var str = "";
+         $(data).each(function(){
+            //str += "<tr class = 'searchResult2'><td>"+this.counselCode+"</td><td class = 'counselTitle'><a class = 'nameClick' data-code = '"+this.counselCode+"' data-name = '"+this.name+"' data-id = '"+this.id+"'>"+this.counselTitle+"</a></td><td>"+this.name+"</td><td>"+this.id+"</td><td>"+this.counselDate+"</td></tr>";
+         	str += "<tr class='searchResult2'><td>"+this.counselCode+"</td><td>"+this.counselItemName+"</td><td class='counselTitle'><a class = 'nameClick' data-code = '"+this.counselCode+"' data-name = '"+this.name+"' data-id = '"+this.customer+"'>"+this.counselTitle+"</a></td><td>"+this.customer+"</td><td>"+this.counselDate+"</td></tr>";
+         });
+         $("#finCounselList").append(str);
       });
       
       $(document.body).on("click",".counselTitle a",function(){
@@ -41,8 +52,7 @@
       });
       
       $("#Search").on("click",function(){
-         $(".searchResult2").remove();
-         
+         $(".searchResult2").remove();         
          var str = "";
          var searchType = $(".searchType2").val();
          var keyword = $("#keyword2").val();
@@ -58,7 +68,35 @@
 </head>
 <body>
 <%@include file = "counselorNavi.jsp" %>
-   <div class = "container">
+  
+  <div class="container">   
+    <div class="col-sm-6">
+    <h3 class="text-center">미상담 목록</h3>
+    	<table id="unfinCounselList" class="table">
+    		<tr>
+               <th>상담번호</th>               
+               <th>상담분류</th>
+               <th>상담제목</th>               
+               <th>고객ID</th> 
+               <th>작성일</th>                 
+           </tr>
+    	</table>
+    </div>
+    <div class="col-sm-6">
+    <h3 class="text-center">상담완료 목록</h3>
+    	<table id="finCounselList" class="table">
+    		<tr>
+               <th>상담번호</th>               
+               <th>상담분류</th>
+               <th>상담제목</th>               
+               <th>고객ID</th> 
+               <th>작성일</th>               
+           </tr>
+    	</table>
+    </div>
+   </div>   
+    
+ <%--     <div class = "container">
       <div class = "box1">
          
          <h3>전체 상담 내역</h3>         
@@ -95,13 +133,10 @@
                </tr>
             </table>
          </div>   
-      
-      <div class = "box2">
-         
-         
+
       </div>
-      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-      <br><br><br><br><br><br>
-     </div>
+      </div> --%>
+
+ 
 </body>
 </html>
