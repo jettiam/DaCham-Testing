@@ -112,6 +112,7 @@
 						<th>식재료&nbsp;&nbsp;  </th>
 						<th>양(g)&nbsp;&nbsp;   </th>
 					</tr>
+					
 				</table>
 		
 		<div class = "box2">
@@ -179,7 +180,7 @@
 			$("#side").addClass("w3-light-gray");
 			openAPI();
 			
-			var v = 0;
+			var v = 0;	
 			$("#listAll").on("click",function(){
 				materialAll(1);
 			});
@@ -191,12 +192,12 @@
 			});
 			
 			$("#regist").on("click",function(){
-				if(!localStorage['init'] || isNaN(localStorage['cnt'])==true || localStorage['cnt'] == 0){
+				if($(".material tbody > .item").length == 0){
 					alert("등록할 식재료를 선택하세요");
 					event.preventDefault();
 				}
 				else if($("#prev_View_area").attr("src") == "http://placehold.it/100x100"){
-					alert("이미지 좀 선택하세요");
+					alert("이미지를 선택하세요");
 				}		
 				else if($(".foodMAmountClass").val() == ""){
 					alert("식재료량을 기재하세요!!");
@@ -221,33 +222,20 @@
 				}
 			});
 			
-			$(document.body).on("focusout",".foodMAmountClass",function(){
-				var cnt = parseInt(localStorage['cnt']);
-				
-				var foodMAmount = $(this).val();
-				
-				localStorage[cnt + '_amount'] = foodMAmount;
-				
-				
-			});
+			
 			$(document.body).on("click",".nameClick",function(){
 				event.preventDefault();
-				
-				var cnt = parseInt(localStorage['cnt']);
-				
+		
+
 				var foodMName = $(this).attr('data-src');
-				
 				var foodMCode = $(this).attr('data-code');
 				
-				localStorage[cnt + '_name'] = foodMName;
-				localStorage[cnt + '_code'] = foodMCode;
-				
-				++cnt;
-				
-				localStorage['cnt'] = cnt;
+				$(".material").append("<tr class = 'item'><td>"+"<input type = 'hidden' name = 'foodMCode' value = '"+foodMCode+"'>"+"</td><td class = 'foodMName' name = 'foodMName' data-name = '"+foodMName+"'>"+foodMName+"</td><td>"+"<input type = 'text' class = 'foodMAmountClass' name = 'foodMAmount' maxlength = '4' size = '1'>"+"</td></tr>");
 				$(this).parent().parent().hide();
-				Refresh();
-				v = cnt;
+				var length = $(".material tbody > .item").length;
+				alert("식재료의 개수:"+length);	
+				v = length;
+				cntChange(v);
 				$.getJSON("nutriAjax/show/"+foodMCode,function(data){
 					var subCount = cnt - 1;
 					localStorage[subCount+"_kcal"] = data.kcal;
@@ -273,8 +261,8 @@
 				
 				--cnt;
 				localStorage['cnt'] = cnt;
-				
-				v = cnt;
+				var length = $(".material tbody > .item").length;
+				v = length;
 				cntChange(v);
 				openAPI();
 			});
@@ -292,7 +280,7 @@
 					var item = $('<tr></tr>').addClass('item').attr('data-id',i);
 					$('<td></td>').html('<input type = "hidden" name = "foodMCode" value = '+foodMCode + '>').appendTo(item);    
 					$('<td>'+foodMName+'</td>').addClass("foodMName").attr('name','foodMName').attr('data-name',foodMName).appendTo(item);
-					$('<td></td>').append('<input type ="text" class = "foodMAmountClass" name = "foodMAmount" maxlength="4" size="1" >').appendTo(item);
+					$('<td></td>').addClass("mountItem").append('<input type ="text" class = "foodMAmountClass" name = "foodMAmount" maxlength="4" size="1" >').appendTo(item);
 					item.appendTo(".material");
 					
 				}
