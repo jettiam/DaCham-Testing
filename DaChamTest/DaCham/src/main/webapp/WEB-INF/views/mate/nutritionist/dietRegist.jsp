@@ -53,7 +53,7 @@
 											$('#body').show();
 											event.preventDefault();
 											var foodGCode= $(this).attr("data-foodGCode");
-											var foodGLength = $(".foodG"+foodGCode+">img").length;
+											var foodGLength = $(".foodG"+foodGCode+" img").length;
 											console.log("푸드그룹랭스 "+foodGLength);
 											if(foodGLength>4){
 												alert("다섯가지 이상 선택할 수 없습니다.");												
@@ -115,7 +115,7 @@
 													.val();
 											console.log("데이터:" + sideDCode);
 											var prev = $(this).prev().val();
-											console.log("ㄷㄷㄷ:"+prev);
+											console.log("element값:"+prev);
 											$(
 													'.nameClick[data-code = "'
 															+ prev + '"]')
@@ -208,7 +208,7 @@
 
 						function Refresh() {
 							var count = parseInt(localStorage['count']);
-							$('.material>div').empty();
+							$('.checkSideD').empty();
 							for (var i = 0; i < count; i++) {
 								var sideDImg = localStorage[i + "_img"];
 								var sideDCode = localStorage[i + "_codes"];
@@ -220,96 +220,62 @@
 											'<input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '>')
 											.appendTo('.foodG01');
 									$(
-											'<img src = "displayFile?fileName='
+											'<div class = "col-sm-2"><img src = "displayFile?fileName='
 													+ sideDImg
-													+ '" class="img-responsive">')
-											.attr('data-id', i).addClass(
-													"sideDImg center-block")
-											.appendTo('.foodG01');
-									$(
-											'<input type="radio" name="foodG01" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
-													+ sideDName + '</label>')
-											.appendTo('.foodG01');
+													+ '" class="img-responsive sideDImg" data-id = "'+i+'" >'+'<input type="radio" name="foodG01" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
+													+ sideDName + '</label></div>').appendTo('.foodG01');
+									
+											
 									break;
 								case "02":
 									$(
-											'<input type = "hidden" name ="sideDCode" class = "sideDCode" value = '+sideDCode + '>')
+											'<input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '>')
 											.appendTo('.foodG02');
 									$(
-											'<img src = "displayFile?fileName='
+											'<div class = "col-sm-2"><img src = "displayFile?fileName='
 													+ sideDImg
-													+ '" class="img-responsive">')
-											.attr('data-id', i).addClass(
-													"sideDImg center-block")
-											.appendTo('.foodG02');
-									$(
-											'<input type="radio" name="foodG02" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
-											+ sideDName + '</label>')
-											.appendTo('.foodG02');
+													+ '" class="img-responsive sideDImg" data-id = "'+i+'" >'+'<input type="radio" name="foodG01" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
+													+ sideDName + '</label></div>').appendTo('.foodG02');
 									break;
 								case "03":
 									$(
 											'<input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '>')
 											.appendTo('.foodG03');
 									$(
-											'<img src = "displayFile?fileName='
+											'<div class = "col-sm-2"><img src = "displayFile?fileName='
 													+ sideDImg
-													+ '" class="img-responsive">')
-											.attr('data-id', i).addClass(
-													"sideDImg center-block")
-											.appendTo('.foodG03');
-									$(
-											'<input type="radio" name="foodG03" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
-											+ sideDName + '</label>')
-											.appendTo('.foodG03');
+													+ '" class="img-responsive sideDImg" data-id = "'+i+'" >'+'<input type="radio" name="foodG01" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
+													+ sideDName + '</label></div>').appendTo('.foodG03');
 									break;
 								case "04":
 									$(
 											'<input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '>')
 											.appendTo('.foodG04');
 									$(
-											'<img src = "displayFile?fileName='
+											'<div class = "col-sm-2"><img src = "displayFile?fileName='
 													+ sideDImg
-													+ '" class="img-responsive">')
-											.attr('data-id', i).addClass(
-													"sideDImg center-block")
-											.appendTo('.foodG04');
-									$(
-											'<input type="radio" name="foodG04" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
-											+ sideDName + '</label>')
-											.appendTo('.foodG04');
+													+ '" class="img-responsive sideDImg" data-id = "'+i+'" >'+'<input type="radio" name="foodG01" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
+													+ sideDName + '</label></div>').appendTo('.foodG04');
 									break;
 								case "05":
 									$(
 											'<input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '>')
 											.appendTo('.foodG05');
 									$(
-											'<img src = "displayFile?fileName='
+											'<div class = "col-sm-2"><img src = "displayFile?fileName='
 													+ sideDImg
-													+ '" class="img-responsive">')
-											.attr('data-id', i).addClass(
-													"sideDImg center-block")
-											.appendTo('.foodG05');
-									$(
-											'<input type="radio" name="foodG05" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
-											+ sideDName + '</label>')
-											.appendTo('.foodG05');
+													+ '" class="img-responsive sideDImg" data-id = "'+i+'" >'+'<input type="radio" name="foodG01" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
+													+ sideDName + '</label></div>').appendTo('.foodG05');
 									break;
 								case "06":
 									$(
 											'<input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '>')
 											.appendTo('.foodG06');
 									$(
-											'<img src = "displayFile?fileName='
+											'<div class = "col-sm-2"><img src = "displayFile?fileName='
 													+ sideDImg
-													+ '" class="img-responsive">')
-											.attr('data-id', i).addClass(
-													"sideDImg center-block")
-											.appendTo('.foodG06');
-									$(
-											'<input type="radio" name="foodG06" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
-											+ sideDName + '</label>')
-											.appendTo('.foodG06');
+													+ '" class="img-responsive sideDImg" data-id = "'+i+'" >'+'<input type="radio" name="foodG01" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
+													+ sideDName + '</label></div>').appendTo('.foodG06');
 									break;
 								}
 
@@ -529,36 +495,70 @@
 </style> -->
 <style>
 .sideDImg {
-	max-height: 80px
+	max-height: 80px;
+
+	
+}
+label{
+	display : inline;
+}
+.checkSideD{
+	height : 150px;  
 }
 
-.material {
-	height: 550px
-}
 </style>
 </head>
 <body>
 	<%@include file="nutritionistNavi.jsp"%>
 	<div class="container">
-		<div class="col-sm-12">
-			<div class="col-sm-2 text-center h3">밥</div>
-			<div class="col-sm-2 text-center h3">국</div>
-			<div class="col-sm-2 text-center h3">메인메뉴1</div>
-			<div class="col-sm-2 text-center h3">메인메뉴2</div>
-			<div class="col-sm-2 text-center h3">메인메뉴3</div>
-			<div class="col-sm-2 text-center h3">메인메뉴4</div>
-			<div class="material">
-				<div class="foodG01 col-sm-2 text-center">1</div>
-				<div class="foodG02 col-sm-2 text-center">2</div>
-				<div class="foodG03 col-sm-2 text-center">3</div>
-				<div class="foodG04 col-sm-2 text-center">4</div>
-				<div class="foodG05 col-sm-2 text-center">5</div>
-				<div class="foodG06 col-sm-2 text-center">6</div>
+		<div class="col-sm-6">
+		<div class="material">
+			<div class="col-sm-12 h4">밥</div>
+			<div class="foodG01 checkSideD"></div>
+			<div class="col-sm-12  h4">국</div>
+			<div class="foodG02 checkSideD">2</div>
+			<div class="col-sm-12 h4">메인메뉴1</div>
+			<div class="foodG03 checkSideD">3</div>
+			<div class="col-sm-12 h4">메인메뉴2</div>
+			<div class="foodG04 checkSideD">4</div>
+			<div class="col-sm-12 h4">메인메뉴3</div>
+			<div class="foodG05 checkSideD">5</div>
+			<div class="col-sm-12 h4">메인메뉴4</div>
+			<div class="foodG06 checkSideD">6</div>
+				
+				
+				
 			</div>
+<!-- 			<table class = "materialTable"> -->
+<!-- 				<tr class = "foodG01"> -->
+<!-- 					<td><h3>밥</h3></td> -->
+										
+<!-- 				</tr> -->
+<!-- 				<tr> -->
+<!-- 					<td><h3>국</h3></td> -->
+<!-- 					<td></td>					 -->
+<!-- 				</tr> -->
+<!-- 				<tr> -->
+<!-- 					<td><h3>메인 메뉴1</h3></td> -->
+<!-- 					<td></td>					 -->
+<!-- 				</tr> -->
+<!-- 				<tr> -->
+<!-- 					<td><h3>메인 메뉴2</h3></td> -->
+<!-- 					<td></td>					 -->
+<!-- 				</tr> -->
+<!-- 				<tr> -->
+<!-- 					<td><h3>메인 메뉴3</h3></td> -->
+<!-- 					<td></td>					 -->
+<!-- 				</tr> -->
+<!-- 				<tr> -->
+<!-- 					<td><h3>메인 메뉴4</h3></td> -->
+<!-- 					<td></td>					 -->
+<!-- 				</tr> -->
+<!-- 			</table> -->
 		</div>
 
-		<div class="div1 col-sm-12">
-			<div class="col-sm-6">
+		<div class="div1 col-sm-6">
+			<div class="col-sm-12">
 				<input type="text" name="search" id="keyword" placeholder="반찬 검색란">
 				<button id="search" class="btn btn-primary">검색</button>
 				<br>
@@ -582,7 +582,7 @@
 				<ul class="pagination">
 				</ul>
 			</div>
-			<div class="box2 col-sm-6">
+			<div class="box2 col-sm-12">
 				<table class="table table-hover">
 					<tr>
 						<th>열량&nbsp;&nbsp;</th>
@@ -604,12 +604,14 @@
 					<div>
 						<!-- 총 칼로리 양 표시 -->
 					</div>
+					<table>
+						<tr><td>성별</td><td>칼로리<br>(Kcal)</td><td>탄수화물<br>(g)</td><td>단백질<br>(g)</td><td>지방<br>(g)</td><td>나트륨<br>(g)</td><td>칼륨<br>(g)</td></tr>
+            <tr><td>남자</td><td id="MKcal">2400</td><td id="MCarbo">405</td><td id="MProtein">50</td><td id="MFat">40</td><td id="MNa">2000</td><td id="MK">3500</td></tr>
+            <tr><td>여자</td><td id="WMKcal">1900</td><td id="WMCarbo">325</td><td id="WMProtein">40</td><td id="WMFat">35</td><td id="WMNa">2000</td><td id="WMK">3500</td></tr>
+					</table>
 				</div>
 			</div>
-
-
-		</div>
-		<input type="hidden" name="kcal" id="kcal"> <input
+<input type="hidden" name="kcal" id="kcal"> <input
 			type="hidden" name="carbohydrate" id="carbohydrate"> <input
 			type="hidden" name="protein" id="protein"> <input
 			type="hidden" name="fat" id="fat"> <input type="hidden"
@@ -619,14 +621,15 @@
 			<form id="registForm" enctype="multipart/form-data">
 				<div class="div2">
 
-					<div class="template">
-						질환별 식단 목록<br> - <a data-code="1">당뇨병</a><br> - <a
-							data-code="4">신부전증</a><br> - <a class="templateErase">템플릿
-							초기화</a>
-					</div>
+<!-- 					<div class="template"> -->
+<!-- 						질환별 식단 목록<br> - <a data-code="1">당뇨병</a><br> - <a -->
+<!-- 							data-code="4">신부전증</a><br> - <a class="templateErase">템플릿 -->
+<!-- 							초기화</a> -->
+<!-- 					</div> -->
 
 
 					<div id="test">
+						<h5><b>질병을 선택하세요</b></h5>          
 						<select name="diseaseCode"  class = "diseaseCodeId">
 							<c:forEach items="${overList }" var="v">
 								<option value="${v.diseaseCode }">${v.diseaseName },
@@ -656,6 +659,9 @@
 
 				</div>
 			</form>
+
+		</div>
+		
 			<div>
 
 				<button id="regist" class="btn btn-danger">등록</button>
