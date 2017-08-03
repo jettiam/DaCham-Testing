@@ -16,6 +16,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-light-green.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <style>
 .dietImg{
@@ -28,6 +29,34 @@ mat-height:200px; */
 }
 .nutriTable{
 text-align: center !important;
+}
+.nutriChart{
+	margin:auto;
+	width:80%;
+}
+.fa-chevron-down{
+	display:none;
+}
+.fa-chevron-up{
+	display:none;
+}
+@media only screen and (max-width: 768px){
+	.nutriChart{
+		margin:auto;
+		width:100%;
+	}
+	.sideDThumbnail{
+		display:none;
+	}
+	.sideDNutri{
+		display:none;
+	}
+	.fa-chevron-down{
+	display:inline-block;
+	}
+	.fa-chevron-up{
+		display:inline-block;
+	}
 }
 </style>
 <title>DaCham 식단상세보기</title>
@@ -53,6 +82,32 @@ $(document).ready(function() {
 		$(".defaultFood[data-foodGCode='"+foodGCode+"']>.defaultSideDName").text(sideDName);
 		console.log($(".defaultFood[data-foodGCode='"+foodGCode+"']>img"));
 		count=0;
+		//반응형 JQ
+		//$(".foodGSideD i").removeClass("fa-chevron-down fa-chevron-up").addClass("fa-chevron-down");
+		/* $(".foodGSideD .sideDThumbnail").toggle(); 
+		$(".foodGSideD .sideDNutri").toggle(); */ 
+		var window_size = $(window).width();
+		if(window_size<=768){
+			//console.log($(".foodGSideD").not($(this)));
+			var notThis = $(".foodGSideD").not($(this));
+			notThis.find(".sideDThumbnail").hide();
+			notThis.find(".sideDNutri").hide();
+			notThis.find("i").removeClass("fa-chevron-up").addClass("fa-chevron-down");
+			var checkToggle=$(this).find("i").attr("class"); 
+			//console.log(checkToggle);
+			if(checkToggle=="fa fa-chevron-down"){
+				$(this).find("i").removeClass("fa-chevron-down").addClass("fa-chevron-up");			
+			}else{
+				$(this).find("i").removeClass("fa-chevron-up").addClass("fa-chevron-down");			
+			};
+			$(this).find(".sideDNutri").insertAfter($(this).find("h5"));
+			$(this).find(".sideDThumbnail").insertAfter($(this).find("h5"));
+			$(this).find(".sideDThumbnail").toggle();
+			$(this).find(".sideDNutri").toggle();
+		}
+
+		
+		//영양 차트
 		$(".chartjs-hidden-iframe").remove();
 		$("#nutriChart").remove();
 		$(".nutriChart").append('<canvas id="nutriChart"></canvas>');
@@ -124,9 +179,9 @@ $(document).ready(function() {
 					}					
 				div.append(
 							"<div class='column foodGSideD w3-theme-l4' data-sideDCode='"+data.list[i].sideDCode+"'>"							
-							+"<img class='thumbnail' src='displayFile?fileName="+data.list[i].sideDImg+"'>"
-							+"<h5 style='text-align:center'>"+data.list[i].sideDName+"</h5>"
-							+"<table class='table' >"
+							+"<img class='thumbnail sideDThumbnail' src='displayFile?fileName="+data.list[i].sideDImg+"'>"
+							+"<h5 style='text-align:center'>"+data.list[i].sideDName+"&nbsp;&nbsp;<i class='fa fa-chevron-down'></i></h5>"
+							+"<table class='table sideDNutri' >"
 							+"<tr><th>칼로리</th><td class='kcal'>"+kcal+"</td></tr>"
 							+"<tr><th>탄수화물</th><td class='carbo'>"+carbo+"</td></tr>"
 							+"<tr><th>단백질</th><td class='protein'>"+protein+"</td></tr>"
@@ -140,9 +195,9 @@ $(document).ready(function() {
 				}else{
 					div.append(
 							"<div class='column foodGSideD' data-sideDCode='"+data.list[i].sideDCode+"'>"		
-							+"<img class='thumbnail' src='displayFile?fileName="+data.list[i].sideDImg+"'>"
-							+"<h5 style='text-align:center'>"+data.list[i].sideDName+"</h5>"
-							+"<table class='table' >"
+							+"<img class='thumbnail sideDThumbnail' src='displayFile?fileName="+data.list[i].sideDImg+"'>"
+							+"<h5 style='text-align:center'>"+data.list[i].sideDName+"&nbsp;&nbsp;<i class='fa fa-chevron-down'></i></h5>"
+							+"<table class='table sideDNutri' >"
 							+"<tr><th>칼로리</th><td class='kcal'>"+kcal+"</td></tr>"
 							+"<tr><th>탄수화물</th><td class='carbo'>"+carbo+"</td></tr>"
 							+"<tr><th>단백질</th><td class='protein'>"+protein+"</td></tr>"

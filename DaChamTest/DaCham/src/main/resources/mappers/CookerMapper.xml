@@ -4,10 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wdb3a.CookerMapper">
 	<select id="foodStock" resultType="FoodMInven">
-		select b.foodMName, c.foodMAmount, a.inAmount, a.unit
-		from foodminven a
-		join sideDInfo c join foodMaterial b
-		where b.foodMCode = c.foodMCode
+		select foodMName,sum(inAmount) inAmount,sum(outAmount) outAmount,unit
+		from foodminven group by foodMName
 		<include refid="search"></include>
 	</select>
 	<sql id="search">

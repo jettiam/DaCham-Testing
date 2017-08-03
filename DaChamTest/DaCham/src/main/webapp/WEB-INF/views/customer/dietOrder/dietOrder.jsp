@@ -46,8 +46,8 @@ display:none;
 			window.location.href = "dietOrderWizard";
 		});
 		$(document).on("click","#dietList",function(){
-			$("#dietOrderNav").toggle("slow");
-			$("#dietList").toggle("slow");
+			$("#dietOrderNav").toggle();
+			$("#dietList").toggle();
 			$(".dietListTab").remove();
 		});
 		$("#sugarBlood").on("click",function(){
@@ -69,7 +69,7 @@ display:none;
 			dietListCall(diseaseCode);
 		});	
 		$("#hyperlipidemia").on("click",function(){
-			$("#dietOrderNav").toggle("slow");
+			$("#dietOrderNav").toggle("slow"); 
 			$("#dietList").toggle("slow");			
 			var diseaseCode = $(this).attr("data-code");
 			dietListCall(diseaseCode);
@@ -79,6 +79,7 @@ display:none;
 			console.log("클릭됨");
 			var dietCode = $(this).attr("data-dietcode");
 			console.log(dietCode);
+			$(".container").remove();			
 			window.location.href="detailOrder?dietCode="+dietCode;
 		});
 		
