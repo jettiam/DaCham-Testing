@@ -11,7 +11,7 @@ function openAPI(){
 		
 		//Legend titles
 		
-		var LegendOptions = ['선택 식재료의 영양정보(kcal)'];
+		var LegendOptions = ['선택 식재료의 영양정보(g)'];           
 		
 		  
 		
@@ -19,15 +19,15 @@ function openAPI(){
 		
 		var protein = 0;
 		var carbohydrate = 0;
-		var kcal = 0;
+		var k = 0;
 		var na = 0;
 		var fat = 0;
 		for(var i = 0; i < count; i++){
-			protein += parseInt(localStorage[i+'_protein']);
-			carbohydrate += parseInt(localStorage[i+'_carbohydrate']);
-			kcal += parseInt(localStorage[i+'_kcal']);
-			na += parseInt(localStorage[i+'_na']);
-			fat += parseInt(localStorage[i+'_fat']);
+			protein += parseInt(localStorage[i+'_protein1']);
+			carbohydrate += parseInt(localStorage[i+'_carbohydrate1']);
+			k += parseInt(localStorage[i+'_k1']);
+			na += parseInt(localStorage[i+'_na1']);
+			fat += parseInt(localStorage[i+'_fat1']);
 			      
 		}
 		var d = [
@@ -35,8 +35,8 @@ function openAPI(){
 				{axis: "단백질",value: protein},
 				{axis: "탄수화물",value: carbohydrate},
 				
-				{axis:"열량",value:kcal*0.1},
-				{axis:"나트륨",value:na*0.05},
+				{axis:"칼륨",value:k},
+				{axis:"나트륨",value:na},
 				{axis:"지방",value:fat}
 			  ]
 			];

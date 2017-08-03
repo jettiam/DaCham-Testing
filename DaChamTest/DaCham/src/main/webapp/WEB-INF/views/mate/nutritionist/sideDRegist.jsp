@@ -100,7 +100,7 @@
 	<input type = "hidden" id = "fat" name = "fat">
 	<input type = "hidden" id = "na" name = "na">
 	<input type = "hidden" id = "carbohydrate" name = "carbohydrate">
-	<input type = "hidden" id =  "fe" name = "fe">
+	<input type = "hidden" id =  "k" name = "k">
 	<form id = "registForm" class = "registFrom" enctype = "multipart/form-data" style = "margin-bottom:100px;">
 		<div class = "div2">	
 			<br><br>
@@ -178,8 +178,9 @@
 		$(document).ready(function(){
 			var currentPage = 1;
 			$("#side").addClass("w3-light-gray");
-			openAPI();
 			
+			localStorage.clear();
+			openAPI();
 			var v = 0;	
 			$("#listAll").on("click",function(){
 				materialAll(1);
@@ -225,28 +226,62 @@
 			
 			$(document.body).on("click",".nameClick",function(){
 				event.preventDefault();
-		
+				var cnt = parseInt(localStorage['cnt']);
 
 				var foodMName = $(this).attr('data-src');
 				var foodMCode = $(this).attr('data-code');
 				
-				$(".material").append("<tr class = 'item'><td>"+"<input type = 'hidden' name = 'foodMCode' value = '"+foodMCode+"'>"+"</td><td class = 'foodMName' name = 'foodMName' data-name = '"+foodMName+"'>"+foodMName+"</td><td>"+"<input type = 'text' class = 'foodMAmountClass' name = 'foodMAmount' maxlength = '4' size = '1'>"+"</td></tr>");
+				$(".material").append("<tr class = 'item'><td>"+"<input type = 'hidden' name = 'foodMCode' value = '"+foodMCode+"'>"+"</td><td class = 'foodMName' name = 'foodMName' data-name = '"+foodMName+"'>"+foodMName+"</td><td>"+"<input type = 'text' class = 'foodMAmountClass' name = 'foodMAmount' maxlength = '4' size = '1' value = '1'>"+"</td></tr>");
 				$(this).parent().parent().hide();
 				var length = $(".material tbody > .item").length;
-				alert("식재료의 개수:"+length);	
+				//alert("식재료의 개수:"+length);	
 				v = length;
+				
+				
 				cntChange(v);
 				$.getJSON("nutriAjax/show/"+foodMCode,function(data){
-					var subCount = cnt - 1;
-					localStorage[subCount+"_kcal"] = data.kcal;
-					localStorage[subCount+"_carbohydrate"] = data.carbohydrate;
-					localStorage[subCount+"_protein"] = data.protein;
-					localStorage[subCount+"_fat"] = data.fat;
-					localStorage[subCount+"_na"] = data.na;
 					
+					localStorage[cnt+"_k"] = data.k;
+					localStorage[cnt+"_carbohydrate"] = data.carbohydrate;
+					localStorage[cnt+"_protein"] = data.protein;  
+					localStorage[cnt+"_fat"] = data.fat;
+					localStorage[cnt+"_na"] = data.na;
+					
+					localStorage[cnt+"_k1"] = localStorage[cnt+"_k"]*1*0.01;
+					localStorage[cnt+"_carbohydrate1"] = localStorage[cnt+"_carbohydrate"]*1*0.01;
+					localStorage[cnt+"_protein1"] = localStorage[cnt+"_protein"]*1*0.01;  
+					localStorage[cnt+"_fat1"] = localStorage[cnt+"_fat"]*1*0.01;
+					localStorage[cnt+"_na1"] = localStorage[cnt+"_na"]*1*0.01;
+					cnt++;         
+					localStorage['cnt'] = cnt;
 					openAPI();
 				});
 			});
+			$(document.body).on('focusout','.foodMAmountClass',function(){
+				var cnt = parseInt(localStorage['cnt']);
+				var subCnt = cnt - 1;
+				var value = $(this).val();
+				if(value == ""){
+					localStorage[subCnt+"_k1"] = localStorage[subCnt+"_k"]*1*0.01;
+					localStorage[subCnt+"_carbohydrate1"] = localStorage[subCnt+"_carbohydrate"]*1*0.01;
+					localStorage[subCnt+"_protein1"] = localStorage[subCnt+"_protein"]*1*0.01;  
+					localStorage[subCnt+"_fat1"] = localStorage[subCnt+"_fat"]*1*0.01;
+					localStorage[subCnt+"_na1"] = localStorage[subCnt+"_na"]*1*0.01;
+					openAPI();
+				}
+				else{
+					
+				
+					
+					localStorage[subCnt+"_k1"] = localStorage[subCnt+"_k"]*value*0.01;
+					localStorage[subCnt+"_carbohydrate1"] = localStorage[subCnt+"_carbohydrate"]*value*0.01;
+					localStorage[subCnt+"_protein1"] = localStorage[subCnt+"_protein"]*value*0.01;  
+					localStorage[subCnt+"_fat1"] = localStorage[subCnt+"_fat"]*value*0.01;
+					localStorage[subCnt+"_na1"] = localStorage[subCnt+"_na"]*value*0.01;
+					openAPI();
+				}
+			});
+			
 			$(document.body).on('click','.foodMName',function(){
 				var cnt = parseInt(localStorage['cnt']);
 				var id = $(this).parent().attr('data-id');
