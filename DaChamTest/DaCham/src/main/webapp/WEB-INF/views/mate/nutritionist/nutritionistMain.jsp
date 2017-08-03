@@ -100,37 +100,37 @@
 <body>
 <%@include file="nutritionistNavi.jsp" %>
   <div class = "container">
-   <div class = "box1">
-   	  <h3>공지사항</h3>
-      <div>
-         <select>
-            <option>등록자</option>
-            <option>제목</option>
-            <option>내용</option>
-         </select>
-         <input type = "text" name = "keyword">
-         <button id = "search" class = "btn btn-warning"> 검색 </button>
-      </div>
-      <div>
-         <table class = "table table-hover">
-            <tr>
-               <th>번호</th>
-               <th>제목</th>
-               <th>등록자</th>
-               <th>등록일</th>
-               <th>조회수</th>
-            </tr>
-            <tr>
-               <td>1</td>
-               <td>영양관리주간목록</td>
-               <td>영양사장</td>
-               <td>2017.05.05</td>
-               <td>0</td>
-            </tr>
-         </table>
-         <button id = "noticeList" class = "btn btn-warning">목록</button>
-      </div>
-   </div>
+<!--    <div class = "box1"> -->
+<!--    	  <h3>공지사항</h3> -->
+<!--       <div> -->
+<!--          <select> -->
+<!--             <option>등록자</option> -->
+<!--             <option>제목</option> -->
+<!--             <option>내용</option> -->
+<!--          </select> -->
+<!--          <input type = "text" name = "keyword"> -->
+<!--          <button id = "search" class = "btn btn-warning"> 검색 </button> -->
+<!--       </div> -->
+<!--       <div> -->
+<!--          <table class = "table table-hover"> -->
+<!--             <tr> -->
+<!--                <th>번호</th> -->
+<!--                <th>제목</th> -->
+<!--                <th>등록자</th> -->
+<!--                <th>등록일</th> -->
+<!--                <th>조회수</th> -->
+<!--             </tr> -->
+<!--             <tr> -->
+<!--                <td>1</td> -->
+<!--                <td>영양관리주간목록</td> -->
+<!--                <td>영양사장</td> -->
+<!--                <td>2017.05.05</td> -->
+<!--                <td>0</td> -->
+<!--             </tr> -->
+<!--          </table> -->
+<!--          <button id = "noticeList" class = "btn btn-warning">목록</button> -->
+<!--       </div> -->
+<!--    </div> -->
    <div class = "box2">
    	  <h2>고객 식단 요청 리스트</h2>
       <table class = "orderTable table table-hover">      
