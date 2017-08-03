@@ -5,7 +5,7 @@
 <mapper namespace="com.wdb3a.CookerMapper">
 	<select id="foodStock" resultType="FoodMInven">
 		select b.foodMName, c.foodMAmount, a.inAmount, a.unit
-		from foodMInven a
+		from foodminven a
 		join sideDInfo c join foodMaterial b
 		where b.foodMCode = c.foodMCode
 		<include refid="search"></include>
