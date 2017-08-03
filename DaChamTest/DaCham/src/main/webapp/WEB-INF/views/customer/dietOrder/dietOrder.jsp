@@ -27,15 +27,18 @@ margin-top:20px;
 margin:20px;
 }
 #dietList{
-position:absolute;
-display:none;
+/* position:absolute;*/
+margin-top:20px;
+display:none; 
+}
+.dietListTab{
+margin-top:20px;
 }
 
 @media screen and (max-width: 763px) {
-    #dietList{
-		position:absolute;
-		left:0px;
-		top:70px;
+
+	.dImg{
+	max-width:120px;
 	}
 }
 </style>
@@ -51,26 +54,26 @@ display:none;
 			$(".dietListTab").remove();
 		});
 		$("#sugarBlood").on("click",function(){
-			$("#dietOrderNav").toggle("slow");
-			$("#dietList").toggle("slow");			
+			$("#dietOrderNav").toggle();
+			$("#dietList").toggle();			
 			var diseaseCode = $(this).attr("data-code");
 			dietListCall(diseaseCode);
 		});	
 		$("#renalFailure").on("click",function(){
-			$("#dietOrderNav").toggle("slow");
-			$("#dietList").toggle("slow");			
+			$("#dietOrderNav").toggle();
+			$("#dietList").toggle();			
 			var diseaseCode = $(this).attr("data-code");
 			dietListCall(diseaseCode);
 		});	
 		$("#heartFailure").on("click",function(){
-			$("#dietOrderNav").toggle("slow");
-			$("#dietList").toggle("slow");			
+			$("#dietOrderNav").toggle();
+			$("#dietList").toggle();			
 			var diseaseCode = $(this).attr("data-code");
 			dietListCall(diseaseCode);
 		});	
 		$("#hyperlipidemia").on("click",function(){
-			$("#dietOrderNav").toggle("slow"); 
-			$("#dietList").toggle("slow");			
+			$("#dietOrderNav").toggle(); 
+			$("#dietList").toggle();			
 			var diseaseCode = $(this).attr("data-code");
 			dietListCall(diseaseCode);
 		});	
@@ -95,7 +98,7 @@ display:none;
 			var divCount=0;
 			for(var i = 0; i<data.list.length; i++){					
 				if(dietCode == 0){
-					$("#dietList").append("<div class='dietListTab col-sm-6 d"+divCount+"'></div>");						
+					$("#dietList").append("<div class='dietListTab col-sm-4 col-xs-6 d"+divCount+"'></div>");						
 					dietCode = data.list[i].dietCode;
 					console.log(dietCode+" 테이블 염");
 					$("#dietList>.d"+divCount).append("<table class='dietTable"+dietCode+" table'><tr class='dietTr"+trCount+"'>");
@@ -127,7 +130,7 @@ display:none;
 					divCount++;
 					trCount=0;						
 					dietCode = data.list[i].dietCode;
-					$("#dietList").append("<div class='dietListTab col-sm-6 d"+divCount+"'></div>");
+					$("#dietList").append("<div class='dietListTab col-sm-4 col-xs-6 d"+divCount+"'></div>");
 					$("#dietList>.d"+divCount).append("<table class='dietTable"+dietCode+" table'><tr class='dietTr"+trCount+"'>");
 					console.log(dietCode+"테이블 염");
 					console.log("tr카운트 염" + trCount);
@@ -154,16 +157,18 @@ display:none;
 <div class="wizardExplain block-center ">당신의 질환 상태에 맞는 식단을 추천받을 수 있습니다.</div>
 <a href=# class="disease btn btn-danger" id="wizardOrder">위자드로 주문하기</a>
 </div>
-<div id="dietOrderNav" class="block-center text-center">	
-		<div class="col-sm-6 text-center disease"><a href=#  data-code="1" id="sugarBlood"><img class="img-responsive dImg center-block" src="resources/customerImage/dang.png"><div class="dName">당뇨병</div></a></div>
-		<div class="col-sm-6 text-center disease"><a href=# data-code="4" id="renalFailure"><img class="img-responsive dImg center-block" src="resources/customerImage/sin.png"><div class="dName">신부전증</div></a></div>
-		<div class="col-sm-6 text-center disease"><a href=# data-code="16" id="heartFailure"><img class="img-responsive dImg center-block" src="resources/customerImage/sim.png"><div class="dName">심부전증</div></a></div>
-		<div class="col-sm-6 text-center disease"><a href=# data-code="13" id="hyperlipidemia"><img class="img-responsive dImg center-block" src="resources/customerImage/go.png"><div class="dName">고지혈증</div></a></div>	
-</div>
-<div id="dietList" class="container text-center">	
+<div id="dietOrderNav" class="block-center text-center col-sm-12">	
+		<div class="col-xs-6 col-lg-6 text-center disease"><a href=#  data-code="1" id="sugarBlood"><img class="img-responsive dImg center-block" src="resources/customerImage/dang.png"><div class="dName">당뇨병</div></a></div>
+		<div class="col-xs-6 col-lg-6 text-center disease"><a href=# data-code="4" id="renalFailure"><img class="img-responsive dImg center-block" src="resources/customerImage/sin.png"><div class="dName">신부전증</div></a></div>
+		<div class="col-xs-6 col-lg-6 text-center disease"><a href=# data-code="16" id="heartFailure"><img class="img-responsive dImg center-block" src="resources/customerImage/sim.png"><div class="dName">심부전증</div></a></div>
+		<div class="col-xs-6 col-lg-6 text-center disease"><a href=# data-code="13" id="hyperlipidemia"><img class="img-responsive dImg center-block" src="resources/customerImage/go.png"><div class="dName">고지혈증</div></a></div>	
+</div>  
+<div id="dietList" class="text-center col-sm-12">	
 </div>
 </div> 
 </div>
-<br><br><br><br><br><br>
+<footer>
+	<%@include file="../../footer.jsp" %>
+</footer>
 </body>
 </html>

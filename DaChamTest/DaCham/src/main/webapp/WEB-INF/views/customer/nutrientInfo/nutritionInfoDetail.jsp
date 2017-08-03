@@ -111,5 +111,8 @@ position:relative;
  </h4> </div>
  	  <a href="nutritionInfo"><h3>영양소개 TOP</h3></a>
 	</div>
+	<footer>
+	<%@include file="../../footer.jsp" %>
+</footer>
 </body>
 </html>

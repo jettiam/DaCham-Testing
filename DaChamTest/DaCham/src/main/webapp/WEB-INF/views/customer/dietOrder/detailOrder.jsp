@@ -134,22 +134,35 @@ $(document).ready(function() {
 		$("#dietPrice").text(a * price);
 	});
 	$("#doOrder").on("click", function() {
-		getCheckedList()			
-		$("#setDietName").val($("#dietName").text());
-		$("#setPrice").val($("#dietPrice").text());
-		$("#setDietAmount").val($("#dietAmount").val());
-		$("#setDietImg").val($(".dietImg").attr("data-dietImg"));			
-		$("#orderForm").attr("action", "doOrder");
-		$("#orderForm").submit();
+		var login = $("#sessionName").text()+""; 
+		console.log(login);
+		if(login!=""){			
+			getCheckedList();			
+			$("#setDietName").val($("#dietName").text());
+			$("#setPrice").val($("#dietPrice").text());
+			$("#setDietAmount").val($("#dietAmount").val());
+			$("#setDietImg").val($(".dietImg").attr("data-dietImg"));			
+			$("#orderForm").attr("action", "doOrder");
+			//$("#orderForm").submit();
+		}else{
+			alert("로그인 후에 이용해주세요.");
+		}
 	});
 	$("#goMyCart").on("click", function() {
-		getCheckedList();			
-		$("#setDietName").val($("#dietName").text());
-		$("#setPrice").val($("#dietPrice").text());
-		$("#setDietAmount").val($("#dietAmount").val());
-		//$("#sideDish").val();
-		$("#orderForm").attr("action", "goMyCart");
-		$("#orderForm").submit();
+		var login = $("#sessionName").text()+""; 
+		console.log(login);
+		if(login!=""){
+			getCheckedList();			
+			$("#setDietName").val($("#dietName").text());
+			$("#setPrice").val($("#dietPrice").text());
+			$("#setDietAmount").val($("#dietAmount").val());
+			//$("#sideDish").val();
+			$("#orderForm").attr("action", "goMyCart");
+			$("#orderForm").submit();
+			
+		}else{
+			alert("로그인 후에 이용해주세요.");
+		}
 	});
 	
 	
@@ -724,6 +737,8 @@ $(document).ready(function() {
 		<!-- 디테일오더에서 넘어갔는지 유무 -->
 	</form>
 
-
+<footer>
+	<%@include file="../../footer.jsp" %>
+</footer>
 </body>
 </html>

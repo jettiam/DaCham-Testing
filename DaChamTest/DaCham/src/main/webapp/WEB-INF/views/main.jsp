@@ -130,11 +130,13 @@ display:none;}
 </tr>
 </table>
 
-			</div>
-		</div>
-		</div>
+</div>
+</div>
+</div>
 	</div>
-	
+	<footer>
+		<%@include file="footer.jsp"%>
+	</footer>
 	<script>
 	$(function(){
 		$('.mainMenuImg1').mouseover(function(){
