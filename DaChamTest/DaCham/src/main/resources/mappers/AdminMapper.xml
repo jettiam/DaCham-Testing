@@ -172,10 +172,11 @@
 		from diet a join
 		orderlist b join
 		orderitem c
-		where a.dietCode=b.dietCode
+		where
+		a.dietCode=b.dietCode
 		and
-		b.orderItemCode =
-		c.orderItemCode
+		b.orderItemCode = c.orderItemCode
+		order by field(b.orderItemCode, 0,1,2,3,9,10,4,5,7,8,6)
 		limit #{startRecord},
 		#{recordsPerPage}
 	</select>
@@ -201,12 +202,15 @@
 		b.id, a.dietName, b.orderDate, b.price,
 		b.orderItemCode,
 		b.transportNum, c.orderItemName
-		from diet a join
-		orderlist b join
+		from diet a,
+		orderlist b,
 		orderitem c
 		where a.dietCode=b.dietCode
-		and
-		b.orderItemCode = c.orderItemCode and c.orderItemCode BETWEEN 2 and 3
+		and (c.orderItemCode=2 or c.orderItemCode
+		=3 or c.orderItemCode =9 or
+		c.orderItemCode=10) and
+		(b.orderItemCode =
+		c.orderItemCode)
 		<include refid="orderListSearch"></include>
 	</select>
 	<sql id="orderListSearch">
