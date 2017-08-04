@@ -56,15 +56,20 @@
 							var wizard = code;
 							var xml = Blockly.Xml.workspaceToDom(workspace);
 							var xml_text = Blockly.Xml.domToText(xml);
+							
+							alert(typeof wizard);
+							console.log(wizard);
 							$.ajax({
 								url : "wizardInsert",
-								type : "GET",
+								
+								type : "POST",
 								data : {
 									wizard : wizard,
 									block : xml_text
 								},
 								success : function(data) {
 									if (data == "success") {
+										alert("성공입니다.");
 										window.close();
 									}
 								},
