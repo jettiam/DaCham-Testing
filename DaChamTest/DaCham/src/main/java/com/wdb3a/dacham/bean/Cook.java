@@ -5,8 +5,6 @@ import java.sql.Date;
 public class Cook {
 	private String sideDName;
 	private int dietAmount;
-
-	
 	private int orderItemCode;
 	private int orderCode;
 	private String orderItemName;

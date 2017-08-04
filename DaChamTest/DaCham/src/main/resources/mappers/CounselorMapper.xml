@@ -13,14 +13,14 @@ select  a.id , a.name ,a.birthday, a.address, a.tel, a.email, a.deptCode, a.grad
 <!-- 미답변 상담목록 -->
 <select id = "counselorseList2All" resultType="Counselor">
    select  b.counselCode, b.counselDate,c.counselItemName,b.counselTitle ,a.name, b.customer
-   from member a, counsel b, counselItem c
+   from member a, counsel b, counselitem c
    where a.id =b.customer and c.counselItemCode=b.counselItemCode and b.adviser is null
    order by b.counselDate
 </select>
 <!-- 상담완료 목록 -->
 <select id = "finCounselList" resultType="Counselor">
    select  b.counselCode, b.counselDate,c.counselItemName,b.counselTitle ,a.name, b.customer
-   from member a, counsel b, counselItem c
+   from member a, counsel b, counselitem c
    where a.id =b.customer and c.counselItemCode=b.counselItemCode and b.adviser is not null
    order by b.counselDate
 </select>
@@ -122,5 +122,10 @@ select  a.id , a.name ,a.birthday, a.address, a.tel, a.email, a.deptCode, a.grad
 <select id = "counselTuning" resultType = "Counselor">
    select counselCode,answer,counselDate from counsel
    where customer = #{customer}
+</select>
+<select id = "optionTuning" resultType = "Counselor">
+	select * from orderoptions a, sidedish b
+	where a.sideDCode = b.sideDCode
+	and a.orderCode = #{orderCode}
 </select>
 </mapper>

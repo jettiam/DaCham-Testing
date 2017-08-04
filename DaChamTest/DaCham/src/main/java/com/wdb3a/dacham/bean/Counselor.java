@@ -35,7 +35,7 @@ public class Counselor {
 	private String diseaseName;
 	private String judgement;
 	private Date birthday;
-	
+	private String sideDName;
 	
 	
 	public Date getBirthday() {
@@ -234,6 +234,12 @@ public class Counselor {
 	}
 	public void setAnswer(String answer) {
 		this.answer = answer;
+	}
+	public String getSideDName() {
+		return sideDName;
+	}
+	public void setSideDName(String sideDName) {
+		this.sideDName = sideDName;
 	}
 	
 	
