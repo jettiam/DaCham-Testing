@@ -238,4 +238,17 @@ public class CounselorAjaxController {
 		}
 		return entity;
 	}
+	@RequestMapping(value = "/listAll/{counselItemCode}",method = RequestMethod.GET)
+	public ResponseEntity<List<Counselor>> listAll(@PathVariable("counselItemCode")int counselItemCode){
+		ResponseEntity<List<Counselor>> entity = null;
+		try {
+			List<Counselor> list = service.listAll(counselItemCode);
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
 }
