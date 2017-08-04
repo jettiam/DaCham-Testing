@@ -645,5 +645,8 @@ $('#disease04').click(function(){
 	$('#menuShowList4').show();
 });
 </script>
+<footer>
+	<%@include file="../../footer.jsp" %>
+</footer>
 </body>
 </html>

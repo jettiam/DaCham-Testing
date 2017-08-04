@@ -9,6 +9,7 @@ public class Nutritionist {
 	private int foodMAmount;
 	private String foodMName;
 	private int kcal; //Ä®·Î¸®
+	private int k; //Ä®·ý
 	private int carbohydrate; //Åº¼öÈ­¹°
 	private int protein; //´Ü¹éÁú
 	private int fat; //Áö¹æ
@@ -302,6 +303,12 @@ public class Nutritionist {
 	}
 	public void setCounselCode(int counselCode) {
 		this.counselCode = counselCode;
+	}
+	public int getK() {
+		return k;
+	}
+	public void setK(int k) {
+		this.k = k;
 	}
 	
 	

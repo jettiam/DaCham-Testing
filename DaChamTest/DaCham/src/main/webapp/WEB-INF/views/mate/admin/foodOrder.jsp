@@ -96,13 +96,15 @@
 					<input type="hidden" id ="orderCode${count}" name="orderCode" value="${j.orderCode}">
 					</div>	  		  
 				</c:forEach> 
-			</c:forEach> 
+			</c:forEach>
+			
 		</table>
 	</div>
 	<button id="foodMOrder" class = "btn btn-default">식재료 주문서 보내기</button>
 	</div>
 	<form class="foodMOrderForm" action="mailSending" method="post">  
 		<input type="hidden" name="foodMOrderInfo" id="foodMOrderInfo">
+		<input type="hidden" name="foodMCnt" id="foodMCnt">
 	</form>
 	<form class="foodMOrderSubForm" action="mailSendingSub" method="post">  
 		<input type="hidden" name="cnt" id="cnt">
@@ -201,22 +203,17 @@
 				//alert(content.length);		 
 				//alert(content)
 			});
-							/* $(".foodMName1").on("click", function(){
-								var a = $(this).siblings()
-								alert(a); 
-							}); */
+							
 							all();
 						  
 							function all(){
 								
 								
 									 var str = "";
-									//var food[] = new Array();
+									
 									$(".foodOrder").remove();
-									/* for(var i=1; var i =1; i<=divlength; i++){
-										food[i][] = {$("#foodMName"+i).val(), Number($("#totalAmount"+i).val())*0.001}
-									}  */
-									 for(var i =1; i<=divlength; i++){
+									
+									 /* for(var i =1; i<=divlength; i++){
 										str += "<tr class='foodOrder'><td>"
 										+$("#foodMCode"+i).val()
 										+"</td>"+"<td>"
@@ -228,11 +225,83 @@
 										+"</td>"+"<td>"
 										+$("#unit"+i).val()
 										+"</td> </tr>" 
-									}  
-									 
+									}  */
+								 	 var length = ($("input[name='foodMName']").length);
+								 	var one = new Array();
+								 	var check = 1;
+										for(var i=0; i<length; i++){
+											var y=0;
+											if(i==0){
+											one[i] = $("input[name='foodMName']").eq(i).val();
+											}else{
+												for(var z=0; z<one.length; z++){
+													if(one[z]==$("input[name='foodMName']").eq(i).val()){
+														y++;
+													}
+													
+												}
+												if(y==0){
+													one[check] = $("input[name='foodMName']").eq(i).val();
+													check++;
+												}
+													
+											}
+											
+				  
+											
+										} console.log(one);
+										var totalAmountSum = new Array();
+										var unit = new Array();
+										var price = new Array();
+										var foodOrder = new Array();
+										var foodMName = new Array();
+										var foodMCnt = 0;
+								
+										for(var i=0; i<one.length; i++){
+											console.log($("input[value='"+one[i]+"']"));
+											var length = $("input[value='"+one[i]+"']").length
+											for(var z=0; z<length; z++){
+												console.log($("input[value='"+one[i]+"']").eq(z).next().next().val());
+												if(z==0){
+												foodMName[i] = $("input[value='"+one[i]+"']").eq(z).val(); 
+												totalAmountSum[i] = Number($("input[value='"+one[i]+"']").eq(z).next().next().val())*0.001;   
+												unit[i] = $("input[value='"+one[i]+"']").eq(z).next().next().next().val();
+												price[i] = $("input[value='"+one[i]+"']").eq(z).next().val(); 
+												foodOrder[i] = $("input[value='"+one[i]+"']").eq(z).next().next().next().next().val();
+												}else  
+												totalAmountSum[i] = Number($("input[value='"+one[i]+"']").eq(z).next().next().val())*0.001+totalAmountSum[i];
+				
+											}
+										}   
+										 for(var i =0; i<one.length; i++){
+												str += "<tr class='foodOrder'><td data-code='"+foodOrder[i]+"'>"
+												+foodOrder[i]
+												+"</td>"+"<td data-code='"+one[i]+"'>"
+												+one[i]
+												+"</td>"+"<td data-code='"+price[i]+"'>"
+												+price[i]
+												+"</td>"+"<td data-code='"+totalAmountSum[i].toFixed(3)+"'>"
+												+totalAmountSum[i].toFixed(3)    
+												+"</td>"+"<td data-code='"+unit[i] +"'>"
+												+unit[i]   
+												+"</td> </tr>"
+												
+												$(".foodMOrderForm").append("<input type='hidden' value='"+foodOrder[i]+"'"+"name='foodMOrder'>");
+												$(".foodMOrderForm").append("<input type='hidden' value='"+one[i]+"'"+"name='foodMName'>");
+												$(".foodMOrderForm").append("<input type='hidden' value='"+price[i]+"'"+"name='foodPrice'>");
+												$(".foodMOrderForm").append("<input type='hidden' value='"+totalAmountSum[i].toFixed(3)+"'"+"name='totalAmount'>");
+												$(".foodMOrderForm").append("<input type='hidden' value='"+unit[i]+"'"+"name='unit'>");
+												foodMCnt++;
+											}
+										 $("#foodMCnt").val(foodMCnt);
+										 
+										
 										
 									
-									alert($("input[name='foodMName']").length);  
+									 console.log(totalAmountSum);
+									 console.log(unit);
+									 console.log(price);
+									 console.log(foodOrder);
 									console.log(str);
 									$(".tables").append(str); 
 								
@@ -260,7 +329,6 @@
 									//empty($(this).parent().prev().prev().children());  
 									var foodMCode = $(this).parent().prev().prev().prev().prev().prev().attr('data-code');
 									var foodMName = $(this).parent().prev().prev().prev().prev().attr('data-code');
-									
 									var price = $(this).parent().prev().prev().prev().attr('data-code');
 									var unit = $(this).parent().prev().attr('data-code');
 				   				    cnt++;  
@@ -277,7 +345,9 @@
 									$("#cnt").val(cnt);
 									$(this).parent().prev().prev().children().val(""); 
 									
-								})  
+								})
+								
+								
 							
 						});
 	</script>

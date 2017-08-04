@@ -68,5 +68,8 @@
 	<form  id="counselRead">
 		<input type="hidden" name="counselCode" value="${read.counselCode}">		
 	</form>
+	<footer>
+	<%@include file="../../footer.jsp" %>
+</footer>
 </body>
 </html>

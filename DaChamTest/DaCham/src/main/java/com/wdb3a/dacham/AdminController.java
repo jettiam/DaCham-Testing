@@ -137,7 +137,7 @@ public class AdminController {
 	}
 	// mailSending 코드
 	@RequestMapping(value = "/mailSending", method = RequestMethod.POST)
-	public String mailSending(String foodMOrderInfo) throws Exception {  
+	public String mailSending(String foodMOrderInfo, @RequestParam("foodMOrder")String[] foodMOrder, @RequestParam("foodMName")String[] foodMName, @RequestParam("foodPrice")int[] foodPrice, @RequestParam("totalAmount")double[] totalAmount1, @RequestParam("unit")String[] unit,  @RequestParam("foodMCnt")int foodMCnt ) throws Exception {  
 		
 		
 		
@@ -174,10 +174,16 @@ public class AdminController {
 					* Double.parseDouble(jsonObj1.get("totalAmount").toString()));
 			//System.out.println(jsonObj1);
 			//System.out.println(jsonObj1.get("foodMname").toString());
-			toString = toString + "\n" + "식재료명 : " + jsonObj1.get("foodMName").toString() + "단가 : "
+			/*toString = toString + "\n" + "식재료명 : " + jsonObj1.get("foodMName").toString() + "단가 : "
 					+ jsonObj1.get("price").toString() + " 주문량 :"  + totalAmount
-					+ jsonObj1.get("unit").toString() + " 총가격 : " + totalprice + "원";
+					+ jsonObj1.get("unit").toString() + " 총가격 : " + totalprice + "원";*/
+			
 			//System.out.println(toString);	
+		}
+		for(int i= 0; i<foodMCnt; i++){
+		toString = toString + "\n" + "식재료명 : " + foodMName[i] + "단가 : "
+				+ foodPrice[i] + " 주문량 :"  + totalAmount1[i]
+				+ unit[i] + " 총가격 : " +  + foodPrice[i]*totalAmount1[i] +"원";
 		}
 		System.out.println("되니?");
 		

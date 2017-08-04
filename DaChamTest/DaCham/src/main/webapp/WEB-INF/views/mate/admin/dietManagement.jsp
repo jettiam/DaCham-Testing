@@ -32,10 +32,6 @@ function disease1(){
 					}
 					str += "<tr class='dietAll'>"
 							+ "<td><input type='checkBox' name='dietCode' value='"+data[i].dietCode+"'></td>"
-							+ "<td><img src = 'displayFileAdmin?fileName="
-							+ data[i].dietImg
-							+ "' style = 'width: 75px; height: 25px;'></td>"
-							+ "</td>"
 							+ "<td>"
 							+ data[i].dietName
 							+ "</td>"
@@ -70,10 +66,6 @@ function disease2(){
 					}
 					str += "<tr class='dietAll'>"
 							+ "<td><input type='checkBox' name='dietCode' value='"+data[i].dietCode+"'></td>"
-							+ "<td><img src = 'displayFileAdmin?fileName="
-							+ data[i].dietImg
-							+ "' style = 'width: 75px; height: 25px;'></td>"
-							+ "</td>"
 							+ "<td>"
 							+ data[i].dietName
 							+ "</td>"
@@ -108,10 +100,6 @@ function disease3(){
 					}
 					str += "<tr class='dietAll'>"
 							+ "<td><input type='checkBox' name='dietCode' value='"+data[i].dietCode+"'></td>"
-							+ "<td><img src = 'displayFileAdmin?fileName="
-							+ data[i].dietImg
-							+ "' style = 'width: 75px; height: 25px;'></td>"
-							+ "</td>"
 							+ "<td>"
 							+ data[i].dietName
 							+ "</td>"
@@ -146,10 +134,6 @@ function disease4(){
 					}
 					str += "<tr class='dietAll'>"
 							+ "<td><input type='checkBox' name='dietCode' value='"+data[i].dietCode+"'></td>"
-							+ "<td><img src = 'displayFileAdmin?fileName="
-							+ data[i].dietImg
-							+ "' style = 'width: 75px; height: 25px;'></td>"
-							+ "</td>"
 							+ "<td>"
 							+ data[i].dietName
 							+ "</td>"
@@ -189,10 +173,6 @@ function disease4(){
 													}
 													str += "<tr class='dietAll'>"
 															+ "<td><input type='checkBox' name='dietCode' value='"+data[i].dietCode+"'></td>"
-															+ "<td><img src = 'displayFileAdmin?fileName="
-															+ data[i].dietImg
-															+ "' style = 'width: 75px; height: 25px;'></td>"
-															+ "</td>"
 															+ "<td>"
 															+ data[i].dietName
 															+ "</td>"
@@ -305,7 +285,6 @@ function disease4(){
 			<table class="tables table table-condensed" width="600">
 				<tr>
 					<th>선택</th>
-					<th>식단이미지</th>
 					<th>식단명</th>
 					<th>금액</th>
 					<th>질환명</th>

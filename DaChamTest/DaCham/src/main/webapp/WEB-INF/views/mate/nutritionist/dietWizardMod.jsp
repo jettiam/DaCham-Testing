@@ -70,7 +70,7 @@
 								success : function(data) {
 									if (data == "success") {
 										alert("성공입니다.");
-										//window.close();
+										window.close();
 									}
 								},
 								error : function(request, status, error) {
