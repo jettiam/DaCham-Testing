@@ -69,15 +69,16 @@ var na0=0;
 var k0=0;
 var count = 0;
 $(document).ready(function() {
-	$(document).on("click", ".foodGSideD", function(){
+	$("#foodGList").on("click", ".foodGSideD", function(){
 		var foodGCode= $(this).parent().parent().attr("data-foodgcode");
-		console.log("식품군:"+foodGCode);
+		//console.log("식품군:"+foodGCode);
+		
 		$(this).siblings().removeClass("w3-theme-l4");
 		$(this).addClass("w3-theme-l4");
 		var img = $(this).children("img").attr("src");
-		console.log(img);
+		//console.log(img);
 		var sideDName=$(this).children("h5").text();			
-		console.log("반찬명:"+sideDName);
+		//console.log("반찬명:"+sideDName);
 		$(".defaultFood[data-foodGCode='"+foodGCode+"']>img").attr("src",img);
 		$(".defaultFood[data-foodGCode='"+foodGCode+"']>.defaultSideDName").text(sideDName);
 		console.log($(".defaultFood[data-foodGCode='"+foodGCode+"']>img"));
@@ -143,7 +144,7 @@ $(document).ready(function() {
 			$("#setDietAmount").val($("#dietAmount").val());
 			$("#setDietImg").val($(".dietImg").attr("data-dietImg"));			
 			$("#orderForm").attr("action", "doOrder");
-			//$("#orderForm").submit();
+			$("#orderForm").submit();
 		}else{
 			alert("로그인 후에 이용해주세요.");
 		}

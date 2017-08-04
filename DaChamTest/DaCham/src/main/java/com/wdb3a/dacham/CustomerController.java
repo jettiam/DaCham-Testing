@@ -237,28 +237,22 @@ public String nutritionInfo(){
 	return "customer/nutrientInfo/nutritionInfo";
 }
 
-@RequestMapping(value="/nutritionInfoDetail",method = RequestMethod.GET)
 /**
  * 
  * @return 영양소개 상세로 이동
  */
-public String nutritionInfoDetail(){
+@RequestMapping(value="/nutritionInfoDetail",method = RequestMethod.GET)
+public String nutritionInfoDetail(Model model,int detail){
+	model.addAttribute("detail",detail);
+	
 	return "customer/nutrientInfo/nutritionInfoDetail";
 }
 
-@RequestMapping(value="/nutritionInfoDetail2",method = RequestMethod.GET)
-/**
- * 
- * @return 영양소개 상세로 이동
- */
-public String nutritionInfoDetail2(){
-	return "customer/nutrientInfo/nutritionInfoDetail2";
-}
-@RequestMapping(value="/counsel",method = RequestMethod.GET)
 /**
  * 
  * @return 문의하기로 이동
  */
+@RequestMapping(value="/counsel",method = RequestMethod.GET)
 public String getCounsel(Model model) throws Exception{	
 	List<Counsel> list = service.counselList();
 	model.addAttribute("list",list);
