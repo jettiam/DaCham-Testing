@@ -22,7 +22,7 @@
 <body>
 <%@include file="../admin/upmenu.jsp"%>
 	<div class="container">
-	<div class="col-sm-6">  
+	<!-- <div class="col-sm-6">  
 		<h2>공지사항</h2>
 		<div class="form-group row">
 		<div class="col-sm-3">   
@@ -38,7 +38,7 @@
 		
 			<div style="margin-top:13px">
 			<table class="table table-bordered">    
-				<tr>
+				<tr>    
 					<th>번호</th>
 					<th>제목</th>
 					<th>등록자</th>
@@ -49,21 +49,22 @@
 			<input type="button" value="목록" id="notice" class = "btn btn-default">
 			</div>
 		</div>
-	</div>
+	</div> -->
 <!--차트  -->
-	<div id ="chart" class="col-sm-6">
+	<div id ="chart" class="col-sm-12">    
 		<h2>일자별 통계</h2>
 		<div class="form-group row">
-			<div class="col-sm-4 text-right">   
-		<input type="date" id="startdate" class="form-control">      
+		<div class="col-sm-5"></div>   
+			<div class="col-sm-2 text-right">    
+		<input type="date" id="startdate" class="form-control" style="width :165px">     
 		</div>
-		<div class="col-sm-1 text-center" style="font-size:23px" > 
+		<div class="col-sm-1 text-center" style="font-size:23px" >
 		~
 		</div>    
-		<div class="col-sm-4 text-right">             
-		<input type="date" id="enddate" class="form-control">
+		<div class="col-sm-2 text-right">             
+		<input type="date" id="enddate" class="form-control" style="width :165px"> 
 			</div>
-			<div class="col-sm-2 text-right">
+			<div class="col-sm-1 text-right">
 		   <input type="button" value="검색" id="chartsearch" class = "btn btn-default">
 		   </div>  
 		   <div class="col-sm-11 text-right" style="margin-top:13px">   
@@ -78,8 +79,8 @@
 				<input type = "hidden" id =  "sellAmount" name = "sellAmount">
 				<input type = "hidden" id = "totalprice" name = "totalprice">
 			</div>
-		<div id="chart_div" style="width: 500px; height: 300px;"></div>  
-		<div id="piechart" style="width: 500px; height: 300px;"></div>
+		<div id="chart_div" style="width: 1000px; height: 300px;"></div>  
+		<div id="piechart" style="width: 1000px; height: 300px;"></div>
 	</div>
 	
 	
@@ -113,7 +114,7 @@
 					<th>식단명</th>
 					<th>주문 접수일</th>
 					<th>금액</th>
-					<th>진행상태</th>
+					<th><a href="#" id="sort"></a>진행상태</th>
 					<th>운송장 번호</th>
 				</tr>
 			</table>
@@ -447,6 +448,9 @@
 		}
 		$(".pagination").html(str);
 	}
+	$("#sort").on("click", function(){
+		 even.preventDefault();
+	})
 	});
 	
 		

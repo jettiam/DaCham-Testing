@@ -238,6 +238,30 @@ public class AdminMainServiceImpl implements AdminMainService {
 		return dao.foodStockListStop();
 	}
 
+	@Override
+	public List<OrderList> orderSort1() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.orderSort1();
+	}
+
+	@Override
+	public List<OrderList> orderSort2() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.orderSort2();
+	}
+
+	@Override
+	public List<OrderList> orderSort3() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.orderSort3();
+	}
+
+	@Override
+	public List<OrderList> orderSort4() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.orderSort4();
+	}
+
 	
 	
 	

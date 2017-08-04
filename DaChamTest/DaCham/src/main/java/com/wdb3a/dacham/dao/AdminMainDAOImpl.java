@@ -235,6 +235,30 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 		return sqlSession.selectList(namespace+".foodStockListStop");
 	}
 
+	@Override
+	public List<OrderList> orderSort1() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".orderSort1");
+	}
+
+	@Override
+	public List<OrderList> orderSort2() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".orderSort2");
+	}
+
+	@Override
+	public List<OrderList> orderSort3() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".orderSort3");
+	}
+
+	@Override
+	public List<OrderList> orderSort4() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".orderSort4");
+	}
+
 	
 
 	

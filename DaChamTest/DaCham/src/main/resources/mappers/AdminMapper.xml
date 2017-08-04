@@ -180,6 +180,20 @@
 		limit #{startRecord},
 		#{recordsPerPage}
 	</select>
+	<select id="allSort" resultType="OrderList">
+	select b.dietCode, b.orderCode,
+		b.id, a.dietName, b.orderDate, b.price,
+		b.orderItemCode,
+		b.transportNum, c.orderItemName
+		from diet a join
+		orderlist b join
+		orderitem c
+		where
+		a.dietCode=b.dietCode
+		and
+		b.orderItemCode = c.orderItemCode
+		order by field(b.orderItemCode, 0,1,2,3,9,10,4,5,7,8, #{Sort});
+	</select>
 	<!--orderList 페이지 내역 출력 -->
 	<select id="orderAll" resultType="OrderList">
 		select b.dietCode, b.orderCode,
@@ -226,6 +240,80 @@
 			</if>
 		</if>
 	</sql>
+	<!--결제 완료 우선  -->
+	<select id="orderSort1" resultType="OrderList"> 
+		select b.dietCode, b.orderCode,
+		b.id, a.dietName, b.orderDate, b.price,
+		b.orderItemCode,
+		b.transportNum, c.orderItemName
+		from diet a,
+		orderlist b,
+		orderitem c
+		where a.dietCode=b.dietCode
+		and (c.orderItemCode=2 or c.orderItemCode
+		=3 or c.orderItemCode =9 or
+		c.orderItemCode=10) and
+		(b.orderItemCode =
+		c.orderItemCode)
+		order by field(c.orderItemCode, 2,3,9,10)
+	</select>
+	
+	<!--조리 대기 우선  -->
+	<select id="orderSort2" resultType="OrderList"> 
+		select b.dietCode, b.orderCode,
+		b.id, a.dietName, b.orderDate, b.price,
+		b.orderItemCode,
+		b.transportNum, c.orderItemName
+		from diet a,
+		orderlist b,
+		orderitem c
+		where a.dietCode=b.dietCode
+		and (c.orderItemCode=2 or c.orderItemCode
+		=3 or c.orderItemCode =9 or
+		c.orderItemCode=10) and
+		(b.orderItemCode =
+		c.orderItemCode)
+		order by field(c.orderItemCode, 3,2,9,10)
+	</select>
+	
+	<!--식재료 발주  우선  -->
+	<select id="orderSort3" resultType="OrderList"> 
+		select b.dietCode, b.orderCode,
+		b.id, a.dietName, b.orderDate, b.price,
+		b.orderItemCode,
+		b.transportNum, c.orderItemName
+		from diet a,
+		orderlist b,
+		orderitem c
+		where a.dietCode=b.dietCode
+		and (c.orderItemCode=2 or c.orderItemCode
+		=3 or c.orderItemCode =9 or
+		c.orderItemCode=10) and
+		(b.orderItemCode =
+		c.orderItemCode)
+		order by field(c.orderItemCode, 9,3,2,10)
+	</select>
+	
+	
+	<!--식재료 입고  우선  -->
+	<select id="orderSort4" resultType="OrderList"> 
+		select b.dietCode, b.orderCode,
+		b.id, a.dietName, b.orderDate, b.price,
+		b.orderItemCode,
+		b.transportNum, c.orderItemName
+		from diet a,
+		orderlist b,
+		orderitem c
+		where a.dietCode=b.dietCode
+		and (c.orderItemCode=2 or c.orderItemCode
+		=3 or c.orderItemCode =9 or
+		c.orderItemCode=10) and
+		(b.orderItemCode =
+		c.orderItemCode)
+		order by field(c.orderItemCode, 10,3,9,2)
+	</select>
+	
+	
 
 
 	<select id="orderALlCount" resultType="Integer">

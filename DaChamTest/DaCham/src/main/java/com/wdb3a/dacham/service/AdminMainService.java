@@ -34,6 +34,10 @@ public interface AdminMainService {
 	public int orderListCount() throws Exception;
 	public List<OrderList> orderAll(OrderList orderList) throws Exception;
 	public List<OrderList> orderAllSearch(OrderList orderList) throws Exception;
+	public List<OrderList> orderSort1() throws Exception;
+	public List<OrderList> orderSort2() throws Exception;
+	public List<OrderList> orderSort3() throws Exception;
+	public List<OrderList> orderSort4() throws Exception;
 	public String appTest(String id) throws Exception;
 	public List<Diet> dietAll() throws Exception;
 	public void dietPriceUp(Diet diet) throws Exception;
@@ -41,7 +45,7 @@ public interface AdminMainService {
 	public void dietSellStop(int dietCode) throws Exception;
 	public List<Diet> disease1() throws Exception;
 	public List<Diet> disease2() throws Exception;
-	public List<Diet> disease3() throws Exception;
+	public List<Diet> disease3() throws Exception; 
 	public List<Diet> disease4() throws Exception;
 	public void empjoin(Member member) throws Exception;
 	public List<Member> memberAll() throws Exception;

@@ -17,7 +17,59 @@
 <title>Insert title here</title>
 <script>
 	var object = new Object();
-	var booler = false; 
+	var booler = false;
+	 
+	function orderSort1(){
+		  
+		$.getJSON("adminSub/orderSort1",function(data){
+			  
+			console.log(data); 
+			$(".orderListTable").remove();
+			var str = "";  
+			for(var i =0; i<data.length; i++){
+				str += "<tr class='orderListTable'><td>"+"<input type='checkBox' id='"+data[i].orderCode+"' value='"+data[i].orderCode+"' name='che'</td>"+"<td class='orderCode'>"+data[i].orderCode+"</td>"+"<td class='id'>"+data[i].id+"</td>"+"<td>"+"<a data-src='"+data[i].orderCode+"' class='dietName' data-toggle='modal' href='#myModal'>"+data[i].dietName+"</a> </td>"+"<td class='orderDate'>"+data[i].orderDate+"</td>"+"<td class='price'>"+data[i].price+"</td>"+"<td class='orderItemName'>"+data[i].orderItemName+"</td></tr>"		 
+			} 
+			console.log(str);
+			$(".tables").append(str); 
+		});   
+	}
+	function orderSort2(){ 
+		$.getJSON("adminSub/orderSort2",function(data){
+			console.log(data); 
+			$(".orderListTable").remove();
+			var str = "";  
+			for(var i =0; i<data.length; i++){
+				str += "<tr class='orderListTable'><td>"+"<input type='checkBox' id='"+data[i].orderCode+"' value='"+data[i].orderCode+"' name='che'</td>"+"<td class='orderCode'>"+data[i].orderCode+"</td>"+"<td class='id'>"+data[i].id+"</td>"+"<td>"+"<a data-src='"+data[i].orderCode+"' class='dietName' data-toggle='modal' href='#myModal'>"+data[i].dietName+"</a> </td>"+"<td class='orderDate'>"+data[i].orderDate+"</td>"+"<td class='price'>"+data[i].price+"</td>"+"<td class='orderItemName'>"+data[i].orderItemName+"</td></tr>"		 
+			} 
+			console.log(str);
+			$(".tables").append(str); 
+		});    
+	}
+	function orderSort3(){ 
+		$.getJSON("adminSub/orderSort3",function(data){
+			console.log(data); 
+			$(".orderListTable").remove();
+			var str = "";  
+			for(var i =0; i<data.length; i++){
+				str += "<tr class='orderListTable'><td>"+"<input type='checkBox' id='"+data[i].orderCode+"' value='"+data[i].orderCode+"' name='che'</td>"+"<td class='orderCode'>"+data[i].orderCode+"</td>"+"<td class='id'>"+data[i].id+"</td>"+"<td>"+"<a data-src='"+data[i].orderCode+"' class='dietName' data-toggle='modal' href='#myModal'>"+data[i].dietName+"</a> </td>"+"<td class='orderDate'>"+data[i].orderDate+"</td>"+"<td class='price'>"+data[i].price+"</td>"+"<td class='orderItemName'>"+data[i].orderItemName+"</td></tr>"		 
+			} 
+			console.log(str);
+			$(".tables").append(str); 
+		});    
+	}
+	function orderSort4(){ 
+		$.getJSON("adminSub/orderSort4",function(data){
+			console.log(data); 
+			$(".orderListTable").remove();
+			var str = "";  
+			for(var i =0; i<data.length; i++){
+				str += "<tr class='orderListTable'><td>"+"<input type='checkBox' id='"+data[i].orderCode+"' value='"+data[i].orderCode+"' name='che'</td>"+"<td class='orderCode'>"+data[i].orderCode+"</td>"+"<td class='id'>"+data[i].id+"</td>"+"<td>"+"<a data-src='"+data[i].orderCode+"' class='dietName' data-toggle='modal' href='#myModal'>"+data[i].dietName+"</a> </td>"+"<td class='orderDate'>"+data[i].orderDate+"</td>"+"<td class='price'>"+data[i].price+"</td>"+"<td class='orderItemName'>"+data[i].orderItemName+"</td></tr>"		 
+			} 
+			console.log(str);
+			$(".tables").append(str); 
+		});    
+	}
+	
 	$(document).ready(function() {
 		$("#orderList").addClass("w3-light-gray");
 		var formObj = $("form[role='form']");
@@ -70,6 +122,9 @@
 				$(".tables").append(str); 
 			});    
 		}
+		
+		
+		
 		//환불 버튼
 		$('#refund').click(function() {
 			$("input[name=che]:checked").each(function() {
@@ -172,11 +227,18 @@
 				}
 			});
 		});
+	
+	
 	});
 </script>
 
 
 </head>
+<style>
+.topMar{
+	margin-top: 0.1cm;
+}
+</style>
 <body>
 <%@include file="../admin/upmenu.jsp"%>
 	<div class="container">
@@ -208,11 +270,20 @@
 			<button id = "search" class="btn btn-default">검색</button>
 			<button id = "searchAll" class="btn btn-default">전체 검색</button>
 	</div>
+	<div class="col-sm-offset-6">      
+		<ul class="nav nav-pills text-right">    
+			<li role="presentation" class="active"><a href="#" onclick="orderSort1();">결제완료 정렬</a></li>
+			<li role="presentation" class="active"><a href="#" onclick="orderSort3();">식재료 발주 정렬</a></li>
+			<li role="presentation" class="active"><a href="#" onclick="orderSort4();">식재료 입고 정렬</a></li>
+			<li role="presentation" class="active"><a href="#" onclick="orderSort2();">조리대기 정렬</a></li> 
+		</ul>
+		</div>
+		<div class="topMar">  
 	<div class="form-group row">  
-
+ 
 	<form role="form" method="post">
 		<div class="divs" id="a1">
-			<table class="tables table table-condensed">    
+			<table class="tables table table-condensed">     
 				<tr>
 					<th><input type="checkBox" id="allCheck">전체</th>
 					<th>주문번호</th>
@@ -275,6 +346,7 @@
 
 
 		
+		</div>
 		</div>
 </body>
 </html>

@@ -91,6 +91,10 @@ public class AdminController {
 	//식재료 추가 주문
 	@RequestMapping(value= "/mailSendingSub", method = RequestMethod.POST)
 	public String mailSendingSub (@RequestParam("StockAdd")int[] StockAdd, @RequestParam("foodMCodeAdd")String[] foodMCodeAdd, @RequestParam("foodMNameAdd")String[] foodMNameAdd, @RequestParam("priceAdd")int[] priceAdd,@RequestParam("unitAdd")String[] unitAdd, @RequestParam("cnt")int cnt) throws Exception {
+		String authKey = AUTH_KEY_FCM; // You FCM AUTH key
+		//System.out.println(authKey); 
+		String FMCurl = API_URL_FCM;
+		String token = service.appTest("whole");
 		String toString = "";
 		String setfrom = "dudtka4971@gmail.com";
 		String tomail = "dudtka4971@naver.com";
@@ -133,6 +137,47 @@ public class AdminController {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+		URL url = new URL(FMCurl);
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+		conn.setUseCaches(false);
+		conn.setDoInput(true);
+		conn.setDoOutput(true);
+		conn.setRequestMethod("POST");
+		conn.setRequestProperty("Authorization", "key=" + authKey);
+		conn.setRequestProperty("Content-Type", "application/json");
+
+		JSONObject json = new JSONObject();
+		JSONObject info = new JSONObject();
+
+		info.put("body", "식재료 요청합니다 이메일 확인부탁드립니다"); // Notification body
+
+		json.put("notification", info);
+		json.put("to", token.trim()); // deviceID
+
+		try (OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream(), "UTF-8")) {
+			// 혹시나 한글 깨짐이 발생하면
+			// try(OutputStreamWriter wr = new
+			// OutputStreamWriter(conn.getOutputStream(), "UTF-8")){ 인코딩을 변경해준다.
+
+			wr.write(json.toString());
+			wr.flush();
+		} catch (Exception e) {
+		}
+
+		if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
+			throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+		}
+
+		BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+
+		String output;
+		System.out.println("Output from Server .... \n");
+		while ((output = br.readLine()) != null) {
+			System.out.println(output);
+		}
+
+		conn.disconnect();
 	return "redirect:orderList";
 	}
 	// mailSending 코드
@@ -144,7 +189,7 @@ public class AdminController {
 		String authKey = AUTH_KEY_FCM; // You FCM AUTH key
 		//System.out.println(authKey); 
 		String FMCurl = API_URL_FCM;
-		String token = service.appTest("test");
+		String token = service.appTest("whole");
 		String toString = "";
 		String setfrom = "dudtka4971@gmail.com";
 		String tomail = "dudtka4971@naver.com";

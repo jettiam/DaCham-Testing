@@ -148,6 +148,65 @@ public class AdminSubController {
   		}
   		return entity;
   	}
+   
+   //orderSort1 리스트 출력
+   @RequestMapping(value = "/orderSort1",method = RequestMethod.GET)
+	public ResponseEntity<List<OrderList>> orderSort1(){
+		ResponseEntity<List<OrderList>> entity = null;
+		try {
+			List<OrderList> list = service.orderSort1();
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+ //orderSort2 리스트 출력
+   @RequestMapping(value = "/orderSort2",method = RequestMethod.GET)
+	public ResponseEntity<List<OrderList>> orderSort2(){
+		ResponseEntity<List<OrderList>> entity = null;
+		try {
+			List<OrderList> list = service.orderSort2();
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+ //orderSort3 리스트 출력
+   @RequestMapping(value = "/orderSort3",method = RequestMethod.GET)
+	public ResponseEntity<List<OrderList>> orderSort3(){
+		ResponseEntity<List<OrderList>> entity = null;
+		try {
+			List<OrderList> list = service.orderSort3();
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+ //orderSort4 리스트 출력 
+   @RequestMapping(value = "/orderSort4",method = RequestMethod.GET)
+	public ResponseEntity<List<OrderList>> orderSort4(){
+		ResponseEntity<List<OrderList>> entity = null;
+		try {
+			List<OrderList> list = service.orderSort4();
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+
+   
    //foodStock 리스트 출력
    @RequestMapping(value = "/foodStockAll",method = RequestMethod.GET)
   	public ResponseEntity<List<FoodMInven>> foodStockAll(){

@@ -269,11 +269,16 @@ function disease4(){
 					});
 </script>
 </head>
+<style>
+.topMar{
+	margin-top: 0.1cm;
+}
+</style>
 <body>
 	<%@include file="../admin/upmenu.jsp"%>
 	<div class="container"> 
 	
-		<div>
+		<div  class="col-sm-offset-8">  
 		<ul class="nav nav-pills">    
 			<li role="presentation" class="active"><a href="#" onclick="disease1();">당뇨</a></li>
 			<li role="presentation" class="active"><a href="#" onclick="disease2();">고지혈증</a></li>
@@ -281,7 +286,7 @@ function disease4(){
 			<li role="presentation" class="active"><a href="#" onclick="disease4();">신부전증</a></li> 
 		</ul>
 		</div>
-		<div>
+		<div class="topMar">
 			<table class="tables table table-condensed" width="600">
 				<tr>
 					<th>선택</th>

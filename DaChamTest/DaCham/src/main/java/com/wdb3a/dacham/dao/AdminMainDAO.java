@@ -31,6 +31,10 @@ public interface AdminMainDAO {
 	public List<OrderList> all(Criteria criteria) throws Exception;
 	public List<OrderList> orderAll() throws Exception;
 	public List<OrderList> orderAllSearch(OrderList orderList) throws Exception;
+	public List<OrderList> orderSort1() throws Exception;
+	public List<OrderList> orderSort2() throws Exception;
+	public List<OrderList> orderSort3() throws Exception;
+	public List<OrderList> orderSort4() throws Exception;
 	public List<FoodMInven> foodStockListAll() throws Exception;
 	public int orderListCount() throws Exception;
 	public String appTest(String id) throws Exception;
@@ -53,4 +57,5 @@ public interface AdminMainDAO {
 	public List<Member> memberSearch(Member member) throws Exception;
 	public void insertFoodMAdd(FoodMAmountRead foodMAmountRead) throws Exception;
 	public List<FoodMInven> foodStockListStop() throws Exception;
+	
 }
