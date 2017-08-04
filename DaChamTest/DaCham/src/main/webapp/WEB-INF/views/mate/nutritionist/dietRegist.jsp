@@ -38,13 +38,49 @@
 							}
 						});
 						localStorage.clear();
-						openAPI();
+						
 						if (!localStorage['init']
-								|| isNaN(localStorage['count']) == true) {
+								|| isNaN(localStorage['count']) == true || isNaN(localStorage['count1']) == true || isNaN(localStorage['count2']) == true || isNaN(localStorage['count3']) == true || isNaN(localStorage['count4']) == true || isNaN(localStorage['count5']) == true || isNaN(localStorage['count6']) == true) {
 							localStorage['init'] = "true";
 							localStorage['count'] = 0;
+							localStorage['count1'] = 0;
+							localStorage['count2'] = 0;
+							localStorage['count3'] = 0;
+							localStorage['count4'] = 0;
+							localStorage['count5'] = 0;
+							localStorage['count6'] = 0;
+							localStorage[0 + '_kcal1'] = 0;
+							localStorage[0 + '_carbohydrate1'] = 0;
+							localStorage[0 + '_protein1'] = 0;
+							localStorage[0 + '_fat1'] = 0;
+							localStorage[0 + '_na1'] = 0;
+							localStorage[0 + '_kcal2'] = 0;
+							localStorage[0 + '_carbohydrate2'] = 0;
+							localStorage[0 + '_protein2'] = 0;
+							localStorage[0 + '_fat2'] = 0;
+							localStorage[0 + '_na2'] = 0;
+							localStorage[0 + '_kcal3'] = 0;
+							localStorage[0 + '_carbohydrate3'] = 0;
+							localStorage[0 + '_protein3'] = 0;
+							localStorage[0 + '_fat3'] = 0;
+							localStorage[0 + '_na3'] = 0;
+							localStorage[0 + '_kcal4'] = 0;
+							localStorage[0 + '_carbohydrate4'] = 0;
+							localStorage[0 + '_protein4'] = 0;
+							localStorage[0 + '_fat4'] = 0;
+							localStorage[0 + '_na4'] = 0;
+							localStorage[0 + '_kcal5'] = 0;
+							localStorage[0 + '_carbohydrate5'] = 0;
+							localStorage[0 + '_protein5'] = 0;
+							localStorage[0 + '_fat5'] = 0;
+							localStorage[0 + '_na5'] = 0;
+							localStorage[0 + '_kcal6'] = 0;
+							localStorage[0 + '_carbohydrate6'] = 0;
+							localStorage[0 + '_protein6'] = 0;
+							localStorage[0 + '_fat6'] = 0;
+							localStorage[0 + '_na6'] = 0;
 						}
-
+						openAPI();
 						$(document.body)
 								.on(
 										"click",
@@ -69,25 +105,25 @@
 													'data-foodGCode');
 											var sideDName = $(this).text();
 
-											$
-													.getJSON(
-															"nutriAjax/allNutri/"
-																	+ sideDCode,
-															function(data) {
-																var subCount = count - 1;
+// 											$
+// 													.getJSON(
+// 															"nutriAjax/allNutri/"
+// 																	+ sideDCode,
+// 															function(data) {
+// 																var subCount = count - 1;
 
-																localStorage[subCount
-																		+ '_kcal'] = data.kcal;
-																localStorage[subCount
-																		+ '_carbohydrate'] = data.carbohydrate;
-																localStorage[subCount
-																		+ '_protein'] = data.protein;
-																localStorage[subCount
-																		+ '_fat'] = data.fat;
-																localStorage[subCount
-																		+ '_na'] = data.na;
-																openAPI();
-															});
+// 																localStorage[subCount
+// 																		+ '_kcal'] = data.kcal;
+// 																localStorage[subCount
+// 																		+ '_carbohydrate'] = data.carbohydrate;
+// 																localStorage[subCount
+// 																		+ '_protein'] = data.protein;
+// 																localStorage[subCount
+// 																		+ '_fat'] = data.fat;
+// 																localStorage[subCount
+// 																		+ '_na'] = data.na;
+// 																openAPI();
+// 															});                         
 
 											localStorage[count + '_img'] = sideDImg;
 											localStorage[count + '_codes'] = sideDCode;
@@ -127,20 +163,20 @@
 
 											localStorage
 													.removeItem(id + '_img');
-											localStorage.removeItem(id
-													+ '_codes');
-											localStorage.removeItem(id
-													+ '_kcal');
-											localStorage.removeItem(id
-													+ '_carbohydrate');
-											localStorage.removeItem(id
-													+ '_protein');
-											localStorage
-													.removeItem(id + '_fat');
-											localStorage.removeItem(id + '_na');
+// 											localStorage.removeItem(id
+// 													+ '_codes');
+// 											localStorage.removeItem(id
+// 													+ '_kcal');
+// 											localStorage.removeItem(id
+// 													+ '_carbohydrate');
+// 											localStorage.removeItem(id
+// 													+ '_protein');
+// 											localStorage
+// 													.removeItem(id + '_fat');
+// 											localStorage.removeItem(id + '_na');
 											--count;
 											localStorage['count'] = count;
-											openAPI();
+											
 											v = count;
 											cntChange(v);
 										});
@@ -234,7 +270,7 @@
 									$(
 											'<div class = "col-sm-2"><img src = "displayFile?fileName='
 													+ sideDImg
-													+ '" class="img-responsive sideDImg" data-id = "'+i+'" >'+'<input type="radio" name="foodG01" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
+													+ '" class="img-responsive sideDImg" data-id = "'+i+'" >'+'<input type="radio" name="foodG02" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
 													+ sideDName + '</label></div>').appendTo('.foodG02');
 									break;
 								case "03":
@@ -244,7 +280,7 @@
 									$(
 											'<div class = "col-sm-2"><img src = "displayFile?fileName='
 													+ sideDImg
-													+ '" class="img-responsive sideDImg" data-id = "'+i+'" >'+'<input type="radio" name="foodG01" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
+													+ '" class="img-responsive sideDImg" data-id = "'+i+'" >'+'<input type="radio" name="foodG03" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
 													+ sideDName + '</label></div>').appendTo('.foodG03');
 									break;
 								case "04":
@@ -254,7 +290,7 @@
 									$(
 											'<div class = "col-sm-2"><img src = "displayFile?fileName='
 													+ sideDImg
-													+ '" class="img-responsive sideDImg" data-id = "'+i+'" >'+'<input type="radio" name="foodG01" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
+													+ '" class="img-responsive sideDImg" data-id = "'+i+'" >'+'<input type="radio" name="foodG04" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
 													+ sideDName + '</label></div>').appendTo('.foodG04');
 									break;
 								case "05":
@@ -264,7 +300,7 @@
 									$(
 											'<div class = "col-sm-2"><img src = "displayFile?fileName='
 													+ sideDImg
-													+ '" class="img-responsive sideDImg" data-id = "'+i+'" >'+'<input type="radio" name="foodG01" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
+													+ '" class="img-responsive sideDImg" data-id = "'+i+'" >'+'<input type="radio" name="foodG05" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
 													+ sideDName + '</label></div>').appendTo('.foodG05');
 									break;
 								case "06":
@@ -274,7 +310,7 @@
 									$(
 											'<div class = "col-sm-2"><img src = "displayFile?fileName='
 													+ sideDImg
-													+ '" class="img-responsive sideDImg" data-id = "'+i+'" >'+'<input type="radio" name="foodG01" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
+													+ '" class="img-responsive sideDImg" data-id = "'+i+'" >'+'<input type="radio" name="foodG06" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
 													+ sideDName + '</label></div>').appendTo('.foodG06');
 									break;
 								}
@@ -297,7 +333,98 @@
 						$(
 								'<input type = "hidden" id = "cnt" name = "count" value = "'+v+'">')
 								.appendTo("#registForm");
-
+						
+						
+						$(document.body).on("click","input:radio[name=foodG01]",function(){
+							var sideDCode = $(this).attr("id");
+							var count1 = parseInt(localStorage['count1']);
+							$.getJSON("nutriAjax/allNutri/"+sideDCode,function(data){
+								localStorage[count1 + '_kcal1'] = data.kcal;
+								localStorage[count1 + '_carbohydrate1'] = data.carbohydrate;
+								localStorage[count1 + '_protein1'] = data.protein;
+								localStorage[count1 + '_fat1'] = data.fat;
+								localStorage[count1 + '_na1'] = data.na;
+								count1++;
+								openAPI();
+							});
+							
+						});
+						
+						$(document.body).on("click","input:radio[name=foodG02]",function(){
+							var sideDCode = $(this).attr("id");
+							var count2 = parseInt(localStorage['count2']);
+							$.getJSON("nutriAjax/allNutri/"+sideDCode,function(data){
+								localStorage[count2 + '_kcal2'] = data.kcal;
+								localStorage[count2 + '_carbohydrate2'] = data.carbohydrate;
+								localStorage[count2 + '_protein2'] = data.protein;
+								localStorage[count2 + '_fat2'] = data.fat;
+								localStorage[count2 + '_na2'] = data.na;
+								count2++;
+								openAPI();
+							});
+							
+						});
+						
+						$(document.body).on("click","input:radio[name=foodG03]",function(){
+							var sideDCode = $(this).attr("id");
+							var count3 = parseInt(localStorage['count3']);
+							$.getJSON("nutriAjax/allNutri/"+sideDCode,function(data){
+								localStorage[count3 + '_kcal3'] = data.kcal;
+								localStorage[count3 + '_carbohydrate3'] = data.carbohydrate;
+								localStorage[count3 + '_protein3'] = data.protein;
+								localStorage[count3 + '_fat3'] = data.fat;
+								localStorage[count3 + '_na3'] = data.na;
+								count3++;
+								openAPI();
+							});
+							
+						});
+						
+						$(document.body).on("click","input:radio[name=foodG04]",function(){
+							var sideDCode = $(this).attr("id");
+							var count4 = parseInt(localStorage['count4']);
+							$.getJSON("nutriAjax/allNutri/"+sideDCode,function(data){
+								localStorage[count4 + '_kcal4'] = data.kcal;
+								localStorage[count4 + '_carbohydrate4'] = data.carbohydrate;
+								localStorage[count4 + '_protein4'] = data.protein;
+								localStorage[count4 + '_fat4'] = data.fat;
+								localStorage[count4 + '_na4'] = data.na;
+								count4++;
+								openAPI();
+							});
+							
+						});
+						
+						$(document.body).on("click","input:radio[name=foodG05]",function(){
+							var sideDCode = $(this).attr("id");
+							var count5 = parseInt(localStorage['count5']);
+							$.getJSON("nutriAjax/allNutri/"+sideDCode,function(data){
+								localStorage[count5 + '_kcal5'] = data.kcal;
+								localStorage[count5 + '_carbohydrate5'] = data.carbohydrate;
+								localStorage[count5 + '_protein5'] = data.protein;
+								localStorage[count5 + '_fat5'] = data.fat;
+								localStorage[count5 + '_na5'] = data.na;
+								count5++;
+								openAPI();
+							});
+							
+						});
+						
+						$(document.body).on("click","input:radio[name=foodG06]",function(){
+							var sideDCode = $(this).attr("id");
+							var count6 = parseInt(localStorage['count6']);
+							$.getJSON("nutriAjax/allNutri/"+sideDCode,function(data){
+								localStorage[count6 + '_kcal6'] = data.kcal;
+								localStorage[count6 + '_carbohydrate6'] = data.carbohydrate;
+								localStorage[count6 + '_protein6'] = data.protein;
+								localStorage[count6 + '_fat6'] = data.fat;
+								localStorage[count6 + '_na6'] = data.na;
+								count6++;
+								openAPI();
+							});
+							
+						});
+						
 						$("#regist").on("click", function() {
 							var length1 = $(".foodG01 input[type ='hidden']").length;
 							var length2 = $(".foodG02 input[type ='hidden']").length;

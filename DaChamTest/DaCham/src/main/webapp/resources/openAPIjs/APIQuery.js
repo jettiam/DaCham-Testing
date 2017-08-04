@@ -1,5 +1,10 @@
 function openAPI(){
-	var count = parseInt(localStorage['count']);
+	var count1 = parseInt(localStorage['count1']);
+	var count2 = parseInt(localStorage['count2']);
+	var count3 = parseInt(localStorage['count3']);
+	var count4 = parseInt(localStorage['count4']);
+	var count5 = parseInt(localStorage['count5']);
+	var count6 = parseInt(localStorage['count6']);
 	
 	    var w = 200,h = 200;           
 		
@@ -13,16 +18,15 @@ function openAPI(){
 		var kcal = 0;
 		var na = 0;
 		var fat = 0;
-		console.log(count);
-		console.log(typeof(count));
-		for(var i = 0; i < count; i++){
-			protein += parseInt(localStorage[i+'_protein']);
-			carbohydrate += parseInt(localStorage[i+'_carbohydrate']);
-			kcal += parseInt(localStorage[i+'_kcal']);
-			na += parseInt(localStorage[i+'_na']);
-			fat += parseInt(localStorage[i+'_fat']);
+		
+		
+			protein = parseInt(localStorage[count1+'_protein1'])+parseInt(localStorage[count2+'_protein2'])+parseInt(localStorage[count3+'_protein3'])+parseInt(localStorage[count4+'_protein4'])+parseInt(localStorage[count5+'_protein5'])+parseInt(localStorage[count6+'_protein6']);
+			carbohydrate = parseInt(localStorage[count1+'_carbohydrate1'])+parseInt(localStorage[count2+'_carbohydrate2'])+parseInt(localStorage[count3+'_carbohydrate3'])+parseInt(localStorage[count4+'_carbohydrate4'])+parseInt(localStorage[count5+'_carbohydrate5'])+parseInt(localStorage[count6+'_carbohydrate6']);
+			kcal = parseInt(localStorage[count1+'_kcal1'])+parseInt(localStorage[count2+'_kcal2'])+parseInt(localStorage[count3+'_kcal3'])+parseInt(localStorage[count4+'_kcal4'])+parseInt(localStorage[count5+'_kcal5'])+parseInt(localStorage[count6+'_kcal6']);
+			na = parseInt(localStorage[count1+'_na1'])+parseInt(localStorage[count2+'_na2'])+parseInt(localStorage[count3+'_na3'])+parseInt(localStorage[count4+'_na4'])+parseInt(localStorage[count5+'_na5'])+parseInt(localStorage[count6+'_na6']);
+			fat = parseInt(localStorage[count1+'_fat1'])+parseInt(localStorage[count2+'_fat2'])+parseInt(localStorage[count3+'_fat3'])+parseInt(localStorage[count4+'_fat4'])+parseInt(localStorage[count5+'_fat5'])+parseInt(localStorage[count6+'_fat6']);
 			      
-		}
+		
 		var sum = parseInt(localStorage[0+'_protein']) + parseInt(localStorage[1+'_protein']) + parseInt(localStorage[2 + '_protein']) + parseInt(localStorage[3+'_protein']);
 		console.log("단백질"+protein);
 		console.log("단백질"+carbohydrate);
