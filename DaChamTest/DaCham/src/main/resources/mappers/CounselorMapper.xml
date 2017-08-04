@@ -123,4 +123,9 @@ select  a.id , a.name ,a.birthday, a.address, a.tel, a.email, a.deptCode, a.grad
    select counselCode,answer,counselDate from counsel
    where customer = #{customer}
 </select>
+<select id = "optionTuning" resultType = "Counselor">
+	select * from orderoptions a, sidedish b
+	where a.sideDCode = b.sideDCode
+	and a.orderCode = #{orderCode}
+</select>
 </mapper>

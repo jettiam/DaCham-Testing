@@ -102,7 +102,7 @@ public class CounselorAjaxController {
 		Counselor counselor = new Counselor();
 		counselor.setCouselCode(couselCode);
 		counselor.setAnswer(answer);
-		System.out.println("정답:"+answer);
+		System.out.println("답변내용:"+answer);
 		try {
 			service.counselUpdate(counselor);
 			entity = new ResponseEntity<>("SUCCESS",HttpStatus.OK);
@@ -217,6 +217,19 @@ public class CounselorAjaxController {
 		try {
 			List<Counselor> list = service.orderListSearch(counselor);
 			System.out.println("식단 검색 목록:"+list);
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	@RequestMapping(value = "/optionTuning/{orderCode}",method = RequestMethod.GET)
+	public ResponseEntity<List<Counselor>> optionTuning(@PathVariable("orderCode")int orderCode){
+		ResponseEntity<List<Counselor>> entity = null;
+		try {
+			List<Counselor> list = service.optionTuning(orderCode);
 			entity = new ResponseEntity<>(list,HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

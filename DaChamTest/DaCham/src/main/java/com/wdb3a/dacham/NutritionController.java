@@ -349,7 +349,7 @@ public class NutritionController {
 	 * @param block xml 형태의 String
 	 * @return success 문자열 반환
 	 */
-	@RequestMapping(value="/wizardInsert", method=RequestMethod.GET)
+	@RequestMapping(value="/wizardInsert", method=RequestMethod.POST)
 	public @ResponseBody String wizardInsert(String wizard, String block){
 		mongoDAO.wizardInsert(wizard, block);		
 		return "success";

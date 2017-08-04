@@ -17,37 +17,48 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
+	//조리시작
 	function cookStart() {	
+		var p = $(this).parent();
+		var sideDCode = p.find(".waitSideDCode").text();
+		var sideDName = p.find(".waitSideDName").text();
+		var amount = p.find(".waitAmount").text();
 		
-		var content = "<p>"+
-		"<span>" + $(this).siblings().text() +
-		"</span><span class='newCountup'></span><button class='end'>완료</button> </p>"
+		var newTr =	"<tr class=c"+sideDCode+">" 
+						+ "<td><img src='http://placehold.it/100x100?text=sideImg'/></td>"
+						+ "<td><h3><b>"+sideDName+"</b></h3><h4>"+amount+"</h4></td>"
+						+ "<td></td>"
+						+ "</tr>"
+						+ "<tr class=c"+sideDCode+">"
+						+ "<td colspan='2'><span class='countup'></span></td>"
+						+ "<td><button class='btn end'>완료</button></td>"
+						+ "</tr>";
 		
-		
-		
-		$(this).parent().remove();
-		$("#cookContinue>.container").append(content);
-		var sideDCode = $(this).parent().find("span:first").text();
 		updateOptionsItemCode(4,sideDCode);
+		$(this).parent().remove();
+		$("#cookContinueTable").append(newTr);
 		
-		var newSpan = $("#cookContinue>.container>p:last-child>.newCountup");
-		newSpan.countup();
-		$(".countDays, .countDiv0").attr("style", "display: none");
-		
-		
-		
+		var newCounter = $("#cookContinueTable .countup:last");
+		newCounter.countup();
+			
+		$(".countDays, .countDiv0").attr("style", "display: none");		
 	};
 	
-	
+	// 조리종료
 	function cookEnd(){
-		var sideDCode = $(this).parent().find("span:first").text();
-		updateOptionsItemCode(5, sideDCode);
+		var className = $(this).parent().parent().attr('class');
+		var code = className.slice(2);
+		updateOptionsItemCode(5, code);
 		
+		var element = $("tr."+className);
+		var sideDName = element.find("b").text();
+		var amount = element.find("h4").text();
+			
+		var content = "<p><span>"+sideDName+" "+amount+"</span></p>";
 		
-		var content = "<p><span>"+$(this).siblings().text()+"</span></p>";
-		$(this).parent().remove();
+		$(element).remove();
 		$("#cookFinish>.container").append(content);		
-	}
+	}	
 
 	function updateOptionsItemCode(orderItemCode, sideDCode){
 		$.ajax({
@@ -60,7 +71,7 @@
 			},
 			success : function(data){
 				if(data=="SUCCESS"){
-					alert("성공...");
+					
 				}else{
 					console.log(data);
 				}			
@@ -198,17 +209,32 @@ body {
 		<div class="wrapper_else">
 			<div class="row">
 				<div id="cookContinue" class="box X">
-					<h2>조리중</h2>
-					<div class="container">
-						<c:forEach items="${list}" var="list">
-							<c:if test="${list.optionsOrderItemCode==4}">
-								<p>
+					<div class="container">			
+					<table id="cookContinueTable" class="table table-bordered">
+						<tr>
+							<td colspan='3'><h2 style="text-align:center;">조리중</h2></td>
+						</tr>
+						<c:forEach items="${list}" var="list" varStatus="status">
+							<c:if test="${list.optionsOrderItemCode==4}"  >								
+							<%-- 	<p>
 									<span style='display:none;'>${list.sideDCode} </span> <span>${list.sideDName}
 										${list.cookingAmount}인분</span> <span class="countup"></span>
 									<button class='end'>완료</button>
-								</p>
-							</c:if>
+								</p> --%>					
+							<tr class="c${list.sideDCode}">
+								<td><img src="http://placehold.it/100x100?text=sideImg"/></td>
+								<td><span class='continueSideDCode' style='display:none;'>${list.sideDCode}</span>
+										<h3><b>${list.sideDName}</b></h3><h4>${list.cookingAmount}인분</h4>
+								</td>
+								<td></td>												
+							</tr>
+							<tr class="c${list.sideDCode}">
+								<td colspan="2"><span class="countup"></span></td>								
+								<td><button class="btn end">완료</button></td>
+							</tr>							
+							</c:if>							
 						</c:forEach>
+					</table>	
 					</div>
 				</div>
 				<div class="box C mintColor">
@@ -221,8 +247,9 @@ body {
 						<c:forEach items="${list}" var="list">
 							<c:if test="${list.optionsOrderItemCode==3}">
 								<p>
-									<span>${list.sideDCode} </span> <span>${list.sideDName}
-										${list.cookingAmount}인분</span>
+									<span class="waitSideDCode">${list.sideDCode} </span> 
+									<span class="waitSideDName">${list.sideDName}</span>
+									<span class="waitAmount">${list.cookingAmount}인분</span>
 									<button class="start">시작</button>
 								</p>
 							</c:if>
