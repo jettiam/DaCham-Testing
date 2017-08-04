@@ -106,7 +106,7 @@ float:right;
 			<div id="infoBox" class="col-sm-4 col-sm-offset-5 loginWrap hidden-xs">
 				<!-- 고객이름 출력. 로그아웃&마이인포 -->
 				<h4>
-					<b>${memberName}</b>님 반갑습니다.
+					<b id="sessionName">${memberName}</b>님 반갑습니다.
 				</h4>
 				<a href="myPage?status=0">마이페이지</a> <a href="myPage?status=2">장바구니</a>
 				<a href="memberLogout">로그아웃</a>

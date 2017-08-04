@@ -60,5 +60,8 @@
 		<button id = "cancle" class="btn btn-warning myPageBtn">취소</button>
 	</div>
 </div>
+<footer>
+	<%@include file="../../footer.jsp" %>
+</footer>
 </body>
 </html>

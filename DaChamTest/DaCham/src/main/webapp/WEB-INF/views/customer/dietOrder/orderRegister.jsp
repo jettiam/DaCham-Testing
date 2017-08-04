@@ -161,5 +161,8 @@
 		</c:forEach>	
 		</c:if>
 	</form>
+	<footer>
+	<%@include file="../../footer.jsp" %>
+</footer>
 </body>
 </html>

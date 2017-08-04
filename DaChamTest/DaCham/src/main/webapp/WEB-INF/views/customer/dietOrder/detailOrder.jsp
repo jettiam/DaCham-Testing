@@ -16,6 +16,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-light-green.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <style>
 .dietImg{
@@ -28,6 +29,34 @@ mat-height:200px; */
 }
 .nutriTable{
 text-align: center !important;
+}
+.nutriChart{
+	margin:auto;
+	width:80%;
+}
+.fa-chevron-down{
+	display:none;
+}
+.fa-chevron-up{
+	display:none;
+}
+@media only screen and (max-width: 768px){
+	.nutriChart{
+		margin:auto;
+		width:100%;
+	}
+	.sideDThumbnail{
+		display:none;
+	}
+	.sideDNutri{
+		display:none;
+	}
+	.fa-chevron-down{
+	display:inline-block;
+	}
+	.fa-chevron-up{
+		display:inline-block;
+	}
 }
 </style>
 <title>DaCham 식단상세보기</title>
@@ -53,6 +82,32 @@ $(document).ready(function() {
 		$(".defaultFood[data-foodGCode='"+foodGCode+"']>.defaultSideDName").text(sideDName);
 		console.log($(".defaultFood[data-foodGCode='"+foodGCode+"']>img"));
 		count=0;
+		//반응형 JQ
+		//$(".foodGSideD i").removeClass("fa-chevron-down fa-chevron-up").addClass("fa-chevron-down");
+		/* $(".foodGSideD .sideDThumbnail").toggle(); 
+		$(".foodGSideD .sideDNutri").toggle(); */ 
+		var window_size = $(window).width();
+		if(window_size<=768){
+			//console.log($(".foodGSideD").not($(this)));
+			var notThis = $(".foodGSideD").not($(this));
+			notThis.find(".sideDThumbnail").hide();
+			notThis.find(".sideDNutri").hide();
+			notThis.find("i").removeClass("fa-chevron-up").addClass("fa-chevron-down");
+			var checkToggle=$(this).find("i").attr("class"); 
+			//console.log(checkToggle);
+			if(checkToggle=="fa fa-chevron-down"){
+				$(this).find("i").removeClass("fa-chevron-down").addClass("fa-chevron-up");			
+			}else{
+				$(this).find("i").removeClass("fa-chevron-up").addClass("fa-chevron-down");			
+			};
+			$(this).find(".sideDNutri").insertAfter($(this).find("h5"));
+			$(this).find(".sideDThumbnail").insertAfter($(this).find("h5"));
+			$(this).find(".sideDThumbnail").toggle();
+			$(this).find(".sideDNutri").toggle();
+		}
+
+		
+		//영양 차트
 		$(".chartjs-hidden-iframe").remove();
 		$("#nutriChart").remove();
 		$(".nutriChart").append('<canvas id="nutriChart"></canvas>');
@@ -79,22 +134,35 @@ $(document).ready(function() {
 		$("#dietPrice").text(a * price);
 	});
 	$("#doOrder").on("click", function() {
-		getCheckedList()			
-		$("#setDietName").val($("#dietName").text());
-		$("#setPrice").val($("#dietPrice").text());
-		$("#setDietAmount").val($("#dietAmount").val());
-		$("#setDietImg").val($(".dietImg").attr("data-dietImg"));			
-		$("#orderForm").attr("action", "doOrder");
-		$("#orderForm").submit();
+		var login = $("#sessionName").text()+""; 
+		console.log(login);
+		if(login!=""){			
+			getCheckedList();			
+			$("#setDietName").val($("#dietName").text());
+			$("#setPrice").val($("#dietPrice").text());
+			$("#setDietAmount").val($("#dietAmount").val());
+			$("#setDietImg").val($(".dietImg").attr("data-dietImg"));			
+			$("#orderForm").attr("action", "doOrder");
+			//$("#orderForm").submit();
+		}else{
+			alert("로그인 후에 이용해주세요.");
+		}
 	});
 	$("#goMyCart").on("click", function() {
-		getCheckedList();			
-		$("#setDietName").val($("#dietName").text());
-		$("#setPrice").val($("#dietPrice").text());
-		$("#setDietAmount").val($("#dietAmount").val());
-		//$("#sideDish").val();
-		$("#orderForm").attr("action", "goMyCart");
-		$("#orderForm").submit();
+		var login = $("#sessionName").text()+""; 
+		console.log(login);
+		if(login!=""){
+			getCheckedList();			
+			$("#setDietName").val($("#dietName").text());
+			$("#setPrice").val($("#dietPrice").text());
+			$("#setDietAmount").val($("#dietAmount").val());
+			//$("#sideDish").val();
+			$("#orderForm").attr("action", "goMyCart");
+			$("#orderForm").submit();
+			
+		}else{
+			alert("로그인 후에 이용해주세요.");
+		}
 	});
 	
 	
@@ -124,9 +192,9 @@ $(document).ready(function() {
 					}					
 				div.append(
 							"<div class='column foodGSideD w3-theme-l4' data-sideDCode='"+data.list[i].sideDCode+"'>"							
-							+"<img class='thumbnail' src='displayFile?fileName="+data.list[i].sideDImg+"'>"
-							+"<h5 style='text-align:center'>"+data.list[i].sideDName+"</h5>"
-							+"<table class='table' >"
+							+"<img class='thumbnail sideDThumbnail' src='displayFile?fileName="+data.list[i].sideDImg+"'>"
+							+"<h5 style='text-align:center'>"+data.list[i].sideDName+"&nbsp;&nbsp;<i class='fa fa-chevron-down'></i></h5>"
+							+"<table class='table sideDNutri' >"
 							+"<tr><th>칼로리</th><td class='kcal'>"+kcal+"</td></tr>"
 							+"<tr><th>탄수화물</th><td class='carbo'>"+carbo+"</td></tr>"
 							+"<tr><th>단백질</th><td class='protein'>"+protein+"</td></tr>"
@@ -140,9 +208,9 @@ $(document).ready(function() {
 				}else{
 					div.append(
 							"<div class='column foodGSideD' data-sideDCode='"+data.list[i].sideDCode+"'>"		
-							+"<img class='thumbnail' src='displayFile?fileName="+data.list[i].sideDImg+"'>"
-							+"<h5 style='text-align:center'>"+data.list[i].sideDName+"</h5>"
-							+"<table class='table' >"
+							+"<img class='thumbnail sideDThumbnail' src='displayFile?fileName="+data.list[i].sideDImg+"'>"
+							+"<h5 style='text-align:center'>"+data.list[i].sideDName+"&nbsp;&nbsp;<i class='fa fa-chevron-down'></i></h5>"
+							+"<table class='table sideDNutri' >"
 							+"<tr><th>칼로리</th><td class='kcal'>"+kcal+"</td></tr>"
 							+"<tr><th>탄수화물</th><td class='carbo'>"+carbo+"</td></tr>"
 							+"<tr><th>단백질</th><td class='protein'>"+protein+"</td></tr>"
@@ -274,8 +342,33 @@ $(document).ready(function() {
 		}				
 		console.log("칼로리:"+kcal+",탄수화물:"+carbo+",단백질:"+protein+",지방:"+fat+",나트륨:"+na+",칼륨"+k);
 			if(count==6){
-				nutriValue = [carbo0,protein0,fat0,na0/100, k0/100];
+				/* nutriValue = [carbo0,protein0,fat0,na0/1000, k0/1000];  */
+				
+				var KcalDay = parseInt(kcal0/2000*100);
+				var CDay = parseInt(carbo0/325*100);
+				var PDay = parseInt(protein0/40*100);
+				var FDday = parseInt(fat0/35*100);
+				var NaDay = parseInt(na0/2000*100);
+				var KDay = parseInt(k0/3500*100);
+				nutriValue = [KcalDay,CDay,PDay,FDday,NaDay, KDay];
 				$(".nutriInfoTable").append("<td class='kcalSign w3-green'>"+kcal0+"</td><td class='carboSign w3-green'>"+carbo0+"</td><td class='proteinSign w3-green'>"+protein0+"</td><td class='fatSign w3-green'>"+fat0+"</td><td class='naSign w3-green'>"+na0+"</td><td class='kSign w3-green'>"+k0+"</td>")
+				/* 
+				<td>남자</td><td id="MKcal">2400</td><td id="MCarbo">405</td><td id="MProtein">50</td><td id="MFat">40</td><td id="MNa">2000</td><td id="MK">3500</td></tr>
+				<td>여자</td><td id="WMKcal">1900</td><td id="WMCarbo">325</td><td id="WMProtein">40</td><td id="WMFat">35</td><td id="WMNa">2000</td><td id="WMK">3500</td></tr> */
+				$("#MKcal").html("2500<br>("+parseInt(kcal0/2500*100)+"%)");//여기부터
+				$("#MCarbo").html("405<br>("+parseInt(carbo0/405*100)+"%)");
+				$("#MProtein").html("50<br>("+parseInt(protein0/50*100)+"%)");
+				$("#MFat").html("40<br>("+parseInt(fat0/40*100)+"%)");
+				$("#MNa").html("2000<br>("+parseInt(na0/2000*100)+"%)");
+				$("#MK").html("3500<br>("+parseInt(k0/3500*100)+"%)");
+				
+				$("#WMKcal").html("2000<br>("+parseInt(kcal0/2000*100)+"%)");
+				$("#WMCarbo").html("325<br>("+parseInt(carbo0/325*100)+"%)");
+				$("#WMProtein").html("40<br>("+parseInt(protein0/40*100)+"%)");
+				$("#WMFat").html("35<br>("+parseInt(fat0/35*100)+"%)");
+				$("#WMNa").html("2000<br>("+parseInt(na0/2000*100)+"%)");
+				$("#WMK").html("3500<br>("+parseInt(k0/3500*100)+"%)"); 
+				
 				localStorage.clear();
 				localStorage['kcal']=kcal0;
 				localStorage['carbo']=carbo0;
@@ -283,8 +376,18 @@ $(document).ready(function() {
 				localStorage['fat']=fat0;
 				localStorage['na']=na0;
 				localStorage['k']=k0;
+				
+				
 			}else{
-				nutriValue = [carbo,protein,fat,na/100,k/100];	
+				/* nutriValue = [carbo,protein,fat,na/1000,k/1000]; */
+				var KcalDay = parseInt(kcal/2000*100);
+				var CDay = parseInt(carbo/325*100);
+				var PDay = parseInt(protein/40*100);
+				var FDday = parseInt(fat/35*100);
+				var NaDay = parseInt(na/2000*100);
+				var KDay = parseInt(k/3500*100);
+				nutriValue = [KcalDay,CDay,PDay,FDday,NaDay, KDay];
+				
 				$(".nutriInfoTable td").remove();
 				$(".fatSign").removeClass("w3-orange");
 				$(".fatSign").removeClass("w3-red");
@@ -300,6 +403,20 @@ $(document).ready(function() {
 				$(".kcalSign").removeClass("w3-red");
 
 				$(".nutriInfoTable").append("<td class='kcalSign'>"+kcal+"</td><td class='carboSign'>"+carbo+"</td><td class='proteinSign'>"+protein+"</td><td class='fatSign'>"+fat+"</td><td class='naSign'>"+na+"</td><td class='kSign'>"+k+"</td>")
+				$("#MKcal").html("2500<br>("+parseInt(kcal/2500*100)+"%)");//여기부터
+				$("#MCarbo").html("405<br>("+parseInt(carbo/405*100)+"%)");
+				$("#MProtein").html("50<br>("+parseInt(protein/50*100)+"%)");
+				$("#MFat").html("40<br>("+parseInt(fat/40*100)+"%)");
+				$("#MNa").html("2000<br>("+parseInt(na/2000*100)+"%)");
+				$("#MK").html("3500<br>("+parseInt(k/3500*100)+"%)");
+				
+				$("#WMKcal").html("2000<br>("+parseInt(kcal/2000*100)+"%)");
+				$("#WMCarbo").html("325<br>("+parseInt(carbo/325*100)+"%)");
+				$("#WMProtein").html("40<br>("+parseInt(protein/40*100)+"%)");
+				$("#WMFat").html("35<br>("+parseInt(fat/35*100)+"%)");
+				$("#WMNa").html("2000<br>("+parseInt(na/2000*100)+"%)");
+				$("#WMK").html("3500<br>("+parseInt(k/3500*100)+"%)"); 
+				
 				var kcalSign = Number(kcal)-Number(localStorage['kcal']);				
 				var carboSign = Number(carbo)-Number(localStorage['carbo']);
 				var proteinSign = Number(protein)-Number(localStorage['protein']);
@@ -328,9 +445,9 @@ $(document).ready(function() {
 				}else{
 					$(".proteinSign").addClass("w3-green");
 				}
-				if(naSign>=100 && naSign<200){
+				if(na>=2000 && na<2500){
 					$(".naSign").addClass("w3-orange");
-				}else if(naSign>=200){
+				}else if(na>=2500){
 					$(".naSign").addClass("w3-red");
 				}else{
 					$(".naSign").addClass("w3-green");
@@ -354,15 +471,16 @@ $(document).ready(function() {
 		
 		console.log(nutriValue);
 		var nutriData ={
-				labels:["탄수화물","단백질","지방","나트륨","칼륨"],
+				labels:["칼로리","탄수화물","단백질","지방","나트륨","칼륨"],
 				 datasets: [{
 					 label:"영양정보",					
 				     backgroundColor:[
 				    	 'rgba(255, 99, 132, 0.5)',
-			                'rgba(54, 162, 235, 0.5)',
-			                'rgba(255, 206, 86, 0.5)',
-			                'rgba(75, 192, 192, 0.5)',
-			                'rgba(153, 102, 255, 0.5)',
+				    	 'rgba(120, 99, 132, 0.5)',
+			             'rgba(54, 162, 235, 0.5)',
+			             'rgba(255, 206, 86, 0.5)',
+			             'rgba(75, 192, 192, 0.5)',
+			             'rgba(153, 102, 255, 0.5)',
 				     ],
 				     data: nutriValue
 				}]
@@ -393,7 +511,7 @@ $(document).ready(function() {
 	<!-- You can now combine a row and column if you just need a 12 column row -->
 	
 
-	<div class="row">
+	<div class="container">
 		<div class="medium-6 columns">
 			<img class="thumbnail dietImg" data-dietImg="${list[0].dietImg}" src='displayFile?fileName=${list[0].dietImg}'>
 			<div class="row small-up-3">
@@ -430,7 +548,7 @@ $(document).ready(function() {
 		</div>
 
 		<!-- 우측 식단 정보 영역 -->
-		<div class="medium-6 large-5 columns">
+		<div class="medium-6 columns">
 		<div>
 			<h3 id="dietName">${list[0].dietName}</h3>
 
@@ -455,13 +573,21 @@ $(document).ready(function() {
 			</div>
 			<!-- 영양차트 -->
 			<div class="nutriChart">
-				<canvas id="nutriChart"></canvas>
+				<h4 class="text-center">1일 영양성분 기준에 대한 비율(%)</h4>
+				<canvas id="nutriChart"></canvas>				
+			</div>				
+			<div class="center-block table-responsive">
+			<table class="table table-condensed">  
+				<tr><td>성별</td><td>칼로리<br>(Kcal)</td><td>탄수화물<br>(g)</td><td>단백질<br>(g)</td><td>지방<br>(g)</td><td>나트륨<br>(g)</td><td>칼륨<br>(g)</td></tr>
+				<tr><td>남자</td><td id="MKcal">2400</td><td id="MCarbo">405</td><td id="MProtein">50</td><td id="MFat">40</td><td id="MNa">2000</td><td id="MK">3500</td></tr>
+				<tr><td>여자</td><td id="WMKcal">1900</td><td id="WMCarbo">325</td><td id="WMProtein">40</td><td id="WMFat">35</td><td id="WMNa">2000</td><td id="WMK">3500</td></tr>
+			</table>
 			</div>
-			<div class="center-block">
+			<div class="center-block table-responsive">
 				<table class="table nutriTable">
 					<tr><th class="kcalSign w3-green">칼로리<br>(Kcal)</th><th class="carboSign w3-green">탄수화물<br>(g)</th><th class="proteinSign w3-green">단백질<br>(g)</th><th class="fatSign w3-green">지방<br>(g)</th><th class="naSign w3-green">나트륨<br>(mg)</th><th class="kSign w3-green">칼륨<br>(mg)</th></tr>
-					<tr class="nutriInfoTable"></tr>
-				</table>
+					<tr class="nutriInfoTable"></tr>					
+				</table>				
 			</div>
 		</div>
 	</div>
@@ -611,6 +737,8 @@ $(document).ready(function() {
 		<!-- 디테일오더에서 넘어갔는지 유무 -->
 	</form>
 
-
+<footer>
+	<%@include file="../../footer.jsp" %>
+</footer>
 </body>
 </html>

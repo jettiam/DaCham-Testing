@@ -46,16 +46,14 @@ $(function(){
 			<table class = "table table-hover">
 				<tr>
 					<th>식재료명</th>
-					<th>추가된 입고량</th>
-					<th>요청양</th>
+					<th>재고량</th>					
 					<th>단위</th>
 				</tr>
 				<c:forEach items = "${list }" var = "a">
 					<tr>
 						<td>${a.foodMName }</td>
-						<td>${a.foodMAmount }</td>
-						<td><input type = "text" style = "width:30px;"></td>
-						<td>${a.uint }</td>
+						<td>${a.foodMAmount }</td>						
+						<td>${a.unit }</td>
 					</tr>
 				</c:forEach>
 			</table>

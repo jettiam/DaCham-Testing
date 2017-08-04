@@ -88,7 +88,9 @@ width:600px;
 		</c:if>
 		</div>
 			</div>
-	
+<footer>
+	<%@include file="../../footer.jsp" %>
+</footer>	
 </body>
 </html>
 <!-- localhost:8080/dacham/counsel -->

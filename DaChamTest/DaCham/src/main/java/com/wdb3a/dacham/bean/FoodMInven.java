@@ -135,7 +135,7 @@ public class FoodMInven {
 		this.foodMCheck = foodMCheck;
 	}
 	public double getFoodMAmount() {
-		return foodMAmount;
+		return inAmount-outAmount;
 	}
 	public void setFoodMAmount(double foodMAmount) {
 		this.foodMAmount = foodMAmount;
