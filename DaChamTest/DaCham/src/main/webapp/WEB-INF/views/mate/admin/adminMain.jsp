@@ -417,7 +417,7 @@
 	});
 
 	function all(page){
-		$.getJSON("adminSub/all/"+page,function(data){
+		$.getJSON("adminSub/all/"+page,function(data){ 
 			console.log(data); 
 			$(".orderListTable").remove(); 
 			var str = "";

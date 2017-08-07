@@ -19,7 +19,7 @@ public interface AdminMainDAO {
 	//orderList 전체 출력
 
 	public List<OrderList> orderListAll(OrderList orderList) throws Exception;
-	public List<OrderList> orderAll(OrderList orderList) throws Exception;
+	//public List<OrderList> orderAll(OrderList orderList) throws Exception;
 	public List<OrderList> datailview(String orderCode) throws Exception;
 	public List<FoodMInven> foodStockList(FoodMInven foodMInven) throws Exception;//식재료 재고 검색
 	public void refundUpdate(OrderList list) throws Exception;
@@ -29,14 +29,16 @@ public interface AdminMainDAO {
 	public List<ChartPrice> chartPrice() throws Exception;
 	public List<ChartPrice> chartPrice1(ChartPrice dates) throws Exception;
 	public List<OrderList> all(Criteria criteria) throws Exception;
-	public List<OrderList> orderAll() throws Exception;
+	public List<OrderList> orderAll(Criteria criteria) throws Exception;
 	public List<OrderList> orderAllSearch(OrderList orderList) throws Exception;
 	public List<OrderList> orderSort1() throws Exception;
 	public List<OrderList> orderSort2() throws Exception;
 	public List<OrderList> orderSort3() throws Exception;
 	public List<OrderList> orderSort4() throws Exception;
-	public List<FoodMInven> foodStockListAll() throws Exception;
+	public List<FoodMInven> foodStockListAll(Criteria criteria) throws Exception;
 	public int orderListCount() throws Exception;
+	public int orderCount() throws Exception;
+	public int foodStockListCount() throws Exception;
 	public String appTest(String id) throws Exception;
 	public List<Diet> dietAll() throws Exception;
 	public void dietPriceUp(Diet diet) throws Exception;

@@ -52,20 +52,25 @@
 	<select id="foodStockList" resultType="FoodMInven">
 		select foodMName,
 		sum(inAmount) as inAmount, COALESCE(sum(outAmount),0) as
-		outAmount, unit, foodMStatus, 
+		outAmount,
+		unit, foodMStatus,
 		sum(inAmount)-COALESCE(sum(outAmount),0) as stock
-		from foodminven where foodMStatus = 1  
+		from foodminven where foodMStatus = 1
 		group by foodMName
+		limit #{startRecord},
+		#{recordsPerPage}
 	</select>
 
 	<select id="foodStockListSearch" resultType="FoodMInven">
 		select foodMName,
-		sum(inAmount) as inAmount, COALESCE(sum(outAmount),0) as
-		outAmount, unit, foodMStatus, 
+		sum(inAmount) as inAmount, COALESCE(sum(outAmount),0)
+		as
+		outAmount, unit, foodMStatus,
 		sum(inAmount)-COALESCE(sum(outAmount),0) as stock
-		from foodminven where foodMStatus = 1
+		from foodminven where
+		foodMStatus = 1
 		group by foodMName
-		<include refid="foodsearch"></include>   
+		<include refid="foodsearch"></include>
 	</select>
 	<sql id="foodsearch">
 		<if test="searchType != null">
@@ -74,10 +79,12 @@
 			</if>
 		</if>
 	</sql>
-	
-	<!-- 식재료 주문 대기  -->
+
+	<!-- 식재료 주문 대기 -->
 	<select id="foodStockListStop" resultType="FoodMInven">
-		select foodMName, sum(inAmount) as inAmount, unit, foodMStatus, sum(inAmount)*price as price
+		select foodMName,
+		sum(inAmount) as inAmount, unit, foodMStatus, sum(inAmount)*price as
+		price
 		from foodminven where foodMStatus = 0
 		group by foodMName
 	</select>
@@ -175,13 +182,14 @@
 		where
 		a.dietCode=b.dietCode
 		and
-		b.orderItemCode = c.orderItemCode
+		b.orderItemCode =
+		c.orderItemCode
 		order by field(b.orderItemCode, 0,1,2,3,9,10,4,5,7,8,6)
 		limit #{startRecord},
 		#{recordsPerPage}
 	</select>
 	<select id="allSort" resultType="OrderList">
-	select b.dietCode, b.orderCode,
+		select b.dietCode, b.orderCode,
 		b.id, a.dietName, b.orderDate, b.price,
 		b.orderItemCode,
 		b.transportNum, c.orderItemName
@@ -192,7 +200,8 @@
 		a.dietCode=b.dietCode
 		and
 		b.orderItemCode = c.orderItemCode
-		order by field(b.orderItemCode, 0,1,2,3,9,10,4,5,7,8, #{Sort});
+		order by field(b.orderItemCode,
+		0,1,2,3,9,10,4,5,7,8, #{Sort});
 	</select>
 	<!--orderList 페이지 내역 출력 -->
 	<select id="orderAll" resultType="OrderList">
@@ -209,6 +218,8 @@
 		c.orderItemCode=10) and
 		(b.orderItemCode =
 		c.orderItemCode)
+		limit #{startRecord},
+		#{recordsPerPage}
 	</select>
 
 	<select id="orderAllSearch" resultType="OrderList">
@@ -217,10 +228,12 @@
 		b.orderItemCode,
 		b.transportNum, c.orderItemName
 		from diet a,
-		orderlist b,
+		orderlist
+		b,
 		orderitem c
 		where a.dietCode=b.dietCode
-		and (c.orderItemCode=2 or c.orderItemCode
+		and (c.orderItemCode=2 or
+		c.orderItemCode
 		=3 or c.orderItemCode =9 or
 		c.orderItemCode=10) and
 		(b.orderItemCode =
@@ -240,82 +253,95 @@
 			</if>
 		</if>
 	</sql>
-	<!--결제 완료 우선  -->
-	<select id="orderSort1" resultType="OrderList"> 
+	<!--결제 완료 우선 -->
+	<select id="orderSort1" resultType="OrderList">
 		select b.dietCode, b.orderCode,
 		b.id, a.dietName, b.orderDate, b.price,
 		b.orderItemCode,
 		b.transportNum, c.orderItemName
 		from diet a,
-		orderlist b,
+		orderlist
+		b,
 		orderitem c
 		where a.dietCode=b.dietCode
-		and (c.orderItemCode=2 or c.orderItemCode
+		and (c.orderItemCode=2 or
+		c.orderItemCode
 		=3 or c.orderItemCode =9 or
 		c.orderItemCode=10) and
 		(b.orderItemCode =
 		c.orderItemCode)
-		order by field(c.orderItemCode, 2,3,9,10)
+		order by field(c.orderItemCode,
+		2,3,9,10)
 	</select>
-	
-	<!--조리 대기 우선  -->
-	<select id="orderSort2" resultType="OrderList"> 
+
+	<!--조리 대기 우선 -->
+	<select id="orderSort2" resultType="OrderList">
 		select b.dietCode, b.orderCode,
 		b.id, a.dietName, b.orderDate, b.price,
 		b.orderItemCode,
 		b.transportNum, c.orderItemName
 		from diet a,
-		orderlist b,
+		orderlist
+		b,
 		orderitem c
 		where a.dietCode=b.dietCode
-		and (c.orderItemCode=2 or c.orderItemCode
+		and (c.orderItemCode=2 or
+		c.orderItemCode
 		=3 or c.orderItemCode =9 or
 		c.orderItemCode=10) and
 		(b.orderItemCode =
 		c.orderItemCode)
-		order by field(c.orderItemCode, 3,2,9,10)
+		order by field(c.orderItemCode,
+		3,2,9,10)
 	</select>
-	
-	<!--식재료 발주  우선  -->
-	<select id="orderSort3" resultType="OrderList"> 
+
+	<!--식재료 발주 우선 -->
+	<select id="orderSort3" resultType="OrderList">
 		select b.dietCode, b.orderCode,
 		b.id, a.dietName, b.orderDate, b.price,
 		b.orderItemCode,
 		b.transportNum, c.orderItemName
 		from diet a,
-		orderlist b,
+		orderlist
+		b,
 		orderitem c
 		where a.dietCode=b.dietCode
-		and (c.orderItemCode=2 or c.orderItemCode
+		and (c.orderItemCode=2 or
+		c.orderItemCode
 		=3 or c.orderItemCode =9 or
 		c.orderItemCode=10) and
 		(b.orderItemCode =
 		c.orderItemCode)
-		order by field(c.orderItemCode, 9,3,2,10)
+		order by field(c.orderItemCode,
+		9,3,2,10)
 	</select>
-	
-	
-	<!--식재료 입고  우선  -->
-	<select id="orderSort4" resultType="OrderList"> 
-		select b.dietCode, b.orderCode,
-		b.id, a.dietName, b.orderDate, b.price,
-		b.orderItemCode,
-		b.transportNum, c.orderItemName
-		from diet a,
-		orderlist b,
-		orderitem c
-		where a.dietCode=b.dietCode
-		and (c.orderItemCode=2 or c.orderItemCode
-		=3 or c.orderItemCode =9 or
-		c.orderItemCode=10) and
-		(b.orderItemCode =
-		c.orderItemCode)
-		order by field(c.orderItemCode, 10,3,9,2)
-	</select>
-	
-	
 
 
+	<!--식재료 입고 우선 -->
+	<select id="orderSort4" resultType="OrderList">
+		select b.dietCode, b.orderCode,
+		b.id, a.dietName, b.orderDate, b.price,
+		b.orderItemCode,
+		b.transportNum, c.orderItemName
+		from diet a,
+		orderlist
+		b,
+		orderitem c
+		where a.dietCode=b.dietCode
+		and (c.orderItemCode=2 or
+		c.orderItemCode
+		=3 or c.orderItemCode =9 or
+		c.orderItemCode=10) and
+		(b.orderItemCode =
+		c.orderItemCode)
+		order by field(c.orderItemCode,
+		10,3,9,2)
+	</select>
+
+
+
+	<!--페이지 네이션 -->
+	<!--메인 페이지 -->
 	<select id="orderALlCount" resultType="Integer">
 		select count(b.orderCode)
 		from diet a join
@@ -326,6 +352,32 @@
 		and
 		b.orderItemCode = c.orderItemCode
 	</select>
+	<!--주문 내역 페이지 -->
+	<select id="orderListCount" resultType="Integer">
+		select count(b.orderCode)
+		from diet a,
+		orderlist b,
+		orderitem c
+		where a.dietCode=b.dietCode
+		and
+		(c.orderItemCode=2 or c.orderItemCode
+		=3 or c.orderItemCode =9 or
+		c.orderItemCode=10) and
+		(b.orderItemCode =
+		c.orderItemCode)
+	</select>
+
+	<select id="foodStockListCount" resultType="Integer">
+		select count(a.foodMName)
+		from (select foodMName,
+		sum(inAmount) as inAmount, COALESCE(sum(outAmount),0) as
+		outAmount, unit, foodMStatus,
+		sum(inAmount)-COALESCE(sum(outAmount),0) as stock
+		from foodminven where foodMStatus = 1
+		group by foodMName) a
+	</select>
+
+
 
 	<select id="AppTest" resultType="String">
 		select token
@@ -499,7 +551,8 @@
 	<!-- orderoptions에 있는 orderItemCode = 3으로 업데이트 -->
 	<update id="workupdateOptions">
 		update orderoptions set orderItemCode = 3
-		where orderCode = #{orderCode};
+		where
+		orderCode = #{orderCode};
 	</update>
 
 </mapper> 
