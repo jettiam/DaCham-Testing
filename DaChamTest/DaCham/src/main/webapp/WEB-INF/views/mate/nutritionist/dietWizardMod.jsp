@@ -60,8 +60,7 @@
 							alert(typeof wizard);
 							console.log(wizard);
 							$.ajax({
-								url : "wizardInsert",
-								
+								url : "wizardInsert",								
 								type : "POST",
 								data : {
 									wizard : wizard,
