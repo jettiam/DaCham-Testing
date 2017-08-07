@@ -91,5 +91,10 @@ private CustomerDAO dao;
 		// TODO Auto-generated method stub
 		return dao.measureRead(id);
 	}
+	@Override
+	public List<Customer> menuShow(int diseaseCode) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.menuShow(diseaseCode);
+	}
 
 }

@@ -58,7 +58,7 @@
 		<property name="url" value="jdbc:mysql://localhost:3306/redbud" /> 		
 		<property name="username" value="redbud" />
 		<property name="password" value="fpemqjem1*" />
-	</bean>  --> 
+	</bean> -->
 
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
