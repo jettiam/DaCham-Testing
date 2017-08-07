@@ -32,7 +32,7 @@ margin-bottom:20px;
 		<div class="w3-bar w3-border w3-theme-d5 w3-xlarge">
 		<div class="w3-container">
 		  <a href="counselorList" class="w3-bar-item w3-button w3-hover-light-gray" id="counselorList">고객상담</a>
-		  <a href="detail?customer=test&name=김다희&counselCode=2" id = "detail" class="w3-bar-item w3-button w3-hover-light-gray" id="detail">상담내역</a>	 
+		  <a href="all" class="w3-bar-item w3-button w3-hover-light-gray" id="detail">상담내역</a>	 
 		</div>
 		</div>
 		

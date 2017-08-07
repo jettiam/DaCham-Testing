@@ -120,4 +120,10 @@ public class CounselorServiceImpl implements CounselorService {
 		// TODO Auto-generated method stub
 		return dao.optionTuning(orderCode);
 	}
+
+	@Override
+	public List<Counselor> listAll(int counselItemCode) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.listAll(counselItemCode);
+	}
 }

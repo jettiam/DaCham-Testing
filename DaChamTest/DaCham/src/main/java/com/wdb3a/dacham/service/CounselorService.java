@@ -24,4 +24,5 @@ public interface CounselorService {
 	public List<Counselor> orderListSearch(Counselor counselor) throws Exception;
 	public List<Counselor> finCounselList() throws Exception;
 	public List<Counselor> optionTuning(int orderCode) throws Exception;
+	public List<Counselor> listAll(int counselItemCode) throws Exception;
 }

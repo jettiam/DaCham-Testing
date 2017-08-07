@@ -1,6 +1,8 @@
 package com.wdb3a.dacham.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -85,15 +87,15 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 	}
 
 	@Override
-	public List<OrderList> orderAll() throws Exception {
+	public List<OrderList> orderAll(Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".orderAll");
+		return sqlSession.selectList(namespace+".orderAll", criteria); 
 	}
 
 	@Override
-	public List<FoodMInven> foodStockListAll() throws Exception {
+	public List<FoodMInven> foodStockListAll(Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".foodStockList");
+		return sqlSession.selectList(namespace+".foodStockList", criteria);
 	}
 
 	@Override
@@ -102,15 +104,17 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 		return sqlSession.selectOne(namespace+".orderALlCount");
 	}
 
-	@Override
+	/*@Override
 	public List<OrderList> orderAll(OrderList orderList) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".orderAll", orderList);
-	}
+		
+		return sqlSession.selectList(namespace+".orderAll", orderList);  
+	}*/
 
 	@Override
 	public List<OrderList> orderAllSearch(OrderList orderist) throws Exception {
 		// TODO Auto-generated method stub
+		
 		return sqlSession.selectList(namespace+".orderAllSearch", orderist);
 	}
 
@@ -233,6 +237,42 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 	public List<FoodMInven> foodStockListStop() throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".foodStockListStop");
+	}
+
+	@Override
+	public List<OrderList> orderSort1() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".orderSort1");
+	}
+
+	@Override
+	public List<OrderList> orderSort2() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".orderSort2");
+	}
+
+	@Override
+	public List<OrderList> orderSort3() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".orderSort3");
+	}
+
+	@Override
+	public List<OrderList> orderSort4() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".orderSort4");
+	}
+
+	@Override
+	public int orderCount() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".orderListCount");
+	}
+
+	@Override
+	public int foodStockListCount() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".foodStockListCount");
 	}
 
 	

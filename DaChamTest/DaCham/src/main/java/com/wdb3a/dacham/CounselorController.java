@@ -47,4 +47,8 @@ public class CounselorController {
       model.addAttribute("name",name);
       return "mate/counselor/counselorDetail";
    }
+   @RequestMapping(value = "/all",method = RequestMethod.GET)
+   public String all(){
+	   return "mate/counselor/counselAll";
+   }
 }

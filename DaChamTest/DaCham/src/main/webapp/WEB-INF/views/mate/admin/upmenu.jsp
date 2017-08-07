@@ -33,8 +33,8 @@ margin-bottom:20px;
 		  <a href="orderList" class="w3-bar-item w3-button w3-hover-light-gray" id="orderList">주문내역</a>
 		  <a href="foodStock" class="w3-bar-item w3-button w3-hover-light-gray" id="foodStock">식재료</a>
 		  <a href="dietManagement"class="w3-bar-item w3-button w3-hover-light-gray" id="dietManagement">식단관리</a>
-		  <a href="emp"class="w3-bar-item w3-button w3-hover-light-gray" id="emp">사원관리</a>
-		  <a href="customer" class="w3-bar-item w3-button w3-hover-light-gray" id="customer">회원관리</a>
+		  <a href="emp"class="w3-bar-item w3-button w3-hover-light-gray" id="emp">사원등록</a>
+		  <a href="customer" class="w3-bar-item w3-button w3-hover-light-gray" id="customer">사원/회원 관리</a>  
 		</div>
 		</div>
 		

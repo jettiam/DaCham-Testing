@@ -276,7 +276,7 @@
 	<%@include file="../admin/upmenu.jsp"%>
 	<div class="container">
 		<div class="col-sm-4">
-			<h2>회원검색</h2>
+			<h2>사원/회원 검색</h2>
 			<div class="form-group row">
 				<div class="col-sm-3">     
 					<select name="searchType" class="searchType form-control">

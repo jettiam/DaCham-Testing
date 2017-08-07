@@ -35,7 +35,7 @@ display:none;
 margin-top:20px;
 }
 
-@media screen and (max-width: 763px) {
+@media screen and (max-width: 768px) {
 
 	.dImg{
 	max-width:120px;

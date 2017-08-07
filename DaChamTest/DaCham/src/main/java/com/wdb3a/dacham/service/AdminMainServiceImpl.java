@@ -91,15 +91,15 @@ public class AdminMainServiceImpl implements AdminMainService {
 	}
 
 	@Override
-	public List<OrderList> orderAll() throws Exception {
+	public List<OrderList> orderAll(Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.orderAll();
+		return dao.orderAll(criteria);
 	}
 
 	@Override
-	public List<FoodMInven> foodStockListAll() throws Exception {
+	public List<FoodMInven> foodStockListAll(Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.foodStockListAll();  
+		return dao.foodStockListAll(criteria);  
 	}
 
 	@Override
@@ -108,11 +108,11 @@ public class AdminMainServiceImpl implements AdminMainService {
 		return dao.orderListCount();
 	}
 
-	@Override
+	/*@Override
 	public List<OrderList> orderAll(OrderList orderList) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.orderAll(orderList);
-	}
+	}*/  
 
 	@Override
 	public List<OrderList> orderAllSearch(OrderList orderList) throws Exception {
@@ -236,6 +236,42 @@ public class AdminMainServiceImpl implements AdminMainService {
 	public List<FoodMInven> foodStockListStop() throws Exception {
 		// TODO Auto-generated method stub
 		return dao.foodStockListStop();
+	}
+
+	@Override
+	public List<OrderList> orderSort1() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.orderSort1();
+	}
+
+	@Override
+	public List<OrderList> orderSort2() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.orderSort2();
+	}
+
+	@Override
+	public List<OrderList> orderSort3() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.orderSort3();
+	}
+
+	@Override
+	public List<OrderList> orderSort4() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.orderSort4();
+	}
+
+	@Override
+	public int orderCount() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.orderCount();
+	}
+
+	@Override
+	public int foodStockListCount() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.foodStockListCount();
 	}
 
 	

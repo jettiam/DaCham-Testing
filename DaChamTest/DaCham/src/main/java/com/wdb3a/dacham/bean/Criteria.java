@@ -78,7 +78,7 @@ public class Criteria {
 	public int getStartRecord(){
 		//page가 1이면 0*10리턴
 		//page가 2이면 1*10리턴........
-		
+		System.out.println((page-1)*recordsPerPage);
 		return (page-1)*recordsPerPage;
 	}
 	public void setPage(int page) {

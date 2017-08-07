@@ -68,7 +68,19 @@ public class LoginController {
 					session.setAttribute("tel", dbResult.getTel());
 					session.setAttribute("email", dbResult.getEmail());
 					session.setAttribute("joinDate", dbResult.getJoinDate());
-					session.setAttribute("gradeCode", dbResult.getGradeCode());				
+					session.setAttribute("gradeCode", dbResult.getGradeCode());
+					session.setAttribute("deptCode", dbResult.getDeptCode());					
+				}else if(result == 3 ){
+					Member dbResult = service.getMember(id);
+					session.setAttribute("memberName", dbResult.getName());
+					session.setAttribute("customerId", dbResult.getId());
+					session.setAttribute("passwd", dbResult.getPasswd());
+					session.setAttribute("address", dbResult.getAddress());
+					session.setAttribute("tel", dbResult.getTel());
+					session.setAttribute("email", dbResult.getEmail());
+					session.setAttribute("joinDate", dbResult.getJoinDate());
+					session.setAttribute("gradeCode", dbResult.getGradeCode());
+					session.setAttribute("deptCode", dbResult.getDeptCode());	
 				}
 			} catch (Exception e) {								
 				e.printStackTrace();

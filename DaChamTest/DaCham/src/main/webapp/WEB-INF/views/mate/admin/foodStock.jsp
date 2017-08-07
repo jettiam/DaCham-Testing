@@ -15,21 +15,23 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 <script>
-function all(){
-	$.getJSON("adminSub/foodStockAll",function(data){
-		console.log(data); 
-		$(".foodStock").remove(); 
-		var str = "";
-		for(var i =0; i<data.length; i++){
-			str += "<tr class='foodStock'>"+"<td>"+data[i].foodMName+"</td>"+"<td>"+data[i].inAmount+"</td>"+"<td>"+data[i].outAmount+"</td>"+"<td>"+data[i].stock+"</td>"+"<td>"+data[i].unit+"</td></tr>"			 
-		}
-		console.log(str);
-		$(".tables").append(str); 
-	});  
-} 
+
 	$(document).ready(function() {
+		function all(page){
+			$.getJSON("adminSub/foodStockAll/"+page,function(data){ 
+				console.log(data);  
+				$(".foodStock").remove(); 
+				var str = "";
+				for(var i =0; i<data.list.length; i++){ 
+					str += "<tr class='foodStock'>"+"<td>"+data.list[i].foodMName+"</td>"+"<td>"+data.list[i].inAmount+"</td>"+"<td>"+data.list[i].outAmount+"</td>"+"<td>"+data.list[i].stock+"</td>"+"<td>"+data.list[i].unit+"</td></tr>"			 
+				} 
+				console.log(str);
+				$(".tables").append(str); 
+				printPaging(data.criteria); 
+			});  
+		} 
 		$("#foodStock").addClass("w3-light-gray");
-		all();
+		all(1);  
 		$("#foodOrder").on("click", function() {
 			window.location.href = "foodOrder"
 		});
@@ -64,6 +66,35 @@ function all(){
 			});  
 		}
 		allSub(); 
+		
+		function printPaging(criteria) { 
+			var str = "";
+
+			if (criteria.prev) {
+				str += "<li><a href=''"
+						+ (criteria.startPage - 1) + "'>'"
+						+ "<<" + "</a></li>";
+			}
+			for (var i = criteria.startPage; i <= criteria.endPage; i++) {
+				var strClass = criteria.page == i ? "class = 'active'"
+						: "";
+				str += "<li "+strClass+"><a href ='"+i+"'>" + i
+						+ "</a></li>";
+			}
+			if (criteria.next) {
+				str += "<li><a href=''"
+						+ (criteria.endPage + 1) + "'>'" + ">>"
+						+ "</a></li>";
+			}
+			$(".pagination").html(str);
+		}
+
+		var currentPage = 1;
+		$(".pagination").on("click", "li a", function() {
+			event.preventDefault();
+			var replyPage = $(this).attr("href");
+			all(replyPage);
+		});
 	
 });          
 </script>
@@ -97,6 +128,8 @@ function all(){
 				<th>단위</th>     
 			</tr>
 		</table>
+		<ul class="pagination" position="center">
+					</ul>
 	</div>
 	<button id="foodOrder" class = "btn btn-default">식재료주문</button> 
 	
