@@ -29,10 +29,12 @@ public interface AdminMainService {
 	public List<ChartPrice> chartPrice() throws Exception;
 	public List<ChartPrice> chartPrice1(ChartPrice dates) throws Exception;
 	public List<OrderList> all(Criteria criteria) throws Exception;
-	public List<OrderList> orderAll() throws Exception;
-	public List<FoodMInven> foodStockListAll() throws Exception; 
+	public List<OrderList> orderAll(Criteria criteria) throws Exception;
+	public List<FoodMInven> foodStockListAll(Criteria criteria) throws Exception; 
 	public int orderListCount() throws Exception;
-	public List<OrderList> orderAll(OrderList orderList) throws Exception;
+	public int orderCount() throws Exception;
+	public int foodStockListCount() throws Exception;
+	//public List<OrderList> orderAll(OrderList orderList) throws Exception;
 	public List<OrderList> orderAllSearch(OrderList orderList) throws Exception;
 	public List<OrderList> orderSort1() throws Exception;
 	public List<OrderList> orderSort2() throws Exception;

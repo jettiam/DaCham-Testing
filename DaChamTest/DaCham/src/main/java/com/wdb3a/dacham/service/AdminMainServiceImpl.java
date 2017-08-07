@@ -91,15 +91,15 @@ public class AdminMainServiceImpl implements AdminMainService {
 	}
 
 	@Override
-	public List<OrderList> orderAll() throws Exception {
+	public List<OrderList> orderAll(Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.orderAll();
+		return dao.orderAll(criteria);
 	}
 
 	@Override
-	public List<FoodMInven> foodStockListAll() throws Exception {
+	public List<FoodMInven> foodStockListAll(Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.foodStockListAll();  
+		return dao.foodStockListAll(criteria);  
 	}
 
 	@Override
@@ -108,11 +108,11 @@ public class AdminMainServiceImpl implements AdminMainService {
 		return dao.orderListCount();
 	}
 
-	@Override
+	/*@Override
 	public List<OrderList> orderAll(OrderList orderList) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.orderAll(orderList);
-	}
+	}*/  
 
 	@Override
 	public List<OrderList> orderAllSearch(OrderList orderList) throws Exception {
@@ -260,6 +260,18 @@ public class AdminMainServiceImpl implements AdminMainService {
 	public List<OrderList> orderSort4() throws Exception {
 		// TODO Auto-generated method stub
 		return dao.orderSort4();
+	}
+
+	@Override
+	public int orderCount() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.orderCount();
+	}
+
+	@Override
+	public int foodStockListCount() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.foodStockListCount();
 	}
 
 	
