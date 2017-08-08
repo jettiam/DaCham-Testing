@@ -300,6 +300,9 @@
 						});
 						//작업요청
 						$('#work').click(function() {
+							
+			
+							
 							$("input[name=che]:checked").each(function() {
 								var test = $(this).val();
 								console.log(test);
@@ -316,7 +319,7 @@
 										"X-HTTP-Method-Override" : "PUT"
 									},
 									success : function(data) {
-
+										
 										all();
 
 									},
@@ -326,6 +329,7 @@
 
 								});
 							});
+							
 						});
 						//검색
 						$("#search")
@@ -338,6 +342,7 @@
 											var searchType = $(".searchType")
 													.val();
 											var keyword = $("#keyword").val();
+											if(keyword!=""){
 											$
 													.getJSON(
 															"adminSub/orderList/"
@@ -372,10 +377,16 @@
 																			+ data[i].orderItemName
 																			+ "</td> </tr>"
 																}
+															
 																$(".tables")
 																		.append(
 																				str);
+																
 															});
+											}else{
+												alert("검색어를 입력하세요");
+												all(1); 
+											}
 										});
 						$("#searchAll").on("click", function() {
 							all(1); 
@@ -446,7 +457,7 @@
 							event.preventDefault();
 							var replyPage = $(this).attr("href");
 							all(replyPage);
-						});
+						});   
 
 					});
 </script>

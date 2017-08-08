@@ -27,45 +27,54 @@
 				} 
 				console.log(str);
 				$(".tables").append(str); 
-				printPaging(data.criteria); 
+				printPaging(data.criteria);     
 			});  
 		} 
 		$("#foodStock").addClass("w3-light-gray");
-		all(1);  
+		all(1);      
 		$("#foodOrder").on("click", function() {
 			window.location.href = "foodOrder"
 		});
 		$("#search").on("click",function(){
+		
 			$(".foodStock").remove();
 			 
 			var str="";  
 			var searchType = $(".searchType").val();   
 			var keyword = $("#keyword").val();
+			if(keyword!=""){
 			$.getJSON("adminSub/foodOrder/"+searchType+"/"+keyword,function(data){
 			for(var i=0; i<data.length; i++){
 				 
 				str += "<tr class='foodStock'>"+"<td>"+data[i].foodMName+"</td>"+"<td>"+data[i].inAmount+"</td>"+"<td>"+data[i].outAmount+"</td>"+"<td>"+data[i].stock+"</td>"+"<td>"+data[i].unit+"</td></tr>"		 
 				}    
-			$(".tables").append(str); 
-			});        
+			$(".tables").append(str);
+			$(".pagination").empty();
+			}); 
+			}
+			else{
+				alert("검색어를 입력하세요");
+				all(1);
+			}
 		}); 
 		$("#searchAll").on("click", function(){
-			all(); 
+			all(1);   
 		});
 		
-		function allSub(){
-			$.getJSON("adminSub/foodStockStopAll",function(data){
+		function allSub(page){
+			$.getJSON("adminSub/foodStockStopAll/"+page,function(data){
 				console.log(data); 
 				$(".foodStockStop").remove(); 
 				var str = "";
-				for(var i =0; i<data.length; i++){
-					str += "<tr class='foodStockStop'>"+"<td>"+data[i].foodMName+"</td>"+"<td>"+data[i].inAmount+"</td>"+"<td>"+data[i].unit+"</td><td>"+data[i].price+"</td></tr>"			 
+				for(var i =0; i<data.list.length; i++){
+					str += "<tr class='foodStockStop'>"+"<td>"+data.list[i].foodMName+"</td>"+"<td>"+data.list[i].inAmount+"</td>"+"<td>"+data.list[i].unit+"</td><td>"+data.list[i].price+"</td></tr>"			 
 				}
 				console.log(str);
 				$(".tablesStop").append(str); 
+				printPagingSub(data.criteria); 
 			});  
 		}
-		allSub(); 
+		allSub(1); 
 		
 		function printPaging(criteria) { 
 			var str = "";
@@ -86,15 +95,46 @@
 						+ (criteria.endPage + 1) + "'>'" + ">>"
 						+ "</a></li>";
 			}
-			$(".pagination").html(str);
+			$(".all").html(str);
 		}
 
-		var currentPage = 1;
-		$(".pagination").on("click", "li a", function() {
+		//var currentPage = 1;
+		$(".all").on("click", "li a", function() {
 			event.preventDefault();
 			var replyPage = $(this).attr("href");
 			all(replyPage);
 		});
+		
+		function printPagingSub(criteria) { 
+			var str = "";
+
+			if (criteria.prev) {
+				str += "<li><a href=''"
+						+ (criteria.startPage - 1) + "'>'"
+						+ "<<" + "</a></li>";
+			}
+			for (var i = criteria.startPage; i <= criteria.endPage; i++) {
+				var strClass = criteria.page == i ? "class = 'active'"
+						: "";
+				str += "<li "+strClass+"><a href ='"+i+"'>" + i
+						+ "</a></li>";
+			}
+			if (criteria.next) {
+				str += "<li><a href=''"
+						+ (criteria.endPage + 1) + "'>'" + ">>"
+						+ "</a></li>";
+			}
+			$(".paginationSub").html(str);
+		}  
+
+		//var currentPageSub = 1;  
+		$(".paginationSub").on("click", "li a", function() {
+			event.preventDefault();
+			var replyPage = $(this).attr("href");
+			allSub(replyPage);
+		});
+		
+		
 	
 });          
 </script>
@@ -128,7 +168,7 @@
 				<th>단위</th>     
 			</tr>
 		</table>
-		<ul class="pagination" position="center">
+		<ul class="all pagination" position="center">
 					</ul>
 	</div>
 	<button id="foodOrder" class = "btn btn-default">식재료주문</button> 
@@ -143,6 +183,8 @@
 				<th>총가격</th>  
 			</tr>
 		</table>
+		<ul class="paginationSub pagination" position="center">
+					</ul>
 	</div>
 	</div>
 </body>

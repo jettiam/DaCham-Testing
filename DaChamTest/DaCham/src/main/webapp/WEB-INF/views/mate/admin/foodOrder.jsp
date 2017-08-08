@@ -315,12 +315,17 @@
 									var str=""; 
 									var searchType = $(".searchType").val();
 									var keyword = $("#keyword").val();
+									if(keyword != ""){
 									$.getJSON("adminSub/foodMaterial/"+searchType+"/"+keyword,function(data){
 									for(var i=0; i<data.length; i++){
 										str += "<tr class='foodStock'>"+"<td id='foodMCode' data-code='"+data[i].foodMCode+"'>"+data[i].foodMCode+"</td>"+"<td id='foodMName' data-code='"+data[i].foodMName+"'>"+data[i].foodMName+"</td>"+"<td id='price' data-code='"+data[i].price+"'>"+data[i].price+"</td>"+"<td><input type='text' class='Stock' size='4'></td>"+"<td id='unit' data-code='"+data[i].unit+"'>"+data[i].unit+"</td>"+"<td><button class='orderBtn btn btn-primary'>주문</button></td>"+"</tr>"
 										}    
 									$(".foodMTable").append(str); 
 									});
+									}else{
+										alert("검색어를 입력하세요");
+										
+									}
 								});
 								var cnt=0; 
 							 

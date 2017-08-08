@@ -46,6 +46,7 @@ function disease1(){
 				}
 				console.log(str);
 				$(".tables").append(str);
+				$(".pagination").empty();
 			});
 }
 function disease2(){
@@ -80,6 +81,7 @@ function disease2(){
 				}
 				console.log(str);
 				$(".tables").append(str);
+				$(".pagination").empty();
 			});
 }  
 function disease3(){
@@ -114,6 +116,7 @@ function disease3(){
 				}
 				console.log(str);
 				$(".tables").append(str);
+				$(".pagination").empty();
 			});
 }
 function disease4(){
@@ -148,6 +151,7 @@ function disease4(){
 				}
 				console.log(str);
 				$(".tables").append(str);
+				$(".pagination").empty();
 			});
 }
 
@@ -155,41 +159,42 @@ function disease4(){
 			.ready(
 					function() {
 						$("#dietManagement").addClass("w3-light-gray");
-						function all() {
+						function all(page) {
 							$
 									.getJSON(
-											"adminSub/dietAll",
+											"adminSub/dietAll/"+page,
 											function(data) {
 												console.log(data);
 												$(".dietAll").remove();
 												var str = "";
-												for (var i = 0; i < data.length; i++) {
-													if (data[i].spDietItem == 0) {
-														data[i].spDietItem = "특별식단"
-													} else if (data[i].spDietItem == 1) {
-														data[i].spDietItem = "판매중"
+												for (var i = 0; i < data.list.length; i++) {
+													if (data.list[i].spDietItem == 0) {
+														data.list[i].spDietItem = "특별식단"
+													} else if (data.list[i].spDietItem == 1) {
+														data.list[i].spDietItem = "판매중"
 													} else {
-														data[i].spDietItem = "판매중지"
+														data.list[i].spDietItem = "판매중지"
 													}
 													str += "<tr class='dietAll'>"
-															+ "<td><input type='checkBox' name='dietCode' value='"+data[i].dietCode+"'></td>"
+															+ "<td><input type='checkBox' name='dietCode' value='"+data.list[i].dietCode+"'></td>"
 															+ "<td>"
-															+ data[i].dietName
+															+ data.list[i].dietName
 															+ "</td>"
-															+ "<td><input type='text' value='" + data[i].price + "'>"
-															+ "&nbsp&nbsp<button class='priceUpdate btn btn-default' data-price='"+data[i].dietCode+"'>가격수정</button>"
+															+ "<td><input type='text' value='" + data.list[i].price + "'>"
+															+ "&nbsp&nbsp<button class='priceUpdate btn btn-default' data-price='"+data.list[i].dietCode+"'>가격수정</button>"
 															+ "</td>"
 															+ "<td>"
-															+ data[i].diseaseName
+															+ data.list[i].diseaseName
 															+ "</td><td>"
-															+ data[i].spDietItem
+															+ data.list[i].spDietItem
 															+ "</tr>"
 												}
 												console.log(str);
 												$(".tables").append(str);
+												printPaging(data.criteria);    
 											});
 						}
-						all()
+						all(1)
 						$(".tables").on('click', '.priceUpdate', function() {
 							//alert($(this).prev().val());
 							var price = $(this).prev().val();
@@ -265,6 +270,38 @@ function disease4(){
 										});
 						
 						
+						function printPaging(criteria) {
+							var str = "";
+
+							if (criteria.prev) {
+								str += "<li><a href=''"
+										+ (criteria.startPage - 1) + "'>'"
+										+ "<<" + "</a></li>";
+							}
+							for (var i = criteria.startPage; i <= criteria.endPage; i++) {
+								var strClass = criteria.page == i ? "class = 'active'"
+										: "";
+								str += "<li "+strClass+"><a href ='"+i+"'>" + i
+										+ "</a></li>";
+							}
+							if (criteria.next) {
+								str += "<li><a href=''"
+										+ (criteria.endPage + 1) + "'>'" + ">>"
+										+ "</a></li>";
+							}
+							$(".pagination").html(str);
+						}  
+
+						var currentPage = 1;
+						$(".pagination").on("click", "li a", function() {
+							event.preventDefault();
+							var replyPage = $(this).attr("href");
+							all(replyPage);
+						});   
+
+				
+						
+						
 
 					});
 </script>
@@ -296,6 +333,8 @@ function disease4(){
 					<th>상태</th>
 				</tr>
 			</table>
+			<ul class="pagination" position="center">
+					</ul>
 		</div>
 		<div class="col-sm-offset-10">
 			<button id="dietSell" class="btn btn-default">판매</button>
