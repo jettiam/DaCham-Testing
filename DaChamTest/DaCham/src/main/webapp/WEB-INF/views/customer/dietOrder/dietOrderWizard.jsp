@@ -19,11 +19,20 @@
 <script>
 	$(document).ready(function() {
 		$("#dietOrder").addClass("w3-gray");
+		step=1;
+		stepArr = new Array();
 		$("#startWizard").click(function() {
-			/* alert("위자드를 시작해요."); */
+			$(this).text("위자드 다시 시작하기");
+			
+			
 			$("#wizardResult").hide("slow");
 			$(".btn").show("slow");
+					
+			step=1;
+			$("#wizardStepLogo").attr("colspan", "");
+			$("#wizardStepArea").empty();
 			getWizard(1);
+			
 		});
 
 		$(".btn").click(function() {
@@ -36,6 +45,14 @@
 			$("#rJudg").val($("#resultJudg").text());
 			$("#ResultDiet").attr("action", "recommendDiet");
 			$("#ResultDiet").submit();
+		});
+		
+		$(document).on("click", ".step", function(){
+			//alert("클릭되었습니다."+$(this).attr("data-link"));
+			$("#wizardStepLogo").attr("colspan", $(this).attr("data-step"));
+			$(this).nextAll("td").remove();
+			
+			getWizard($(this).attr("data-link"));
 		});
 		
 		
@@ -59,6 +76,7 @@
 							$(".btn").hide("slow");
 
 							var resultName = eval("json.q" + no
+									
 									+ ".resultList.result");
 							var resultJudg = eval("json.q" + no
 									+ ".resultList.judg");
@@ -90,21 +108,40 @@
 								n++;
 							}
 						}
+						stepArr[step]=no;		
+						var a = "<td class='step' data-step='"+step+"' data-link='"+no+"'>"+step+"단계</td>";
+						$("#wizardStepLogo").attr('colspan', step);
+						$("#wizardStepArea").append(a);					
+						if($(document).hasClass("step")){
+							if($("td").attr("data-step")==step){
+								
+							}else{
+								step++;
+							}
+							
+						}
+							
+						
+						
 					},
 					error : function(request, status, error) {
 						alert("에러: " + request.status + "\n massage"
 								+ request.responseText);
 					}
 				});
+	
+	
+	
+			
+		
 	}
 </script>
 
 <style>
 
-#ground {
+.ground {
 	width: 320px;
 	height: 100px;
-	background-image: url('https://placeimg.com/320/100/any');
 }
 
 #startBox {
@@ -114,8 +151,14 @@
 #startWizard {
 	text-align: center;
 	margin: 0 auto;
-	padding-top: 35px;
-	color: #ffffff;
+	
+	
+}
+
+.testing {
+	border-radius: 5px;
+	border: 1px solid #819b3a;
+	padding: 5px;
 }
 
 li {
@@ -131,54 +174,52 @@ li {
 	<section class="purpose section">
 		<div class="container">
 			<h2 class="title">Dacham Wizard</h2>
-			<div id="ground" class="container">
-			<h2 id="startWizard">위자드 시작하기</h2>
-			</div>
-			<div class="row">
-				<div class="col-sm-6">	
-							<h3>col-sm-6</h3>
-							<p>내용 들어갈 자리</p>
-							<p>내용 들어갈 자리</p>				
-				</div>
-				<div class="col-sm-12">	
-							<h3>col-sm-12</h3>
-							<p>내용 들어갈 자리</p>
-							<p>내용 들어갈 자리</p>						
-				</div>
-				<div class="col-sm-4">	
-							<h3>여기는 ROWROW</h3>
-							<p>내용 들어갈 자리</p>
-							<p>내용 들어갈 자리</p>				
-				</div>
-			</div>
-	
 
-		<div class="row">
-		<ul>
-			<h3 id="question"></h3>
-			<li class="btn" id="1" data-id=""></li>
-			<li class="btn" id="2" data-id=""></li>
-			<li class="btn" id="3" data-id=""></li>
-			<li class="btn" id="4" data-id=""></li>
-		</ul>
-		<div id="wizardResult" style="display: none">
-			고객님의 위자드 결과
-			<h2 id="resultName"></h2>
-			<h2 id="resultJudg"></h2>
-			<button id="showResultDiet">추천식단 보기</button>
-		</div>
-		<!-- 시간이 된다면 추가할 파트
+			<div class="row">
+				<div id="ground" class="container col-sm-4 testing">
+					<h2 id="startWizard">위자드 시작하기</h2>
+					
+					<table id="wizardStep" class="table table-bordered">
+						<tr>
+							<td id="wizardStepLogo"><h3>DaCHAM</h3></td>
+						</tr>
+						<tr id="wizardStepArea">
+						</tr>
+					</table>
+				</div>
+
+				<div class="col-sm-8 testing">
+					<ul>
+						<b><h2 id="question"></h2></b>
+						<li class="btn" id="1" data-id=""></li>
+						<li class="btn" id="2" data-id=""></li>
+						<li class="btn" id="3" data-id=""></li>
+						<li class="btn" id="4" data-id=""></li>
+					</ul>
+					<div id="wizardResult" style="display: none">
+						고객님의 위자드 결과
+						<h2 id="resultName"></h2>
+						<h2 id="resultJudg"></h2>
+						<button id="showResultDiet">추천식단 보기</button>
+					</div>
+					<!-- 시간이 된다면 추가할 파트
 	<div id="resultDiet" class=".col-md-8 col-md-offset-4">
 		추천식단 목록
 	</div> -->
+				</div>
+				
+				<div class="col-sm-4 testing">
+					여기 또다른 공간있습니다.
+				</div>
+			</div>
+
+
+			<form id="ResultDiet" method="GET">
+				<input id="rName" type="hidden" name="rName"> <input
+					id="rJudg" type="hidden" name="rJudg">
+			</form>
+
 		</div>
-
-		<form id="ResultDiet" method="GET">
-			<input id="rName" type="hidden" name="rName"> <input
-				id="rJudg" type="hidden" name="rJudg">
-		</form>
-
-</div>
 	</section>
 
 
@@ -241,9 +282,9 @@ li {
 	</section>
 
 
-<footer>
-	<%@include file="../../footer.jsp" %>
-</footer>
+	<footer>
+		<%@include file="../../footer.jsp"%>
+	</footer>
 
 </body>
 </html>

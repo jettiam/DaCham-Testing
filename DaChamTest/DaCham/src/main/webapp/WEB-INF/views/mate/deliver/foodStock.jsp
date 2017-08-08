@@ -97,12 +97,8 @@
 				var str = "";
 				
 				$(data).each(function(){
-					if(this.foodMStatus == 0){
-						str += "<tr class = 'actionResult'><td><input type = 'hidden' class = 'orderCode' name = 'orderCode' value = '"+this.orderCode+"'>"+this.foodMCode+"</td><td>"+this.foodMName+"</td><td>"+this.orderDate+"</td><td>"+this.inAmount+"</td><td>"+this.unit+"</td><td class = 'foodMStatus' data-value = '"+this.foodMStatus+"'>"+"<button class = 'overButton' data-vcode = '"+this.foodMCode+"'>입고확인</button>"+"</td></tr>";
-					}
-					else{
-						str += "<tr class = 'actionResult'><td><input type = 'hidden' class = 'orderCode' name = 'orderCode' value = '"+this.orderCode+"'>"+this.foodMCode+"</td><td>"+this.foodMName+"</td><td>"+this.orderDate+"</td><td>"+this.inAmount+"</td><td>"+this.unit+"</td><td class = 'foodMStatus' data-value = '"+this.foodMStatus+"'>"+"<button class = 'overButton' data-vcode = '"+this.foodMCode+"'>입고 상태중</button>"+"</td></tr>";
-					}
+					
+						str += "<tr class = 'actionResult'><td><input type = 'hidden' class = 'orderCode' name = 'orderCode' value = '"+this.orderCode+"'>"+"<input type = 'hidden' class = 'foodMICode' name = 'foodMICode' value = '"+this.foodMICode+"'>"+this.foodMICode+"</td><td>"+this.foodMName+"</td><td>"+this.orderDate+"</td><td>"+this.inAmount+"</td><td>"+this.unit+"</td></tr>";
 				});
 				$(".action1").append(str);                 
 			});
@@ -242,7 +238,7 @@
 							
 							<th>수량&nbsp;</th>
 							<th>단위&nbsp;</th>
-							<th>입고여부&nbsp;</th>         
+							    
 						</tr>
 						
 							<tr class = "actionResult">

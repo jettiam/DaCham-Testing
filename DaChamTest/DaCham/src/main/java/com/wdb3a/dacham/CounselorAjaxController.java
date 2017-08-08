@@ -49,6 +49,19 @@ public class CounselorAjaxController {
 		}
 		return entity;
 	}
+	@RequestMapping(value = "/linkCounsel2/{customer}",method = RequestMethod.GET)
+	public ResponseEntity<List<Counselor>> linkCounsel2(@PathVariable("customer")String customer){
+		ResponseEntity<List<Counselor>> entity = null;
+		try {
+			List<Counselor> list = service.linkCounsel2(customer);
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
 	@RequestMapping(value = "/selectCounsel/{couselCode}",method = RequestMethod.GET)
 	public ResponseEntity<Counselor> selectCounsel(@PathVariable("couselCode")int couselCode){
 		ResponseEntity<Counselor> entity = null;
@@ -195,6 +208,7 @@ public class CounselorAjaxController {
 	@RequestMapping(value = "/counselInsert/{customer}/{answer}",method = RequestMethod.POST)
 	public ResponseEntity<String> counselInsert(@PathVariable("customer")String customer,@PathVariable("answer")String answer){
 		ResponseEntity<String> entity = null;
+		
 		Counselor counselor = new Counselor();
 		counselor.setCustomer(customer);
 		counselor.setAnswer(answer);
