@@ -23,6 +23,7 @@
 </style>
 <script>
 	$(document).ready(function() {
+		$("#dietOrder").addClass("w3-gray");
 		if("${cartOrder[0].dietCode}">0){
 			var totalPrice = 0;
 			for(var i=0; i<$(".dietAmount").length;i++){

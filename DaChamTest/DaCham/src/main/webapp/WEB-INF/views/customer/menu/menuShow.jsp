@@ -69,6 +69,7 @@ width:100px;
 <title>DaCham 이달의메뉴</title>
 <script>
 $(document).ready(function(){
+	$("#menuShow").addClass("w3-gray");
 	menuShow(0);
 	$("#disease0").on("click",function(){
 		menuShow(0);

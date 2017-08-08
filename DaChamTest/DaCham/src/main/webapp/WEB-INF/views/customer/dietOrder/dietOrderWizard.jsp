@@ -18,6 +18,7 @@
 <script src="resources/json2.js"></script>
 <script>
 	$(document).ready(function() {
+		$("#dietOrder").addClass("w3-gray");
 		$("#startWizard").click(function() {
 			/* alert("위자드를 시작해요."); */
 			$("#wizardResult").hide("slow");
@@ -99,11 +100,6 @@
 </script>
 
 <style>
-@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
-
-* {
-	font-family: 'Jeju Gothic', sans-serif;
-}
 
 #ground {
 	width: 320px;

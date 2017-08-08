@@ -69,6 +69,7 @@ var na0=0;
 var k0=0;
 var count = 0;
 $(document).ready(function() {
+	$("#dietOrder").addClass("w3-gray");
 	$("#foodGList").on("click", ".foodGSideD", function(){
 		var foodGCode= $(this).parent().parent().attr("data-foodgcode");
 		//console.log("식품군:"+foodGCode);

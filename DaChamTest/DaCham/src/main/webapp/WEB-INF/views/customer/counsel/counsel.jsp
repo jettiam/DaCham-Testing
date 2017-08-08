@@ -29,20 +29,10 @@
 				
 			}
 		});
+		$("#counsel").addClass("w3-gray");
 	});
 </script>
 <style>
-#counselTableWrap{
-    width: 1080px;
-	height: 100%;
-	margin: 0 auto;
-	
-}
-#counselTable{
-
-width:600px;
-
-}
 
 </style>
 </head>
@@ -51,7 +41,7 @@ width:600px;
 <!-- 	<form action = "write" method = "get"> -->
 <%-- 		<input type = "hidden" name = "id" value = "${a. }"> --%>
 <!-- 	</form> -->
-		<div id="counselTableWrap">
+		<div class="container">
 		<table id="counselTable" class="table table-hover">
 			<tr>
 				<th>문의분류</th>

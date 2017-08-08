@@ -18,7 +18,11 @@
 <title>다참</title>
 <!-- 상단 내비게이션 표시를 위한 임시 CSS -->
 <style>
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
 
+* {
+	font-family: 'Jeju Gothic', sans-serif;
+}
 
 .liBox {
 	
