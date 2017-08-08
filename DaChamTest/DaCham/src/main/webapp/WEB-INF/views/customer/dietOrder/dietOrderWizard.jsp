@@ -18,6 +18,7 @@
 <script src="resources/json2.js"></script>
 <script>
 	$(document).ready(function() {
+		$("#dietOrder").addClass("w3-gray");
 		step=1;
 		stepArr = new Array();
 		$("#startWizard").click(function() {
@@ -195,11 +196,6 @@
 </script>
 
 <style>
-@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
-
-* {
-	font-family: 'Jeju Gothic', sans-serif;
-}
 
 .ground {
 	width: 320px;

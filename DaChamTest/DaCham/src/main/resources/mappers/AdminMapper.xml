@@ -57,7 +57,8 @@
 		sum(inAmount)-COALESCE(sum(outAmount),0) as stock
 		from foodminven where foodMStatus = 1
 		group by foodMName
-		limit #{startRecord},
+		limit
+		#{startRecord},
 		#{recordsPerPage}
 	</select>
 
@@ -87,6 +88,9 @@
 		price
 		from foodminven where foodMStatus = 0
 		group by foodMName
+		limit
+		#{startRecord},
+		#{recordsPerPage}
 	</select>
 
 
@@ -199,9 +203,11 @@
 		where
 		a.dietCode=b.dietCode
 		and
-		b.orderItemCode = c.orderItemCode
+		b.orderItemCode =
+		c.orderItemCode
 		order by field(b.orderItemCode,
-		0,1,2,3,9,10,4,5,7,8, #{Sort});
+		0,1,2,3,9,10,4,5,7,8,
+		#{Sort});
 	</select>
 	<!--orderList 페이지 내역 출력 -->
 	<select id="orderAll" resultType="OrderList">
@@ -255,7 +261,8 @@
 	</sql>
 	<!--결제 완료 우선 -->
 	<select id="orderSort1" resultType="OrderList">
-		select b.dietCode, b.orderCode,
+		select b.dietCode,
+		b.orderCode,
 		b.id, a.dietName, b.orderDate, b.price,
 		b.orderItemCode,
 		b.transportNum, c.orderItemName
@@ -266,7 +273,8 @@
 		where a.dietCode=b.dietCode
 		and (c.orderItemCode=2 or
 		c.orderItemCode
-		=3 or c.orderItemCode =9 or
+		=3
+		or c.orderItemCode =9 or
 		c.orderItemCode=10) and
 		(b.orderItemCode =
 		c.orderItemCode)
@@ -276,7 +284,8 @@
 
 	<!--조리 대기 우선 -->
 	<select id="orderSort2" resultType="OrderList">
-		select b.dietCode, b.orderCode,
+		select b.dietCode,
+		b.orderCode,
 		b.id, a.dietName, b.orderDate, b.price,
 		b.orderItemCode,
 		b.transportNum, c.orderItemName
@@ -287,7 +296,8 @@
 		where a.dietCode=b.dietCode
 		and (c.orderItemCode=2 or
 		c.orderItemCode
-		=3 or c.orderItemCode =9 or
+		=3
+		or c.orderItemCode =9 or
 		c.orderItemCode=10) and
 		(b.orderItemCode =
 		c.orderItemCode)
@@ -297,7 +307,8 @@
 
 	<!--식재료 발주 우선 -->
 	<select id="orderSort3" resultType="OrderList">
-		select b.dietCode, b.orderCode,
+		select b.dietCode,
+		b.orderCode,
 		b.id, a.dietName, b.orderDate, b.price,
 		b.orderItemCode,
 		b.transportNum, c.orderItemName
@@ -308,7 +319,8 @@
 		where a.dietCode=b.dietCode
 		and (c.orderItemCode=2 or
 		c.orderItemCode
-		=3 or c.orderItemCode =9 or
+		=3
+		or c.orderItemCode =9 or
 		c.orderItemCode=10) and
 		(b.orderItemCode =
 		c.orderItemCode)
@@ -319,7 +331,8 @@
 
 	<!--식재료 입고 우선 -->
 	<select id="orderSort4" resultType="OrderList">
-		select b.dietCode, b.orderCode,
+		select b.dietCode,
+		b.orderCode,
 		b.id, a.dietName, b.orderDate, b.price,
 		b.orderItemCode,
 		b.transportNum, c.orderItemName
@@ -330,7 +343,8 @@
 		where a.dietCode=b.dietCode
 		and (c.orderItemCode=2 or
 		c.orderItemCode
-		=3 or c.orderItemCode =9 or
+		=3
+		or c.orderItemCode =9 or
 		c.orderItemCode=10) and
 		(b.orderItemCode =
 		c.orderItemCode)
@@ -368,14 +382,40 @@
 	</select>
 
 	<select id="foodStockListCount" resultType="Integer">
-		select count(a.foodMName)
+		select
+		count(a.foodMName)
 		from (select foodMName,
-		sum(inAmount) as inAmount, COALESCE(sum(outAmount),0) as
+		sum(inAmount) as inAmount,
+		COALESCE(sum(outAmount),0) as
 		outAmount, unit, foodMStatus,
 		sum(inAmount)-COALESCE(sum(outAmount),0) as stock
-		from foodminven where foodMStatus = 1
+		from foodminven where
+		foodMStatus = 1
 		group by foodMName) a
 	</select>
+
+	<select id="foodStockListStopCount" resultType="Integer">
+		select
+		count(a.foodMName)
+		from (select foodMName,
+		sum(inAmount) as inAmount,
+		unit, foodMStatus,
+		sum(inAmount)*price as
+		price
+		from foodminven where
+		foodMStatus = 0
+		group
+		by foodMName) a
+	</select>
+
+	<select id="dietAllCount" resultType="Integer">
+		select count(a.dietCode)
+		from diet a
+		join disease b
+		where a.diseaseCode=b.diseaseCode
+	</select>
+
+
 
 
 
@@ -392,6 +432,10 @@
 		from diet a
 		join disease b
 		where a.diseaseCode=b.diseaseCode
+		order by field(a.spDietItem, 1,2,0)
+		limit
+		#{startRecord},
+		#{recordsPerPage}
 	</select>
 
 	<update id="dietPriceUp">
@@ -421,6 +465,7 @@
 		join disease b
 		where
 		a.diseaseCode=b.diseaseCode and diseaseName = '당뇨'
+		order by field(a.spDietItem, 1,2,0)
 	</select>
 
 	<select id="disease2" resultType="Diet">
@@ -432,6 +477,7 @@
 		where
 		a.diseaseCode=b.diseaseCode and diseaseName =
 		'고지혈증'
+		order by field(a.spDietItem, 1,2,0)
 	</select>
 
 	<select id="disease3" resultType="Diet">
@@ -443,6 +489,7 @@
 		where
 		a.diseaseCode=b.diseaseCode and diseaseName =
 		'심부전증'
+		order by field(a.spDietItem, 1,2,0)
 	</select>
 
 	<select id="disease4" resultType="Diet">
@@ -454,6 +501,7 @@
 		where
 		a.diseaseCode=b.diseaseCode and diseaseName =
 		'신부전증'
+		order by field(a.spDietItem, 1,2,0) 
 	</select>
 
 	<insert id="empjoin">

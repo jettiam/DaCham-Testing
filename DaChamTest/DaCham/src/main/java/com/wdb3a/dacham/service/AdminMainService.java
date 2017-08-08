@@ -31,9 +31,14 @@ public interface AdminMainService {
 	public List<OrderList> all(Criteria criteria) throws Exception;
 	public List<OrderList> orderAll(Criteria criteria) throws Exception;
 	public List<FoodMInven> foodStockListAll(Criteria criteria) throws Exception; 
+	
+	
 	public int orderListCount() throws Exception;
 	public int orderCount() throws Exception;
 	public int foodStockListCount() throws Exception;
+	public int foodStockListStopCount() throws Exception;
+	public int dietAllCount() throws Exception;
+	
 	//public List<OrderList> orderAll(OrderList orderList) throws Exception;
 	public List<OrderList> orderAllSearch(OrderList orderList) throws Exception;
 	public List<OrderList> orderSort1() throws Exception;
@@ -41,7 +46,7 @@ public interface AdminMainService {
 	public List<OrderList> orderSort3() throws Exception;
 	public List<OrderList> orderSort4() throws Exception;
 	public String appTest(String id) throws Exception;
-	public List<Diet> dietAll() throws Exception;
+	public List<Diet> dietAll(Criteria criteria) throws Exception;
 	public void dietPriceUp(Diet diet) throws Exception;
 	public void dietSell(int dietCode) throws Exception;
 	public void dietSellStop(int dietCode) throws Exception;
@@ -59,5 +64,5 @@ public interface AdminMainService {
 	public List<FoodMaterial> foodMaterialSearch(FoodMaterial foodMaterial) throws Exception;
 	public List<Member> memberSearch(Member member) throws Exception;
 	public void insertFoodMAdd(FoodMAmountRead foodMAmountRead) throws Exception;
-	public List<FoodMInven> foodStockListStop() throws Exception;
+	public List<FoodMInven> foodStockListStop(Criteria criteria) throws Exception;
 }

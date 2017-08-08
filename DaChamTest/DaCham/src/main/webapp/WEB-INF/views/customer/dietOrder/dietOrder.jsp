@@ -45,6 +45,7 @@ margin-top:20px;
 
 <script>
 	$(document).ready(function(){
+		$("#dietOrder").addClass("w3-gray");
 		$("#wizardOrder").click(function(){
 			window.location.href = "dietOrderWizard";
 		});

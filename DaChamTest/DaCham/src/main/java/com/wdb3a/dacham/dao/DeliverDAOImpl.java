@@ -93,5 +93,10 @@ public class DeliverDAOImpl implements DeliverDAO{
 		// TODO Auto-generated method stub
 		sqlSession.update(namespace+".overButton",foodMCode);
 	}
+	@Override
+	public void changer0(int foodMICode) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace+".changer0",foodMICode);
+	}
 
 }

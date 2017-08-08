@@ -20,6 +20,7 @@
 		$("#update").click(function () {
 			$("#form").submit();
 		});
+		$("#counsel").addClass("w3-gray");
 	});
 </script>
 </head>

@@ -23,7 +23,7 @@
       $.getJSON("counselAjax/counselorListAll",function(data){
          var str = "";
          $(data).each(function(){
-            str += "<tr class = 'searchResult1'><td>"+this.id+"</td><td><a class = 'nameClick' data-code = '"+this.couselCode+"' data-name = '"+this.id+"'>"+this.name+"</a></td><td>"+this.birthday+"</td><td>"+this.address+"</td><td>"+this.tel+"</td><td>"+this.email+"</td><td>"+this.deptCode+"</td><td>"+this.gradeCode+"</td><td>"+this.joinDate+"</td><td>"+this.diseaseName+"</td><td>"+this.judgement+"</td></tr>";
+            str += "<tr class = 'searchResult1'><td>"+this.id+"</td><td><a class = 'nameClick' data-code = '"+this.couselCode+"' data-name = '"+this.id+"' data-toggle = 'modal' href = '#myModal'>"+this.name+"</a></td><td>"+this.birthday+"</td><td>"+this.address+"</td><td>"+this.tel+"</td><td>"+this.email+"</td><td>"+this.deptCode+"</td><td>"+this.gradeCode+"</td><td>"+this.joinDate+"</td><td>"+this.diseaseName+"</td><td>"+this.judgement+"</td></tr>";
          });
          $(".search1").append(str);
       });
@@ -44,16 +44,14 @@
          var counselCode = $(this).attr('data-code');
          $(".answer").empty();
          $(".answerReturn").show();
-         $(".answer").append("<input type = 'hidden' class = 'id'  name = 'id' value = '"+name+"'>");
-         $(".answerDiv").html("<textarea name = 'answerReturn' class = 'answerReturn' placeholder = '여기에 답변을 입력하세요'></textarea>");
-         $(".boxButton").html("<button id = 'button' data-code = '"+name+"'data-answer = '"+$('.answerReturn').val()+"'>답변등록</button>");
+         
          
          linkAll(name);
       });
       
-      $(document.body).on("click","#button",function(){
+      $(document.body).on("click","#newAnswer",function(){
          var customer = $(this).attr('data-code');
-         var answer = $(".answerReturn").val();
+         var answer = $(".quickAnswer").val();
          alert("정답:"+answer);
          $.ajax({
             type : "POST",
@@ -65,7 +63,7 @@
             success : function(result){
                if(result == "SUCCESS"){
                   alert("등록되었습니다.");
-                  window.location.reload();
+                  linkAll(customer);
                }
             }
          });
@@ -79,27 +77,27 @@
          var keyword = $("#keyword").val();
          $.getJSON("counselAjax/listAll/"+searchType+"/"+keyword,function(data){
             $(data).each(function(){
-               str += "<tr class = 'searchResult1'><td>"+this.id+"</td><td><a class = 'nameClick' data-name = '"+this.id+"'>"+this.name+"</a></td><td>"+this.birthday+"</td><td>"+this.address+"</td><td>"+this.tel+"</td><td>"+this.email+"</td><td>"+this.deptCode+"</td><td>"+this.gradeCode+"</td><td>"+this.joinDate+"</td><td>"+this.diseaseName+"</td><td>"+this.judgement+"</td></tr>";
+            	str += "<tr class = 'searchResult1'><td>"+this.id+"</td><td><a class = 'nameClick' data-code = '"+this.couselCode+"' data-name = '"+this.id+"' data-toggle = 'modal' href = '#myModal'>"+this.name+"</a></td><td>"+this.birthday+"</td><td>"+this.address+"</td><td>"+this.tel+"</td><td>"+this.email+"</td><td>"+this.deptCode+"</td><td>"+this.gradeCode+"</td><td>"+this.joinDate+"</td><td>"+this.diseaseName+"</td><td>"+this.judgement+"</td></tr>";
             });
             $(".search1").append(str);
          });
       });
       
       $(document.body).on("click",".answerClick",function(){
+    	 
+    	 $('.overAnswer').empty();
          var counselCode = $(this).attr('data-code');
-         $(".box2 textarea").remove();
-         $(".box2 button").remove();
-         $(".box2 br").remove();
-         
-         $(".wingAnswer").html("<textarea name = 'answer' class = 'answerView' readonly></textarea><br>");
-         $(".answerDiv").html("<textarea name = 'answerReturn' class = 'answerReturn' placeholder = '여기에 답변을 입력하세요'></textarea>");
-         $(".boxButton").html("<button id = 'answerReturn' data-code = '"+counselCode+"'data-answer = '"+$('.answerReturn').val()+"'>답변수정</button>");
-         $(".answerView").text($(this).attr('data-answer'));
-         
+         var answer = $(this).attr('data-answer');
+         var customer = $(this).attr('data-customer');
+         $('.overAnswer').append("<div class = 'form-group'><label>기존답변:</label>");
+         $('.overAnswer').append("<textarea readonly class = 'form-control'>"+answer+"</textarea></div>");
+         $('.overAnswer').append("<div class = 'form-group'><label>변경할 답변:</label><textarea class = 'answerReturn form-control' placeholder = '변경하려면 적고 아래 버튼 누르십시오'></textarea></div>");
+         $('.overAnswer').append("<button id = 'answerReturn' data-customer = '"+customer+"' data-code = '"+counselCode+"' class = 'btn btn-warning'>변경</button>");
          
       });
       $(document.body).on("click","#answerReturn",function(){
          var couselCode = $(this).attr("data-code");
+         var customer = $(this).attr('data-customer');
             var answer = $('.answerReturn').val();
            if($('.answerReturn').val() == ""){
               alert("답변을 입력하세요");
@@ -115,9 +113,10 @@
                    success : function(result){
                       console.log("result:"+result);
                       if(result == "SUCCESS"){
-                         alert("수정되었습니다.");
+                         alert("수정되었습니다. 이제 팝업을 닫아주십시오");
                          $(".answerReturn").val('');
-                        window.location.reload();
+                         
+                        linkAll(customer);
                         
                       }
                    }
@@ -141,15 +140,17 @@
       
       function linkAll(customer){
          $(".answerResult").remove();
-        
-         $.getJSON("counselAjax/linkCounsel/"+customer,function(data){
+        $(".super div").remove();	
+         $.getJSON("counselAjax/linkCounsel2/"+customer,function(data){
             var str = "";
             $(data).each(function(){
                if(this.counselCode != null){
-                  str += "<tr class = 'answerResult'><td class = 'counselCode' data-code = '"+this.counselCode+"' data-id = '"+this.customer+"'><a href = '#'>"+this.counselCode+"</a></td><td>"+this.customer+"</td><td class = 'answerClick' data-code = '"+this.counselCode+"' data-answer = '"+this.answer+"'><a href = '#'>"+this.answer+"</a></td></tr>";
+                  str += "<tr class = 'answerResult'><td class = 'counselCode' data-code = '"+this.counselCode+"' data-id = '"+this.customer+"'><a>"+this.counselCode+"</a></td><td>"+this.customer+"</td><td><a  href = '#yourModal' data-toggle = 'modal'  class = 'answerClick' data-code = '"+this.counselCode+"' data-answer = '"+this.answer+"' data-customer = '"+customer+"'>"+this.answer+"</a></td></tr>";
                }
+              
             });
             $(".link").append(str);
+            $(".super").append("<div class = 'form-group'><label>신규등록</label><textarea class = 'quickAnswer form-control'></textarea><button id = 'newAnswer' class = 'btn btn-success' data-code = '"+customer+"'>등록</button></div>");
          });
       }
    });
@@ -210,16 +211,7 @@
          </table>
          </div>
          <div>
-               <table class = "link table table-hover">
-               <tr>   
-                  <th>번호</th>
-                  <th>고객아이디</th>
-                  <th>답변</th>
-               </tr>
-               <tr class = "answerResult">
-                  
-               </tr>
-            </table>
+           
          </div>
          <form>
             <div class = "answer">
@@ -227,17 +219,48 @@
          </form>     
       </div>
       <div class = "box2">
-           <div class = "wingAnswer">
-              
-           </div>
-           <div class = "answerDiv">
-              
-           </div>
          
-         <div class = "boxButton">
-         </div>
       </div>
-      
+      <div class = "modal fade" id = "myModal" role = "dialog">
+      		<div class = "modal-dialog">
+      			<div class = "modal-content">
+      				<div class = "modal-header">
+      					<button type = "button" class = "close" data-dismiss = "modal">X</button>
+      					<h4 class = "modal-title">상담 내역</h4>
+      				</div>
+      				<div class = "super modal-body">
+      					<table class = "link table table-borded">
+      						<tr>
+      							<th>번호</th>
+      							<th>고객아이디</th>
+      							<th>질문</th>
+      						</tr>
+      						<tr class = "answerResult">
+      						</tr>
+      					</table>
+      					
+      				</div>
+      				<div class = "modal-footer">
+      					<button type = "button" class = "btn btn-default" data-dismiss = "modal">Close</button>
+      				</div>
+      			</div>
+      		</div>
+      </div>
+      <div class = "modal fade" id = "yourModal" role = "dialog">
+      	<div class = "modal-dialog">
+      		<div class = "modal-content">
+      			<div class = "modal-header">
+      				<button type = "button" class = "close" data-dismiss = "modal">X</button>
+      				<h4 class = "modal-title">답변 내역</h4>
+      			</div>
+      			<div class = "overAnswer modal-body">
+      				
+      			</div>
+      			<div class = "modal-footer">
+      			</div>
+      		</div>
+      	</div>
+      </div>
       <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
       <br><br><br><br><br><br>
      </div>

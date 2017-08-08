@@ -14,6 +14,38 @@
 
 <title>Insert title here</title>
 <script>
+function previewImage(targetObj, View_area){
+	var preview = document.getElementById(View_area);
+	
+	var files  = targetObj.files;
+	for(var i = 0; i<files.length; i++){
+		var file = files[i];
+		var imageType = /image.*/;
+		if(!file.type.match(imageType)){
+			continue;
+		}
+		var prevImg = document.getElementById("prev_"+View_area);
+		if(prevImg){
+			preview.removeChild(prevImg);
+		}
+		var img = document.createElement("img");
+		img.id = "prev_"+View_area;
+		img.classList.add("obj");
+		img.file = file;
+		img.style.width = '250px';
+		img.style.height = '250px'; 
+		preview.appendChild(img);
+		if(window.FileReader){
+			var reader = new FileReader();
+			reader.onloadend = (function(almg){
+				return function(e){
+					almg.src = e.target.result;
+				};
+			})(img);
+			reader.readAsDataURL(file);
+		}
+	}
+}
 	$(document)
 			.ready(
 					function() {
@@ -76,6 +108,11 @@
 														+ "<td>"
 														+ "<input type='text' id='address' value='"+data.address+"'>"
 														+ "</td></tr>"
+														
+														$("#prev_View_area").attr("src", "displayFile?fileName="+data.photoImg);
+														
+														
+														
 												console.log(data.length);
 												var strSub = "";
 												if (data.deptCode == "회원") {
@@ -102,7 +139,9 @@
 															+ "</td></tr><tr style='display:none'><th>계좌번호</th>"
 															+ "<td>"
 															+ "<input type='text' id ='account_Number' value='"+data.account_Number+"'>"
-															+ "</td></tr>"
+															+ "</td></tr>"  
+															
+															$("#prev_View_area").attr("style", "width:250px; height : 250px; display:none;");      
 												} else {
 													strSub += "<tr class='MemberUserInfoSub'><th>부서</th><td id='"+data.deptCode+"'>"
 															+ "<input type='text' id = 'deptCode' value='"+data.deptCode+"'>"
@@ -128,6 +167,8 @@
 															+ "<td>"
 															+ "<input type='text' id ='account_Number' value='"+data.account_Number+"'>"
 															+ "</td></tr>"
+															  
+															$("#prev_View_area").attr("style", "width:250px; height : 250px; display:block;");       
 												}
 												$(".memberUserTableSub")
 														.append(strSub);
@@ -156,6 +197,7 @@
 													.val() + "");
 											var account_Number = ($(
 													"#account_Number").val() + "");
+											   
 
 											console.log(id + tel + email
 													+ address + deptCode
@@ -180,6 +222,7 @@
 																	"bank_name" : bank_name,
 																	"bank_user" : bank_user,
 																	"account_Number" : account_Number
+																	
 																}),
 														dataType : 'text',
 														type : 'put',
@@ -236,7 +279,7 @@
 											var searchType = $(".searchType")
 													.val();
 											var keyword = $("#keyword").val();
-											 
+											if(keyword != ""){ 
 											$
 													.getJSON(
 															"adminSub/customer/"
@@ -261,9 +304,13 @@
 																			".memberTable")
 																			.append(
 																					str);
-																}
-																;
+																};
+															
 															});
+											}else{
+												alert("검색어를 입력하세요");
+												all();  
+											}
 										});
 						$("#searchAll").on("click", function(){
 							all();  
@@ -320,6 +367,11 @@
 			</table>
 
 		</div>
+		<div id = "View_area">
+					<img id = "prev_View_area" src="http://placehold.it/250x250" style = "width:250px; height : 250px; display:none;">      
+				</div>
+				
+		
 		<div class="col-sm-2 col-sm-offset-10">
 			<button id="empUpdateBtn" class="btn btn-primary">회원수정</button>
 			<button id="empOut" class="btn btn-primary">탈퇴</button>

@@ -71,6 +71,11 @@ select  a.id , a.name ,a.birthday, a.address, a.tel, a.email, a.deptCode, a.grad
    and a.customer = #{customer}
    and counselTitle not in('전화')   
 </select>
+<select id = "linkCounsel2" resultType = "Counselor">
+   select * from counsel a join counselitem b
+   where a.counselItemCode = b.counselItemCode
+   and a.customer = #{customer}   
+</select>
 <select id = "selectCounsel" resultType = "Counselor">
    select * from counsel a join counselitem b
    where a.counselItemCode = b.counselItemCode

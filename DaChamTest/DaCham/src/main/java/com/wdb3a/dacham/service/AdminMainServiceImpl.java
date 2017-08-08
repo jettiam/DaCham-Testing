@@ -128,9 +128,9 @@ public class AdminMainServiceImpl implements AdminMainService {
 	}
 
 	@Override
-	public List<Diet> dietAll() throws Exception {
+	public List<Diet> dietAll(Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.dietAll();
+		return dao.dietAll(criteria);
 	}
 
 	@Override
@@ -233,9 +233,9 @@ public class AdminMainServiceImpl implements AdminMainService {
 	}
 
 	@Override
-	public List<FoodMInven> foodStockListStop() throws Exception {
+	public List<FoodMInven> foodStockListStop(Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.foodStockListStop();
+		return dao.foodStockListStop(criteria);
 	}
 
 	@Override
@@ -272,6 +272,18 @@ public class AdminMainServiceImpl implements AdminMainService {
 	public int foodStockListCount() throws Exception {
 		// TODO Auto-generated method stub
 		return dao.foodStockListCount();
+	}
+
+	@Override
+	public int foodStockListStopCount() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.foodStockListStopCount();
+	}
+
+	@Override
+	public int dietAllCount() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.dietAllCount();  
 	}
 
 	

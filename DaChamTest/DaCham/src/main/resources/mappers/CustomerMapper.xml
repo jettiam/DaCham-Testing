@@ -132,7 +132,36 @@ select m.measureDate,m.reading,mi.measureName,mi.measureUnit,m.measureICode
 from measure m, measureitem mi
 where m.id=#{id} and m.measureICode = mi.measureICode
 order BY m.measureDate, m.measureICode
-
-
 </select>
+<!-- select di.dietCode, sum(result.kcal) kcal,sum(result.carbohydrate) carbohydrate, sum(result.protein) protein,sum(result.fat) fat,sum(result.na) na,sum(result.k) k
+from  (select s.sideDCode, s.sidedImg,s.sideDname,s.foodGCode, f.kcal,f.carbohydrate,f.protein,f.fat,f.na,f.k
+from sidedish s,(select a.sideDcode,sum(kcal) kcal,sum(carbohydrate) carbohydrate, sum(protein) protein, sum(fat) fat, sum(na) na,sum(k) k
+from 
+(select si.sideDCode,(si.foodMAmount/100)*f.kcal kcal,(si.foodMAmount/100)*f.protein protein,(si.foodMAmount/100)*f.carbohydrate carbohydrate,(si.foodMAmount/100)*f.na na,(si.foodMAmount/100)*f.fat fat,(si.foodMAmount/100)*f.k k
+	from sidedinfo si,foodmaterial f
+	where si.foodMCode = f.foodMCode) a
+	group by a.sidedcode) f 
+where s.sideDCode=f.sideDcode) result, dietinfo di
+where result.sideDCode= di.sideDCode
+group by di.dietCode
+order by di.sideDType --><!-- 모든 식단의 영양소 합 쿼리 -->
+<!-- 질환에 따른 식단 반찬과 영양소 합 -->
+<select id="menuShow" resultType="Customer">
+select d.dietCode, d.dietName, s.sideDName, s.sideDCode , s.sideDImg, n.kcal,n.carbohydrate,n.protein,n.fat,n.na,n.k
+from diet d,dietinfo di, sidedish s, (select di.dietCode, sum(result.kcal) kcal,sum(result.carbohydrate) carbohydrate, sum(result.protein) protein,sum(result.fat) fat,sum(result.na) na,sum(result.k) k
+from  (select s.sideDCode, s.sidedImg,s.sideDname,s.foodGCode, f.kcal,f.carbohydrate,f.protein,f.fat,f.na,f.k
+from sidedish s,(select a.sideDcode,sum(kcal) kcal,sum(carbohydrate) carbohydrate, sum(protein) protein, sum(fat) fat, sum(na) na,sum(k) k
+from 
+(select si.sideDCode,(si.foodMAmount/100)*f.kcal kcal,(si.foodMAmount/100)*f.protein protein,(si.foodMAmount/100)*f.carbohydrate carbohydrate,(si.foodMAmount/100)*f.na na,(si.foodMAmount/100)*f.fat fat,(si.foodMAmount/100)*f.k k
+	from sidedinfo si,foodmaterial f
+	where si.foodMCode = f.foodMCode) a
+	group by a.sidedcode) f 
+where s.sideDCode=f.sideDcode) result, dietinfo di
+where result.sideDCode= di.sideDCode
+group by di.dietCode
+order by di.sideDType) n
+where d.diseaseCode=#{diseaseCode} and di.dietCode=d.dietCode and di.sideDCode=s.sideDCode and di.sideDType=0 and d.spDietitem=1 and d.dietCode=n.dietCode
+order by d.dietCode
+</select>
+
   </mapper>

@@ -39,11 +39,11 @@ $(document).ready(function(){
    $(document.body).on("click",".counselCode",function(){
       couselCode = $(this).attr('data-code');
       $.getJSON("counselAjax/selectCounsel/"+couselCode,function(data){
-    	  $("#counselItemCode2").text(data.counselItemName);
-    	  $("#counselTitle2").text(data.counselTitle);
-    	  $("#counselContent").text(data.counselContent);
-    	  $("#thisAnswer").text(data.answer);
-    	  $("#counselDate").text(data.counselDate);
+         $("#counselItemCode2").text(data.counselItemName);
+         $("#counselTitle2").text(data.counselTitle);
+         $("#counselContent").text(data.counselContent);
+         $("#thisAnswer").text(data.answer);
+         $("#counselDate").text(data.counselDate);
       });
    });
    $(".pagination").on("click","li a",function(){
@@ -70,15 +70,15 @@ $(document).ready(function(){
    }
    
    $(document.body).on("click",".dietName",function(){
-	   var orderCode = $(this).attr('data-src');
-	   $(".modalResult").remove();
-	   $.getJSON("counselAjax/optionTuning/"+orderCode,function(data){
-		   var str = "";
-		   $(data).each(function(){
-			   str += "<tr class = 'modalResult'><td>"+this.sideDName+"</td></tr>";
-		   });
-		   $(".modalTable").append(str);
-	   });
+      var orderCode = $(this).attr('data-src');
+      $(".modalResult").remove();
+      $.getJSON("counselAjax/optionTuning/"+orderCode,function(data){
+         var str = "";
+         $(data).each(function(){
+            str += "<tr class = 'modalResult'><td>"+this.sideDName+"</td></tr>";
+         });
+         $(".modalTable").append(str);
+      });
    });
    
    function orderList(page,couselCode){
@@ -129,25 +129,25 @@ $(document).ready(function(){
       });
    });
    $("#search").on("click",function(){
-	   var keyword = $(".keyword").val();
-	   orderListSearch(couselCode,keyword);
+      var keyword = $(".keyword").val();
+      orderListSearch(couselCode,keyword);
    });
    $("#listAll").on("click",function(){
-	   $(".pagination").show();
-	   orderList(1,couselCode);
+      $(".pagination").show();
+      orderList(1,couselCode);
    });
    function orderListSearch(couselCode,keyword){
-	   
-	   
-	   $.getJSON("counselAjax/orderListSearch/"+couselCode+"/"+keyword,function(data){
-		   $(".orderResult").remove();
-		   $(".pagination").hide();
-		   var str = "";
-		   $(data).each(function(){
-			   str += "<tr class = 'orderResult'><td>"+this.orderCode+"</td><td>"+this.id+"</td><td class = 'dietName' data-code = '"+this.orderCode+"'><a href = '#'>"+this.dietName+"</a></td><td>"+this.orderDate+"</td><td>"+this.paymentItemName+"</td><td>"+this.orderItemName+"</td></tr>";
-		   });
-		   $(".order").append(str);
-	   });
+      
+      
+      $.getJSON("counselAjax/orderListSearch/"+couselCode+"/"+keyword,function(data){
+         $(".orderResult").remove();
+         $(".pagination").hide();
+         var str = "";
+         $(data).each(function(){
+            str += "<tr class = 'orderResult'><td>"+this.orderCode+"</td><td>"+this.id+"</td><td class = 'dietName' data-code = '"+this.orderCode+"'><a href = '#'>"+this.dietName+"</a></td><td>"+this.orderDate+"</td><td>"+this.paymentItemName+"</td><td>"+this.orderItemName+"</td></tr>";
+         });
+         $(".order").append(str);
+      });
    }
    
    function linkAll(){
@@ -237,8 +237,8 @@ $(document).ready(function(){
                <td class = "name">고객 성함</td>  
             </tr>
             <tr>
-            	<th>생일</th>
-            	<td class ="birthday">생일</td>
+               <th>생일</th>
+               <td class ="birthday">생일</td>
             </tr>
             <tr>
                <th>가입일</th>
@@ -257,12 +257,12 @@ $(document).ready(function(){
                <td class = "address">주소</td>  
             </tr> 
             <tr>
-            	<th>질병이름</th>
-            	<td class = "diseaseName">질병이름</td>
+               <th>질병이름</th>
+               <td class = "diseaseName">질병이름</td>
             </tr>
             <tr>
-            	<th>위험군</th>
-            	<td class = "judgement">위험군</td>
+               <th>위험군</th>
+               <td class = "judgement">위험군</td>
             </tr> 
          </table>
          <div style = "border:1px solid gold;">
@@ -296,58 +296,64 @@ $(document).ready(function(){
       <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
       <br><br><br><br><br><br>
       <div class = "modal fade" id = "myModal" role = "dialog">
-      		<div class = "modal-dialog">
-      			<div class = "modal-content">
-      				<div class = "modal-header">
-      					<button type = "button" class = "close" data-dismiss = "modal">X</button>
-      					<h4 class = "modal-title">상세 내역</h4>
-      				</div>
-      				<div class = "modal-body">
-      					<table class = "modalTable table table-borded">
-      						<tr>
-      							<th>반찬이름</th>
-      						</tr>      	
-      						<tr class = "modalResult">
-      							
-      						</tr>					
-      					</table>
-      				</div>
-      				<div class = "modal-footer">
-      					<button type = "button" class = "btn btn-default" data-dismiss = "modal">Close</button>
-      				</div>
-      			</div>
-      		</div>
+            <div class = "modal-dialog">
+               <div class = "modal-content">
+                  <div class = "modal-header">
+                     <button type = "button" class = "close" data-dismiss = "modal">X</button>
+                     <h4 class = "modal-title">상세 내역</h4>
+                  </div>
+                  <div class = "modal-body">
+                     <table class = "modalTable table table-borded">
+                        <tr>
+                           <th>반찬이름</th>
+                        </tr>         
+                        <tr class = "modalResult">
+                           
+                        </tr>               
+                     </table>
+                  </div>
+                  <div class = "modal-footer">
+                     <button type = "button" class = "btn btn-default" data-dismiss = "modal">Close</button>
+                  </div>
+               </div>
+            </div>
       </div>
       <div class = "modal fade" id = "yourModal" role = "dialog">
-      	<div class = "modal-dialog">
-      		<div class = "modal-content" style = 'width:980px;'>
-      			<div class = "modal-header">
-      				<button type = "button" class = "close" data-dismiss = "modal">X</button>
-      				<h4 class = "modal-title">상세 내역</h4>
-      			</div>
-      			<div class = "modal-body">
-      				<table class = "modalTable2 table table-borded">
-      					<tr>
-      						<th>분류</th>
-      						<th>제목</th>
-      						<th>상담일자</th>
-      						<th>내용</th>
-      						<th>답변</th>
-      					</tr>
-      					<tr>
-      						<td id = "counselItemCode2"></td>
-      						<td id = "counselTitle2"></td>
-      						<td id = "counselDate"></td>
-      						<td id = "counselContent"></td>
-      						<td id = "thisAnswer"></td>
-      					</tr>
-      				</table>
-      			</div>
-      			<div class = "modal-footer">
-      				<button type = "button" class = "btn btn-default" data-dismiss = "modal">Close</button>
-      			</div>
-      		</div>
-      	</div>
+         <div class = "modal-dialog">
+            <div class = "modal-content">
+               <div class = "modal-header">
+                  <button type = "button" class = "close" data-dismiss = "modal">X</button>
+                  <h4 class = "modal-title">상세 내역</h4>
+               </div>
+               <div class = "modal-body">
+                  <table class = "modalTable2 table table-borded">
+                     <tr>
+                        <th>분류</th>
+                        <td id = "counselItemCode2"></td>
+                     </tr>
+                     <tr>
+                        <th>제목</th>
+                        <td id = "counselTitle2"></td>
+                     </tr>
+                     <tr>
+                        <th>상담일자</th>
+                        <td id = "counselDate"></td>
+                     </tr>
+                     <tr>
+                        <th>내용</th>
+                        <td id = "counselContent"></td>
+                     </tr>
+                     <tr>
+                        <th>답변</th>
+                        <td id = "thisAnswer"></td>
+                     </tr>
+                  </table>
+               </div>
+               <div class = "modal-footer">
+                  <button type = "button" class = "btn btn-default" data-dismiss = "modal">Close</button>
+               </div>
+            </div>
+         </div>
       </div>
    </div>  
 </body>

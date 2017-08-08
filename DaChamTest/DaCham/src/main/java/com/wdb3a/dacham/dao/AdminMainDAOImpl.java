@@ -126,9 +126,9 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 	}
 
 	@Override
-	public List<Diet> dietAll() throws Exception {
+	public List<Diet> dietAll(Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".DietAll");
+		return sqlSession.selectList(namespace+".DietAll", criteria);
 	}
 
 	@Override
@@ -234,9 +234,9 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 	}
 
 	@Override
-	public List<FoodMInven> foodStockListStop() throws Exception {
+	public List<FoodMInven> foodStockListStop(Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".foodStockListStop");
+		return sqlSession.selectList(namespace+".foodStockListStop", criteria);
 	}
 
 	@Override
@@ -273,6 +273,18 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 	public int foodStockListCount() throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace+".foodStockListCount");
+	}
+
+	@Override
+	public int foodStockListStopCount() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".foodStockListStopCount");
+	}
+
+	@Override
+	public int dietAllCount() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".dietAllCount");
 	}
 
 	

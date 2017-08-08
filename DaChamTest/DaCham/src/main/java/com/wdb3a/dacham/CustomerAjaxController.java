@@ -230,5 +230,21 @@ public class CustomerAjaxController {
 		}
 		return entity;
 	}
+	@RequestMapping(value="menuShow/{diseaseCode}",method=RequestMethod.GET)
+	public ResponseEntity<Map<String, Object>> getDetailSideD(@PathVariable("diseaseCode") int diseaseCode, Customer customer){
+		ResponseEntity<Map<String, Object>> entity = null;
+		List<Customer> list;
+		try {
+			list = service.menuShow(diseaseCode);
+			Map<String, Object> map = new HashMap<>();
+			map.put("list",list);
+			entity = new ResponseEntity<>(map,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
 		
 }
