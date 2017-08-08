@@ -22,4 +22,5 @@ public interface DeliverDAO {
 	public List<Deliver> completeAll(Criteria criteria) throws Exception;
 	public int completeAllCount() throws Exception;
 	public void overButton(int foodMCode) throws Exception;
+	public void changer0(int foodMICode) throws Exception;
 }

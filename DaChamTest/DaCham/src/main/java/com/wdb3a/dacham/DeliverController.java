@@ -63,8 +63,9 @@ public class DeliverController {
 	}
 	
 	@RequestMapping(value = "/changer",method = RequestMethod.POST)
-	public String changer(@RequestParam("orderCode")int[] orderCode,@RequestParam("length") int length) throws Exception{
+	public String changer(@RequestParam("orderCode")int[] orderCode,@RequestParam("foodMICode")int[] foodMICode,@RequestParam("length") int length) throws Exception{
 		for(int i = 0; i<length; i++){
+			service.changer0(foodMICode[i]);
 			service.changer(orderCode[i]);
 			service.todaySynchro(orderCode[i]);
 		}

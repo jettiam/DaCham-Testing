@@ -46,7 +46,7 @@
 		from foodminven b join orderlist c join orderitem d
 		where b.orderCode = c.orderCode
 		and c.orderItemCode = d.orderItemCode
-		and d.orderItemCode = 9
+		and b.foodMStatus  = 0
 		order by b.foodMStatus, c.orderDate, b.foodMName
   	</select>
   	<select id = "showCount" resultType = "Integer">
@@ -88,9 +88,15 @@
 		and a.orderItemCode = d.orderItemCode
 		and a.orderItemCode = #{orderItemCode}
   	</select>
+  	<update id = "changer0">
+  		update foodminven set foodMStatus = 1
+  		where foodMICode = #{foodMICode}
+  	</update>
   	<update id = "changer">
  		update orderlist set orderItemCode = 10
- 		where orderCode = #{orderCode}  		
+ 		where 
+ 		(select count(orderCode) from foodminven where orderCode = #{orderCode})
+ 		= (select count(orderCode) from foodminven where foodMStatus = 1 and orderCode = #{orderCode})  		
    	</update>
    	<update id = "todaySynchro">
    		update foodminven set inDate = now()
@@ -102,7 +108,7 @@
 		where b.orderCode = c.orderCode
 		and c.orderItemCode = d.orderItemCode
 		and d.orderItemCode = 10
-		order by b.foodMStatus
+		order by b.inDate desc
 		limit #{startRecord},#{recordsPerPage}
    	</select>
    	<select id = "completeAllCount" resultType = "Integer">

@@ -88,5 +88,10 @@ public class DeliverServiceImpl implements DeliverService {
 		// TODO Auto-generated method stub
 		dao.overButton(foodMCode);
 	}
+	@Override
+	public void changer0(int foodMICode) throws Exception {
+		// TODO Auto-generated method stub
+		dao.changer0(foodMICode);
+	}
 
 }

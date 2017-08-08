@@ -126,4 +126,10 @@ public class CounselorServiceImpl implements CounselorService {
 		// TODO Auto-generated method stub
 		return dao.listAll(counselItemCode);
 	}
+
+	@Override
+	public List<Counselor> linkCounsel2(String customer) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.linkCounsel2(customer);
+	}
 }

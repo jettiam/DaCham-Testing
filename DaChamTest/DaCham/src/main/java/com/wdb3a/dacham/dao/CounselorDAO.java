@@ -27,4 +27,5 @@ public interface CounselorDAO {
 	public List<Counselor> orderListSearch(Counselor counselor) throws Exception;
 	public List<Counselor> optionTuning(int orderCode) throws Exception;
 	public List<Counselor> listAll(int counselItemCode) throws Exception;
+	public List<Counselor> linkCounsel2(String customer) throws Exception;
 }
