@@ -27,6 +27,7 @@
 		$("#cancle").on("click",function(){
 			window.location.href = "counsel";
 		});
+		$("#counsel").addClass("w3-gray");
 	});
 </script>
 </head>

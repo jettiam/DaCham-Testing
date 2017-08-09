@@ -218,13 +218,11 @@ public String goOrderInfo()throws Exception{
 }
 
 
-
-@RequestMapping(value="/menuShow",method = RequestMethod.GET)
 /**
  * 
  * @return 이달의 메뉴로 이동
- */
-public String menuShow(){
+ */@RequestMapping(value="/menuShow",method = RequestMethod.GET)
+public String menuShow(Model model){	
 	return "customer/menu/menuShow";
 }
 

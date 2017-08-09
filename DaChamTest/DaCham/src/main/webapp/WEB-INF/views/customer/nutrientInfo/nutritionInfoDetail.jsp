@@ -15,6 +15,11 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <title>DaCham 영양정보</title>
+<script>
+$(document).ready(function(){
+	$("#nutritionInfo").addClass("w3-gray");
+	});
+</script>
 <style>
 /* #nutriInfoDetailWrap {
 	width: 1080px;	
@@ -79,7 +84,7 @@ p{
 	<c:if test="${detail==1}">
 	<%--토마토 --%>
 		<div class="infoImg">
-		<img src="resources/customerImage/colorcherrytomato.jpg" class="img-responsive nutriInfoDetailTitleImg">
+		<img src="resources/customerImage/tomato0.jpg" class="img-responsive nutriInfoDetailTitleImg">
 		</div>
 		<div class="container">
 	
@@ -212,6 +217,329 @@ p{
 			</div>
 		</div>
 			
+
+</c:if>
+<!-- 당뇨와 과일 -->
+<c:if test="${detail==4}">
+<div class="infoImg">
+      <img src="resources/customerImage/fruits.jpg"
+         class="img-responsive nutriInfoDetailTitleImg">
+   </div>
+   <div class="container">
+
+      <div class="nutritionInfoTitleBox h2 text-center">당뇨환자인데 과일을 먹어도 될까요?</div>
+      
+      <div class="nutritionInfoTextBox"><p class="lead">
+" 당뇨"는 인슐린의 분비가 적거나 혹은 기능이 몸안에서 제대로 작동하지 않아서 생겨납니다
+이렇기에 피안에서 당이 기준을 넘어서는 현상을 일으킵니다.
+특히나 생활속 본인이 서슴없이 행동하는 것이 직접적인 요인이 될 수 있다는 점으로 하여금 환자 스스로의
+자각으로 내 문제들을 개선시켜주셔야 합니다
+건강한 습관을 유지하게된다면 미리 막을수 있는만큼 자신이 진행하는 노력에따라 양상이 달라지기도 합니다.
+그렇다면 당뇨에 좋은 과일 어떤게 있을까요? 
+
+</p>
+      </div> 
+      <div class="nutriInfoDetailImgWrap ">
+         <img src="resources/customerImage/berry.jpg"
+            class="center-block img-responsive nutriInfoDetailImg"></div>
+         <div class="nutritionInfoTitleBox h2 text-center">
+            
+         </div>
+         <div class="nutritionInfoTextBox">
+            <p class="lead">
+
+과일은 당 함유량이 높지만 비타민, 식이섬유 등이 풍부하기 때문에 적절히 섭취를 해주는 것이 좋습니다.
+우선 껍질째, 공복에 조금씩 나눠 먹는 것이 중요합니다.
+그리고 혈당지수를 천천히 오르게 하는 과일을 골라드시는게 좋습니다. 
+ 
+첫번째 과일인 <strong>딸기</strong> 부터 살펴보겠습니다
+비타민을 함유하고 있기때문에 신진대사를
+보다 활발히 만드는데요 여기에 섬유질이 무척이나
+많아 심혈관 질병을 사전에 막는데 많은 도움이 됩니다
+
+
+</p>
+         </div>
+
+      
+      <div class="nutriInfoDetailImgWrap">
+         <img src="resources/customerImage/kiwi.jpg" class="center-block img-responsive nutriInfoDetailImg"></div>
+         <div class="nutritionInfoTitleBox h2 text-center">키위</div>
+         <div class="nutritionInfoTextBox">
+            <p class="lead">
+             
+
+그리고 두번째로 소개할 당뇨에 좋은 과일
+ 바로 <strong>키위</strong> 입니다
+이 안에는 시로토닌 이라는 성분이 많이
+들어있는데 스트레스를 줄이는데 큰 
+효과가 있으며 여기에 아르기닌 성분은 피가 
+활발히 순환되는데 도움이 되어서 특히나 
+당뇨를 위하여 자주섭취하면 많은 효과를 얻을수 있습니다
+
+
+
+
+
+</p>
+         
+         </div>
+      </div>
+         
+
+</c:if>
+<!-- 야채와 과일 -->
+<c:if test="${detail==3}">
+<div class="infoImg">
+      <img src="resources/customerImage/vege1.jpg"
+         class="img-responsive nutriInfoDetailTitleImg">
+   </div>
+   <div class="container">
+
+      <div class="nutritionInfoTitleBox h2 text-center">야채와 과일, 색깔로 골라먹자!</div>
+      
+      <div class="nutritionInfoTextBox"><p class="lead">
+과일이나 채소는 다양한 색상을 가지고 있습니다.
+이 색상들이 기능성물질로서 인정받고 있다는 것 아시나요?
+흔하게 분류되는 5가지의 색깔별로 간단히 어떤 기능과 어떤 종류가 있는지 알아보겠습니다.
+미국 암연구기관(AICR)은 다양한 색깔의 채소와 과일을 하루에 400g이상 먹으면
+암 발생을 최소 20%정도 낮출 수 있다고 하였습니다. 
+미 국립암연구소를 중심으로 실시해 온 "5 DAY" 캠페인은 하루에 다섯가지 색깔 이상의 채소와 과일을 충분히 섭취하자는 운동입니다.
+하루 5가지 이상의 과일과 채소를 먹는다는 것은 건강유지에 매우 중요한 부분이며,
+짙은 색깔의 과일과 채소는 다양하고 풍부한 비타민, 미네랄, 섬유질을 함유하고 있기에
+노화와 암, 각종 심장 관련 질환예방에 도움이 되는 식물성 화학물질, 즉 파이토케미컬을 공급해줍니다.
+
+ 
+
+</p>
+      </div> 
+      <div class="nutriInfoDetailImgWrap ">
+         <img src="resources/customerImage/vege2.jpg"
+            class="center-block img-responsive nutriInfoDetailImg"></div>
+         <div class="nutritionInfoTitleBox h2 text-center">
+            
+         </div>
+         <div class="nutritionInfoTextBox">
+            <p class="lead">
+
+가장 쉽게 볼 수 있는 <strong>녹색</strong>입니다.
+녹색은 비타민C와 카로티노이드, 플라보노이드 등 노화방지에 도움이 되는 물질과 섬유질, 엽산, 철분, 칼륨, 칼슘 등
+미네랄이 풍부합니다.
+브로콜리, 상추, 피망, 청포도, 참다래, 매실, 배추, 콩, 샐러리, 오이, 풋고추, 깻잎, 양배추, 부추,
+시금치, 고추냉이, 녹차, 쑥, 미나리 등이 있습니다.
+
+</p>
+         </div>
+
+      
+      <div class="nutriInfoDetailImgWrap">
+         <img src="resources/customerImage/vege3.jpg" class="center-block img-responsive nutriInfoDetailImg"></div>
+         <div class="nutritionInfoTitleBox h2 text-center">주황색 야채와 과일</div>
+         <div class="nutritionInfoTextBox">
+            <p class="lead">
+             
+
+<strong>주황색</strong>
+
+ 
+
+카로티노이드는 밝은 주황색을 내게 하는 대표적인 색소입니다.
+노화를 방지하는 비타민C와 섬유질, 염산, 칼륨, 칼슘 등의 미네랄이 풍부합니다.
+감귤, 한라봉, 천혜향, 당근, 고구마, 배, 옥수수, 감, 황도, 파프리카, 
+유자, 살구, 호박 등이 있습니다.
+
+<strong>자주색</strong>자주색은 안토시아닌, 석탄산, 섬유질과 영양소가 풍부하게 들어 있습니다.
+암과 심장질환 예방 및 시력이나 면연력 증가에 도움이 됩니다.
+블루베리, 가지, 적상추, 적양배추, 자두, 아스파라거스, 적근대, 자주감자, 복분자 등이 있습니다.
+
+
+
+
+
+</p>
+         </div>
+
+      <div class="nutriInfoDetailImgWrap">
+         <img src="resources/customerImage/vege4.jpg" class="center-block img-responsive nutriInfoDetailImg"></div>
+         <div class="nutritionInfoTitleBox h2 text-center">흰색 야채와 과일</div>
+         <div class="nutritionInfoTextBox">
+            <p class="lead">
+             
+
+
+
+ 
+<strong>흰색</strong>은항산화물질인 비타민C가 풍부해 암과 심장질환 예방에 도움이 됩니다.
+마늘과 양파의 유황화합물은 가끔은 우리를 눈물흘리게 만들지만 질병 예방에 중요한 역할을 합니다.
+흰색 음식에는 마늘, 무, 버섯, 생강, 감자, 양파, 연근, 토란, 흰깨, 백도 등이 있습니다 
+
+<strong>빨간색</strong>그룹의 대표적인 항산화. 노화물질은 붉은색을 내게 하는 안토시아닌과 카로티노이드입니다.
+이 밖에 비타민C, 섬유질, 칼륨 등이 풍부합니다.
+사과, 토마토, 딸기, 수박, 앵두, 석류, 대추, 붉은고추, 붉은 양파 등이 있습니다.
+
+
+
+
+
+
+
+</p>
+         </div>
+
+
+   </div>
+         
+
+</c:if>
+<!-- 슈퍼푸드 연어 -->
+<c:if test="${detail==6}">
+<div class="infoImg">
+      <img src="resources/customerImage/salmon3.jpg"
+         class="img-responsive nutriInfoDetailTitleImg">
+   </div>
+   <div class="container">
+
+      <div class="nutritionInfoTitleBox h2 text-center">슈퍼푸드 연어</div>
+      
+      <div class="nutritionInfoTextBox"><p class="lead">
+<strong>연어는 세계 10대 슈퍼 푸드에 선정될 정도로 건강에 좋은 식품입니다. </strong>
+슈퍼 푸드는 칼로리는 낮으면서 당분, 염분이 적고 식이섬유와 영양소가 풍부하여 면역력 증가에 효능이 있는 음식을 말합니다. 
+미국의 시사 주간지 ‘타임’이 선정한 세계 10대 슈퍼 푸드(블루베리, 토마토, 시금치, 레드와인, 귀리, 브로콜리, 마늘, 연어, 녹차, 견과류)를 보면 
+채소가 아닌 식품으로는 연어가 유일하게 들어있습니다. 
+미국의 영양전문가 스티븐 프랫은 연어가 슈퍼 푸드에 선정된 이유로 맛이 좋고, 
+요리하기 쉬우며, 단백질이 풍부하다는 것을 꼽았습니다. 
+
+ 
+
+</p>
+      </div> 
+      <div class="nutriInfoDetailImgWrap ">
+         <img src="resources/customerImage/salmon1.jpg"
+            class="center-block img-responsive nutriInfoDetailImg"></div>
+         <div class="nutritionInfoTitleBox h2 text-center">
+            
+         </div>
+         <div class="nutritionInfoTextBox">
+            <p class="lead">
+ <p class="lead"><strong>몸에 좋은 비타민 덩어리</strong></p>
+
+살코기의 20%가 양질의 단백질로 구성되어 있는 연어는 비타민이 많기로도 유명합니다. 
+연어는 비타민 D가 풍부해 칼슘이 우리 몸에 흡수되는 것을 돕고, 여러 가지 비타민 B군을 함유하고 있어 성장과 소화를 촉진하고 혈액순환에 도움이 됩니다.
+또한 비타민 A와 E 성분이 많아 세포점막을 튼튼히 해주고 노화 방지 효능도 있습니다. 
+'회춘 비타민'으로 알려진 비타민 E의 경우 연어 알에 많이 들어있습니다. 
+뿐만 아니라 연어에는 EPA, DHA의 오메가-3 지방산이 다량 함유돼 체내 중성지방 수치를 낮추는 것과 뇌세포 발달에도 도움이 됩니다. 
+
+</p>
+         </div>
+
+      
+      <div class="nutriInfoDetailImgWrap">
+         <img src="resources/customerImage/salmon2.jpg" class="center-block img-responsive nutriInfoDetailImg"></div>
+         <div class="nutritionInfoTitleBox h2 text-center"></div>
+         <div class="nutritionInfoTextBox">
+           
+           <p class="lead"><strong>피부미인을 만든다</strong></p>
+           
+            <p class="lead">      
+
+
+
+ 
+
+연어에 들어 있는 오메가-3 지방산은 여드름 피부를 개선하는데 효과가 있고, 
+염증과 주름살이 생기지 않도록 예방하는 차원에서도 도움이 됩니다. 
+또한 혈액순환을 좋게 하는 비타민 B군은 다크서클을 완화하고 
+피부색소가 침착되는 것을 예방하는데 도움이 됩니다. 
+때문에 연어는 특히 여성들에게 인기가 좋습니다. 
+맛도 좋고 피부에도 좋으니 피부를 미의 기준으로 생각하는 여성들에게 
+연어만한 음식이 없습니다. 
+
+연어는 요리법 또한 매우 다양합니다. 
+육류를 과다 섭취하면 각종 성인병 유발을 하는데요,
+간편한 요리법과 영양이 풍부한 슈퍼푸드 연어로 건강한 생활을 보내시기 바랍니다.
+
+
+
+
+
+
+
+
+</p>
+         </div>
+
+
+
+
+   </div>
+         
+
+</c:if>
+<!-- 현미 -->
+<c:if test="${detail==5}">
+<div class="infoImg">
+      <img src="resources/customerImage/rice0.jpg"
+         class="img-responsive nutriInfoDetailTitleImg">
+   </div>
+   <div class="container">
+
+      <div class="nutritionInfoTitleBox h2 text-center">질병과 현미</div>
+      
+      <div class="nutritionInfoTextBox"><p class="lead">
+
+만성신부전에는 고기, 생선, 달걀, 우유를 일체 먹으면 안 됩니다. 식물성 식품만 먹어야 하는데, 그래서 현미, 채소, 과일 이 세 가지만 먹어야 합니다. 그리고 그것을 먹더라도 날것으로 먹으면 가장 좋습니다. 만성신부전에는 현미를 먹으면 안 되고, 채소를 충분히 먹으면 안 되며 채소를 먹더라도 적게 먹어야 한다, 또, 이것은 생것으로 먹으면 안 되기 때문에 익혀서 성분을 빼고 먹어야 한다고 소문이 나 있습니다만 이 소문과 정반대로 하면 만성신부전은 낫게 되어있습니다. 
+
+ 
+
+</p>
+      </div> 
+      <div class="nutriInfoDetailImgWrap ">
+         <img src="resources/customerImage/rice1.jpg"
+            class="center-block img-responsive nutriInfoDetailImg"></div>
+         <div class="nutritionInfoTitleBox h2 text-center">
+            
+         </div>
+         <div class="nutritionInfoTextBox">
+          <p class="lead"><strong>현미와 채소는 날것으로</strong></p>
+            <p class="lead">
+
+날것으로 먹는 것이 훨씬 더 낫다고 하는 것은 바로 위와 같은 이유 때문입니다. 날것에는 칼륨, 인이 더 많이 들어있어서 그를 섭취하게 되면 만성신부전 때문에 올라간 칼륨, 인수치가 더욱더 올라갈 수 있습니다. 그래서 그것이 많이 든 음식을 먹으면 안 된다고 생각해서 삶거나 요리해서 칼륨, 인수치를 조금 낮추고 먹으면 좋다고 이야기를 합니다. 하지만 모든 식물성 식품을 익혀버리면 성분이 많이 감소하는데, 특히 몸에 좋은 성분들이 감소합니다. 동맥경화증을 일으키는 성분을 없애거나 줄여줘야 하는데 채소를 익혀버리면 채소 안에 동맥경화증을 억제해주는 성분이 많이 줄어듭니다. 그래서 날것으로 먹는 것이 가장 좋습니다.
+
+</p>
+         </div>
+
+      
+      <div class="nutriInfoDetailImgWrap">
+         <img src="resources/customerImage/rice2.jpg" class="center-block img-responsive nutriInfoDetailImg"></div>
+         <div class="nutritionInfoTitleBox h2 text-center"></div>
+         <div class="nutritionInfoTextBox">
+            <p class="lead">
+             
+
+
+
+ 
+
+현미, 채소, 과일을 생으로 먹으면 칼륨, 인수치의 증가보다 배설량을 더 많게 해준다
+
+ 
+
+다시 한 번 정리하면 현미, 채소 그리고 과일 등 식물성 식품을 충분히 먹고 또, 그것을 날 것으로 먹으면 칼륨 수치가 혹은 인수치가 올라가서 몸에 문제가 생긴다고 사람들은 생각하는데, 그렇게 먹게 되면 동맥경화증을 훨씬 더 빨리 치료해주기 때문에 만성신부전이 잘 낫습니다. 그래서 칼륨, 혹은 인수치 섭취량은 많아지지만, 그것을 배설을 훨씬 더 많이 해주기 때문에 현미, 채소, 과일을 충분히 먹고 그것을 날 것으로 먹으면 오히려 만성신부전이 낫습니다. 상상과는 다르게 병이 낫는다는 것을 실제로 해보면 금방 알게 됩니다. 염려하지 마시고 현미, 채소, 과일을 충분히 그리고 날 것으로 먹으면 가장 좋습니다. 
+
+
+
+
+
+
+
+</p>
+         </div>
+
+
+
+
+   </div>
+         
 
 </c:if>
 <footer>

@@ -112,4 +112,10 @@ public List<Measure> measureRead(String id) throws Exception {
 	return sqlSession.selectList(namespace+".measureRead", id);
 }
 
+@Override
+public List<Customer> menuShow(int diseaseCode) throws Exception {
+	// TODO Auto-generated method stub
+	return sqlSession.selectList(namespace+".menuShow", diseaseCode);
+}
+
 }

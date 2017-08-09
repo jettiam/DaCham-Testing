@@ -1,5 +1,7 @@
 package com.wdb3a.dacham;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -208,8 +210,21 @@ public class CounselorAjaxController {
 	@RequestMapping(value = "/counselInsert/{customer}/{answer}",method = RequestMethod.POST)
 	public ResponseEntity<String> counselInsert(@PathVariable("customer")String customer,@PathVariable("answer")String answer){
 		ResponseEntity<String> entity = null;
-		
+		Date d = new Date();
+        
+        String s = d.toString();
+        System.out.println("현재날짜 : "+ s);
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        System.out.println("현재날짜 : "+ sdf.format(d));
+        
+        String dateTitle = sdf.format(d);
+        String counselTitle = dateTitle + " 전화 상담입니다."; 
+
+
 		Counselor counselor = new Counselor();
+		counselor.setCounselTitle(counselTitle);
+	    counselor.setCounselContent(counselTitle);
 		counselor.setCustomer(customer);
 		counselor.setAnswer(answer);
 		try {

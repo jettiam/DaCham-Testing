@@ -230,9 +230,10 @@ public class AdminSubController {
 			
 			Criteria criteria = new Criteria();
 			int totalCount = service.foodStockListCount();
+			criteria.setPage(page);
 			criteria.setTotalCount(totalCount); 
 			List<FoodMInven> list = service.foodStockListAll(criteria);
-			criteria.setPage(page);
+			
 			Map<String, Object> map = new HashMap<>();
 			map.put("list", list);
 			map.put("criteria", criteria);   
@@ -267,13 +268,20 @@ public class AdminSubController {
 	}
 
 	// foodStock 대기중 리스트 출력
-	@RequestMapping(value = "/foodStockStopAll", method = RequestMethod.GET)
-	public ResponseEntity<List<FoodMInven>> foodStockStopAll() {
-		ResponseEntity<List<FoodMInven>> entity = null;
+	@RequestMapping(value = "/foodStockStopAll/{page}", method = RequestMethod.GET)
+	public ResponseEntity<Map<String, Object>> foodStockStopAll(@PathVariable("page") int page) {
+		ResponseEntity<Map<String, Object>> entity = null;
 		try {
-			List<FoodMInven> list = service.foodStockListStop();
-			entity = new ResponseEntity<>(list, HttpStatus.OK);
-		} catch (Exception e) {
+			Criteria criteria = new Criteria();
+			int totalCount = service.foodStockListStopCount();
+			criteria.setPage(page);
+			criteria.setTotalCount(totalCount); 
+			List<FoodMInven> list = service.foodStockListStop(criteria);
+			Map<String, Object> map = new HashMap<>();
+			map.put("list", list);
+			map.put("criteria", criteria);    
+			entity = new ResponseEntity<>(map, HttpStatus.OK);
+		} catch (Exception e) { 
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -282,12 +290,19 @@ public class AdminSubController {
 	}
 
 	// 식단 다 보여줘
-	@RequestMapping(value = "/dietAll", method = RequestMethod.GET)
-	public ResponseEntity<List<Diet>> dietAll() {
-		ResponseEntity<List<Diet>> entity = null;
+	@RequestMapping(value = "/dietAll/{page}", method = RequestMethod.GET)
+	public ResponseEntity<Map<String, Object>> dietAll(@PathVariable("page") int page) {
+		ResponseEntity<Map<String, Object>> entity = null;
 		try {
-			List<Diet> list = service.dietAll();
-			entity = new ResponseEntity<>(list, HttpStatus.OK);
+			Criteria criteria = new Criteria();
+			int totalCount = service.dietAllCount();
+			criteria.setPage(page);
+			criteria.setTotalCount(totalCount); 
+			List<Diet> list = service.dietAll(criteria);
+			Map<String, Object> map = new HashMap<>();  
+			map.put("list", list);
+			map.put("criteria", criteria); 
+			entity = new ResponseEntity<>(map, HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

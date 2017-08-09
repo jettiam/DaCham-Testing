@@ -15,6 +15,11 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <title>DaCham 영양정보</title>
+<script>
+$(document).ready(function(){
+	$("#nutritionInfo").addClass("w3-gray");
+	});
+</script>
 <style>
 #nutriInfoWrap {
 	width: 1080px;
