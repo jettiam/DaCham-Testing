@@ -16,12 +16,22 @@
 		select MAX(dietCode) from diet
 	</select>
 	<!-- 해당 메인페이지에 이달의 메뉴를 조회합니다. -->
-	<select id = "thisMonth" resultType = "OrderList">
-		select a.orderDate, b.dietName, b.dietImg 
-		from orderlist a join diet b
-		where a.dietCode = b.dietCode
-		and month(a.orderDate) between month(a.orderDate) and (month(a.orderDate)+1)
-		group by a.dietCode
+	<select id = "thisMonth" resultType = "Customer">
+		select d.dietCode, d.dietName, d.dietImg, s.sideDName, s.sideDCode , s.sideDImg, n.kcal,n.carbohydrate,n.protein,n.fat,n.na,n.k
+		from diet d,dietinfo di, sidedish s, (select di.dietCode, sum(result.kcal) kcal,sum(result.carbohydrate) carbohydrate, sum(result.protein) protein,sum(result.fat) fat,sum(result.na) na,sum(result.k) k
+		from  (select s.sideDCode, s.sidedImg,s.sideDname,s.foodGCode, f.kcal,f.carbohydrate,f.protein,f.fat,f.na,f.k
+		from sidedish s,(select a.sideDcode,sum(kcal) kcal,sum(carbohydrate) carbohydrate, sum(protein) protein, sum(fat) fat, sum(na) na,sum(k) k
+		from 
+		(select si.sideDCode,(si.foodMAmount/100)*f.kcal kcal,(si.foodMAmount/100)*f.protein protein,(si.foodMAmount/100)*f.carbohydrate carbohydrate,(si.foodMAmount/100)*f.na na,(si.foodMAmount/100)*f.fat fat,(si.foodMAmount/100)*f.k k
+			from sidedinfo si,foodmaterial f
+			where si.foodMCode = f.foodMCode) a
+			group by a.sidedcode) f 
+		where s.sideDCode=f.sideDcode) result, dietinfo di
+		where result.sideDCode= di.sideDCode
+		group by di.dietCode
+		order by di.sideDType) n
+		where  di.dietCode=d.dietCode and di.sideDCode=s.sideDCode and di.sideDType=0 and d.spDietitem=1 and d.dietCode=n.dietCode
+		order by d.dietCode
 		limit #{startRecord},#{recordsPerPage}
 	</select>
 	<!-- 이달의 메뉴의 개수를 구합니다. -->
