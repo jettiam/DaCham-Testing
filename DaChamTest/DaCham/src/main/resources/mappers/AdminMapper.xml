@@ -280,6 +280,9 @@
 		c.orderItemCode)
 		order by field(c.orderItemCode,
 		2,3,9,10)
+		limit
+		#{startRecord},
+		#{recordsPerPage}
 	</select>
 
 	<!--조리 대기 우선 -->
@@ -303,6 +306,9 @@
 		c.orderItemCode)
 		order by field(c.orderItemCode,
 		3,2,9,10)
+		limit
+		#{startRecord},
+		#{recordsPerPage}
 	</select>
 
 	<!--식재료 발주 우선 -->
@@ -326,6 +332,9 @@
 		c.orderItemCode)
 		order by field(c.orderItemCode,
 		9,3,2,10)
+		limit
+		#{startRecord},
+		#{recordsPerPage}
 	</select>
 
 
@@ -350,6 +359,9 @@
 		c.orderItemCode)
 		order by field(c.orderItemCode,
 		10,3,9,2)
+		limit
+		#{startRecord},
+		#{recordsPerPage}
 	</select>
 
 

@@ -163,12 +163,20 @@ public class AdminSubController {
 	}
 
 	// orderSort1 리스트 출력
-	@RequestMapping(value = "/orderSort1", method = RequestMethod.GET)
-	public ResponseEntity<List<OrderList>> orderSort1() {
-		ResponseEntity<List<OrderList>> entity = null;
+	@RequestMapping(value = "/orderSort1/{page}", method = RequestMethod.GET)
+	public ResponseEntity<Map<String, Object>> orderSort1(@PathVariable("page") int page) {
+		ResponseEntity<Map<String, Object>> entity = null;
 		try {
-			List<OrderList> list = service.orderSort1();
-			entity = new ResponseEntity<>(list, HttpStatus.OK);
+			Criteria criteria = new Criteria();
+			System.out.println(page);
+			criteria.setPage(page);
+			int totalCount = service.orderCount();
+			criteria.setTotalCount(totalCount); 
+			List<OrderList> list = service.orderSort1(criteria);
+			Map<String, Object> map = new HashMap<>();
+			map.put("list", list);
+			map.put("criteria", criteria);  
+			entity = new ResponseEntity<>(map, HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -178,12 +186,20 @@ public class AdminSubController {
 	}
 
 	// orderSort2 리스트 출력
-	@RequestMapping(value = "/orderSort2", method = RequestMethod.GET)
-	public ResponseEntity<List<OrderList>> orderSort2() {
-		ResponseEntity<List<OrderList>> entity = null;
+	@RequestMapping(value = "/orderSort2/{page}", method = RequestMethod.GET)
+	public ResponseEntity<Map<String, Object>> orderSort2(@PathVariable("page") int page) {
+		ResponseEntity<Map<String, Object>> entity = null;
 		try {
-			List<OrderList> list = service.orderSort2();
-			entity = new ResponseEntity<>(list, HttpStatus.OK);
+			Criteria criteria = new Criteria();
+			System.out.println(page);
+			criteria.setPage(page);
+			int totalCount = service.orderCount();
+			criteria.setTotalCount(totalCount); 
+			List<OrderList> list = service.orderSort2(criteria);
+			Map<String, Object> map = new HashMap<>();
+			map.put("list", list);
+			map.put("criteria", criteria); 
+			entity = new ResponseEntity<>(map, HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -193,12 +209,20 @@ public class AdminSubController {
 	}
 
 	// orderSort3 리스트 출력
-	@RequestMapping(value = "/orderSort3", method = RequestMethod.GET)
-	public ResponseEntity<List<OrderList>> orderSort3() {
-		ResponseEntity<List<OrderList>> entity = null;
+	@RequestMapping(value = "/orderSort3/{page}", method = RequestMethod.GET)
+	public ResponseEntity<Map<String, Object>> orderSort3(@PathVariable("page") int page) {
+		ResponseEntity<Map<String, Object>> entity = null;
 		try {
-			List<OrderList> list = service.orderSort3();
-			entity = new ResponseEntity<>(list, HttpStatus.OK);
+			Criteria criteria = new Criteria();
+			System.out.println(page);
+			criteria.setPage(page);
+			int totalCount = service.orderCount();
+			criteria.setTotalCount(totalCount); 
+			List<OrderList> list = service.orderSort3(criteria);
+			Map<String, Object> map = new HashMap<>();
+			map.put("list", list);
+			map.put("criteria", criteria); 
+			entity = new ResponseEntity<>(map, HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -208,12 +232,20 @@ public class AdminSubController {
 	}
 
 	// orderSort4 리스트 출력
-	@RequestMapping(value = "/orderSort4", method = RequestMethod.GET)
-	public ResponseEntity<List<OrderList>> orderSort4() {
-		ResponseEntity<List<OrderList>> entity = null;
+	@RequestMapping(value = "/orderSort4/{page}", method = RequestMethod.GET)
+	public ResponseEntity<Map<String, Object>> orderSort4(@PathVariable("page") int page) {
+		ResponseEntity<Map<String, Object>> entity = null;
 		try {
-			List<OrderList> list = service.orderSort4();
-			entity = new ResponseEntity<>(list, HttpStatus.OK);
+			Criteria criteria = new Criteria();
+			System.out.println(page);
+			criteria.setPage(page);
+			int totalCount = service.orderCount();
+			criteria.setTotalCount(totalCount); 
+			List<OrderList> list = service.orderSort4(criteria);
+			Map<String, Object> map = new HashMap<>();
+			map.put("list", list);
+			map.put("criteria", criteria); 
+			entity = new ResponseEntity<>(map, HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
