@@ -18,161 +18,221 @@
 <script>
 	var object = new Object();
 	var booler = false;
-
-	function orderSort1() {
-
+	var sortCount;
+	
+	function orderSort1(page) {
+		$(".pagination li").remove();  
+		sortCount = 1
 		$
 				.getJSON(
-						"adminSub/orderSort1",
+						"adminSub/orderSort1/"+page,
 						function(data) {
 
 							console.log(data);
 							$(".orderListTable").remove();
 							var str = "";
-							for (var i = 0; i < data.length; i++) {
+							for (var i = 0; i < data.list.length; i++) {
 								str += "<tr class='orderListTable'><td>"
 										+ "<input type='checkBox' id='"
-										+ data[i].orderCode
+										+ data.list[i].orderCode
 										+ "' value='"
-										+ data[i].orderCode
+										+ data.list[i].orderCode   
 										+ "' name='che'</td>"
 										+ "<td class='orderCode'>"
-										+ data[i].orderCode
+										+ data.list[i].orderCode
 										+ "</td>"
 										+ "<td class='id'>"
-										+ data[i].id
+										+ data.list[i].id
 										+ "</td>"
 										+ "<td>"
-										+ "<a data-src='"+data[i].orderCode+"' class='dietName' data-toggle='modal' href='#myModal'>"
-										+ data[i].dietName
+										+ "<a data-src='"+data.list[i].orderCode+"' class='dietName' data-toggle='modal' href='#myModal'>"
+										+ data.list[i].dietName
 										+ "</a> </td>"
 										+ "<td class='orderDate'>"
-										+ data[i].orderDate
+										+ data.list[i].orderDate
 										+ "</td>"
 										+ "<td class='price'>"
-										+ data[i].price
+										+ data.list[i].price
 										+ "</td>"
 										+ "<td class='orderItemName'>"
-										+ data[i].orderItemName + "</td></tr>"
+										+ data.list[i].orderItemName + "</td></tr>"
 							}
 							console.log(str);
 							$(".tables").append(str);
+							printPaging1(data.criteria);   
 						});
 	}
-	function orderSort2() {
+	function orderSort2(page) {     
+		$(".pagination li").remove();
+		sortCount = 2;
 		$
 				.getJSON(
-						"adminSub/orderSort2",
+						"adminSub/orderSort2/"+page,
 						function(data) {
 							console.log(data);
 							$(".orderListTable").remove();
 							var str = "";
-							for (var i = 0; i < data.length; i++) {
+							for (var i = 0; i < data.list.length; i++) {
 								str += "<tr class='orderListTable'><td>"
 										+ "<input type='checkBox' id='"
-										+ data[i].orderCode
+										+ data.list[i].orderCode
 										+ "' value='"
-										+ data[i].orderCode
+										+ data.list[i].orderCode
 										+ "' name='che'</td>"
 										+ "<td class='orderCode'>"
-										+ data[i].orderCode
+										+ data.list[i].orderCode
 										+ "</td>"
 										+ "<td class='id'>"
-										+ data[i].id
+										+ data.list[i].id
 										+ "</td>"
 										+ "<td>"
-										+ "<a data-src='"+data[i].orderCode+"' class='dietName' data-toggle='modal' href='#myModal'>"
-										+ data[i].dietName
+										+ "<a data-src='"+data.list[i].orderCode+"' class='dietName' data-toggle='modal' href='#myModal'>"
+										+ data.list[i].dietName
 										+ "</a> </td>"
 										+ "<td class='orderDate'>"
-										+ data[i].orderDate
+										+ data.list[i].orderDate
 										+ "</td>"
 										+ "<td class='price'>"
-										+ data[i].price
+										+ data.list[i].price
 										+ "</td>"
 										+ "<td class='orderItemName'>"
-										+ data[i].orderItemName + "</td></tr>"
+										+ data.list[i].orderItemName + "</td></tr>"
 							}
 							console.log(str);
 							$(".tables").append(str);
+							printPaging1(data.criteria);  
 						});
 	}
-	function orderSort3() {
+	function orderSort3(page) {
+		$(".pagination li").remove();
+		sortCount = 3
 		$
 				.getJSON(
-						"adminSub/orderSort3",
+						"adminSub/orderSort3/"+page,
 						function(data) {
 							console.log(data);
 							$(".orderListTable").remove();
 							var str = "";
-							for (var i = 0; i < data.length; i++) {
+							for (var i = 0; i < data.list.length; i++) {
 								str += "<tr class='orderListTable'><td>"
 										+ "<input type='checkBox' id='"
-										+ data[i].orderCode
+										+ data.list[i].orderCode
 										+ "' value='"
-										+ data[i].orderCode
+										+ data.list[i].orderCode
 										+ "' name='che'</td>"
 										+ "<td class='orderCode'>"
-										+ data[i].orderCode
+										+ data.list[i].orderCode
 										+ "</td>"
 										+ "<td class='id'>"
-										+ data[i].id
+										+ data.list[i].id
 										+ "</td>"
 										+ "<td>"
-										+ "<a data-src='"+data[i].orderCode+"' class='dietName' data-toggle='modal' href='#myModal'>"
-										+ data[i].dietName
+										+ "<a data-src='"+data.list[i].orderCode+"' class='dietName' data-toggle='modal' href='#myModal'>"
+										+ data.list[i].dietName
 										+ "</a> </td>"
 										+ "<td class='orderDate'>"
-										+ data[i].orderDate
+										+ data.list[i].orderDate
 										+ "</td>"
 										+ "<td class='price'>"
-										+ data[i].price
+										+ data.list[i].price
 										+ "</td>"
 										+ "<td class='orderItemName'>"
-										+ data[i].orderItemName + "</td></tr>"
+										+ data.list[i].orderItemName + "</td></tr>"
 							}
 							console.log(str);
 							$(".tables").append(str);
+							printPaging1(data.criteria);  
 						});
 	}
-	function orderSort4() {
+	function orderSort4(page) {
+		$(".pagination li").remove();
+		sortCount = 4;
 		$
 				.getJSON(
-						"adminSub/orderSort4",
+						"adminSub/orderSort4/"+page,  
 						function(data) {
 							console.log(data);
 							$(".orderListTable").remove();
 							var str = "";
-							for (var i = 0; i < data.length; i++) {
+							for (var i = 0; i < data.list.length; i++) {
 								str += "<tr class='orderListTable'><td>"
 										+ "<input type='checkBox' id='"
-										+ data[i].orderCode
+										+ data.list[i].orderCode
 										+ "' value='"
-										+ data[i].orderCode
+										+ data.list[i].orderCode
 										+ "' name='che'</td>"
 										+ "<td class='orderCode'>"
-										+ data[i].orderCode
+										+ data.list[i].orderCode
 										+ "</td>"
 										+ "<td class='id'>"
-										+ data[i].id
+										+ data.list[i].id
 										+ "</td>"
 										+ "<td>"
-										+ "<a data-src='"+data[i].orderCode+"' class='dietName' data-toggle='modal' href='#myModal'>"
-										+ data[i].dietName
+										+ "<a data-src='"+data.list[i].orderCode+"' class='dietName' data-toggle='modal' href='#myModal'>"
+										+ data.list[i].dietName
 										+ "</a> </td>"
 										+ "<td class='orderDate'>"
-										+ data[i].orderDate
+										+ data.list[i].orderDate
 										+ "</td>"
 										+ "<td class='price'>"
-										+ data[i].price
+										+ data.list[i].price
 										+ "</td>"
 										+ "<td class='orderItemName'>"
-										+ data[i].orderItemName + "</td></tr>"
+										+ data.list[i].orderItemName + "</td></tr>"
 							}
 							console.log(str);
 							$(".tables").append(str);
+							printPaging1(data.criteria);  
 						});
 	}
+	
+	function printPaging1(criteria) {
+		var str = "";
+
+		if (criteria.prev) {
+			str += "<li><a href=''"
+					+ (criteria.startPage - 1) + "'>'"
+					+ "<<" + "</a></li>";
+		}
+		for (var i = criteria.startPage; i <= criteria.endPage; i++) {
+			var strClass = criteria.page == i ? "class = 'active'"
+					: "";
+			str += "<li "+strClass+"><a href ='"+i+"'>" + i
+					+ "</a></li>";
+		}
+		if (criteria.next) {
+			str += "<li><a href=''"
+					+ (criteria.endPage + 1) + "'>'" + ">>"
+					+ "</a></li>";
+		}
+		$(".pagination").html(str);
+	}
+
+
+/* 	$(".pagination").on("click", "li a", function() {
+		event.preventDefault();
+		var replyPage = $(this).attr("href");
+		
+		
+		var code = $(".active a").attr('data-code');  
+		
+		alert('코드번호:'+code);
+		if(code == 1){
+			orderSort1(replyPage); 
+		}
+		else if(code == 2){
+			orderSort2(replyPage);
+		}
+		else if(code == 3){
+			orderSort3(replyPage);
+		}
+		else if(code == 4){
+			orderSort4(replyPage); 
+		}
+		
+		 
+		
+	});  */  
 
 	$(document)
 			.ready(
@@ -304,13 +364,13 @@
 			
 							
 							$("input[name=che]:checked").each(function() {
-								var test = $(this).val();
-								console.log(test);
-
+								var orderCode = $(this).val();
+								console.log(orderCode);
+  
 								$.ajax({
 									url : 'adminSub/orderList2',
 									data : JSON.stringify({
-										"orderCode" : test
+										"orderCode" : orderCode
 									}),
 									dataType : 'text',
 									type : 'put',
@@ -320,7 +380,7 @@
 									},
 									success : function(data) {
 										
-										all();
+										all(1); 
 
 									},
 									error : function() {
@@ -453,11 +513,28 @@
 						}
 
 						var currentPage = 1;
-						$(".pagination").on("click", "li a", function() {
-							event.preventDefault();
-							var replyPage = $(this).attr("href");
-							all(replyPage);
-						});   
+ 						$(".pagination").on("click", "li a", function() {
+ 							event.preventDefault();
+ 							var replyPage = $(this).attr("href");
+ 							
+ 							
+ 							//var code = $(".data").attr('data-code');      
+ 							
+ 							//alert('코드번호22:'+sortCount);
+ 							if(sortCount == 1){
+ 								orderSort1(replyPage); 
+ 							}
+ 							else if(sortCount == 2){
+ 								orderSort2(replyPage);
+ 							}
+ 							else if(sortCount == 3){
+ 								orderSort3(replyPage);
+ 							}
+ 							else if(sortCount == 4){
+ 								orderSort4(replyPage); 
+ 							}else    
+ 							all(replyPage);
+ 						});   
 
 					});
 </script>
@@ -499,14 +576,14 @@
 			</div>
 			<div class="col-sm-offset-6">
 				<ul class="nav nav-pills text-right">
-					<li role="presentation" class="active"><a href="#"
-						onclick="orderSort1();">결제완료 정렬</a></li>
-					<li role="presentation" class="active"><a href="#"
-						onclick="orderSort3();">식재료 발주 정렬</a></li>
-					<li role="presentation" class="active"><a href="#"
-						onclick="orderSort4();">식재료 입고 정렬</a></li>
-					<li role="presentation" class="active"><a href="#"
-						onclick="orderSort2();">조리대기 정렬</a></li>
+					<li role="presentation" class="active"><a class = 'data' data-code = '1' href="#"
+						onclick="orderSort1(1);">결제완료 정렬</a></li>
+					<li role="presentation" class="active"><a class = 'data' data-code = '3'href="#"
+						onclick="orderSort3(1);">식재료 발주 정렬</a></li>
+					<li role="presentation" class="active"><a class = 'data' data-code = '4' href="#"
+						onclick="orderSort4(1);">식재료 입고 정렬</a></li>
+					<li role="presentation" class="active"><a class = 'data' data-code = '2' href="#"
+						onclick="orderSort2(1);">조리대기 정렬</a></li>
 				</ul>
 			</div>
 			<div class="topMar">

@@ -41,10 +41,10 @@ public interface AdminMainService {
 	
 	//public List<OrderList> orderAll(OrderList orderList) throws Exception;
 	public List<OrderList> orderAllSearch(OrderList orderList) throws Exception;
-	public List<OrderList> orderSort1() throws Exception;
-	public List<OrderList> orderSort2() throws Exception;
-	public List<OrderList> orderSort3() throws Exception;
-	public List<OrderList> orderSort4() throws Exception;
+	public List<OrderList> orderSort1(Criteria criteria) throws Exception;
+	public List<OrderList> orderSort2(Criteria criteria) throws Exception;
+	public List<OrderList> orderSort3(Criteria criteria) throws Exception; 
+	public List<OrderList> orderSort4(Criteria criteria) throws Exception;
 	public String appTest(String id) throws Exception;
 	public List<Diet> dietAll(Criteria criteria) throws Exception;
 	public void dietPriceUp(Diet diet) throws Exception;
