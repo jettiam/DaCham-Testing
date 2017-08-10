@@ -33,8 +33,6 @@
 	<%@include file="nutritionistNavi.jsp"%>
 	<div class="container">
 		<div>
-			<input type="datetime" name="datetime" placeholder="최근 위자드 갱신일"
-				readonly>
 			<button id="regist" class="btn btn-default">위자드 등록</button>
 			<button id="modify" class="btn btn-primary">위자드 수정(프로토 발표용)</button>
 		</div>

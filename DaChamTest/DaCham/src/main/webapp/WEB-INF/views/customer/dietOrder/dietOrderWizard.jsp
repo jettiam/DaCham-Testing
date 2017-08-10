@@ -22,12 +22,15 @@
 		step=1;
 		stepArr = new Array();
 		$("#startWizard").click(function() {
+			$("#wizardSalad").width(100);
+			$("#wizardSalad").height(100);
+		
+			$("#wizardSalad").css("float", "left");
 			$(this).text("위자드 다시 시작하기");
 			
 			
 			$("#wizardResult").hide("slow");
-			$(".btn").show("slow");
-					
+			$(".btn").show("slow");					
 			step=1;
 			$("#wizardStepLogo").attr("colspan", "");
 			$("#wizardStepArea").empty();
@@ -50,14 +53,20 @@
 		$(document).on("click", ".step", function(){
 			//alert("클릭되었습니다."+$(this).attr("data-link"));
 			$("#wizardStepLogo").attr("colspan", $(this).attr("data-step"));
-			$(this).nextAll("td").remove();
+			$(this).nextAll("td").remove();		
+			alert($(this).attr("data-step")+"단계~");
+			step = parseInt($(this).attr("data-step"))+1;
+			alert("step: "+step+", link: "+$(this).attr("data-link"));
+			getStep($(this).attr("data-link"));
+			$(this).nextAll("td").remove();		
 			
-			getWizard($(this).attr("data-link"));
+			
 		});
 		
 		
 		
 	});
+	
 	function getWizard(no) {
 		$
 				.ajax({
@@ -67,14 +76,13 @@
 					async : true,
 					success : function(data) {
 						var json = JSON.parse(data);
-						console.log(json);
+						
 						var r = "json.q" + no + ".result";
 						r = eval(r);
 						if (r == "결과") {
 							document.getElementById("question").innerText = r;
 							/* alert(r); */
 							$(".btn").hide("slow");
-
 							var resultName = eval("json.q" + no
 									
 									+ ".resultList.result");
@@ -100,7 +108,6 @@
 										+ n + "].answer");
 								link = eval("json.q" + no + ".answerList[" + n
 										+ "].link");
-
 								var k = n + 1;
 								var id = "#" + k;
 								$(id).text(answer);
@@ -108,33 +115,84 @@
 								n++;
 							}
 						}
-						stepArr[step]=no;		
+						stepArr[step]=no;	
+						
+						
 						var a = "<td class='step' data-step='"+step+"' data-link='"+no+"'>"+step+"단계</td>";
 						$("#wizardStepLogo").attr('colspan', step);
-						$("#wizardStepArea").append(a);					
-						if($(document).hasClass("step")){
-							if($("td").attr("data-step")==step){
-								
-							}else{
-								step++;
-							}
-							
-						}
-							
-						
-						
+						$("#wizardStepArea").append(a);											
+						step++;												
 					},
 					error : function(request, status, error) {
 						alert("에러: " + request.status + "\n massage"
 								+ request.responseText);
 					}
 				});
-	
-	
-	
-			
-		
 	}
+		function getStep(no) {
+			$
+					.ajax({
+						url : "wizardTestGetWizard",
+						type : "GET",
+						dataType : "text",
+						async : true,
+						success : function(data) {
+							var json = JSON.parse(data);
+							
+							var r = "json.q" + no + ".result";
+							r = eval(r);
+							if (r == "결과") {
+								document.getElementById("question").innerText = r;
+								/* alert(r); */
+								$(".btn").hide("slow");
+								var resultName = eval("json.q" + no
+										
+										+ ".resultList.result");
+								var resultJudg = eval("json.q" + no
+										+ ".resultList.judg");
+								$("#resultName").text(resultName);
+								$("#resultJudg").text(resultJudg);
+								$("#wizardResult").show("slow");
+							} else {
+								var q = "json.q" + no + ".question";
+								q = eval(q);
+								document.getElementById("question").innerText = q;
+
+								for (i = 1; i < 5; i++) {
+									var id = "#" + i;
+									$(id).text("");
+									$(id).attr("data-id", "");
+								}
+								var n = 0;
+								while (eval("json.q" + no + ".answerList[" + n
+										+ "]")) {
+									answer = eval("json.q" + no + ".answerList["
+											+ n + "].answer");
+									link = eval("json.q" + no + ".answerList[" + n
+											+ "].link");
+									var k = n + 1;
+									var id = "#" + k;
+									$(id).text(answer);
+									$(id).attr("data-id", link);
+									n++;
+								}
+							}
+							stepArr[step]=no;		
+							/* var a = "<td class='step' data-step='"+step+"' data-link='"+no+"'>"+step+"단계</td>"; */
+							
+							$("#wizardStepLogo").attr('colspan', step);
+							//$("#wizardStepArea").append(a);											
+							
+						},
+						error : function(request, status, error) {
+							alert("에러: " + request.status + "\n massage"
+									+ request.responseText);
+						}
+					});
+	
+		}	
+		
+	
 </script>
 
 <style>
@@ -142,6 +200,14 @@
 .ground {
 	width: 320px;
 	height: 100px;
+}
+img#startWizard{
+	margin: 0;
+	padding: 0;
+	position: absolute;
+}
+h2#question{
+	display: block;
 }
 
 #startBox {
@@ -190,11 +256,31 @@ li {
 
 				<div class="col-sm-8 testing">
 					<ul>
-						<b><h2 id="question"></h2></b>
+						<div id="wizardQArea" class="row">
+						<img class="img-responsive" id="wizardSalad" src="resources/salad.png"/>						
+						<b><span><h2 id="question"></h2></span></b>
+						</div>
+						
+						<table class="table table-boardered">
+							<tr>
+								<td>
 						<li class="btn" id="1" data-id=""></li>
+						</td>
+						<td>
 						<li class="btn" id="2" data-id=""></li>
+						</td>
+						</tr>
+						<tr>
+						<td>
 						<li class="btn" id="3" data-id=""></li>
+						</td>
+						<td>
 						<li class="btn" id="4" data-id=""></li>
+						</td>
+					
+						</tr>
+						
+						</table>
 					</ul>
 					<div id="wizardResult" style="display: none">
 						고객님의 위자드 결과
@@ -206,11 +292,7 @@ li {
 	<div id="resultDiet" class=".col-md-8 col-md-offset-4">
 		추천식단 목록
 	</div> -->
-				</div>
-				
-				<div class="col-sm-4 testing">
-					여기 또다른 공간있습니다.
-				</div>
+			</div>
 			</div>
 
 
