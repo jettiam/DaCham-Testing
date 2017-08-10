@@ -535,7 +535,7 @@ $(document).ready(function(){
 			type:"POST",			
 			success:function(data){				
 					alert("추가되었습니다.");					
-					console.log(data);
+					console.log(data); 
 				
 			}
 		});
