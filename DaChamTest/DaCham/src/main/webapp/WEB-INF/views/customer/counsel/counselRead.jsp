@@ -23,6 +23,7 @@
 		$("#counselDelete").on("click", function() {
 			if (confirm("삭제하시겠습니까?")) {
 				$("#counselRead").attr('action', 'counselDelete');
+				$("#counselRead").attr("method", "post");
 				$("#counselRead").submit();
 			}
 		});
