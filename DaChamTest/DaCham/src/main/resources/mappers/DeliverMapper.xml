@@ -120,6 +120,6 @@
    	</select>
    	<update id = "overButton">
    		update foodminven set foodMStatus = 1
-   		where foodMCode = #{foodMCode}
+   		where foodMICode = #{foodMICode}
    	</update>
 </mapper>

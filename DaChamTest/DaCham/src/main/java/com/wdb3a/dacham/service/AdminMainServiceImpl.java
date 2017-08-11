@@ -112,7 +112,7 @@ public class AdminMainServiceImpl implements AdminMainService {
 	public List<OrderList> orderAll(OrderList orderList) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.orderAll(orderList);
-	}*/  
+	}*/    
 
 	@Override
 	public List<OrderList> orderAllSearch(OrderList orderList) throws Exception {
@@ -239,27 +239,27 @@ public class AdminMainServiceImpl implements AdminMainService {
 	}
 
 	@Override
-	public List<OrderList> orderSort1() throws Exception {
+	public List<OrderList> orderSort1(Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.orderSort1();
+		return dao.orderSort1(criteria);
 	}
 
 	@Override
-	public List<OrderList> orderSort2() throws Exception {
+	public List<OrderList> orderSort2(Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.orderSort2();
+		return dao.orderSort2(criteria);
 	}
 
 	@Override
-	public List<OrderList> orderSort3() throws Exception {
+	public List<OrderList> orderSort3(Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.orderSort3();
+		return dao.orderSort3(criteria);
 	}
 
 	@Override
-	public List<OrderList> orderSort4() throws Exception {
+	public List<OrderList> orderSort4(Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.orderSort4();
+		return dao.orderSort4(criteria);
 	}
 
 	@Override

@@ -145,7 +145,7 @@
             var str = "";
             $(data).each(function(){
                if(this.counselCode != null){
-                  str += "<tr class = 'answerResult'><td class = 'counselCode' data-code = '"+this.counselCode+"' data-id = '"+this.customer+"'><a>"+this.counselCode+"</a></td><td>"+this.customer+"</td><td><a  href = '#yourModal' data-toggle = 'modal'  class = 'answerClick' data-code = '"+this.counselCode+"' data-answer = '"+this.answer+"' data-customer = '"+customer+"'>"+this.answer+"</a></td></tr>";
+                  str += "<tr class = 'answerResult'><td class = 'counselCode' data-code = '"+this.counselCode+"' data-id = '"+this.customer+"'><a>"+this.counselCode+"</a></td><td>"+this.customer+"</td><td>"+this.counselContent+"</td><td><a  href = '#yourModal' data-toggle = 'modal'  class = 'answerClick' data-code = '"+this.counselCode+"' data-answer = '"+this.answer+"' data-customer = '"+customer+"'>"+this.answer+"</a></td></tr>";
                }
               
             });
@@ -193,7 +193,7 @@
         <div style = "border:1px solid gold;">
          <table border ="1" class = "search1 table table-hover">
             <tr>
-                     <th>고객id</th>
+                  <th>고객id</th>
                   <th>고객이름</th>
                   <th>주소</th>
                   <th>전화번호</th>
@@ -222,7 +222,7 @@
          
       </div>
       <div class = "modal fade" id = "myModal" role = "dialog">
-      		<div class = "modal-dialog">
+      		<div class = "modal-dialog" style = "width:1080px;">
       			<div class = "modal-content">
       				<div class = "modal-header">
       					<button type = "button" class = "close" data-dismiss = "modal">X</button>
@@ -234,6 +234,8 @@
       							<th>번호</th>
       							<th>고객아이디</th>
       							<th>질문</th>
+      							<th>답변</th>
+      							
       						</tr>
       						<tr class = "answerResult">
       						</tr>
@@ -247,7 +249,7 @@
       		</div>
       </div>
       <div class = "modal fade" id = "yourModal" role = "dialog">
-      	<div class = "modal-dialog">
+      	<div class = "modal-dialog" >
       		<div class = "modal-content">
       			<div class = "modal-header">
       				<button type = "button" class = "close" data-dismiss = "modal">X</button>

@@ -23,7 +23,10 @@
 * {
 	font-family: 'Jeju Gothic', sans-serif;
 }
-
+#inputPasswd{
+	font-family:sans-serif;
+}
+ 
 .liBox {
 	
 	font-size: 25px;
@@ -50,7 +53,7 @@
 
 #logo {
 	margin-top: 10px;
-	margin-left: 10px;
+	margin-left: 10px;	
 }
 
 
@@ -68,6 +71,11 @@ padding-right:20px;
 .joinBox{
 float:right;
 }
+img{width:100%}
+#logoImg{
+	max-width:150px;
+	max-height:150px; 
+}
 @media only screen and (max-width: 736px) {
 
 }
@@ -80,11 +88,10 @@ float:right;
 <body>
 	<div class="w3-row logoBox">
 		<!-- 로고+고객정보 -->
-		<div class="col-sm-2 hidden-xs" id="logo" >
+		<div class="col-sm-2 hidden-xs" id="logo">
 			<!-- 로고박스 -->
-			<a href="main"><img class="img-responsive block-center"
-				src="resources/customerImage/dachamlogo.png"
-				max-width="100px" max-height="100px"></a>
+			<a href="main"><img id="logoImg" class="img-responsive block-center"
+				src="resources/customerImage/dachamlogo.png"></a>
 		</div>
 		<!-- 고객 로그인 페이지 -->
 		<c:if test="${empty sessionScope.memberName}">
@@ -95,7 +102,7 @@ float:right;
 							class="form-control">
 					</div>
 					<div class="form-group col-sm-5">
-						<input type="password" name="pw" placeholder="Password"
+						<input id="inputPasswd" type="password" name="pw" placeholder="Password"
 							class="form-control">
 					</div>
 					<div class="form-group col-sm-2">
@@ -166,11 +173,6 @@ float:right;
 	
 	});
 </script>
-
-
-
-
-
 
 
 </html>

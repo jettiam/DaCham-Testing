@@ -279,7 +279,7 @@ public class AdminController {
 		if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
 			throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
 		}
-
+ 
 		BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
 
 		String output;
@@ -456,10 +456,10 @@ public class AdminController {
 
 	@RequestMapping(value = "/orderList", method = RequestMethod.GET)
 	public String getorderList(Model model, OrderList order) throws Exception {
-		/*List<OrderList> list = service.orderAll(order);
+		/*List<OrderList> list = service.orderAll(order);  
 		model.addAttribute("list", list);
-		model.addAttribute("order", order);*/
-		return "mate/admin/orderList";
+		model.addAttribute("order", order);*/   
+		return "mate/admin/orderList"; 
 	}
 
 	@RequestMapping(value = "/statistics")

@@ -174,7 +174,7 @@
 	<button id="foodOrder" class = "btn btn-default">식재료주문</button> 
 	
 	<div>
-	<h2>식재료 주문 대기</h2>
+	<h2>식재료 입고 대기</h2>
 		<table width="600" class="tablesStop table table-condensed">
 			<tr>
 				<th>식재료명</th>

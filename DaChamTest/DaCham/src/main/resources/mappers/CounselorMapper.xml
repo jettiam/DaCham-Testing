@@ -122,7 +122,7 @@ select  a.id , a.name ,a.birthday, a.address, a.tel, a.email, a.deptCode, a.grad
 </update>
 <insert id = "counselInsert">
    insert into counsel(answer,counselItemCode,counselTitle,counselDate,counselContent,customer)
-   values(#{answer},4,'전화',now(),'전화',#{customer});
+   values(#{answer},4,#{counselTitle},now(),#{counselContent},#{customer});
 </insert>
 <select id = "counselTuning" resultType = "Counselor">
    select counselCode,answer,counselDate from counsel
