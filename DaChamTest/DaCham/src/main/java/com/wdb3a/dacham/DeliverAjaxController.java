@@ -147,11 +147,11 @@ public class DeliverAjaxController {
 		}
 		return entity;
 	}
-	@RequestMapping(value = "/overButton/{foodMCode}",method = RequestMethod.PUT)
-	public ResponseEntity<String> overButton(@PathVariable("foodMCode")int foodMCode){
+	@RequestMapping(value = "/overButton/{foodMICode}",method = RequestMethod.PUT)
+	public ResponseEntity<String> overButton(@PathVariable("foodMICode")int foodMICode){
 		ResponseEntity<String> entity = null;
 		try {
-			service.overButton(foodMCode);
+			service.overButton(foodMICode);
 			entity = new ResponseEntity<>("SUCCESS",HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

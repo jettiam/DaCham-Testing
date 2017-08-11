@@ -84,9 +84,9 @@ public class DeliverServiceImpl implements DeliverService {
 		return dao.completeAllCount();
 	}
 	@Override
-	public void overButton(int foodMCode) throws Exception {
+	public void overButton(int foodMICode) throws Exception {
 		// TODO Auto-generated method stub
-		dao.overButton(foodMCode);
+		dao.overButton(foodMICode);
 	}
 	@Override
 	public void changer0(int foodMICode) throws Exception {
