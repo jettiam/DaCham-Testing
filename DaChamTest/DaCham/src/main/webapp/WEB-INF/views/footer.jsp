@@ -5,7 +5,7 @@
 	margin:50px auto;
 }
 </style>  
-<div class="container footer">
+<div class="footer">
 	<div class="row">
 		<div class="col-sm-12">
 			다참 Footer<br>
