@@ -221,7 +221,7 @@
 		where a.dietCode=b.dietCode
 		and (c.orderItemCode=2 or c.orderItemCode
 		=3 or c.orderItemCode =9 or
-		c.orderItemCode=10) and
+		c.orderItemCode=10 or c.orderItemCode=6) and
 		(b.orderItemCode =
 		c.orderItemCode)
 		limit #{startRecord},
@@ -576,7 +576,7 @@
 		update member set education=#{education},
 		salary=#{salary}, bank_name=#{bank_name}, bank_user=#{bank_user},
 		address=#{address}, tel=#{tel}, email=#{email}, deptCode=#{deptCode},
-		gradeCode=#{gradeCode}
+		gradeCode=#{gradeCode}, account_Number=#{account_Number}
 		where id=#{id}
 	</update>
 

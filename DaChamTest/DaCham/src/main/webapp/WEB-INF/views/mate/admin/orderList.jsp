@@ -258,29 +258,39 @@
 										function() {
 											var orderCode = "";
 											var foodOrderinfo = {};
-											for (var i = 0; i < $('.orderListTable').length; i++) {
-												if ($(
-														'.orderListTable:eq('
-																+ i + ') input')
-														.prop('checked')) {
-													orderCode = $(
-															'.orderListTable:eq('
-																	+ i
-																	+ ') input')
-															.val();
+											var length = $('.orderListTable input:checked').length;
+										    
+										    var orderCheck = true;
+											for (var i = 0; i < length; i++) {
+												var orderItemName = $('.orderListTable input:checked').eq(i).parent().next().next().next().next().next().next().text()
+												
+												if (orderItemName=="결제완료") {
+													orderCheck = true;
+													
+													orderCode = $('.orderListTable:eq('+ i+ ') input').val(); 
 													var json = {
 														'orderCode' : orderCode
 													}
 													foodOrderinfo[y] = json;
 													y++;
+												}else{
+													orderCheck =false;
 												}
-											}
+												if(orderCheck ==false){
+													break;
+												}
+											}  
 											//alert(JSON.stringify(foodOrderinfo)); 
+											if(orderCheck ==true){ 
 											$('input[name=orderCode]')
 													.val(
 															JSON
 																	.stringify(foodOrderinfo));
 											$("#formid").submit();
+											}else{
+												alert("결제 완료만 식재료 주문이 가능합니다"); 
+											}
+											  
 										});
 
 						$("#close").click(function() {
@@ -330,12 +340,14 @@
 											});
 						}
 
-						//환불 버튼
+						//환불 버튼  
 						$('#refund').click(function() {
 							$("input[name=che]:checked").each(function() {
 								var test = $(this).val();
+								var orderItemName = $(this).parent().next().next().next().next().next().next().text();        
+								
 								console.log(test);
-
+								if(orderItemName=="결제완료"){
 								$.ajax({
 									url : 'adminSub/orderList1',
 									data : JSON.stringify({
@@ -348,14 +360,20 @@
 										"X-HTTP-Method-Override" : "PUT"
 									},
 									success : function(data) {
+										
+										
 										alert("환불처리 되었습니다");
-										all();
+										all(1);
 									},
 									error : function() {
 										alert("실패");
 									}
 
 								});
+								}else{
+									alert("결제완료 상태이여만 환불처리 됩니다.")
+								}
+								
 							});
 						});
 						//작업요청
@@ -365,6 +383,8 @@
 							
 							$("input[name=che]:checked").each(function() {
 								var orderCode = $(this).val();
+								var orderItemName = $(this).parent().next().next().next().next().next().next().text();   
+								if(orderItemName=="식재료 입고"){
 								console.log(orderCode);
   
 								$.ajax({
@@ -388,7 +408,11 @@
 									}
 
 								});
+								}else{
+									alert("식재료 입고 상태여야만 작업요청을 할 수 있습니다.")
+								}
 							});
+							
 							
 						});
 						//검색

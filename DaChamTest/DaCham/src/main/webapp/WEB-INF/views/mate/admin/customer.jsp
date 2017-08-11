@@ -83,7 +83,7 @@ function previewImage(targetObj, View_area){
 							userMemberInfo(id);
 						});
 						function userMemberInfo(id) {
-							$(".memberUserTable tr").remove();
+							$(".memberUserTable tr").remove();  
 							$(".memberUserTableSub tr").remove();
 							$
 									.getJSON(
@@ -120,7 +120,7 @@ function previewImage(targetObj, View_area){
 															+ "<input type='text' id = 'deptCode' value='"+data.deptCode+"'>"
 															+ "</td></tr>"
 															+ "<tr style='display:none'><th>직급</th><td>"
-															+ "<input type='text' id=''gradeCode' value='"+data.gradeCode+"'>"
+															+ "<input type='text' id='gradeCode' value='"+data.gradeCode+"'>"
 															+ "</td></tr><tr style='display:none'><th>입사 경로</th>"
 															+ "<td>"
 															+ data.path_e
@@ -147,7 +147,7 @@ function previewImage(targetObj, View_area){
 															+ "<input type='text' id = 'deptCode' value='"+data.deptCode+"'>"
 															+ "</td></tr>"
 															+ "<tr><th>직급</th><td>"
-															+ "<input type='text' id=''gradeCode' value='"+data.gradeCode+"'>"
+															+ "<input type='text' id='gradeCode' value='"+data.gradeCode+"'>" 
 															+ "</td></tr><tr><th>입사 경로</th>"
 															+ "<td>"
 															+ data.path_e
@@ -237,6 +237,7 @@ function previewImage(targetObj, View_area){
 														},
 														error : function() {
 															alert("실패");
+															all();
 														}
 
 													});
