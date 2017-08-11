@@ -334,8 +334,7 @@
 						$('#refund').click(function() {
 							$("input[name=che]:checked").each(function() {
 								var test = $(this).val();
-								console.log(test);
-
+								console.log(test);							
 								$.ajax({
 									url : 'adminSub/orderList1',
 									data : JSON.stringify({
