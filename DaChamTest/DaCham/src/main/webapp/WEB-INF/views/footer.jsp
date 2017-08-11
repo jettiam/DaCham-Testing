@@ -5,7 +5,7 @@
 	margin:50px auto;
 }
 </style>  
-<div class="container footer">
+<div class="footer">
 	<div class="row">
 		<div class="col-sm-12">			
 			영진전문대학 컴퓨터정보계열 웹데이터베이스 WD3A 무병장수 캡스톤 디자인<br>			
