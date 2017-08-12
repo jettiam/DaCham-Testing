@@ -24,8 +24,37 @@
 		$(".category li a").on("click",function(){
 			event.preventDefault();
 			foodGName = $(this).attr("data-name");
-			$('.category').hide();
-			$('.category2').show();
+			if(foodGName == "밥"){
+				$(".searchResult").remove();
+				$.getJSON("nutriAjax/categorySearch/"+foodGName+"/"+"찜",function(data){
+					console.log(data);
+					var str = "";
+					$(data).each(function(){
+						str += "<tr class = 'searchResult'>"+"<td>"+"<input type = 'radio' name = 'radio' value = '"+this.sideDCode+"'>"+"</td>"+"<td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width: 75px; height: 25px;'></td>"+"<td>"+this.sideDName+"</td>"+"</tr>"
+					});
+					$(".searchTable").append(str);
+				});
+				$('.category').hide();
+				$('#categoryStart').show();
+			}
+			else if(foodGName == "국"){
+				$(".searchResult").remove();
+				$.getJSON("nutriAjax/categorySearch/"+foodGName+"/"+"탕",function(data){
+					console.log(data);
+					var str = "";
+					$(data).each(function(){
+						str += "<tr class = 'searchResult'>"+"<td>"+"<input type = 'radio' name = 'radio' value = '"+this.sideDCode+"'>"+"</td>"+"<td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width: 75px; height: 25px;'></td>"+"<td>"+this.sideDName+"</td>"+"</tr>"
+					});
+					$(".searchTable").append(str);
+				});
+				$('.category').hide();
+				$('#categoryStart').show();
+			}
+			else{
+				$('.category').hide();
+				$('.category2').show();
+			}
+			
 		});
 		$(".category2 li a").on("click",function(){
 			event.preventDefault();
