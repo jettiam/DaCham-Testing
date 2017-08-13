@@ -201,6 +201,7 @@
 		where a.sideDCode = b.sideDCode
 		and b.dietCode = c.dietCode
 		and c.dietCode = #{dietCode}
+		group by sideDCode
 	</select>
 	<!-- 특별식단에 있는 특별식단 코드만 불러오기 -->
 	<select id = "specialCode" resultType = "com.wdb3a.dacham.bean.Nutritionist">

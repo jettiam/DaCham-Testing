@@ -692,6 +692,8 @@
 					<th>반찬</th>
 					<th>이미지</th>
 				</tr>
+				<tr class = "trText">
+				</tr>
 			</table>
 			
 		</div>

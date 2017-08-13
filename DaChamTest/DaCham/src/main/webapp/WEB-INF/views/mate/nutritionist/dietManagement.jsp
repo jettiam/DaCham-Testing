@@ -40,7 +40,13 @@
 		$(".modifyDiet").on("click",function(){
 			var dietCode = 0;
 			dietCode = $('input:radio[name="radio"]:checked').val();
-			window.location.href =  "dietModify?dietCode="+dietCode;	
+			if(dietCode == undefined){
+				alert("라디오로 식단을 선택한 후 진행해 주세요");
+			}
+			else{
+				window.location.href =  "dietModify?dietCode="+dietCode;	
+			}
+				
 		});
 		
 		$(".deleteDiet").on("click",function(){
