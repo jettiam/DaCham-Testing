@@ -207,7 +207,7 @@ img#startWizard {
 	border-radius : 12px;
 	
 	width: 230px;
-	hegith: 130px;
+	hegith: 160px;
 	
 	font-size: 23px;
 }
@@ -260,7 +260,7 @@ li {
 						<tr>
 							<td id="wizardStartButton">
 								<div id="startWizardArea" class="startWizardBefore">
-									<img src="resources/play-button-green.png" width="30" height="30"/>
+									<img src="resources/play-button-green.png" style="width: 50px; height:50px;" />
 									<span id="startWizard">위자드 시작하기</span>
 								</div>
 							</td>
@@ -268,26 +268,23 @@ li {
 						<tr>
 							<td id="wizardStepLogo">
 							<img src="resources/salad.png"
-								width="100" height="100" style="margin-bottom: 10px;"/></td>
+							style="width:100px; height:100px; margin-bottom: 10px; "/></td>
 						</tr>
 						<tr id="wizardStepArea">
 						</tr>
 					</table>
 				</div>
 
-				<div class="col-sm-8 testing">
-					<ul>
-						<div id="wizardQArea" class="row">
-							
-							<span>
-							<hr style="align:center;  border: solid 1px #5D5D5D; width: 90%; ">
+				<div  class="col-sm-8 testing">
+						
+							<hr style="align:center;  border: solid 1px #5D5D5D; width: 50%; ">
 							<b><h2 id="question"></h2></b>
-							<hr style="align:center;  border: solid 1px #5D5D5D; width: 90%; ">
-							</span>
+							<hr style="align:center;  border: solid 1px #5D5D5D; width: 50%; ">							
 							
-						</div>
+							
+						
 
-						<table style="background-color: red;"id="wizardAnswerArea" class="table table-boardered">
+						<table style="text-align: center; align:center;" id="wizardAnswerArea" class="table" >
 							<tr>
 								<td>
 									<li class="btn" id="1" data-id=""></li>
@@ -308,8 +305,7 @@ li {
 									<li class="btn" id="4" data-id=""></li>
 								</td>
 							</tr>
-						</table>
-					</ul>
+						</table>		
 					<div id="wizardResult" style="display: none">
 						고객님의 위자드 결과
 						<h2 id="resultName"></h2>
