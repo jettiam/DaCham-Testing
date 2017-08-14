@@ -344,10 +344,12 @@
 						$('#refund').click(function() {
 							$("input[name=che]:checked").each(function() {
 								var test = $(this).val();
+
 								var orderItemName = $(this).parent().next().next().next().next().next().next().text();        
 								
 								console.log(test);
 								if(orderItemName=="결제완료"){
+
 								$.ajax({
 									url : 'adminSub/orderList1',
 									data : JSON.stringify({
