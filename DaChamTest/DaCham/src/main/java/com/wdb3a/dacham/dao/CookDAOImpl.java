@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.wdb3a.dacham.bean.Cook;
 import com.wdb3a.dacham.bean.CookingItem;
+import com.wdb3a.dacham.bean.Criteria;
 import com.wdb3a.dacham.bean.FoodMInven;
 import com.wdb3a.dacham.bean.OrderList;
 @Repository
@@ -71,6 +72,16 @@ public class CookDAOImpl implements CookDAO {
 		map.put("orderItemCode", orderItemCode);
 		map.put("sideDCode", sideDCode);
 		sqlSession.update(namespace+".updateOptionsItemCode", map);		
+	}
+	@Override
+	public List<FoodMInven> foodStockAll(Criteria criteria) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".foodStockAll",criteria);
+	}
+	@Override
+	public int foodStockAll() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".foodStockAllCount");
 	}
 
 }
