@@ -101,9 +101,8 @@
 													'data-img');
 											var sideDCode = $(this).attr(
 													'data-code');
-											var foodGCode = $(this).attr(
-													'data-foodGCode');
-											var sideDName = $(this).text();
+											
+											var sideDName = $(this).attr('data-name');
 
 // 											$
 // 													.getJSON(
@@ -125,16 +124,13 @@
 // 																openAPI();
 // 															});                         
 
-											localStorage[count + '_img'] = sideDImg;
-											localStorage[count + '_codes'] = sideDCode;
-											localStorage[count + '_foodGCode'] = foodGCode;
-											localStorage[count + '_sideDName'] = sideDName;
+											
 
 											++count;
 
 											localStorage['count'] = count;
 
-											Refresh();
+											Refresh(foodGCode, sideDImg, sideDCode, sideDName);
 											v = count;
 											}
 											});
@@ -156,13 +152,17 @@
 													'.nameClick[data-code = "'
 															+ prev + '"]')
 													.parent().parent().show();
-											$(this).prev().remove();
-											$(this).next().next().remove();
-											$(this).next().remove();
-											$(this).remove();
+											
+											$(this).parent().remove();
 
 											localStorage
 													.removeItem(id + '_img');
+											localStorage
+											.removeItem(id + '_codes');
+											localStorage
+											.removeItem(id + '_foodGCode');
+											localStorage
+											.removeItem(id + '_sideDName');
 // 											localStorage.removeItem(id
 // 													+ '_codes');
 // 											localStorage.removeItem(id
@@ -242,80 +242,62 @@
 													});
 										});
 
-						function Refresh() {
+						function Refresh(foodGCode, sideDImg, sideDCode, sideDName) {
 							var count = parseInt(localStorage['count']);
-							$('.checkSideD').empty();
-							for (var i = 0; i < count; i++) {
-								var sideDImg = localStorage[i + "_img"];
-								var sideDCode = localStorage[i + "_codes"];
-								var foodGCode = localStorage[i + "_foodGCode"];
-								var sideDName = localStorage[i + "_sideDName"];
+							
+							
 								switch (foodGCode) {
 								case "01":
 									$(
-											'<input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '>')
-											.appendTo('.foodG01');
-									$(
-											'<div class = "col-sm-2"><img src = "displayFile?fileName='
+											'<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
 													+ sideDImg
-													+ '" class="img-responsive sideDImg" data-id = "'+i+'" >'+'<input type="radio" name="foodG01" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
+													+ '" class="img-responsive sideDImg" data-id = "'+2+'" >'+'<input type="radio" name="foodG01" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
 													+ sideDName + '</label></div>').appendTo('.foodG01');
 									
 											
 									break;
 								case "02":
 									$(
-											'<input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '>')
-											.appendTo('.foodG02');
-									$(
-											'<div class = "col-sm-2"><img src = "displayFile?fileName='
+											'<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
 													+ sideDImg
-													+ '" class="img-responsive sideDImg" data-id = "'+i+'" >'+'<input type="radio" name="foodG02" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
+													+ '" class="img-responsive sideDImg" data-id = "'+1+'" >'+'<input type="radio" name="foodG02" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
 													+ sideDName + '</label></div>').appendTo('.foodG02');
 									break;
 								case "03":
+									
 									$(
-											'<input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '>')
-											.appendTo('.foodG03');
-									$(
-											'<div class = "col-sm-2"><img src = "displayFile?fileName='
+											'<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
 													+ sideDImg
-													+ '" class="img-responsive sideDImg" data-id = "'+i+'" >'+'<input type="radio" name="foodG03" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
+													+ '" class="img-responsive sideDImg" data-id = "'+3+'" >'+'<input type="radio" name="foodG03" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
 													+ sideDName + '</label></div>').appendTo('.foodG03');
 									break;
 								case "04":
+									
 									$(
-											'<input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '>')
-											.appendTo('.foodG04');
-									$(
-											'<div class = "col-sm-2"><img src = "displayFile?fileName='
+											'<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
 													+ sideDImg
-													+ '" class="img-responsive sideDImg" data-id = "'+i+'" >'+'<input type="radio" name="foodG04" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
+													+ '" class="img-responsive sideDImg" data-id = "'+4+'" >'+'<input type="radio" name="foodG04" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
 													+ sideDName + '</label></div>').appendTo('.foodG04');
 									break;
 								case "05":
+									
 									$(
-											'<input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '>')
-											.appendTo('.foodG05');
-									$(
-											'<div class = "col-sm-2"><img src = "displayFile?fileName='
+											'<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
 													+ sideDImg
-													+ '" class="img-responsive sideDImg" data-id = "'+i+'" >'+'<input type="radio" name="foodG05" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
+													+ '" class="img-responsive sideDImg" data-id = "'+5+'" >'+'<input type="radio" name="foodG05" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
 													+ sideDName + '</label></div>').appendTo('.foodG05');
 									break;
 								case "06":
+										
 									$(
-											'<input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '>')
-											.appendTo('.foodG06');
-									$(
-											'<div class = "col-sm-2"><img src = "displayFile?fileName='
+											'<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
 													+ sideDImg
-													+ '" class="img-responsive sideDImg" data-id = "'+i+'" >'+'<input type="radio" name="foodG06" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
+													+ '" class="img-responsive sideDImg" data-id = "'+6+'" >'+'<input type="radio" name="foodG06" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
 													+ sideDName + '</label></div>').appendTo('.foodG06');
 									break;
 								}
 
-							}
+							
 
 							v = count;
 
@@ -344,6 +326,11 @@
 								localStorage[count1 + '_protein1'] = data.protein;
 								localStorage[count1 + '_fat1'] = data.fat;
 								localStorage[count1 + '_na1'] = data.na;
+								$("#TKcal").text(data.kcal);
+								$("#TCarbohydrate").text(data.carbohydrate);
+								$("#TProtein").text(data.protein);
+								$("#TFat").text(data.fat);
+								$("#TNa").text(data.na);
 								count1++;
 								openAPI();
 							});
@@ -359,6 +346,11 @@
 								localStorage[count2 + '_protein2'] = data.protein;
 								localStorage[count2 + '_fat2'] = data.fat;
 								localStorage[count2 + '_na2'] = data.na;
+								$("#TKcal").val(data.kcal);
+								$("#TCarbohydrate").val(data.carbohydrate);
+								$("#TProtein").val(data.protein);
+								$("#TFat").val(data.fat);
+								$("#TNa").val(data.na);
 								count2++;
 								openAPI();
 							});
@@ -374,6 +366,11 @@
 								localStorage[count3 + '_protein3'] = data.protein;
 								localStorage[count3 + '_fat3'] = data.fat;
 								localStorage[count3 + '_na3'] = data.na;
+								$("#TKcal").val(data.kcal);
+								$("#TCarbohydrate").val(data.carbohydrate);
+								$("#TProtein").val(data.protein);
+								$("#TFat").val(data.fat);
+								$("#TNa").val(data.na);
 								count3++;
 								openAPI();
 							});
@@ -389,6 +386,11 @@
 								localStorage[count4 + '_protein4'] = data.protein;
 								localStorage[count4 + '_fat4'] = data.fat;
 								localStorage[count4 + '_na4'] = data.na;
+								$("#TKcal").val(data.kcal);
+								$("#TCarbohydrate").val(data.carbohydrate);
+								$("#TProtein").val(data.protein);
+								$("#TFat").val(data.fat);
+								$("#TNa").val(data.na);
 								count4++;
 								openAPI();
 							});
@@ -404,6 +406,11 @@
 								localStorage[count5 + '_protein5'] = data.protein;
 								localStorage[count5 + '_fat5'] = data.fat;
 								localStorage[count5 + '_na5'] = data.na;
+								$("#TKcal").val(data.kcal);
+								$("#TCarbohydrate").val(data.carbohydrate);
+								$("#TProtein").val(data.protein);
+								$("#TFat").val(data.fat);
+								$("#TNa").val(data.na);
 								count5++;
 								openAPI();
 							});
@@ -419,6 +426,11 @@
 								localStorage[count6 + '_protein6'] = data.protein;
 								localStorage[count6 + '_fat6'] = data.fat;
 								localStorage[count6 + '_na6'] = data.na;
+								$("#TKcal").val(data.kcal);
+								$("#TCarbohydrate").val(data.carbohydrate);
+								$("#TProtein").val(data.protein);
+								$("#TFat").val(data.fat);
+								$("#TNa").val(data.na);	
 								count6++;
 								openAPI();
 							});
@@ -455,7 +467,7 @@
 								alert("식단명을 지으셔야 합니다.");
 							}
 							else if($("#prev_View_area").attr("src") == "http://placehold.it/100x100"){
-								alert("이미지 좀 선택하세요");
+								alert("이미지를 선택하세요");
 							}		
 							else if($("#priceText").val() == ""){
 								alert("식단가격을 정하셔야 합니다.");
@@ -499,8 +511,8 @@
 																$(data)
 																		.each(
 																				function() {
-																					str += "<tr class = 'searchResult'><td><a class = 'nameClick' data-foodGCode='"+this.foodGCode+"' data-img = '"+this.sideDImg+"' data-code = '"+this.sideDCode+"'>"
-																							+ this.sideDName
+																					str += "<tr class = 'searchResult'><td><a class = 'nameClick' data-foodGCode='"+this.foodGCode+"' data-img = '"+this.sideDImg+"' data-code = '"+this.sideDCode+"' data-name = '"+this.sideDName+"'>"        
+																							+ this.sideDName                    
 																							+ "</a></td>"
 																							+ "<td>"
 																							+ this.foodGName
@@ -553,7 +565,7 @@
 												$(data.list)
 														.each(
 																function() {
-																	str += "<tr class = 'searchResult'><td><a class = 'nameClick' data-foodGCode='"+currentGroup+"' data-img = '"+this.sideDImg+"' data-code = '"+this.sideDCode+"'>"
+																	str += "<tr class = 'searchResult'><td><a class = 'nameClick' data-foodGCode='"+currentGroup+"' data-img = '"+this.sideDImg+"' data-code = '"+this.sideDCode+"' data-name = '"+this.sideDName+"'>"
 																			+ this.sideDName
 																			+ "</a></td>"
 																			+ "<td>"
@@ -643,15 +655,15 @@ label{
 			<div class="col-sm-12 h4">밥</div>
 			<div class="foodG01 checkSideD"></div>
 			<div class="col-sm-12  h4">국</div>
-			<div class="foodG02 checkSideD">2</div>
+			<div class="foodG02 checkSideD"></div>
 			<div class="col-sm-12 h4">메인메뉴1</div>
-			<div class="foodG03 checkSideD">3</div>
+			<div class="foodG03 checkSideD"></div>
 			<div class="col-sm-12 h4">메인메뉴2</div>
-			<div class="foodG04 checkSideD">4</div>
+			<div class="foodG04 checkSideD"></div>
 			<div class="col-sm-12 h4">메인메뉴3</div>
-			<div class="foodG05 checkSideD">5</div>
+			<div class="foodG05 checkSideD"></div>
 			<div class="col-sm-12 h4">메인메뉴4</div>
-			<div class="foodG06 checkSideD">6</div>
+			<div class="foodG06 checkSideD"></div>
 				
 				
 				
@@ -731,6 +743,10 @@ label{
 					<div>
 						<!-- 총 칼로리 양 표시 -->
 					</div>
+					<table class = "press table table-hover">
+						<tr><td>칼로리<br>(Kcal)</td><td>탄수화물<br>(g)</td><td>단백질<br>(g)</td><td>지방<br>(g)</td><td>나트륨<br>(g)</td></tr>
+            <tr><td id= "TKcal"></td><td id="TCarbohydrate"></td><td id="TProtein"></td><td id="TFat"></td><td id="TNa"></td></tr>
+					</table>
 					<table>
 						<tr><td>성별</td><td>칼로리<br>(Kcal)</td><td>탄수화물<br>(g)</td><td>단백질<br>(g)</td><td>지방<br>(g)</td><td>나트륨<br>(g)</td><td>칼륨<br>(g)</td></tr>
             <tr><td>남자</td><td id="MKcal">2400</td><td id="MCarbo">405</td><td id="MProtein">50</td><td id="MFat">40</td><td id="MNa">2000</td><td id="MK">3500</td></tr>

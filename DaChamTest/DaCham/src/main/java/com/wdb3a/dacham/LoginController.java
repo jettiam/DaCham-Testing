@@ -65,6 +65,7 @@ public class LoginController {
 					session.setAttribute("customerId", dbResult.getId());
 					session.setAttribute("passwd", dbResult.getPasswd());
 					session.setAttribute("address", dbResult.getAddress());
+					session.setAttribute("recentlyAddress", dbResult.getRecentlyAddress());
 					session.setAttribute("tel", dbResult.getTel());
 					session.setAttribute("email", dbResult.getEmail());
 					session.setAttribute("joinDate", dbResult.getJoinDate());
@@ -75,6 +76,7 @@ public class LoginController {
 					session.setAttribute("memberName", dbResult.getName());
 					session.setAttribute("customerId", dbResult.getId());
 					session.setAttribute("passwd", dbResult.getPasswd());
+					session.setAttribute("recentlyAddress", dbResult.getRecentlyAddress());
 					session.setAttribute("address", dbResult.getAddress());
 					session.setAttribute("tel", dbResult.getTel());
 					session.setAttribute("email", dbResult.getEmail());
@@ -126,7 +128,7 @@ public class LoginController {
 					Member dbResult = service.getMember(id);
 					session.setAttribute("memberName", dbResult.getName());
 					session.setAttribute("customerId", dbResult.getId());
-					//session.setAttribute("passwd", dbResult.getPasswd());
+					session.setAttribute("recentlyAddress", dbResult.getRecentlyAddress());
 					session.setAttribute("address", dbResult.getAddress());
 					session.setAttribute("tel", dbResult.getTel());
 					session.setAttribute("email", dbResult.getEmail());

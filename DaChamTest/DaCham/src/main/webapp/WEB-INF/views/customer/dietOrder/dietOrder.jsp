@@ -16,7 +16,9 @@
 #dietCode{
 display:block;
 }
-
+.sideDImg{
+	height:118px;
+}
 .dImg{
 max-width:200px;
 }
@@ -39,6 +41,9 @@ margin-top:20px;
 
 	.dImg{
 	max-width:120px;
+	}
+	.sideDImg{
+	height:39px;
 	}
 }
 </style>
@@ -108,7 +113,7 @@ margin-top:20px;
 				if(dietCode==data.list[i].dietCode){
 					if(tdCount<2){
 						console.log("티디카운트 " +tdCount);
-						$(".dietTable"+dietCode+">tbody>.dietTr"+trCount).append("<td><img class='img-responsive' src='displayFile?fileName="+data.list[i].sideDImg+"' alt='이미지'></td>");
+						$(".dietTable"+dietCode+">tbody>.dietTr"+trCount).append("<td><img class='img-responsive sideDImg' src='displayFile?fileName="+data.list[i].sideDImg+"' alt='이미지'></td>");
 						console.log("이미지찍음 " +i);	
 						tdCount++;
 						
@@ -117,7 +122,7 @@ margin-top:20px;
 						trCount++; 
 						$(".dietTable"+dietCode).append("</tr><tr class='dietTr"+trCount+"'>");
 						console.log("tr카운트 염" + trCount);
-						$(".dietTable"+dietCode+">tbody>.dietTr"+trCount).append("<td><img class='img-responsive' src='displayFile?fileName="+data.list[i].sideDImg+"' alt='이미지'></td>");
+						$(".dietTable"+dietCode+">tbody>.dietTr"+trCount).append("<td><img class='img-responsive sideDImg' src='displayFile?fileName="+data.list[i].sideDImg+"' alt='이미지'></td>");
 						console.log("이미지찍음 " +i);							
 						tdCount = 1;
 					}						
@@ -135,7 +140,7 @@ margin-top:20px;
 					$("#dietList>.d"+divCount).append("<table class='dietTable"+dietCode+" table'><tr class='dietTr"+trCount+"'>");
 					console.log(dietCode+"테이블 염");
 					console.log("tr카운트 염" + trCount);
-					$(".dietTable"+dietCode+">tbody>.dietTr"+trCount).append("<td><img class='img-responsive' src='displayFile?fileName="+data.list[i].sideDImg+"' alt='이미지'></td>");
+					$(".dietTable"+dietCode+">tbody>.dietTr"+trCount).append("<td><img class='img-responsive sideDImg' src='displayFile?fileName="+data.list[i].sideDImg+"' alt='이미지'></td>");
 					//$(".dietTable"+dietCode+">tbody>.dietTr"+trCount).append("<td><img src='displayFile?fileName="+data.list[i].sideDImg+" alt='이미지'></td>");
 					tdCount=1;
 					console.log("이미지찍음 " +i);	
@@ -159,10 +164,10 @@ margin-top:20px;
 <a href=# class="disease btn btn-danger" id="wizardOrder">위자드로 주문하기</a>
 </div>
 <div id="dietOrderNav" class="block-center text-center col-sm-12">	
-		<div class="col-xs-6 col-lg-6 text-center disease"><a href=#  data-code="1" id="sugarBlood"><img class="img-responsive dImg center-block" src="resources/customerImage/dang.png"><div class="dName">당뇨병</div></a></div>
-		<div class="col-xs-6 col-lg-6 text-center disease"><a href=# data-code="4" id="renalFailure"><img class="img-responsive dImg center-block" src="resources/customerImage/sin.png"><div class="dName">신부전증</div></a></div>
-		<div class="col-xs-6 col-lg-6 text-center disease"><a href=# data-code="16" id="heartFailure"><img class="img-responsive dImg center-block" src="resources/customerImage/sim.png"><div class="dName">심부전증</div></a></div>
-		<div class="col-xs-6 col-lg-6 text-center disease"><a href=# data-code="13" id="hyperlipidemia"><img class="img-responsive dImg center-block" src="resources/customerImage/go.png"><div class="dName">고지혈증</div></a></div>	
+		<div class="col-xs-6 col-lg-6 text-center disease"><a href=#  data-code="1" id="sugarBlood"><img class="img-responsive  dImg center-block" src="resources/customerImage/dang.png"><div class="dName">당뇨병</div></a></div>
+		<div class="col-xs-6 col-lg-6 text-center disease"><a href=# data-code="4" id="renalFailure"><img class="img-responsive  dImg center-block" src="resources/customerImage/sin.png"><div class="dName">신부전증</div></a></div>
+		<div class="col-xs-6 col-lg-6 text-center disease"><a href=# data-code="16" id="heartFailure"><img class="img-responsive  dImg center-block" src="resources/customerImage/sim.png"><div class="dName">심부전증</div></a></div>
+		<div class="col-xs-6 col-lg-6 text-center disease"><a href=# data-code="13" id="hyperlipidemia"><img class="img-responsive  dImg center-block" src="resources/customerImage/go.png"><div class="dName">고지혈증</div></a></div>	
 </div>  
 <div id="dietList" class="text-center col-sm-12">	
 </div>

@@ -24,8 +24,10 @@
 max-height:350px; */
 }
 .sideDImg{
-/* max-width:250px;
-mat-height:200px; */
+height:115px;
+}
+.sideDThumbnail{
+height:145px; 
 }
 .nutriTable{
 text-align: center !important;
@@ -45,8 +47,12 @@ text-align: center !important;
 		margin:auto;
 		width:100%;
 	}
+	.sideDImg{
+	height:58px;
+	}
 	.sideDThumbnail{
 		display:none;
+		height:auto; 
 	}
 	.sideDNutri{
 		display:none;
@@ -244,83 +250,13 @@ $(document).ready(function() {
 	
 	
 });	
-	/* function getDishList(a) {
-		a
-				.children()
-				.each(
-						function() {
-							var foodGCode = $(this).attr("data-foodGCode");
-							var b = $(this);
-							$
-									.getJSON(
-											"customerAjax/getfoodG/"
-													+ foodGCode, //controller를 통해 요청.
-											function(data) { //데이터 받아옴 data.list로 사용
-												for (var i = 0; i < data.list.length; i++) {
-													b
-															.append("<label><div class='' data-sideDCode='"+data.list[i].sideDCode+"'>"
-																	+ "<input type='radio' style='display:none' name='"+data.list[i].foodGCode+"' value='"+data.list[i].sideDCode+"' />"
-																	 + "<img src='http://via.placeholder.com/150x150'>" 
-																	+"<img class='sideDImg' src='displayFile?fileName="	+ data.list[i].sideDImg+"'>"
-																	+ data.list[i].sideDName
-																	+ "  <table><tr><td>칼로리</td><td>탄수화물</td><td>단백질</td><td>지방</td><td>나트륨</td></tr><tr><td>"
-																	+ data.list[i].kcal
-																			.toFixed(0)
-																	+ "kcal</td><td>"
-																	+ data.list[i].carbohydrate
-																			.toFixed(0)
-																	+ "g</td><td>"
-																	+ data.list[i].protein
-																			.toFixed(0)
-																	+ "g</td><td>"
-																	+ data.list[i].fat
-																			.toFixed(0)
-																	+ "g</td><td>"
-																	+ data.list[i].na
-																			.toFixed(0)
-																	+ "mg</td></tr></table>"
-																	+ "</div></label>");
-												}
-											})
-						});
-	}
-	 */
-	// div : panel id
-	// foodGCode : 각각 판넬에 들어가게 될 반찬들의 GCode(그룹코드)
 	
-	
-/* 	function activeRadio(btn){		
-		//alert("클릭되었습니다."); 
-		var inputBtn = btn.find("input:radio");
-		inputBtn.attr("checked", true);
-	} */
 	function getCheckedList() {
 		$(".w3-theme-l4").each(function(){
 			var sideDCode = $(this).attr("data-sideDcode");
 			console.log(sideDCode);
 			$("#orderForm").append("<input id='sideDish' type='hidden' name='sideDish' value='"+sideDCode+"'>");
-		});
-		/* var arrInx = 0;
-		var sideDish = [];
-		a.children().each(
-				function() {
-					var name = $(this).attr("data-foodGCode");
-					var checkedValue = $(
-							'input:radio[name="' + name + '"]:checked').val(); //벨류가 반찬 코드		
-					if (checkedValue != undefined) {
-						sideDish[arrInx] = checkedValue;
-						arrInx++;
-					}
-					console.log(sideDish);
-				});
-		$("#orderForm>#sideDish").remove();
-		for (i = 0; i < arrInx; i++) {
-			$("#orderForm")
-					.append(
-							"<input id='sideDish' type='hidden' name='sideDish' value='"+sideDish[i]+"'>");
-		} */
-		
-		
+		});		
 	}
 	
 	
@@ -346,13 +282,13 @@ $(document).ready(function() {
 			if(count==6){
 				/* nutriValue = [carbo0,protein0,fat0,na0/1000, k0/1000];  */
 				
-				var KcalDay = parseInt(kcal0/2000*100);
-				var CDay = parseInt(carbo0/325*100);
-				var PDay = parseInt(protein0/40*100);
-				var FDday = parseInt(fat0/35*100);
+				var KcalDay = parseInt(kcal0/2500*100);
+				var CDay = parseInt(carbo0/405*100);
+				var PDay = parseInt(protein0/50*100);
+				var Fday = parseInt(fat0/40*100);
 				var NaDay = parseInt(na0/2000*100);
 				var KDay = parseInt(k0/3500*100);
-				nutriValue = [KcalDay,CDay,PDay,FDday,NaDay, KDay];
+				nutriValue = [KcalDay,CDay,PDay,Fday,NaDay, KDay];
 				$(".nutriInfoTable").append("<td class='kcalSign w3-green'>"+kcal0+"</td><td class='carboSign w3-green'>"+carbo0+"</td><td class='proteinSign w3-green'>"+protein0+"</td><td class='fatSign w3-green'>"+fat0+"</td><td class='naSign w3-green'>"+na0+"</td><td class='kSign w3-green'>"+k0+"</td>")
 				/* 
 				<td>남자</td><td id="MKcal">2400</td><td id="MCarbo">405</td><td id="MProtein">50</td><td id="MFat">40</td><td id="MNa">2000</td><td id="MK">3500</td></tr>
@@ -378,17 +314,59 @@ $(document).ready(function() {
 				localStorage['fat']=fat0;
 				localStorage['na']=na0;
 				localStorage['k']=k0;
-				
+				if(KcalDay>20 && KcalDay<=100){
+					$(".kcalSign").addClass("w3-green");
+				}else if((KcalDay>10&&KcalDay<=20)||(KcalDay>100&&KcalDay<=120)){
+					$(".kcalSign").addClass("w3-orange");
+				}else{
+					$(".kcalSign").addClass("w3-red");
+				}
+				if(CDay>20 && CDay<=100){
+					$(".carboSign").addClass("w3-green");
+				}else if((CDay>10&&CDay<=20)||(CDay>100&&CDay<=120)){
+					$(".carboSign").addClass("w3-orange");
+				}else{
+					$(".carboSign").addClass("w3-red");
+				}
+				console.log(PDay)
+				if(PDay>50 && PDay<=120){
+					$(".proteinSign").addClass("w3-green");
+				}else if((PDay>30&&PDay<=50)||(PDay>120&&PDay<=140)){
+					$(".proteinSign").addClass("w3-orange");
+				}else{
+					$(".proteinSign").addClass("w3-red");
+				}
+				if(NaDay<=100){
+					$(".naSign").addClass("w3-green");
+				}else if(NaDay>100&&NaDay<=120){
+					$(".naSign").addClass("w3-orange");
+				}else{
+					$(".naSign").addClass("w3-red");
+				}
+				if(KDay<=120){
+					$(".kSign").addClass("w3-green");
+				}else if(KDay>120&&KDay<=150){
+					$(".kSign").addClass("w3-orange");
+				}else{
+					$(".kSign").addClass("w3-red");
+				}
+				if(Fday>50 && Fday<=120){
+					$(".fatSign").addClass("w3-green");
+				}else if((Fday>30&&Fday<=50)||(Fday>120&&Fday<=140)){
+					$(".fatSign").addClass("w3-orange");
+				}else{
+					$(".fatSign").addClass("w3-red");
+				}
 				
 			}else{
 				/* nutriValue = [carbo,protein,fat,na/1000,k/1000]; */
-				var KcalDay = parseInt(kcal/2000*100);
-				var CDay = parseInt(carbo/325*100);
-				var PDay = parseInt(protein/40*100);
-				var FDday = parseInt(fat/35*100);
+				var KcalDay = parseInt(kcal/2500*100);
+				var CDay = parseInt(carbo/405*100);
+				var PDay = parseInt(protein/50*100);
+				var Fday = parseInt(fat/40*100);
 				var NaDay = parseInt(na/2000*100);
 				var KDay = parseInt(k/3500*100);
-				nutriValue = [KcalDay,CDay,PDay,FDday,NaDay, KDay];
+				nutriValue = [KcalDay,CDay,PDay,Fday,NaDay, KDay];
 				
 				$(".nutriInfoTable td").remove();
 				$(".fatSign").removeClass("w3-orange");
@@ -426,47 +404,48 @@ $(document).ready(function() {
 				var naSign = Number(na)-Number(localStorage['na']);
 				var kSign = Number(k)-Number(localStorage['k']);
 				console.log("칼로리차:"+kcalSign+" 탄수화물차:"+carboSign+" 단백질차:"+proteinSign+" 지방차:"+fatSign+" 나트륨차:"+naSign+" 칼륨차:"+kSign);
-				if(kcalSign>=100 && kcalSign<200){
-					$(".kcalSign").addClass("w3-orange");
-				}else if(kcalSign>=200){
-					$(".kcalSign").addClass("w3-red");
-				}else{
+				if(KcalDay>20 && KcalDay<=100){
 					$(".kcalSign").addClass("w3-green");
-				}
-				if(carboSign>=50 && carboSign<100){
-					$(".carboSign").addClass("w3-orange");
-				}else if(carboSign>=100){
-					$(".carboSign").addClass("w3-red");
+				}else if((KcalDay>10&&KcalDay<=30)||(KcalDay>100&&KcalDay<=120)){
+					$(".kcalSign").addClass("w3-orange");
 				}else{
+					$(".kcalSign").addClass("w3-red");
+				}
+				if(CDay>20 && CDay<=100){
 					$(".carboSign").addClass("w3-green");
-				}
-				if(proteinSign>=50 && proteinSign<100){
-					$(".proteinSign").addClass("w3-orange");
-				}else if(proteinSign>=100){
-					$(".proteinSign").addClass("w3-red");
+				}else if((CDay>10&&CDay<=20)||(CDay>100&&CDay<=120)){
+					$(".carboSign").addClass("w3-orange");
 				}else{
+					$(".carboSign").addClass("w3-red");
+				}
+				console.log(PDay)
+				if(PDay>50 && PDay<=120){
 					$(".proteinSign").addClass("w3-green");
-				}
-				if(na>=2000 && na<2500){
-					$(".naSign").addClass("w3-orange");
-				}else if(na>=2500){
-					$(".naSign").addClass("w3-red");
+				}else if((PDay>30&&PDay<=50)||(PDay>120&&PDay<=140)){
+					$(".proteinSign").addClass("w3-orange");
 				}else{
+					$(".proteinSign").addClass("w3-red");
+				}
+				if(NaDay<=100){
 					$(".naSign").addClass("w3-green");
-				}
-				if(kSign>=100 && kSign<200){
-					$(".kSign").addClass("w3-orange");
-				}else if(kSign>=200){
-					$(".kSign").addClass("w3-red");
+				}else if(NaDay>100&&NaDay<=120){
+					$(".naSign").addClass("w3-orange");
 				}else{
+					$(".naSign").addClass("w3-red");
+				}
+				if(KDay<=120){
 					$(".kSign").addClass("w3-green");
-				}
-				if(fatSign>=50 && fatSign<100){
-					$(".fatSign").addClass("w3-orange");
-				}else if(fatSign>=100){
-					$(".fatSign").addClass("w3-red");
+				}else if(KDay>120&&KDay<=150){
+					$(".kSign").addClass("w3-orange");
 				}else{
+					$(".kSign").addClass("w3-red");
+				}
+				if(Fday>50 && Fday<=120){
 					$(".fatSign").addClass("w3-green");
+				}else if((Fday>30&&Fday<=50)||(Fday>120&&Fday<=140)){
+					$(".fatSign").addClass("w3-orange");
+				}else{
+					$(".fatSign").addClass("w3-red");
 				}
 				
 			}

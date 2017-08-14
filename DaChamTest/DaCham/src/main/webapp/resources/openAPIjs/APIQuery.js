@@ -11,7 +11,8 @@ function openAPI(){
 		var colorscale = d3.scale.category10();
 		
 		//Legend titles
-		var LegendOptions = ['선택 반찬의 영양정보'];
+		var LegendOptions = ['선택 반찬의 영양정보','적정 요구량'];
+		
 		//Data
 		var protein = 0;
 		var carbohydrate = 0;
@@ -33,6 +34,7 @@ function openAPI(){
 		console.log("단백질"+kcal);
 		console.log("단백질"+na);
 		console.log("단백질"+fat);     
+		
 		var d = [
 			  [
 				{axis: "단백질(g)",value: protein},
@@ -41,8 +43,15 @@ function openAPI(){
 				{axis:"열량(kcal)",value: kcal*0.1},     
 				{axis:"나트륨(mg)",value:na*0.05},
 				{axis:"지방(g)",value:fat}   
-			  ]
-			  
+			  ],
+			  [
+					{axis: "단백질(g)",value: 150},
+					{axis: "탄수화물(g)",value: 150},
+					
+					{axis:"열량(kcal)",value: 150},     
+					{axis:"나트륨(mg)",value: 150},
+					{axis:"지방(g)",value: 150}                    
+				  ]          
 			];
 		
 		//Options for the Radar chart, other than default
@@ -56,6 +65,7 @@ function openAPI(){
 		
 		//Call function to draw the Radar chart
 		//Will expect that data is in %'s
+		
 		RadarChart.draw("#chart", d, mycfg);
 		
 		////////////////////////////////////////////
@@ -106,5 +116,5 @@ function openAPI(){
 		  .attr("font-size", "11px")
 		  .attr("fill", "#737373")
 		  .text(function(d) { return d; })
-		  ;	
+		  ;	                    
 }

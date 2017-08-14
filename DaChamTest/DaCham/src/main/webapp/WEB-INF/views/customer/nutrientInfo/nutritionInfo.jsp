@@ -84,9 +84,15 @@ $(document).ready(function(){
 <body>
 	<%@include file="../../clientNavi.jsp"%>
 	<div class="container">
-		<h1>영양소개</h1>
+	<div class="row">
+		<h1 class="text-center">영양소개</h1>
+		<div class="col-sm-12 text-center">
+		<p class="lead"> 
 		건강에 대한 유용한 정보를 알려드립니다.<br> 일상에서 쉽게 활용할 수 있는 정보만을 드릴게요.<br>
-		다참과 함께 건강한 생활 하세요<br>
+		다참과 함께 건강한 생활 하세요
+		</p>
+		</div>
+	</div>	
 		<table id="nutriInfotable">
 			<tr>
 				<td>

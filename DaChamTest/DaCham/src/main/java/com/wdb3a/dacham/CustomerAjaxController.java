@@ -118,7 +118,14 @@ public class CustomerAjaxController {
 	public ResponseEntity<String> payment(@RequestBody List<Customer> list){
 		System.out.println(list.size());
 		ResponseEntity<String> entity = null;
+		Customer customer = new Customer();
+		String id = list.get(0).getId();
+		String recentlyAddress = list.get(0).getRecentlyAddress();
+		System.out.println("아이디 "+id+" 주소 "+recentlyAddress);
+		customer.setId(id);
+		customer.setRecentlyAddress(recentlyAddress);
 		try {
+			service.recentlyAddress(customer);
 			for(int i=0;i<list.size();i++){
 				service.orderCart(list.get(i));
 			}			
