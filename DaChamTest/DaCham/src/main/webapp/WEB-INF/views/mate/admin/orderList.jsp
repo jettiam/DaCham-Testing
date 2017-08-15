@@ -186,6 +186,48 @@
 						});
 	}
 	
+	function orderSort5(page) {
+		$(".pagination li").remove();
+		sortCount = 5;
+		$
+				.getJSON(
+						"adminSub/orderSort5/"+page,  
+						function(data) {
+							console.log(data);
+							$(".orderListTable").remove();
+							var str = "";
+							for (var i = 0; i < data.list.length; i++) {
+								str += "<tr class='orderListTable'><td>"
+										+ "<input type='checkBox' id='"
+										+ data.list[i].orderCode
+										+ "' value='"
+										+ data.list[i].orderCode
+										+ "' name='che'</td>"
+										+ "<td class='orderCode'>"
+										+ data.list[i].orderCode
+										+ "</td>"
+										+ "<td class='id'>"
+										+ data.list[i].id
+										+ "</td>"
+										+ "<td>"
+										+ "<a data-src='"+data.list[i].orderCode+"' class='dietName' data-toggle='modal' href='#myModal'>"
+										+ data.list[i].dietName
+										+ "</a> </td>"
+										+ "<td class='orderDate'>"
+										+ data.list[i].orderDate
+										+ "</td>"
+										+ "<td class='price'>"
+										+ data.list[i].price
+										+ "</td>"
+										+ "<td class='orderItemName'>"
+										+ data.list[i].orderItemName + "</td></tr>"
+							}
+							console.log(str);
+							$(".tables").append(str);
+							printPaging1(data.criteria);   
+						});
+	}
+	
 	function printPaging1(criteria) {
 		var str = "";
 
@@ -261,8 +303,11 @@
 											var length = $('.orderListTable input:checked').length;
 										    
 										    var orderCheck = true;
+										   	if(length!=0){ 
 											for (var i = 0; i < length; i++) {
+												       
 												var orderItemName = $('.orderListTable input:checked').eq(i).parent().next().next().next().next().next().next().text()
+												var orderCodeCheck = $('.orderListTable input:checked').eq(i)
 												
 												if (orderItemName=="결제완료") {
 													orderCheck = true;
@@ -279,6 +324,8 @@
 												if(orderCheck ==false){
 													break;
 												}
+												
+												 
 											}  
 											//alert(JSON.stringify(foodOrderinfo)); 
 											if(orderCheck ==true){ 
@@ -290,6 +337,10 @@
 											}else{
 												alert("결제 완료만 식재료 주문이 가능합니다"); 
 											}
+										   	}else{
+										   		alert("식단을 선택하세요");
+										   	}
+										    
 											  
 										});
 
@@ -338,15 +389,18 @@
 												$(".tables").append(str);
 												printPaging(data.criteria); 
 											});
-						}
+						} 
 
 						//환불 버튼  
 						$('#refund').click(function() {
+							var length = $('.orderListTable input:checked').length;
+							if(length!=0){
 							$("input[name=che]:checked").each(function() {
 								var test = $(this).val();
 
 								var orderItemName = $(this).parent().next().next().next().next().next().next().text();        
-								
+								var length = $('.orderListTable input:checked').length;
+								  
 								console.log(test);
 								if(orderItemName=="결제완료"){
 
@@ -375,12 +429,17 @@
 								}else{
 									alert("결제완료 상태이여만 환불처리 됩니다.")
 								}
+							
 								
 							});
+							}else{
+								alert("식단을 선택하세요");    
+							}
 						});
 						//작업요청
 						$('#work').click(function() {
-							
+							var length = $('.orderListTable input:checked').length;
+							if(length!=0){
 			
 							
 							$("input[name=che]:checked").each(function() {
@@ -414,6 +473,9 @@
 									alert("식재료 입고 상태여야만 작업요청을 할 수 있습니다.")
 								}
 							});
+							}else{
+								alert("식단을 선택하세요");     
+							}
 							
 							
 						});
@@ -467,6 +529,7 @@
 																$(".tables")
 																		.append(
 																				str);
+																$(".pagination").empty(); 
 																
 															});
 											}else{
@@ -558,9 +621,11 @@
  							}
  							else if(sortCount == 4){
  								orderSort4(replyPage); 
- 							}else    
+ 							}else if(sortCount == 5){
+ 								orderSort5(replyPage); 
+ 							}   
  							all(replyPage);
- 						});   
+ 						});     
 
 					});
 </script>
@@ -600,7 +665,7 @@
 				<button id="search" class="btn btn-default">검색</button>
 				<button id="searchAll" class="btn btn-default">전체 검색</button>
 			</div>
-			<div class="col-sm-offset-6">
+			<div class="col-sm-offset-4">
 				<ul class="nav nav-pills text-right">
 					<li role="presentation" class="active"><a class = 'data' data-code = '1' href="#"
 						onclick="orderSort1(1);">결제완료 정렬</a></li>
@@ -610,6 +675,8 @@
 						onclick="orderSort4(1);">식재료 입고 정렬</a></li>
 					<li role="presentation" class="active"><a class = 'data' data-code = '2' href="#"
 						onclick="orderSort2(1);">조리대기 정렬</a></li>
+					<li role="presentation" class="active"><a class = 'data' data-code = '5' href="#"
+						onclick="orderSort5(1);">환불 정렬</a></li> 	  
 				</ul>
 			</div>
 			<div class="topMar">

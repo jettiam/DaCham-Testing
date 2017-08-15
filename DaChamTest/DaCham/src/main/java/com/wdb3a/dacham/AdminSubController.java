@@ -253,6 +253,28 @@ public class AdminSubController {
 		}
 		return entity;
 	}
+	
+	@RequestMapping(value = "/orderSort5/{page}", method = RequestMethod.GET)
+	public ResponseEntity<Map<String, Object>> orderSort5(@PathVariable("page") int page) {
+		ResponseEntity<Map<String, Object>> entity = null;
+		try {
+			Criteria criteria = new Criteria();
+			System.out.println(page); 
+			criteria.setPage(page);
+			int totalCount = service.orderCount();
+			criteria.setTotalCount(totalCount); 
+			List<OrderList> list = service.orderSort5(criteria);
+			Map<String, Object> map = new HashMap<>();
+			map.put("list", list);
+			map.put("criteria", criteria); 
+			entity = new ResponseEntity<>(map, HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
 
 	// foodStock 리스트 출력
 	@RequestMapping(value = "/foodStockAll/{page}", method = RequestMethod.GET)

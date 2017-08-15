@@ -130,4 +130,22 @@ public class CookAjaxController {
 		}
 		return entity;
 	}
+	
+	@RequestMapping(value = "/foodStockSearch/{keyword}",method = RequestMethod.GET)
+	public ResponseEntity<List<FoodMInven>> foodStock(@PathVariable("keyword")String keyword){
+		ResponseEntity<List<FoodMInven>> entity = null;
+		
+		try {
+			FoodMInven foodInv = new FoodMInven();
+			foodInv.setKeyword(keyword);
+			List<FoodMInven> list = service.CookStock(foodInv);
+			System.out.println("¸®½ºÆ®:"+list);
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
 }

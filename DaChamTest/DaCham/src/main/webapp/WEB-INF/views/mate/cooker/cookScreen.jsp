@@ -161,18 +161,18 @@ body {
 
 #cookWait>.container {
 	width: 500px;
-	height: 300px;
+	height: 260px;
 }
 
 .X {
-	height: 560px;
+	height: 835px;
 	width: 610px;
 	float: left;
 }
 
 #cookContinue>.container {
 	width: 560px;
-	height: 480px;
+	height: 790px;
 }
 
 .C {
@@ -186,20 +186,20 @@ body {
 }
 
 .Y {
-	height: 400px;
+	height: 350px;
 	width: 556px;
 }
 
 .Z {
-	height: 256px;
-	width: 710px;
+	height: 306px;
+	width: 356px;
 	float: left;
 }
 
 .Q {
-	height: 256px;
-	width: 456px;
-	float: right;
+	height: 306px;
+	width: 180px;
+	float: left;
 }
 </style>
 </head>
@@ -207,7 +207,7 @@ body {
 <body>
 	<div class="bodyWrapper">
 		<div class="wrapper_else">
-			<div class="row">
+			
 				<div id="cookContinue" class="box X">
 					<div class="container">			
 					<table id="cookContinueTable" class="table table-bordered">
@@ -255,9 +255,9 @@ body {
 							</c:if>
 						</c:forEach>
 					</div>
-				</div>
+			
 			</div>
-			<div class="row">
+		
 				<div id="cookFinish" class="box Z">
 					<h2>조리 완료</h2>
 					<div class="container"></div>
@@ -265,7 +265,7 @@ body {
 				<div class="box Q">
 					<button onclick="window.close();">종료</button>
 				</div>
-			</div>
+			
 		</div>
 	</div>
 

@@ -241,7 +241,7 @@
 		and (c.orderItemCode=2 or
 		c.orderItemCode
 		=3 or c.orderItemCode =9 or
-		c.orderItemCode=10) and
+		c.orderItemCode=10 or c.orderItemCode=6) and
 		(b.orderItemCode =
 		c.orderItemCode)
 		<include refid="orderListSearch"></include>
@@ -258,7 +258,7 @@
 				and c.orderItemName like CONCAT('%',#{keyword},'%')
 			</if>
 		</if>
-	</sql>
+	</sql> 
 	<!--결제 완료 우선 -->
 	<select id="orderSort1" resultType="OrderList">
 		select b.dietCode,
@@ -275,11 +275,11 @@
 		c.orderItemCode
 		=3
 		or c.orderItemCode =9 or
-		c.orderItemCode=10) and
+		c.orderItemCode=10 or c.orderItemCode=6) and
 		(b.orderItemCode =
 		c.orderItemCode)
 		order by field(c.orderItemCode,
-		2,3,9,10)
+		2,3,9,10,6)
 		limit
 		#{startRecord},
 		#{recordsPerPage}
@@ -301,11 +301,11 @@
 		c.orderItemCode
 		=3
 		or c.orderItemCode =9 or
-		c.orderItemCode=10) and
+		c.orderItemCode=10 or c.orderItemCode=6) and
 		(b.orderItemCode =
 		c.orderItemCode)
 		order by field(c.orderItemCode,
-		3,2,9,10)
+		3,2,9,10,6)
 		limit
 		#{startRecord},
 		#{recordsPerPage}
@@ -327,11 +327,11 @@
 		c.orderItemCode
 		=3
 		or c.orderItemCode =9 or
-		c.orderItemCode=10) and
+		c.orderItemCode=10 or c.orderItemCode=6) and
 		(b.orderItemCode =
 		c.orderItemCode)
 		order by field(c.orderItemCode,
-		9,3,2,10)
+		9,3,2,10,6)
 		limit
 		#{startRecord},
 		#{recordsPerPage}
@@ -354,14 +354,40 @@
 		c.orderItemCode
 		=3
 		or c.orderItemCode =9 or
-		c.orderItemCode=10) and
+		c.orderItemCode=10 or c.orderItemCode=6) and
 		(b.orderItemCode =
 		c.orderItemCode)
 		order by field(c.orderItemCode,
-		10,3,9,2)
+		10,3,9,2,6)
 		limit
 		#{startRecord},
 		#{recordsPerPage}
+	</select>
+	
+	<!--환불 우선  -->
+	<select id="orderSort5" resultType="OrderList">
+		select b.dietCode,   
+		b.orderCode,
+		b.id, a.dietName, b.orderDate, b.price,
+		b.orderItemCode,
+		b.transportNum, c.orderItemName
+		from diet a,
+		orderlist
+		b,
+		orderitem c
+		where a.dietCode=b.dietCode
+		and (c.orderItemCode=2 or
+		c.orderItemCode
+		=3
+		or c.orderItemCode =9 or
+		c.orderItemCode=10 or c.orderItemCode=6 ) and
+		(b.orderItemCode =
+		c.orderItemCode)
+		order by field(c.orderItemCode,
+		6,10,3,9,2)
+		limit
+		#{startRecord},
+		#{recordsPerPage}  
 	</select>
 
 
@@ -440,7 +466,7 @@
 
 	<select id="DietAll" resultType="Diet">
 		select a.price, a.dietCode,
-		a.dietName, a.price, a.dietImg, b.diseaseName, a.spDietItem
+		a.dietName, a.price, a.dietImg, b.diseaseName, a.spDietItem, b.judgement 
 		from diet a
 		join disease b
 		where a.diseaseCode=b.diseaseCode
@@ -472,7 +498,7 @@
 	<select id="disease1" resultType="Diet">
 		select a.price, a.dietCode,
 		a.dietName, a.price, a.dietImg, b.diseaseName,
-		a.spDietItem
+		a.spDietItem, b.judgement
 		from diet a
 		join disease b
 		where
@@ -483,7 +509,7 @@
 	<select id="disease2" resultType="Diet">
 		select a.price, a.dietCode,
 		a.dietName, a.price, a.dietImg, b.diseaseName,
-		a.spDietItem
+		a.spDietItem, b.judgement
 		from diet a
 		join disease b
 		where
@@ -494,7 +520,7 @@
 
 	<select id="disease3" resultType="Diet">
 		select a.price, a.dietCode,
-		a.dietName, a.price, a.dietImg, b.diseaseName,
+		a.dietName, a.price, a.dietImg, b.diseaseName, b.judgement, 
 		a.spDietItem
 		from diet a
 		join disease b
@@ -507,7 +533,7 @@
 	<select id="disease4" resultType="Diet">
 		select a.price, a.dietCode,
 		a.dietName, a.price, a.dietImg, b.diseaseName,
-		a.spDietItem
+		a.spDietItem, b.judgement
 		from diet a
 		join disease b
 		where

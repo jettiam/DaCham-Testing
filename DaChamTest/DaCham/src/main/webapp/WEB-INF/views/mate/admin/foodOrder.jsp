@@ -163,12 +163,18 @@
 			
 		$(document).ready(function() {
 			$("#foodMOrderSub").on("click", function(){
+				 
+				if(cnt!=0){
 				$(".foodMOrderSubForm").submit();
+				}else{
+					alert("식재료를 검색하여 주문하여 주세요");
+				}
 			})
 			$("#foodMOrder").on("click", function(){
 				
 				var foodMOrderInfo = {};
 				var y=0;
+				if(divlength!=0){
 				for(var i =1; i<=divlength; i++){
 
 					var foodMname = $("#foodMName"+i).val();
@@ -197,6 +203,9 @@
 				console.log(foodMOrderInfo);   
 				$("#foodMOrderInfo").val(JSON.stringify(foodMOrderInfo));
 				$(".foodMOrderForm").submit();
+				}else{
+					alert("식단에 따른 식재료 주문입니다. 주문내역에서 식단을 선택하세요");
+				}
 				
 
 			  

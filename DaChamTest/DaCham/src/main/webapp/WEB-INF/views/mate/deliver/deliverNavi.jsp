@@ -30,7 +30,7 @@ margin-bottom:20px;
 		<!-- 상단 메뉴바 -->
 		<div class="w3-bar w3-border w3-theme-d5 w3-xlarge">
 		<div class="w3-container">
-		  <a href="deliverFood" class="w3-bar-item w3-button w3-hover-light-gray" id="deliverFood">식재료 재고</a>
+		  <a href="deliverFood" class="w3-bar-item w3-button w3-hover-light-gray" id="deliverFood">식재료 입고</a>
 		  <a href="deliverList" class="w3-bar-item w3-button w3-hover-light-gray" id="deliverList">식단 배송</a>	 
 		</div>
 		</div>

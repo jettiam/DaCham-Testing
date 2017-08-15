@@ -9,8 +9,9 @@
 		limit #{startRecord} , #{recordsPerPage}
 	</select>
 	<select id = "foodStockAllCount" resultType = "Integer">
-		select count(*)
-		from foodminven
+		select count(c.foodMName)
+from (select foodMName,sum(inAmount) inAmount,sum(outAmount) outAmount,unit
+		from foodminven group by foodMName) c     
 		
 	</select>
 	<select id="foodStock" resultType="FoodMInven">
