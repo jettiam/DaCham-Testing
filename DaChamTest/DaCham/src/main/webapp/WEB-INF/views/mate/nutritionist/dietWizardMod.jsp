@@ -57,8 +57,8 @@
 							var xml = Blockly.Xml.workspaceToDom(workspace);
 							var xml_text = Blockly.Xml.domToText(xml);
 							
-							alert(typeof wizard);
-							console.log(wizard);
+							
+						
 							$.ajax({
 								url : "wizardInsert",								
 								type : "POST",
@@ -68,7 +68,7 @@
 								},
 								success : function(data) {
 									if (data == "success") {
-										alert("성공입니다.");
+										
 										window.close();
 									}
 								},
@@ -164,12 +164,6 @@ svg {
 	</div>
 	<div id="graphWizard"></div>
 	<div id="searchArea">
-		<h3>블록을 찾겠습니다. 나중에 수정할 영역.</h3>
-		<form name="f1" action=""
-			onSubmit="if(this.t1.value!=null && this.t1.value!='') findString(this.t1.value);return false">
-			<input type="text" name=t1 value="text" size=20> <input
-				type="submit" name=b1 value="Find">
-		</form>
 	</div>
 	<span id="blockWizard">
 		<div id="blocklyDiv"
@@ -487,10 +481,10 @@ svg {
 		}
 
 		function searchSheet(num) {
-			alert(num + "번 질문지를 찾을꺼에요:)");
+			
 			var txt = $("#blocklyDiv").text();
-			console.log(txt);
-			alert(txt);
+		
+		
 		}
 
 		workspace.addChangeListener(drawGraph);
@@ -504,8 +498,7 @@ svg {
 												var num = $("#searchNum").val();
 												num = num.split(" ").join(
 														"&nbsp;");
-												alert(num + "에 대하여 찾습니다.");
-
+											
 												var searchedBox = document
 														.getElementsByClassName("blocklyText");
 												var selectList = new Array();
