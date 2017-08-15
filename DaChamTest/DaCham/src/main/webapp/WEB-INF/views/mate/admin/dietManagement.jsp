@@ -40,9 +40,11 @@ function disease1(){
 							+ "</td>"
 							+ "<td>"
 							+ data[i].diseaseName
+							+ "</td><td>" 
+							+ data[i].judgement
 							+ "</td><td>"
 							+ data[i].spDietItem
-							+ "</tr>"
+							+ "</td></tr>"
 				}
 				console.log(str);
 				$(".tables").append(str);
@@ -76,8 +78,10 @@ function disease2(){
 							+ "<td>"
 							+ data[i].diseaseName
 							+ "</td><td>"
+							+ data[i].judgement
+							+ "</td><td>"
 							+ data[i].spDietItem
-							+ "</tr>"
+							+ "</td></tr>"
 				}
 				console.log(str);
 				$(".tables").append(str);
@@ -111,8 +115,10 @@ function disease3(){
 							+ "<td>"
 							+ data[i].diseaseName
 							+ "</td><td>"
+							+ data[i].judgement
+							+ "</td><td>"
 							+ data[i].spDietItem
-							+ "</tr>"
+							+ "</td></tr>"
 				}
 				console.log(str);
 				$(".tables").append(str);
@@ -146,8 +152,10 @@ function disease4(){
 							+ "<td>"
 							+ data[i].diseaseName
 							+ "</td><td>"
+							+ data[i].judgement
+							+ "</td><td>"
 							+ data[i].spDietItem
-							+ "</tr>"
+							+ "</td></tr>"
 				}
 				console.log(str);
 				$(".tables").append(str);
@@ -185,9 +193,11 @@ function disease4(){
 															+ "</td>"
 															+ "<td>"
 															+ data.list[i].diseaseName
+															+ "</td><td>"  
+															+ data.list[i].judgement
 															+ "</td><td>"
 															+ data.list[i].spDietItem
-															+ "</tr>"
+															+ "</td></tr>"
 												}
 												console.log(str);
 												$(".tables").append(str);
@@ -330,6 +340,7 @@ function disease4(){
 					<th>식단명</th>
 					<th>금액</th>
 					<th>질환명</th>
+					<th>질환 위험도</th>
 					<th>상태</th>
 				</tr>
 			</table>
