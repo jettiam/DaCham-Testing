@@ -316,7 +316,11 @@
 								'<input type = "hidden" id = "cnt" name = "count" value = "'+v+'">')
 								.appendTo("#registForm");
 						
-						
+						var TKcal = 0;
+						var TCarbohydrate = 0;
+						var TProtein = 0;
+						var TFat = 0;
+						var TNa = 0;
 						$(document.body).on("click","input:radio[name=foodG01]",function(){
 							var sideDCode = $(this).attr("id");
 							var count1 = parseInt(localStorage['count1']);
@@ -326,11 +330,19 @@
 								localStorage[count1 + '_protein1'] = data.protein;
 								localStorage[count1 + '_fat1'] = data.fat;
 								localStorage[count1 + '_na1'] = data.na;
-								$("#TKcal").text(data.kcal);
-								$("#TCarbohydrate").text(data.carbohydrate);
-								$("#TProtein").text(data.protein);
-								$("#TFat").text(data.fat);
-								$("#TNa").text(data.na);
+								
+								TKcal += data.kcal;
+								TCarbohydrate += data.carbohydrate;
+								TProtein += data.protein;
+								TFat += data.fat;
+								TNa += data.na;
+								
+								$("#TKcal").text(TKcal);
+								$("#TCarbohydrate").text(TCarbohydrate);
+								$("#TProtein").text(TProtein);
+								$("#TFat").text(TFat);
+								$("#TNa").text(TNa);
+								
 								count1++;
 								openAPI();
 							});
@@ -346,11 +358,20 @@
 								localStorage[count2 + '_protein2'] = data.protein;
 								localStorage[count2 + '_fat2'] = data.fat;
 								localStorage[count2 + '_na2'] = data.na;
-								$("#TKcal").val(data.kcal);
-								$("#TCarbohydrate").val(data.carbohydrate);
-								$("#TProtein").val(data.protein);
-								$("#TFat").val(data.fat);
-								$("#TNa").val(data.na);
+								
+								
+								TKcal += data.kcal;
+								TCarbohydrate += data.carbohydrate;
+								TProtein += data.protein;
+								TFat += data.fat;
+								TNa += data.na;
+								
+								$("#TKcal").text(TKcal);
+								$("#TCarbohydrate").text(TCarbohydrate);
+								$("#TProtein").text(TProtein);
+								$("#TFat").text(TFat);
+								$("#TNa").text(TNa);
+								
 								count2++;
 								openAPI();
 							});
@@ -366,11 +387,20 @@
 								localStorage[count3 + '_protein3'] = data.protein;
 								localStorage[count3 + '_fat3'] = data.fat;
 								localStorage[count3 + '_na3'] = data.na;
-								$("#TKcal").val(data.kcal);
-								$("#TCarbohydrate").val(data.carbohydrate);
-								$("#TProtein").val(data.protein);
-								$("#TFat").val(data.fat);
-								$("#TNa").val(data.na);
+								
+								TKcal += data.kcal;
+								TCarbohydrate += data.carbohydrate;
+								TProtein += data.protein;
+								TFat += data.fat;
+								TNa += data.na;
+								
+								$("#TKcal").text(TKcal);
+								$("#TCarbohydrate").text(TCarbohydrate);
+								$("#TProtein").text(TProtein);
+								$("#TFat").text(TFat);
+								$("#TNa").text(TNa);
+								
+								
 								count3++;
 								openAPI();
 							});
@@ -386,11 +416,20 @@
 								localStorage[count4 + '_protein4'] = data.protein;
 								localStorage[count4 + '_fat4'] = data.fat;
 								localStorage[count4 + '_na4'] = data.na;
-								$("#TKcal").val(data.kcal);
-								$("#TCarbohydrate").val(data.carbohydrate);
-								$("#TProtein").val(data.protein);
-								$("#TFat").val(data.fat);
-								$("#TNa").val(data.na);
+								
+								
+								TKcal += data.kcal;
+								TCarbohydrate += data.carbohydrate;
+								TProtein += data.protein;
+								TFat += data.fat;
+								TNa += data.na;
+								
+								$("#TKcal").text(TKcal);
+								$("#TCarbohydrate").text(TCarbohydrate);
+								$("#TProtein").text(TProtein);
+								$("#TFat").text(TFat);
+								$("#TNa").text(TNa);
+								
 								count4++;
 								openAPI();
 							});
@@ -406,11 +445,20 @@
 								localStorage[count5 + '_protein5'] = data.protein;
 								localStorage[count5 + '_fat5'] = data.fat;
 								localStorage[count5 + '_na5'] = data.na;
-								$("#TKcal").val(data.kcal);
-								$("#TCarbohydrate").val(data.carbohydrate);
-								$("#TProtein").val(data.protein);
-								$("#TFat").val(data.fat);
-								$("#TNa").val(data.na);
+								
+								TKcal += data.kcal;
+								TCarbohydrate += data.carbohydrate;
+								TProtein += data.protein;
+								TFat += data.fat;
+								TNa += data.na;
+								
+								$("#TKcal").text(TKcal);
+								$("#TCarbohydrate").text(TCarbohydrate);
+								$("#TProtein").text(TProtein);
+								$("#TFat").text(TFat);
+								$("#TNa").text(TNa);
+								
+								
 								count5++;
 								openAPI();
 							});
@@ -426,11 +474,20 @@
 								localStorage[count6 + '_protein6'] = data.protein;
 								localStorage[count6 + '_fat6'] = data.fat;
 								localStorage[count6 + '_na6'] = data.na;
-								$("#TKcal").val(data.kcal);
-								$("#TCarbohydrate").val(data.carbohydrate);
-								$("#TProtein").val(data.protein);
-								$("#TFat").val(data.fat);
-								$("#TNa").val(data.na);	
+								
+								
+								TKcal += data.kcal;
+								TCarbohydrate += data.carbohydrate;
+								TProtein += data.protein;
+								TFat += data.fat;
+								TNa += data.na;
+								
+								$("#TKcal").text(TKcal);
+								$("#TCarbohydrate").text(TCarbohydrate);
+								$("#TProtein").text(TProtein);
+								$("#TFat").text(TFat);
+								$("#TNa").text(TNa);
+								
 								count6++;
 								openAPI();
 							});
