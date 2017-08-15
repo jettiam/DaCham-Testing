@@ -118,4 +118,11 @@ public List<Customer> menuShow(int diseaseCode) throws Exception {
 	return sqlSession.selectList(namespace+".menuShow", diseaseCode);
 }
 
+@Override
+public void recentlyAddress(Customer customer) throws Exception {
+	sqlSession.update(namespace+".recentlyAddress", customer);
+	
+}
+
+
 }

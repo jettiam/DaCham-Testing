@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="EUC-KR"%>
+	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
@@ -19,7 +19,7 @@
 	<script src="https://www.w3schools.com/lib/w3.js"></script>
 
 
-<title>DaCham ¸¶ÀÌÆäÀÌÁö</title>
+<title>DaCham ë§ˆì´í˜ì´ì§€</title>
 <style>
 .myPageImg{
 	max-width: 160px;
@@ -46,59 +46,59 @@
 <!-- Sidebar -->
 <div class="w3-sidebar w3-bar-block w3-animate-left" style="display:none;z-index:5" id="mySidebar">
   <button class="w3-bar-item w3-button w3-large" onclick="w3_close()">Close &times;</button>
-		<a id="myInfo" class="w3-bar-item w3-button myPageBtn" onclick="w3_close()" data-status="0">³» Á¤º¸</a>
-		<a id="myHealth" class="w3-bar-item w3-button myPageBtn" onclick="w3_close()" data-status="1">³» °Ç°­Á¤º¸</a>
-		<a id="myCart" class=" w3-bar-item w3-button myPageBtn" onclick="w3_close()" data-status="2">Àå¹Ù±¸´Ï</a>
-		<a id="myOrderlist" class="w3-bar-item w3-button myPageBtn" onclick="w3_close()" data-status="3">ÁÖ¹®³»¿ª</a>
-		<a id="outMember" class="w3-bar-item w3-button" onclick="w3_close()">È¸¿øÅ»Åğ</a>
+		<a id="myInfo" class="w3-bar-item w3-button myPageBtn" onclick="w3_close()" data-status="0">ë‚´ ì •ë³´</a>
+		<a id="myHealth" class="w3-bar-item w3-button myPageBtn" onclick="w3_close()" data-status="1">ë‚´ ê±´ê°•ì •ë³´</a>
+		<a id="myCart" class=" w3-bar-item w3-button myPageBtn" onclick="w3_close()" data-status="2">ì¥ë°”êµ¬ë‹ˆ</a>
+		<a id="myOrderlist" class="w3-bar-item w3-button myPageBtn" onclick="w3_close()" data-status="3">ì£¼ë¬¸ë‚´ì—­</a>
+		<a id="outMember" class="w3-bar-item w3-button" onclick="w3_close()">íšŒì›íƒˆí‡´</a>
 </div>
 
 	<%@include file="../clientNavi.jsp"%>
 	
 <!-- Page Content -->
 <div class="w3-overlay w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay"></div>
-<button class="w3-button w3-white visible-xs h2" onclick="w3_open()">&#9776; ¸¶ÀÌÆäÀÌÁö</button>
+<button class="w3-button w3-white visible-xs h2" onclick="w3_open()">&#9776; ë§ˆì´í˜ì´ì§€</button>
 
-	<!-- ¹öÆ°À» Å¬¸¯ÇÏ¸é ÆäÀÌÁö°¡ ÀüÈ¯µÊ -->
+	<!-- ë²„íŠ¼ì„ í´ë¦­í•˜ë©´ í˜ì´ì§€ê°€ ì „í™˜ë¨ -->
 	<div id="myPageWrap" class="container">		
 		<div class="hidden-xs text-center">
-		<button id="myInfo" class="btn btn-warning myPageBtn" data-status="0">³» Á¤º¸</button>
-		<button id="myHealth" class="btn btn-warning  myPageBtn" data-status="1">³» °Ç°­Á¤º¸</button>
-		<button id="myCart" class="btn btn-warning  myPageBtn" data-status="2">Àå¹Ù±¸´Ï</button>
-		<button id="myOrderlist" class="btn btn-warning  myPageBtn" data-status="3">ÁÖ¹®³»¿ª</button>
-		<button id="outMember" class="btn btn-warning">È¸¿øÅ»Åğ</button>
+		<button id="myInfo" class="btn btn-warning myPageBtn" data-status="0">ë‚´ ì •ë³´</button>
+		<button id="myHealth" class="btn btn-warning  myPageBtn" data-status="1">ë‚´ ê±´ê°•ì •ë³´</button>
+		<button id="myCart" class="btn btn-warning  myPageBtn" data-status="2">ì¥ë°”êµ¬ë‹ˆ</button>
+		<button id="myOrderlist" class="btn btn-warning  myPageBtn" data-status="3">ì£¼ë¬¸ë‚´ì—­</button>
+		<button id="outMember" class="btn btn-warning">íšŒì›íƒˆí‡´</button>
 		</div>
-		<!-- ¸¶ÀÌÆäÀÌÁö -->
+		<!-- ë§ˆì´í˜ì´ì§€ -->
 		<div id="myInfoTableWrap">
-		<h2 class="text-center">³» Á¤º¸</h2>
+		<h2 class="text-center">ë‚´ ì •ë³´</h2>
 		<div class="col-sm-3"></div><div class="col-sm-6 center-block">
 			<table id="myInfoTable" class="table table-bordered table-condensed table-responsive">
 				<tr>
-					<td>°í°´¸í</td>
+					<td>ê³ ê°ëª…</td>
 					<td><input type="text" name="name" value="${memberName}"
 						readonly></td>
 				</tr>
 				<tr>
-					<td>¾ÆÀÌµğ</td>
+					<td>ì•„ì´ë””</td>
 					<td><input type="text" id="customerId" name="id"
 						value="${sessionScope.customerId}" readonly></td>
 				</tr>
 				<tr>
-					<td>ºñ¹Ğ¹øÈ£ ¼öÁ¤</td>
+					<td>ë¹„ë°€ë²ˆí˜¸ ìˆ˜ì •</td>
 					<td><input type="password" name="passwd" value=""></td>
 				</tr>
 
 				<tr>
-					<td>ºñ¹Ğ¹øÈ£ È®ÀÎ</td>
+					<td>ë¹„ë°€ë²ˆí˜¸ í™•ì¸</td>
 					<td><input type="password" name="passwd" value=""></td>
 				</tr>
 				<tr>
-					<td>ÁÖ¼Ò</td>
+					<td>ì£¼ì†Œ</td>
 					<td><input type="text" name="address"
 						value="${sessionScope.address}"></td>
 				</tr>
 				<tr>
-					<td>¿¬¶ôÃ³</td>
+					<td>ì—°ë½ì²˜</td>
 					<td><input type="text" name="tel" value="${sessionScope.tel}"></td>
 				</tr>
 				<tr>
@@ -107,27 +107,27 @@
 						value="${sessionScope.email}"></td>
 				</tr>
 				<tr>
-					<td>È¸¿øµî±Ş</td>
+					<td>íšŒì›ë“±ê¸‰</td>
 					<td><input type="text" name="gradeCode"
 						value="${sessionScope.gradeCode}" readonly></td>
 				</tr>
 				<tr>
-					<td>°¡ÀÔÀÏ</td>
+					<td>ê°€ì…ì¼</td>
 					<td><input type="text" name="joinDate"
 						value="${sessionScope.joinDate}" readonly></td>
 				</tr>
 			</table>
 		</div>
 		<div class="col-sm-12 text-center">	
-			<button class="btn btn-warning  myPageBtn">¼öÁ¤</button>
+			<button class="btn btn-warning  myPageBtn">ìˆ˜ì •</button>
 			</div>	
 		</div>
 
-		<!-- ³» °Ç°­Á¤º¸ -->
+		<!-- ë‚´ ê±´ê°•ì •ë³´ -->
 		<div id="myHealthTableWrap" class="row">
-		<h2 class="text-center">${memberName}´ÔÀÇ °Ç°­Á¤º¸</h2><br>
+		<h2 class="text-center">${memberName}ë‹˜ì˜ ê±´ê°•ì •ë³´</h2><br>
 		<div class="col-sm-6">
-		<h3 class="text-center">¿µ¾çÁ¤º¸</h3>
+		<h3 class="text-center">ì˜ì–‘ì •ë³´</h3>
 			<table id="myHealthTable" class="text-center center-block table-condensed table-responsive">
 				<tr>
 					<td><canvas id="myChart"></canvas></td>
@@ -135,7 +135,7 @@
 			</table>
 		</div>
 		<div class="col-sm-6">
-			<h3 class="text-center">ÃøÁ¤±â·Ï</h3>
+			<h3 class="text-center">ì¸¡ì •ê¸°ë¡</h3>
 			<div>
 				<canvas id="measureChart"></canvas>
 			</div>
@@ -144,41 +144,41 @@
 		<div class="row">
 		<div class="col-sm-12">			
 			  <div class="form-group col-sm-3 col-sm-offset-3">
-			    <label for="LowBooldP">ÃÖÀúÇ÷¾Ğ(Hg)</label>
-			    <input type="number" class="form-control" id="lowBooldP" placeholder="´ÜÀ§(Hg)" min="0" value="0">
+			    <label for="LowBooldP">ìµœì €í˜ˆì••(Hg)</label>
+			    <input type="number" class="form-control" id="lowBooldP" placeholder="ë‹¨ìœ„(Hg)" min="0" value="0">
 			  </div>
 			  <div class="form-group col-sm-3">
-			    <label for="HighBooldP">ÃÖ°íÇ÷¾Ğ(Hg)</label>
-			    <input type="number" class="form-control" id="highBooldP" placeholder="´ÜÀ§(Hg)" min="0" value="0">
+			    <label for="HighBooldP">ìµœê³ í˜ˆì••(Hg)</label>
+			    <input type="number" class="form-control" id="highBooldP" placeholder="ë‹¨ìœ„(Hg)" min="0" value="0">
 			  </div>
 		</div>
 		<div class="col-sm-12 center-block">
 			  <div class="form-group col-sm-3 col-sm-offset-3">
-			    <label for="LowBooldS">°øº¹Ç÷´ç(mg/dL)</label>
-			    <input type="number" class="form-control" id="lowBooldS" placeholder="´ÜÀ§(mg/dL)" min="0" value="0">
+			    <label for="LowBooldS">ê³µë³µí˜ˆë‹¹(mg/dL)</label>
+			    <input type="number" class="form-control" id="lowBooldS" placeholder="ë‹¨ìœ„(mg/dL)" min="0" value="0">
 			  </div>
 			  <div class="form-group col-sm-3">
-			    <label for="highBooldS">½ÄÈÄÇ÷´ç(mg/dL)</label>
-			    <input type="number" class="form-control" id="highBooldS" placeholder="´ÜÀ§(mg/dL)" min="0" value="0">
+			    <label for="highBooldS">ì‹í›„í˜ˆë‹¹(mg/dL)</label>
+			    <input type="number" class="form-control" id="highBooldS" placeholder="ë‹¨ìœ„(mg/dL)" min="0" value="0">
 			  </div>			
 		</div>
-		<div class="col-sm-12 text-center"><button class="btn btn-primary" id="measureRegist">µî·Ï</button></div>
+		<div class="col-sm-12 text-center"><button class="btn btn-primary" id="measureRegist">ë“±ë¡</button></div>
 		</div>	
 		</div>
 
-		<!-- Àå¹Ù±¸´Ï -->
+		<!-- ì¥ë°”êµ¬ë‹ˆ -->
 		<div id="myCartTableWrap">
-			<h2 class="text-center">Àå¹Ù±¸´Ï</h2>
+			<h2 class="text-center">ì¥ë°”êµ¬ë‹ˆ</h2>
 			<div class="col-sm-1"></div>
 			<div class="col-sm-10" style="padding:0px;">
 			<table id="myCartTable" class="table text-center table-condensed table-responsive">
 				<thead>
 				<tr>
 					<td><input type="checkbox" class="w3-check" id="checkAllCart"></td>
-					<td>»óÇ°Á¤º¸</td>
-					<td>»óÇ°¸í</td>					
-					<td>¼ö·®</td>
-					<td>»óÇ°±İ¾×</td>
+					<td>ìƒí’ˆì •ë³´</td>
+					<td>ìƒí’ˆëª…</td>					
+					<td>ìˆ˜ëŸ‰</td>
+					<td>ìƒí’ˆê¸ˆì•¡</td>
 				</tr>
 				</thead>
 				<tbody>
@@ -187,31 +187,31 @@
 			</table>
 			</div>
 			<div class="col-sm-12 text-center">			
-			<button id="cartOrder" class="btn btn-warning">ÁÖ¹®ÇÏ±â</button>
+			<button id="cartOrder" class="btn btn-warning">ì£¼ë¬¸í•˜ê¸°</button>
 			</div>
 		</div>
 		
 		
 		
 		
-		<!-- ÁÖ¹®³»¿ª -->
+		<!-- ì£¼ë¬¸ë‚´ì—­ -->
 		<div id="myOrderListTableWrap">
-		<h2 class="text-center">ÁÖ¹®³»¿ª</h2>
+		<h2 class="text-center">ì£¼ë¬¸ë‚´ì—­</h2>
 		<div class="col-sm-1"></div>
 			<div class="col-sm-10" style="padding:0px;">
 		<table id="myOrderListTable" class="table table-striped table-bordered text-center table-condensed table-responsive">
 				<tr>
-					<td class="hidden-xs" onclick="w3.sortHTML('#myOrderListTable', '.orderTr', 'td:nth-child(1)')" style="cursor:pointer">ÁÖ¹®¹øÈ£</td>
-					<td onclick="w3.sortHTML('#myOrderListTable', '.orderTr', 'td:nth-child(2)')" style="cursor:pointer">ÁÖ¹®ÀÏÀÚ</td>
-					<td class="hidden-xs" onclick="w3.sortHTML('#myOrderListTable', '.orderTr', 'td:nth-child(3)')" style="cursor:pointer">»óÇ°Á¤º¸</td>
-					<td onclick="w3.sortHTML('#myOrderListTable', '.orderTr', 'td:nth-child(4)')" style="cursor:pointer">»óÇ°¸í</td>
-					<td onclick="w3.sortHTML('#myOrderListTable', '.orderTr', 'td:nth-child(5)')" style="cursor:pointer">¼ö·®</td>
-					<td onclick="w3.sortHTML('#myOrderListTable', '.orderTr', 'td:nth-child(6)')" style="cursor:pointer">»óÇ°±İ¾×</td>
-					<td onclick="w3.sortHTML('#myOrderListTable', '.orderTr', 'td:nth-child(7)')" style="cursor:pointer">ÁÖ¹®ÇöÈ²</td>
+					<td class="hidden-xs" onclick="w3.sortHTML('#myOrderListTable', '.orderTr', 'td:nth-child(1)')" style="cursor:pointer">ì£¼ë¬¸ë²ˆí˜¸</td>
+					<td onclick="w3.sortHTML('#myOrderListTable', '.orderTr', 'td:nth-child(2)')" style="cursor:pointer">ì£¼ë¬¸ì¼ì</td>
+					<td class="hidden-xs" onclick="w3.sortHTML('#myOrderListTable', '.orderTr', 'td:nth-child(3)')" style="cursor:pointer">ìƒí’ˆì •ë³´</td>
+					<td onclick="w3.sortHTML('#myOrderListTable', '.orderTr', 'td:nth-child(4)')" style="cursor:pointer">ìƒí’ˆëª…</td>
+					<td onclick="w3.sortHTML('#myOrderListTable', '.orderTr', 'td:nth-child(5)')" style="cursor:pointer">ìˆ˜ëŸ‰</td>
+					<td onclick="w3.sortHTML('#myOrderListTable', '.orderTr', 'td:nth-child(6)')" style="cursor:pointer">ìƒí’ˆê¸ˆì•¡</td>
+					<td onclick="w3.sortHTML('#myOrderListTable', '.orderTr', 'td:nth-child(7)')" style="cursor:pointer">ì£¼ë¬¸í˜„í™©</td>
 				</tr>
 			</table>
 		</div>
-		<!-- È¸¿øÅ»Åğ -->
+		<!-- íšŒì›íƒˆí‡´ -->
 		
 	</div>
 
@@ -223,7 +223,7 @@
 </form>
 <script>
 $(document).ready(function(){
-	//°¢ »óÅÂ¿¡ µû¸¥ Ãâ·Â 0:³»Á¤º¸,1:³»°Ç°­Á¤º¸,2:Àå¹Ù±¸´Ï,3:ÁÖ¹®³»¿ª	
+	//ê° ìƒíƒœì— ë”°ë¥¸ ì¶œë ¥ 0:ë‚´ì •ë³´,1:ë‚´ê±´ê°•ì •ë³´,2:ì¥ë°”êµ¬ë‹ˆ,3:ì£¼ë¬¸ë‚´ì—­	
 	var status=${status};
 	myPage(status);
 	
@@ -265,12 +265,12 @@ $(document).ready(function(){
 					var myChart = new Chart(ctx, {
 					    type: 'pie',
 					    data: {
-					        labels: [ "Åº¼öÈ­¹°",
-					                  "´Ü¹éÁú",
-					                  "Áö¹æ",
-					                  "³ªÆ®·ı",
-					                  "Ä®·ı",
-					                  "Ä®½·"],
+					        labels: [ "íƒ„ìˆ˜í™”ë¬¼",
+					                  "ë‹¨ë°±ì§ˆ",
+					                  "ì§€ë°©",
+					                  "ë‚˜íŠ¸ë¥¨",
+					                  "ì¹¼ë¥¨",
+					                  "ì¹¼ìŠ˜"],
 					        datasets: [{
 					            label: '# of Votes',
 					            data: [cab, pro, fat, na, k, ca],
@@ -305,7 +305,7 @@ $(document).ready(function(){
 					    }
 					});	
 					
-// 					$('#myHealthTable').append("<tr><td>ÃÑ ¼·Ãë Ä®·Î¸® : "+data.list[0].kcal+"</td></tr>");
+// 					$('#myHealthTable').append("<tr><td>ì´ ì„­ì·¨ ì¹¼ë¡œë¦¬ : "+data.list[0].kcal+"</td></tr>");
 				
 				}
 			});
@@ -330,23 +330,23 @@ $(document).ready(function(){
 				data:JSON.stringify({id:id}),
 				type:"POST",			
 				success:function(data){				
-					for(var i = 0; i<data.list.length; i++){ //Àå¹Ù±¸´ÏÀÇ µ¥ÀÌÅÍ Å×ÀÌºí·Î Ãâ·Â					
+					for(var i = 0; i<data.list.length; i++){ //ì¥ë°”êµ¬ë‹ˆì˜ ë°ì´í„° í…Œì´ë¸”ë¡œ ì¶œë ¥					
 						var orderCode = data.list[i].orderCode;				
 						$('#myCartTable').append("<tr class='addTr' data-orderCode='"+data.list[i].orderCode+"'><td>"
 								+"<input type='checkbox' class='w3-check' name='cartCheck' value='"+data.list[i].dietCode+"' data-orderCode='"+data.list[i].orderCode+"'>"
 								+"</td><td><img class='myPageImg img-responsive pull-left' data-img='"+data.list[i].dietImg+"' src='displayFile?fileName="+data.list[i].dietImg
-										+"' alt='ÀÌ¹ÌÁö'>"
+										+"' alt='ì´ë¯¸ì§€'>"
 										+"<span data-orderCode='"+data.list[i].orderCode+"' class='optiondown glyphicon glyphicon-chevron-down'>"						
-										+"ÁÖ¹®»ó¼¼</span></td><td class='dietName'>"+data.list[i].dietName
-										+"</td><td class='dietAmount'>"+data.list[i].dietAmount+"</td><td class='price'><span>"+data.list[i].price+"</span>¿ø"+"</td></tr>");
+										+"ì£¼ë¬¸ìƒì„¸</span></td><td class='dietName'>"+data.list[i].dietName
+										+"</td><td class='dietAmount'>"+data.list[i].dietAmount+"</td><td class='price'><span>"+data.list[i].price+"</span>ì›"+"</td></tr>");
 						var sideDName = "sideDName";
 						$.each(data, function(key, value){
 							if(key==orderCode){	
 								var length = value.length
 								$(".addTr[data-orderCode="+orderCode+"]").after(
 										"<tr class='optionAddTr'><td class='"+orderCode+"_optionArea optionView' colspan='5'>"
-										//»õ·Î ¿­¸®´Â ¹İÂù ¿É¼Ç Ã¢ ¾ÈÀÇ ³»¿ë
-										+"<h4>"+orderCode+"¹ø ÁÖ¹® ¹İÂù</h4>"
+										//ìƒˆë¡œ ì—´ë¦¬ëŠ” ë°˜ì°¬ ì˜µì…˜ ì°½ ì•ˆì˜ ë‚´ìš©
+										+"<h4>"+orderCode+"ë²ˆ ì£¼ë¬¸ ë°˜ì°¬</h4>"
 										+"<div class='"+orderCode+"_options' ></div>"
 										+"</td></tr>");
 								 for(var i=0; i<length; i++){
@@ -382,19 +382,19 @@ $(document).ready(function(){
 				success:function(data){
 					console.log(data);
 					var orderStatus="";
-					for(var i = 0; i<data.list.length; i++){ //ÁÖ¹®³»¿ªÀÇ µ¥ÀÌÅÍ Å×ÀÌºí·Î Ãâ·Â
+					for(var i = 0; i<data.list.length; i++){ //ì£¼ë¬¸ë‚´ì—­ì˜ ë°ì´í„° í…Œì´ë¸”ë¡œ ì¶œë ¥
 					/* if(data.list[i].orderItemCode==0){
-						orderStatus="¹Ì°áÁ¦";				
+						orderStatus="ë¯¸ê²°ì œ";				
 					}else if(data.list[i].orderItemCode==6){
-						orderStatus="ÁÖ¹®Ãë¼Ò";
+						orderStatus="ì£¼ë¬¸ì·¨ì†Œ";
 					}else if(data.list[i].orderItemCode==7){
-						orderStatus="¹è¼ÛÁß";
+						orderStatus="ë°°ì†¡ì¤‘";
 					}else if(data.list[i].orderItemCode==8){
-						orderStatus="¹è¼Û¿Ï·á";
+						orderStatus="ë°°ì†¡ì™„ë£Œ";
 					}else{
-						orderStatus="°áÁ¦¿Ï·á";
+						orderStatus="ê²°ì œì™„ë£Œ";
 					} */
-						$('#myOrderListTable').append("<tr class='orderTr'><td class='orderCode hidden-xs'>"+data.list[i].orderCode+"</td><td class='orderDate'>"+data.list[i].orderDate+"</td><td class='hidden-xs'><img class='img-responsive myPageImg' data-img='"+data.list[i].dietImg+"' src='displayFile?fileName="+data.list[i].dietImg+"' alt='ÀÌ¹ÌÁö'></td><td class='dietName'>"+data.list[i].dietName+"</td><td class='dietAmount'>"+data.list[i].dietAmount+"</td><td class='price'><span>"+data.list[i].price+"</span>¿ø"+"</td><td class='oItemCode' data-oItemCode='"+data.list[i].orderItemCode+"'>"+data.list[i].orderListStatus+"</td></tr>");
+						$('#myOrderListTable').append("<tr class='orderTr'><td class='orderCode hidden-xs'>"+data.list[i].orderCode+"</td><td class='orderDate'>"+data.list[i].orderDate+"</td><td class='hidden-xs'><img class='img-responsive myPageImg' data-img='"+data.list[i].dietImg+"' src='displayFile?fileName="+data.list[i].dietImg+"' alt='ì´ë¯¸ì§€'></td><td class='dietName'>"+data.list[i].dietName+"</td><td class='dietAmount'>"+data.list[i].dietAmount+"</td><td class='price'><span>"+data.list[i].price+"</span>ì›"+"</td><td class='oItemCode' data-oItemCode='"+data.list[i].orderItemCode+"'>"+data.list[i].orderListStatus+"</td></tr>");
 				}
 				}
 			});
@@ -416,38 +416,42 @@ $(document).ready(function(){
 		myPage(status);
 		
 	});
-	//checkbox ¼³Á¤. ÃÖ»óÀ§ÀÇ Ã¼Å©¹Ú½º Ã¼Å© ½Ã ÇÏÀ§ Ã¼Å©¹Ú½º ÀüºÎ ¼±ÅÃ È¤Àº ÇØÁ¦½ÃÅ°±â
+	//checkbox ì„¤ì •. ìµœìƒìœ„ì˜ ì²´í¬ë°•ìŠ¤ ì²´í¬ ì‹œ í•˜ìœ„ ì²´í¬ë°•ìŠ¤ ì „ë¶€ ì„ íƒ í˜¹ì€ í•´ì œì‹œí‚¤ê¸°
 	$('#checkAllCart').change(function(){
-		var checkAll = $('#checkAllCart').prop('checked'); //ÀüÃ¼ Ã¼Å©¹Ú½ºÀÇ Ã¼Å©¿©ºÎ
-		if(checkAll){ //Ã¼Å©¹Ú½º°¡ ÀüºÎ Ã¼Å©µÇ¾î ÀÖÀ¸¸é true,¾Æ´Ï¸é false
+		var checkAll = $('#checkAllCart').prop('checked'); //ì „ì²´ ì²´í¬ë°•ìŠ¤ì˜ ì²´í¬ì—¬ë¶€
+		if(checkAll){ //ì²´í¬ë°•ìŠ¤ê°€ ì „ë¶€ ì²´í¬ë˜ì–´ ìˆìœ¼ë©´ true,ì•„ë‹ˆë©´ false
 			$('input[name="cartCheck"]').prop('checked',true);
 		}else{
 			$('input[name="cartCheck"]').prop('checked',false);
 		}
 			});
-	$('input[name="cartCheck"]').change(function(){ //¸®½ºÆ® ¾ÈÀÇ Ã¼Å©¹Ú½ºÀÇ »óÅÂ°¡ º¯ÇÒ ¶§
+	$('input[name="cartCheck"]').change(function(){ //ë¦¬ìŠ¤íŠ¸ ì•ˆì˜ ì²´í¬ë°•ìŠ¤ì˜ ìƒíƒœê°€ ë³€í•  ë•Œ
 		var cartCheck = true;
 		$('input[name="cartCheck"]').each(function(){
-			if(cartCheck){ //±× Àü Ã¼Å©¹Ú½º°¡ Ã¼Å©µÇ¾î ÀÖÀ» ¶§
+			if(cartCheck){ //ê·¸ ì „ ì²´í¬ë°•ìŠ¤ê°€ ì²´í¬ë˜ì–´ ìˆì„ ë•Œ
 				cartCheck = $(this).prop('checked');
-			if(!cartCheck){ //Ã¼Å©µÇ¾îÀÖÁö ¾ÊÀ» ¶§
+			if(!cartCheck){ //ì²´í¬ë˜ì–´ìˆì§€ ì•Šì„ ë•Œ
 				$('#checkAllCart').prop('checked',false);
 			}	
 			}
 		});	
-		if(cartCheck) { //¸®½ºÆ®ÀÇ Ã¼Å©¹Ú½º°¡ ¸ğµÎ Ã¼Å©µÇ¾î ÀÖÀ» ¶§ checkAllCart Ã¼Å© 
+		if(cartCheck) { //ë¦¬ìŠ¤íŠ¸ì˜ ì²´í¬ë°•ìŠ¤ê°€ ëª¨ë‘ ì²´í¬ë˜ì–´ ìˆì„ ë•Œ checkAllCart ì²´í¬ 
 			$('#checkAllCart').prop('checked',true);
 		}
 	});
 	
-	//Àå¹Ù±¸´Ï ÁÖ¹®ÇÏ±â
+	//ì¥ë°”êµ¬ë‹ˆ ì£¼ë¬¸í•˜ê¸°
 	$("#cartOrder").on("click",function(){		
 		var orderCode = $('.addTr:eq(0) input').attr("data-orderCode");
 		var dietCode = $('.addTr:eq(0) input').val();
 		var dietAmount = $('.addTr:eq(0) .dietAmount').text();
 		var price = $('.addTr:eq(0) .price>span').text();
-		console.log("ÁÖ¹®¹øÈ£:"+orderCode+" ½Ä´ÜÄÚµå:"+dietCode+" ¾ç:"+dietAmount+" °¡°İ:"+price);
+		console.log("ì£¼ë¬¸ë²ˆí˜¸:"+orderCode+" ì‹ë‹¨ì½”ë“œ:"+dietCode+" ì–‘:"+dietAmount+" ê°€ê²©:"+price);
+		var length = $(".addTr input:checked").length;
 		
+		if(length==0){
+			alert("ì„ íƒ ëœ ì‹ë‹¨ì´ ì—†ìŠµë‹ˆë‹¤.")
+		}else{
 		var cartOrderInfo = {};
 		var y=0;
 		for(var i=0; i<$(".addTr").length;i++){
@@ -480,6 +484,7 @@ $(document).ready(function(){
 		/* alert(JSON.stringify(cartOrderInfo)); */
 		$("#cartInfo").val(JSON.stringify(cartOrderInfo));
 		$("#cartForm").submit();
+		} 
 	});
 	
 	$("#myCartTable").on("click", ".optiondown", function(){				
@@ -497,7 +502,7 @@ $(document).ready(function(){
 	$("#lowBooldP").keyup(function(){
 		var lowBooldP = $("#lowBooldP").val();
 	});
-/*°Ç°­ÃøÁ¤Á¤º¸ µî·Ï*/
+/*ê±´ê°•ì¸¡ì •ì •ë³´ ë“±ë¡*/
 	$("#measureRegist").click(function () {
 		var lowBooldP = $("#lowBooldP").val();
 		var highBooldP = $("#highBooldP").val();
@@ -517,7 +522,7 @@ $(document).ready(function(){
 				}
 			}
 		}
-		console.log("ÃÖÇ÷"+lowBooldP+"°íÇ÷"+highBooldP+"°øÇ÷"+lowBooldS+"ÈÄÇ÷"+highBooldS);
+		console.log("ìµœí˜ˆ"+lowBooldP+"ê³ í˜ˆ"+highBooldP+"ê³µí˜ˆ"+lowBooldS+"í›„í˜ˆ"+highBooldS);
 		$.ajax({
 			url:"customerAjax/insertMeasure",
 			headers : {
@@ -534,14 +539,14 @@ $(document).ready(function(){
 			
 			type:"POST",			
 			success:function(data){				
-					alert("Ãß°¡µÇ¾ú½À´Ï´Ù.");					
+					alert("ì¶”ê°€ë˜ì—ˆìŠµë‹ˆë‹¤.");					
 					console.log(data); 
 				
 			}
 		});
 	});
 	
-	//°Ç°­Á¤º¸ ºÒ·¯¿À±â
+	//ê±´ê°•ì •ë³´ ë¶ˆëŸ¬ì˜¤ê¸°
 	function readMeasure(){
 		var id = $("#customerId").val()
 		
@@ -568,7 +573,7 @@ $(document).ready(function(){
 					console.log(data.list[0].measureDate);
 					for(var i=0;i<data.list.length;i++){
 						date[x] = data.list[i].measureDate;
-						lowBloodP[x]=data.list[i].reading; //ÃÖÀúÇ÷¾Ğ
+						lowBloodP[x]=data.list[i].reading; //ìµœì €í˜ˆì••
 						i++;
 						highBloodP[x]=data.list[i].reading;
 						i++;
@@ -577,11 +582,11 @@ $(document).ready(function(){
 						highBloodS[x]=data.list[i].reading;
 						x++;					
 					}
-					console.log("³¯Â¥"+date);
-					console.log("ÃÖÀúÇ÷¾Ğ"+lowBloodP);
-					console.log("ÃÖ°íÇ÷¾Ğ"+highBloodP);
-					console.log("°øº¹Ç÷´ç"+lowBloodS);
-					console.log("½ÄÈÄÇ÷´ç"+highBloodS);
+					console.log("ë‚ ì§œ"+date);
+					console.log("ìµœì €í˜ˆì••"+lowBloodP);
+					console.log("ìµœê³ í˜ˆì••"+highBloodP);
+					console.log("ê³µë³µí˜ˆë‹¹"+lowBloodS);
+					console.log("ì‹í›„í˜ˆë‹¹"+highBloodS);
 					var ctx = $("#measureChart");
 					var chart = new Chart(ctx, {
 					    // The type of chart we want to create
@@ -591,25 +596,25 @@ $(document).ready(function(){
 					    data: {
 					        labels: date,
 					        datasets: [{
-					            label: "ÃÖÀúÇ÷¾Ğ",
+					            label: "ìµœì €í˜ˆì••",
 					            backgroundColor: 'rgb(255, 99, 132)',
 					            borderColor: 'rgb(255, 99, 132)',
 					            data: lowBloodP,
 					            fill:false,},
 					            {
-						            label: "ÃÖ°íÇ÷¾Ğ",
+						            label: "ìµœê³ í˜ˆì••",
 						            backgroundColor: 'rgb(99, 255, 132)',
 						            borderColor: 'rgb(99, 255, 132)',
 						            data: highBloodP,
 						            fill:false,},
 						       {
-							     	 label: "°øº¹Ç÷´ç",
+							     	 label: "ê³µë³µí˜ˆë‹¹",
 							         backgroundColor: 'rgb(132, 99, 225)',
 							         borderColor: 'rgb(132, 99, 225)',
 							         data: lowBloodS,
 							         fill:false,},
 							  {
-								   label: "½ÄÈÄÇ÷´ç",
+								   label: "ì‹í›„í˜ˆë‹¹",
 								   backgroundColor: 'rgb(30, 12, 225)',
 								   borderColor: 'rgb(30, 12, 225)',
 								   data: highBloodS,

@@ -10,7 +10,16 @@ public class Diet {
 	private String spDietItem;
 	private int wizardCode;
 	private String diseaseName;
+	private String judgement;
+	
+	   
 	 
+	public String getJudgement() {
+		return judgement;
+	}
+	public void setJudgement(String judgement) {
+		this.judgement = judgement;
+	}
 	public String getDiseaseName() {
 		return diseaseName;
 	}

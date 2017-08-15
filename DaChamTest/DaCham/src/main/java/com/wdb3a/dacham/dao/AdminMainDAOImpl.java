@@ -287,6 +287,12 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 		return sqlSession.selectOne(namespace+".dietAllCount");
 	}
 
+	@Override
+	public List<OrderList> orderSort5(Criteria criteria) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".orderSort5", criteria);
+	}
+
 	
 
 	

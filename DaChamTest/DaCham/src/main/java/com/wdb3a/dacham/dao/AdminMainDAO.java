@@ -35,6 +35,7 @@ public interface AdminMainDAO {
 	public List<OrderList> orderSort2(Criteria criteria) throws Exception;
 	public List<OrderList> orderSort3(Criteria criteria) throws Exception;
 	public List<OrderList> orderSort4(Criteria criteria) throws Exception;
+	public List<OrderList> orderSort5(Criteria criteria) throws Exception;
 	public List<FoodMInven> foodStockListAll(Criteria criteria) throws Exception;
 	
 	

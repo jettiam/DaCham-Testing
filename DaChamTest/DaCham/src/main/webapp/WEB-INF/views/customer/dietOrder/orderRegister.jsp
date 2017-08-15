@@ -32,7 +32,9 @@
 			$(".totalPrice").text(totalPrice);
 		}
 		$("#payment").on("click", function() {
-			
+			var recentlyAddress = $("#textArea").val();			
+			var id = "${customerId}"			
+			$("#paymentForm").append("<input type='hidden' name='recentlyAddress' value='"+recentlyAddress+"'>")
 			if($(".orderInfo").attr("data-detailOrder")=="true"){
 				if(confirm("결제 하겠습니까?")){
 					$("#setPaymentItem").val($("#paymentItem").val());
@@ -51,7 +53,9 @@
 				for(var i=0; i<length;i++){					
 					var jsonVal ={
 							'orderCode':$(".orderCode:eq("+i+")").attr("data-orderCode"),
-							'paymentItemCode':$("#paymentItem").val()
+							'paymentItemCode':$("#paymentItem").val(),
+							'recentlyAddress':recentlyAddress,
+							'id':id
 					}
 					orderInfo[i]=jsonVal;
 				}
@@ -75,6 +79,20 @@
 			}
 			}
 		});
+		
+		/* 배송지 입력 */
+		$("#address").on("click",function(){
+			$("#textArea").text("${address}");
+			$("#textArea").attr("readonly","readonly");
+		});
+		$("#recentlyAddress").on("click",function(){
+			$("#textArea").text("${recentlyAddress}");
+			$("#textArea").attr("readonly","readonly");
+		});
+		$("#inputAddress").on("click",function(){
+			$("#textArea").text("");
+			$("#textArea").removeAttr("readonly");
+		});
 	});
 </script>
 </head>
@@ -83,19 +101,27 @@
 	<div class="orderRegistWrap">
 		<div class="row">
 			<div class="block-center text-center">주문결제</div>
-			<div class="row col-sm-6 leftArea">
+			<div class="col-sm-6 leftArea">
 				<!--좌측 이 안에 배송지, 결제정보 저장 -->
-				<div>배송지 입력</div>
-				<div>결제수단 선택</div>
+				<div class="form-group col-sm-12"><h3>배송지</h3>
+				<input type="radio" id="address" name="address" checked><label for="address">기본 주소</label>&nbsp;
+				<input type="radio" id="recentlyAddress" name="address"><label for="recentlyAddress">최근 배송지</label>&nbsp;
+				<input type="radio" id="inputAddress" name="address"><label for="inputAddress">배송지 입력</label>
+				</div>
+				<%-- <input type="" id="orderAddress" name="recentlyAddress" value='${address}'> --%>
+				<textarea rows="2" class="form-control" readonly="readonly" id="textArea">${address}</textarea>
+				<div class="form-group col-sm-12">
+				<h3>결제수단 선택</h3>
 				<select id="paymentItem">
 							<option value="2">신용카드</option>
 							<option value="3">계좌이체</option>
 							<option value="4">휴대폰결제</option>
 						</select> 
+				</div>		
 			</div>
 			
 			
-				<div class="row col-sm-6 rightArea"><!--우측 주문내역, 결제정보 출력및결제 -->
+				<div class="col-sm-6 rightArea"><!--우측 주문내역, 결제정보 출력및결제 -->
 				<c:if test="${order.detailOrder == true}">
 				<!-- detaileOrder에서 넘어온 경우 사용 -->
 				<div class="row orderInfo" data-detailOrder="${order.detailOrder}"> <!-- 주문내역 row -->

@@ -96,5 +96,10 @@ private CustomerDAO dao;
 		// TODO Auto-generated method stub
 		return dao.menuShow(diseaseCode);
 	}
+	@Override
+	public void recentlyAddress(Customer customer) throws Exception {
+		// TODO Auto-generated method stub
+		dao.recentlyAddress(customer);
+	}
 
 }

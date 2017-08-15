@@ -3,18 +3,28 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wdb3a.CookerMapper">
+	<select id = "foodStockAll" resultType = "FoodMInven">
+		select foodMName,sum(inAmount) inAmount,sum(outAmount) outAmount,unit
+		from foodminven group by foodMName
+		limit #{startRecord} , #{recordsPerPage}
+	</select>
+	<select id = "foodStockAllCount" resultType = "Integer">
+		select count(*)
+		from foodminven
+		
+	</select>
 	<select id="foodStock" resultType="FoodMInven">
 		select foodMName,sum(inAmount) inAmount,sum(outAmount) outAmount,unit
 		from foodminven group by foodMName
-		<include refid="search"></include>
+		having foodMName like CONCAT('%',#{keyword},'%')
 	</select>
 	<sql id="search">
 		<if test="searchType != null">
 			<if test="searchType == 't'.toString()">
-				and b.foodMName like CONCAT('%',#{keyword},'%')
+				
 			</if>
 			<if test="searchType == 'c'.toString()">
-				and c.foodMAmount like CONCAT('%',#{keyword},'%')
+				where foodMAmount like CONCAT('%',#{keyword},'%')
 			</if>
 		</if>
 	</sql>

@@ -286,6 +286,12 @@ public class AdminMainServiceImpl implements AdminMainService {
 		return dao.dietAllCount();  
 	}
 
+	@Override
+	public List<OrderList> orderSort5(Criteria criteria) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.orderSort5(criteria);
+	}
+
 	
 	
 	
