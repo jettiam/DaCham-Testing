@@ -1,6 +1,8 @@
 package com.wdb3a.dacham;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wdb3a.dacham.bean.Cook;
+import com.wdb3a.dacham.bean.Criteria;
+import com.wdb3a.dacham.bean.FoodMInven;
 import com.wdb3a.dacham.bean.OrderList;
 import com.wdb3a.dacham.service.CookService;
 
@@ -104,5 +108,26 @@ public class CookAjaxController {
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}		
 		return entity;		
+	}
+	@RequestMapping(value = "/foodStockAll/{page}",method = RequestMethod.GET)
+	public ResponseEntity<Map<String,Object>> foodStockAll(@PathVariable("page")int page){
+		ResponseEntity<Map<String,Object>> entity = null;
+		Criteria criteria = new Criteria();
+		
+		try {
+			int totalCount = service.foodStockAll();
+			criteria.setPage(page);
+			criteria.setTotalCount(totalCount);
+			List<FoodMInven> list = service.foodStockAll(criteria);
+			Map<String,Object> map = new HashMap<>();
+			map.put("list", list);
+			map.put("criteria", criteria);
+			entity = new ResponseEntity<>(map,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
 	}
 }

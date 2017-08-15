@@ -1,5 +1,7 @@
 package com.wdb3a.dacham;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -98,12 +100,19 @@ public class DeliverAjaxController {
 		}
 		return entity;
 	}
-	@RequestMapping(value = "/showDeliverAll",method = RequestMethod.GET)
-	public ResponseEntity<List<Deliver>> showDeliverAll(){
-		ResponseEntity<List<Deliver>> entity = null;
+	@RequestMapping(value = "/showDeliverAll/{page}",method = RequestMethod.GET)
+	public ResponseEntity<Map<String,Object>> showDeliverAll(@PathVariable("page")int page){
+		ResponseEntity<Map<String,Object>> entity = null;
 		try {
-			List<Deliver> list = service.showDeliverAll();
-			entity = new ResponseEntity<>(list,HttpStatus.OK);
+			Criteria criteria = new Criteria();
+			criteria.setPage(page);
+			int totalCount = service.showDeliverAllCount();
+			criteria.setTotalCount(totalCount);
+			List<Deliver> list = service.showDeliverAll(criteria);
+			Map<String,Object> map = new HashMap<>();
+			map.put("list", list);
+			map.put("criteria", criteria);
+			entity = new ResponseEntity<>(map,HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -111,11 +120,13 @@ public class DeliverAjaxController {
 		}
 		return entity;
 	}
-	@RequestMapping(value = "/changer/{orderCode}",method = RequestMethod.PUT)
-	public ResponseEntity<String> changer(@PathVariable("orderCode")int orderCode){
+	@RequestMapping(value = "/changer/{orderCode}/{foodMICode}",method = RequestMethod.PUT)
+	public ResponseEntity<String> changer(@PathVariable("orderCode")int orderCode,@PathVariable("foodMICode")int foodMICode){
 		ResponseEntity<String> entity = null;
 		try {
+			service.changer0(foodMICode);
 			service.changer(orderCode);
+			service.todaySynchro(orderCode);
 			entity = new ResponseEntity<>("SUCCESS",HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -153,6 +164,26 @@ public class DeliverAjaxController {
 		try {
 			service.overButton(foodMICode);
 			entity = new ResponseEntity<>("SUCCESS",HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	@RequestMapping(value = "/doing/{page}",method = RequestMethod.GET)
+	public ResponseEntity<Map<String,Object>> doing(@PathVariable("page")int page){
+		ResponseEntity<Map<String,Object>> entity = null;
+		try {
+			Criteria criteria = new Criteria();
+			criteria.setPage(page);
+			int totalCount = service.doingCount();
+			criteria.setTotalCount(totalCount);
+			List<Deliver> list = service.doing(criteria);
+			Map<String,Object> map = new HashMap<>();
+			map.put("list", list);
+			map.put("criteria", criteria);
+			entity = new ResponseEntity<>(map,HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

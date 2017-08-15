@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.wdb3a.dacham.bean.Cook;
 import com.wdb3a.dacham.bean.CookingItem;
+import com.wdb3a.dacham.bean.Criteria;
 import com.wdb3a.dacham.bean.FoodMInven;
 import com.wdb3a.dacham.bean.OrderList;
 
@@ -19,5 +20,6 @@ public interface CookService {
 	
 	public List<CookingItem> getCookingItemList() throws Exception;
 	public void updateOptionsItemCode(int orderItemCode, int sideDCode) throws Exception;
-	
+	public List<FoodMInven> foodStockAll(Criteria criteria) throws Exception;
+	public int foodStockAll() throws Exception;
 }

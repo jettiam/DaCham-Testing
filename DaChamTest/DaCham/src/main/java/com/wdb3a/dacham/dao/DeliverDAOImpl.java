@@ -64,9 +64,9 @@ public class DeliverDAOImpl implements DeliverDAO{
 		return sqlSession.selectOne(namespace+".showCount");
 	}
 	@Override
-	public List<Deliver> showDeliverAll() throws Exception {
+	public List<Deliver> showDeliverAll(Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".showDeliverAll");
+		return sqlSession.selectList(namespace+".showDeliverAll",criteria);
 	}
 	@Override
 	public void changer(int orderCode) throws Exception {
@@ -97,6 +97,21 @@ public class DeliverDAOImpl implements DeliverDAO{
 	public void changer0(int foodMICode) throws Exception {
 		// TODO Auto-generated method stub
 		sqlSession.update(namespace+".changer0",foodMICode);
+	}
+	@Override
+	public List<Deliver> doing(Criteria criteria) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".doing",criteria);
+	}
+	@Override
+	public int doingCount() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".doingCount");
+	}
+	@Override
+	public int showDeliverAllCount() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".showDeliverAllCount");
 	}
 
 }

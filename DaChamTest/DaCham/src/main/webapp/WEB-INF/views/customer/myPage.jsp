@@ -34,6 +34,9 @@
 #myHealthTable{
 	display:table;
 }
+input[type='password']{
+ font-family:"Nanum Gothic";
+}
 @media only screen and (max-width: 736px) {
 	.myPageImg{
 		max-width: 50px;
@@ -50,6 +53,7 @@
 		<a id="myHealth" class="w3-bar-item w3-button myPageBtn" onclick="w3_close()" data-status="1">내 건강정보</a>
 		<a id="myCart" class=" w3-bar-item w3-button myPageBtn" onclick="w3_close()" data-status="2">장바구니</a>
 		<a id="myOrderlist" class="w3-bar-item w3-button myPageBtn" onclick="w3_close()" data-status="3">주문내역</a>
+		<a id="logout" class="w3-bar-item w3-button" onclick="w3_close()" href="memberLogout">로그아웃</a>
 		<a id="outMember" class="w3-bar-item w3-button" onclick="w3_close()">회원탈퇴</a>
 </div>
 
@@ -57,7 +61,7 @@
 	
 <!-- Page Content -->
 <div class="w3-overlay w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay"></div>
-<button class="w3-button w3-white visible-xs h2" onclick="w3_open()">&#9776; 마이페이지</button>
+<button class="w3-button w3-white visible-xs h3" onclick="w3_open()">&#9776; My Page</button>
 
 	<!-- 버튼을 클릭하면 페이지가 전환됨 -->
 	<div id="myPageWrap" class="container">		
@@ -203,10 +207,10 @@
 				<tr>
 					<td class="hidden-xs" onclick="w3.sortHTML('#myOrderListTable', '.orderTr', 'td:nth-child(1)')" style="cursor:pointer">주문번호</td>
 					<td onclick="w3.sortHTML('#myOrderListTable', '.orderTr', 'td:nth-child(2)')" style="cursor:pointer">주문일자</td>
-					<td class="hidden-xs" onclick="w3.sortHTML('#myOrderListTable', '.orderTr', 'td:nth-child(3)')" style="cursor:pointer">상품정보</td>
-					<td onclick="w3.sortHTML('#myOrderListTable', '.orderTr', 'td:nth-child(4)')" style="cursor:pointer">상품명</td>
-					<td onclick="w3.sortHTML('#myOrderListTable', '.orderTr', 'td:nth-child(5)')" style="cursor:pointer">수량</td>
-					<td onclick="w3.sortHTML('#myOrderListTable', '.orderTr', 'td:nth-child(6)')" style="cursor:pointer">상품금액</td>
+					<td class="hidden-xs">상품정보</td>
+					<td >상품명</td>
+					<td>수량</td>
+					<td>상품금액</td>
 					<td onclick="w3.sortHTML('#myOrderListTable', '.orderTr', 'td:nth-child(7)')" style="cursor:pointer">주문현황</td>
 				</tr>
 			</table>

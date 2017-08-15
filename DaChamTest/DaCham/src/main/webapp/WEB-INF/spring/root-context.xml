@@ -41,25 +41,25 @@
 		<constructor-arg name="password" value="admin" />
 	</bean>
 
-  	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">		
+ 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">		
 
 		<property name="url" value="jdbc:mariadb://106.249.38.73:33060/dacham" /> 
 		<property name="driverClassName" value="org.mariadb.jdbc.Driver" />
 		<property name="username" value="root" />
 		<property name="password" value="1234" />
-	</bean>
+	</bean> 
 	
 	<!-- mysql 서버용 -->
  
 
- <!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+<!--   <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />		
 		<property name="url" value="jdbc:mysql://localhost:3306/redbud" /> 		
 		<property name="username" value="redbud" />
 		<property name="password" value="fpemqjem1*" />
-	</bean> -->
-
+	</bean> 
+ -->
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />

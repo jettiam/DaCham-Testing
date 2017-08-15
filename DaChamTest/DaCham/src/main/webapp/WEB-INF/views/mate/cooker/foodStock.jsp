@@ -15,6 +15,8 @@
 <script>  
 $(function(){
 	$("#cookFood").addClass("w3-light-gray");
+	
+	
 });
 </script>
 </head>
@@ -23,20 +25,6 @@ $(function(){
 	<div class = "container">
 		<div>
 			<form>
-				<select name = "searchType">
-					<option value = "n"
-		   			<c:out value="${criteria.searchType==null?'selected':'' }"/>>
-		   			분류
-		   			</option>
-		   			<option value = "t"
-		   			<c:out value="${criteria.searchType eq 't'?'selected':'' }"/>>
-		   			식재료명
-		   			</option>
-		   			<option value = "c"
-		   			<c:out value="${criteria.searchType eq 'c'?'selected':'' }"/>>
-		   			식재료량
-		   			</option>
-				</select>
 				<input type = "text" name = "keyword" placeholder = "검색어 입력란">
 				<button id = "search" class = "btn btn-warning">검색</button>
 			</form>
