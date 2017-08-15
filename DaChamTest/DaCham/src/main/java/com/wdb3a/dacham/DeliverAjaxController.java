@@ -120,11 +120,11 @@ public class DeliverAjaxController {
 		}
 		return entity;
 	}
-	@RequestMapping(value = "/changer/{orderCode}/{foodMICode}",method = RequestMethod.PUT)
-	public ResponseEntity<String> changer(@PathVariable("orderCode")int orderCode,@PathVariable("foodMICode")int foodMICode){
+	@RequestMapping(value = "/changer/{orderCode}/{foodMName}",method = RequestMethod.PUT)
+	public ResponseEntity<String> changer(@PathVariable("orderCode")int orderCode,@PathVariable("foodMName")String foodMName){
 		ResponseEntity<String> entity = null;
 		try {
-			service.changer0(foodMICode);
+			service.changer0(foodMName);
 			service.changer(orderCode);
 			service.todaySynchro(orderCode);
 			entity = new ResponseEntity<>("SUCCESS",HttpStatus.OK);
