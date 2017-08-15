@@ -207,8 +207,8 @@ public class CounselorAjaxController {
 		}
 		return entity;
 	}
-	@RequestMapping(value = "/counselInsert/{customer}/{answer}",method = RequestMethod.POST)
-	public ResponseEntity<String> counselInsert(@PathVariable("customer")String customer,@PathVariable("answer")String answer){
+	@RequestMapping(value = "/counselInsert/{customer}/{answer}/{counselTitle}",method = RequestMethod.POST)
+	public ResponseEntity<String> counselInsert(@PathVariable("customer")String customer,@PathVariable("answer")String answer, @PathVariable("counselTitle")String counselTitle){
 		ResponseEntity<String> entity = null;
 		Date d = new Date();
         
@@ -219,12 +219,12 @@ public class CounselorAjaxController {
         System.out.println("현재날짜 : "+ sdf.format(d));
         
         String dateTitle = sdf.format(d);
-        String counselTitle = dateTitle + " 전화 상담입니다."; 
+        String counselContent = dateTitle + " 전화 상담입니다."; 
 
 
 		Counselor counselor = new Counselor();
 		counselor.setCounselTitle(counselTitle);
-	    counselor.setCounselContent(counselTitle);
+	    counselor.setCounselContent(counselContent);
 		counselor.setCustomer(customer);
 		counselor.setAnswer(answer);
 		try {

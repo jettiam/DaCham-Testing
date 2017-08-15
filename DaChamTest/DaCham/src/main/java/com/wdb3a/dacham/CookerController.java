@@ -49,9 +49,6 @@ public class CookerController {
 	}
 	@RequestMapping(value="/cookFood", method=RequestMethod.GET)
 	public String getFood(Model model, FoodMInven foodInv) throws Exception{
-		List<FoodMInven> list = service.CookStock(foodInv);
-		model.addAttribute("list",list);
-		model.addAttribute("foodInv",foodInv);
 		return "/mate/cooker/foodStock";
 	}
 	@RequestMapping(value="/cook", method=RequestMethod.GET)

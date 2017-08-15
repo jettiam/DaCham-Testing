@@ -106,7 +106,7 @@
          $.getJSON("deliverAjax/doing/"+page,function(data){
             var str = "";
             $(data.list).each(function(){
-                str += "<tr class = 'doingResult'><td><input type = 'hidden' class = 'orderCode' name = 'orderCode' value = '"+this.orderCode+"'>"+"<input type = 'hidden' class = 'foodMICode' name = 'foodMICode' value = '"+this.foodMICode+"'>"+this.foodMICode+"</td><td>"+this.foodMName+"</td><td>"+this.orderDate+"</td><td>"+this.inAmount+"</td><td>"+this.unit+"</td><td>"+this.orderCode+"</td><td></td></tr>";
+                str += "<tr class = 'doingResult'><td><input type = 'hidden' class = 'orderCode' name = 'orderCode' value = '"+this.orderCode+"'>"+"<input type = 'hidden' class = 'foodMICode' name = 'foodMICode' value = '"+this.foodMICode+"'>"+this.foodMICode+"</td><td>"+this.foodMName+"</td><td>"+this.orderDate+"</td><td>"+this.inAmount+"</td><td>"+this.unit+"</td><td>"+this.orderCode+"</td></tr>";
             });
             $(".doingTable").append(str);
             printPaging2(data.criteria);
@@ -273,7 +273,8 @@
                      <th>수량&nbsp;</th>
                      <th>단위&nbsp;</th>
                      <th>주문번호</th>
-                     <th>입고여부&nbsp;</th>
+                     <th>입고여부</th>
+
                   </tr>
                   
                      <tr class = "actionResult">
@@ -317,7 +318,7 @@
                            <th>수량&nbsp;</th>
                            <th>단위&nbsp;</th>
                            <th>주문번호</th>
-                           <th>입고여부&nbsp;</th>
+                           
                         </tr>   
                         <tr class = "doingResult">
                         </tr>
