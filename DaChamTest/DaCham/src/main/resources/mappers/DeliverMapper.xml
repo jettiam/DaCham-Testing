@@ -42,12 +42,13 @@
 		
   	</select>
   	<select id = "showDeliverAll" resultType = "com.wdb3a.dacham.bean.Deliver">
-  		select *         
-		from foodminven b join orderlist c join orderitem d
-		where b.orderCode = c.orderCode
-		and c.orderItemCode = d.orderItemCode
-		and b.foodMStatus  = 0
-		order by b.foodMStatus, c.orderDate, b.foodMName
+  		select * from foodminven where foodMStatus = 0
+  		and orderCode is not null
+  		limit #{startRecord},#{recordsPerPage}
+  	</select>
+  	<select id = "showDeliverAllCount" resultType = "Integer">
+  		select count(*) from foodminven where foodMStatus = 0
+  		and orderCode is not null
   	</select>
   	<select id = "showCount" resultType = "Integer">
   		select count(*)
@@ -71,7 +72,7 @@
   		where orderCode = #{orderCode}
   	</update>
   	<select id = "all" resultType = "OrderList">
-  		select a.orderCode, b.id, c.dietImg, c.dietName, b.address, a.orderItemCode,d.orderItemName,  a.transportNum
+  		select a.orderCode, b.id, c.dietImg, c.dietName,b.name, b.address, a.orderItemCode,d.orderItemName,  a.transportNum
 		from orderlist a join member b join diet c join orderitem d
 		where a.id = b.id
 		and a.dietCode = c.dietCode
@@ -120,6 +121,19 @@
    	</select>
    	<update id = "overButton">
    		update foodminven set foodMStatus = 1
-   		where foodMCode = #{foodMCode}
+   		where foodMICode = #{foodMICode}
    	</update>
+   	<select id = "doing" resultType = "com.wdb3a.dacham.bean.Deliver">
+   		select * from foodminven a, orderlist b
+   		where a.orderCode = b.orderCode
+   		and b.orderItemCode = 9
+   		and a.foodMStatus = 1
+   		limit #{startRecord},#{recordsPerPage}
+   	</select>
+   	<select id = "doingCount" resultType = "Integer">
+   		select count(*) from foodminven a, orderlist b
+   		where a.orderCode = b.orderCode
+   		and b.orderItemCode = 9
+   		and a.foodMStatus = 1
+   	</select>
 </mapper>

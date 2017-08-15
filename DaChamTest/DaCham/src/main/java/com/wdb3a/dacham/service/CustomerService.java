@@ -26,4 +26,6 @@ public interface CustomerService {
 	public int insertMeasure(Measure measure) throws Exception;
 	public List<Measure> measureRead(String id) throws Exception;
 	public List<Customer> menuShow(int diseaseCode) throws Exception;
+	
+	public void recentlyAddress(Customer customer) throws Exception;
 }

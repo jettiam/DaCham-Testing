@@ -155,11 +155,12 @@
 							<select name = "cookMCode">	
 								<option value = "01">튀김</option>
 								<option value = "02">구이</option>
+								<option value = "08">볶음</option>	
 								<option value = "03">조림</option>
 								<option value = "04">찜</option>
-								<option value = "05">초벌</option>
 								<option value = "06">무침</option>
-								<option value = "07">탕</option>								
+								<option value = "07">탕</option>	
+								<option value = "05">초벌</option>						
 							</select>
 						</td>
 					</tr>

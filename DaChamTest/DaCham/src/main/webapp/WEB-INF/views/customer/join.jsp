@@ -22,6 +22,9 @@
 #trueId{
 	color:black;
 }
+#password,#rePassword{
+	font-family:sans-serif;
+}
 
 </style>
 <script>

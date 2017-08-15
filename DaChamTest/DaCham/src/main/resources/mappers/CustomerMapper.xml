@@ -164,4 +164,8 @@ where d.diseaseCode=#{diseaseCode} and di.dietCode=d.dietCode and di.sideDCode=s
 order by d.dietCode
 </select>
 
+<!-- 주문시 최근 주소 입력 -->
+<update id="recentlyAddress">
+	UPDATE member SET recentlyAddress=#{recentlyAddress} WHERE id=#{id};
+</update>
   </mapper>

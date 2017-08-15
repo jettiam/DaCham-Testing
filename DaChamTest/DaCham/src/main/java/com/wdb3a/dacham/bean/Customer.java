@@ -14,6 +14,7 @@ private String spDietItem;
 private int wizardCode;
 private int orderCode;
 private String id;
+private String recentlyAddress;
 private int dietAmount;
 private String transportNum;
 private String orderItemName;
@@ -233,6 +234,12 @@ public int getSideDish() {
 }
 public void setSideDish(int sideDish) {
 	this.sideDish = sideDish;
+}
+public String getRecentlyAddress() {
+	return recentlyAddress;
+}
+public void setRecentlyAddress(String recentlyAddress) {
+	this.recentlyAddress = recentlyAddress;
 }
 
 }

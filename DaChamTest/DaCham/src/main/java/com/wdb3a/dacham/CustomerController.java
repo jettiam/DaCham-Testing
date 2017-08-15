@@ -157,6 +157,8 @@ for(int i=0; i< jsonObj.size();i++){
  */
 @RequestMapping(value="/payment",method=RequestMethod.POST)
 public String payment(RedirectAttributes rttr,Customer customer,@RequestParam(value="sideDCode") int sideDCode[])throws Exception{	
+	
+	serviceCu.recentlyAddress(customer);
 	serviceCu.orderRegist(customer);
 	int recentCode = serviceCu.recentlyOrderCode(customer.getId());
 	for(int i=0;i<sideDCode.length;i++){		

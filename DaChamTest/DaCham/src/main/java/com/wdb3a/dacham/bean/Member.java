@@ -9,6 +9,7 @@ public class Member {
 	private String name;
 	
 	private String address;
+	private String recentlyAddress = "";
 	private String tel;
 	private String email;
 	private String deptCode;
@@ -243,5 +244,11 @@ public class Member {
 
 	public void setDiseaseCode(int diseaseCode) {
 		this.diseaseCode = diseaseCode;
+	}
+	public String getRecentlyAddress() {
+		return recentlyAddress;
+	}
+	public void setRecentlyAddress(String recentlyAddress) {
+		this.recentlyAddress = recentlyAddress;
 	}
 }

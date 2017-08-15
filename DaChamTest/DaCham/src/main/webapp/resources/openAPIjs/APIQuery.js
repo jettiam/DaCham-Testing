@@ -11,7 +11,8 @@ function openAPI(){
 		var colorscale = d3.scale.category10();
 		
 		//Legend titles
-		var LegendOptions = ['선택 반찬의 영양정보'];
+		var LegendOptions = ['선택 반찬의 영양정보','적정 요구량'];
+		
 		//Data
 		var protein = 0;
 		var carbohydrate = 0;
@@ -26,6 +27,11 @@ function openAPI(){
 			na = parseInt(localStorage[count1+'_na1'])+parseInt(localStorage[count2+'_na2'])+parseInt(localStorage[count3+'_na3'])+parseInt(localStorage[count4+'_na4'])+parseInt(localStorage[count5+'_na5'])+parseInt(localStorage[count6+'_na6']);
 			fat = parseInt(localStorage[count1+'_fat1'])+parseInt(localStorage[count2+'_fat2'])+parseInt(localStorage[count3+'_fat3'])+parseInt(localStorage[count4+'_fat4'])+parseInt(localStorage[count5+'_fat5'])+parseInt(localStorage[count6+'_fat6']);
 			      
+			localStorage[0 + '_total1'] = protein;
+			localStorage[0 + '_total2'] = carbohydrate;
+			localStorage[0 + '_total3'] = kcal;
+			localStorage[0 + '_total4'] = na;
+			localStorage[0 + '_total5'] = fat;
 		
 		var sum = parseInt(localStorage[0+'_protein']) + parseInt(localStorage[1+'_protein']) + parseInt(localStorage[2 + '_protein']) + parseInt(localStorage[3+'_protein']);
 		console.log("단백질"+protein);
@@ -33,29 +39,40 @@ function openAPI(){
 		console.log("단백질"+kcal);
 		console.log("단백질"+na);
 		console.log("단백질"+fat);     
+		
 		var d = [
 			  [
-				{axis: "단백질(g)",value: protein},
-				{axis: "탄수화물(g)",value: carbohydrate},
+				{axis: "단백질(%)",value: (protein/50)*100},
+				{axis: "탄수화물(%)",value: (carbohydrate/405)*100},
 				
-				{axis:"열량(kcal)",value: kcal*0.1},     
-				{axis:"나트륨(mg)",value:na*0.05},
-				{axis:"지방(g)",value:fat}   
-			  ]
-			  
+				{axis:"열량(%)",value: (kcal/2400)*100},     
+				{axis:"나트륨(%)",value:(na/2000)*100},
+				{axis:"지방(%)",value:(fat/40)*100}   
+			  ],   
+			  [
+					{axis: "단백질(%)",value: 100},
+					{axis: "탄수화물(%)",value: 100},
+					
+					{axis:"열량(%)",value: 100},     
+					{axis:"나트륨(%)",value: 100},
+					{axis:"지방(%)",value: 100}                          
+				  ]          
 			];
 		
+		
+		
 		//Options for the Radar chart, other than default
-		var mycfg = {
+		var mycfg = {     
 		w: w,
 		h: h,
-		maxValue: 500,
+		maxValue: 150,
 		levels: 5,
 		ExtraWidthX: 300
 		}
 		
 		//Call function to draw the Radar chart
 		//Will expect that data is in %'s
+		
 		RadarChart.draw("#chart", d, mycfg);
 		
 		////////////////////////////////////////////
@@ -106,5 +123,5 @@ function openAPI(){
 		  .attr("font-size", "11px")
 		  .attr("fill", "#737373")
 		  .text(function(d) { return d; })
-		  ;	
+		  ;	                    
 }
