@@ -75,7 +75,7 @@
 				console.log(page);
 				var str = "";
 				$(data.list).each(function(){
-					str += "<tr class = 'searchResult'>"+"<td>"+"<input type = 'radio' name = 'radio' value = '"+this.dietCode+"'>"+"</td>"+"<td><img src = 'displayFile?fileName="+this.dietImg+"' style = 'width: 75px; height: 25px;'></td>"+"<td>"+this.dietName+"</td>"+"<td>"+this.diseaseName+"</td>"+"</tr>";
+					str += "<tr class = 'searchResult'>"+"<td>"+"<input type = 'radio' name = 'radio' value = '"+this.dietCode+"'>"+"</td>"+"<td>"+this.dietName+"</td>"+"<td>"+this.diseaseName+"</td>"+"</tr>";
 				});
 				$(".dietDiseaseOverview").append(str); 
 				printPaging(data.criteria);
@@ -125,10 +125,10 @@
       </table>
       <nav>
          <ul class = "diseaseNation">
-            <li><a data-name = "당뇨">당뇨</a></li>
-            <li><a data-name = "고지혈증">고지혈증</a></li>
-            <li><a data-name = "심부전증">심부전증</a></li>
-            <li><a data-name = "신부전증">신부전증</a></li>
+            <li><a data-name = "당뇨"><img class = "img-responsive dImg center-block" src = "resources/customerImage/dang.png" style = "width:90px; height:90px;">당뇨</a></li>
+            <li><a data-name = "고지혈증"><img class = "img-responsive dImg center-block" src = "resources/customerImage/go.png" style = "width:90px; height:90px;">고지혈증</a></li>
+            <li><a data-name = "심부전증"><img class = "img-responsive dImg center-block" src = "resources/customerImage/sim.png" style = "width:90px; height:90px;">심부전증</a></li>
+            <li><a data-name = "신부전증"><img class = "img-responsive dImg center-block" src = "resources/customerImage/sin.png" style = "width:90px; height:90px;">신부전증</a></li>   
          </ul>
       </nav>
    </div>
@@ -142,7 +142,7 @@
          <table class = "dietDiseaseOverview table table-hover">
             <tr>
                <th></th>
-               <th>식단 이미지&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+               
                <th>식단명&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                <th>질환&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
             </tr>

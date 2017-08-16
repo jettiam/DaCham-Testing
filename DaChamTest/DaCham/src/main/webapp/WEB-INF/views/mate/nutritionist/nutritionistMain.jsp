@@ -198,7 +198,7 @@
    			<div class = "modal-content">
    				<div class = "modal-header">
    					<button type = "button" class = "close" data-dismiss = "modal">X</button>
-      				<h4 class = "modal-title">상담 내역</h4>
+      				<h4 class = "modal-title">식단 내용</h4>
    				</div>
    				<div class = "modal-body">
    					<table class = "modalTable table table-hover">
