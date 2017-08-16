@@ -14,6 +14,16 @@
 
 <title>Insert title here</title>
 <script>
+function fontColor1(){
+	var length = $('.dietAll').length;
+	for(var i=0; i<length; i++){
+		var font = $(".spDietItem").eq(i).text();
+		if(font =="판매중지"){
+			   
+			$(".spDietItem").eq(i).css("color", "red");      
+		}
+	}
+} 
 function disease1(){
 	$
 	.getJSON(
@@ -42,13 +52,14 @@ function disease1(){
 							+ data[i].diseaseName
 							+ "</td><td>" 
 							+ data[i].judgement
-							+ "</td><td>"
+							+ "</td><td class='spDietItem'>"
 							+ data[i].spDietItem
 							+ "</td></tr>"
 				}
 				console.log(str);
 				$(".tables").append(str);
 				$(".pagination").empty();
+				fontColor1();        
 			});
 }
 function disease2(){
@@ -79,13 +90,14 @@ function disease2(){
 							+ data[i].diseaseName
 							+ "</td><td>"
 							+ data[i].judgement
-							+ "</td><td>"
+							+ "</td><td class='spDietItem'>"
 							+ data[i].spDietItem
 							+ "</td></tr>"
 				}
 				console.log(str);
 				$(".tables").append(str);
 				$(".pagination").empty();
+				fontColor1();
 			});
 }  
 function disease3(){
@@ -116,13 +128,14 @@ function disease3(){
 							+ data[i].diseaseName
 							+ "</td><td>"
 							+ data[i].judgement
-							+ "</td><td>"
+							+ "</td><td class='spDietItem'>"
 							+ data[i].spDietItem
 							+ "</td></tr>"
 				}
 				console.log(str);
 				$(".tables").append(str);
 				$(".pagination").empty();
+				fontColor1();
 			});
 }
 function disease4(){
@@ -153,20 +166,34 @@ function disease4(){
 							+ data[i].diseaseName
 							+ "</td><td>"
 							+ data[i].judgement
-							+ "</td><td>"
+							+ "</td><td class='spDietItem'>"    
 							+ data[i].spDietItem
 							+ "</td></tr>"
 				}
 				console.log(str);
 				$(".tables").append(str);
 				$(".pagination").empty();
+				fontColor1();
 			});
+	
 }
 
 	$(document)
 			.ready(
 					function() {
 						$("#dietManagement").addClass("w3-light-gray");
+						
+						function fontColor(){
+							var length = $('.dietAll').length;
+							for(var i=0; i<length; i++){
+								var font = $(".spDietItem").eq(i).text();
+								if(font =="판매중지"){
+									   
+									$(".spDietItem").eq(i).css("color", "red");      
+								}
+							}
+						}
+						
 						function all(page) {
 							$
 									.getJSON(
@@ -195,13 +222,14 @@ function disease4(){
 															+ data.list[i].diseaseName
 															+ "</td><td>"  
 															+ data.list[i].judgement
-															+ "</td><td>"
+															+ "</td><td class='spDietItem'>"
 															+ data.list[i].spDietItem
 															+ "</td></tr>"
 												}
 												console.log(str);
 												$(".tables").append(str);
-												printPaging(data.criteria);    
+												printPaging(data.criteria);
+												fontColor();
 											});
 						}
 						all(1)
@@ -236,7 +264,11 @@ function disease4(){
 										'click',
 										function() {
 											var dietCode = "";
-											for (var i = 0; i < $('.dietAll').length; i++) {
+											var length = $('.tables input:checked').length;
+										          
+											
+											if(length != 0){
+											for (var i = 0; i < $('.dietAll').length; i++) { 
 												if ($(
 														'.dietAll:eq(' + i
 																+ ') input')
@@ -245,14 +277,17 @@ function disease4(){
 															'.dietAll:eq(' + i
 																	+ ') input')
 															.val();
-													alert(dietCode);
+													//alert(dietCode);
 													$("#dietSellForm")
 															.append(
 																	'<input type="hidden" value= "'+dietCode+'" name="dietCode">');
 												}
 											}
-											//alert(JSON.stringify(dietinfo));   
+											//alert(JSON.stringify(dietinfo));     
 											$("#dietSellForm").submit();
+											}else{
+												alert("식단을 선택하세요");
+											}
 										});
 
 						$("#dietSellStop")
@@ -260,6 +295,8 @@ function disease4(){
 										'click',
 										function() {
 											var dietCode = "";
+											var length = $('.tables input:checked').length;
+											if(length != 0){
 											for (var i = 0; i < $('.dietAll').length; i++) {
 												if ($(
 														'.dietAll:eq(' + i
@@ -269,7 +306,7 @@ function disease4(){
 															'.dietAll:eq(' + i
 																	+ ') input')
 															.val();
-													alert(dietCode);
+													//alert(dietCode); 
 													$("#dietSellStopForm")
 															.append(
 																	'<input type="hidden" value= "'+dietCode+'" name="dietCode">');
@@ -277,6 +314,9 @@ function disease4(){
 											}
 											//alert(JSON.stringify(dietinfo));   
 											$("#dietSellStopForm").submit();
+											}else{
+												alert("식단을 선택하세요"); 
+											}
 										});
 						
 						
@@ -349,7 +389,7 @@ function disease4(){
 		</div>
 		<div class="col-sm-offset-10">
 			<button id="dietSell" class="btn btn-default">판매</button>
-			<button id="dietSellStop" class="btn btn-default">판매중지</button>
+			<button id="dietSellStop" class="btn btn-danger">판매중지</button>
 		</div>
 	</div>
 	<div>
