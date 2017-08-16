@@ -111,7 +111,7 @@ $(window).scroll(function() {
 <%@include file="clientNavi.jsp"%><!-- 네비게이션 삽입 -->
 	<div class="mainWrap">
 		<img class="img_top" src='resources/customerImage/mainTop.jpg'/>
-		<div id="myCarousel" class="carousel  slide text-center" data-ride="carousel">
+		<div id="myCarousel" class="carousel  slide text-center hidden-xs" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -156,7 +156,7 @@ $(window).scroll(function() {
 		<div class="row">
 		  
 		    <div class="col-sm-8">
-		      <h2>직접 만드는 건강한 식단</h2><br>
+		      <h3>직접 만드는 건강한 식단</h3><br>
 		      <h4>내용용요용</h4>
 		      
 		    </div>
@@ -171,7 +171,7 @@ $(window).scroll(function() {
 		      <img src="resources/customerImage/dachamlogo.png" class="slideanim">
 		    </div>
 		    <div class="col-sm-8">
-		      <h2>다참</h2><br>
+		      <h3>다참</h3><br>
 		     
 		    </div>
 		 </div>
@@ -179,6 +179,8 @@ $(window).scroll(function() {
 
 	<div id="mainContent" class="container">
 	</div>
-		
+	<footer>
+		<%@include file="footer.jsp"%>
+	</footer>
 </body>
 </html>

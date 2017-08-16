@@ -24,7 +24,16 @@ public class OrderList {
 	private String keyword;
 	private Date counselDate;
 	private String counselContent;
+	private int orderItemNameCount;
 	
+	
+	
+	public int getOrderItemNameCount() {
+		return orderItemNameCount;
+	}
+	public void setOrderItemNameCount(int orderItemNameCount) {
+		this.orderItemNameCount = orderItemNameCount;
+	}
 	public String getOrderItemName() {
 		return orderItemName;
 	}

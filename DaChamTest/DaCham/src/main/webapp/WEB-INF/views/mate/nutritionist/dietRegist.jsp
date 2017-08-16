@@ -102,6 +102,8 @@
 											var sideDCode = $(this).attr(
 													'data-code');
 											
+											
+											
 											var sideDName = $(this).attr('data-name');
 
 // 											$
@@ -707,7 +709,8 @@ label{
 <body>
 	<%@include file="nutritionistNavi.jsp"%>
 	<div class="container">
-		<div class="col-sm-6">
+		<div class="col-sm-6" style = "border: 1px solid gold;">
+		<h3>선택된 반찬 목록</h3>        
 		<div class="material">
 			<div class="col-sm-12 h4">밥</div>
 			<div class="foodG01 checkSideD"></div>

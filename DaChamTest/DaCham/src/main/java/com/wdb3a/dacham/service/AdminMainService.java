@@ -38,6 +38,7 @@ public interface AdminMainService {
 	public int foodStockListCount() throws Exception;
 	public int foodStockListStopCount() throws Exception;
 	public int dietAllCount() throws Exception;
+	public List<OrderList> orderItemNameCount() throws Exception;
 	
 	//public List<OrderList> orderAll(OrderList orderList) throws Exception;
 	public List<OrderList> orderAllSearch(OrderList orderList) throws Exception;
@@ -58,6 +59,7 @@ public interface AdminMainService {
 	public List<Diet> disease4() throws Exception;
 	public void empjoin(Member member) throws Exception;
 	public List<Member> memberAll() throws Exception;
+	public List<Member> memberNomal() throws Exception; 
 	public Member memberUserInfo(String id) throws Exception;  
 	public void joinOut(String id) throws Exception; 
 	public void empUpdate(Member member) throws Exception;

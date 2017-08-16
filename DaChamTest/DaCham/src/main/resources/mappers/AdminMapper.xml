@@ -221,7 +221,8 @@
 		where a.dietCode=b.dietCode
 		and (c.orderItemCode=2 or c.orderItemCode
 		=3 or c.orderItemCode =9 or
-		c.orderItemCode=10 or c.orderItemCode=6) and
+		c.orderItemCode=10 or c.orderItemCode=6)
+		and
 		(b.orderItemCode =
 		c.orderItemCode)
 		limit #{startRecord},
@@ -241,7 +242,8 @@
 		and (c.orderItemCode=2 or
 		c.orderItemCode
 		=3 or c.orderItemCode =9 or
-		c.orderItemCode=10 or c.orderItemCode=6) and
+		c.orderItemCode=10 or
+		c.orderItemCode=6) and
 		(b.orderItemCode =
 		c.orderItemCode)
 		<include refid="orderListSearch"></include>
@@ -258,7 +260,7 @@
 				and c.orderItemName like CONCAT('%',#{keyword},'%')
 			</if>
 		</if>
-	</sql> 
+	</sql>
 	<!--결제 완료 우선 -->
 	<select id="orderSort1" resultType="OrderList">
 		select b.dietCode,
@@ -363,10 +365,10 @@
 		#{startRecord},
 		#{recordsPerPage}
 	</select>
-	
-	<!--환불 우선  -->
+
+	<!--환불 우선 -->
 	<select id="orderSort5" resultType="OrderList">
-		select b.dietCode,   
+		select b.dietCode,
 		b.orderCode,
 		b.id, a.dietName, b.orderDate, b.price,
 		b.orderItemCode,
@@ -387,7 +389,7 @@
 		6,10,3,9,2)
 		limit
 		#{startRecord},
-		#{recordsPerPage}  
+		#{recordsPerPage}
 	</select>
 
 
@@ -453,6 +455,23 @@
 		where a.diseaseCode=b.diseaseCode
 	</select>
 
+	<select id="orderItemNameCount" resultType="OrderList">
+		select orderItemName,
+		count(orderItemName) as orderItemNameCount
+
+		from
+		(select b.dietCode, b.orderCode,
+		b.id, a.dietName, b.orderDate, b.price,
+		b.orderItemCode,
+		b.transportNum, c.orderItemName
+		from diet a,
+		orderlist b,
+		orderitem c
+		where a.dietCode=b.dietCode
+		and b.orderItemCode = c.orderItemCode ) a
+		group by orderItemName
+	</select>
+
 
 
 
@@ -466,11 +485,13 @@
 
 	<select id="DietAll" resultType="Diet">
 		select a.price, a.dietCode,
-		a.dietName, a.price, a.dietImg, b.diseaseName, a.spDietItem, b.judgement 
+		a.dietName, a.price, a.dietImg, b.diseaseName, a.spDietItem,
+		b.judgement
 		from diet a
 		join disease b
 		where a.diseaseCode=b.diseaseCode
-		order by field(a.spDietItem, 1,2,0)
+		order by
+		field(a.spDietItem, 1,2,0)
 		limit
 		#{startRecord},
 		#{recordsPerPage}
@@ -498,34 +519,39 @@
 	<select id="disease1" resultType="Diet">
 		select a.price, a.dietCode,
 		a.dietName, a.price, a.dietImg, b.diseaseName,
-		a.spDietItem, b.judgement
+		a.spDietItem,
+		b.judgement
 		from diet a
 		join disease b
 		where
-		a.diseaseCode=b.diseaseCode and diseaseName = '당뇨'
+		a.diseaseCode=b.diseaseCode
+		and diseaseName = '당뇨'
 		order by field(a.spDietItem, 1,2,0)
 	</select>
 
 	<select id="disease2" resultType="Diet">
 		select a.price, a.dietCode,
 		a.dietName, a.price, a.dietImg, b.diseaseName,
-		a.spDietItem, b.judgement
+		a.spDietItem,
+		b.judgement
 		from diet a
 		join disease b
 		where
-		a.diseaseCode=b.diseaseCode and diseaseName =
+		a.diseaseCode=b.diseaseCode
+		and diseaseName =
 		'고지혈증'
 		order by field(a.spDietItem, 1,2,0)
 	</select>
 
 	<select id="disease3" resultType="Diet">
 		select a.price, a.dietCode,
-		a.dietName, a.price, a.dietImg, b.diseaseName, b.judgement, 
+		a.dietName, a.price, a.dietImg, b.diseaseName, b.judgement,
 		a.spDietItem
 		from diet a
 		join disease b
 		where
-		a.diseaseCode=b.diseaseCode and diseaseName =
+		a.diseaseCode=b.diseaseCode
+		and diseaseName =
 		'심부전증'
 		order by field(a.spDietItem, 1,2,0)
 	</select>
@@ -533,13 +559,15 @@
 	<select id="disease4" resultType="Diet">
 		select a.price, a.dietCode,
 		a.dietName, a.price, a.dietImg, b.diseaseName,
-		a.spDietItem, b.judgement
+		a.spDietItem,
+		b.judgement
 		from diet a
 		join disease b
 		where
-		a.diseaseCode=b.diseaseCode and diseaseName =
+		a.diseaseCode=b.diseaseCode
+		and diseaseName =
 		'신부전증'
-		order by field(a.spDietItem, 1,2,0) 
+		order by field(a.spDietItem, 1,2,0)
 	</select>
 
 	<insert id="empjoin">
@@ -555,7 +583,7 @@
 		#{bank_user},
 		#{Account_Number}, #{photoImg})
 	</insert>
-
+<!--관리자 id만 찾기  -->
 	<select id="memberAll" resultType="Member">
 		select id, passwd, name,
 		address, tel, email, deptCode, gradeCode, joinDate,
@@ -563,6 +591,17 @@
 		path_e, education, salary, bank_name, bank_user,
 		Account_Number from
 		member
+		where gradeCode != '일반회원'
+	</select>
+	<!--회원 아이디만 찾기  -->
+	<select id="memberNomal" resultType="Member">
+		select id, passwd, name,
+		address, tel, email, deptCode, gradeCode, joinDate,
+		outDate, photoImg,
+		path_e, education, salary, bank_name, bank_user,
+		Account_Number from
+		member
+		where gradeCode = '일반회원'
 	</select>
 
 	<select id="memberSearch" resultType="Member">
@@ -577,9 +616,6 @@
 			</if>
 			<if test="searchType == 'c'.toString()">
 				where name like CONCAT('%',#{keyword},'%')
-			</if>
-			<if test="searchType == 'a'.toString()">
-				where gradeCode like CONCAT('%',#{keyword},'%')
 			</if>
 		</if>
 	</sql>

@@ -13,57 +13,17 @@
 	<script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<script src="https://www.w3schools.com/lib/w3.js"></script>
 <style> 
-/* #menuShowWrap{
-	max-width: 1080px;
-	height: 100%;
-	margin: 0 auto;
-	text-align: center;
+.sideDImg{  
+height:118px;
 }
-#menuShowTableWrap{
-position: relative;
-	
-	float: left;
-	margin-left: 70px;
-	margin-right: 70px;
-	
-}
-#menuShowTextWrap {
-position: relative;
-	
-	float: left;
-	width:400px;
-	height:100px;
-	text-align: center;
-	margin-left: 70px;
-	margin-right: 70px;
-	margin-bottom:10px;
-}
+@media screen and (max-width: 768px) {
 
-#menuShowNutriTable{
-position: relative;
-	
-	float: left;
-	width:400px;
-	height:100px;
-	text-align: center;
-	margin-left: 70px;
-	margin-right: 70px;
-	border : solid 1px black;
+	.sideDImg{
+	height:110px;
+	}
 }
-.NutriTable 
-{
-border : solid 1px black;
-width:100px;
-}
-#menuShowList1{display:none;}
-#menuShowList2{display:none;}
-#menuShowList3{display:none;}
-#menuShowList4{display:none;}
-#menuShowImg
-{width:200px;
- height:150px;
-} */
 </style>
 
 <title>DaCham 이달의메뉴</title>
@@ -71,20 +31,25 @@ width:100px;
 $(document).ready(function(){
 	$("#menuShow").addClass("w3-gray");
 	menuShow(0);
-	$("#disease0").on("click",function(){
+	$(".disease0").on("click",function(){
 		menuShow(0);
+		$("#disease").text("다참 베이직");
 	});
-	$("#disease1").on("click",function(){
+	$(".disease1").on("click",function(){
 		menuShow(1);
+		$("#disease").text("당뇨");
 	});
-	$("#disease2").on("click",function(){
+	$(".disease2").on("click",function(){
 		menuShow(4);
+		$("#disease").text("신부전증");
 	});
-	$("#disease3").on("click",function(){
+	$(".disease3").on("click",function(){
 		menuShow(16);
+		$("#disease").text("심부전증");
 	});
-	$("#disease4").on("click",function(){
+	$(".disease4").on("click",function(){
 		menuShow(13);
+		$("#disease").text("고지혈증");
 	});
 	$("#dietList").on("click",'.dietCode',function(){
 		console.log("클릭됨");
@@ -105,7 +70,7 @@ $(document).ready(function(){
 		var divCount=0;
 		for(var i = 0; i<data.list.length; i++){					
 			if(dietCode == 0){
-				$("#dietList").append("<div class='dietListTab col-sm-6 d"+divCount+"'></div>");						
+				$("#dietList").append("<div class='dietListTab col-sm-4 d"+divCount+"'></div>");						
 				dietCode = data.list[i].dietCode;
 				console.log(dietCode+" 테이블 염");
 				$("#dietList>.d"+divCount).append("<table class='dietTable"+dietCode+" table'><tr class='dietTr"+trCount+"'>");
@@ -114,7 +79,7 @@ $(document).ready(function(){
 			if(dietCode==data.list[i].dietCode){
 				if(tdCount<2){
 					console.log("티디카운트 " +tdCount);
-					$(".dietTable"+dietCode+">tbody>.dietTr"+trCount).append("<td><img class='img-responsive' src='displayFile?fileName="+data.list[i].sideDImg+"' alt='이미지'></td>");
+					$(".dietTable"+dietCode+">tbody>.dietTr"+trCount).append("<td><img class='img-responsive sideDImg' src='displayFile?fileName="+data.list[i].sideDImg+"' alt='이미지'></td>");
 					console.log("이미지찍음 " +i);	
 					tdCount++;
 					
@@ -123,7 +88,7 @@ $(document).ready(function(){
 					trCount++; 
 					$(".dietTable"+dietCode).append("</tr><tr class='dietTr"+trCount+"'>");
 					console.log("tr카운트 염" + trCount);
-					$(".dietTable"+dietCode+">tbody>.dietTr"+trCount).append("<td><img class='img-responsive' src='displayFile?fileName="+data.list[i].sideDImg+"' alt='이미지'></td>");
+					$(".dietTable"+dietCode+">tbody>.dietTr"+trCount).append("<td><img class='img-responsive sideDImg' src='displayFile?fileName="+data.list[i].sideDImg+"' alt='이미지'></td>");
 					console.log("이미지찍음 " +i);							
 					tdCount = 1;
 				}						
@@ -138,11 +103,11 @@ $(document).ready(function(){
 				divCount++;
 				trCount=0;						
 				dietCode = data.list[i].dietCode;
-				$("#dietList").append("<div class='dietListTab col-sm-6 d"+divCount+"'></div>");
+				$("#dietList").append("<div class='dietListTab col-sm-4 d"+divCount+"'></div>");
 				$("#dietList>.d"+divCount).append("<table class='dietTable"+dietCode+" table'><tr class='dietTr"+trCount+"'>");
 				console.log(dietCode+"테이블 염");
 				console.log("tr카운트 염" + trCount);
-				$(".dietTable"+dietCode+">tbody>.dietTr"+trCount).append("<td><img class='img-responsive' src='displayFile?fileName="+data.list[i].sideDImg+"' alt='이미지'></td>");
+				$(".dietTable"+dietCode+">tbody>.dietTr"+trCount).append("<td><img class='img-responsive sideDImg' src='displayFile?fileName="+data.list[i].sideDImg+"' alt='이미지'></td>");
 				//$(".dietTable"+dietCode+">tbody>.dietTr"+trCount).append("<td><img src='displayFile?fileName="+data.list[i].sideDImg+" alt='이미지'></td>");
 				tdCount=1;
 				console.log("이미지찍음 " +i);	
@@ -155,20 +120,41 @@ $(document).ready(function(){
 	});
 	};
 });
+function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
 </script>
 </head>
 <body>
+<!-- Sidebar -->
+<div class="w3-sidebar w3-bar-block w3-animate-left" style="display:none;z-index:5" id="mySidebar">
+  <button class="w3-bar-item w3-button w3-large" onclick="w3_close()">Close &times;</button>
+		<a class="w3-bar-item w3-button disease0" onclick="w3_close()" href="#">다참 베이직</a>
+		<a class="w3-bar-item w3-button disease1" onclick="w3_close()" href="#">당뇨</a>
+		<a class=" w3-bar-item w3-button disease2" onclick="w3_close()" href="#">신부전증</a>
+		<a class="w3-bar-item w3-button disease3" onclick="w3_close()" href="#">심부전증</a>
+		<a class="w3-bar-item w3-button disease4" onclick="w3_close()" href="#">고지혈증</a>
+		
+</div>
 <%@include file="../../clientNavi.jsp" %>
+<!-- Page Content -->
+<div class="w3-overlay w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay"></div>
+<button class="w3-button w3-white visible-xs h3" onclick="w3_open()">&#9776; <span id="disease">다참 베이직</span></button>
 
 <div class="container">
-<div class="text-center">
+<div class="text-center hidden-xs">
 	<h1>이달의 메뉴</h1>
-	<input type="button" id="disease0" class="btn btn-warning" value="다참 베이직">
-	<input type="button" id="disease1" class="btn btn-warning" value="당뇨">
-	<input type="button" id="disease2" class="btn btn-warning" value="신부전증">
-	<input type="button" id="disease3" class="btn btn-warning" value="심부전증">
-	<input type="button" id="disease4" class="btn btn-warning" value="고지혈">
-	</div>
+	<input type="button" class="btn btn-warning disease0" value="다참 베이직">
+	<input type="button" class="btn btn-warning disease1" value="당뇨">
+	<input type="button" class="btn btn-warning disease2" value="신부전증">
+	<input type="button" class="btn btn-warning disease3" value="심부전증">
+	<input type="button" class="btn btn-warning disease4" value="고지혈">
+</div>
 	<div class="row" id="dietList">
 		
 	</div>

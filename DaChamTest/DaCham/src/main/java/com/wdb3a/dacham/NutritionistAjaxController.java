@@ -441,4 +441,19 @@ public class NutritionistAjaxController {
 		}
 		return entity;
 	}
+	//ÆË¾÷ Ãâ·Â
+	@RequestMapping(value = "/popup/{dietCode}",method = RequestMethod.GET)
+	public ResponseEntity<List<Nutritionist>> popup(@PathVariable("dietCode")int dietCode){
+		ResponseEntity<List<Nutritionist>> entity = null;
+		
+		try {
+			List<Nutritionist> list = service.popup(dietCode);
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
 }

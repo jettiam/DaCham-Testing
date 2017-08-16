@@ -103,14 +103,14 @@ img{width:100%}
 <body>
 	<div class="w3-row logoBox">
 		<!-- 로고+고객정보 -->
-		<div class="col-sm-2 hidden-xs" id="logo">
+		<div class="col-sm-1 hidden-xs" id="logo">
 			<!-- 로고박스 -->
 			<a href="main"><img id="logoImg" class="img-responsive block-center"
 				src="resources/customerImage/dachamlogo.png"></a>
 		</div>
 		<!-- 고객 로그인 페이지 -->
 		<c:if test="${empty sessionScope.memberName}">
-			<div class="col-sm-4 col-sm-offset-5 loginWrap hidden-xs">
+			<div class="col-sm-4 col-sm-offset-6 loginWrap hidden-xs">
 				<form method="post" action="main" class="loginBox">
 					<div class="form-group col-sm-5">
 						<input type="text" name="id" placeholder="ID"
@@ -129,7 +129,7 @@ img{width:100%}
 			</div>
 		</c:if>
 		<c:if test="${not empty sessionScope.memberName}">
-			<div id="infoBox" class="col-sm-4 col-sm-offset-5 loginWrap hidden-xs">
+			<div id="infoBox" class="col-sm-4 col-sm-offset-6 loginWrap hidden-xs">
 				<!-- 고객이름 출력. 로그아웃&마이인포 -->				
 				<h4><strong id="sessionName">${memberName}</strong>&nbsp;님</h4>				
 				<h4><a href="myPage?status=0">마이페이지</a> <a href="myPage?status=2">장바구니</a>

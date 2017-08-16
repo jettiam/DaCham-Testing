@@ -98,7 +98,7 @@
   	</select>
   	<update id = "changer0">
   		update foodminven set foodMStatus = 1
-  		where foodMICode = #{foodMICode}
+  		where foodMName = #{foodMName}
   	</update>
   	<update id = "changer">
  		update orderlist set orderItemCode = 10

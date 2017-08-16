@@ -31,18 +31,28 @@
 		group by di.dietCode
 		order by di.sideDType) n
 		where  di.dietCode=d.dietCode and di.sideDCode=s.sideDCode and di.sideDType=0 and d.spDietitem=1 and d.dietCode=n.dietCode
+		group by d.dietName
 		order by d.dietCode
 		limit #{startRecord},#{recordsPerPage}
 	</select>
 	<!-- 이달의 메뉴의 개수를 구합니다. -->
 	<select id = "thisMonthCount" resultType = "Integer">
-		select count(v.dietNAme) as count
-		from (select a.orderDate, b.dietName, b.dietImg 
-				from orderlist a join diet b
-				where a.dietCode = b.dietCode
-				and month(a.orderDate) between month(a.orderDate) and (month(a.orderDate)+1)
-				group by a.dietCode
-		) v
+		select count(v.dietName)
+ 		from (select d.dietCode, d.dietName, d.dietImg, s.sideDName, s.sideDCode , s.sideDImg, n.kcal,n.carbohydrate,n.protein,n.fat,n.na,n.k
+		from diet d,dietinfo di, sidedish s, (select di.dietCode, sum(result.kcal) kcal,sum(result.carbohydrate) carbohydrate, sum(result.protein) protein,sum(result.fat) fat,sum(result.na) na,sum(result.k) k
+		from  (select s.sideDCode, s.sidedImg,s.sideDname,s.foodGCode, f.kcal,f.carbohydrate,f.protein,f.fat,f.na,f.k
+		from sidedish s,(select a.sideDcode,sum(kcal) kcal,sum(carbohydrate) carbohydrate, sum(protein) protein, sum(fat) fat, sum(na) na,sum(k) k
+		from 
+		(select si.sideDCode,(si.foodMAmount/100)*f.kcal kcal,(si.foodMAmount/100)*f.protein protein,(si.foodMAmount/100)*f.carbohydrate carbohydrate,(si.foodMAmount/100)*f.na na,(si.foodMAmount/100)*f.fat fat,(si.foodMAmount/100)*f.k k
+			from sidedinfo si,foodmaterial f
+			where si.foodMCode = f.foodMCode) a
+			group by a.sidedcode) f 
+		where s.sideDCode=f.sideDcode) result, dietinfo di
+		where result.sideDCode= di.sideDCode
+		group by di.dietCode
+		order by di.sideDType) n
+		where  di.dietCode=d.dietCode and di.sideDCode=s.sideDCode and di.sideDType=0 and d.spDietitem=1 and d.dietCode=n.dietCode
+		group by d.dietName) v
 	</select>
 	<!-- 반찬 전체를 조회합니다(with 식품군, 조리방법) -->
 	<select id = "sideAll" resultType = "com.wdb3a.dacham.bean.Nutritionist">
@@ -145,9 +155,10 @@
 	</select>
 	<!-- 해당 메인페이지에 주문목록 표시 -->
 	<select id = "orderList" resultType = "OrderList">
-		select a.orderCode, a.id, b.dietName,a.orderDate ,a.price
+		select a.orderCode, a.id, b.dietName,a.orderDate ,a.price , b.dietCode
 		from orderlist a join diet b
 		where a.dietCode = b.dietCode
+		and b.spDietItem = 0
 		limit #{startRecord}, #{recordsPerPage}
 	</select>
 	<!-- 해당 메인페이지 주문목록의 총 개수를 구함 -->
@@ -155,6 +166,7 @@
 		select count(a.orderCode)
 		from orderlist a join diet b
 		where a.dietCode = b.dietCode
+		and b.spDietItem = 0
 	</select>
 	<!-- 해당 반찬에 대한 영양정보 -->
 	<select id = "allNutri" resultType = "com.wdb3a.dacham.bean.Nutritionist">
@@ -330,4 +342,11 @@
 		insert into dietinfo(dietCode, sideDCode,sideDType)
 		values (#{dietCode},#{sideDCode},#{sideDType})
 	</insert>	
+	<!-- 메인 페이지에 팝업을 띄우기 -->
+	<select id = "popup" resultType = "com.wdb3a.dacham.bean.Nutritionist">
+		select * from diet a, dietinfo b, sidedish c
+		where a.dietCode = b.dietCode
+		and b.sideDCode = c.sideDCode
+		and a.dietCode = #{dietCode}
+	</select>
 </mapper>
