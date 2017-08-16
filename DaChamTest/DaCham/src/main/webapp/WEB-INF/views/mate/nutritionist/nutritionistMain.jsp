@@ -28,6 +28,33 @@
 			thisMonth(replyPage);
 		});
 		
+		
+		$(document.body).on("click",".dualOver",function(){
+			var dietCode = $(this).attr('data-code');
+			
+			$.getJSON("nutriAjax/popup/"+dietCode,function(data){
+				$(".modalResult").remove();
+				var str = "";
+				$(data).each(function(){
+					str += "<tr class = 'modalResult'><td>"+"<img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width: 75px; height: 25px;'>"+"</td><td>"+this.sideDName+"</td></tr>";
+				});
+				$(".modalTable").append(str);  
+			});   
+		});
+		
+		$(document.body).on("click",".clicker",function(){
+			var dietCode = $(this).attr('data-code');
+			
+			$.getJSON("nutriAjax/popup/"+dietCode,function(data){
+				$(".modalResult").remove();
+				var str = "";
+				$(data).each(function(){
+					str += "<tr class = 'modalResult'><td>"+"<img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width: 75px; height: 25px;'>"+"</td><td>"+this.sideDName+"</td></tr>";
+				});
+				$(".modalTable").append(str);  
+			});   
+		});
+		
 		thisMonth(1);
 		function orderList(page){
 			currentPage = page;
@@ -35,21 +62,21 @@
 			$.getJSON("nutriAjax/orderList/"+page,function(data){
 				var str = "";
 				$(data.list).each(function(){
-					str += "<tr class = 'orderResult'><td>"+this.orderCode+"</td>"+"<td>"+this.id+"</td>"+"<td>"+this.dietName+"</td>"+"<td>"+this.orderDate+"</td>"+"<td>"+this.price+"</td>"+"</tr>"
+					str += "<tr class = 'orderResult'><td>"+this.orderCode+"</td>"+"<td>"+this.id+"</td>"+"<td><a class = 'dualOver' data-code = '"+this.dietCode+"' data-toggle = 'modal' href = '#myModal'>"+this.dietName+"</a></td>"+"<td>"+this.orderDate+"</td>"+"<td>"+this.price+"</td>"+"</tr>"
 				});
 				$(".orderTable").append(str);
 				printPaging(data.criteria);
 			});             
 		}
 		function thisMonth(page){
-			$(".monthResult").remove();
+			$(".thisResult").remove();
 			$.getJSON("nutriAjax/thisMonth/"+page,function(data){
 				doubleCurrentPage = page;
 				var str = "";
 				$(data.list).each(function(){
-					str += "<ul class = 'monthResult'>"+"<li>"+"<img src = 'displayFile?fileName="+this.dietImg+"' style = 'width: 75px; height: 25px;'>"+this.dietName+"</li>"+"</ul>";
+					str += "<tr class = 'thisResult'><td>"+"<img src = 'displayFile?fileName="+this.dietImg+"' style = 'width: 75px; height: 25px;'>"+"</td><td><a class = 'clicker' data-code = '"+this.dietCode+"' data-toggle = 'modal' href = '#myModal'>"+this.dietName+"</a></td></tr>";
 				});
-				$(".thisMonth").append(str);
+				$(".thisTable").append(str);
 				printPaging2(data.criteria);
 			});
 		}
@@ -89,9 +116,13 @@
 <title>영양사</title>
 <style>
  .box1 {
-  float:left;  }
+    }
  .box2 {
-  display:inline-block;  margin-left:10px;}  
+ 	float:left;
+  }  
+  .thisMonth{
+  		display:inline-block;  margin-left:100px;
+  }
   ul{
   	list-style : none;
   }
@@ -132,7 +163,7 @@
 <!--       </div> -->
 <!--    </div> -->
    <div class = "box2">
-   	  <h2>고객 식단 요청 리스트</h2>
+   	  <h2>특별 식단 요청 리스트</h2>  
       <table class = "orderTable table table-hover">      
          <tr>
             <th>번호&nbsp;&nbsp;&nbsp;</th>
@@ -151,11 +182,39 @@
    <div class = "thisMonth">
       <h1> 이번 달의 판매 식단</h1>
       <hr align = "left" width = "20%">
-     <ul class = "monthResult">
-     	<li></li>
-     </ul>
+     	<table class = "thisTable table table-hover">
+     		<tr>
+     			<th>이미지</th>
+     			<th>식단명</th>
+     		</tr>
+     		<tr class = "thisResult">
+     		</tr>
+     	</table>
      <ul class = "pagination2 pagination">
      </ul>
+   </div>
+   <div class = "modal fade" id = "myModal">
+   		<div class = "modal-dialog">
+   			<div class = "modal-content">
+   				<div class = "modal-header">
+   					<button type = "button" class = "close" data-dismiss = "modal">X</button>
+      				<h4 class = "modal-title">상담 내역</h4>
+   				</div>
+   				<div class = "modal-body">
+   					<table class = "modalTable table table-hover">
+   						<tr>
+   							<th>이미지</th>
+   							<th>반찬명</th>
+   						</tr>
+   						<tr class = "modalResult">
+   						</tr>
+   					</table>
+   				</div>
+   				<div class = "modal-footer">
+   					<button type = "button" class = "btn btn-default" data-dismiss = "modal">Close</button>
+   				</div>
+   			</div>
+   		</div>
    </div>
   </div> 
 </body>
