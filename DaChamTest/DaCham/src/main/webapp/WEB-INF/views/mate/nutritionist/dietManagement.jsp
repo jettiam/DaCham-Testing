@@ -125,10 +125,10 @@
       </table>
       <nav>
          <ul class = "diseaseNation">
-            <li><a data-name = "당뇨"><img class = "img-responsive dImg center-block" src = "resources/customerImage/dang.png" style = "width:90px; height:90px;">당뇨</a></li>
-            <li><a data-name = "고지혈증"><img class = "img-responsive dImg center-block" src = "resources/customerImage/go.png" style = "width:90px; height:90px;">고지혈증</a></li>
-            <li><a data-name = "심부전증"><img class = "img-responsive dImg center-block" src = "resources/customerImage/sim.png" style = "width:90px; height:90px;">심부전증</a></li>
-            <li><a data-name = "신부전증"><img class = "img-responsive dImg center-block" src = "resources/customerImage/sin.png" style = "width:90px; height:90px;">신부전증</a></li>   
+            <li><a data-name = "당뇨"><img class = "img-responsive dImg center-block" src = "resources/customerImage/dang.png" style = "width:90px; height:90px;"><b>당뇨</b></a></li><br><br><br>
+            <li><a data-name = "고지혈증"><img class = "img-responsive dImg center-block" src = "resources/customerImage/go.png" style = "width:90px; height:90px;"><b>고지혈증</b></a></li><br><br><br>
+            <li><a data-name = "심부전증"><img class = "img-responsive dImg center-block" src = "resources/customerImage/sim.png" style = "width:90px; height:90px;"><b>심부전증</b></a></li><br><br><br>
+            <li><a data-name = "신부전증"><img class = "img-responsive dImg center-block" src = "resources/customerImage/sin.png" style = "width:90px; height:90px;"><b>신부전증</b></a></li><br><br><br>
          </ul>
       </nav>
    </div>
