@@ -41,8 +41,8 @@ public class CookerController {
 
 	@RequestMapping(value="/cookList", method=RequestMethod.GET)
 	public String getList(Model model) throws Exception{
-		List<Cook> list = service.readyScreen();
-		List<Cook> list2 = service.endScreen();
+		List<CookingItem> list = service.anotherSelectCookingItem3();
+		List<CookingItem> list2 = service.anotherSelectCookingItem5();
 		model.addAttribute("list",list);
 		model.addAttribute("list2",list2);
 		return "/mate/cooker/cookingList";

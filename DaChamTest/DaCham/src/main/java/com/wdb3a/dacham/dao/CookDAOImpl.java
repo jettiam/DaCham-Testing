@@ -83,5 +83,15 @@ public class CookDAOImpl implements CookDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace+".foodStockAllCount");
 	}
+	@Override
+	public List<CookingItem> anotherSelectCookingItem3() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".anotherSelectCookingItem3");
+	}
+	@Override
+	public List<CookingItem> anotherSelectCookingItem5() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".anotherSelectCookingItem5");
+	}
 
 }

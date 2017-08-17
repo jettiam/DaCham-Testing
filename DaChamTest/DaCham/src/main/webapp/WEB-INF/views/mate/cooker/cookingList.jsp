@@ -30,33 +30,49 @@
 	<%@include file = "cookerNavi.jsp" %>
 	<div class = container>
 	<h1>조리 대기</h1>
-		<button id = "startCookBtn" class = "btn btn-primary">조리시작</button>
+		<button id = "startCookBtn" class = "btn btn-primary btn-lg">조리시작</button>
 		<table class ="table table-hover">
 			<tr>
-				<th>음식명</th>
+				<th>주문번호</th>
+				<th>반찬번호</th>
+				<th>반찬이미지</th>
+				<th>반찬이름</th>
+				
+				<th>주문안의 반찬진행상태</th>
 				<th>조리량</th>
-				<th>조리상태</th>
 			</tr>
 			<c:forEach items = "${list }" var = "b">
 				<tr>
-					<td><a href = "#">${b.dietName }</a></td>
-					<td>${b.dietAmount}</td>
-					<td>${b.orderItemName}</td>
+					<td>${b.orderCode}</td>
+				<td>${b.sideDCode}</td>
+				<td><img src = "displayFile?fileName=${b.sideDImg}" style = "width:50px; height : 50px;"></td>
+				<td>${b.sideDName}</td>
+				
+				<td>${b.orderItemName}</td>
+				<td>${b.cookingAmount}</td>
 				</tr>
 			</c:forEach>			
 		</table>
 	<h1>조리 완료</h1>
 		<table class = "table table-hover">
 			<tr>
-				<th>음식명</th>
+				<th>주문번호</th>
+				<th>반찬번호</th>
+				<th>반찬이미지</th>
+				<th>반찬이름</th>
+				
+				<th>주문안의 반찬진행상태</th>
 				<th>조리량</th>
-				<th>조리상태</th>
 			</tr>
 			<c:forEach items = "${list2 }" var ="y">
 			<tr>
-				<td><a href ="#">${y. dietName }</a></td>
-				<td>${y.dietAmount }</td>
-				<td>${y.orderItemName }</td>
+				<td>${y.orderCode}</td>
+				<td>${y.sideDCode}</td>
+				<td><img src = "displayFile?fileName=${y.sideDImg}" style = "width:50px; height : 50px;"></td>
+				<td>${y.sideDName}</td>
+				               
+				<td>${y.orderItemName}</td>   
+				<td>${y.cookingAmount}</td>   
 			</tr>
 			</c:forEach>
 		</table>
