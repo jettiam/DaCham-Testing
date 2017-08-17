@@ -226,6 +226,7 @@
 		and c.dietCode = d.dietCode
 		and a.customer = #{customer}
 		and d.spDietItem = 0
+		group by d.dietCode 
 	</select>
 	<!-- 특별식단 추가 등록하고 싶으면 전환함 -->
 	<update id="reRegist">
