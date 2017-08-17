@@ -29,18 +29,51 @@
 }
 .detailSideDImg{
 	max-width:150px;
-	max-height:100px;
+	height:100px;
 }
-#myHealthTable{
-	display:table;
+#myPageWrap{
+	
+}
+.sideWrap{
+	position:fixed;
+	top:270px;
+	left:8%;  
+	width:220px; 
 }
 input[type='password']{
  font-family:"Nanum Gothic";
 }
-@media only screen and (max-width: 736px) {
+
+.sideUl{
+margin:0px;
+padding:0px;
+border:0px;
+}
+.sideUl li{
+ list-style: none;
+ padding:15px;
+ border-bottom:0.5px solid #999;
+}
+.sideUl li>a{
+	cursor: pointer;
+}
+.sideUl li:HOVER {
+	background-color: #eee; 
+}
+@media only screen and (max-width: 1440px) {
+	.sideWrap{
+	position:fixed;
+	top:270px;
+	left:3%;  
+	width:200px; 
+}	
+	
+}
+@media only screen and (max-width: 768px) {
 	.myPageImg{
 		max-width: 50px;
-	}
+	}	
+	
 }
 </style>
 
@@ -61,18 +94,33 @@ input[type='password']{
 	
 <!-- Page Content -->
 <div class="w3-overlay w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay"></div>
-<button class="w3-button w3-white visible-xs h3" onclick="w3_open()">&#9776; My Page</button>
+<button class="w3-button w3-white visible-xs visible-sm h3" onclick="w3_open()">&#9776; My Page</button>
+	<!-- 데스크탑 사이드바 -->
+	<div class="w3-card-4 hidden-xs hidden-sm sideWrap">
+	<header class="w3-container btn-warning">
+	   <h4 class=""><b>마이 페이지</b></h4>
+	</header>
+	
+	<ul class="sideUl">
+	  	<li><a id="myInfo" class="myPageBtn" data-status="0">내 정보</a></li>
+		<li><a id="myHealth" class="myPageBtn" data-status="1">내 건강정보</a></li>
+		<li><a id="myCart" class="myPageBtn" data-status="2">장바구니</a></li>
+		<li><a id="myOrderlist" class="myPageBtn" data-status="3">주문내역</a></li>
+		<li><a id="outMember" class="">회원탈퇴</a></li>
+	</ul>
+
+</div>
+
 
 	<!-- 버튼을 클릭하면 페이지가 전환됨 -->
-	<div id="myPageWrap" class="container">		
-		<div class="hidden-xs text-center">
-		<button id="myInfo" class="btn btn-warning myPageBtn" data-status="0">내 정보</button>
-		<button id="myHealth" class="btn btn-warning  myPageBtn" data-status="1">내 건강정보</button>
-		<button id="myCart" class="btn btn-warning  myPageBtn" data-status="2">장바구니</button>
-		<button id="myOrderlist" class="btn btn-warning  myPageBtn" data-status="3">주문내역</button>
-		<button id="outMember" class="btn btn-warning">회원탈퇴</button>
-		</div>
-		<!-- 마이페이지 -->
+	<div class="container">
+	
+	<div class="row">
+</div>
+	<!-- 마이페이지 내용 -->
+	<div id="myPageWrap">	 		
+		
+		<!-- 내정보 -->
 		<div id="myInfoTableWrap">
 		<h2 class="text-center">내 정보</h2>
 		<div class="col-sm-3"></div><div class="col-sm-6 center-block">
@@ -123,7 +171,7 @@ input[type='password']{
 			</table>
 		</div>
 		<div class="col-sm-12 text-center">	
-			<button class="btn btn-warning  myPageBtn">수정</button>
+			<button class="btn btn-warning">수정</button>
 			</div>	
 		</div>
 
@@ -132,19 +180,17 @@ input[type='password']{
 		<h2 class="text-center">${memberName}님의 건강정보</h2><br>
 		<div class="col-sm-6">
 		<h3 class="text-center">영양정보</h3>
-			<table id="myHealthTable" class="text-center center-block table-condensed table-responsive">
-				<tr>
-					<td><canvas id="myChart"></canvas></td>
-					</tr>
-			</table>
+			<div>
+			<canvas id="myChart" class="center-block"></canvas>
+			</div>	 
 		</div>
 		<div class="col-sm-6">
 			<h3 class="text-center">측정기록</h3>
-			<div>
-				<canvas id="measureChart"></canvas>
+			<div>   
+				<canvas id="measureChart"  class="center-block"></canvas>
 			</div>
 		</div>
-		
+		   
 		<div class="row">
 		<div class="col-sm-12">			
 			  <div class="form-group col-sm-3 col-sm-offset-3">
@@ -218,8 +264,10 @@ input[type='password']{
 		<!-- 회원탈퇴 -->
 		
 	</div>
+</div>
 
 
+</div>
 
 
 <form id="cartForm" action="cartOrderRegister" method="post">
@@ -340,7 +388,7 @@ $(document).ready(function(){
 								+"<input type='checkbox' class='w3-check' name='cartCheck' value='"+data.list[i].dietCode+"' data-orderCode='"+data.list[i].orderCode+"'>"
 								+"</td><td><img class='myPageImg img-responsive pull-left' data-img='"+data.list[i].dietImg+"' src='displayFile?fileName="+data.list[i].dietImg
 										+"' alt='이미지'>"
-										+"<span data-orderCode='"+data.list[i].orderCode+"' class='optiondown glyphicon glyphicon-chevron-down'>"						
+										+"<span style='padding-top:10px;' data-orderCode='"+data.list[i].orderCode+"' class='optiondown glyphicon glyphicon-chevron-down'>"						
 										+"주문상세</span></td><td class='dietName'>"+data.list[i].dietName
 										+"</td><td class='dietAmount'>"+data.list[i].dietAmount+"</td><td class='price'><span>"+data.list[i].price+"</span>원"+"</td></tr>");
 						var sideDName = "sideDName";
@@ -354,7 +402,7 @@ $(document).ready(function(){
 										+"<div class='"+orderCode+"_options' ></div>"
 										+"</td></tr>");
 								 for(var i=0; i<length; i++){
-									$("."+orderCode+"_options").html($("."+orderCode+"_options").html()+"<div class='col-sm-2'><img class='detailSideDImg' src='displayFile?fileName="+value[i].sideDImg+"'/>"+value[i].sideDName+"</div>");																		
+									$("."+orderCode+"_options").html($("."+orderCode+"_options").html()+"<div class='col-sm-2'><img class='detailSideDImg hidden-xs' src='displayFile?fileName="+value[i].sideDImg+"'/><div style='padding-top:10px'>"+value[i].sideDName+"</div></div>");																		
 								}	 						
 							}
 						})

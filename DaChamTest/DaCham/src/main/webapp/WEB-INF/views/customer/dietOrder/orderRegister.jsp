@@ -16,9 +16,13 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <title>DaCham 주문하기</title>
 <style>
-.orderRegistWrap {
-	width: 70%;
-	margin: 0 auto;
+.buyInfo {
+	width:90px; 
+	
+	
+}
+.row{
+	margin-bottom:30px;
 }
 </style>
 <script>
@@ -42,7 +46,7 @@
 					$("#paymentForm").submit();	
 				}
 			}else{			
-			if(confirm("결제 하겠습니까?")){
+			if(confirm("결제 하겠습니까? 장바구니")){
 				var data = new Array();
 				var dataObj = new Object();
 				var length = $(".dietAmount").length;
@@ -98,82 +102,82 @@
 </head>
 <body>
 	<%@include file="../../clientNavi.jsp"%>
-	<div class="orderRegistWrap">
-		<div class="row">
-			<div class="block-center text-center">주문결제</div>
-			<div class="col-sm-6 leftArea">
-				<!--좌측 이 안에 배송지, 결제정보 저장 -->
-				<div class="form-group col-sm-12"><h3>배송지</h3>
+	<div class="container">
+		
+			<div class="block-center" style="margin-bottom:30px; border-bottom:2px solid black;"><h2>주문결제</h2></div>
+			<div class="row">
+				<div class="col-sm-12 form-group"><span class=" h3">구매자 정보</span></div>
+				<div class="col-sm-12">
+				<table class="table table-striped"> 
+				<tr><td class="buyInfo">이름</td><td>${memberName}</td></tr>
+				<tr><td class="buyInfo">이메일</td><td>${email}</td></tr>
+				<tr><td class="buyInfo">전화번호</td><td>${tel}</td></tr>
+				</table>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-sm-12"><span class="h3">배송지</span>&nbsp;&nbsp;
 				<input type="radio" id="address" name="address" checked><label for="address">기본 주소</label>&nbsp;
 				<input type="radio" id="recentlyAddress" name="address"><label for="recentlyAddress">최근 배송지</label>&nbsp;
 				<input type="radio" id="inputAddress" name="address"><label for="inputAddress">배송지 입력</label>
 				</div>
-				<%-- <input type="" id="orderAddress" name="recentlyAddress" value='${address}'> --%>
-				<textarea rows="2" class="form-control" readonly="readonly" id="textArea">${address}</textarea>
+				<div class="col-sm-12">
+				<table class="table table-striped"> 
+				<tr><td class="buyInfo">배송주소</td><td><textarea rows="2" class="form-control" readonly="readonly" id="textArea">${address}</textarea></td></tr>
+				<tr><td class="buyInfo">연락처</td><td>${tel}</td></tr>
+				</table>				
+				</div>
+			</div>
+		
+			<div class="row">
+			<div class="col-sm-12 form-group"><span class="h3">주문 식단</span></div>
+			<div class="col-sm-12"><!--우측 주문내역, 결제정보 출력및결제 -->
+			<table class="table table-striped"> 
+			<tr><td style="width:170px;">식단명</td><td style="width:170px;">수량</td><td>가격</td></tr>
+				<c:if test="${order.detailOrder == true}">								
+				<!-- detaileOrder에서 넘어온 경우 사용 -->
+				<tr class="orderInfo" data-detailOrder="${order.detailOrder}">
+					<td class="dietCode" data-dietCode="${order.dietCode}">${order.dietName}</td>
+					<td class="dietAmount"><span>${order.dietAmount}</span>개</td>
+					<td class="dietPrice"><span>${order.price}</span>원</td>
+				</tr>			
+					</c:if>
+					<!-- 장바구니에서 넘어온 경우 사용 -->
+				<c:forEach items="${cartOrder}" var="cart">
+					<tr class="orderCode" data-orderCode="${cart.orderCode}">
+					<td class="dietCode" data-dietCode="${cart.dietCode}">${cart.dietName}</td>
+					<td class="dietAmount"><span>${cart.dietAmount}</span>개</td>
+					<td class="dietPrice"><span>${cart.price}</span>원</td>
+				</tr>				
+				</c:forEach>
+				</table>
+				</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12 form-group"><span class="h3">최종결제 정보</span></div>	
+					<div class="col-sm-12">			
+					<table class="table table-striped">
+					<tr><td class="buyInfo">상품가격</td><td><c:if test="${order.detailOrder == true}">${order.price}</c:if><span class="totalPrice"></span>원</td></tr>
+					<tr><td class="buyInfo">할인</td><td>0원</td></tr>
+					<tr><td class="buyInfo">배송비</td><td>0원</td></tr>
+					<tr><td class="buyInfo">최종가격</td><td><c:if test="${order.detailOrder == true}">${order.price}</c:if><span class="totalPrice"></span>원</td></tr>
+					</table>
+					</div>					
+				</div>						
+					
+				<div class="row">			
+				<div class="col-sm-12 form-group"><span class="h3">결제수단</span></div>
 				<div class="form-group col-sm-12">
-				<h3>결제수단 선택</h3>
 				<select id="paymentItem">
 							<option value="2">신용카드</option>
 							<option value="3">계좌이체</option>
 							<option value="4">휴대폰결제</option>
 						</select> 
 				</div>		
-			</div>
-			
-			
-				<div class="col-sm-6 rightArea"><!--우측 주문내역, 결제정보 출력및결제 -->
-				<c:if test="${order.detailOrder == true}">
-				<!-- detaileOrder에서 넘어온 경우 사용 -->
-				<div class="row orderInfo" data-detailOrder="${order.detailOrder}"> <!-- 주문내역 row -->
-					<div class="col-sm-3 text-center">
-						<img class="block-center img-responsive" width="120" height="90"
-							src="displayFile?fileName=${order.dietImg}">
-					</div>
-					<div class="col-sm-3 text-center">
-						<div class="block-center dietCode" data-dietCode="${order.dietCode}">식단명</div>
-						<div >${order.dietName}</div>
-					</div>
-					<div class="col-sm-3 text-center">
-						<div>주문수량</div>
-						<div class="dietAmount"><span>${order.dietAmount}</span>개</div>						
-					</div>
-					<div class="col-sm-3 text-center">
-						<div>가격</div>
-						<div class="dietPrice"><span>${order.price}</span>원</div>
-					</div>
 				</div>
-					</c:if>
-					<!-- 장바구니에서 넘어온 경우 사용 -->
-				<c:forEach items="${cartOrder}" var="cart">
-				<div class="row"> <!-- 주문내역 row -->
-					<div class="col-sm-3 text-center">
-						<img class="block-center img-responsive" width="120" height="90"
-							src="displayFile?fileName=${cart.dietImg}">
-					</div>
-					<div class="col-sm-3 text-center">
-						<div class="block-center orderCode" data-orderCode="${cart.orderCode}">식단명</div>
-						<div >${cart.dietName}</div>
-					</div>
-					<div class="col-sm-3 text-center">
-						<div>주문수량</div>
-						<div class="dietAmount"><span>${cart.dietAmount}</span>개</div>						
-					</div>
-					<div class="col-sm-3 text-center">
-						<div>가격</div>
-						<div class="dietPrice"><span>${cart.price}</span>원</div>
-					</div>
-				</div>	
-				</c:forEach>
-					<div>최종결제 정보</div>
-					<div class="row"><!-- 최종 결제정보 row -->						
-						<div class="col-sm-5">상품가격</div><div class="col-sm-7"><c:if test="${order.detailOrder == true}">${order.price}</c:if><span class="totalPrice"></span>원</div>
-						<div class="col-sm-5">할인가격</div><div class="col-sm-7">0원</div>
-						<div class="col-sm-5">배송비</div><div class="col-sm-7">0원</div>
-						<div class="col-sm-5">최종 결제가격</div><div class="col-sm-7"><c:if test="${order.detailOrder == true}">${order.price}</c:if><span class="totalPrice"></span>원</div>
-						<button id="payment">결제</button>
-					</div>	
-				</div>			
-		</div>
+			<div class="row text-center">
+			<button id="payment" class="btn btn-danger btn-lg">결제하기</button>		
+			</div>
 	</div>
 	
 	<form id="paymentForm" method="POST">
