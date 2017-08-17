@@ -316,7 +316,6 @@ public class NutritionistAjaxController {
 	//해당 특별고객에 대한 특별식단 표시
 	@RequestMapping(value = "/specialToggle/{customer}/{dietCode}",method = RequestMethod.GET)
 	public ResponseEntity<List<Nutritionist>> specialToggle(@PathVariable("customer")String customer,@PathVariable("dietCode")int dietCode){
-		System.out.println("스페셜 토글 컨트롤러입니다.");
 		ResponseEntity<List<Nutritionist>> entity = null;
 		Nutritionist nutritionist = new Nutritionist();
 		try {
@@ -448,6 +447,20 @@ public class NutritionistAjaxController {
 		
 		try {
 			List<Nutritionist> list = service.popup(dietCode);
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	//반찬 코드에 속한 식재료
+	@RequestMapping(value = "/callName/{sideDCode}",method = RequestMethod.GET)
+	public ResponseEntity<List<Nutritionist>> callName(@PathVariable("sideDCode")int sideDCode){
+		ResponseEntity<List<Nutritionist>> entity = null;
+		try {
+			List<Nutritionist> list = service.callName(sideDCode);
 			entity = new ResponseEntity<>(list,HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

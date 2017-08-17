@@ -64,11 +64,12 @@ from (select foodMName,sum(inAmount) inAmount,sum(outAmount) outAmount,unit
 	<select id="readycook" resultType="Cook">
 		select a.orderCode,
 		b.sideDName,b.sideDImg, sum(a.dietAmount) as dietAmount,
-		a.orderItemCode
-		from orderlist a join sidedish b join dietinfo c
+		a.orderItemCode, d.orderItemName
+		from orderlist a join sidedish b join dietinfo c join orderitem d
 		where
 		a.dietCode = c.dietCode
 		and c.sideDCode = b.sideDCode
+		and a.orderItemCode = d.orderItemCode
 		and
 		a.orderItemCode = 3
 		group by b.sideDName
@@ -137,8 +138,46 @@ from (select foodMName,sum(inAmount) inAmount,sum(outAmount) outAmount,unit
 		a.sideDCode = c.sideDCode
 		group by sideDcode;
 	</select>
-
-
+	<select id="anotherSelectCookingItem3" resultType="CookingItem">
+		select a.orderCode as
+		orderCode,
+		a.sideDCode as sideDCode,
+		c.sideDImg as sideDImg,
+		c.sideDName
+		as sideDName,
+		b.orderItemCode as orderOrderItemCode,
+		a.orderItemCode as
+		optionsOrderItemCode,
+		sum(b.dietAmount) as cookingAmount, d.orderItemName
+		from
+		orderoptions a, orderlist b, sidedish c, orderitem d
+		where a.orderCode = b.orderCode
+		and
+		a.sideDCode = c.sideDCode
+		and a.orderItemCode = d.orderItemCode
+		group by sideDcode
+		having optionsOrderItemCode = 3;
+	</select>
+	<select id="anotherSelectCookingItem5" resultType="CookingItem">
+		select a.orderCode as
+		orderCode,
+		a.sideDCode as sideDCode,
+		c.sideDImg as sideDImg,
+		c.sideDName
+		as sideDName,
+		b.orderItemCode as orderOrderItemCode,
+		a.orderItemCode as
+		optionsOrderItemCode,
+		sum(b.dietAmount) as cookingAmount, d.orderItemName
+		from
+		orderoptions a, orderlist b, sidedish c, orderitem d
+		where a.orderCode = b.orderCode
+		and
+		a.sideDCode = c.sideDCode
+		and a.orderItemCode = d.orderItemCode
+		group by sideDcode
+		having optionsOrderItemCode = 5;
+	</select>
 	<update id="updateOptionsItemCode" parameterType="HashMap">
 		update
 		orderoptions set orderItemCode= #{orderItemCode}

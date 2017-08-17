@@ -202,16 +202,18 @@
 	</update>
 	<!-- 특별 고객이 등록한 특별식단 toggle -->
 	<select id = "specialToggle" resultType = "com.wdb3a.dacham.bean.Nutritionist">
-		select a.sideDName, a.sideDCode, a.sideDImg, c.dietName, c.dietCode
+		select a.sideDName, a.sideDCode, a.sideDImg, c.dietName, c.dietCode,e.foodMCode,group_concat(distinct e.foodMName) as foodMName
 		from sidedish a join dietinfo b join (select d.dietCode,d.dietName, d.dietImg, d.price 
 		from counsel a join member b join orderlist c join diet d
 		where a.customer = b.id
 		and b.id = c.id
 		and c.dietCode = d.dietCode
 		and a.customer = #{customer}
-		and d.spDietItem = 0) c
+		and d.spDietItem = 0) c, sidedinfo di, foodmaterial e
 		where a.sideDCode = b.sideDCode
 		and b.dietCode = c.dietCode
+		and a.sideDCode = di.sideDCode
+		and di.foodMCode = e.foodMCode
 		and c.dietCode = #{dietCode}
 		group by sideDCode
 	</select>
@@ -224,6 +226,7 @@
 		and c.dietCode = d.dietCode
 		and a.customer = #{customer}
 		and d.spDietItem = 0
+		group by d.dietCode 
 	</select>
 	<!-- 특별식단 추가 등록하고 싶으면 전환함 -->
 	<update id="reRegist">
@@ -314,7 +317,7 @@
 		insert into sidedinfo(sideDCode, foodMCode, foodMAmount)
 		values (#{sideDCode},#{foodMCode},#{foodMAmount})
 	</insert>
-	<!-- 식단코드에 속한 식단 재료 불러오기(수정) -->
+	<!-- 식단코드에 속한 식단 정보 불러오기(수정) -->
 	<select id = "dietOver" resultType = "com.wdb3a.dacham.bean.Nutritionist">
 		select * from diet 
 		where dietCode = #{dietCode}
@@ -348,5 +351,11 @@
 		where a.dietCode = b.dietCode
 		and b.sideDCode = c.sideDCode
 		and a.dietCode = #{dietCode}
+	</select>
+	<!-- 반찬코드에 속한 식재료 이름이라도 불러오기 -->
+	<select id = "callName" resultType = "com.wdb3a.dacham.bean.Nutritionist">
+		select * from sidedinfo a, foodmaterial b
+		where a.foodMCode = b.foodMCode
+		and a.sideDCode = #{sideDCode}
 	</select>
 </mapper>
