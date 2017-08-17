@@ -754,7 +754,7 @@
 				console.log("스페셜 코드:"+dietCode);  
 				$.getJSON("nutriAjax/specialToggle/"+customer+"/"+dietCode,function(data){   
 					$(data).each(function(){
-						str += "<tr class = 'trText'><td><a class = 'dream' data-code = '"+this.sideDCode+"'>"+this.sideDName+"</a></td><td class = 'summon"+this.sideDCode+"'>"+dream+"</td></tr>";
+						str += "<tr class = 'trText'><td><a class = 'dream' data-code = '"+this.sideDCode+"'>"+this.sideDName+"</a></td><td class = 'summon"+this.sideDCode+"'>"+this.foodMName+"</td></tr>";
 					});
 					$(".optional2").append(str);
 				});

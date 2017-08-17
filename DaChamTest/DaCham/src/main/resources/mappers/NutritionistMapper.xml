@@ -202,16 +202,18 @@
 	</update>
 	<!-- 특별 고객이 등록한 특별식단 toggle -->
 	<select id = "specialToggle" resultType = "com.wdb3a.dacham.bean.Nutritionist">
-		select a.sideDName, a.sideDCode, a.sideDImg, c.dietName, c.dietCode
+		select a.sideDName, a.sideDCode, a.sideDImg, c.dietName, c.dietCode,e.foodMCode,group_concat(distinct e.foodMName) as foodMName
 		from sidedish a join dietinfo b join (select d.dietCode,d.dietName, d.dietImg, d.price 
 		from counsel a join member b join orderlist c join diet d
 		where a.customer = b.id
 		and b.id = c.id
 		and c.dietCode = d.dietCode
 		and a.customer = #{customer}
-		and d.spDietItem = 0) c
+		and d.spDietItem = 0) c, sidedinfo di, foodmaterial e
 		where a.sideDCode = b.sideDCode
 		and b.dietCode = c.dietCode
+		and a.sideDCode = di.sideDCode
+		and di.foodMCode = e.foodMCode
 		and c.dietCode = #{dietCode}
 		group by sideDCode
 	</select>
