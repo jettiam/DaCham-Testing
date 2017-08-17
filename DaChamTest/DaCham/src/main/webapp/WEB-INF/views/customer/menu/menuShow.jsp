@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!document HTML>
+<!doctype HTML>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,6 +18,35 @@
 .sideDImg{  
 height:118px;
 }
+.sideWrap{
+	position:fixed;
+	top:270px;
+	left:5%;  
+	width:210px; 
+}
+.sideUl{
+margin:0px;
+padding:0px;
+border:0px;
+}
+.sideUl li{
+ list-style: none;
+ padding:15px;
+ border-bottom:0.5px solid #999;
+}
+.sideUl li>a{
+	cursor: pointer;
+}
+.sideUl li:HOVER {
+	background-color: #eee; 
+}
+@media only screen and (max-width: 1440px) {
+	.sideWrap{
+	position:fixed;
+	top:270px;
+	left:1%;  
+	width:120px; 
+}	
 @media screen and (max-width: 768px) {
 
 	.sideDImg{
@@ -144,16 +173,28 @@ function w3_close() {
 <%@include file="../../clientNavi.jsp" %>
 <!-- Page Content -->
 <div class="w3-overlay w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay"></div>
-<button class="w3-button w3-white visible-xs h3" onclick="w3_open()">&#9776; <span id="disease">다참 베이직</span></button>
+<button class="w3-button w3-white visible-xs visible-sm visible-md h3" onclick="w3_open()">&#9776; <span id="disease">다참 베이직</span></button>
+
+	<!-- 데스크탑 사이드바 -->
+	<div class="w3-card-4 hidden-xs hidden-sm hidden-md sideWrap">
+	<header class="w3-container btn-warning">
+	   <h5 class=""><b>이달의 메뉴</b></h5>
+	</header>
+	
+	<ul class="sideUl">
+	  	<li><a class="disease0">다참 베이직</a></li>
+	  	<li><a class="disease1">당뇨</a></li>
+	  	<li><a class="disease2">신부전증</a></li>
+	  	<li><a class="disease3">심부전증</a></li>
+	  	<li><a class="disease4">고지혈증</a></li>
+	  		
+	</ul>
+
+</div>
 
 <div class="container">
-<div class="text-center hidden-xs">
-	<h1>이달의 메뉴</h1>
-	<input type="button" class="btn btn-warning disease0" value="다참 베이직">
-	<input type="button" class="btn btn-warning disease1" value="당뇨">
-	<input type="button" class="btn btn-warning disease2" value="신부전증">
-	<input type="button" class="btn btn-warning disease3" value="심부전증">
-	<input type="button" class="btn btn-warning disease4" value="고지혈">
+<div class="text-center" style="margin-bottom:20px;"> 
+	<h1>이달의 메뉴</h1>	
 </div>
 	<div class="row" id="dietList">
 		

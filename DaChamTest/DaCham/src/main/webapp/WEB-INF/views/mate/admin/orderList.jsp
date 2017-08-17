@@ -59,7 +59,8 @@
 							}
 							console.log(str);
 							$(".tables").append(str);
-							printPaging1(data.criteria);   
+							printPaging1(data.criteria);  
+							fontColor1()
 						});
 	}
 	function orderSort2(page) {     
@@ -100,7 +101,8 @@
 							}
 							console.log(str);
 							$(".tables").append(str);
-							printPaging1(data.criteria);  
+							printPaging1(data.criteria); 
+							fontColor1()
 						});
 	}
 	function orderSort3(page) {
@@ -110,7 +112,7 @@
 				.getJSON(
 						"adminSub/orderSort3/"+page,
 						function(data) {
-							console.log(data);
+							console.log(data); 
 							$(".orderListTable").remove();
 							var str = "";
 							for (var i = 0; i < data.list.length; i++) {
@@ -142,6 +144,7 @@
 							console.log(str);
 							$(".tables").append(str);
 							printPaging1(data.criteria);  
+							fontColor1()
 						});
 	}
 	function orderSort4(page) {
@@ -182,7 +185,8 @@
 							}
 							console.log(str);
 							$(".tables").append(str);
-							printPaging1(data.criteria);  
+							printPaging1(data.criteria);
+							fontColor1()
 						});
 	}
 	
@@ -224,7 +228,8 @@
 							}
 							console.log(str);
 							$(".tables").append(str);
-							printPaging1(data.criteria);   
+							printPaging1(data.criteria);  
+							fontColor1()
 						});
 	}
 	
@@ -248,6 +253,16 @@
 					+ "</a></li>";
 		}
 		$(".pagination").html(str);
+	}
+	function fontColor1(){
+		var length = $('.tables tr').length; 
+		for(var i=0; i<length; i++){
+			var font = $(".orderItemName").eq(i).text(); 
+			 if(font =="환불"){
+				   
+				$(".orderItemName").eq(i).css("color", "red");      
+			} 
+		} 
 	}
 
 
@@ -279,6 +294,8 @@
 	$(document)
 			.ready(
 					function() {
+						  
+						
 						$("#orderList").addClass("w3-light-gray");
 						var formObj = $("form[role='form']");
 						var checkArr = [];
@@ -291,6 +308,8 @@
 								$("input[name=che]").prop('checked', false);
 							}
 						});
+						
+						 
 
 						//체크박스 된 값의 orderCode값 출력
 						var y = 0;
@@ -349,6 +368,19 @@
 						});
 
 						//주문 전체 리스트
+						
+						function fontColor(){
+							var length = $('.tables tr').length; 
+							for(var i=0; i<length; i++){
+								var font = $(".orderItemName").eq(i).text(); 
+								 if(font =="환불"){
+									   
+									$(".orderItemName").eq(i).css("color", "red");      
+								} 
+							} 
+						}
+						 
+						
 						all(1);
 						function all(page) {
 							$
@@ -388,6 +420,8 @@
 												console.log(str);
 												$(".tables").append(str);
 												printPaging(data.criteria); 
+												fontColor(); 
+												
 											});
 						}
 						
@@ -639,7 +673,9 @@
  								orderSort5(replyPage); 
  							}   
  							all(replyPage);
- 						});     
+ 						}); 
+ 						
+ 						 
 
 					});
 </script>
