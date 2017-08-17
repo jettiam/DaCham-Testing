@@ -161,6 +161,21 @@ public class AdminSubController {
 		}
 		return entity;
 	}
+	
+	@RequestMapping(value = "orderList/orderItemNameCount", method = RequestMethod.GET)
+	public ResponseEntity<List<OrderList>> orderItemNameCount() {
+		ResponseEntity<List<OrderList>> entity = null;
+
+		try {
+			List<OrderList> list = service.orderItemNameCount(); 
+			entity = new ResponseEntity<>(list, HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
 
 	// orderSort1 리스트 출력
 	@RequestMapping(value = "/orderSort1/{page}", method = RequestMethod.GET)
@@ -443,6 +458,20 @@ public class AdminSubController {
 		ResponseEntity<List<Member>> entity = null;
 		try {
 			List<Member> list = service.memberAll();
+			entity = new ResponseEntity<>(list, HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	
+	@RequestMapping(value = "/memberNomal", method = RequestMethod.GET)
+	public ResponseEntity<List<Member>> memberNomal() {
+		ResponseEntity<List<Member>> entity = null;
+		try {
+			List<Member> list = service.memberNomal();
 			entity = new ResponseEntity<>(list, HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

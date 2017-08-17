@@ -342,6 +342,18 @@ public class NutritionistServiceImpl implements NutritionistService {
 		dao.updateCross2(nutritionist);
 	}
 
+	@Override
+	public List<Nutritionist> popup(int dietCode) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.popup(dietCode);
+	}
+
+	@Override
+	public List<Nutritionist> callName(int sideDCode) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.callName(sideDCode);
+	}
+
 
 	
 

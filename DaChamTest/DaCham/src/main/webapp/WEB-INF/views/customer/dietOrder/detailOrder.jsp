@@ -30,7 +30,7 @@ height:115px;
 height:145px; 
 }
 .nutriTable{
-text-align: center !important;
+text-align: center;
 }
 .nutriChart{
 	margin:auto;
@@ -41,6 +41,9 @@ text-align: center !important;
 }
 .fa-chevron-up{
 	display:none;
+}
+#doOrder{
+	background-color: #1583cc;
 }
 @media only screen and (max-width: 768px){
 	.nutriChart{
@@ -289,7 +292,7 @@ $(document).ready(function() {
 				var NaDay = parseInt(na0/2000*100);
 				var KDay = parseInt(k0/3500*100);
 				nutriValue = [KcalDay,CDay,PDay,Fday,NaDay, KDay];
-				$(".nutriInfoTable").append("<td class='kcalSign w3-green'>"+kcal0+"</td><td class='carboSign w3-green'>"+carbo0+"</td><td class='proteinSign w3-green'>"+protein0+"</td><td class='fatSign w3-green'>"+fat0+"</td><td class='naSign w3-green'>"+na0+"</td><td class='kSign w3-green'>"+k0+"</td>")
+				$(".nutriInfoTable").append("<td class='kcalSign '>"+kcal0+"</td><td class='carboSign '>"+carbo0+"</td><td class='proteinSign '>"+protein0+"</td><td class='fatSign '>"+fat0+"</td><td class='naSign '>"+na0+"</td><td class='kSign '>"+k0+"</td>")
 				/* 
 				<td>남자</td><td id="MKcal">2400</td><td id="MCarbo">405</td><td id="MProtein">50</td><td id="MFat">40</td><td id="MNa">2000</td><td id="MK">3500</td></tr>
 				<td>여자</td><td id="WMKcal">1900</td><td id="WMCarbo">325</td><td id="WMProtein">40</td><td id="WMFat">35</td><td id="WMNa">2000</td><td id="WMK">3500</td></tr> */
@@ -313,49 +316,49 @@ $(document).ready(function() {
 				localStorage['protein']=protein0;
 				localStorage['fat']=fat0;
 				localStorage['na']=na0;
-				localStorage['k']=k0;
+				localStorage['k']=k0; 
 				if(KcalDay>20 && KcalDay<=100){
-					$(".kcalSign").addClass("w3-green");
+					$(".kcalSign").css({'background-color':'rgba(99, 183, 108,0.7)','color':'#000'});
 				}else if((KcalDay>10&&KcalDay<=20)||(KcalDay>100&&KcalDay<=120)){
-					$(".kcalSign").addClass("w3-orange");
+					$(".kcalSign").css({'background-color':'rgba(255, 174, 66,0.7)','color':'#000'});
 				}else{
-					$(".kcalSign").addClass("w3-red");
+					$(".kcalSign").css({'background-color':'rgba(255, 83, 73,0.7)','color':'#000'});
 				}
 				if(CDay>20 && CDay<=100){
-					$(".carboSign").addClass("w3-green");
+					$(".carboSign").css({'background-color':'rgba(99, 183, 108,0.7)','color':'#000'});
 				}else if((CDay>10&&CDay<=20)||(CDay>100&&CDay<=120)){
-					$(".carboSign").addClass("w3-orange");
+					$(".carboSign").css({'background-color':'rgba(255, 174, 66,0.7)','color':'#000'});
 				}else{
-					$(".carboSign").addClass("w3-red");
+					$(".carboSign").css({'background-color':'rgba(255, 83, 73,0.7)','color':'#000'});
 				}
 				console.log(PDay)
 				if(PDay>50 && PDay<=120){
-					$(".proteinSign").addClass("w3-green");
+					$(".proteinSign").css({'background-color':'rgba(99, 183, 108,0.7)','color':'#000'});
 				}else if((PDay>30&&PDay<=50)||(PDay>120&&PDay<=140)){
-					$(".proteinSign").addClass("w3-orange");
+					$(".proteinSign").css({'background-color':'rgba(255, 174, 66,0.7)','color':'#000'});
 				}else{
-					$(".proteinSign").addClass("w3-red");
+					$(".proteinSign").css({'background-color':'rgba(255, 83, 73,0.7)','color':'#000'});
 				}
 				if(NaDay<=100){
-					$(".naSign").addClass("w3-green");
+					$(".naSign").css({'background-color':'rgba(99, 183, 108,0.7)','color':'#000'});
 				}else if(NaDay>100&&NaDay<=120){
-					$(".naSign").addClass("w3-orange");
+					$(".naSign").css({'background-color':'rgba(255, 174, 66,0.7)','color':'#000'});
 				}else{
-					$(".naSign").addClass("w3-red");
+					$(".naSign").css({'background-color':'rgba(255, 83, 73,0.7)','color':'#000'});
 				}
 				if(KDay<=120){
-					$(".kSign").addClass("w3-green");
+					$(".kSign").css({'background-color':'rgba(99, 183, 108,0.7)','color':'#000'});
 				}else if(KDay>120&&KDay<=150){
-					$(".kSign").addClass("w3-orange");
+					$(".kSign").css({'background-color':'rgba(255, 174, 66,0.7)','color':'#000'});
 				}else{
-					$(".kSign").addClass("w3-red");
+					$(".kSign").css({'background-color':'rgba(255, 83, 73,0.7)','color':'#000'});
 				}
 				if(Fday>50 && Fday<=120){
-					$(".fatSign").addClass("w3-green");
+					$(".fatSign").css({'background-color':'rgba(99, 183, 108,0.7)','color':'#000'});
 				}else if((Fday>30&&Fday<=50)||(Fday>120&&Fday<=140)){
-					$(".fatSign").addClass("w3-orange");
+					$(".fatSign").css({'background-color':'rgba(255, 174, 66,0.7)','color':'#000'});
 				}else{
-					$(".fatSign").addClass("w3-red");
+					$(".fatSign").css({'background-color':'rgba(255, 83, 73,0.7)','color':'#000'});
 				}
 				
 			}else{
@@ -369,7 +372,7 @@ $(document).ready(function() {
 				nutriValue = [KcalDay,CDay,PDay,Fday,NaDay, KDay];
 				
 				$(".nutriInfoTable td").remove();
-				$(".fatSign").removeClass("w3-orange");
+				/* $(".fatSign").removeClass("w3-orange");
 				$(".fatSign").removeClass("w3-red");
 				$(".kSign").removeClass("w3-orange");
 				$(".kSign").removeClass("w3-red");
@@ -380,7 +383,7 @@ $(document).ready(function() {
 				$(".carboSign").removeClass("w3-orange");
 				$(".carboSign").removeClass("w3-red");
 				$(".kcalSign").removeClass("w3-orange");
-				$(".kcalSign").removeClass("w3-red");
+				$(".kcalSign").removeClass("w3-red"); */
 
 				$(".nutriInfoTable").append("<td class='kcalSign'>"+kcal+"</td><td class='carboSign'>"+carbo+"</td><td class='proteinSign'>"+protein+"</td><td class='fatSign'>"+fat+"</td><td class='naSign'>"+na+"</td><td class='kSign'>"+k+"</td>")
 				$("#MKcal").html("2500<br>("+parseInt(kcal/2500*100)+"%)");//여기부터
@@ -405,48 +408,48 @@ $(document).ready(function() {
 				var kSign = Number(k)-Number(localStorage['k']);
 				console.log("칼로리차:"+kcalSign+" 탄수화물차:"+carboSign+" 단백질차:"+proteinSign+" 지방차:"+fatSign+" 나트륨차:"+naSign+" 칼륨차:"+kSign);
 				if(KcalDay>20 && KcalDay<=100){
-					$(".kcalSign").addClass("w3-green");
+					$(".kcalSign").css({'background-color':'rgba(99, 183, 108,0.7)','color':'#000'});
 				}else if((KcalDay>10&&KcalDay<=30)||(KcalDay>100&&KcalDay<=120)){
-					$(".kcalSign").addClass("w3-orange");
+					$(".kcalSign").css({'background-color':'rgba(255, 174, 66,0.7)','color':'#000'});
 				}else{
-					$(".kcalSign").addClass("w3-red");
+					$(".kcalSign").css({'background-color':'rgba(255, 83, 73,0.7)','color':'#000'});
 				}
 				if(CDay>20 && CDay<=100){
-					$(".carboSign").addClass("w3-green");
+					$(".carboSign").css({'background-color':'rgba(99, 183, 108,0.7)','color':'#000'});
 				}else if((CDay>10&&CDay<=20)||(CDay>100&&CDay<=120)){
-					$(".carboSign").addClass("w3-orange");
+					$(".carboSign").css({'background-color':'rgba(255, 174, 66,0.7)','color':'#000'});
 				}else{
-					$(".carboSign").addClass("w3-red");
+					$(".carboSign").css({'background-color':'rgba(255, 83, 73,0.7)','color':'#000'});
 				}
 				console.log(PDay)
 				if(PDay>50 && PDay<=120){
-					$(".proteinSign").addClass("w3-green");
+					$(".proteinSign").css({'background-color':'rgba(99, 183, 108,0.7)','color':'#000'});
 				}else if((PDay>30&&PDay<=50)||(PDay>120&&PDay<=140)){
-					$(".proteinSign").addClass("w3-orange");
+					$(".proteinSign").css({'background-color':'rgba(255, 174, 66,0.7)','color':'#000'});
 				}else{
-					$(".proteinSign").addClass("w3-red");
+					$(".proteinSign").css({'background-color':'rgba(255, 83, 73,0.7)','color':'#000'});
 				}
 				if(NaDay<=100){
-					$(".naSign").addClass("w3-green");
+					$(".naSign").css({'background-color':'rgba(99, 183, 108,0.7)','color':'#000'});
 				}else if(NaDay>100&&NaDay<=120){
-					$(".naSign").addClass("w3-orange");
+					$(".naSign").css({'background-color':'rgba(255, 174, 66,0.7)','color':'#000'});
 				}else{
-					$(".naSign").addClass("w3-red");
+					$(".naSign").css({'background-color':'rgba(255, 83, 73,0.7)','color':'#000'});
 				}
 				if(KDay<=120){
-					$(".kSign").addClass("w3-green");
+					$(".kSign").css({'background-color':'rgba(99, 183, 108,0.7)','color':'#000'});
 				}else if(KDay>120&&KDay<=150){
-					$(".kSign").addClass("w3-orange");
+					$(".kSign").css({'background-color':'rgba(255, 174, 66,0.7)','color':'#000'});
 				}else{
-					$(".kSign").addClass("w3-red");
+					$(".kSign").css({'background-color':'rgba(255, 83, 73,0.7)','color':'#000'});
 				}
 				if(Fday>50 && Fday<=120){
-					$(".fatSign").addClass("w3-green");
+					$(".fatSign").css({'background-color':'rgba(99, 183, 108,0.7)','color':'#000'});
 				}else if((Fday>30&&Fday<=50)||(Fday>120&&Fday<=140)){
-					$(".fatSign").addClass("w3-orange");
+					$(".fatSign").css({'background-color':'rgba(255, 174, 66,0.7)','color':'#000'});
 				}else{
-					$(".fatSign").addClass("w3-red");
-				}
+					$(".fatSign").css({'background-color':'rgba(255, 83, 73,0.7)','color':'#000'});
+				} 
 				
 			}
 		
@@ -548,8 +551,8 @@ $(document).ready(function() {
 			<!-- 장바구니, 주문하기 버튼 -->
 			<div class="large secondary expanded button-group">
 				
-				<a href="#" class="button large expanded" id="goMyCart">Cart</a> <a href="#"
-					class="button large expanded" id="doOrder">Buy Now</a>
+				<a href="#" class="button large expanded" id="goMyCart">Cart</a>
+				<a href="#"	class="button large expanded " id="doOrder">Buy Now</a>
 			</div>
 			</div>
 			<!-- 영양차트 -->
@@ -566,7 +569,7 @@ $(document).ready(function() {
 			</div>
 			<div class="center-block table-responsive">
 				<table class="table nutriTable">
-					<tr><th class="kcalSign w3-green">칼로리<br>(Kcal)</th><th class="carboSign w3-green">탄수화물<br>(g)</th><th class="proteinSign w3-green">단백질<br>(g)</th><th class="fatSign w3-green">지방<br>(g)</th><th class="naSign w3-green">나트륨<br>(mg)</th><th class="kSign w3-green">칼륨<br>(mg)</th></tr>
+					<tr><th class="kcalSign ">칼로리<br>(Kcal)</th><th class="carboSign ">탄수화물<br>(g)</th><th class="proteinSign ">단백질<br>(g)</th><th class="fatSign ">지방<br>(g)</th><th class="naSign ">나트륨<br>(mg)</th><th class="kSign ">칼륨<br>(mg)</th></tr>
 					<tr class="nutriInfoTable"></tr>					
 				</table>				
 			</div>

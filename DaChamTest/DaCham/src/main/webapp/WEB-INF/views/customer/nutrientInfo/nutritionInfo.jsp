@@ -16,8 +16,8 @@
 
 <title>DaCham 영양정보</title>
 <script>
-$(document).ready(function(){
-	$("#nutritionInfo").addClass("w3-gray");
+	$(document).ready(function() {
+		$("#nutritionInfo").addClass("w3-gray");
 	});
 </script>
 <style>
@@ -77,23 +77,42 @@ $(document).ready(function(){
 }
 
 #nutriInfotable {
-	margin:auto
+	margin: auto
+}
+
+@media screen and (max-width: 768px) {
+
+	.col-sm-4{
+	padding-top:20px;
+	}
+	.overlay {
+	position: absolute;	
+	top: 24px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 300px;
+	width: 300px;
+	opacity: 1;
+	transition: .5s ease;
+	background-color: rgba(211, 112, 168, 0.1);
+	}
 }
 </style>
 </head>
 <body>
 	<%@include file="../../clientNavi.jsp"%>
 	<div class="container">
-	<div class="row">
-		<h1 class="text-center">영양소개</h1>
-		<div class="col-sm-12 text-center">
-		<p class="lead"> 
-		건강에 대한 유용한 정보를 알려드립니다.<br> 일상에서 쉽게 활용할 수 있는 정보만을 드릴게요.<br>
-		다참과 함께 건강한 생활 하세요
-		</p>
+		<div class="row">
+			<h1 class="text-center">영양소개</h1>
+			<div class="col-sm-12 text-center">
+				<p class="lead">
+					건강에 대한 유용한 정보를 알려드립니다.<br> 일상에서 쉽게 활용할 수 있는 정보만을 드릴게요.<br>
+					다참과 함께 건강한 생활 하세요
+				</p>
+			</div>
 		</div>
-	</div>	
-		<table id="nutriInfotable">
+		<table id="nutriInfotable" class="hidden-xs">
 			<tr>
 				<td>
 					<div class="nutriInfoContainer">
@@ -102,7 +121,7 @@ $(document).ready(function(){
 								<img src="resources/customerImage/tomato.jpg" id="nutriInfoImg">
 
 								<div class="overlay">
-									<div class="text">'방울 토마토'의 효능과 요리</div>
+									<div class="text text-center">'방울 토마토'의 효능과 요리</div>
 								</div>
 							</div>
 						</a>
@@ -116,7 +135,7 @@ $(document).ready(function(){
 									id="nutriInfoImg">
 
 								<div class="overlay">
-									<div class="text">미세먼지 기승, 녹차・브로콜리로 예방하세요!</div>
+									<div class="text text-center">미세먼지 기승, 녹차・브로콜리로 예방하세요!</div>
 
 								</div>
 							</div>
@@ -133,7 +152,7 @@ $(document).ready(function(){
 									id="nutriInfoImg">
 
 								<div class="overlay">
-									<div class="text">'야채와 건강'</div>
+									<div class="text text-center">'야채와 건강'</div>
 								</div>
 							</div>
 						</a>
@@ -149,7 +168,7 @@ $(document).ready(function(){
 								<img src="resources/customerImage/fruit.jpg" id="nutriInfoImg">
 
 								<div class="overlay">
-									<div class="text">'당뇨와 과일'</div>
+									<div class="text text-center">'당뇨와 과일'</div>
 								</div>
 							</div>
 						</a>
@@ -163,7 +182,7 @@ $(document).ready(function(){
 								<img src="resources/customerImage/gusal.jpg" id="nutriInfoImg">
 
 								<div class="overlay">
-									<div class="text">'질병과 현미'</div>
+									<div class="text text-center">'질병과 현미'</div>
 								</div>
 							</div>
 						</a>
@@ -177,7 +196,7 @@ $(document).ready(function(){
 								<img src="resources/customerImage/salmon.jpg" id="nutriInfoImg">
 
 								<div class="overlay">
-									<div class="text">'슈퍼푸드 연어'</div>
+									<div class="text text-center">'슈퍼푸드 연어'</div>
 								</div>
 							</div>
 						</a>
@@ -185,9 +204,77 @@ $(document).ready(function(){
 				</td>
 			</tr>
 		</table>
+		<div class="visible-xs">
+			<div class="nutriInfoContainer col-sm-4">
+				<a href="nutritionInfoDetail?detail=1">
+					<div id="nutriInfoImgList">
+						<img class="center-block" src="resources/customerImage/tomato.jpg" id="nutriInfoImg">
 
+						<div class="overlay center-block">
+							<div class="text text-center">'방울 토마토'의 효능과 요리</div>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="nutriInfoContainer col-sm-4">
+				<a href="nutritionInfoDetail?detail=2">
+					<div id="nutriInfoImgList">
+						<img class="center-block" src="resources/customerImage/broccoli.jpg" id="nutriInfoImg">
+						<div class="overlay center-block">
+							<div class="text text-center">미세먼지 기승, 녹차・브로콜리로 예방하세요!</div>
 
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="nutriInfoContainer col-sm-4">
+				<a href="nutritionInfoDetail?detail=3">
+					<div id="nutriInfoImgList">
+						<img class="center-block" src="resources/customerImage/shutterstock.jpg"
+							id="nutriInfoImg">
 
+						<div class="overlay center-block">
+							<div class="text text-center">'야채와 건강'</div>
+						</div>
+					</div>
+				</a>
+			</div>
+
+			<div class="nutriInfoContainer col-sm-4">
+				<a href="nutritionInfoDetail?detail=4">
+					<div id="nutriInfoImgList">
+						<img class="center-block"  src="resources/customerImage/fruit.jpg" id="nutriInfoImg">
+
+						<div class="overlay center-block">
+							<div class="text text-center">'당뇨와 과일'</div>
+						</div>
+					</div>
+				</a>
+			</div>
+		
+		<div class="nutriInfoContainer col-sm-4">
+			<a href="nutritionInfoDetail?detail=5">
+				<div id="nutriInfoImgList">
+					<img class="center-block" src="resources/customerImage/gusal.jpg" id="nutriInfoImg">
+
+					<div class="overlay center-block">
+						<div class="text text-center">'질병과 현미'</div>
+					</div>
+				</div>
+			</a>
+		</div>
+		<div class="nutriInfoContainer col-sm-4">
+			<a href="nutritionInfoDetail?detail=6">
+				<div id="nutriInfoImgList">
+					<img class="center-block" src="resources/customerImage/salmon.jpg" id="nutriInfoImg">
+
+					<div class="overlay center-block">
+						<div class="text text-center">'슈퍼푸드 연어'</div>
+					</div>
+				</div>
+			</a>
+		</div>
+		</div> 
 	</div>
 
 

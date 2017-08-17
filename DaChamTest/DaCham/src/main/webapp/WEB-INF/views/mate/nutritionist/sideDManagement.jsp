@@ -129,23 +129,23 @@
 		<nav>
 			<a href = "#" id = "categoryStart">반찬 찾아보기</a>
 			<ul class = "category">
-				<li><a data-name = "밥">밥</a></li>
-				<li><a data-name = "국">국</a></li>
-				<li><a data-name = "메인 메뉴1">메인 메뉴1</a></li>
-				<li><a data-name = "메인 메뉴2">메인 메뉴2</a></li>
-				<li><a data-name = "메인 메뉴3">메인 메뉴3</a></li>
-				<li><a data-name = "메인 메뉴4">메인 메뉴4</a></li>
+				<li><a data-name = "밥"><img class = "img-responsive dImg center-block" src = "resources/customerImage/dietImg/rice7.JPG" style = "width:50px; height:50px;">밥</a></li>
+				<li><a data-name = "국"><img class = "img-responsive dImg center-block" src = "resources/customerImage/dietImg/s08.JPG" style = "width:50px; height:50px;">국</a></li>
+				<li><a data-name = "메인 메뉴1"><img class = "img-responsive dImg center-block" src = "resources/customerImage/dietImg/m06.JPG" style = "width:50px; height:50px;">메인 메뉴1</a></li>
+				<li><a data-name = "메인 메뉴2"><img class = "img-responsive dImg center-block" src = "resources/customerImage/dietImg/m07.JPG" style = "width:50px; height:50px;">메인 메뉴2</a></li>
+				<li><a data-name = "메인 메뉴3"><img class = "img-responsive dImg center-block" src = "resources/customerImage/dietImg/m08.JPG" style = "width:50px; height:50px;">메인 메뉴3</a></li>
+				<li><a data-name = "메인 메뉴4"><img class = "img-responsive dImg center-block" src = "resources/customerImage/dietImg/m09.JPG" style = "width:50px; height:50px;">메인 메뉴4</a></li>
 			</ul>
 		</nav>
 		<nav>
 			<ul class = "category2">
-				<li><a data-name = "튀김">튀김</a></li>
-				<li><a data-name = "구이">구이</a></li>
-				<li><a data-name = "조림">조림</a></li>
-				<li><a data-name = "찜">찜</a></li>
-				<li><a data-name = "초벌">초벌</a></li>
-				<li><a data-name = "무침">무침</a></li>
-				<li><a data-name = "탕">탕</a></li>
+				<li><a data-name = "튀김"><h3>튀김</h3></a></li>
+				<li><a data-name = "구이"><h3>구이</h3></a></li>
+				<li><a data-name = "조림"><h3>조림</h3></a></li>
+				<li><a data-name = "찜"><h3>찜</h3></a></li>
+				<li><a data-name = "초벌"><h3>초벌</h3></a></li>
+				<li><a data-name = "무침"><h3>무침</h3></a></li>
+				<li><a data-name = "탕"><h3>탕</h3></a></li>
 			</ul>
 		</nav>
 	</div>

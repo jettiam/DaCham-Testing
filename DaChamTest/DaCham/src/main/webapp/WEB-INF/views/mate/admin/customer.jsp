@@ -13,6 +13,9 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <title>Insert title here</title>
+<style>
+  
+</style>
 <script>
 function previewImage(targetObj, View_area){
 	var preview = document.getElementById(View_area);
@@ -315,7 +318,36 @@ function previewImage(targetObj, View_area){
 										});
 						$("#searchAll").on("click", function(){
 							all();  
-						});  
+						});
+						
+						$(".admin").on("click", function(){
+							all();  
+						})
+						$(".member").on("click", function(){
+							$
+							.getJSON(
+									"adminSub/memberNomal",  
+									function(data) {
+										console.log(data);
+										$(".trclass").remove();
+										var str = "";
+										for (var i = 0; i < data.length; i++) {
+											if (data[i].outDate == null) {
+												str += "<tr class='trclass'><td class='ids' data-code = '"+data[i].id+"'>"
+														+ data[i].id
+														+ "</td>"
+														+ "<td>"
+														+ data[i].name
+														+ "<td>"
+														+ data[i].gradeCode
+														+ "</td>"
+														+ "</tr>"
+											}
+										}
+										console.log(str);
+										$(".memberTable").append(str);
+									});
+						})
 
 					});
 </script>
@@ -326,27 +358,30 @@ function previewImage(targetObj, View_area){
 		<div class="col-sm-4">
 			<h2>사원/회원 검색</h2>
 			<div class="form-group row">
-				<div class="col-sm-3">     
+				<div class="col-sm-4">     
 					<select name="searchType" class="searchType form-control">
 						<option value="t">
 							<c:out value="${member.searchType eq 't'?'selected':'' }"/>
 							ID</option>           
 						<option value="c">
 							<c:out value="${member.searchType eq 'c'?'selected':'' }"/>
-							이름</option>
-						<option value="a">
-							<c:out value="${member.searchType eq 'c'?'selected':'' }"/>
-							직책</option>  
+							이름</option>     
 					</select>  
 				</div>
-				<div class="col-sm-4">
+				<div class="col-sm-5">
 					<input type="text" name="keyword" id="keyword" class="form-control">
 				</div>
-				<div class="col-sm-5">
-					<button id="search" class="btn btn-default">검색</button>
-					<button id="searchAll" class="btn btn-default">전체</button>
+				<div class="col-sm-3">
+					<button id="search" class="btn btn-default">검색</button>    
 				</div>
 			</div>
+			
+			<div class="col-sm-offset-8">      
+			&nbsp;
+			<button class="admin btn btn-default btn-xs">관리자</button> 
+			<button class="member btn btn-default btn-xs">회원</button> 
+			</div>
+			<div id="margin">
 			<pre class="member pre-scrollable" width="30">
 				<table class="memberTable table table-condensed">    
 					<tr>
@@ -356,6 +391,8 @@ function previewImage(targetObj, View_area){
 					</tr>
 				</table>
 			</pre>
+			</div>
+			
 		</div>
 		<div class="col-sm-4">
 			<table class="memberUserTable table table-condensed">

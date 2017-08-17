@@ -348,7 +348,7 @@
 						str += "<tr class = 'searchResult'><td>"+this.foodMCode+"</td>"+"<td>"+"<a class = 'nameClick' data-src = '"+this.foodMName+"' data-code = '"+this.foodMCode+"'>"+this.foodMName+"</a></td></tr>";
 					});
 					$(".searchTable").append(str);
-					/* alert(str); */
+					/* alert(str);   */
 				});
 			});
 			

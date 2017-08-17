@@ -102,4 +102,8 @@ public interface NutritionistService {
 	public void updateCross1(int dietCode) throws Exception;
 	//해당 식단 수정 페이지에서 수정을 위해 페이지에 있는 반찬을 재등록
 	public void updateCross2(Nutritionist nutritionist) throws Exception;
+	//해당 영양사 메인 페이지에서 식단 클릭하면 팝업을 띄울 수 있음
+	public List<Nutritionist> popup(int dietCode) throws Exception;
+	//해당 반찬 코드에 속한 식재료 정보를 불러옵니다.
+	public List<Nutritionist> callName(int sideDCode) throws Exception;
 }

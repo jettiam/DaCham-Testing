@@ -389,8 +389,22 @@
 												$(".tables").append(str);
 												printPaging(data.criteria); 
 											});
-						} 
-
+						}
+						
+						function orderItemNameCount(){
+							var str="";
+							$
+							.getJSON(
+									"adminSub/orderList/orderItemNameCount",
+									function(data) {
+										console.log(data);
+										str = "<h4>뭐가 출력될까요?"+data[0].orderItemName + "몇 건" + data[0].orderItemNameCount + "<h2>"
+									
+										$(".orderItemNameCount").append(str); 
+										
+						});
+						}
+									orderItemNameCount()
 						//환불 버튼  
 						$('#refund').click(function() {
 							var length = $('.orderListTable input:checked').length;
@@ -679,6 +693,9 @@
 						onclick="orderSort5(1);">환불 정렬</a></li> 	  
 				</ul>
 			</div>
+			<div class="orderItemNameCount">
+			<h4>건수 수정중입니다 . !! </h4>  
+			</div>
 			<div class="topMar">
 				<div class="form-group row">
 
@@ -703,7 +720,7 @@
 					<div>
 						<button id="foodOrder" class="btn btn-default">식재료 주문</button>
 						<button id="work" class="btn btn-default">작업 요청</button>
-						<button id="refund" class="btn btn-default">환불</button>
+						<button id="refund" class="btn btn-danger">환불</button>
 					</div>
 
 

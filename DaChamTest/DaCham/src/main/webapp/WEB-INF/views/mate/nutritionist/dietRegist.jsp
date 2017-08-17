@@ -99,8 +99,9 @@
 											console.log(count);
 											var sideDImg = $(this).attr(
 													'data-img');
-											var sideDCode = $(this).attr(
-													'data-code');
+										
+											
+// 											localStorage[count+"_sideDCode"] = sideDCode;
 											
 											var sideDName = $(this).attr('data-name');
 
@@ -124,14 +125,67 @@
 // 																openAPI();
 // 															});                         
 
+											var foodGCode = $(this).attr('data-foodgcode');
+											var sideDCode = $(this).attr('data-code');
+											var length = $(".foodG"+foodGCode).children().length;
+											var status = true;
 											
+											if(length == 0){
+												++count;
 
-											++count;
+												localStorage['count'] = count;
+												Refresh(foodGCode, sideDImg, sideDCode, sideDName);
+												v = count;
+											}
+											else{
+												for(var i = 0; i < length; i++){
+	 												console.log("콘솔:"+$(".foodG"+foodGCode).children().eq(i).children().eq(0).val());
+	 												if($(".foodG"+foodGCode).children().eq(i).children().eq(0).val() == sideDCode){
+	 													alert("중복된 반찬이 있습니다.");
+	 													status = false;
+	 													break;
+													}
+													else{
+						
+														
+													}
+												}
+												if(status == true){
+													++count;
 
-											localStorage['count'] = count;
-
-											Refresh(foodGCode, sideDImg, sideDCode, sideDName);
-											v = count;
+													localStorage['count'] = count;
+													Refresh(foodGCode, sideDImg, sideDCode, sideDName);
+													v = count;
+												}
+											}
+ 											
+											
+											
+											
+											
+											
+											
+//  											for(var i = 0; i<count;i++){
+//  												for(var j = 0; j<i;j++){
+//  													if(localStorage[i+'_sideDCode'] == localStorage[j + '_sideDCode']){
+//  														alert("중복된 반찬을 선택하셨습니다.");
+														
+//  													}
+//  													else{
+//  														Refresh(foodGCode, sideDImg, sideDCode, sideDName);
+//  														break;
+//  													}
+ 				
+//  												}
+//  											}
+											
+										
+											
+											
+											
+											
+											
+											
 											}
 											});
 
@@ -163,6 +217,8 @@
 											.removeItem(id + '_foodGCode');
 											localStorage
 											.removeItem(id + '_sideDName');
+											localStorage
+											.removeItem(id + '_sideDCode');
 // 											localStorage.removeItem(id
 // 													+ '_codes');
 // 											localStorage.removeItem(id
@@ -707,7 +763,8 @@ label{
 <body>
 	<%@include file="nutritionistNavi.jsp"%>
 	<div class="container">
-		<div class="col-sm-6">
+		<div class="col-sm-6" style = "border: 1px solid gold;">
+		<h3>선택된 반찬 목록</h3>        
 		<div class="material">
 			<div class="col-sm-12 h4">밥</div>
 			<div class="foodG01 checkSideD"></div>
