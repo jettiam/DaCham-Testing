@@ -4,6 +4,14 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-indigo.css">
 <style>
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+
+body {
+	font-family: 'Jeju Gothic', sans-serif;
+}
+
+
+
 .w3-display-container{
 height:180px;
 }

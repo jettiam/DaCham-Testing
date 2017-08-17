@@ -140,14 +140,15 @@ Blockly.Blocks['answerLink'] = {
 };
 
 //당뇨 결과 블록들 1~3 위로 갈수록 심각.
+
+
+var colorSet1 = "#28727B", colorSet2 = "#EAA130", colorSet3 = "#A43B3F";
 Blockly.Blocks['d1'] = {
   init: function() {
-    this.appendDummyInput()
-        .appendField("당뇨");
-    this.appendDummyInput()
-        .appendField("주의");
+    this.appendDummyInput().appendField("당뇨");
+    this.appendDummyInput().appendField("주의");
     this.setOutput(true, null);
-    this.setColour("#28727B");
+    this.setColour(colorSet1);
     this.setTooltip('');
     this.setHelpUrl('');
   }
@@ -160,7 +161,7 @@ Blockly.Blocks['d2'] = {
     this.appendDummyInput()
         .appendField("위험");
     this.setOutput(true, null);
-    this.setColour("#EAA130");
+    this.setColour(colorSet2);
     this.setTooltip('');
     this.setHelpUrl('');
   }
@@ -173,12 +174,11 @@ Blockly.Blocks['d3'] = {
     this.appendDummyInput()
         .appendField("고위험");
     this.setOutput(true, null);
-    this.setColour("#A43B3F");
+    this.setColour(colorSet3);
     this.setTooltip('');
     this.setHelpUrl('');
   }
 };
-
 
 
 

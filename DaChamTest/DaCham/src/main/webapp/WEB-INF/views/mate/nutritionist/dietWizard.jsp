@@ -13,7 +13,13 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+<style>
+	.align_bottom{
+	width : 100%;
+    position: fixed;
+  	bottom: 0;
+  	}
+</style>
 <script>
 	$(document).ready(function(){
 		$("#wizard").addClass("w3-light-gray");
@@ -31,11 +37,15 @@
 
 <body>
 	<%@include file="nutritionistNavi.jsp"%>
-	<div class="container">
 		<div>
+		</div>
 			<button id="regist" class="btn btn-default">위자드 등록</button>
 			<button id="modify" class="btn btn-primary">위자드 수정(프로토 발표용)</button>
-		</div>
+
+	<div class="align_bottom">
+	<img class="center-block" src="resources/bottom_bg.png"/>
 	</div>
+	<h1>안녕ㅇ하세요</h1>
+	<h1>안녕ㅇ하세요</h1><h1>안녕ㅇ하세요</h1><h1>안녕ㅇ하세요</h1>
 </body>
 </html>

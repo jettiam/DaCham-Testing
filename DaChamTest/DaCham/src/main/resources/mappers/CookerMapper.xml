@@ -139,10 +139,8 @@
 
 
 	<update id="updateOptionsItemCode" parameterType="HashMap">
-		update
-		orderoptions set orderItemCode= #{orderItemCode}
-		where sideDCode =
-		#{sideDCode};
+		update orderoptions set orderItemCode= #{orderItemCode} 
+		where sideDCode = #{sideDCode};
 	</update>
 
 
