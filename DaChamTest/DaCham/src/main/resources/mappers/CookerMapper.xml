@@ -136,7 +136,7 @@ from (select foodMName,sum(inAmount) inAmount,sum(outAmount) outAmount,unit
 		where a.orderCode = b.orderCode
 		and
 		a.sideDCode = c.sideDCode
-		group by sideDcode
+		group by sideDcode 
 		
 	</select>
 	<select id="anotherSelectCookingItem3" resultType="CookingItem">
