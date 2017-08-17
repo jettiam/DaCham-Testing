@@ -8,6 +8,7 @@ public class CookingItem {
 	private int orderOrderItemCode; // orderlist테이블의 반찬 itemCode(상태)
 	private int optionsOrderItemCode; // options테이블의 반찬 itemCode(상태)
 	private int cookingAmount;
+	private String orderItemName;
 	
 	
 	
@@ -55,5 +56,11 @@ public class CookingItem {
 	}
 	public void setCookingAmount(int cookingAmount) {
 		this.cookingAmount = cookingAmount;
+	}
+	public String getOrderItemName() {
+		return orderItemName;
+	}
+	public void setOrderItemName(String orderItemName) {
+		this.orderItemName = orderItemName;
 	}		
 }

@@ -31,7 +31,7 @@ margin-bottom:20px;
 		<div class="w3-bar w3-border w3-theme-d5 w3-xlarge">
 		<div class="w3-container">
 		  <a href="cookList" class="w3-bar-item w3-button w3-hover-light-gray" id="cookList">조리목록</a>
-		  <a href="cook" class="w3-bar-item w3-button w3-hover-light-gray" id="cook">조리현황보기</a>
+<!-- 		  <a href="cook" class="w3-bar-item w3-button w3-hover-light-gray" id="cook">조리현황보기</a> -->
 		  <a href="cookFood"class="w3-bar-item w3-button w3-hover-light-gray" id="cookFood">식재료재고</a>
 		</div>
 		</div>
