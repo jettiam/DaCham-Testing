@@ -136,10 +136,11 @@ from (select foodMName,sum(inAmount) inAmount,sum(outAmount) outAmount,unit
 		where a.orderCode = b.orderCode
 		and
 		a.sideDCode = c.sideDCode
-		group by sideDcode;
+		group by sideDcode
+		
 	</select>
 	<select id="anotherSelectCookingItem3" resultType="CookingItem">
-		select a.orderCode as
+				select a.orderCode as
 		orderCode,
 		a.sideDCode as sideDCode,
 		c.sideDImg as sideDImg,
@@ -148,15 +149,30 @@ from (select foodMName,sum(inAmount) inAmount,sum(outAmount) outAmount,unit
 		b.orderItemCode as orderOrderItemCode,
 		a.orderItemCode as
 		optionsOrderItemCode,
-		sum(b.dietAmount) as cookingAmount, d.orderItemName
+		sum(b.dietAmount) as cookingAmount, d.orderItemName  
 		from
 		orderoptions a, orderlist b, sidedish c, orderitem d
 		where a.orderCode = b.orderCode
+		and a.orderItemCode = d.orderItemCode
 		and
 		a.sideDCode = c.sideDCode
-		and a.orderItemCode = d.orderItemCode
 		group by sideDcode
-		having optionsOrderItemCode = 3;
+		having optionsOrderItemCode = 3
+		limit #{startRecord},#{recordsPerPage}
+	</select>
+	<select id = "anotherSelectCookingItemCount" resultType = "Integer">
+		select count(c.orderCode)
+		from (select a.orderCode as orderCode, 
+		b.sideDName,b.sideDImg, sum(a.dietAmount) as dietAmount,
+		a.orderItemCode, d.orderItemName
+		from orderlist a join sidedish b join dietinfo c join orderitem d
+		where
+		a.dietCode = c.dietCode
+		and c.sideDCode = b.sideDCode
+		and a.orderItemCode = d.orderItemCode
+		and
+		a.orderItemCode = 3
+		group by b.sideDName) c
 	</select>
 	<select id="anotherSelectCookingItem5" resultType="CookingItem">
 		select a.orderCode as
@@ -168,15 +184,36 @@ from (select foodMName,sum(inAmount) inAmount,sum(outAmount) outAmount,unit
 		b.orderItemCode as orderOrderItemCode,
 		a.orderItemCode as
 		optionsOrderItemCode,
-		sum(b.dietAmount) as cookingAmount, d.orderItemName
+		sum(b.dietAmount) as cookingAmount, d.orderItemName  
 		from
 		orderoptions a, orderlist b, sidedish c, orderitem d
 		where a.orderCode = b.orderCode
+		and a.orderItemCode = d.orderItemCode
 		and
 		a.sideDCode = c.sideDCode
-		and a.orderItemCode = d.orderItemCode
 		group by sideDcode
-		having optionsOrderItemCode = 5;
+		having optionsOrderItemCode = 5
+		limit #{startRecord},#{recordsPerPage};
+	</select>
+	<select id = "anotherSelectCookingItemCount2" resultType = "Integer">
+		select count(c.orderCode)
+from (select a.orderCode as
+		orderCode,
+		a.sideDCode as sideDCode,
+		c.sideDImg as sideDImg,
+		c.sideDName
+		as sideDName,
+		b.orderItemCode as orderOrderItemCode,
+		a.orderItemCode as
+		optionsOrderItemCode,
+		sum(b.dietAmount) as cookingAmount
+		from
+		orderoptions a, orderlist b, sidedish c
+		where a.orderCode = b.orderCode
+		and
+		a.sideDCode = c.sideDCode
+		group by sideDcode
+		having optionsOrderItemCode = 5) c
 	</select>
 	<update id="updateOptionsItemCode" parameterType="HashMap">
 		update

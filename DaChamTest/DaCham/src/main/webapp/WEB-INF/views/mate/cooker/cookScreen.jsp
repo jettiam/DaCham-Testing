@@ -47,7 +47,7 @@
 	// 조리종료
 	function cookEnd(){
 		var className = $(this).parent().parent().attr('class');
-		var code = className.slice(2);
+		var code = className.slice(1);
 		updateOptionsItemCode(5, code);
 		
 		var element = $("tr."+className);
