@@ -162,17 +162,23 @@ from (select foodMName,sum(inAmount) inAmount,sum(outAmount) outAmount,unit
 	</select>
 	<select id = "anotherSelectCookingItemCount" resultType = "Integer">
 		select count(c.orderCode)
-		from (select a.orderCode as orderCode, 
-		b.sideDName,b.sideDImg, sum(a.dietAmount) as dietAmount,
-		a.orderItemCode, d.orderItemName
-		from orderlist a join sidedish b join dietinfo c join orderitem d
-		where
-		a.dietCode = c.dietCode
-		and c.sideDCode = b.sideDCode
-		and a.orderItemCode = d.orderItemCode
+from (select a.orderCode as
+		orderCode,
+		a.sideDCode as sideDCode,
+		c.sideDImg as sideDImg,
+		c.sideDName
+		as sideDName,
+		b.orderItemCode as orderOrderItemCode,
+		a.orderItemCode as
+		optionsOrderItemCode,
+		sum(b.dietAmount) as cookingAmount
+		from
+		orderoptions a, orderlist b, sidedish c
+		where a.orderCode = b.orderCode
 		and
-		a.orderItemCode = 3
-		group by b.sideDName) c
+		a.sideDCode = c.sideDCode
+		group by sideDcode
+		having optionsOrderItemCode = 3) c
 	</select>
 	<select id="anotherSelectCookingItem5" resultType="CookingItem">
 		select a.orderCode as
