@@ -6,178 +6,181 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <title>DaCham 다참</title>
+<script>
+$(window).scroll(function() {
+    $(".slideanim").each(function(){
+      var pos = $(this).offset().top;
+
+      var winTop = $(window).scrollTop();
+        if (pos < winTop + 600) {
+          $(this).addClass("slide");
+        }
+    });
+  });
+</script>
 <!-- 메인페이지 기본 틀을 위한 임시 CSS -->
 <style>
-table,td,tr,tbody{
-	margin:0;
-	padding:0;
-	border:0;
+.container{
+	padding:30px;
 }
-#mainImgWrap{
-padding:0px;
-}
-#nutriInfoWrap{
-padding:0px;}
-#myNutriInfo{
-padding:0px;
-}
-#mainMenuImgs{
-padding:0px;
-}
-#mainNutriBox{
-padding:0px;}
-#mainShowNutriTable{
-margin-top:10px;
-display:none;}
+	.mainWrap{
+	position:relative;
+	}
+ #mainContent{
+      padding: 30px 50px;
+  }
+ .slideanim {visibility:hidden;}
+ .slide {
+      animation-name: slide;
+      -webkit-animation-name: slide;
+      animation-duration: 1s;
+      -webkit-animation-duration: 1s;
+      visibility: visible;
+  }
+  .carousel-inner{
+  	position: absolute;
+  	top:40%;
+  }
+  .item div h3{
+  	line-height: 1.375em
+  }
+ #myCarousel{
+	position: absolute;
+	top: 0 ;
+	bottom: 0;
+	left: 0;
+	right: 0;	
+	opacity: 1;	
+ }
+
+  .carousel-control.right, .carousel-control.left {
+      background-image: none;
+      color: #fff;      
+  }
+  .img_top {
+    opacity: 0.7;
+    filter: alpha(opacity=70); /* For IE8 and earlier */
+    display: block;
+	}
+@keyframes slide {
+    0% {
+      opacity: 0;
+      transform: translateY(70%);
+    } 
+    100% {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+  }
+  @-webkit-keyframes slide {
+    0% {
+      opacity: 0;
+      -webkit-transform: translateY(70%);
+    } 
+    100% {
+      opacity: 1;
+      -webkit-transform: translateY(0%);
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .col-sm-4 {
+      text-align: center;
+      margin: 25px 0;
+    }
+    .btn-lg {
+        width: 100%;
+        margin-bottom: 35px;
+    }
+  }
+  @media screen and (max-width: 480px) {
+    .logo {
+        font-size: 150px;
+    }
+  }
 </style>
 </head>
 <body>
-	<div>
-		<%@include file="clientNavi.jsp"%><!-- 네비게이션 삽입 -->
+<%@include file="clientNavi.jsp"%><!-- 네비게이션 삽입 -->
+	<div class="mainWrap">
+		<img class="img_top" src='resources/customerImage/mainTop.jpg'/>
+		<div id="myCarousel" class="carousel  slide text-center hidden-xs" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      <div class="item active">
+      	<div>
+        <h3>"질환 상태에 맞는 맞춤식단"<br><p>다참의 식단 위자드를 사용한 맞춤식단 제공</p></h3>
+        </div>
+      </div>
+      <div class="item">
+      	<div>
+          <h3>"직접 만드는 건강한 식단"<br><p>전문 영양사가 작성한 식단에서 원하는 음식으로 변경</p></h3>
+        </div>
+      </div>
+      <div class="item">
+      	<div>
+          <h3>"내용"<br><p>내용</p></h3>
+        </div>
+      </div>     
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+	</div>
+  
+
+	
+	<div class="container">	
+		<div class="row">
+		  
+		    <div class="col-sm-8">
+		      <h3>직접 만드는 건강한 식단</h3><br>
+		      <h4>내용용요용</h4>
+		      
+		    </div>
+		      <div class="col-sm-4">
+		      <img src="resources/customerImage/dmain.jpg" class="slideanim">
+		    </div>
+		 </div>
+	</div>
+		<div class="container">	
+		<div class="row">
+		    <div class="col-sm-4">
+		      <img src="resources/customerImage/dachamlogo.png" class="slideanim">
+		    </div>
+		    <div class="col-sm-8">
+		      <h3>다참</h3><br>
+		     
+		    </div>
+		 </div>
 	</div>
 
 	<div id="mainContent" class="container">
-	<div class="row">
-		<div class="col-sm-9" id="mainImgWrap">
-			<!-- 메인페이지 메인이미지 -->
-			<img class="img-responsive" src="resources/customerImage/dmain.jpg">
-		</div>
-
-
-		<div class="col-sm-3" id="nutriInfoWrap">		
-			<div class="col-sm-12" id="myNutriInfo"></div>
-			<div id="mainMenuImgs" class="col-sm-12">
-				<!-- 로그인박스 하단 작은 사이즈 식단 이미지 -->
-				<table>
-					<tr>
-						<td><a href="detailOrder?dietCode=51"><img src="resources/customerImage/dietImg/d01.JPG"
-							id=mainMenuImg class="mainMenuImg1 img-responsive"></a></td>
-						<td><a href="detailOrder?dietCode=52"><img src="resources/customerImage/dietImg/d02.JPG"
-							class="mainMenuImg2 img-responsive"></a></td>
-					</tr>
-
-					<tr>
-						<td><a href="detailOrder?dietCode=53"><img src="resources/customerImage/dietImg/d03.JPG"
-							class="mainMenuImg3 img-responsive"></a></td>
-						<td><a href="detailOrder?dietCode=54"><img src="resources/customerImage/dietImg/d05.JPG"
-							class="mainMenuImg4 img-responsive"></a></td>
-					</tr>
-
-					<tr>
-						<td><a href="detailOrder?dietCode=55"><img src="resources/customerImage/dietImg/m16.JPG"
-							class="mainMenuImg5 img-responsive"></a></td>
-						<td><a href="detailOrder?dietCode=56"><img src="resources/customerImage/dietImg/d20.JPG"
-							class="mainMenuImg6 img-responsive"></a></td>
-					</tr>
-				</table>
-			</div>
-
-			<div id="mainNutriBox" class="col-sm-12">
-				<!-- 각 식단의 간략한 영양정보 -->
-				<table id = "mainShowNutriTable" class="table-bordered text-center mainNT1">
-<tr class="NutriTable">
-<td class="NutriTable">칼로리</td>
-<td class="NutriTable">나트륨</td>
-<td class="NutriTable">탄수화물</td>
-<td class="NutriTable">지방</td>
-</tr>
-
-<tr class="NutriTable">
-<td class="NutriTable">614.5kcal</td>
-<td class="NutriTable">80.4mg</td>
-<td class="NutriTable">14.3g</td>
-<td class="NutriTable">48.5g</td>
-</tr>
-</table>
-
-<table id = "mainShowNutriTable" class="table-bordered text-center mainNT2">
-<tr class="NutriTable">
-<td class="NutriTable">칼로리</td>
-<td class="NutriTable">나트륨</td>
-<td class="NutriTable">탄수화물</td>
-<td class="NutriTable">지방</td>
-</tr>
-
-<tr class="NutriTable">
-<td class="NutriTable">583.3kcal</td>
-<td class="NutriTable">57.2mg</td>
-<td class="NutriTable">50.3g</td>
-<td class="NutriTable">30.5g</td>
-</tr>
-</table>
-
-<table id = "mainShowNutriTable" class="table-bordered text-center mainNT3">
-<tr class="NutriTable">
-<td class="NutriTable">칼로리</td>
-<td class="NutriTable">나트륨</td>
-<td class="NutriTable">탄수화물</td>
-<td class="NutriTable">지방</td>
-</tr>
-
-<tr class="NutriTable">
-<td class="NutriTable">566.2kcal</td>
-<td class="NutriTable">53.2mg</td>
-<td class="NutriTable">56.3g</td>
-<td class="NutriTable">18.5g</td>
-</tr>
-</table>
-
-</div>
-</div>
-</div>
 	</div>
 	<footer>
 		<%@include file="footer.jsp"%>
 	</footer>
-	<script>
-	$(function(){
-		$('.mainMenuImg1').mouseover(function(){
-			$('.mainNT1').show();
-		});
-		$('.mainMenuImg1').mouseout(function(){
-			$('.mainNT1').hide();
-		});
-		$('.mainMenuImg2').mouseover(function(){
-			$('.mainNT2').show();
-		});
-		$('.mainMenuImg2').mouseout(function(){
-			$('.mainNT2').hide();
-		});
-		$('.mainMenuImg3').mouseover(function(){
-			$('.mainNT3').show();
-		});
-		$('.mainMenuImg3').mouseout(function(){
-			$('.mainNT3').hide();
-		});
-		
-		$('.mainMenuImg4').mouseover(function(){
-			$('.mainNT1').show();
-		});
-		$('.mainMenuImg4').mouseout(function(){
-			$('.mainNT1').hide();
-		});
-		$('.mainMenuImg5').mouseover(function(){
-			$('.mainNT2').show();
-		});
-		$('.mainMenuImg5').mouseout(function(){
-			$('.mainNT2').hide();
-		});
-		$('.mainMenuImg6').mouseover(function(){
-			$('.mainNT3').show();
-		});
-		$('.mainMenuImg6').mouseout(function(){
-			$('.mainNT3').hide();	
-		
-		});
-	});
-	</script>
 </body>
 </html>

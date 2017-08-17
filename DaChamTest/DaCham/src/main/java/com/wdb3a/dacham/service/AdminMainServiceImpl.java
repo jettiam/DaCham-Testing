@@ -292,6 +292,18 @@ public class AdminMainServiceImpl implements AdminMainService {
 		return dao.orderSort5(criteria);
 	}
 
+	@Override
+	public List<OrderList> orderItemNameCount() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.orderItemNameCount();
+	}
+
+	@Override
+	public List<Member> memberNomal() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.memberNomal(); 
+	}
+
 	
 	
 	

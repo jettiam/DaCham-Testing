@@ -52,10 +52,11 @@
       $(document.body).on("click","#newAnswer",function(){
          var customer = $(this).attr('data-code');
          var answer = $(".quickAnswer").val();
+         var counselTitle = $(".quickTitle").val();
          alert("정답:"+answer);
          $.ajax({
             type : "POST",
-            url : 'counselAjax/counselInsert/'+customer+"/"+answer,
+            url : 'counselAjax/counselInsert/'+customer+"/"+answer + "/" + counselTitle,
             headers : {
                "Content-Type" : "application/json",
                "X-HTTP-Method-Override" : "POST",
@@ -90,7 +91,7 @@
          var answer = $(this).attr('data-answer');
          var customer = $(this).attr('data-customer');
          $('.overAnswer').append("<div class = 'form-group'><label>기존답변:</label>");
-         $('.overAnswer').append("<textarea readonly class = 'form-control'>"+answer+"</textarea></div>");
+         $('.overAnswer').append("<textarea readonly class = 'answerDual form-control'>"+answer+"</textarea></div>");
          $('.overAnswer').append("<div class = 'form-group'><label>변경할 답변:</label><textarea class = 'answerReturn form-control' placeholder = '변경하려면 적고 아래 버튼 누르십시오'></textarea></div>");
          $('.overAnswer').append("<button id = 'answerReturn' data-customer = '"+customer+"' data-code = '"+counselCode+"' class = 'btn btn-warning'>변경</button>");
          
@@ -115,7 +116,7 @@
                       if(result == "SUCCESS"){
                          alert("수정되었습니다. 이제 팝업을 닫아주십시오");
                          $(".answerReturn").val('');
-                         
+                         $(".answerDual").val(answer);
                         linkAll(customer);
                         
                       }
@@ -145,12 +146,12 @@
             var str = "";
             $(data).each(function(){
                if(this.counselCode != null){
-                  str += "<tr class = 'answerResult'><td class = 'counselCode' data-code = '"+this.counselCode+"' data-id = '"+this.customer+"'><a>"+this.counselCode+"</a></td><td>"+this.customer+"</td><td>"+this.counselContent+"</td><td><a  href = '#yourModal' data-toggle = 'modal'  class = 'answerClick' data-code = '"+this.counselCode+"' data-answer = '"+this.answer+"' data-customer = '"+customer+"'>"+this.answer+"</a></td></tr>";
+                  str += "<tr class = 'answerResult'><td class = 'counselCode' data-code = '"+this.counselCode+"' data-id = '"+this.customer+"'><a>"+this.counselCode+"</a></td><td>"+this.customer+"</td><td>"+this.counselTitle+"</td><td>"+this.counselContent+"</td><td><a  href = '#yourModal' data-toggle = 'modal'  class = 'answerClick' data-code = '"+this.counselCode+"' data-answer = '"+this.answer+"' data-customer = '"+customer+"'>"+this.answer+"</a></td></tr>";
                }
               
             });
             $(".link").append(str);
-            $(".super").append("<div class = 'form-group'><label>신규등록</label><textarea class = 'quickAnswer form-control'></textarea><button id = 'newAnswer' class = 'btn btn-success' data-code = '"+customer+"'>등록</button></div>");
+            $(".super").append("<div class = 'form-group'><label>글제목:</label><textarea class = 'quickTitle form-control'></textarea><label>신규등록</label><textarea class = 'quickAnswer form-control'></textarea><button id = 'newAnswer' class = 'btn btn-success' data-code = '"+customer+"'>등록</button></div>");
          });
       }
    });
@@ -164,9 +165,9 @@
   display:inline-block;  margin-left:20px;}  
 </style>
 </head>
-<body>
+<body>           
 <%@include file = "counselorNavi.jsp" %>
-   <div class = "container">   
+   <div class = "container"  style = "width:100%; overflow-x:auto;">   
       <div class = "box1">
       
              <h3>고객의 정보</h3>
@@ -186,12 +187,12 @@
                   </option>
             </select>
             <input type = "text" name = "keyword" id = "keyword" placeholder = "검색어 입력란">
-            <button id = "search">검색</button>
+            <button id = "search" class = "btn btn-success">검색</button>
          </div>
       
          
         <div style = "border:1px solid gold;">
-         <table border ="1" class = "search1 table table-hover">
+         <table border ="1" class = "search1 table table-hover" style = "width:1580px;">
             <tr>
                   <th>고객id</th>
                   <th>고객이름</th>
@@ -221,8 +222,8 @@
       <div class = "box2">
          
       </div>
-      <div class = "modal fade" id = "myModal" role = "dialog">
-      		<div class = "modal-dialog" style = "width:1080px;">
+      <div class = "modal fade" id = "myModal" role = "dialog" style = "width:100%; overflow-x:auto;">
+      		<div class = "modal-dialog" style = "width:100%;">
       			<div class = "modal-content">
       				<div class = "modal-header">
       					<button type = "button" class = "close" data-dismiss = "modal">X</button>
@@ -233,7 +234,8 @@
       						<tr>
       							<th>번호</th>
       							<th>고객아이디</th>
-      							<th>질문</th>
+      							<th>제목</th>
+      							<th>내용</th>
       							<th>답변</th>
       							
       						</tr>

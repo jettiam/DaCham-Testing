@@ -44,6 +44,7 @@ public interface AdminMainDAO {
 	public int foodStockListCount() throws Exception;
 	public int foodStockListStopCount() throws Exception;
 	public int dietAllCount() throws Exception;
+	public List<OrderList> orderItemNameCount() throws Exception;
 	
 	
 	
@@ -57,10 +58,13 @@ public interface AdminMainDAO {
 	public List<Diet> disease3() throws Exception;
 	public List<Diet> disease4() throws Exception;
 	public void empjoin(Member member) throws Exception;
+	
 	public List<Member> memberAll() throws Exception;
+	public List<Member> memberNomal() throws Exception; 
 	public Member memberUserInfo(String id) throws Exception;
 	public void joinOut(String id) throws Exception;
 	public void empUpdate(Member member) throws Exception;
+	
 	public void insertFoodM(FoodMAmountRead foodMAmountRead) throws Exception;  
 	public void foodMUpdate(int orderCode) throws Exception;
 	public List<FoodMaterial> foodMaterialSearch(FoodMaterial foodMaterial) throws Exception;

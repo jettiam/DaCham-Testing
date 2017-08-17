@@ -61,9 +61,10 @@
 			
 			$('<input type = "hidden" id = "cnt" name = "count" value = "'+sideDLength+'">').appendTo("form");
 			
-			
-			
-			if(window.confirm("정말로 수정하시겠습니까?")){
+			if($("#prev_View_area").attr("src") == "http://placehold.it/100x100"){
+				alert("이미지를 변경하세요");
+			}	
+			else if(window.confirm("정말로 수정하시겠습니까?")){
 				
 				
 				$("form").attr("action","dietModify");
@@ -477,7 +478,7 @@
 			<div>
 				<h2>식단 사진</h2>
 					<div id = "View_area">
-						<img id = "prev_View_area" src="displayFile?fileName=${nutritionist.dietImg }" style = "width:100px; height : 100px;">
+						<img id = "prev_View_area" src="http://placehold.it/100x100" style = "width:100px; height : 100px;">
 					</div>
 					
 					<input type = "file" class = "filestyle" data-input = "false" name = "file" placeholder = "식단이미지 올리기" id = "profile_pt" onchange = "previewImage(this,'View_area')">

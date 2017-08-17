@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wdb3a.dacham.bean.Cook;
 import com.wdb3a.dacham.bean.CookingItem;
+import com.wdb3a.dacham.bean.Criteria;
 import com.wdb3a.dacham.bean.FoodMInven;
 import com.wdb3a.dacham.service.CookService;
 import com.wdb3a.dacham.util.MediaUtils;
@@ -40,18 +41,24 @@ public class CookerController {
 	}
 
 	@RequestMapping(value="/cookList", method=RequestMethod.GET)
-	public String getList(Model model) throws Exception{
-		List<Cook> list = service.readyScreen();
-		List<Cook> list2 = service.endScreen();
+	public String getList(Model model,Criteria criteria,Criteria criteria2) throws Exception{
+		criteria2 = new Criteria();
+		List<CookingItem> list = service.anotherSelectCookingItem3(criteria);
+		List<CookingItem> list2 = service.anotherSelectCookingItem5(criteria2);
 		model.addAttribute("list",list);
 		model.addAttribute("list2",list2);
+		model.addAttribute("criteria",criteria);
+		model.addAttribute("criteria2",criteria2);
+		
+		int totalCount = service.anotherSelectCookingItemCount();
+		criteria.setTotalCount(totalCount);
+		int totalCount2 = service.anotherSelectCookingItemCount2();
+		criteria2.setTotalCount(totalCount2);
+		
 		return "/mate/cooker/cookingList";
 	}
 	@RequestMapping(value="/cookFood", method=RequestMethod.GET)
 	public String getFood(Model model, FoodMInven foodInv) throws Exception{
-		List<FoodMInven> list = service.CookStock(foodInv);
-		model.addAttribute("list",list);
-		model.addAttribute("foodInv",foodInv);
 		return "/mate/cooker/foodStock";
 	}
 	@RequestMapping(value="/cook", method=RequestMethod.GET)

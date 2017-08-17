@@ -687,10 +687,12 @@
 			<table class = "optional table table-hover">
 				
 			</table>             
+			<div class = "text">
+			</div>
 			<table class = "optional2 table table-hover">
 				<tr>
 					<th>반찬</th>
-					<th>이미지</th>
+					<th>식재료들</th>
 				</tr>
 				<tr class = "trText">
 				</tr>
@@ -740,17 +742,34 @@
 					$(".optional").append(stv);        
 				});
 			}
+			var dream = "";
 			$(document.body).on("click",".SPDietCode",function(data){
-				$(".trText").remove();    
+				$(".trText").remove();
+				$(".text").html("<h5>옆에 반찬명을 클릭하시면 식재료를 볼 수 있습니다.</h5>");
+				dream = "";
 				var dietCode = $(this).attr('data-code');  
 				var str = "";
+				
+				
 				console.log("스페셜 코드:"+dietCode);  
 				$.getJSON("nutriAjax/specialToggle/"+customer+"/"+dietCode,function(data){   
 					$(data).each(function(){
-						str += "<tr class = 'trText'><td>"+this.sideDName+"</td><td>"+"<img src = 'displayFile?fileName="+this.sideDImg+"'style = 'width:105px; height : 50px;'></td></tr>";
-						console.log("반찬이름:"+this.sideDName);
+						str += "<tr class = 'trText'><td><a class = 'dream' data-code = '"+this.sideDCode+"'>"+this.sideDName+"</a></td><td class = 'summon"+this.sideDCode+"'>"+this.foodMName+"</td></tr>";
 					});
 					$(".optional2").append(str);
+				});
+				
+			});
+			
+			$(document.body).on("click",".dream",function(data){
+				dream = "";
+				var sideDCode = $(this).attr('data-code');
+				$(".summon"+sideDCode).empty();
+				$.getJSON("nutriAjax/callName/"+sideDCode,function(data){
+					$(data).each(function(){
+						dream += this.foodMName + ", &nbsp;";
+					});
+					$(".summon"+sideDCode).append(dream);
 				});
 			});
 		});

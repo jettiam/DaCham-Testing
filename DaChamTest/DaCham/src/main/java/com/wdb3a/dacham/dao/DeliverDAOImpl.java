@@ -94,9 +94,9 @@ public class DeliverDAOImpl implements DeliverDAO{
 		sqlSession.update(namespace+".overButton",foodMICode);
 	}
 	@Override
-	public void changer0(int foodMICode) throws Exception {
+	public void changer0(String foodMName) throws Exception {
 		// TODO Auto-generated method stub
-		sqlSession.update(namespace+".changer0",foodMICode);
+		sqlSession.update(namespace+".changer0",foodMName);
 	}
 	@Override
 	public List<Deliver> doing(Criteria criteria) throws Exception {

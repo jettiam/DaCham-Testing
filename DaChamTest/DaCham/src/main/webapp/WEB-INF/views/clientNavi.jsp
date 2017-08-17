@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -19,9 +19,10 @@
 <!-- 상단 내비게이션 표시를 위한 임시 CSS -->
 <style>
 @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
 * {
-	font-family: 'Jeju Gothic', sans-serif;
+	font-family: 'Jeju Gothic',"Nanum Gothic", sans-serif;
 }
 #inputPasswd{
 	font-family:sans-serif;
@@ -47,7 +48,7 @@
 
 #infoBox {
 	float: right;
-	margin-right: 10px;
+	 
 	color: gray;
 }
 
@@ -76,8 +77,22 @@ img{width:100%}
 	max-width:150px;
 	max-height:150px; 
 }
+#m_login{
+	display:none;
+	}
 @media only screen and (max-width: 736px) {
-
+#m_login{
+	display:inline-block;
+	position: relative;
+    float: right;
+   	margin-right:10px;
+   	margin-top:7px; 
+    background-color: transparent;
+    background-image: none;
+    font-size:30px;
+    color:#888;
+    text-decoration: none;
+}
 }
 
 
@@ -88,14 +103,14 @@ img{width:100%}
 <body>
 	<div class="w3-row logoBox">
 		<!-- 로고+고객정보 -->
-		<div class="col-sm-2 hidden-xs" id="logo">
+		<div class="col-sm-1 hidden-xs" id="logo">
 			<!-- 로고박스 -->
 			<a href="main"><img id="logoImg" class="img-responsive block-center"
 				src="resources/customerImage/dachamlogo.png"></a>
 		</div>
 		<!-- 고객 로그인 페이지 -->
 		<c:if test="${empty sessionScope.memberName}">
-			<div class="col-sm-4 col-sm-offset-5 loginWrap hidden-xs">
+			<div class="col-sm-4 col-sm-offset-6 loginWrap hidden-xs">
 				<form method="post" action="main" class="loginBox">
 					<div class="form-group col-sm-5">
 						<input type="text" name="id" placeholder="ID"
@@ -114,13 +129,11 @@ img{width:100%}
 			</div>
 		</c:if>
 		<c:if test="${not empty sessionScope.memberName}">
-			<div id="infoBox" class="col-sm-4 col-sm-offset-5 loginWrap hidden-xs">
-				<!-- 고객이름 출력. 로그아웃&마이인포 -->
-				<h4>
-					<b id="sessionName">${memberName}</b>님 반갑습니다.
-				</h4>
-				<a href="myPage?status=0">마이페이지</a> <a href="myPage?status=2">장바구니</a>
-				<a href="memberLogout">로그아웃</a>
+			<div id="infoBox" class="col-sm-4 col-sm-offset-6 loginWrap hidden-xs">
+				<!-- 고객이름 출력. 로그아웃&마이인포 -->				
+				<h4><strong id="sessionName">${memberName}</strong>&nbsp;님</h4>				
+				<h4><a href="myPage?status=0">마이페이지</a> <a href="myPage?status=2">장바구니</a>
+				<a href="memberLogout">로그아웃</a></h4>
 			</div>
 		</c:if>
 	</div>
@@ -130,12 +143,22 @@ img{width:100%}
 	
 	<nav class="navbar navbar-default">
   <div class="container-fluid">
-    <div class="navbar-header">
+    <div class="navbar-header">   
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
+      <c:if test="${empty sessionScope.memberName}">
+       <a id="m_login" data-toggle="modal" data-target="#myModal">
+        <i class="fa fa-user-circle-o"></i>                      
+     </a>
+     </c:if>
+     <c:if test="${not empty sessionScope.memberName}">
+     <a id="m_login" href="myPage?status=0">
+        <i class="fa fa-user-circle-o"></i>                      
+     </a>
+     </c:if>
       <a class="visible-xs" style="margin:5px;" href="main">
         <img style="display:blcok; width:48px; height:48px;"
 				src="resources/customerImage/dachamlogo.png" ></a>            
@@ -153,6 +176,39 @@ img{width:100%}
 </nav>
 <input type="hidden" id="loginResult" value="${result}"/>
 
+<!-- 로그인 모달 -->
+ <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title text-center">다참 로그인</h4>
+        </div>
+        <div class="modal-body">
+          <form method="post" action="main" class="loginBox">
+					<div class="form-group col-sm-5">
+						<input type="text" name="id" placeholder="ID"
+							class="form-control">
+					</div>
+					<div class="form-group col-sm-5">
+						<input id="inputPasswd" type="password" name="pw" placeholder="Password"
+							class="form-control">
+					</div>
+					<div class="form-group col-sm-2">
+						<input type="submit" class="btn btn-warning" value="로그인">
+					</div>
+				</form> 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <!-- 모달 끝 -->
 </body>
 <!--로그인함수  -->
 <script>

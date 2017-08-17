@@ -42,13 +42,20 @@
 		
   	</select>
   	<select id = "showDeliverAll" resultType = "com.wdb3a.dacham.bean.Deliver">
-  		select * from foodminven where foodMStatus = 0
-  		and orderCode is not null
+  		select foodMICode, foodMName, sum(inAmount) as inAmount,orderDate, unit, orderCode
+      from foodminven
+      where orderCode is not null
+      and foodMStatus = 0
+      group by foodMName
   		limit #{startRecord},#{recordsPerPage}
   	</select>
   	<select id = "showDeliverAllCount" resultType = "Integer">
-  		select count(*) from foodminven where foodMStatus = 0
-  		and orderCode is not null
+  		select count(c.foodMName)
+		from (select foodMICode, foodMName, sum(inAmount) as inAmount,orderDate, unit, orderCode
+      	from foodminven
+      	where orderCode is not null
+      	and foodMStatus = 0
+      	group by foodMName) c
   	</select>
   	<select id = "showCount" resultType = "Integer">
   		select count(*)
@@ -91,7 +98,7 @@
   	</select>
   	<update id = "changer0">
   		update foodminven set foodMStatus = 1
-  		where foodMICode = #{foodMICode}
+  		where foodMName = #{foodMName}
   	</update>
   	<update id = "changer">
  		update orderlist set orderItemCode = 10
@@ -128,6 +135,7 @@
    		where a.orderCode = b.orderCode
    		and b.orderItemCode = 9
    		and a.foodMStatus = 1
+   		group by foodMName
    		limit #{startRecord},#{recordsPerPage}
    	</select>
    	<select id = "doingCount" resultType = "Integer">

@@ -41,6 +41,8 @@ import com.wdb3a.dacham.util.UploadFileUtils;
 
 
 
+
+
 /*
  * 영양사페이지 컨트롤러
  */
@@ -272,7 +274,9 @@ public class NutritionController {
    //식단 수정
    @RequestMapping(value = "dietModify",method = RequestMethod.POST)
    public String postDietModify(MultipartHttpServletRequest request, Model model, Nutritionist nutritionist, MultipartFile file, @RequestParam("sideDType")String[] sideDType,@RequestParam("count")int count) throws Exception{
-	   String savedName = UploadFileUtils.uploadFile(request,file.getOriginalFilename() ,uploadPath,file.getBytes());
+	   String savedName = "";
+	   savedName = UploadFileUtils.uploadFile(request,file.getOriginalFilename() ,uploadPath,file.getBytes());
+	   System.out.println("파일 길이 이름:"+file.getOriginalFilename());
 
 		model.addAttribute("savedName", savedName);
 		nutritionist.setDietImg(savedName);

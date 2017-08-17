@@ -23,4 +23,8 @@ public interface CookDAO {
 	public void updateOptionsItemCode(int orderItemCode, int sideDCode) throws Exception;
 	public List<FoodMInven> foodStockAll(Criteria criteria) throws Exception;
 	public int foodStockAll() throws Exception;
+	public List<CookingItem> anotherSelectCookingItem3(Criteria criteria) throws Exception;
+	public List<CookingItem> anotherSelectCookingItem5(Criteria criteria) throws Exception;
+	public int anotherSelectCookingItemCount() throws Exception;
+	public int anotherSelectCookingItemCount2() throws Exception;
 }

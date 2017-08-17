@@ -132,7 +132,7 @@ margin-top:20px;
 					console.log("tr카운트 닫음" + trCount);
 					$("#dietList>.d"+divCount).append("</table>");						
 					console.log(dietCode+"테이블 닫기");						
-					$("#dietList>.d"+divCount).append("<a class='dietCode btn btn-warning' href=# data-dietcode='"+dietCode+"'>"+data.list[i-1].dietName+"</a>");					
+					$("#dietList>.d"+divCount).append("<a class='dietCode btn btn-warning btn-default' href=# data-dietcode='"+dietCode+"'>"+data.list[i-1].dietName+"</a>");					
 					divCount++;
 					trCount=0;						
 					dietCode = data.list[i].dietCode;
@@ -147,7 +147,7 @@ margin-top:20px;
 				}
 				
 			}
-			$("#dietList>.d"+divCount).append("<a class='dietCode btn btn-warning' href=# data-dietcode='"+dietCode+"'>"+data.list[i-1].dietName+"</a>");
+			$("#dietList>.d"+divCount).append("<a class='dietCode btn btn-warning btn-default' href=# data-dietcode='"+dietCode+"'>"+data.list[i-1].dietName+"</a>");
 			divCount++;
 		});
 		}
@@ -160,11 +160,11 @@ margin-top:20px;
 <div class="container">
 <div class="row">
 <div class="wizardSelectWrap text-center">
-<div class="wizardExplain block-center ">당신의 질환 상태에 맞는 식단을 추천받을 수 있습니다.</div>
-<a href=# class="disease btn btn-danger" id="wizardOrder">위자드로 주문하기</a>
+<div class="wizardExplain block-center h4">당신의 질환 상태에 맞는 식단을 추천받을 수 있습니다.</div>
+<a href=# class="disease btn btn-danger btn-lg" id="wizardOrder">위자드로 주문하기</a>
 </div>
 <div id="dietOrderNav" class="block-center text-center col-sm-12">	
-		<div class="col-xs-6 col-lg-6 text-center disease"><a href=#  data-code="1" id="sugarBlood"><img class="img-responsive  dImg center-block" src="resources/customerImage/dang.png"><div class="dName">당뇨병</div></a></div>
+		<div class="col-xs-6 col-lg-6 text-center disease"><a href=# data-code="1" id="sugarBlood"><img class="img-responsive  dImg center-block" src="resources/customerImage/dang.png"><div class="dName">당뇨병</div></a></div>
 		<div class="col-xs-6 col-lg-6 text-center disease"><a href=# data-code="4" id="renalFailure"><img class="img-responsive  dImg center-block" src="resources/customerImage/sin.png"><div class="dName">신부전증</div></a></div>
 		<div class="col-xs-6 col-lg-6 text-center disease"><a href=# data-code="16" id="heartFailure"><img class="img-responsive  dImg center-block" src="resources/customerImage/sim.png"><div class="dName">심부전증</div></a></div>
 		<div class="col-xs-6 col-lg-6 text-center disease"><a href=# data-code="13" id="hyperlipidemia"><img class="img-responsive  dImg center-block" src="resources/customerImage/go.png"><div class="dName">고지혈증</div></a></div>	

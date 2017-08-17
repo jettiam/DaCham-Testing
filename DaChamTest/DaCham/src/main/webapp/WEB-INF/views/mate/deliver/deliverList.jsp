@@ -141,8 +141,8 @@
       <div>
       <button id = "button" class = "btn btn-primary">배송</button>
       <div style = "float:right;">
-         <button id = "button1" class = "btn btn-danger">조리목록</button>
-         <button id = "button2" class = "btn btn-danger">배송목록 확인</button>       
+         <button id = "button1" class = "btn btn-danger">배송목록</button>
+         <button id = "button2" class = "btn btn-danger">배송확인 목록</button>       
       </div>
          <table class = "searchTable table table-hover">   
             <tr>

@@ -138,7 +138,7 @@ img {
 
 				</div>
 			</div>
-			<br> <br> <input type="button" id="moveOrder"  class="btn btn-warning" value="주문하기">
+			<br><input type="button" id="moveOrder"  class="btn btn-warning btn-lg" value="주문하기">
 		</div>
 
 	</div>

@@ -82,5 +82,25 @@ public class CookServiceImpl implements CookService {
 		// TODO Auto-generated method stub
 		return dao.foodStockAll();
 	}
+	@Override
+	public List<CookingItem> anotherSelectCookingItem3(Criteria criteria) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.anotherSelectCookingItem3(criteria);
+	}
+	@Override
+	public List<CookingItem> anotherSelectCookingItem5(Criteria criteria) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.anotherSelectCookingItem5(criteria);
+	}
+	@Override
+	public int anotherSelectCookingItemCount() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.anotherSelectCookingItemCount();
+	}
+	@Override
+	public int anotherSelectCookingItemCount2() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.anotherSelectCookingItemCount2();
+	}
 	
 }

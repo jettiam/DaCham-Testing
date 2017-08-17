@@ -48,7 +48,10 @@
 	function cookEnd(){
 		var className = $(this).parent().parent().attr('class');
 		var code = className.slice(1);
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of git@github.com:jettiam/DaCham-Testing.git
 		updateOptionsItemCode(5, code);
 		
 		var element = $("tr."+className);
