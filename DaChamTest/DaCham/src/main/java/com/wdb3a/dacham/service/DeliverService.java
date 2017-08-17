@@ -15,4 +15,15 @@ public interface DeliverService {
 	public void transportNum(OrderList orderList) throws Exception;
 	public List<OrderList> all(String orderItemCode,Criteria criteria) throws Exception;
 	public int allCount(String orderItemCode) throws Exception;
+	public int showDeliverCount() throws Exception;
+	public List<Deliver> showDeliverAll(Criteria criteria) throws Exception;
+	public void changer(int orderCode) throws Exception;
+	public void todaySynchro(int orderCode) throws Exception;
+	public List<Deliver> completeAll(Criteria criteria) throws Exception;
+	public int completeAllCount() throws Exception;
+	public void overButton(int foodMICode) throws Exception;
+	public void changer0(String foodMName) throws Exception;
+	public List<Deliver> doing(Criteria criteria) throws Exception;
+	public int doingCount() throws Exception; 
+	public int showDeliverAllCount() throws Exception;
 }

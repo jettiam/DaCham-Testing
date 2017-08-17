@@ -3,43 +3,140 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wdb3a.CounselorMapper">
+<select id = "counselorListAll"  resultType="Counselor">
+select  a.id , a.name ,a.birthday, a.address, a.tel, a.email, a.deptCode, a.gradeCode, a.joinDate, b.diseaseName,b.judgement
+	from member a  join disease b
+	where a.diseaseCode = b.diseaseCode
+	and a.gradeCode = '일반회원'
+
+</select>
+<!-- 미답변 상담목록 -->
+<select id = "counselorseList2All" resultType="Counselor">
+   select  b.counselCode, b.counselDate,c.counselItemName,b.counselTitle ,a.name, b.customer
+   from member a, counsel b, counselitem c
+   where a.id =b.customer and c.counselItemCode=b.counselItemCode and b.adviser is null
+   order by b.counselDate
+</select>
+<!-- 상담완료 목록 -->
+<select id = "finCounselList" resultType="Counselor">
+   select  b.counselCode, b.counselDate,c.counselItemName,b.counselTitle ,a.name, b.customer
+   from member a, counsel b, counselitem c
+   where a.id =b.customer and c.counselItemCode=b.counselItemCode and b.adviser is not null
+   order by b.counselDate
+</select>
+
 <select id="counselorList" resultType="Counselor">
-		select  a.id , a.name , a.address, a.tel, a.email, a.deptCode, a.gradeCode, a.joinDate, b.counselTitle, b.counselDate, b.counselContent
-		from member a join counsel b
-		where a.id = b.customer
-		<include refid="search"></include>
-	</select>
-	<sql id = "search">
-	  	<if test = "searchType != null">
-	  		<if test="searchType == 't'.toString()">
-	  			and a.id like CONCAT('%',#{keyword},'%')
-	  		</if>
-	  		<if test="searchType == 'c'.toString()">
-	  			and a.name like CONCAT('%',#{keyword},'%')
-	  		</if>
-	  	</if>
-  	</sql>
+     select  a.id , a.name ,a.birthday, a.address, a.tel, a.email, a.deptCode, a.gradeCode, a.joinDate, b.diseaseName,b.judgement
+	from member a  join disease b
+	where a.diseaseCode = b.diseaseCode
+	and a.gradeCode = '일반회원'
+      <include refid="search"></include>
+   </select>
+   <sql id = "search">
+        <if test = "searchType != null">
+           <if test="searchType == 't'.toString()">
+              and a.id like CONCAT('%',#{keyword},'%')
+           </if>
+           <if test="searchType == 'c'.toString()">
+              and a.name like CONCAT('%',#{keyword},'%')
+           </if>
+        </if>
+     </sql>
 <select id="counselorseList2" resultType="Counselor">
-	select  b.counselCode,b.counselTitle ,a.name, a.id, b.counselDate, b.counselContent
-	from member a join counsel b
-	where a.id =b.customer
-	<include refid="Search"></include>
+   select  b.counselCode,b.counselTitle ,a.name, a.id, b.counselDate, b.counselContent
+   from member a join counsel b
+   where a.id =b.customer
+   <include refid="Search"></include>
 </select>
 <sql id = "Search">
-	  	<if test = "searchType2 != null">
-	  		<if test="searchType == 'y'.toString()">
-	  			and a.name like CONCAT('%',#{keyword2},'%')
-	  		</if>
-	  		<if test="searchType2 == 'u'.toString()">
-	  			and a.id like CONCAT('%',#{keyword2},'%')
-	  		</if>
-	  	</if>
-  	</sql>
+        <if test = "searchType2 != null">
+           <if test="searchType2 == 'y'.toString()">
+              and a.name like CONCAT('%',#{keyword2},'%')
+           </if>
+           <if test="searchType2 == 'u'.toString()">
+              and a.id like CONCAT('%',#{keyword2},'%')
+           </if>
+        </if>
+     </sql>
 
 
 <select id = "viewCounsel" resultType = "Counselor">
-	select counselTitle, counselContent
-	from counsel
-	where counselCode = #{counselCode} 
+   select counselTitle, counselContent
+   from counsel
+   where counselCode = #{counselCode} 
+</select>
+<select id = "linkCounsel" resultType = "Counselor">
+   select * from counsel a join counselitem b
+   where a.counselItemCode = b.counselItemCode
+   and a.customer = #{customer}
+   and counselTitle not in('전화')   
+</select>
+<select id = "linkCounsel2" resultType = "Counselor">
+   select * from counsel a join counselitem b
+   where a.counselItemCode = b.counselItemCode
+   and a.customer = #{customer}   
+</select>
+<select id = "selectCounsel" resultType = "Counselor">
+   select * from counsel a join counselitem b
+   where a.counselItemCode = b.counselItemCode
+   and  a.counselCode = #{couselCode}
+</select>
+<select id = "counselMember" resultType = "Counselor">
+   select * from member a join counsel b join disease c
+   where a.id = b.customer
+   and a.diseaseCode = c.diseaseCode
+   and b.counselCode = #{couselCode}
+</select>
+<select id = "orderList" resultType = "Counselor">
+   select * from orderlist a join diet b join paymentitem c join orderitem d join counsel e
+   where a.dietCode = b.dietCode
+   and a.paymentItemCode = c.paymentItemCode
+   and a.orderItemCode = d.orderItemCode
+   and a.id = e.customer
+   and e.counselCode = #{couselCode}
+   limit #{criteria.startRecord},#{criteria.recordsPerPage}
+</select>
+<select id = "orderListSearch" resultType = "Counselor">
+	select * from orderlist a join diet b join paymentitem c join orderitem d join counsel e
+   where a.dietCode = b.dietCode
+   and a.paymentItemCode = c.paymentItemCode
+   and a.orderItemCode = d.orderItemCode
+   and a.id = e.customer
+   and e.counselCode = #{couselCode}
+   <include refid="orderListSearch"></include>
+</select>
+<sql id = "orderListSearch">
+	and b.dietName like CONCAT('%',#{keyword},'%')
+</sql>
+<select id = "orderListCount" resultType = "Integer">
+   select count(*) from orderlist a join diet b join paymentitem c join orderitem d join counsel e
+   where a.dietCode = b.dietCode
+   and a.paymentItemCode = c.paymentItemCode
+   and a.orderItemCode = d.orderItemCode
+   and a.id = e.customer
+   and e.counselCode = #{couselCode}
+</select>
+<update id = "counselUpdate">
+   update counsel set answer = #{answer}, adviser = 'counselor'
+   where counselCode = #{couselCode}
+</update>
+<insert id = "counselInsert">
+   insert into counsel(answer,counselItemCode,counselTitle,counselDate,counselContent,customer)
+   values(#{answer},4,#{counselTitle},now(),#{counselContent},#{customer});
+</insert>
+<select id = "counselTuning" resultType = "Counselor">
+   select counselCode,answer,counselDate from counsel
+   where customer = #{customer}
+</select>
+<select id = "optionTuning" resultType = "Counselor">
+	select * from orderoptions a, sidedish b
+	where a.sideDCode = b.sideDCode
+	and a.orderCode = #{orderCode}
+</select>
+<select id = "listAll" resultType = "Counselor">
+	select * from counsel a, counselItem b, member c
+	where a.counselItemCode = b.counselItemCode
+	and a.customer = c.id
+	and b.counselItemCode = #{counselItemCode}
 </select>
 </mapper>

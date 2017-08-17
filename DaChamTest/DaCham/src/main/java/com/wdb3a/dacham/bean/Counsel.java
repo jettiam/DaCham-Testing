@@ -6,13 +6,17 @@ public class Counsel {
 private int counselCode;
 private String counselItemCode;
 private String counselItemName;
-
 private String customer;
 private String adviser;
 private String counselTitle;
 private Date counselDate;
 private String counselContent;
 private String counselRec;
+private String address;
+private String tel;
+private String answer;
+
+
 public int getCounselCode() {
 	return counselCode;
 }
@@ -66,6 +70,24 @@ public String getCounselItemName() {
 }
 public void setCounselItemName(String counselItemName) {
 	this.counselItemName = counselItemName;
+}
+public String getAddress() {
+	return address;
+}
+public void setAddress(String address) {
+	this.address = address;
+}
+public String getTel() {
+	return tel;
+}
+public void setTel(String tel) {
+	this.tel = tel;
+}
+public String getAnswer() {
+	return answer;
+}
+public void setAnswer(String answer) {
+	this.answer = answer;
 }
 
 }

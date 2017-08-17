@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -25,8 +26,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.wdb3a.dacham.bean.Counsel;
 import com.wdb3a.dacham.bean.Nutritionist;
+import com.wdb3a.dacham.bean.OrderList;
 import com.wdb3a.dacham.bean.Testing5;
 import com.wdb3a.dacham.dao.MongoDAO;
 import com.wdb3a.dacham.service.NutritionistService;
@@ -34,6 +38,8 @@ import com.wdb3a.dacham.service.NutritionistService;
 import com.wdb3a.dacham.util.MediaUtils;
 
 import com.wdb3a.dacham.util.UploadFileUtils;
+
+
 
 
 
@@ -113,9 +119,10 @@ public class NutritionController {
    }
    
    @RequestMapping(value = "/side", method = RequestMethod.POST)
-   public String postSideRegist(Model model, Nutritionist nutritionist, MultipartFile file, @RequestParam("foodMCode")String[] foodMCode,@RequestParam("cnt")int cnt,@RequestParam("foodMAmount")int[] foodMAmount) throws Exception{
-	   System.out.println("파일 업로드");
-	   String savedName = UploadFileUtils.uploadFile(file.getOriginalFilename() ,uploadPath,file.getBytes());
+   public String postSideRegist(MultipartHttpServletRequest request,Model model, Nutritionist nutritionist, MultipartFile file, @RequestParam("foodMCode")String[] foodMCode,@RequestParam("cnt")int cnt,@RequestParam("foodMAmount")int[] foodMAmount) throws Exception{
+	   System.out.println("파일 업로드 : "+uploadPath);
+	   
+	   String savedName = UploadFileUtils.uploadFile(request,file.getOriginalFilename() ,uploadPath,file.getBytes());
 		model.addAttribute("savedName", savedName);
 		System.out.println("총합:"+cnt);
 		nutritionist.setSideDImg(savedName);
@@ -130,18 +137,33 @@ public class NutritionController {
 	    return "redirect:side";
    }
    @RequestMapping(value = "/diet",method = RequestMethod.POST)
-   public String postDietRegist(Model model, Nutritionist nutritionist, MultipartFile file, @RequestParam("sideDCode")String[] sideDCode,@RequestParam("count")int count) throws Exception{
+   public String postDietRegist(MultipartHttpServletRequest request,Model model, Nutritionist nutritionist, MultipartFile file,@RequestParam("sideDType")String[] sideDType,@RequestParam("count")int count) throws Exception{
 	   System.out.println("이제 등록되려 합니다.");
-	   String savedName = UploadFileUtils.uploadFile(file.getOriginalFilename(), uploadPath, file.getBytes());
+	  String savedName = UploadFileUtils.uploadFile(request,file.getOriginalFilename(), uploadPath, file.getBytes());
 	   model.addAttribute("savedName",savedName);
 	   System.out.println("총합:"+count);
 	   nutritionist.setDietImg(savedName);
 	   service.createDiet(nutritionist);
-	   for(int i = 0; i<count; i++){
+	   /*for(int i = 0; i<count; i++){		   
 		   System.out.println("코드번호 : " + sideDCode[i]);
 		   nutritionist.setSideDCode(sideDCode[i]);
 		   service.createDietInfo(nutritionist);
 		   System.out.println("정보 등록 완료" + (i+1) + "개");
+	   }*/
+	   for(int i=0; i<count;i++){
+		   int sideDTypeUnDefault = sideDType[i].indexOf("_1");
+		   if(sideDTypeUnDefault==-1){
+			   int sideDTypeDefault = sideDType[i].indexOf("_0");
+			   nutritionist.setSideDType("0");
+			   nutritionist.setSideDCode(sideDType[i].substring(0,sideDTypeDefault));
+			   System.out.println("디폴트 반찬코드: "+sideDType[i].substring(0,sideDTypeDefault)+" 디폴트:"+nutritionist.getSideDType());
+			   service.createDietInfo(nutritionist);
+		   }else{
+			   nutritionist.setSideDType("1");
+			   nutritionist.setSideDCode(sideDType[i].substring(0,sideDTypeUnDefault));
+			   System.out.println("언디폴트 반찬코드: "+sideDType[i].substring(0,sideDTypeUnDefault)+" 디폴트:"+nutritionist.getSideDType());
+			   service.createDietInfo(nutritionist);
+		   }
 	   }
 	   return "redirect:diet";
    }
@@ -149,24 +171,144 @@ public class NutritionController {
     * @return 스페셜식단 관리 페이지로 이동
     */
    @RequestMapping(value="/special",method = RequestMethod.GET)
-   public String getSpecial(){
+   public String getSpecial(Model model) throws Exception{
+	   List<OrderList> list = service.specialList();
+	   model.addAttribute("list",list);
 	   return "mate/nutritionist/SPDietMain";
    }
    /*
     * @return 스페셜식단 등록 페이지로 이동
     */
    @RequestMapping(value="/SPRegist", method = RequestMethod.GET)
-   public String getSPRegist(){
+   public String getSPRegist(Model model,@RequestParam("counselCode")int counselCode) throws Exception{
+	   List<Nutritionist> overList = service.choiceDisease();
+	   model.addAttribute("overList",overList);
+	   Counsel counsel = service.specialView(counselCode);
+	   model.addAttribute("counsel",counsel);
 	   return "mate/nutritionist/SPDietRegist";
+   }
+   @RequestMapping(value = "/SPDiet",method = RequestMethod.POST)
+   public String postSPDietRegist(MultipartHttpServletRequest request,Model model, Nutritionist nutritionist, MultipartFile file,@RequestParam("sideDType")String[] sideDType,@RequestParam("count")int count,@RequestParam("counselCode")int counselCode) throws Exception{
+	   System.out.println("이제 등록되려 합니다.");
+	  String savedName = UploadFileUtils.uploadFile(request,file.getOriginalFilename(), uploadPath, file.getBytes());
+	   model.addAttribute("savedName",savedName);
+	   System.out.println("총합:"+count);
+	   System.out.println("상담코드:"+counselCode);
+	   String answer = service.answer(counselCode);
+	   System.out.println("이전의 답변:"+answer);
+	   
+	   
+	   nutritionist.setDietImg(savedName);
+	   service.createDiet(nutritionist);
+	   service.specialRegist(nutritionist.getCustomer());
+	   int maxDiet = service.maxDiet();
+	   answer = answer + "<br><a href = 'detailOrder?dietCode="+maxDiet+"'>"+"Please click to enter your diet!"+"</a><br>";
+	   System.out.println("식단의 코드:"+maxDiet);
+	   nutritionist.setAnswer(answer);
+	   nutritionist.setCounselCode(counselCode);
+	   service.answers(nutritionist);
+	   /*for(int i = 0; i<count; i++){		   
+		   System.out.println("코드번호 : " + sideDCode[i]);
+		   nutritionist.setSideDCode(sideDCode[i]);
+		   service.createDietInfo(nutritionist);
+		   System.out.println("정보 등록 완료" + (i+1) + "개");
+	   }*/
+	   for(int i=0; i<count;i++){
+		   int sideDTypeUnDefault = sideDType[i].indexOf("_1");
+		   if(sideDTypeUnDefault==-1){
+			   int sideDTypeDefault = sideDType[i].indexOf("_0");
+			   nutritionist.setSideDType("0");
+			   nutritionist.setSideDCode(sideDType[i].substring(0,sideDTypeDefault));
+			   System.out.println("디폴트 반찬코드: "+sideDType[i].substring(0,sideDTypeDefault)+" 디폴트:"+nutritionist.getSideDType());
+			   service.createDietInfo(nutritionist);
+			   service.optionInsert(nutritionist);
+		   }else{
+			   nutritionist.setSideDType("1");
+			   nutritionist.setSideDCode(sideDType[i].substring(0,sideDTypeUnDefault));
+			   System.out.println("언디폴트 반찬코드: "+sideDType[i].substring(0,sideDTypeUnDefault)+" 디폴트:"+nutritionist.getSideDType());
+			   service.createDietInfo(nutritionist);
+		   }
+	   }
+	   //게시판에 있는 text(answer)를 가져와서 String 변수에 저장시키고(쿼리1)
+	   
+	   //마지막에 제일 최근에 등록된 식단 코드를 가져오는 쿼리2
+	   //a태그를 해서 String에 붙이고, String을 위에 식단코드 주소를 a태그에 
+	   service.specialComplete(nutritionist.getCustomer());
+	   System.out.println("고객아이디:"+nutritionist.getCustomer());
+	   return "redirect:special";
+   }
+   //수정을 위한 반찬 정보 출력
+   @RequestMapping(value = "sideModify",method = RequestMethod.GET)
+   public String getSideModify(Model model,@RequestParam("sideDCode")String sideDCode) throws Exception{
+	   Nutritionist nutritionist = service.sideOver(sideDCode);
+	   model.addAttribute("nutritionist",nutritionist);
+	   return "mate/nutritionist/sideModify";
+   }
+   //반찬 수정
+   @RequestMapping(value = "sideModify",method = RequestMethod.POST)
+   public String postSideModify(MultipartHttpServletRequest request,Model model,Nutritionist nutritionist,MultipartFile file,@RequestParam("cnt")int cnt,@RequestParam("foodMCode")String[] foodMCode, @RequestParam("foodMAmount")int[] foodMAmount) throws Exception{
+	   String savedName = UploadFileUtils.uploadFile(request,file.getOriginalFilename() ,uploadPath,file.getBytes());
+		model.addAttribute("savedName", savedName);
+		System.out.println("총합:"+cnt);
+		nutritionist.setSideDImg(savedName);
+	    service.sideModify(nutritionist);
+	    service.modifyCross1(nutritionist.getSideDCode());
+	    for(int i = 0; i< cnt;i++){
+	    	System.out.println("코드번호 : "+foodMCode[i]);
+			nutritionist.setFoodMCode(foodMCode[i]);
+			nutritionist.setFoodMAmount(foodMAmount[i]);
+			service.modifyCross2(nutritionist);
+	    }
+	    return "redirect:side";
+   }
+   //수정을 위한 식단 정보 출력
+   @RequestMapping(value = "dietModify",method = RequestMethod.GET)
+   public String getDietModify(Model model, @RequestParam("dietCode")int dietCode,HttpServletRequest request) throws Exception{
+	   Nutritionist nutritionist = service.dietOver(dietCode);
+	   List<Nutritionist> overList = service.choiceDisease();
+	   model.addAttribute("overList",overList);
+	   model.addAttribute("nutritionist",nutritionist);
+	   model.addAttribute("cloneDisease", nutritionist.getDiseaseCode());
+	   return "mate/nutritionist/dietModify";
+   }
+   //식단 수정
+   @RequestMapping(value = "dietModify",method = RequestMethod.POST)
+   public String postDietModify(MultipartHttpServletRequest request, Model model, Nutritionist nutritionist, MultipartFile file, @RequestParam("sideDType")String[] sideDType,@RequestParam("count")int count) throws Exception{
+	   String savedName = "";
+	   savedName = UploadFileUtils.uploadFile(request,file.getOriginalFilename() ,uploadPath,file.getBytes());
+	   System.out.println("파일 길이 이름:"+file.getOriginalFilename());
+
+		model.addAttribute("savedName", savedName);
+		nutritionist.setDietImg(savedName);
+		service.dietModify(nutritionist);
+		service.updateCross1(nutritionist.getDietCode());
+		
+		for(int i=0; i<count;i++){
+			   int sideDTypeUnDefault = sideDType[i].indexOf("_1");
+			   if(sideDTypeUnDefault==-1){
+				   int sideDTypeDefault = sideDType[i].indexOf("_0");
+				   nutritionist.setSideDType("0");
+				   nutritionist.setSideDCode(sideDType[i].substring(0,sideDTypeDefault));
+				   System.out.println("디폴트 반찬코드: "+sideDType[i].substring(0,sideDTypeDefault)+" 디폴트:"+nutritionist.getSideDType());
+				   service.updateCross2(nutritionist);
+			   }else{
+				   nutritionist.setSideDType("1");
+				   nutritionist.setSideDCode(sideDType[i].substring(0,sideDTypeUnDefault));
+				   System.out.println("언디폴트 반찬코드: "+sideDType[i].substring(0,sideDTypeUnDefault)+" 디폴트:"+nutritionist.getSideDType());
+				   service.updateCross2(nutritionist);
+			   }
+		   }
+		
+		return "redirect:diet";
    }
    
     @ResponseBody
 	@RequestMapping("displayFile")
-	public ResponseEntity<byte[]> displayFile(String fileName) throws Exception{
+	public ResponseEntity<byte[]> displayFile(HttpServletRequest request,String fileName) throws Exception{
 		ResponseEntity<byte[]> entity = null;
-		
+		System.out.println("이미지 로딩");
 		String ext = fileName.substring(fileName.lastIndexOf(".")+1);
-		
+		String path = request.getSession().getServletContext().getRealPath("");
 		MediaType mediaType = MediaUtils.getMediaType(ext);
 		
 		InputStream in = null;
@@ -176,8 +318,9 @@ public class NutritionController {
 		HttpHeaders headers = new HttpHeaders();
 		//uploadPath : resources/upload
 		//fileName : /2017/05/18/ThumbNail_rose_XXXXX.jpg
+		System.out.println(path+uploadPath+fileName);
 		try{
-			in = new FileInputStream(uploadPath+fileName);
+			in = new FileInputStream(path+uploadPath+fileName);
 			if(mediaType != null){
 				headers.setContentType(mediaType);
 			}else{
@@ -210,7 +353,7 @@ public class NutritionController {
 	 * @param block xml 형태의 String
 	 * @return success 문자열 반환
 	 */
-	@RequestMapping(value="/wizardInsert", method=RequestMethod.GET)
+	@RequestMapping(value="/wizardInsert", method=RequestMethod.POST)
 	public @ResponseBody String wizardInsert(String wizard, String block){
 		mongoDAO.wizardInsert(wizard, block);		
 		return "success";

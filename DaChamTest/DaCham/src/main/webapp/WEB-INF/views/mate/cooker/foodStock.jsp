@@ -12,53 +12,97 @@
 <script
    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
-<script>
-$(function(){
-	$("#cookFood").addClass("w3-light-gray");
-});
+<script>  
+	$(document).ready(function(){
+		$("#cookFood").addClass("w3-light-gray");
+		
+		foodStockAll(1);
+		
+		$(".pagination").on("click","li a",function(){
+			event.preventDefault();
+			var replyPage = $(this).attr("href");
+			
+			foodStockAll(replyPage);
+		});
+		
+		function foodStockAll(page){
+			$(".pagination").show();
+			$.getJSON("cookAjax/foodStockAll/"+page,function(data){
+				$(".overlayResult").remove();
+				var str = "";
+				$(data.list).each(function(){
+					str += "<tr class = 'overlayResult'><td>"+this.foodMName+"</td><td>"+this.foodMAmount+"</td><td>"+this.unit+"</td></tr>";
+				});
+				$(".overlay").append(str);
+				printPaging(data.criteria);
+			});
+		}
+		
+		$("#search").on("click",function(){
+			var keyword = $("#keyword").val();
+			alert("검색"+keyword);
+			if(keyword == ""){
+				alert("검색어를 입력하세요");
+			}
+			else{
+				$(".pagination").hide();
+				$.getJSON("cookAjax/foodStockSearch/"+keyword,function(data){
+					$(".overlayResult").remove();
+					var str = "";
+					$(data).each(function(){
+						str += "<tr class = 'overlayResult'><td>"+this.foodMName+"</td><td>"+this.foodMAmount+"</td><td>"+this.unit+"</td></tr>";
+					});
+					$(".overlay").append(str);
+				});
+			}
+		});
+		$("#all").on("click",function(){
+			
+			foodStockAll(1);
+		});
+		
+		function printPaging(criteria){
+			var str = "";
+					
+			if(criteria.prev){
+				str += "<li><a href='"+(criteria.startPage-1)+"'>" + "<<"+"</a></li>";
+			}
+			for(var i = criteria.startPage; i<=criteria.endPage; i++){
+				var strClass = criteria.page == i?"class = 'active'":"";
+				str += "<li "+strClass+"><a href ='"+i+"'>"+i + "</a></li>";
+			}
+			if(criteria.next){
+				str += "<li><a href='"+(criteria.endPage+1)+"'>" + ">>"+"</a></li>";   
+			}
+			$(".pagination").html(str);
+		}
+	});
 </script>
 </head>
 <body>
 <%@include file = "cookerNavi.jsp" %>
 	<div class = "container">
 		<div>
-			<form>
-				<select name = "searchType">
-					<option value = "n"
-		   			<c:out value="${criteria.searchType==null?'selected':'' }"/>>
-		   			분류
-		   			</option>
-		   			<option value = "t"
-		   			<c:out value="${criteria.searchType eq 't'?'selected':'' }"/>>
-		   			식재료명
-		   			</option>
-		   			<option value = "c"
-		   			<c:out value="${criteria.searchType eq 'c'?'selected':'' }"/>>
-		   			식재료량
-		   			</option>
-				</select>
-				<input type = "text" name = "keyword" placeholder = "검색어 입력란">
+			
+				<input type = "text" id = "keyword" name = "keyword" placeholder = "검색어 입력란">
 				<button id = "search" class = "btn btn-warning">검색</button>
-			</form>
+				<button id = "all" class = "btn btn-success">전체목록</button>
 		</div>
 		<br><br>
 		<div>
-			<table class = "table table-hover">
+			<table class = "overlay table table-hover">
 				<tr>
 					<th>식재료명</th>
-					<th>식재료량</th>
-					<th>요청양</th>
+					<th>재고량</th>					
 					<th>단위</th>
 				</tr>
-				<c:forEach items = "${list }" var = "a">
-					<tr>
-						<td>${a.foodMName }</td>
-						<td>${a.foodMAmount }</td>
-						<td><input type = "text" style = "width:30px;"></td>
-						<td>${a.uint }</td>
-					</tr>
-				</c:forEach>
+				<tr class = "overlayResult">
+						
+				</tr>
+				
 			</table>
+			<ul class = "pagination">
+			</ul>
 		</div>
 	</div>
 </body>

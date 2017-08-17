@@ -1,12 +1,16 @@
 package com.wdb3a.dacham.bean;
 
+import java.sql.Date;
+
 public class Cook {
 	private String sideDName;
 	private int dietAmount;
 	private int orderItemCode;
 	private int orderCode;
 	private String orderItemName;
-	
+	private String dietName;
+	private String dietImg;
+	private Date orderDate;
 	
 	public String getOrderItemName() {
 		return orderItemName;
@@ -26,6 +30,7 @@ public class Cook {
 	public void setDietAmount(int dietAmount) {
 		this.dietAmount = dietAmount;
 	}
+	
 	public int getOrderItemCode() {
 		return orderItemCode;
 	}
@@ -37,6 +42,24 @@ public class Cook {
 	}
 	public void setOrderCode(int orderCode) {
 		this.orderCode = orderCode;
+	}
+	public String getDietName() {
+		return dietName;
+	}
+	public void setDietName(String dietName) {
+		this.dietName = dietName;
+	}
+	public String getDietImg() {
+		return dietImg;
+	}
+	public void setDietImg(String dietImg) {
+		this.dietImg = dietImg;
+	}
+	public Date getOrderDate() {
+		return orderDate;
+	}
+	public void setOrderDate(Date orderDate) {
+		this.orderDate = orderDate;
 	}
 	
 	

@@ -3,11 +3,13 @@ package com.wdb3a.dacham.bean;
 public class Nutritionist {
 	private String sideDCode;
 	private String sideDName;
+	private String sideDType;
 	private String recipe;
 	private String sideDImg;
 	private int foodMAmount;
 	private String foodMName;
 	private int kcal; //Ä®·Î¸®
+	private int k; //Ä®·ý
 	private int carbohydrate; //Åº¼öÈ­¹°
 	private int protein; //´Ü¹éÁú
 	private int fat; //Áö¹æ
@@ -40,6 +42,9 @@ public class Nutritionist {
 	private int wizardCode;
 	private int dietCode;
 	private String spDietItem;
+	private String customer;
+	private String answer;
+	private int counselCode;
 	
 	public String getFoodGCode() {
 		return foodGCode;
@@ -275,6 +280,38 @@ public class Nutritionist {
 	public void setSpDietItem(String spDietItem) {
 		this.spDietItem = spDietItem;
 	}
+	public String getSideDType() {
+		return sideDType;
+	}
+	public void setSideDType(String sideDType) {
+		this.sideDType = sideDType;
+	}
+	public String getCustomer() {
+		return customer;
+	}
+	public void setCustomer(String customer) {
+		this.customer = customer;
+	}
+	public String getAnswer() {
+		return answer;
+	}
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
+	public int getCounselCode() {
+		return counselCode;
+	}
+	public void setCounselCode(int counselCode) {
+		this.counselCode = counselCode;
+	}
+	public int getK() {
+		return k;
+	}
+	public void setK(int k) {
+		this.k = k;
+	}
+	
+	
 	
 }
 

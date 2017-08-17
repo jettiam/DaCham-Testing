@@ -70,12 +70,20 @@ public class NutritionistAjaxController {
 		}
 		return entity;
 	}
-	@RequestMapping(value = "/materialAll",method = RequestMethod.GET)
-	public ResponseEntity<List<Nutritionist>> materialView(){
-		ResponseEntity<List<Nutritionist>> entity = null;
+	@RequestMapping(value = "/materialAll/{page}",method = RequestMethod.GET)
+	public ResponseEntity<Map<String,Object>> materialView(@PathVariable("page")int page){
+		ResponseEntity<Map<String,Object>> entity = null;
 		try {
-			List<Nutritionist> list = service.materialAll();
-			entity = new ResponseEntity<>(list,HttpStatus.OK);
+			
+			Criteria criteria = new Criteria();
+			int totalCount = service.materialTotal();
+			criteria.setPage(page);
+			criteria.setTotalCount(totalCount);
+			List<Nutritionist> list = service.materialAll(criteria);
+			Map<String,Object> map = new HashMap<>();
+			map.put("criteria", criteria);
+			map.put("list", list);
+			entity = new ResponseEntity<>(map,HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -105,11 +113,11 @@ public class NutritionistAjaxController {
 		entity = new ResponseEntity<>(cnt2,HttpStatus.OK);
 		return entity;
 	}
-	@RequestMapping(value = "/show/{foodMName}",method = RequestMethod.GET)
-	public ResponseEntity<Nutritionist> openAPI(@PathVariable("foodMName")String foodMName){
+	@RequestMapping(value = "/show/{foodMCode}",method = RequestMethod.GET)
+	public ResponseEntity<Nutritionist> openAPI(@PathVariable("foodMCode")String foodMCode){
 		ResponseEntity<Nutritionist> entity = null;
 		try {
-			Nutritionist nutritionist = service.openAPI(foodMName);
+			Nutritionist nutritionist = service.openAPI(foodMCode);
 			entity = new ResponseEntity<>(nutritionist,HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -298,6 +306,149 @@ public class NutritionistAjaxController {
 		try {
 			Nutritionist nutritionist = service.allNutri(sideDCode);
 			entity = new ResponseEntity<>(nutritionist,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	//해당 특별고객에 대한 특별식단 표시
+	@RequestMapping(value = "/specialToggle/{customer}/{dietCode}",method = RequestMethod.GET)
+	public ResponseEntity<List<Nutritionist>> specialToggle(@PathVariable("customer")String customer,@PathVariable("dietCode")int dietCode){
+		System.out.println("스페셜 토글 컨트롤러입니다.");
+		ResponseEntity<List<Nutritionist>> entity = null;
+		Nutritionist nutritionist = new Nutritionist();
+		try {
+			nutritionist.setCustomer(customer);
+			nutritionist.setDietCode(dietCode);
+			System.out.println("고객아이디:"+customer);
+			List<Nutritionist> list = service.specialToggle(nutritionist);
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+			System.out.println("the list"+list);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	//해당 특별식단에 대한 코드를 가져와 증북 방지
+	@RequestMapping(value = "/specialCode/{customer}",method = RequestMethod.GET)
+	public ResponseEntity<List<Nutritionist>> specialCode(@PathVariable("customer")String customer){
+		ResponseEntity<List<Nutritionist>> entity = null;	
+		try {			
+			List<Nutritionist> list = service.specialCode(customer);
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	//해당 특별식단을 추가 등록하길 원할 때 페이지를 갱신함
+	@RequestMapping(value = "/reRegist/{customer}",method = RequestMethod.PUT)
+	public ResponseEntity<String> reRegist(@PathVariable("customer")String customer){
+		ResponseEntity<String> entity = null;
+		try {
+			service.reRegist(customer);
+			entity = new ResponseEntity<>("SUCCESS",HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	//원래대로 되돌림
+	@RequestMapping(value = "/rollback/{customer}",method = RequestMethod.PUT)
+	public ResponseEntity<String> rollback(@PathVariable("customer")String customer){
+		ResponseEntity<String> entity = null;
+		try {
+			service.specialComplete(customer);
+			entity = new ResponseEntity<>("SUCCESS",HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	//반찬 삭제
+	@RequestMapping(value = "/delete/{sideDCode}",method = RequestMethod.DELETE)
+	public ResponseEntity<String> deleter(@PathVariable("sideDCode")String sideDCode){
+		ResponseEntity<String> entity = null;
+		try {
+			service.remove0(sideDCode);
+			service.remove1(sideDCode);
+			service.remove2(sideDCode);
+			service.remove3(sideDCode);
+			entity = new ResponseEntity<>("SUCCESS",HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	//식단 삭제
+	@RequestMapping(value = "/remove/{dietCode}",method = RequestMethod.DELETE)
+	public ResponseEntity<String> remover(@PathVariable("dietCode")int dietCode){
+		ResponseEntity<String> entity = null;
+		try {
+			service.delete0(dietCode);
+			service.delete1(dietCode);
+			service.delete2(dietCode);
+			service.delete3(dietCode);
+			entity = new ResponseEntity<>("SUCCESS",HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	//식재료 출력(수정)
+	@RequestMapping(value = "/sideMaterial/{sideDCode}",method = RequestMethod.GET)
+	public ResponseEntity<List<Nutritionist>> sideMaterial(@PathVariable("sideDCode")String sideDCode){
+		ResponseEntity<List<Nutritionist>> entity = null;
+		
+		try {
+			List<Nutritionist> list = service.sideMaterial(sideDCode);
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	//반찬 출력(수정)
+	@RequestMapping(value = "/groupSide/{foodGCode}/{dietCode}",method = RequestMethod.GET)
+	public ResponseEntity<List<Nutritionist>> groupSide(@PathVariable("foodGCode")String foodGCode, @PathVariable("dietCode")int dietCode){
+		ResponseEntity<List<Nutritionist>> entity = null;
+		Nutritionist nutritionist = new Nutritionist();
+		nutritionist.setFoodGCode(foodGCode);
+		nutritionist.setDietCode(dietCode);
+		try {
+			List<Nutritionist> list = service.groupSide(nutritionist);
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	//팝업 출력
+	@RequestMapping(value = "/popup/{dietCode}",method = RequestMethod.GET)
+	public ResponseEntity<List<Nutritionist>> popup(@PathVariable("dietCode")int dietCode){
+		ResponseEntity<List<Nutritionist>> entity = null;
+		
+		try {
+			List<Nutritionist> list = service.popup(dietCode);
+			entity = new ResponseEntity<>(list,HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

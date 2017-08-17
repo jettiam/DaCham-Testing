@@ -20,7 +20,11 @@ public class LoginServiceImpl implements LoginService {
 		Member dbResult = dao.getMember(id);
 		if(dbResult != null){
 			if(pw.equals(dbResult.getPasswd())){
-				return 1; //로그인 성공.
+				if(dbResult.getDeptCode().equals("도매상")){
+					return 3;//도매상 로그인 성공
+				}else{
+					return 1; //로그인 성공.
+				}				
 			}else{
 				return 0; // 아이디 있으나 비밀번호 틀림
 			}
@@ -67,6 +71,24 @@ public class LoginServiceImpl implements LoginService {
 	public Emp getEmp(String id) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.getEmp(id);
+	}
+
+	@Override
+	public int idCheck(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.idCheck(id);
+	}
+
+	@Override
+	public void insertToken(Member member) throws Exception {
+		// TODO Auto-generated method stub
+		dao.insertToken(member);
+	}
+
+	@Override
+	public void join(Member member) throws Exception {
+		dao.join(member);
+		
 	}
 
 	

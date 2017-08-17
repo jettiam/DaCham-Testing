@@ -2,30 +2,42 @@
 
 
 function openAPI(){
-
+		var count = parseInt(localStorage['cnt']);
+		
+	
 		var w = 200,h = 200;
 		
 		var colorscale = d3.scale.category10();
 		
 		//Legend titles
-		var foodMName = $("#foodMName").val();
-		var LegendOptions = [foodMName];
 		
-		console.log("단백질:"+A);        
-		var A = ($("#protein").val())/100;
-		var B = ($("#carbohydrate").val())/100;
-		var C = ($("#fat").val())/100;
-		var D = ($("#na").val())/100000;
-		var E = ($("#fe").val())/100;
+		var LegendOptions = ['선택 식재료의 영양정보(g)'];           
+		
+		  
+		
 		//Data
+		
+		var protein = 0;
+		var carbohydrate = 0;
+		var k = 0;
+		var na = 0;
+		var fat = 0;
+		for(var i = 0; i < count; i++){
+			protein += parseInt(localStorage[i+'_protein1']);
+			carbohydrate += parseInt(localStorage[i+'_carbohydrate1']);
+			k += parseInt(localStorage[i+'_k1']);
+			na += parseInt(localStorage[i+'_na1']);
+			fat += parseInt(localStorage[i+'_fat1']);
+			      
+		}
 		var d = [
 			  [
-				{axis: "단백질",value: A},
-				{axis: "탄수화물",value: B},
+				{axis: "단백질",value: protein},
+				{axis: "탄수화물",value: carbohydrate},
 				
-				{axis:"지방",value:C},
-				{axis:"나트륨",value:D},
-				{axis:"철",value:E}
+				{axis:"칼륨",value:k},
+				{axis:"나트륨",value:na},
+				{axis:"지방",value:fat}
 			  ]
 			];
 		
@@ -33,8 +45,8 @@ function openAPI(){
 		var mycfg = {
 		w: w,
 		h: h,
-		maxValue: 0.6,
-		levels: 6,
+		maxValue: 500,
+		levels: 5,
 		ExtraWidthX: 300
 		}
 		

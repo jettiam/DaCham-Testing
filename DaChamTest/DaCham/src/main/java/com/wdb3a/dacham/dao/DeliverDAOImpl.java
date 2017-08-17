@@ -58,5 +58,60 @@ public class DeliverDAOImpl implements DeliverDAO{
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace+".allCount",orderItemCode);
 	}
+	@Override
+	public int showDeliverCount() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".showCount");
+	}
+	@Override
+	public List<Deliver> showDeliverAll(Criteria criteria) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".showDeliverAll",criteria);
+	}
+	@Override
+	public void changer(int orderCode) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace+".changer",orderCode);
+	}
+	@Override
+	public void todaySynchro(int orderCode) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace+".todaySynchro",orderCode);
+	}
+	@Override
+	public List<Deliver> completeAll(Criteria criteria) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".completeAll",criteria);
+	}
+	@Override
+	public int completeAllCount() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".completeAllCount");
+	}
+	@Override
+	public void overButton(int foodMICode) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace+".overButton",foodMICode);
+	}
+	@Override
+	public void changer0(String foodMName) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace+".changer0",foodMName);
+	}
+	@Override
+	public List<Deliver> doing(Criteria criteria) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".doing",criteria);
+	}
+	@Override
+	public int doingCount() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".doingCount");
+	}
+	@Override
+	public int showDeliverAllCount() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".showDeliverAllCount");
+	}
 
 }

@@ -2,15 +2,20 @@ package com.wdb3a.dacham;
 
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -60,15 +65,47 @@ public class LoginController {
 					session.setAttribute("customerId", dbResult.getId());
 					session.setAttribute("passwd", dbResult.getPasswd());
 					session.setAttribute("address", dbResult.getAddress());
+					session.setAttribute("recentlyAddress", dbResult.getRecentlyAddress());
 					session.setAttribute("tel", dbResult.getTel());
 					session.setAttribute("email", dbResult.getEmail());
 					session.setAttribute("joinDate", dbResult.getJoinDate());
-					session.setAttribute("gradeCode", dbResult.getGradeCode());				
+					session.setAttribute("gradeCode", dbResult.getGradeCode());
+					session.setAttribute("deptCode", dbResult.getDeptCode());					
+				}else if(result == 3 ){
+					Member dbResult = service.getMember(id);
+					session.setAttribute("memberName", dbResult.getName());
+					session.setAttribute("customerId", dbResult.getId());
+					session.setAttribute("passwd", dbResult.getPasswd());
+					session.setAttribute("recentlyAddress", dbResult.getRecentlyAddress());
+					session.setAttribute("address", dbResult.getAddress());
+					session.setAttribute("tel", dbResult.getTel());
+					session.setAttribute("email", dbResult.getEmail());
+					session.setAttribute("joinDate", dbResult.getJoinDate());
+					session.setAttribute("gradeCode", dbResult.getGradeCode());
+					session.setAttribute("deptCode", dbResult.getDeptCode());	
 				}
 			} catch (Exception e) {								
 				e.printStackTrace();
 				
 			}
+			res.setContentType("text/html;charset=UTF-8");
+	         PrintWriter out = res.getWriter();
+	         out.write(callback+"(" + result + ")");
+		}
+		
+		@ResponseBody
+		@RequestMapping(value="insertToken")
+		public void insertToken(Member member,HttpServletRequest req, HttpServletResponse res) throws Exception{
+			req.setCharacterEncoding("utf-8");
+			String callback = req.getParameter("callback");
+			int result=0;
+			String id = req.getParameter("id");
+			System.out.println("토큰아이디:"+member.getId());
+			String token = req.getParameter("token");	
+			System.out.println("토큰:"+member.getToken());
+			
+			service.insertToken(member);
+			
 			res.setContentType("text/html;charset=UTF-8");
 	         PrintWriter out = res.getWriter();
 	         out.write(callback+"(" + result + ")");
@@ -91,15 +128,21 @@ public class LoginController {
 					Member dbResult = service.getMember(id);
 					session.setAttribute("memberName", dbResult.getName());
 					session.setAttribute("customerId", dbResult.getId());
-					session.setAttribute("passwd", dbResult.getPasswd());
+					session.setAttribute("recentlyAddress", dbResult.getRecentlyAddress());
 					session.setAttribute("address", dbResult.getAddress());
 					session.setAttribute("tel", dbResult.getTel());
 					session.setAttribute("email", dbResult.getEmail());
 					session.setAttribute("joinDate", dbResult.getJoinDate());
 					session.setAttribute("gradeCode", dbResult.getGradeCode());
-					
+					session.setAttribute("deptCode",dbResult.getDeptCode());
 					model.addAttribute("result", result);					
 					return "main";
+				}else if(result==3){
+					Member dbResult = service.getMember(id);
+					session.setAttribute("deptCode", dbResult.getDeptCode());
+					session.setAttribute("memberName", dbResult.getName());
+					session.setAttribute("customerId", dbResult.getId());
+					return "mate/wholesaler";
 				}else{
 					model.addAttribute("result", result);
 					return "main";
@@ -141,7 +184,7 @@ public class LoginController {
 					session.setAttribute("EmpName", dbResult.getName());
 					session.setAttribute("EmpDept", dbResult.getDeptCode());
 					session.setAttribute("EmpGrade", dbResult.getGradeCode());
-				
+					session.setAttribute("deptCode", dbResult.getDeptCode());
 					model.addAttribute("result",dbResult);
 					
 					if(dbResult.getDeptCode().equals("영양사")){
@@ -158,6 +201,8 @@ public class LoginController {
 					}
 					else if(dbResult.getDeptCode().equals("고객대응팀")){
 						return "/mate/counselor/counselorMain";
+					}else if(dbResult.getDeptCode().equals("도매상")){
+						return "/mate/wholesaler";
 					}
 					return "mate/mateMain";
 				}else{
@@ -170,10 +215,44 @@ public class LoginController {
 			return "main2";
 			
 		}
-		@RequestMapping(value="empLogout")
+		@RequestMapping(value="empLogout",method = RequestMethod.GET)
 		public String empLogout(HttpSession session){
 			session.invalidate();
 			return "main2";			
+		}
+		
+		@RequestMapping(value="join",method = RequestMethod.GET)
+		public String join(){
+			return "customer/join";
+		}
+		
+		@ResponseBody
+		@RequestMapping(value = "idCheck/{id}", method = RequestMethod.GET)
+		public ResponseEntity<Map<String, Object>> idCheck(@PathVariable("id") String id)throws Exception{
+			ResponseEntity<Map<String, Object>> entity = null;
+			System.out.println(id);
+			
+			try {
+				int idCheck = service.idCheck(id);
+				Map<String, Object> map = new HashMap<>();
+				map.put("idCheck",idCheck);
+				entity = new ResponseEntity<>(map, HttpStatus.OK);
+			} catch (Exception e) {
+				e.printStackTrace();
+				entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			}
+			return entity;			
+		}
+		
+		@RequestMapping(value="join",method = RequestMethod.POST)
+		public String joinPost(Member member){
+			try {
+				service.join(member);
+				return "main";
+			} catch (Exception e) {				
+				e.printStackTrace();
+				return "customer/join";
+			}			
 		}
 		
 }

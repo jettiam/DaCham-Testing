@@ -8,15 +8,15 @@
 <head>
  <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>반찬 등록 페이지</title>
 <script src="http://d3js.org/d3.v3.min.js"></script>
-<script src = "../../../dacham/resources/openAPIjs/radarchart.js"></script>
+<script src = "resources/openAPIjs/radarchart.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../../../dacham/resources/bootstrap-filestyle.min.js"> </script>
+<script type="text/javascript" src="resources/bootstrap-filestyle.min.js"> </script>
 <script>
 		//이미지를 업로드하면 미리 볼 수 있는 기능
 		function previewImage(targetObj, View_area){
@@ -58,7 +58,7 @@
  .box2 {
   display:inline-block;  margin-left:10px;}           
   .div1 {   
-  float:left;  }
+  float:left; width: 600px; }   
  .div2 {
   display:inline-block;  margin-left:10px;} 
   #body{
@@ -69,7 +69,7 @@
 </head>
 <body>
 <%@include file="nutritionistNavi.jsp" %>
-	<div class = "container">
+	<div class = "container" style = "width:1530px;">  
 		<div class = "div1">
 		
 				<div>
@@ -91,24 +91,28 @@
 						</tr>
 					
 				</table>
+				<ul class = "pagination">
+				</ul>
 		</div>
-	
+		
 	<input type = "hidden" id = "foodMName" name = "foodMName2">
 	<input type = "hidden" id =  "protein" name = "protein">
 	<input type = "hidden" id = "fat" name = "fat">
 	<input type = "hidden" id = "na" name = "na">
 	<input type = "hidden" id = "carbohydrate" name = "carbohydrate">
-	<input type = "hidden" id =  "fe" name = "fe">
+	<input type = "hidden" id =  "k" name = "k">
 	<form id = "registForm" class = "registFrom" enctype = "multipart/form-data" style = "margin-bottom:100px;">
 		<div class = "div2">	
 			<br><br>
 			<div class = "box1">
+				<h4>지우려면 이름 클릭</h4>
 				<table class = "material" style = "position:absolute;">          
-					<tr>
+					<tr>   
 						<th></th>  
 						<th>식재료&nbsp;&nbsp;  </th>
 						<th>양(g)&nbsp;&nbsp;   </th>
 					</tr>
+					
 				</table>
 		
 		<div class = "box2">
@@ -139,7 +143,6 @@
 					<tr>
 						<td>
 							<select name = "foodGCode">
-								<option>식품군</option>
 								<option value = "01">밥</option>
 								<option value = "02">국</option>
 								<option value = "03">메인메뉴1</option>
@@ -150,14 +153,14 @@
 						</td>
 						<td>
 							<select name = "cookMCode">	
-								<option>조리방법</option>
 								<option value = "01">튀김</option>
 								<option value = "02">구이</option>
+								<option value = "08">볶음</option>	
 								<option value = "03">조림</option>
 								<option value = "04">찜</option>
-								<option value = "05">초벌</option>
 								<option value = "06">무침</option>
-								<option value = "07">탕</option>								
+								<option value = "07">탕</option>	
+								<option value = "05">초벌</option>						
 							</select>
 						</td>
 					</tr>
@@ -166,7 +169,7 @@
 		  </div> 
 		</div>
 	</form>
-		<div style = "margin-left:500px; margin-bottom : 1px;">                   
+		<div style = "margin-left:1000px; margin-bottom : 1px;">                   
 			<button id = "regist" class = "btn btn-success">등록</button>
 			<button id = "cancle" class = "btn btn-success">취소</button>
 		</div>
@@ -174,19 +177,34 @@
 	<script>
 
 		$(document).ready(function(){
+			var currentPage = 1;
 			$("#side").addClass("w3-light-gray");
-			openAPI();
 			
-			var v = 0;
+			localStorage.clear();
+			openAPI();
+			var v = 0;	
 			$("#listAll").on("click",function(){
-				materialAll();
+				materialAll(1);
 			});
+			$(".pagination").on("click","li a",function(){
+				event.preventDefault();
+				var replyPage = $(this).attr("href");
+				
+				materialAll(replyPage);
+			});
+			
 			$("#regist").on("click",function(){
-				if(!localStorage['init'] || isNaN(localStorage['cnt'])==true || localStorage['cnt'] == 0){
-					/* alert("등록할 식재료를 선택하세요"); */
+				if($(".material tbody > .item").length == 0){
+					alert("등록할 식재료를 선택하세요");
 					event.preventDefault();
 				}
-				else{
+				else if($("#prev_View_area").attr("src") == "http://placehold.it/100x100"){
+					alert("이미지를 선택하세요");
+				}		
+				else if($(".foodMAmountClass").val() == ""){
+					alert("식재료량을 기재하세요!!");
+				}
+				else{ 
 					$("#registForm").attr("method","post");
 					$("#registForm").attr("action","side");
 					$("#registForm").submit();	
@@ -205,53 +223,86 @@
 					window.location.href = "side";	
 				}
 			});
+			
+			
 			$(document.body).on("click",".nameClick",function(){
 				event.preventDefault();
-				
 				var cnt = parseInt(localStorage['cnt']);
-				
+
 				var foodMName = $(this).attr('data-src');
-				
 				var foodMCode = $(this).attr('data-code');
 				
-				localStorage[cnt + '_name'] = foodMName;
-				localStorage[cnt + '_code'] = foodMCode;
+				$(".material").append("<tr class = 'item'><td>"+"<input type = 'hidden' name = 'foodMCode' value = '"+foodMCode+"'>"+"</td><td class = 'foodMName' name = 'foodMName' data-name = '"+foodMName+"'>"+foodMName+"</td><td>"+"<input type = 'text' class = 'foodMAmountClass' name = 'foodMAmount' maxlength = '4' size = '1' value = '1'>"+"</td></tr>");
+				$(this).parent().parent().hide();
+				var length = $(".material tbody > .item").length;
+				//alert("식재료의 개수:"+length);	
+				v = length;
 				
-				++cnt;
 				
-				localStorage['cnt'] = cnt;
-				
-				Refresh();
-				v = cnt;
+				cntChange(v);
+				$.getJSON("nutriAjax/show/"+foodMCode,function(data){
+					
+					localStorage[cnt+"_k"] = data.k;
+					localStorage[cnt+"_carbohydrate"] = data.carbohydrate;
+					localStorage[cnt+"_protein"] = data.protein;  
+					localStorage[cnt+"_fat"] = data.fat;
+					localStorage[cnt+"_na"] = data.na;
+					
+					localStorage[cnt+"_k1"] = localStorage[cnt+"_k"]*1*0.01;
+					localStorage[cnt+"_carbohydrate1"] = localStorage[cnt+"_carbohydrate"]*1*0.01;
+					localStorage[cnt+"_protein1"] = localStorage[cnt+"_protein"]*1*0.01;  
+					localStorage[cnt+"_fat1"] = localStorage[cnt+"_fat"]*1*0.01;
+					localStorage[cnt+"_na1"] = localStorage[cnt+"_na"]*1*0.01;
+					cnt++;         
+					localStorage['cnt'] = cnt;
+					openAPI();
+				});
 			});
+			$(document.body).on('focusout','.foodMAmountClass',function(){
+				var cnt = parseInt(localStorage['cnt']);
+				var subCnt = cnt - 1;
+				var value = $(this).val();
+				if(value == ""){
+					localStorage[subCnt+"_k1"] = localStorage[subCnt+"_k"]*1*0.01;
+					localStorage[subCnt+"_carbohydrate1"] = localStorage[subCnt+"_carbohydrate"]*1*0.01;
+					localStorage[subCnt+"_protein1"] = localStorage[subCnt+"_protein"]*1*0.01;  
+					localStorage[subCnt+"_fat1"] = localStorage[subCnt+"_fat"]*1*0.01;
+					localStorage[subCnt+"_na1"] = localStorage[subCnt+"_na"]*1*0.01;
+					openAPI();
+				}
+				else{
+					
+				
+					
+					localStorage[subCnt+"_k1"] = localStorage[subCnt+"_k"]*value*0.01;
+					localStorage[subCnt+"_carbohydrate1"] = localStorage[subCnt+"_carbohydrate"]*value*0.01;
+					localStorage[subCnt+"_protein1"] = localStorage[subCnt+"_protein"]*value*0.01;  
+					localStorage[subCnt+"_fat1"] = localStorage[subCnt+"_fat"]*value*0.01;
+					localStorage[subCnt+"_na1"] = localStorage[subCnt+"_na"]*value*0.01;
+					openAPI();
+				}
+			});
+			
 			$(document.body).on('click','.foodMName',function(){
 				var cnt = parseInt(localStorage['cnt']);
 				var id = $(this).parent().attr('data-id');
+				var foodMName = $(this).attr('data-name');
 				
+				var prev = $(this).attr('data-name');
+				console.log("ㅇㅇㅇ"+prev);
+				$('.nameClick[data-src="'+prev+'"]').parent().parent().show();
 				$(this).parent().remove();
-				localStorage.removeItem(id+'_name');
+				localStorage.removeItem(id+'_name');    
 				localStorage.removeItem(id+'_code');
 				
 				--cnt;
 				localStorage['cnt'] = cnt;
-				
-				v = cnt;
+				var length = $(".material tbody > .item").length;
+				v = length;
 				cntChange(v);
+				openAPI();
 			});
 			
-			$(document.body).on('mouseover','.foodMName',function(){
-				var foodMName = $(this).attr('data-name');
-				
-				$.getJSON("nutriAjax/show/"+foodMName,function(data){
-					$("#foodMName").val(data.foodMName);
-					$("#protein").val(data.protein);
-					$("#fat").val(data.fat);
-					$("#na").val(data.na);
-					$("#carbohydrate").val(data.carbohydrate);
-					$("#fe").val(data.fe);
-					openAPI(); 
-				});
-			});	
 			
 			
 			function Refresh(){
@@ -265,7 +316,7 @@
 					var item = $('<tr></tr>').addClass('item').attr('data-id',i);
 					$('<td></td>').html('<input type = "hidden" name = "foodMCode" value = '+foodMCode + '>').appendTo(item);    
 					$('<td>'+foodMName+'</td>').addClass("foodMName").attr('name','foodMName').attr('data-name',foodMName).appendTo(item);
-					$('<td></td>').html('<input type ="text" name = "foodMAmount" maxlength="4" size="1" >').appendTo(item);
+					$('<td></td>').addClass("mountItem").append('<input type ="text" class = "foodMAmountClass" name = "foodMAmount" maxlength="4" size="1" >').appendTo(item);
 					item.appendTo(".material");
 					
 				}
@@ -297,22 +348,39 @@
 						str += "<tr class = 'searchResult'><td>"+this.foodMCode+"</td>"+"<td>"+"<a class = 'nameClick' data-src = '"+this.foodMName+"' data-code = '"+this.foodMCode+"'>"+this.foodMName+"</a></td></tr>";
 					});
 					$(".searchTable").append(str);
-					/* alert(str); */
+					/* alert(str);   */
 				});
 			});
 			
-			function materialAll(){
+			function materialAll(page){
+				currentPage = page;
 				$(".searchResult").remove();
-				$.getJSON("nutriAjax/materialAll",function(data){
+				$.getJSON("nutriAjax/materialAll/"+page,function(data){
 					var str = "";
-					$(data).each(function(){
+					$(data.list).each(function(){
 						str += "<tr class = 'searchResult'><td>"+this.foodMCode+"</td>"+"<td>"+"<a class = 'nameClick' data-src = '"+this.foodMName+"' data-code = '"+this.foodMCode+"'>"+this.foodMName+"</a></td></tr>";
 					});
 					$(".searchTable").append(str);
+					printPaging(data.criteria);
 				});
+			}
+			function printPaging(criteria){
+				var str = "";
+						
+				if(criteria.prev){
+					str += "<li><a href='"+(criteria.startPage-1)+"'>" + "<<"+"</a></li>";
+				}
+				for(var i = criteria.startPage; i<=criteria.endPage; i++){
+					var strClass = criteria.page == i?"class = 'active'":"";
+					str += "<li "+strClass+"><a href ='"+i+"'>"+i + "</a></li>";
+				}
+				if(criteria.next){
+					str += "<li><a href='"+(criteria.endPage+1)+"'>" + ">>"+"</a></li>";   
+				}
+				$(".pagination").html(str);
 			}
 		});
 	</script>
-	<script src = "../../../dacham/resources/openAPIjs/APIQuery2.js"></script>
+	<script src = "resources/openAPIjs/APIQuery2.js"></script>
 </body>
 </html>

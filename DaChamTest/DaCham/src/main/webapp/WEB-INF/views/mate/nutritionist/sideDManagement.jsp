@@ -20,15 +20,45 @@
 			window.location.href = "sideDRegist";
 		});
 		var foodGName = "";
+		var cookMName = "";
 		$(".category li a").on("click",function(){
 			event.preventDefault();
 			foodGName = $(this).attr("data-name");
-			$('.category').hide();
-			$('.category2').show();
+			if(foodGName == "밥"){
+				$(".searchResult").remove();
+				$.getJSON("nutriAjax/categorySearch/"+foodGName+"/"+"찜",function(data){
+					console.log(data);
+					var str = "";
+					$(data).each(function(){
+						str += "<tr class = 'searchResult'>"+"<td>"+"<input type = 'radio' name = 'radio' value = '"+this.sideDCode+"'>"+"</td>"+"<td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width: 75px; height: 25px;'></td>"+"<td>"+this.sideDName+"</td>"+"</tr>"
+					});
+					$(".searchTable").append(str);
+				});
+				$('.category').hide();
+				$('#categoryStart').show();
+			}
+			else if(foodGName == "국"){
+				$(".searchResult").remove();
+				$.getJSON("nutriAjax/categorySearch/"+foodGName+"/"+"탕",function(data){
+					console.log(data);
+					var str = "";
+					$(data).each(function(){
+						str += "<tr class = 'searchResult'>"+"<td>"+"<input type = 'radio' name = 'radio' value = '"+this.sideDCode+"'>"+"</td>"+"<td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width: 75px; height: 25px;'></td>"+"<td>"+this.sideDName+"</td>"+"</tr>"
+					});
+					$(".searchTable").append(str);
+				});
+				$('.category').hide();
+				$('#categoryStart').show();
+			}
+			else{
+				$('.category').hide();
+				$('.category2').show();
+			}
+			
 		});
 		$(".category2 li a").on("click",function(){
 			event.preventDefault();
-			var cookMName = $(this).attr("data-name");
+			cookMName = $(this).attr("data-name");
 			$(".searchResult").remove();
 			
 			$('.category2').hide();
@@ -38,7 +68,7 @@
 				console.log(data);
 				var str = "";
 				$(data).each(function(){
-					str += "<tr class = 'searchResult'>"+"<td>"+"<input type = 'radio' name = 'radio' value = '"+this.sideCode+"'>"+"</td>"+"<td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width: 75px; height: 25px;'></td>"+"<td>"+this.sideDName+"</td>"+"</tr>"
+					str += "<tr class = 'searchResult'>"+"<td>"+"<input type = 'radio' name = 'radio' value = '"+this.sideDCode+"'>"+"</td>"+"<td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width: 75px; height: 25px;'></td>"+"<td>"+this.sideDName+"</td>"+"</tr>"
 				});
 				$(".searchTable").append(str);
 			});
@@ -48,12 +78,40 @@
 			$('.category').show();
 			$("#categoryStart").hide();
 		});
+		$(".updateSide").on("click",function(){
+			var sideDCode = $('input:radio[name="radio"]:checked').val();
+			window.location.href = "sideModify?sideDCode="+sideDCode;
+		});
+		$(".deleteSide").on("click",function(){
+			var ans = confirm("삭제하면 되돌릴 수 없습니다. 정말로 반찬을 삭제하시겠습니까?");
+			if(ans == false) return;
+			var sideDCode = $('input:radio[name="radio"]:checked').val();
+			$.ajax({
+				type : "DELETE",			
+				url : 'nutriAjax/delete/'+sideDCode,
+				success : function(data){
+					if(data =="SUCCESS"){
+						alert("삭제되버렸습니다.");
+						$(".searchResult").remove();
+						$.getJSON("nutriAjax/categorySearch/"+foodGName+"/"+cookMName,function(data){
+							console.log(data);
+							var str = "";
+							$(data).each(function(){
+								str += "<tr class = 'searchResult'>"+"<td>"+"<input type = 'radio' name = 'radio' value = '"+this.sideDCode+"'>"+"</td>"+"<td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width: 75px; height: 25px;'></td>"+"<td>"+this.sideDName+"</td>"+"</tr>"
+							});
+							$(".searchTable").append(str);
+						});
+					}
+				}
+			});
+			
+		});
 	});
 </script>
-<title>Insert title here</title>
+<title>반찬 관리 페이지</title>
 <style>
 	.box1 {
-  float:left;  }
+  float:left; width: 150px;  }
  .box2 {
   display:inline-block;  margin-left:10px;}
   ul{
@@ -64,35 +122,38 @@
 <body>
 <%@include file="nutritionistNavi.jsp" %>
    <div class = "container">
+    <form>
+    </form>
 	<div class = "box1">
 		<b>반찬 카테고리</b>
 		<nav>
 			<a href = "#" id = "categoryStart">반찬 찾아보기</a>
 			<ul class = "category">
-				<li><a data-name = "곡류">곡류</a></li>
-				<li><a data-name = "조미류">조미류</a></li>
-				<li><a data-name = "채소류">채소류</a></li>
-				<li><a data-name = "생선류">생선류</a></li>
-				<li><a data-name = "고기류">고기류</a></li>
+				<li><a data-name = "밥"><img class = "img-responsive dImg center-block" src = "resources/customerImage/dietImg/rice7.JPG" style = "width:50px; height:50px;">밥</a></li>
+				<li><a data-name = "국"><img class = "img-responsive dImg center-block" src = "resources/customerImage/dietImg/s08.JPG" style = "width:50px; height:50px;">국</a></li>
+				<li><a data-name = "메인 메뉴1"><img class = "img-responsive dImg center-block" src = "resources/customerImage/dietImg/m06.JPG" style = "width:50px; height:50px;">메인 메뉴1</a></li>
+				<li><a data-name = "메인 메뉴2"><img class = "img-responsive dImg center-block" src = "resources/customerImage/dietImg/m07.JPG" style = "width:50px; height:50px;">메인 메뉴2</a></li>
+				<li><a data-name = "메인 메뉴3"><img class = "img-responsive dImg center-block" src = "resources/customerImage/dietImg/m08.JPG" style = "width:50px; height:50px;">메인 메뉴3</a></li>
+				<li><a data-name = "메인 메뉴4"><img class = "img-responsive dImg center-block" src = "resources/customerImage/dietImg/m09.JPG" style = "width:50px; height:50px;">메인 메뉴4</a></li>
 			</ul>
 		</nav>
 		<nav>
 			<ul class = "category2">
-				<li><a data-name = "튀김">튀김</a></li>
-				<li><a data-name = "구이">구이</a></li>
-				<li><a data-name = "조림">조림</a></li>
-				<li><a data-name = "찜">찜</a></li>
-				<li><a data-name = "초벌">초벌</a></li>
-				<li><a data-name = "무침">무침</a></li>
-				<li><a data-name = "탕">탕</a></li>
+				<li><a data-name = "튀김"><h3>튀김</h3></a></li>
+				<li><a data-name = "구이"><h3>구이</h3></a></li>
+				<li><a data-name = "조림"><h3>조림</h3></a></li>
+				<li><a data-name = "찜"><h3>찜</h3></a></li>
+				<li><a data-name = "초벌"><h3>초벌</h3></a></li>
+				<li><a data-name = "무침"><h3>무침</h3></a></li>
+				<li><a data-name = "탕"><h3>탕</h3></a></li>
 			</ul>
 		</nav>
 	</div>
 	<div class = "box2">
 		<div>
 			<button id = "regist" class = "btn btn-primary">반찬 등록</button>
-			<button class = "btn btn-primary">반찬 수정</button>
-			<button class = "btn btn-primary">반찬 삭제</button>
+			<button class = "updateSide btn btn-primary">반찬 수정</button>
+<!-- 			<button class = "deleteSide btn btn-primary">반찬 삭제</button> -->
 		</div>
 		<div>
 			<table class = "searchTable table table-hover">

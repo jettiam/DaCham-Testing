@@ -14,6 +14,11 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <title>DaCham 다참소개</title>
+<script>
+$(document).ready(function(){
+	$("#dachamInfo").addClass("w3-gray");
+});
+</script>
 <style>
 #infoWrap {
 	width: 1080px;
@@ -133,11 +138,13 @@ img {
 
 				</div>
 			</div>
-			<br> <br> <input type="button" id="moveOrder"  class="btn btn-warning" value="주문하기">
+			<br><input type="button" id="moveOrder"  class="btn btn-warning btn-lg" value="주문하기">
 		</div>
 
 	</div>
-
+<footer>
+	<%@include file="../../footer.jsp" %>
+</footer>
 
 </body>
 <script>

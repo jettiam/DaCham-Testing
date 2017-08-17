@@ -98,10 +98,15 @@ public String detailOrder(@RequestParam(value="dietCode") int dietCode, Model mo
  * @throws Exception
  */
 @RequestMapping(value="/doOrder",method=RequestMethod.GET)
-public String doOrder(Customer customer,Model model)throws Exception{
+public String doOrder(Customer customer,Model model,@RequestParam(value="sideDish") int sideDish[])throws Exception{
 	//serviceCu.orderRegist(customer);
 	System.out.println("오더에 들어감");
+	for(int i=0;i<sideDish.length;i++){
+		System.out.println(sideDish[i]);
+	}
+	
 	model.addAttribute("order", customer);
+	model.addAttribute("sideDCode",sideDish);
 	return "customer/dietOrder/orderRegister";
 }
 /**
@@ -151,9 +156,19 @@ for(int i=0; i< jsonObj.size();i++){
  * @throws Exception
  */
 @RequestMapping(value="/payment",method=RequestMethod.POST)
-public String payment(RedirectAttributes rttr,Customer customer)throws Exception{	
-	serviceCu.orderRegist(customer);	
+public String payment(RedirectAttributes rttr,Customer customer,@RequestParam(value="sideDCode") int sideDCode[])throws Exception{	
+	
+	serviceCu.recentlyAddress(customer);
+	serviceCu.orderRegist(customer);
+	int recentCode = serviceCu.recentlyOrderCode(customer.getId());
+	for(int i=0;i<sideDCode.length;i++){		
+			HashMap options = new HashMap();
+			options.put("recentCode", recentCode);
+			options.put("sideCode", sideDCode[i]);
+			serviceCu.orderOptionRegist(options);
+		}	
 	rttr.addAttribute("status","3");
+	
 	//결제후 마이페이지로
 	return "redirect:myPage";
 }
@@ -176,10 +191,10 @@ public String goMyCart(@RequestParam(value="sideDish") List<String> sideDish, Cu
 	int recentCode = serviceCu.recentlyOrderCode(customer.getId());
 	for(String sCode : sideDish){
 	int code = Integer.parseInt(sCode);
-	HashMap options = new HashMap();
-	options.put("recentCode", recentCode);
-	options.put("sideCode", code);
-	serviceCu.orderOptionRegist(options);
+		HashMap options = new HashMap();
+		options.put("recentCode", recentCode);
+		options.put("sideCode", code);
+		serviceCu.orderOptionRegist(options);
 	}	
 	return "redirect:goCartList";
 }
@@ -205,13 +220,11 @@ public String goOrderInfo()throws Exception{
 }
 
 
-
-@RequestMapping(value="/menuShow",method = RequestMethod.GET)
 /**
  * 
  * @return 이달의 메뉴로 이동
- */
-public String menuShow(){
+ */@RequestMapping(value="/menuShow",method = RequestMethod.GET)
+public String menuShow(Model model){	
 	return "customer/menu/menuShow";
 }
 
@@ -224,28 +237,22 @@ public String nutritionInfo(){
 	return "customer/nutrientInfo/nutritionInfo";
 }
 
-@RequestMapping(value="/nutritionInfoDetail",method = RequestMethod.GET)
 /**
  * 
  * @return 영양소개 상세로 이동
  */
-public String nutritionInfoDetail(){
+@RequestMapping(value="/nutritionInfoDetail",method = RequestMethod.GET)
+public String nutritionInfoDetail(Model model,int detail){
+	model.addAttribute("detail",detail);
+	
 	return "customer/nutrientInfo/nutritionInfoDetail";
 }
 
-@RequestMapping(value="/nutritionInfoDetail2",method = RequestMethod.GET)
-/**
- * 
- * @return 영양소개 상세로 이동
- */
-public String nutritionInfoDetail2(){
-	return "customer/nutrientInfo/nutritionInfoDetail2";
-}
-@RequestMapping(value="/counsel",method = RequestMethod.GET)
 /**
  * 
  * @return 문의하기로 이동
  */
+@RequestMapping(value="/counsel",method = RequestMethod.GET)
 public String getCounsel(Model model) throws Exception{	
 	List<Counsel> list = service.counselList();
 	model.addAttribute("list",list);
@@ -294,23 +301,27 @@ public String delete(@RequestParam(value="counselCode")int code,RedirectAttribut
 	return "redirect:counsel";
 	
 }
-@RequestMapping(value="/counselUpdate",method = RequestMethod.GET)
+
 /**
  * 
  * @return 고객 게시글 수정
  */
-	public void updateGET(int code, Model model) throws Exception{
-	model.addAttribute(service.couselRead(code));
-	
+@RequestMapping(value="/counselUpdate",method = RequestMethod.GET)
+	public String counselUpdate(int counselCode,Model model) throws Exception{
+	model.addAttribute("read",service.couselRead(counselCode));
+	return "customer/counsel/counselUpdate";
 }
 
-@RequestMapping(value="/counselUpdate",method = RequestMethod.POST)
 /**
  * 
  * @return 고객 게시글 수정 후 게시글 목록으로 리다이렉트 
  */
-	public String updatePOST(Counsel counsel,RedirectAttributes rttr) throws Exception {
-	
+@RequestMapping(value="/counselUpdate",method = RequestMethod.POST)
+	public String updatePOST(Counsel counsel) throws Exception {
+	System.out.println(counsel.getCounselCode());
+	System.out.println(counsel.getCounselTitle());
+	System.out.println(counsel.getCounselContent());
+	System.out.println(counsel.getCounselItemCode());
 	service.update(counsel);
 	
 	return "redirect:counsel";

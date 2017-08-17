@@ -8,7 +8,7 @@
   <select id="dietList" resultType="Customer">
   	select d.dietCode, d.dietName, s.sideDImg
 	from diet d,dietinfo di, sidedish s
-	where d.diseaseCode=#{diseaseCode} and di.dietCode=d.dietCode and di.sideDCode=s.sideDCode
+	where d.diseaseCode=#{diseaseCode} and di.dietCode=d.dietCode and di.sideDCode=s.sideDCode and di.sideDType=0 and d.spDietitem=1
 	order by d.dietCode
 
   </select>
@@ -16,20 +16,31 @@
   <select id="detailOrder" resultType="Customer">
     select d.dietImg, d.dietCode, d.dietName, d.price, s.sideDImg, s.sideDName,s.foodGCode
 	from diet d,dietinfo di, sidedish s
-	where d.dietCode=#{dietCode} and di.dietCode=d.dietCode and di.sideDCode=s.sideDCode
+	where d.dietCode=#{dietCode} and di.dietCode=d.dietCode and di.sideDCode=s.sideDCode and di.sideDType=0
 	order by s.foodGcode  
   </select>
   
   <!-- 특정 식품군 반찬 정보 띄우는 쿼리문 영양정보 포함 -->
   <select id="sideDDetail" resultType="Customer">
-  select s.sideDCode, s.sidedImg,s.sideDname,s.foodGCode, f.kcal,f.carbohydrate,f.protein,f.fat,f.na
+  <!-- select s.sideDCode, s.sidedImg,s.sideDname,s.foodGCode, f.kcal,f.carbohydrate,f.protein,f.fat,f.na
 from sidedish s,(select a.sideDcode,sum(kcal) kcal,sum(carbohydrate) carbohydrate, sum(protein) protein, sum(fat) fat, sum(na) na
 from 
 (select si.sideDCode,(si.foodMAmount/100)*f.kcal kcal,(si.foodMAmount/100)*f.protein protein,(si.foodMAmount/100)*f.carbohydrate carbohydrate,(si.foodMAmount/100)*f.na na,(si.foodMAmount/100)*f.fat fat
 	from sidedinfo si,foodmaterial f
 	where si.foodMCode = f.foodMCode) a
 	group by a.sidedcode) f 
-where s.sideDCode=f.sideDcode and s.foodGCode=#{foodGCode};
+where s.sideDCode=f.sideDcode and s.foodGCode=#{foodGCode}; -->
+select result.sideDCode, result.sidedImg,result.sideDname,result.foodGCode, result.kcal,result.carbohydrate,result.protein,result.fat,result.na,result.k
+from  (select s.sideDCode, s.sidedImg,s.sideDname,s.foodGCode, f.kcal,f.carbohydrate,f.protein,f.fat,f.na,f.k
+from sidedish s,(select a.sideDcode,sum(kcal) kcal,sum(carbohydrate) carbohydrate, sum(protein) protein, sum(fat) fat, sum(na) na,sum(k) k
+from 
+(select si.sideDCode,(si.foodMAmount/100)*f.kcal kcal,(si.foodMAmount/100)*f.protein protein,(si.foodMAmount/100)*f.carbohydrate carbohydrate,(si.foodMAmount/100)*f.na na,(si.foodMAmount/100)*f.fat fat,(si.foodMAmount/100)*f.k k
+	from sidedinfo si,foodmaterial f
+	where si.foodMCode = f.foodMCode) a
+	group by a.sidedcode) f 
+where s.sideDCode=f.sideDcode and s.foodGCode=#{foodGCode}) result, dietinfo di
+where di.dietCode = #{dietCode} and result.sideDCode= di.sideDCode
+order by di.sideDType
   </select>
   <!-- 주문결제 -->
   <insert id="orderRegist">
@@ -69,10 +80,10 @@ from orderlist
 where id=#{id};
 </select>
 
-<!-- 사용자 주문 식단(반찬옵션) 에 insert 하기 위한 쿼리문, 리턴 없음 -->
+<!-- 사용자 주문 식단(반찬옵션) 에 insert 하기 위한 쿼리문, 리턴 없음 (마지막 1은 itemCode 장바구니)-->
 <insert id="registOrderOption" parameterType="hashmap">
 insert into orderoptions
-values( #{recentCode}, #{sideCode});
+values( #{recentCode}, #{sideCode}, 1 );
 </insert>
 
 <!-- 주문에 대한 옵션(반찬들) 가져오는 쿼리문, 리턴 Customer(반찬이름, 반찬이미지) -->
@@ -107,6 +118,54 @@ from orderlist ol, orderoptions op
 where ol.id=#{id} and ol.ordercode=op.ordercode) u
 where u.sideDcode=n.sideDcode;
 </select>
+<!-- 고객 건강정보입력 -->
+<insert id="insertMeasure">
+INSERT INTO measure (id, measureICode, measureDate, reading) VALUES (#{id},#{measureICode}, now(), #{reading})
+</insert>
+<!-- 건강정보 중첩확인 -->
+<select id="measureCheck" resultType="int">
+select count(id) from measure where id=#{id} and measureicode=#{measureICode} and  measureDate =str_to_date(now(),'%Y-%m-%d')
+</select>
+<!-- 건강정보 불러오기 -->
+<select id="measureRead" resultType="Measure">
+select m.measureDate,m.reading,mi.measureName,mi.measureUnit,m.measureICode
+from measure m, measureitem mi
+where m.id=#{id} and m.measureICode = mi.measureICode
+order BY m.measureDate, m.measureICode
+</select>
+<!-- select di.dietCode, sum(result.kcal) kcal,sum(result.carbohydrate) carbohydrate, sum(result.protein) protein,sum(result.fat) fat,sum(result.na) na,sum(result.k) k
+from  (select s.sideDCode, s.sidedImg,s.sideDname,s.foodGCode, f.kcal,f.carbohydrate,f.protein,f.fat,f.na,f.k
+from sidedish s,(select a.sideDcode,sum(kcal) kcal,sum(carbohydrate) carbohydrate, sum(protein) protein, sum(fat) fat, sum(na) na,sum(k) k
+from 
+(select si.sideDCode,(si.foodMAmount/100)*f.kcal kcal,(si.foodMAmount/100)*f.protein protein,(si.foodMAmount/100)*f.carbohydrate carbohydrate,(si.foodMAmount/100)*f.na na,(si.foodMAmount/100)*f.fat fat,(si.foodMAmount/100)*f.k k
+	from sidedinfo si,foodmaterial f
+	where si.foodMCode = f.foodMCode) a
+	group by a.sidedcode) f 
+where s.sideDCode=f.sideDcode) result, dietinfo di
+where result.sideDCode= di.sideDCode
+group by di.dietCode
+order by di.sideDType --><!-- 모든 식단의 영양소 합 쿼리 -->
+<!-- 질환에 따른 식단 반찬과 영양소 합 -->
+<select id="menuShow" resultType="Customer">
+select d.dietCode, d.dietName, s.sideDName, s.sideDCode , s.sideDImg, n.kcal,n.carbohydrate,n.protein,n.fat,n.na,n.k
+from diet d,dietinfo di, sidedish s, (select di.dietCode, sum(result.kcal) kcal,sum(result.carbohydrate) carbohydrate, sum(result.protein) protein,sum(result.fat) fat,sum(result.na) na,sum(result.k) k
+from  (select s.sideDCode, s.sidedImg,s.sideDname,s.foodGCode, f.kcal,f.carbohydrate,f.protein,f.fat,f.na,f.k
+from sidedish s,(select a.sideDcode,sum(kcal) kcal,sum(carbohydrate) carbohydrate, sum(protein) protein, sum(fat) fat, sum(na) na,sum(k) k
+from 
+(select si.sideDCode,(si.foodMAmount/100)*f.kcal kcal,(si.foodMAmount/100)*f.protein protein,(si.foodMAmount/100)*f.carbohydrate carbohydrate,(si.foodMAmount/100)*f.na na,(si.foodMAmount/100)*f.fat fat,(si.foodMAmount/100)*f.k k
+	from sidedinfo si,foodmaterial f
+	where si.foodMCode = f.foodMCode) a
+	group by a.sidedcode) f 
+where s.sideDCode=f.sideDcode) result, dietinfo di
+where result.sideDCode= di.sideDCode
+group by di.dietCode
+order by di.sideDType) n
+where d.diseaseCode=#{diseaseCode} and di.dietCode=d.dietCode and di.sideDCode=s.sideDCode and di.sideDType=0 and d.spDietitem=1 and d.dietCode=n.dietCode
+order by d.dietCode
+</select>
 
-
+<!-- 주문시 최근 주소 입력 -->
+<update id="recentlyAddress">
+	UPDATE member SET recentlyAddress=#{recentlyAddress} WHERE id=#{id};
+</update>
   </mapper>

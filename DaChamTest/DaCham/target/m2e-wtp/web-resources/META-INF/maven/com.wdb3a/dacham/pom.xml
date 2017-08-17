@@ -8,7 +8,7 @@
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
-		<java-version>1.6</java-version>
+		<java-version>1.8</java-version>
 		<org.springframework-version>4.2.4.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
@@ -176,16 +176,12 @@
 
 		<!-- MONGO DB 사용하기 위한 dependency -->
 		<!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver -->
-		<dependency>
-			<groupId>org.mongodb</groupId>
-			<artifactId>mongo-java-driver</artifactId>
-			<version>3.4.2</version>
-		</dependency>
+		
 		<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-mongodb -->
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-mongodb</artifactId>
-			<version>1.10.3.RELEASE</version>
+			<version>1.7.0.RELEASE</version> 
 		</dependency>
 
 		<!-- email -->

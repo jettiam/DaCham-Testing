@@ -5,35 +5,59 @@
 <mapper namespace="com.wdb3a.NutritionistMapper">
 	<!-- 반찬 목록을 검색합니다. -->
 	<select id = "listSearch" resultType = "com.wdb3a.dacham.bean.Nutritionist">	
-		select a.sideDName, b.foodGName, c.cookMName , a.sideDCode, a.sideDImg
-		from sideDish a join foodGroup b join cookMethod c
+		select a.sideDName, b.foodGName, c.cookMName , a.sideDCode, a.sideDImg,a.foodGCode
+		from sidedish a join foodgroup b join cookmethod c
 		where a.foodGCode = b.foodGCode
 		and a.cookMCode = c.cookMCode
 		and a.sideDName like CONCAT('%',#{search},'%') 
 	</select>
+	<!-- 가장 최신의 식단을 조회합니다. -->
+	<select id = "maxDiet" resultType = "Integer">
+		select MAX(dietCode) from diet
+	</select>
 	<!-- 해당 메인페이지에 이달의 메뉴를 조회합니다. -->
-	<select id = "thisMonth" resultType = "OrderList">
-		select a.orderDate, b.dietName, b.dietImg 
-		from orderlist a join diet b
-		where a.dietCode = b.dietCode
-		and month(a.orderDate) between month(a.orderDate) and (month(a.orderDate)+1)
-		group by a.dietCode
+	<select id = "thisMonth" resultType = "Customer">
+		select d.dietCode, d.dietName, d.dietImg, s.sideDName, s.sideDCode , s.sideDImg, n.kcal,n.carbohydrate,n.protein,n.fat,n.na,n.k
+		from diet d,dietinfo di, sidedish s, (select di.dietCode, sum(result.kcal) kcal,sum(result.carbohydrate) carbohydrate, sum(result.protein) protein,sum(result.fat) fat,sum(result.na) na,sum(result.k) k
+		from  (select s.sideDCode, s.sidedImg,s.sideDname,s.foodGCode, f.kcal,f.carbohydrate,f.protein,f.fat,f.na,f.k
+		from sidedish s,(select a.sideDcode,sum(kcal) kcal,sum(carbohydrate) carbohydrate, sum(protein) protein, sum(fat) fat, sum(na) na,sum(k) k
+		from 
+		(select si.sideDCode,(si.foodMAmount/100)*f.kcal kcal,(si.foodMAmount/100)*f.protein protein,(si.foodMAmount/100)*f.carbohydrate carbohydrate,(si.foodMAmount/100)*f.na na,(si.foodMAmount/100)*f.fat fat,(si.foodMAmount/100)*f.k k
+			from sidedinfo si,foodmaterial f
+			where si.foodMCode = f.foodMCode) a
+			group by a.sidedcode) f 
+		where s.sideDCode=f.sideDcode) result, dietinfo di
+		where result.sideDCode= di.sideDCode
+		group by di.dietCode
+		order by di.sideDType) n
+		where  di.dietCode=d.dietCode and di.sideDCode=s.sideDCode and di.sideDType=0 and d.spDietitem=1 and d.dietCode=n.dietCode
+		group by d.dietName
+		order by d.dietCode
 		limit #{startRecord},#{recordsPerPage}
 	</select>
 	<!-- 이달의 메뉴의 개수를 구합니다. -->
 	<select id = "thisMonthCount" resultType = "Integer">
-		select count(v.dietNAme) as count
-		from (select a.orderDate, b.dietName, b.dietImg 
-				from orderlist a join diet b
-				where a.dietCode = b.dietCode
-				and month(a.orderDate) between month(a.orderDate) and (month(a.orderDate)+1)
-				group by a.dietCode
-		) v
+		select count(v.dietName)
+ 		from (select d.dietCode, d.dietName, d.dietImg, s.sideDName, s.sideDCode , s.sideDImg, n.kcal,n.carbohydrate,n.protein,n.fat,n.na,n.k
+		from diet d,dietinfo di, sidedish s, (select di.dietCode, sum(result.kcal) kcal,sum(result.carbohydrate) carbohydrate, sum(result.protein) protein,sum(result.fat) fat,sum(result.na) na,sum(result.k) k
+		from  (select s.sideDCode, s.sidedImg,s.sideDname,s.foodGCode, f.kcal,f.carbohydrate,f.protein,f.fat,f.na,f.k
+		from sidedish s,(select a.sideDcode,sum(kcal) kcal,sum(carbohydrate) carbohydrate, sum(protein) protein, sum(fat) fat, sum(na) na,sum(k) k
+		from 
+		(select si.sideDCode,(si.foodMAmount/100)*f.kcal kcal,(si.foodMAmount/100)*f.protein protein,(si.foodMAmount/100)*f.carbohydrate carbohydrate,(si.foodMAmount/100)*f.na na,(si.foodMAmount/100)*f.fat fat,(si.foodMAmount/100)*f.k k
+			from sidedinfo si,foodmaterial f
+			where si.foodMCode = f.foodMCode) a
+			group by a.sidedcode) f 
+		where s.sideDCode=f.sideDcode) result, dietinfo di
+		where result.sideDCode= di.sideDCode
+		group by di.dietCode
+		order by di.sideDType) n
+		where  di.dietCode=d.dietCode and di.sideDCode=s.sideDCode and di.sideDType=0 and d.spDietitem=1 and d.dietCode=n.dietCode
+		group by d.dietName) v
 	</select>
 	<!-- 반찬 전체를 조회합니다(with 식품군, 조리방법) -->
 	<select id = "sideAll" resultType = "com.wdb3a.dacham.bean.Nutritionist">
-		select a.sideDName, b.foodGName, c.cookMName , a.sideDCode, a.sideDImg
-		from sideDish a join foodGroup b join cookMethod c
+		select a.sideDName, b.foodGName, c.cookMName , a.sideDCode, a.sideDImg, a.foodGCode
+		from sidedish a join foodgroup b join cookmethod c
 		where a.foodGCode = b.foodGCode
 		and a.cookMCode = c.cookMCode
 		and a.foodGCode = #{foodGCode}
@@ -42,7 +66,7 @@
 	<!-- 반찬 전체의 수량 구하기 -->
 	<select id = "sideAllCount" resultType = "Integer">
 		select count(a.sideDCode)
-		from sideDish a join foodGroup b join cookMethod c
+		from sidedish a join foodgroup b join cookmethod c
 		where a.foodGCode = b.foodGCode
 		and a.cookMCode = c.cookMCode
 		and a.foodGCode = #{foodGCode}
@@ -54,6 +78,10 @@
 	</select>
 	<select id="materialAmount" resultType = "com.wdb3a.dacham.bean.Nutritionist">
 		select * from foodmaterial
+		limit #{startRecord},#{recordsPerPage}
+	</select>
+	<select id = "materialTotal" resultType = "Integer">
+		select count(*) from foodmaterial
 	</select>
 	<insert id="createAmount">
 		insert into sidedinfo(sideDCode, foodMCode, foodMAmount)
@@ -65,7 +93,7 @@
 	</insert>
 	<select id="openAPI" resultType = "com.wdb3a.dacham.bean.Nutritionist">
 		select * from foodmaterial
-		where foodMName = #{foodMName}
+		where foodMCode = #{foodMCode}
 	</select>
 	<insert id = "createDiet">
 		insert into diet(diseaseCode, dietName, price, dietImg, spDietItem)
@@ -75,9 +103,9 @@
 		select * from disease
 	</select>
 	<insert id = "createDietInfo">
-		insert into dietinfo(dietCode, sideDCode)
-		values ((select MAX(dietCode) from diet),#{sideDCode})
-	</insert>
+		insert into dietinfo(dietCode, sideDCode,sideDType)
+		values ((select MAX(dietCode) from diet),#{sideDCode},#{sideDType})
+	</insert>	
 	<!-- 특정 반찬에 대한 영양 정보 -->
 	<select id="showKcal" resultType = "com.wdb3a.dacham.bean.Nutritionist">
 		select f.foodMName, a.sideDName, sum(f.kcal*a.cu) kcal, f.carbohydrate*a.cu carbohydrate, f.protein*a.cu protein, f.fat*cu fat, f.na*cu na
@@ -127,9 +155,10 @@
 	</select>
 	<!-- 해당 메인페이지에 주문목록 표시 -->
 	<select id = "orderList" resultType = "OrderList">
-		select a.orderCode, a.id, b.dietName,a.orderDate ,a.price
+		select a.orderCode, a.id, b.dietName,a.orderDate ,a.price , b.dietCode
 		from orderlist a join diet b
 		where a.dietCode = b.dietCode
+		and b.spDietItem = 0
 		limit #{startRecord}, #{recordsPerPage}
 	</select>
 	<!-- 해당 메인페이지 주문목록의 총 개수를 구함 -->
@@ -137,6 +166,7 @@
 		select count(a.orderCode)
 		from orderlist a join diet b
 		where a.dietCode = b.dietCode
+		and b.spDietItem = 0
 	</select>
 	<!-- 해당 반찬에 대한 영양정보 -->
 	<select id = "allNutri" resultType = "com.wdb3a.dacham.bean.Nutritionist">
@@ -147,5 +177,176 @@
 		   where si.foodMCode = f.foodMCode) a
 		   group by a.sidedcode
 			having a.sidedcode = #{sideDCode};		
+	</select>
+	<!-- 특별식단의 상담 리스트를 조회 -->
+	<select id="specialList" resultType = "com.wdb3a.dacham.bean.Counsel">
+		select * from counsel
+		where counselItemCode = 2 or counselItemCode = 5
+	</select>
+	<!-- 특별식단을 view -->
+	<select id = "specialView" resultType = "com.wdb3a.dacham.bean.Counsel">
+		select a.customer,a.counselCode, a.counselDate, b.address, b.tel, a.counselContent, a.counselItemCode
+		from counsel a join member b
+		where a.customer = b.id
+		and a.counselCode = #{counselCode}
+	</select>
+	<!-- 특별식단 고객 요청 등록 -->
+	<insert id = "specialRegist">
+		insert into orderlist(id, dietCode, orderDate, price, dietAmount, transportNum, orderItemCode, paymentItemCode)
+		values(#{customer},(select MAX(dietCode) from diet),now(),(select price from diet where dietCode = (select MAX(dietCode) from diet)),1,null,0,1)
+	</insert>
+	<!-- 특별식단 등록이 완료되면 표시함 -->
+	<update id = "specialComplete">
+		update counsel set counselItemCode = 5
+		where customer = #{customer}
+	</update>
+	<!-- 특별 고객이 등록한 특별식단 toggle -->
+	<select id = "specialToggle" resultType = "com.wdb3a.dacham.bean.Nutritionist">
+		select a.sideDName, a.sideDCode, a.sideDImg, c.dietName, c.dietCode
+		from sidedish a join dietinfo b join (select d.dietCode,d.dietName, d.dietImg, d.price 
+		from counsel a join member b join orderlist c join diet d
+		where a.customer = b.id
+		and b.id = c.id
+		and c.dietCode = d.dietCode
+		and a.customer = #{customer}
+		and d.spDietItem = 0) c
+		where a.sideDCode = b.sideDCode
+		and b.dietCode = c.dietCode
+		and c.dietCode = #{dietCode}
+		group by sideDCode
+	</select>
+	<!-- 특별식단에 있는 특별식단 코드만 불러오기 -->
+	<select id = "specialCode" resultType = "com.wdb3a.dacham.bean.Nutritionist">
+		select d.dietCode,d.dietName, d.dietImg, d.price 
+		from counsel a join member b join orderlist c join diet d
+		where a.customer = b.id
+		and b.id = c.id
+		and c.dietCode = d.dietCode
+		and a.customer = #{customer}
+		and d.spDietItem = 0
+	</select>
+	<!-- 특별식단 추가 등록하고 싶으면 전환함 -->
+	<update id="reRegist">
+		update counsel set counselItemCode = 2
+		where customer = #{customer}
+	</update>
+	<!-- 특별식단의 디폴트 반찬 옵션에 입력함 -->
+	<insert id = "optionInsert">
+		insert into orderoptions(orderCode, sideDCode)
+		values((select MAX(orderCode) from orderlist), #{sideDCode})
+	</insert>
+	<!-- 특별식단 상담 리스트의 답변을 조회함 -->
+	<select id = "answer" resultType = "String">
+		select answer from counsel
+		where counselCode = #{counselCode}
+	</select>
+	<!-- 특별식단 상담 답변에 링크를 걸어줌 -->
+	<update id="answers">
+		update counsel set answer = #{answer}, adviser = 'nutri'
+		where counselCode = #{counselCode}
+	</update>
+	<!-- 반찬 지우기 옵션 -->
+	<delete id = "remove0">
+		delete from orderoptions
+		where sideDCode = #{sideDCode}
+	</delete>
+	<!-- 반찬 지우기 1탄 -->
+	<delete id = "remove1">
+		delete from sidedinfo
+		where sideDCode = #{sideDCode}
+	</delete>
+	<!-- 반찬 지우기 2탄 -->
+	<delete id = "remove2">
+		delete from dietinfo
+		where sideDCode = #{sideDCode}
+	</delete>
+	<!-- 반찬 지우기 3탄 -->
+	<delete id = "remove3">
+		delete from sidedish
+		where sideDCode = #{sideDCode}
+	</delete>
+	<!-- 식단 지우기 시작 -->
+	<delete id = "delete0">
+		delete from dietinfo
+		where dietCode = #{dietCode}
+	</delete>
+	<!-- 식단 지우기 1탄 -->
+	<delete id = "delete1">
+		delete from orderoptions
+		where orderCode in (select orderCode from orderlist where dietCode = #{dietCode})
+	</delete>
+	<!-- 식단 지우기 2탄 -->
+	<delete id = "delete2">
+		delete from orderlist
+		where dietCode = #{dietCode}
+	</delete>
+	<!-- 식단 지우기 3탄 -->
+	<delete id = "delete3">
+		delete from diet
+		where dietCode = #{dietCode}
+	</delete>
+	<!-- 반찬코드에 속한 식재료 불러오기(수정) -->
+	<select id = "sideMaterial" resultType = "com.wdb3a.dacham.bean.Nutritionist">
+		select * from sidedinfo a join sidedish b join foodmaterial c
+		where a.sideDCode = b.sideDCode
+		and a.foodMCode = c.foodMCode
+		and a.sideDCode = #{sideDCode}
+	</select>
+	<!-- 반찬코드에 속한 반찬 재료 불러오기(수정) -->
+	<select id = "sideOver" resultType = "com.wdb3a.dacham.bean.Nutritionist">
+		select * from sidedish a join cookMethod b join foodgroup c
+		where a.cookMCode = b.cookMCode
+		and a.foodGCode = c.foodGCode
+		and a.sideDCode = #{sideDCode}
+	</select>
+	<!-- 반찬 수정 -->
+	<update id = "sideModify">
+		update sidedish set foodGCode = #{foodGCode}, cookMCode = #{cookMCode}, sideDName = #{sideDName},
+		recipe = #{recipe}, sideDImg = #{sideDImg}
+		where sideDCode = #{sideDCode}
+	</update>
+	<!-- 반찬 수정 2탄 -->
+	<delete id = "modifyCross1">
+		delete from sidedinfo
+		where sideDCode = #{sideDCode}
+	</delete>
+	<insert id = "modifyCross2">
+		insert into sidedinfo(sideDCode, foodMCode, foodMAmount)
+		values (#{sideDCode},#{foodMCode},#{foodMAmount})
+	</insert>
+	<!-- 식단코드에 속한 식단 재료 불러오기(수정) -->
+	<select id = "dietOver" resultType = "com.wdb3a.dacham.bean.Nutritionist">
+		select * from diet 
+		where dietCode = #{dietCode}
+	</select>
+	<!-- 식단 수정 -->
+	<update id = "dietModify">
+		update diet set diseaseCode = #{diseaseCode}, dietName = #{dietName}, price = #{price}, dietImg = #{dietImg}
+		where dietCode = #{dietCode}
+	</update>
+	<!-- 수정 페이지의 식품군별 식단 정렬 -->
+	<select id = "groupSide" resultType = "com.wdb3a.dacham.bean.Nutritionist">
+		select * from sidedish a join dietinfo b join diet c
+		where a.sideDCode = b.sideDCode
+		and b.dietCode = c.dietCode
+		and a.foodGCode = #{foodGCode}
+		and b.dietCode = #{dietCode}
+	</select>
+	<!-- 식단에 속하는 반찬들을 삭제(수정) -->
+	<delete id = "updateCross1">
+		delete from dietinfo
+		where dietCode = #{dietCode}
+	</delete>
+	<!-- 페이지에 있는 반찬들을 다시 넣기 -->
+	<insert id = "updateCross2">
+		insert into dietinfo(dietCode, sideDCode,sideDType)
+		values (#{dietCode},#{sideDCode},#{sideDType})
+	</insert>	
+	<!-- 메인 페이지에 팝업을 띄우기 -->
+	<select id = "popup" resultType = "com.wdb3a.dacham.bean.Nutritionist">
+		select * from diet a, dietinfo b, sidedish c
+		where a.dietCode = b.dietCode
+		and b.sideDCode = c.sideDCode
+		and a.dietCode = #{dietCode}
 	</select>
 </mapper>

@@ -21,20 +21,18 @@
 		$("#write").on("click",function(){
 			window.location.href = "write";
 		});
+		$(".counselRead").on("click",function(){
+			if("${customerId}"!=$(this).attr("data-id")){
+				event.preventDefault();
+				alert("비밀글입니다.");
+			}else{
+				
+			}
+		});
+		$("#counsel").addClass("w3-gray");
 	});
 </script>
 <style>
-#counselTableWrap{
-    width: 1080px;
-	height: 100%;
-	margin: 0 auto;
-	
-}
-#counselTable{
-
-width:600px;
-
-}
 
 </style>
 </head>
@@ -43,7 +41,7 @@ width:600px;
 <!-- 	<form action = "write" method = "get"> -->
 <%-- 		<input type = "hidden" name = "id" value = "${a. }"> --%>
 <!-- 	</form> -->
-		<div id="counselTableWrap">
+		<div class="container">
 		<table id="counselTable" class="table table-hover">
 			<tr>
 				<th>문의분류</th>
@@ -58,7 +56,7 @@ width:600px;
 			<tr>
 				<td>${counsel.counselItemName}</td>			
 				<td>${counsel.counselCode }</td>
-				<td><a href = "read?counselCode=${counsel.counselCode}">${counsel.counselTitle }</a></td>
+				<td><a href = "read?counselCode=${counsel.counselCode}" data-id="${counsel.customer}" class="counselRead">${counsel.counselTitle }</a></td>
 				<td>${counsel.customer}</td>
 				<td>${counsel.counselDate }</td>
 				<c:if test="${empty counsel.adviser}">
@@ -70,8 +68,7 @@ width:600px;
 			</tr>
 			</c:forEach>
 		</table>
-	
-		
+			
 		<div>
 		<c:if test="${empty sessionScope.memberName}">
 			로그인 후 이용해주세요.
@@ -81,7 +78,9 @@ width:600px;
 		</c:if>
 		</div>
 			</div>
-	
+<footer>
+	<%@include file="../../footer.jsp" %>
+</footer>	
 </body>
 </html>
 <!-- localhost:8080/dacham/counsel -->

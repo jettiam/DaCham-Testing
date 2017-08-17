@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wdb3a.WholseMapper">
+	<select id="foodMOrderList" resultType="FoodMInven">
+		select orderDate,count(*)-count(orderCode) foodMCheck1, count(orderCode) foodMCheck2 from foodminven group by orderDate order by orderDate desc
+	</select>
+	<select id="foodMOrderListDetail" resultType="FoodMInven">
+		select orderDate,foodMName, sum(inAmount) inAmount,unit,sum(inAmount)*price price,foodMStatus from foodminven
+		where orderDate=#{orderDate} and orderCode is not null
+		group by foodMName order by foodMStatus,foodMName
+	</select>
+	<select id="foodMOrderListDetailAdd" resultType="FoodMInven">
+		select orderDate,foodMName, sum(inAmount) inAmount,unit,sum(inAmount)*price price,foodMStatus from foodminven
+		where orderDate=#{orderDate} and orderCode is null
+		group by foodMName order by foodMStatus,foodMName
+	</select>
+
+</mapper>

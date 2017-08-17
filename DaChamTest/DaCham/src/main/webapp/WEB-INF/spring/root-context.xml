@@ -9,28 +9,58 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<!-- 몽고 DB사용을 위한 bean -->
-	<mongo:mongo-client host="106.249.38.75" port="27017" credentials="admin:admin@admin">
-	</mongo:mongo-client>
+
+	<!--  <mongo:mongo host ="ds111123.mlab.com" port="11123" />	 -->
 	
+	<!-- <mongo:mongo-client host="ds111123.mlab.com" port="11123" credentials="admin:admin@admin">
+	</mongo:mongo-client> -->
+	
+
+
 	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+
 		<constructor-arg ref="mongo"/>
-		<constructor-arg name="databaseName" value="test1" /> <!-- 우선 test1 db 사용. -->
+		<constructor-arg name="databaseName" value="mongo" />
+		<constructor-arg name="userCredentials" ref="userCredentials"/>
 	</bean>
 	
 	<bean id="mongoDAO" class="com.wdb3a.dacham.dao.MongoDAO">
 		<property name="mongoTemplate" ref="mongoTemplate"/>
 	</bean>
-
-	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 	
-		<!-- <property name="url" value="jdbc:mariadb://localhost:33060/dacham" />  -->
+	<bean class="com.mongodb.MongoURI" id="mongoURI">
+		<constructor-arg value="mongodb://admin:admin@ds111123.mlab.com:11123/mongo"/>
+	</bean>
+	
+	<bean class="com.mongodb.Mongo" id="mongo">
+		<constructor-arg ref="mongoURI"/>
+	</bean>
+	
+	<bean id="userCredentials" class="org.springframework.data.authentication.UserCredentials">
+		<constructor-arg name="username" value="admin" />
+		<constructor-arg name="password" value="admin" />
+	</bean>
+
+ 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">		
+
 		<property name="url" value="jdbc:mariadb://106.249.38.73:33060/dacham" /> 
 		<property name="driverClassName" value="org.mariadb.jdbc.Driver" />
 		<property name="username" value="root" />
 		<property name="password" value="1234" />
 	</bean>
-		
+	
+	<!-- mysql 서버용 -->
+ 
+
+ <!--   <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />		
+		<property name="url" value="jdbc:mysql://localhost:3306/redbud" /> 		
+		<property name="username" value="redbud" />
+		<property name="password" value="fpemqjem1*" />
+	</bean>  -->
+
+
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation" value="classpath:/mybatis-config.xml" />
@@ -44,7 +74,7 @@
       <property name="host" value="smtp.gmail.com" />
       <property name="port" value="587" />
       <property name="username" value="dudtka4971@gmail.com" />
-      <property name="password" value="jini0124!" />
+      <property name="password" value="dudtka4971!" />
       <property name="javaMailProperties">
          <props>
                <prop key="mail.transport.protocol">smtp</prop>

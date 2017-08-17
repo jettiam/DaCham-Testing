@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.wdb3a.dacham.bean.Counsel;
 import com.wdb3a.dacham.bean.Criteria;
 import com.wdb3a.dacham.bean.Nutritionist;
 import com.wdb3a.dacham.bean.OrderList;
@@ -56,9 +57,9 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 	}
 
 	@Override
-	public Nutritionist openAPI(String foodMName) throws Exception {
+	public Nutritionist openAPI(String foodMCode) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne(namespace+".openAPI",foodMName);
+		return sqlSession.selectOne(namespace+".openAPI",foodMCode);
 	}
 
 	@Override
@@ -92,9 +93,9 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 	}
 
 	@Override
-	public List<Nutritionist> materialAll() throws Exception {
+	public List<Nutritionist> materialAll(Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".materialAmount");
+		return sqlSession.selectList(namespace+".materialAmount",criteria);
 	}
 	//반찬 템플릿의 개수를 구합니다.
 	@Override
@@ -169,6 +170,189 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 		return sqlSession.selectOne(namespace+".thisMonthCount");
 	}
 
-	
+	@Override
+	public List<OrderList> specialList() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".specialList");
+	}
 
+	@Override
+	public int materialTotal() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".materialTotal");
+	}
+
+	@Override
+	public Counsel specialView(int counselCode) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".specialView",counselCode);
+	}
+
+	@Override
+	public void specialRegist(String customer) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.insert(namespace+".specialRegist",customer);
+	}
+
+	@Override
+	public List<Nutritionist> specialToggle(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".specialToggle",nutritionist);
+	}
+
+	@Override
+	public void specialComplete(String customer) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace+".specialComplete",customer);
+	}
+
+	@Override
+	public List<Nutritionist> specialCode(String customer) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".specialCode",customer);
+	}
+
+	@Override
+	public void reRegist(String customer) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace + ".reRegist",customer);
+	}
+
+	@Override
+	public void optionInsert(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.insert(namespace+".optionInsert",nutritionist);
+	}
+
+	@Override
+	public String answer(int counselCode) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".answer",counselCode);
+	}
+
+	@Override
+	public void answers(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace+".answers",nutritionist);
+	}
+
+	@Override
+	public int maxDiet() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".maxDiet");
+	}
+
+	@Override
+	public void remove1(String sideDCode) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.delete(namespace+".remove1",sideDCode);
+	}
+
+	@Override
+	public void remove2(String sideDCode) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.delete(namespace+".remove2",sideDCode);
+	}
+
+	@Override
+	public void remove3(String sideDCode) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.delete(namespace+".remove3",sideDCode);
+	}
+
+	@Override
+	public void remove0(String sideDCode) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.delete(namespace+".remove0",sideDCode);
+	}
+
+	@Override
+	public void delete0(int dietCode) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.delete(namespace+".delete0",dietCode);
+	}
+
+	@Override
+	public void delete1(int dietCode) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.delete(namespace+".delete1",dietCode);
+	}
+
+	@Override
+	public void delete2(int dietCode) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.delete(namespace+".delete2",dietCode);
+	}
+
+	@Override
+	public void delete3(int dietCode) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.delete(namespace+".delete3",dietCode);
+	}
+
+	@Override
+	public List<Nutritionist> sideMaterial(String sideDCode) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".sideMaterial",sideDCode);
+	}
+
+	@Override
+	public Nutritionist sideOver(String sideDCode) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".sideOver",sideDCode);
+	}
+
+	@Override
+	public void sideModify(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace+".sideModify",nutritionist);
+	}
+
+	@Override
+	public void modifyCross1(String sideDCode) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.delete(namespace+".modifyCross1",sideDCode);
+	}
+
+	@Override
+	public void modifyCross2(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.insert(namespace+".modifyCross2",nutritionist);
+	}
+
+	@Override
+	public Nutritionist dietOver(int dietCode) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".dietOver",dietCode);
+	}
+
+	@Override
+	public void dietModify(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace+".dietModify",nutritionist);
+	}
+
+	@Override
+	public List<Nutritionist> groupSide(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".groupSide",nutritionist);
+	}
+
+	@Override
+	public void updateCross1(int dietCode) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.delete(namespace+".updateCross1",dietCode);
+	}
+
+	@Override
+	public void updateCross2(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.insert(namespace+".updateCross2",nutritionist);
+	}
+
+	@Override
+	public List<Nutritionist> popup(int dietCode) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".popup",dietCode);
+	}
 }

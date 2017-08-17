@@ -16,201 +16,473 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-light-green.css">
-
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <style>
 .dietImg{
 /* max-width:650px;
 max-height:350px; */
 }
 .sideDImg{
-/* max-width:250px;
-mat-height:200px; */
+height:115px;
+}
+.sideDThumbnail{
+height:145px; 
+}
+.nutriTable{
+text-align: center;
+}
+.nutriChart{
+	margin:auto;
+	width:80%;
+}
+.fa-chevron-down{
+	display:none;
+}
+.fa-chevron-up{
+	display:none;
+}
+#doOrder{
+	background-color: #1583cc;
+}
+@media only screen and (max-width: 768px){
+	.nutriChart{
+		margin:auto;
+		width:100%;
+	}
+	.sideDImg{
+	height:58px;
+	}
+	.sideDThumbnail{
+		display:none;
+		height:auto; 
+	}
+	.sideDNutri{
+		display:none;
+	}
+	.fa-chevron-down{
+	display:inline-block;
+	}
+	.fa-chevron-up{
+		display:inline-block;
+	}
 }
 </style>
 <title>DaCham 식단상세보기</title>
 <script>
-	function getDishList(a) {
-		a
-				.children()
-				.each(
-						function() {
-							var foodGCode = $(this).attr("data-foodGCode");
-							var b = $(this);
-							$
-									.getJSON(
-											"customerAjax/getfoodG/"
-													+ foodGCode, //controller를 통해 요청.
-											function(data) { //데이터 받아옴 data.list로 사용
-												for (var i = 0; i < data.list.length; i++) {
-													b
-															.append("<label><div class='' data-sideDCode='"+data.list[i].sideDCode+"'>"
-																	+ "<input type='radio' style='display:none' name='"+data.list[i].foodGCode+"' value='"+data.list[i].sideDCode+"' />"
-																	/* + "<img src='http://via.placeholder.com/150x150'>" */
-																	+"<img class='sideDImg' src='displayFile?fileName="	+ data.list[i].sideDImg+"'>"
-																	+ data.list[i].sideDName
-																	+ "  <table><tr><td>칼로리</td><td>탄수화물</td><td>단백질</td><td>지방</td><td>나트륨</td></tr><tr><td>"
-																	+ data.list[i].kcal
-																			.toFixed(0)
-																	+ "kcal</td><td>"
-																	+ data.list[i].carbohydrate
-																			.toFixed(0)
-																	+ "g</td><td>"
-																	+ data.list[i].protein
-																			.toFixed(0)
-																	+ "g</td><td>"
-																	+ data.list[i].fat
-																			.toFixed(0)
-																	+ "g</td><td>"
-																	+ data.list[i].na
-																			.toFixed(0)
-																	+ "mg</td></tr></table>"
-																	+ "</div></label>");
-												}
-											})
-						});
-	}
+var kcal0=0;
+var carbo0=0;
+var protein0=0;
+var fat0=0;
+var na0=0;
+var k0=0;
+var count = 0;
+$(document).ready(function() {
+	$("#dietOrder").addClass("w3-gray");
+	$("#foodGList").on("click", ".foodGSideD", function(){
+		var foodGCode= $(this).parent().parent().attr("data-foodgcode");
+		//console.log("식품군:"+foodGCode);
+		
+		$(this).siblings().removeClass("w3-theme-l4");
+		$(this).addClass("w3-theme-l4");
+		var img = $(this).children("img").attr("src");
+		//console.log(img);
+		var sideDName=$(this).children("h5").text();			
+		//console.log("반찬명:"+sideDName);
+		$(".defaultFood[data-foodGCode='"+foodGCode+"']>img").attr("src",img);
+		$(".defaultFood[data-foodGCode='"+foodGCode+"']>.defaultSideDName").text(sideDName);
+		console.log($(".defaultFood[data-foodGCode='"+foodGCode+"']>img"));
+		count=0;
+		//반응형 JQ
+		//$(".foodGSideD i").removeClass("fa-chevron-down fa-chevron-up").addClass("fa-chevron-down");
+		/* $(".foodGSideD .sideDThumbnail").toggle(); 
+		$(".foodGSideD .sideDNutri").toggle(); */ 
+		var window_size = $(window).width();
+		if(window_size<=768){
+			//console.log($(".foodGSideD").not($(this)));
+			var notThis = $(".foodGSideD").not($(this));
+			notThis.find(".sideDThumbnail").hide();
+			notThis.find(".sideDNutri").hide();
+			notThis.find("i").removeClass("fa-chevron-up").addClass("fa-chevron-down");
+			var checkToggle=$(this).find("i").attr("class"); 
+			//console.log(checkToggle);
+			if(checkToggle=="fa fa-chevron-down"){
+				$(this).find("i").removeClass("fa-chevron-down").addClass("fa-chevron-up");			
+			}else{
+				$(this).find("i").removeClass("fa-chevron-up").addClass("fa-chevron-down");			
+			};
+			$(this).find(".sideDNutri").insertAfter($(this).find("h5"));
+			$(this).find(".sideDThumbnail").insertAfter($(this).find("h5"));
+			$(this).find(".sideDThumbnail").toggle();
+			$(this).find(".sideDNutri").toggle();
+		}
+
+		
+		//영양 차트
+		$(".chartjs-hidden-iframe").remove();
+		$("#nutriChart").remove();
+		$(".nutriChart").append('<canvas id="nutriChart"></canvas>');
+		drawNutriChart(nutriInsert(count));
+		//activeRadio($(this));
+	});	
+
 	
-	// div : panel id
-	// foodGCode : 각각 판넬에 들어가게 될 반찬들의 GCode(그룹코드)
+	
+	$("#dietAmount").keyup(function() {
+		var a = $("#dietAmount").val();
+		var price = $("#dietPrice").attr("data-basicPrice");
+		console.log("수량" + a);
+		console.log("가격" + price);
+		console.log(a * price);
+		$("#dietPrice").text(a * price);
+	});
+	$("#dietAmount").mouseup(function() {
+		var a = $("#dietAmount").val();
+		var price = $("#dietPrice").attr("data-basicPrice");
+		console.log("수량" + a);
+		console.log("가격" + price);
+		console.log(a * price);
+		$("#dietPrice").text(a * price);
+	});
+	$("#doOrder").on("click", function() {
+		var login = $("#sessionName").text()+""; 
+		console.log(login);
+		if(login!=""){			
+			getCheckedList();			
+			$("#setDietName").val($("#dietName").text());
+			$("#setPrice").val($("#dietPrice").text());
+			$("#setDietAmount").val($("#dietAmount").val());
+			$("#setDietImg").val($(".dietImg").attr("data-dietImg"));			
+			$("#orderForm").attr("action", "doOrder");
+			$("#orderForm").submit();
+		}else{
+			alert("로그인 후에 이용해주세요.");
+		}
+	});
+	$("#goMyCart").on("click", function() {
+		var login = $("#sessionName").text()+""; 
+		console.log(login);
+		if(login!=""){
+			getCheckedList();			
+			$("#setDietName").val($("#dietName").text());
+			$("#setPrice").val($("#dietPrice").text());
+			$("#setDietAmount").val($("#dietAmount").val());
+			//$("#sideDish").val();
+			$("#orderForm").attr("action", "goMyCart");
+			$("#orderForm").submit();
+			
+		}else{
+			alert("로그인 후에 이용해주세요.");
+		}
+	});
+	
+	
 	function getDish(div, foodGCode){
 		var foodGCode= foodGCode;
-		$.getJSON("customerAjax/getfoodG/"+foodGCode, function(data){
+		var dietCode = $("#setDietCode").val();
+		$.getJSON("customerAjax/getfoodG/"+foodGCode+"/"+dietCode, function(data){
 			for(var i=0; i<data.list.length; i++){
 				var kcal = data.list[i].kcal.toFixed(0);
 				var carbo = data.list[i].carbohydrate.toFixed(0);
 				var protein = data.list[i].protein.toFixed(0);
 				var fat = data.list[i].fat.toFixed(0);
 				var na = data.list[i].na.toFixed(0);
-				
+				var k = data.list[i].k.toFixed(0);
 				if(i==0){
+					kcal0+=Number(kcal);
+					console.log(kcal0);
+					carbo0+=Number(carbo);
+					protein0+=Number(protein);
+					fat0+=Number(fat);
+					na0+=Number(na);
+					k0+=Number(k);
+					count++;
+					console.log(count);
+					if(count==6){
+						drawNutriChart(nutriInsert(count));
+					}					
 				div.append(
-							"<div class='column foodGSideD backColor' data-sideDCode='"+data.list[i].sideDCode+"'>"							
-							+"<img class='thumbnail' src='displayFile?fileName="+data.list[i].sideDImg+"'>"
-							+"<h5 style='text-align:center'>"+data.list[i].sideDName+"</h5>"
-							+"<table class='table' >"
-							+"<tr><th>칼로리</th><td>"+kcal+"</td></tr>"
-							+"<tr><th>탄수화물</th><td>"+carbo+"</td></tr>"
-							+"<tr><th>단백질</th><td>"+protein+"</td></tr>"
-							+"<tr><th>지방</th><td>"+fat+"</td></tr>"
-							+"<tr><th>나트륨</th><td>"+na+"</td></tr>"
+							"<div class='column foodGSideD w3-theme-l4' data-sideDCode='"+data.list[i].sideDCode+"'>"							
+							+"<img class='thumbnail sideDThumbnail' src='displayFile?fileName="+data.list[i].sideDImg+"'>"
+							+"<h5 style='text-align:center'>"+data.list[i].sideDName+"&nbsp;&nbsp;<i class='fa fa-chevron-down'></i></h5>"
+							+"<table class='table sideDNutri' >"
+							+"<tr><th>칼로리</th><td class='kcal'>"+kcal+"</td></tr>"
+							+"<tr><th>탄수화물</th><td class='carbo'>"+carbo+"</td></tr>"
+							+"<tr><th>단백질</th><td class='protein'>"+protein+"</td></tr>"
+							+"<tr><th>지방</th><td class='fat'>"+fat+"</td></tr>"
+							+"<tr><th>나트륨</th><td class='na'>"+na+"</td></tr>"
+							+"<tr><th>칼륨</th><td class='k'>"+k+"</td></tr>"
 							+"</table>"							
-							+"<a class='sideButton button hollow tiny expanded'>선택 하기</a>"
-							+"<input type='radio' style='display:none' name='"+foodGCode+"' value='"+data.list[i].sideDCode+"' checked='true'/>"
+							//+"<a class='sideButton button hollow tiny expanded'>선택 하기</a>"								
 							+"</div>"
 						);
 				}else{
 					div.append(
 							"<div class='column foodGSideD' data-sideDCode='"+data.list[i].sideDCode+"'>"		
-							+"<img class='thumbnail' src='displayFile?fileName="+data.list[i].sideDImg+"'>"
-							+"<h5 style='text-align:center'>"+data.list[i].sideDName+"</h5>"
-							+"<table class='table' >"
-							+"<tr><th>칼로리</th><td>"+kcal+"</td></tr>"
-							+"<tr><th>탄수화물</th><td>"+carbo+"</td></tr>"
-							+"<tr><th>단백질</th><td>"+protein+"</td></tr>"
-							+"<tr><th>지방</th><td>"+fat+"</td></tr>"
-							+"<tr><th>나트륨</th><td>"+na+"</td></tr>"
+							+"<img class='thumbnail sideDThumbnail' src='displayFile?fileName="+data.list[i].sideDImg+"'>"
+							+"<h5 style='text-align:center'>"+data.list[i].sideDName+"&nbsp;&nbsp;<i class='fa fa-chevron-down'></i></h5>"
+							+"<table class='table sideDNutri' >"
+							+"<tr><th>칼로리</th><td class='kcal'>"+kcal+"</td></tr>"
+							+"<tr><th>탄수화물</th><td class='carbo'>"+carbo+"</td></tr>"
+							+"<tr><th>단백질</th><td class='protein'>"+protein+"</td></tr>"
+							+"<tr><th>지방</th><td class='fat'>"+fat+"</td></tr>"
+							+"<tr><th>나트륨</th><td class='na'>"+na+"</td></tr>"
+							+"<tr><th>칼륨</th><td class='k'>"+k+"</td></tr>"
 							+"</table>"							
-							+"<a class='sideButton button hollow tiny expanded'>선택 하기</a>"
-							+"<input type='radio' style='display:none' name='"+foodGCode+"' value='"+data.list[i].sideDCode+"' />"
+							//+"<a class='sideButton button hollow tiny expanded'>선택 하기</a>"
 							+"</div>"
 						);
 				}				
-			}
-		});
-	}
-	
-/* 	function activeRadio(btn){		
-		//alert("클릭되었습니다."); 
-		var inputBtn = btn.find("input:radio");
-		inputBtn.attr("checked", true);
-	} */
-
-	function getCheckedList(a) {
-		var arrInx = 0;
-		var sideDish = [];
-		a.children().each(
-				function() {
-					var name = $(this).attr("data-foodGCode");
-					var checkedValue = $(
-							'input:radio[name="' + name + '"]:checked').val(); //벨류가 반찬 코드		
-					if (checkedValue != undefined) {
-						sideDish[arrInx] = checkedValue;
-						arrInx++;
-					}
-					console.log(sideDish);
-				});
-		$("#orderForm>#sideDish").remove();
-		for (i = 0; i < arrInx; i++) {
-			$("#orderForm")
-					.append(
-							"<input id='sideDish' type='hidden' name='sideDish' value='"+sideDish[i]+"'>");
-		}
-	}
-
-	$(document).ready(function() {
-		$(document).on("click", ".foodGSideD", function(){
-			var foodGCode= $(this).children("input").attr("name");
+			}							
 			
-			$(this).siblings().removeClass("w3-theme-l4");
-			$(this).addClass("w3-theme-l4");
-			var img = $(this).children("img").attr("src");
-			//alert(img);
-			var sideDName=$(this).children("h5").text();			
-			//alert(foodGCode);
-			$(".defaultFood[data-foodGCode='"+foodGCode+"']>img").attr("src",img);
-			$(".defaultFood[data-foodGCode='"+foodGCode+"']>.defaultSideDName").text(sideDName);
-			console.log($(".defaultFood[data-foodGCode='"+foodGCode+"']>img"));
-			$(this).siblings().children(":input").removeAttr("checked");
-			$(this).children(":input").attr("checked",true);
-			//activeRadio($(this));
 		});
 		
-		getDish($("#panel1>div"), "01");
+		//;
+		
+	}
+	for(var i=1;i<7;i++){
+		getDish($("#panel"+i+">div"), "0"+i);
+		
+/* 		getDish($("#panel1>div"), "01");
 		getDish($("#panel2>div"),"02");
 		getDish($("#panel3>div"), "03");
 		getDish($("#panel4>div"),"04");
 		getDish($("#panel5>div"), "05");
-		getDish($("#panel6>div"),"06");
+		getDish($("#panel6>div"),"06");	 */
+	}
+	
+	
+});	
+	
+	function getCheckedList() {
+		$(".w3-theme-l4").each(function(){
+			var sideDCode = $(this).attr("data-sideDcode");
+			console.log(sideDCode);
+			$("#orderForm").append("<input id='sideDish' type='hidden' name='sideDish' value='"+sideDCode+"'>");
+		});		
+	}
+	
+	
+	//영양정보 받아오는 함수
+	function nutriInsert(count){
+		var nutriValue = new Array();
+		var kcal=0;
+		var carbo=0;
+		var protein=0;
+		var fat=0;
+		var na=0;
+		var k=0;
+		console.log($(".w3-theme-l4").length);
+		for(var i=0;i<$(".w3-theme-l4").length;i++){
+			kcal+=Number($(".w3-theme-l4 .kcal:eq("+i+")").text());
+			carbo+=Number($(".w3-theme-l4 .carbo:eq("+i+")").text());
+			protein+=Number($(".w3-theme-l4 .protein:eq("+i+")").text());
+			fat+=Number($(".w3-theme-l4 .fat:eq("+i+")").text());
+			na+=Number($(".w3-theme-l4 .na:eq("+i+")").text());
+			k+=Number($(".w3-theme-l4 .k:eq("+i+")").text());
+		}				
+		console.log("칼로리:"+kcal+",탄수화물:"+carbo+",단백질:"+protein+",지방:"+fat+",나트륨:"+na+",칼륨"+k);
+			if(count==6){
+				/* nutriValue = [carbo0,protein0,fat0,na0/1000, k0/1000];  */
+				
+				var KcalDay = parseInt(kcal0/2500*100);
+				var CDay = parseInt(carbo0/405*100);
+				var PDay = parseInt(protein0/50*100);
+				var Fday = parseInt(fat0/40*100);
+				var NaDay = parseInt(na0/2000*100);
+				var KDay = parseInt(k0/3500*100);
+				nutriValue = [KcalDay,CDay,PDay,Fday,NaDay, KDay];
+				$(".nutriInfoTable").append("<td class='kcalSign '>"+kcal0+"</td><td class='carboSign '>"+carbo0+"</td><td class='proteinSign '>"+protein0+"</td><td class='fatSign '>"+fat0+"</td><td class='naSign '>"+na0+"</td><td class='kSign '>"+k0+"</td>")
+				/* 
+				<td>남자</td><td id="MKcal">2400</td><td id="MCarbo">405</td><td id="MProtein">50</td><td id="MFat">40</td><td id="MNa">2000</td><td id="MK">3500</td></tr>
+				<td>여자</td><td id="WMKcal">1900</td><td id="WMCarbo">325</td><td id="WMProtein">40</td><td id="WMFat">35</td><td id="WMNa">2000</td><td id="WMK">3500</td></tr> */
+				$("#MKcal").html("2500<br>("+parseInt(kcal0/2500*100)+"%)");//여기부터
+				$("#MCarbo").html("405<br>("+parseInt(carbo0/405*100)+"%)");
+				$("#MProtein").html("50<br>("+parseInt(protein0/50*100)+"%)");
+				$("#MFat").html("40<br>("+parseInt(fat0/40*100)+"%)");
+				$("#MNa").html("2000<br>("+parseInt(na0/2000*100)+"%)");
+				$("#MK").html("3500<br>("+parseInt(k0/3500*100)+"%)");
+				
+				$("#WMKcal").html("2000<br>("+parseInt(kcal0/2000*100)+"%)");
+				$("#WMCarbo").html("325<br>("+parseInt(carbo0/325*100)+"%)");
+				$("#WMProtein").html("40<br>("+parseInt(protein0/40*100)+"%)");
+				$("#WMFat").html("35<br>("+parseInt(fat0/35*100)+"%)");
+				$("#WMNa").html("2000<br>("+parseInt(na0/2000*100)+"%)");
+				$("#WMK").html("3500<br>("+parseInt(k0/3500*100)+"%)"); 
+				
+				localStorage.clear();
+				localStorage['kcal']=kcal0;
+				localStorage['carbo']=carbo0;
+				localStorage['protein']=protein0;
+				localStorage['fat']=fat0;
+				localStorage['na']=na0;
+				localStorage['k']=k0; 
+				if(KcalDay>20 && KcalDay<=100){
+					$(".kcalSign").css({'background-color':'rgba(99, 183, 108,0.7)','color':'#000'});
+				}else if((KcalDay>10&&KcalDay<=20)||(KcalDay>100&&KcalDay<=120)){
+					$(".kcalSign").css({'background-color':'rgba(255, 174, 66,0.7)','color':'#000'});
+				}else{
+					$(".kcalSign").css({'background-color':'rgba(255, 83, 73,0.7)','color':'#000'});
+				}
+				if(CDay>20 && CDay<=100){
+					$(".carboSign").css({'background-color':'rgba(99, 183, 108,0.7)','color':'#000'});
+				}else if((CDay>10&&CDay<=20)||(CDay>100&&CDay<=120)){
+					$(".carboSign").css({'background-color':'rgba(255, 174, 66,0.7)','color':'#000'});
+				}else{
+					$(".carboSign").css({'background-color':'rgba(255, 83, 73,0.7)','color':'#000'});
+				}
+				console.log(PDay)
+				if(PDay>50 && PDay<=120){
+					$(".proteinSign").css({'background-color':'rgba(99, 183, 108,0.7)','color':'#000'});
+				}else if((PDay>30&&PDay<=50)||(PDay>120&&PDay<=140)){
+					$(".proteinSign").css({'background-color':'rgba(255, 174, 66,0.7)','color':'#000'});
+				}else{
+					$(".proteinSign").css({'background-color':'rgba(255, 83, 73,0.7)','color':'#000'});
+				}
+				if(NaDay<=100){
+					$(".naSign").css({'background-color':'rgba(99, 183, 108,0.7)','color':'#000'});
+				}else if(NaDay>100&&NaDay<=120){
+					$(".naSign").css({'background-color':'rgba(255, 174, 66,0.7)','color':'#000'});
+				}else{
+					$(".naSign").css({'background-color':'rgba(255, 83, 73,0.7)','color':'#000'});
+				}
+				if(KDay<=120){
+					$(".kSign").css({'background-color':'rgba(99, 183, 108,0.7)','color':'#000'});
+				}else if(KDay>120&&KDay<=150){
+					$(".kSign").css({'background-color':'rgba(255, 174, 66,0.7)','color':'#000'});
+				}else{
+					$(".kSign").css({'background-color':'rgba(255, 83, 73,0.7)','color':'#000'});
+				}
+				if(Fday>50 && Fday<=120){
+					$(".fatSign").css({'background-color':'rgba(99, 183, 108,0.7)','color':'#000'});
+				}else if((Fday>30&&Fday<=50)||(Fday>120&&Fday<=140)){
+					$(".fatSign").css({'background-color':'rgba(255, 174, 66,0.7)','color':'#000'});
+				}else{
+					$(".fatSign").css({'background-color':'rgba(255, 83, 73,0.7)','color':'#000'});
+				}
+				
+			}else{
+				/* nutriValue = [carbo,protein,fat,na/1000,k/1000]; */
+				var KcalDay = parseInt(kcal/2500*100);
+				var CDay = parseInt(carbo/405*100);
+				var PDay = parseInt(protein/50*100);
+				var Fday = parseInt(fat/40*100);
+				var NaDay = parseInt(na/2000*100);
+				var KDay = parseInt(k/3500*100);
+				nutriValue = [KcalDay,CDay,PDay,Fday,NaDay, KDay];
+				
+				$(".nutriInfoTable td").remove();
+				/* $(".fatSign").removeClass("w3-orange");
+				$(".fatSign").removeClass("w3-red");
+				$(".kSign").removeClass("w3-orange");
+				$(".kSign").removeClass("w3-red");
+				$(".naSign").removeClass("w3-orange");
+				$(".naSign").removeClass("w3-red");
+				$(".proteinSign").removeClass("w3-orange");
+				$(".proteinSign").removeClass("w3-red");
+				$(".carboSign").removeClass("w3-orange");
+				$(".carboSign").removeClass("w3-red");
+				$(".kcalSign").removeClass("w3-orange");
+				$(".kcalSign").removeClass("w3-red"); */
 
-		$("#dietAmount").keyup(function() {
-			var a = $("#dietAmount").val();
-			var price = $("#dietPrice").attr("data-basicPrice");
-			console.log("수량" + a);
-			console.log("가격" + price);
-			console.log(a * price);
-			$("#dietPrice").text(a * price);
-		});
-		$("#dietAmount").mouseup(function() {
-			var a = $("#dietAmount").val();
-			var price = $("#dietPrice").attr("data-basicPrice");
-			console.log("수량" + a);
-			console.log("가격" + price);
-			console.log(a * price);
-			$("#dietPrice").text(a * price);
-		});
-
-		$("#doOrder").on("click", function() {
-			//getCheckedList($("#foodGList")
-			$("#setDietCode").val();
-			$("#setDietName").val($("#dietName").text());
-			$("#setPrice").val($("#dietPrice").text());
-			$("#setDietAmount").val($("#dietAmount").val());
-			$("#setDietImg").val($("#dietImg").attr("data-dietImg"));
-			$("#orderForm").attr("action", "doOrder");
-			$("#orderForm").submit();
-		});
-
-		$("#goMyCart").on("click", function() {
-			getCheckedList($(".tabs-content"));
-			$("#setDietCode").val();
-			$("#setDietName").val($("#dietName").text());
-			$("#setPrice").val($("#dietPrice").text());
-			$("#setDietAmount").val($("#dietAmount").val());
-			$("#sideDish").val();
-			$("#orderForm").attr("action", "goMyCart");
-			$("#orderForm").submit();
-		});
-	});
+				$(".nutriInfoTable").append("<td class='kcalSign'>"+kcal+"</td><td class='carboSign'>"+carbo+"</td><td class='proteinSign'>"+protein+"</td><td class='fatSign'>"+fat+"</td><td class='naSign'>"+na+"</td><td class='kSign'>"+k+"</td>")
+				$("#MKcal").html("2500<br>("+parseInt(kcal/2500*100)+"%)");//여기부터
+				$("#MCarbo").html("405<br>("+parseInt(carbo/405*100)+"%)");
+				$("#MProtein").html("50<br>("+parseInt(protein/50*100)+"%)");
+				$("#MFat").html("40<br>("+parseInt(fat/40*100)+"%)");
+				$("#MNa").html("2000<br>("+parseInt(na/2000*100)+"%)");
+				$("#MK").html("3500<br>("+parseInt(k/3500*100)+"%)");
+				
+				$("#WMKcal").html("2000<br>("+parseInt(kcal/2000*100)+"%)");
+				$("#WMCarbo").html("325<br>("+parseInt(carbo/325*100)+"%)");
+				$("#WMProtein").html("40<br>("+parseInt(protein/40*100)+"%)");
+				$("#WMFat").html("35<br>("+parseInt(fat/35*100)+"%)");
+				$("#WMNa").html("2000<br>("+parseInt(na/2000*100)+"%)");
+				$("#WMK").html("3500<br>("+parseInt(k/3500*100)+"%)"); 
+				
+				var kcalSign = Number(kcal)-Number(localStorage['kcal']);				
+				var carboSign = Number(carbo)-Number(localStorage['carbo']);
+				var proteinSign = Number(protein)-Number(localStorage['protein']);
+				var fatSign = Number(fat)-Number(localStorage['fat']);
+				var naSign = Number(na)-Number(localStorage['na']);
+				var kSign = Number(k)-Number(localStorage['k']);
+				console.log("칼로리차:"+kcalSign+" 탄수화물차:"+carboSign+" 단백질차:"+proteinSign+" 지방차:"+fatSign+" 나트륨차:"+naSign+" 칼륨차:"+kSign);
+				if(KcalDay>20 && KcalDay<=100){
+					$(".kcalSign").css({'background-color':'rgba(99, 183, 108,0.7)','color':'#000'});
+				}else if((KcalDay>10&&KcalDay<=30)||(KcalDay>100&&KcalDay<=120)){
+					$(".kcalSign").css({'background-color':'rgba(255, 174, 66,0.7)','color':'#000'});
+				}else{
+					$(".kcalSign").css({'background-color':'rgba(255, 83, 73,0.7)','color':'#000'});
+				}
+				if(CDay>20 && CDay<=100){
+					$(".carboSign").css({'background-color':'rgba(99, 183, 108,0.7)','color':'#000'});
+				}else if((CDay>10&&CDay<=20)||(CDay>100&&CDay<=120)){
+					$(".carboSign").css({'background-color':'rgba(255, 174, 66,0.7)','color':'#000'});
+				}else{
+					$(".carboSign").css({'background-color':'rgba(255, 83, 73,0.7)','color':'#000'});
+				}
+				console.log(PDay)
+				if(PDay>50 && PDay<=120){
+					$(".proteinSign").css({'background-color':'rgba(99, 183, 108,0.7)','color':'#000'});
+				}else if((PDay>30&&PDay<=50)||(PDay>120&&PDay<=140)){
+					$(".proteinSign").css({'background-color':'rgba(255, 174, 66,0.7)','color':'#000'});
+				}else{
+					$(".proteinSign").css({'background-color':'rgba(255, 83, 73,0.7)','color':'#000'});
+				}
+				if(NaDay<=100){
+					$(".naSign").css({'background-color':'rgba(99, 183, 108,0.7)','color':'#000'});
+				}else if(NaDay>100&&NaDay<=120){
+					$(".naSign").css({'background-color':'rgba(255, 174, 66,0.7)','color':'#000'});
+				}else{
+					$(".naSign").css({'background-color':'rgba(255, 83, 73,0.7)','color':'#000'});
+				}
+				if(KDay<=120){
+					$(".kSign").css({'background-color':'rgba(99, 183, 108,0.7)','color':'#000'});
+				}else if(KDay>120&&KDay<=150){
+					$(".kSign").css({'background-color':'rgba(255, 174, 66,0.7)','color':'#000'});
+				}else{
+					$(".kSign").css({'background-color':'rgba(255, 83, 73,0.7)','color':'#000'});
+				}
+				if(Fday>50 && Fday<=120){
+					$(".fatSign").css({'background-color':'rgba(99, 183, 108,0.7)','color':'#000'});
+				}else if((Fday>30&&Fday<=50)||(Fday>120&&Fday<=140)){
+					$(".fatSign").css({'background-color':'rgba(255, 174, 66,0.7)','color':'#000'});
+				}else{
+					$(".fatSign").css({'background-color':'rgba(255, 83, 73,0.7)','color':'#000'});
+				} 
+				
+			}
+		
+		console.log(nutriValue);
+		var nutriData ={
+				labels:["칼로리","탄수화물","단백질","지방","나트륨","칼륨"],
+				 datasets: [{
+					 label:"영양정보",					
+				     backgroundColor:[
+				    	 'rgba(255, 99, 132, 0.5)',
+				    	 'rgba(120, 99, 132, 0.5)',
+			             'rgba(54, 162, 235, 0.5)',
+			             'rgba(255, 206, 86, 0.5)',
+			             'rgba(75, 192, 192, 0.5)',
+			             'rgba(153, 102, 255, 0.5)',
+				     ],
+				     data: nutriValue
+				}]
+		}
+		return nutriData;
+	}	
+	
+	//영양차트 함수
+	function drawNutriChart(nutriData){
+		var ctx = $("#nutriChart");
+		var myChart = new Chart(ctx, {
+		    type: 'polarArea',
+		    data: nutriData
+		    
+		});		
+	
+	}	
+	
 </script>
 <body>
 	<%@include file="../../clientNavi.jsp"%>
@@ -223,9 +495,9 @@ mat-height:200px; */
 	<!-- You can now combine a row and column if you just need a 12 column row -->
 	
 
-	<div class="row">
+	<div class="container">
 		<div class="medium-6 columns">
-			<img class="thumbnail" class="dietImg" data-dietImg="${list[0].dietImg}" src='displayFile?fileName=${list[0].dietImg}'>
+			<img class="thumbnail dietImg" data-dietImg="${list[0].dietImg}" src='displayFile?fileName=${list[0].dietImg}'>
 			<div class="row small-up-3">
 				<!-- <img src="resources/customerImage/option_list.png"> -->
 				<c:forEach items="${list}" var="list">
@@ -260,8 +532,9 @@ mat-height:200px; */
 		</div>
 
 		<!-- 우측 식단 정보 영역 -->
-		<div class="medium-6 large-5 columns">
-			<h3>${list[0].dietName}</h3>
+		<div class="medium-6 columns">
+		<div>
+			<h3 id="dietName">${list[0].dietName}</h3>
 
 			<div class="row">
 				<div class="small-3 columns">
@@ -278,8 +551,27 @@ mat-height:200px; */
 			<!-- 장바구니, 주문하기 버튼 -->
 			<div class="large secondary expanded button-group">
 				
-				<a href="#" class="button large expanded" id="goMyCart">Cart</a> <a href="#"
-					class="button large expanded" id="doOrder">Buy Now</a>
+				<a href="#" class="button large expanded" id="goMyCart">Cart</a>
+				<a href="#"	class="button large expanded " id="doOrder">Buy Now</a>
+			</div>
+			</div>
+			<!-- 영양차트 -->
+			<div class="nutriChart">
+				<h4 class="text-center">1일 영양성분 기준에 대한 비율(%)</h4>
+				<canvas id="nutriChart"></canvas>				
+			</div>				
+			<div class="center-block table-responsive">
+			<table class="table table-condensed">  
+				<tr><td>성별</td><td>칼로리<br>(Kcal)</td><td>탄수화물<br>(g)</td><td>단백질<br>(g)</td><td>지방<br>(g)</td><td>나트륨<br>(g)</td><td>칼륨<br>(g)</td></tr>
+				<tr><td>남자</td><td id="MKcal">2400</td><td id="MCarbo">405</td><td id="MProtein">50</td><td id="MFat">40</td><td id="MNa">2000</td><td id="MK">3500</td></tr>
+				<tr><td>여자</td><td id="WMKcal">1900</td><td id="WMCarbo">325</td><td id="WMProtein">40</td><td id="WMFat">35</td><td id="WMNa">2000</td><td id="WMK">3500</td></tr>
+			</table>
+			</div>
+			<div class="center-block table-responsive">
+				<table class="table nutriTable">
+					<tr><th class="kcalSign ">칼로리<br>(Kcal)</th><th class="carboSign ">탄수화물<br>(g)</th><th class="proteinSign ">단백질<br>(g)</th><th class="fatSign ">지방<br>(g)</th><th class="naSign ">나트륨<br>(mg)</th><th class="kSign ">칼륨<br>(mg)</th></tr>
+					<tr class="nutriInfoTable"></tr>					
+				</table>				
 			</div>
 		</div>
 	</div>
@@ -357,9 +649,7 @@ mat-height:200px; */
 				<img src="http://via.placeholder.com/150x150">
 				<!--<img id="dietImg" data-dietImg="${list[0].dietImg}"
 					src='displayFile?fileName=${list[0].dietImg}' /> -->
-
 			</div>
-
 			<div class="col-sm-5">
 				<div id="dietName">
 					<h2>${list[0].dietName}</h2>
@@ -388,7 +678,6 @@ mat-height:200px; */
 				</div>
 			</c:forEach>
 		</div>
-
 		<!-- 반찬군별 식단의 반찬 리스트 노출 -->
 		<div class="row" id="foodGList">
 			<c:forEach items="${list}" var="list">
@@ -399,7 +688,6 @@ mat-height:200px; */
 			</c:forEach>
 		</div>
 	</div>
-
 	<!-- 가은 편집 반찬 선택창 입니다 :) -->
 	<div>
 		<section>
@@ -416,7 +704,6 @@ mat-height:200px; */
 			src="http://via.placeholder.com/150x150"> <img
 			src="http://via.placeholder.com/150x150">
 	</div>
-
 	<div>
 		<h1>삭제할 공간입니다.</h1>
 		<div id="testing"></div>
@@ -424,18 +711,18 @@ mat-height:200px; */
 
 
 	<form id="orderForm" method="get">
-		<input id="setDietCode" type="hidden" name="dietCode"
-			value="${list[0].dietCode }"> <input id="setPrice"
-			type="hidden" name="price"> <input id="setDietImg"
-			type="hidden" name="dietImg"> <input id="setDietAmount"
-			type="hidden" name="dietAmount"> <input id="setDietName"
-			type="hidden" name="dietName"> <input id="customerId"
-			type="hidden" name="id" value="${customerId}"> <input
-			id="sideDish" type="hidden" name="sideDish"> <input
-			type="hidden" name="detailOrder" value="true">
+		<input id="setDietCode" type="hidden" name="dietCode" value="${list[0].dietCode }"> 
+			<input id="setPrice" type="hidden" name="price"> 
+			<input id="setDietImg" type="hidden" name="dietImg">
+			<input id="setDietAmount" type="hidden" name="dietAmount"> 
+			<input id="setDietName" type="hidden" name="dietName"> 
+			<input id="customerId" type="hidden" name="id" value="${customerId}">
+			<input type="hidden" name="detailOrder" value="true">
 		<!-- 디테일오더에서 넘어갔는지 유무 -->
 	</form>
 
-
+<footer>
+	<%@include file="../../footer.jsp" %>
+</footer>
 </body>
 </html>

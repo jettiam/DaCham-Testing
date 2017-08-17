@@ -7,8 +7,8 @@ public class Counselor {
 	private int counselCode;
 	private String name;
 	private String email;
-	private String counselitemName;
-	private String costomer;
+	private String counselItemName;
+	private String customer;
 	private String adviser;
 	private Date counselDate;
 	private String counselCoutent;
@@ -25,6 +25,45 @@ public class Counselor {
 	private String keyword;
 	private String keyword2;
 	private String searchType2;
+	private int orderCode;
+	private String dietName;
+	private Date orderDate;
+	private String orderItemName;
+	private String paymentItemName;
+	private String answer;
+	private int diseaseCode;
+	private String diseaseName;
+	private String judgement;
+	private Date birthday;
+	private String sideDName;
+	
+	
+	public Date getBirthday() {
+		return birthday;
+	}
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+	public int getDiseaseCode() {
+		return diseaseCode;
+	}
+	public void setDiseaseCode(int diseaseCode) {
+		this.diseaseCode = diseaseCode;
+	}
+	public String getDiseaseName() {
+		return diseaseName;
+	}
+	public void setDiseaseName(String diseaseName) {
+		this.diseaseName = diseaseName;
+	}
+	public String getJudgement() {
+		return judgement;
+	}
+	public void setJudgement(String judgement) {
+		this.judgement = judgement;
+	}
+	
+	
 	public int getCouselCode() {
 		return couselCode;
 	}
@@ -49,17 +88,17 @@ public class Counselor {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getCounselitemName() {
-		return counselitemName;
+	public String getCounselItemName() {
+		return counselItemName;
 	}
-	public void setCounselitemName(String counselitemName) {
-		this.counselitemName = counselitemName;
+	public void setCounselitemName(String counselItemName) {
+		this.counselItemName = counselItemName;
 	}
-	public String getCostomer() {
-		return costomer;
+	public String getCustomer() {
+		return customer;
 	}
-	public void setCostomer(String costomer) {
-		this.costomer = costomer;
+	public void setCostomer(String customer) {
+		this.customer = customer;
 	}
 	public String getAdviser() {
 		return adviser;
@@ -156,6 +195,51 @@ public class Counselor {
 	}
 	public void setSearchType2(String searchType2) {
 		this.searchType2 = searchType2;
+	}
+	public int getOrderCode() {
+		return orderCode;
+	}
+	public void setOrderCode(int orderCode) {
+		this.orderCode = orderCode;
+	}
+	public String getDietName() {
+		return dietName;
+	}
+	public void setDietName(String dietName) {
+		this.dietName = dietName;
+	}
+	public Date getOrderDate() {
+		return orderDate;
+	}
+	public void setOrderDate(Date orderDate) {
+		this.orderDate = orderDate;
+	}
+	public String getOrderItemName() {
+		return orderItemName;
+	}
+	public void setOrderItemName(String orderItemName) {
+		this.orderItemName = orderItemName;
+	}
+	public String getPaymentItemName() {
+		return paymentItemName;
+	}
+	public void setPaymentItemName(String paymentItemName) {
+		this.paymentItemName = paymentItemName;
+	}
+	public void setCustomer(String customer) {
+		this.customer = customer;
+	}
+	public String getAnswer() {
+		return answer;
+	}
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
+	public String getSideDName() {
+		return sideDName;
+	}
+	public void setSideDName(String sideDName) {
+		this.sideDName = sideDName;
 	}
 	
 	

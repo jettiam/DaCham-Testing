@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.wdb3a.dacham.bean.Customer;
+import com.wdb3a.dacham.bean.Measure;
 import com.wdb3a.dacham.dao.CustomerDAO;
 
 @Service
@@ -30,9 +31,9 @@ private CustomerDAO dao;
 		return dao.detailOrder(dietCode);
 	}
 	@Override
-	public List<Customer> sideDDetail(String foodGCode) throws Exception {
+	public List<Customer> sideDDetail(Customer customer) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.sideDDetail(foodGCode);
+		return dao.sideDDetail(customer);
 
 	}
 	@Override
@@ -79,6 +80,26 @@ private CustomerDAO dao;
 	public List<Customer> myNutri(String id) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.myNutri(id);
+	}
+	@Override
+	public int insertMeasure(Measure measure) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.insertMeasure(measure);
+	}
+	@Override
+	public List<Measure> measureRead(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.measureRead(id);
+	}
+	@Override
+	public List<Customer> menuShow(int diseaseCode) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.menuShow(diseaseCode);
+	}
+	@Override
+	public void recentlyAddress(Customer customer) throws Exception {
+		// TODO Auto-generated method stub
+		dao.recentlyAddress(customer);
 	}
 
 }
