@@ -19,7 +19,7 @@
 		$("#regist").click(function(){
 			window.location.href = "dietRegist";
 		});
-		
+		all(1,'당뇨');
 		$(".pagination").on("click","li a",function(){
 			event.preventDefault();
 			var replyPage = $(this).attr("href");
@@ -80,7 +80,7 @@
 				$(".dietDiseaseOverview").append(str); 
 				printPaging(data.criteria);
 			});
-		}
+		}   
 		
 		function printPaging(criteria){
 			var str = "";
@@ -104,7 +104,7 @@
  .box1 {
   float:left;  }
  .box2 {
-  display:inline-block;  margin-left:10px;}  
+  display:inline-block;  margin-left:10px; width : 1000px;}     
   ul{
   	list-style : none;
   }
