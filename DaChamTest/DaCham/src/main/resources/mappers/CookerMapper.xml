@@ -162,7 +162,7 @@ from (select foodMName,sum(inAmount) inAmount,sum(outAmount) outAmount,unit
 	</select>
 	<select id = "anotherSelectCookingItemCount" resultType = "Integer">
 		select count(c.orderCode)
-from (select a.orderCode as
+		from (select a.orderCode as
 		orderCode,
 		a.sideDCode as sideDCode,
 		c.sideDImg as sideDImg,
@@ -202,8 +202,8 @@ from (select a.orderCode as
 		limit #{startRecord},#{recordsPerPage};
 	</select>
 	<select id = "anotherSelectCookingItemCount2" resultType = "Integer">
-		select count(c.orderCode)
-from (select a.orderCode as
+		select count(c.orderCode)	
+		from (select a.orderCode as
 		orderCode,
 		a.sideDCode as sideDCode,
 		c.sideDImg as sideDImg,
