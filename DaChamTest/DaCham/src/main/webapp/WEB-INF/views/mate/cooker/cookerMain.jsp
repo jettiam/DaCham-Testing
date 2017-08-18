@@ -33,7 +33,7 @@
 				$(".tableResult").remove();
 				var str = "";
 				$(data).each(function(){
-					str += "<tr class = 'tableResult'><td>"+this.orderCode+"</td><td>"+this.dietName+"</td><td>"+this.orderDate+"</td><td>"+this.orderItemName+"</td></tr>"
+					str += "<tr class = 'tableResult'><td>"+this.orderCode+"</td><td>"+this.sideDCode+"</td><td>"+this.sideDName+"</td><td>"+this.orderItemName+"</td><td>"+this.cookingAmount+"</td></tr>"
 				});
 				$(".overTable").append(str);
 			});
@@ -109,11 +109,12 @@
 	      <div>
 	         <table class = "overTable table table-hover">
 	            <tr>
-	              	<th>주문번호</th>
-	              	<th>식단이름</th>
-	              	<th>주문날짜</th>
-	              	<th>주문상태</th>
-	            </tr>
+				<th>주문번호</th>
+				<th>반찬번호</th>
+				<th>반찬이름</th>
+				<th>주문안의 반찬진행상태</th>
+				<th>조리량</th>
+				</tr>
 	            <tr class = "tableResult">
 	            </tr>
 	         </table>

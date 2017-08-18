@@ -10,7 +10,7 @@
 	</select>
 	<select id = "foodStockAllCount" resultType = "Integer">
 		select count(c.foodMName)
-from (select foodMName,sum(inAmount) inAmount,sum(outAmount) outAmount,unit
+		from (select foodMName,sum(inAmount) inAmount,sum(outAmount) outAmount,unit
 		from foodminven group by foodMName) c     
 		
 	</select>
@@ -75,17 +75,24 @@ from (select foodMName,sum(inAmount) inAmount,sum(outAmount) outAmount,unit
 		group by b.sideDName
 	</select>
 	<select id="readyScreen" resultType="Cook">
-		select a.orderCode,
-		b.dietName, b.dietImg,a.orderItemCode, a.orderDate,
-		c.orderItemName
-		from orderlist a join diet b join orderitem c
-		where a.dietCode =
-		b.dietCode
-		and a.orderItemCode = c.orderItemCode
-		and a.orderItemCode = 3
-		group by b.dietName
-		order by a.orderDate
-		limit 0,3
+		select a.orderCode as
+		orderCode,
+		a.sideDCode as sideDCode,
+		c.sideDImg as sideDImg,
+		c.sideDName
+		as sideDName,
+		b.orderItemCode as orderOrderItemCode,
+		a.orderItemCode as
+		optionsOrderItemCode,
+		sum(b.dietAmount) as cookingAmount, d.orderItemName  
+		from
+		orderoptions a, orderlist b, sidedish c, orderitem d
+		where a.orderCode = b.orderCode
+		and a.orderItemCode = d.orderItemCode
+		and
+		a.sideDCode = c.sideDCode
+		group by sideDcode
+		having optionsOrderItemCode = 3
 	</select>
 	<update id="transportNum2">
 		update orderlist set orderItemCode = 5
@@ -140,7 +147,7 @@ from (select foodMName,sum(inAmount) inAmount,sum(outAmount) outAmount,unit
 		
 	</select>
 	<select id="anotherSelectCookingItem3" resultType="CookingItem">
-				select a.orderCode as
+		select a.orderCode as
 		orderCode,
 		a.sideDCode as sideDCode,
 		c.sideDImg as sideDImg,
@@ -158,7 +165,7 @@ from (select foodMName,sum(inAmount) inAmount,sum(outAmount) outAmount,unit
 		a.sideDCode = c.sideDCode
 		group by sideDcode
 		having optionsOrderItemCode = 3
-		limit #{startRecord},#{recordsPerPage}
+		
 	</select>
 	<select id = "anotherSelectCookingItemCount" resultType = "Integer">
 		select count(c.orderCode)
