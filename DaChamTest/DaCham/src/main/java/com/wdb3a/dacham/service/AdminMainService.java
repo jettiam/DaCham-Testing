@@ -39,6 +39,7 @@ public interface AdminMainService {
 	public int foodStockListStopCount() throws Exception;
 	public int dietAllCount() throws Exception;
 	public List<OrderList> orderItemNameCount() throws Exception;
+	public List<OrderList> orderAllCountTd() throws Exception; 
 	
 	//public List<OrderList> orderAll(OrderList orderList) throws Exception;
 	public List<OrderList> orderAllSearch(OrderList orderList) throws Exception;

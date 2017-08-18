@@ -64,6 +64,7 @@ public interface AdminMainDAO {
 	public Member memberUserInfo(String id) throws Exception;
 	public void joinOut(String id) throws Exception;
 	public void empUpdate(Member member) throws Exception;
+	public List<OrderList> orderAllCountTd() throws Exception;
 	
 	public void insertFoodM(FoodMAmountRead foodMAmountRead) throws Exception;  
 	public void foodMUpdate(int orderCode) throws Exception;

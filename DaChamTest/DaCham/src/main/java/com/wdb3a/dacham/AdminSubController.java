@@ -121,6 +121,21 @@ public class AdminSubController {
 		}
 		return entity;
 	}
+	
+	@RequestMapping(value = "/orderAllCountTd", method = RequestMethod.GET)
+	public ResponseEntity<List<OrderList>> orderAllCountTd() {
+		ResponseEntity<List<OrderList>> entity = null; 
+		try {
+			OrderList orderList = new OrderList();
+			List<OrderList> list = service.orderAllCountTd(); 
+			entity = new ResponseEntity<>(list, HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
 
 	// 메인 검색
 	@RequestMapping(value = "/{searchType}/{keyword}", method = RequestMethod.GET)

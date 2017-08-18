@@ -305,6 +305,12 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 		return sqlSession.selectList(namespace+".memberNomal");
 	}
 
+	@Override
+	public List<OrderList> orderAllCountTd() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".orderAllCountTd"); 
+	}
+
 	
 
 	
