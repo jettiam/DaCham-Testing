@@ -397,5 +397,6 @@ function disease4(){
 		<form id='dietSellStopForm' method='GET' action='dietSellStop'>
 		</form>
 	</div>
+	
 </body>
 </html>

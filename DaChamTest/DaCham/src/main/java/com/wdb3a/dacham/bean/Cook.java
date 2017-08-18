@@ -11,7 +11,21 @@ public class Cook {
 	private String dietName;
 	private String dietImg;
 	private Date orderDate;
+	private int sideDCode;
+	private int cookingAmount;
 	
+	public int getSideDCode() {
+		return sideDCode;
+	}
+	public void setSideDCode(int sideDCode) {
+		this.sideDCode = sideDCode;
+	}
+	public int getCookingAmount() {
+		return cookingAmount;
+	}
+	public void setCookingAmount(int cookingAmount) {
+		this.cookingAmount = cookingAmount;
+	}
 	public String getOrderItemName() {
 		return orderItemName;
 	}

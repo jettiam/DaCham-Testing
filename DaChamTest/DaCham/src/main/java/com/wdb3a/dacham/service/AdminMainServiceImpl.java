@@ -304,6 +304,12 @@ public class AdminMainServiceImpl implements AdminMainService {
 		return dao.memberNomal(); 
 	}
 
+	@Override
+	public List<OrderList> orderAllCountTd() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.orderAllCountTd();  
+	}
+
 	
 	
 	
