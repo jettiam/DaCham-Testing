@@ -47,7 +47,7 @@ public class AdminSubController {
 	@RequestMapping(value = "/orderList1", method = RequestMethod.PUT)
 	public ResponseEntity<String> transportNum(@RequestBody OrderList order) {
 		ResponseEntity<String> entity = null;
-		System.out.println(order.getOrderCode());
+		
 		try {
 			service.refundUpdate(order);
 			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
@@ -104,10 +104,10 @@ public class AdminSubController {
 		ResponseEntity<Map<String, Object>> entity = null;
 		try {
 			Criteria criteria = new Criteria();
-			System.out.println(page);
+			
 			criteria.setPage(page);
 			int totalCount = service.orderCount();
-			System.out.println(totalCount);
+			
 			criteria.setTotalCount(totalCount); 
 			List<OrderList> list = service.orderAll(criteria);
 			Map<String, Object> map = new HashMap<>();
@@ -213,7 +213,7 @@ public class AdminSubController {
 		ResponseEntity<Map<String, Object>> entity = null;
 		try {
 			Criteria criteria = new Criteria();
-			System.out.println(page);
+			
 			criteria.setPage(page);
 			int totalCount = service.orderCount();
 			criteria.setTotalCount(totalCount); 
@@ -236,7 +236,7 @@ public class AdminSubController {
 		ResponseEntity<Map<String, Object>> entity = null;
 		try {
 			Criteria criteria = new Criteria();
-			System.out.println(page);
+			
 			criteria.setPage(page);
 			int totalCount = service.orderCount();
 			criteria.setTotalCount(totalCount); 
@@ -259,7 +259,7 @@ public class AdminSubController {
 		ResponseEntity<Map<String, Object>> entity = null;
 		try {
 			Criteria criteria = new Criteria();
-			System.out.println(page);
+			
 			criteria.setPage(page);
 			int totalCount = service.orderCount();
 			criteria.setTotalCount(totalCount); 
@@ -282,7 +282,7 @@ public class AdminSubController {
 		ResponseEntity<Map<String, Object>> entity = null;
 		try {
 			Criteria criteria = new Criteria();
-			System.out.println(page);
+			
 			criteria.setPage(page);
 			int totalCount = service.orderCount();
 			criteria.setTotalCount(totalCount); 
@@ -304,7 +304,7 @@ public class AdminSubController {
 		ResponseEntity<Map<String, Object>> entity = null;
 		try {
 			Criteria criteria = new Criteria();
-			System.out.println(page); 
+			
 			criteria.setPage(page);
 			int totalCount = service.orderCount();
 			criteria.setTotalCount(totalCount); 
@@ -351,7 +351,7 @@ public class AdminSubController {
 	public ResponseEntity<List<FoodMInven>> foodStockSearch(@PathVariable("searchType") String searchType,
 			@PathVariable("keyword") String keyword) {
 		ResponseEntity<List<FoodMInven>> entity = null;
-		System.out.println("asdasd");
+		
 		try {
 			FoodMInven foodMInven = new FoodMInven();
 			foodMInven.setSearchType(searchType);
@@ -414,10 +414,10 @@ public class AdminSubController {
 	@RequestMapping(value = "/priceUp", method = RequestMethod.PUT)
 	public ResponseEntity<String> priceUp(@RequestBody Diet diet) {
 		ResponseEntity<String> entity = null;
-		System.out.println(diet.getPrice());
+		
 		try {
 			service.dietPriceUp(diet);
-			System.out.println("¾ß");
+		
 			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -527,7 +527,7 @@ public class AdminSubController {
 
 	@RequestMapping(value = "/userMemberInfo/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Member> memberAll(@PathVariable("id") String id) {
-		System.out.println(id);
+		
 		ResponseEntity<Member> entity = null;
 		try {
 			Member member = service.memberUserInfo(id);
@@ -574,7 +574,7 @@ public class AdminSubController {
 	public ResponseEntity<List<FoodMaterial>> foodMaterialSearch(@PathVariable("searchType") String searchType,
 			@PathVariable("keyword") String keyword) {
 		ResponseEntity<List<FoodMaterial>> entity = null;
-		System.out.println("asdasd");
+		
 		try {
 			FoodMaterial foodMaterial = new FoodMaterial();
 			foodMaterial.setSearchType(searchType);
@@ -594,7 +594,7 @@ public class AdminSubController {
 	public ResponseEntity<List<Member>> customerSearch(@PathVariable("searchType") String searchType,
 			@PathVariable("keyword") String keyword) {
 		ResponseEntity<List<Member>> entity = null;
-		System.out.println("asdasd");
+		
 		try {
 			Member member = new Member();
 			member.setSearchType(searchType);
