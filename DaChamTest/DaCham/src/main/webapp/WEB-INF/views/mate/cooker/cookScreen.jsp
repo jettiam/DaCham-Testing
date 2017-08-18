@@ -48,8 +48,7 @@
 	function cookEnd(){
 		var className = $(this).parent().parent().attr('class');
 		var code = className.slice(1);
-		updateOptionsItemCode(5, code);
-		
+		updateOptionsItemCode(5, code);		
 		var element = $("tr."+className);
 		var sideDName = element.find("b").text();
 		var amount = element.find("h4").text();
@@ -77,7 +76,8 @@
 				}			
 			}
 		});
-	}	
+	}
+
 	
 	$(document)
 			.ready(

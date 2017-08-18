@@ -53,7 +53,7 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 	@Override
 	public void workUpdate(OrderList list) throws Exception {
 		sqlSession.update(namespace+".workupdate", list);
-		
+		sqlSession.update(namespace+".workupdateOptions", list);
 	}
 
 	@Override

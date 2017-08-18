@@ -64,7 +64,7 @@ public class AdminSubController {
 	public ResponseEntity<String> transportNum1(@RequestBody OrderList order) {
 		ResponseEntity<String> entity = null;
 		try {
-			service.workUpdate(order);
+			service.workUpdate(order);			
 			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
