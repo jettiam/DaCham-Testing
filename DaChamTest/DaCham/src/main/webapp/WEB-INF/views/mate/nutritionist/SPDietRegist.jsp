@@ -180,6 +180,15 @@
 												$("#fat").text(data.fat);
 												$("#na").text(data.na);
 											});
+									
+									$(".concatResult").remove();
+									$.getJSON("nutriAjax/callName/"+sideDCode,function(data){
+										var str = "";
+										$(data).each(function(){
+											str += "<tr class = 'concatResult'><td>"+this.foodMName+"</td></tr>";
+										});
+										$(".concatTable").append(str);
+									});
 								});
 
 						$(".template a")
@@ -615,6 +624,13 @@
 						<td id="protein">&nbsp;&nbsp;&nbsp;</td>
 						<td id="fat">&nbsp;&nbsp;&nbsp;</td>
 						<td id="na">&nbsp;&nbsp;&nbsp;</td>
+					</tr>
+				</table>
+				<table class = "concatTable table table-hover">
+					<tr>
+						<th>식재료들</th>
+					</tr>
+					<tr class = "concatResult">
 					</tr>
 				</table>
 				<div id="body">
