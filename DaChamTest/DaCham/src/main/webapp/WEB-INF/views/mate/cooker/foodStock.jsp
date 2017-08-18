@@ -58,13 +58,13 @@
 				
 				if(font < 0.3){   
 					
-					$(".dualAmount").eq(i).attr("style","background-color:red;");  
+					$(".dualAmount").eq(i).attr("style","background-color:#CC0066; color : #EEEEEE;");  
 				}
 			}
 		}
 		$("#search").on("click",function(){
 			var keyword = $("#keyword").val();
-			alert("검색"+keyword);
+			//alert("검색"+keyword);
 			if(keyword == ""){
 				alert("검색어를 입력하세요");
 			}

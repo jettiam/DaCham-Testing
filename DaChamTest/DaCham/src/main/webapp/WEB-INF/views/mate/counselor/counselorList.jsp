@@ -53,7 +53,7 @@
          var customer = $(this).attr('data-code');
          var answer = $(".quickAnswer").val();
          var counselTitle = $(".quickTitle").val();
-         alert("정답:"+answer);
+         
          $.ajax({
             type : "POST",
             url : 'counselAjax/counselInsert/'+customer+"/"+answer + "/" + counselTitle,
@@ -71,17 +71,24 @@
       });
       
       $("#search").on("click",function(){
-         $(".searchResult1").remove();
-         
-         var str = "";
+        
          var searchType = $(".searchType").val();
          var keyword = $("#keyword").val();
-         $.getJSON("counselAjax/listAll/"+searchType+"/"+keyword,function(data){
-            $(data).each(function(){
-            	str += "<tr class = 'searchResult1'><td>"+this.id+"</td><td><a class = 'nameClick' data-code = '"+this.couselCode+"' data-name = '"+this.id+"' data-toggle = 'modal' href = '#myModal'>"+this.name+"</a></td><td>"+this.birthday+"</td><td>"+this.address+"</td><td>"+this.tel+"</td><td>"+this.email+"</td><td>"+this.deptCode+"</td><td>"+this.gradeCode+"</td><td>"+this.joinDate+"</td><td>"+this.diseaseName+"</td><td>"+this.judgement+"</td></tr>";
-            });
-            $(".search1").append(str);
-         });
+         if(keyword == ""){
+        	 alert("검색어를 입력하세요");
+         }
+         else{
+        	 $(".searchResult1").remove();
+             
+             var str = "";
+        	 $.getJSON("counselAjax/listAll/"+searchType+"/"+keyword,function(data){
+                 $(data).each(function(){
+                 	str += "<tr class = 'searchResult1'><td>"+this.id+"</td><td><a class = 'nameClick' data-code = '"+this.couselCode+"' data-name = '"+this.id+"' data-toggle = 'modal' href = '#myModal'>"+this.name+"</a></td><td>"+this.birthday+"</td><td>"+this.address+"</td><td>"+this.tel+"</td><td>"+this.email+"</td><td>"+this.deptCode+"</td><td>"+this.gradeCode+"</td><td>"+this.joinDate+"</td><td>"+this.diseaseName+"</td><td>"+this.judgement+"</td></tr>";
+                 });
+                 $(".search1").append(str);
+              });	 
+         }
+         
       });
       
       $(document.body).on("click",".answerClick",function(){
@@ -138,7 +145,17 @@
             $(".search2").append(str);
          });
       });
-      
+      $("#listAll").on("click",function(){
+    	  $(".searchResult1").remove();
+          $(".answerReturn").hide();
+          $.getJSON("counselAjax/counselorListAll",function(data){
+             var str = "";
+             $(data).each(function(){
+                str += "<tr class = 'searchResult1'><td>"+this.id+"</td><td><a class = 'nameClick' data-code = '"+this.couselCode+"' data-name = '"+this.id+"' data-toggle = 'modal' href = '#myModal'>"+this.name+"</a></td><td>"+this.birthday+"</td><td>"+this.address+"</td><td>"+this.tel+"</td><td>"+this.email+"</td><td>"+this.deptCode+"</td><td>"+this.gradeCode+"</td><td>"+this.joinDate+"</td><td>"+this.diseaseName+"</td><td>"+this.judgement+"</td></tr>";
+             });
+             $(".search1").append(str);
+          });
+      });
       function linkAll(customer){
          $(".answerResult").remove();
         $(".super div").remove();	
@@ -173,10 +190,6 @@
              <h3>고객의 정보</h3>
          <div>
             <select name = "searchType" class= "searchType">
-               <option value = "n"
-                  <c:out value="${Counselor.searchType==null?'selected':'' }"/>>
-                  ----------
-                  </option>
                   <option value = "t"
                   <c:out value="${Counselor.searchType eq 't'?'selected':'' }"/>>
                   고객id
@@ -188,6 +201,7 @@
             </select>
             <input type = "text" name = "keyword" id = "keyword" placeholder = "검색어 입력란">
             <button id = "search" class = "btn btn-success">검색</button>
+            <button id = "listAll" class = "btn btn-warning">전체고객목록</button>
          </div>
       
          

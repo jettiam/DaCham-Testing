@@ -61,17 +61,15 @@
 				<th>반찬번호</th>
 				<th>반찬이미지</th>
 				<th>반찬이름</th>
-				
 				<th>주문안의 반찬진행상태</th>
 				<th>조리량</th>
 			</tr>
 			<c:forEach items = "${list }" var = "b">
 				<tr>
-					<td>${b.orderCode}</td>
+				<td>${b.orderCode}</td>
 				<td>${b.sideDCode}</td>
 				<td><img src = "displayFile?fileName=${b.sideDImg}" style = "width:50px; height : 50px;"></td>
 				<td>${b.sideDName}</td>
-				
 				<td>${b.orderItemName}</td>
 				<td>${b.cookingAmount}</td>
 				</tr>
