@@ -11,6 +11,11 @@
    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+	.changeColor{
+		background-color : red;
+	}
+</style>
 <title>Insert title here</title>
 <script>  
 	$(document).ready(function(){
@@ -30,14 +35,33 @@
 			$.getJSON("cookAjax/foodStockAll/"+page,function(data){
 				$(".overlayResult").remove();
 				var str = "";
-				$(data.list).each(function(){
-					str += "<tr class = 'overlayResult'><td>"+this.foodMName+"</td><td>"+this.foodMAmount+"</td><td>"+this.unit+"</td></tr>";
+				$(data.list).each(function(i){
+					
+					str += "<tr class = 'overlayResult'><td>"+this.foodMName+"</td><td class = 'dualAmount' data-mount = '"+this.foodMAmount+"'>"+this.foodMAmount+"</td><td>"+this.unit+"</td></tr>";
+
 				});
+				
+				
 				$(".overlay").append(str);
+				style();      
+				
 				printPaging(data.criteria);
 			});
+			
+			
 		}
-		
+		function style(){
+			var length = 0;
+			length = $(".overlayResult").length;
+			for(var i = 0; i< length; i++){
+				var font = $(".dualAmount").eq(i).attr('data-mount');
+				
+				if(font < 0.3){   
+					
+					$(".dualAmount").eq(i).attr("style","background-color:red;");  
+				}
+			}
+		}
 		$("#search").on("click",function(){
 			var keyword = $("#keyword").val();
 			alert("검색"+keyword);
@@ -50,7 +74,7 @@
 					$(".overlayResult").remove();
 					var str = "";
 					$(data).each(function(){
-						str += "<tr class = 'overlayResult'><td>"+this.foodMName+"</td><td>"+this.foodMAmount+"</td><td>"+this.unit+"</td></tr>";
+						str += "<tr class = 'overlayResult'><td>"+this.foodMName+"</td><td class = 'dualMount' data-mount = '"+this.foodMAmount+"'>"+this.foodMAmount+"</td><td>"+this.unit+"</td></tr>";
 					});
 					$(".overlay").append(str);
 				});

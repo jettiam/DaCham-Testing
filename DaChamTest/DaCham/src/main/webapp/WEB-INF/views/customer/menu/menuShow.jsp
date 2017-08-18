@@ -40,6 +40,7 @@ border:0px;
 .sideUl li:HOVER {
 	background-color: #eee; 
 }
+
 @media only screen and (max-width: 1440px) {
 	.sideWrap{
 	position:fixed;

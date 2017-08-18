@@ -47,7 +47,11 @@
 	// 조리종료
 	function cookEnd(){
 		var className = $(this).parent().parent().attr('class');
-		var code = className.slice(2);
+		var code = className.slice(1);
+<<<<<<< HEAD
+
+=======
+>>>>>>> branch 'master' of git@github.com:jettiam/DaCham-Testing.git
 		updateOptionsItemCode(5, code);
 		
 		var element = $("tr."+className);
@@ -214,7 +218,7 @@ body {
 						<tr>
 							<td colspan='3'><h2 style="text-align:center;">조리중</h2></td>
 						</tr>
-						<c:forEach items="${list}" var="list" varStatus="status">
+						<c:forEach items="${list}" var="list">
 							<c:if test="${list.optionsOrderItemCode==4}"  >								
 							<%-- 	<p>
 									<span style='display:none;'>${list.sideDCode} </span> <span>${list.sideDName}

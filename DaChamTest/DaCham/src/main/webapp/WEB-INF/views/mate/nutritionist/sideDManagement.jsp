@@ -111,9 +111,9 @@
 <title>반찬 관리 페이지</title>
 <style>
 	.box1 {
-  float:left; width: 150px;  }
+  float:left; width: 150px; margin-right : 20px;  }
  .box2 {
-  display:inline-block;  margin-left:10px;}
+  display:inline-block;  margin-left:20px; width:580px;}
   ul{
   	list-style : none;
   }

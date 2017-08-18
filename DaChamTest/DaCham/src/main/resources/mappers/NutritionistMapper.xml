@@ -354,7 +354,7 @@
 	</select>
 	<!-- 반찬코드에 속한 식재료 이름이라도 불러오기 -->
 	<select id = "callName" resultType = "com.wdb3a.dacham.bean.Nutritionist">
-		select * from sidedinfo a, foodmaterial b
+		select group_concat(distinct b.foodMName) as foodMName from sidedinfo a, foodmaterial b
 		where a.foodMCode = b.foodMCode
 		and a.sideDCode = #{sideDCode}
 	</select>

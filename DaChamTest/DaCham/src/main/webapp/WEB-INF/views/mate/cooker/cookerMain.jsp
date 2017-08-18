@@ -135,7 +135,6 @@
 	   			<ul class = "pagination">
 	   			</ul>
 	   		</div>
-	   		<button class = "btn btn-warning"><a href = "cookFood">식재료페이지 바로가기 ★</a></button>
 	   </div>
 	  </div>
 </body>

@@ -588,7 +588,7 @@
 							else if((length1 <= 0) || (length2 <= 0) || (length3 <= 0) || (length4 <= 0) || (length5 <= 0) || (length6 <= 0)){
 								alert("최소한 한 개 이상의 반찬은 선택하셔야 합니다.");
 							}
-							else if($(".diseaseCodeId option:selected").val() == '0' || $(".diseaseCodeId option:selected").val() == '-1'){
+							else if($(".diseaseCodeId option:selected").val() == '-1'){
 								alert("질병을 선택해 주세요");
 							}
 											
