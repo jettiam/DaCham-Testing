@@ -46,7 +46,7 @@
 					$("#paymentForm").submit();	
 				}
 			}else{			
-			if(confirm("결제 하겠습니까? 장바구니")){
+			if(confirm("결제 하겠습니까?")){
 				var data = new Array();
 				var dataObj = new Object();
 				var length = $(".dietAmount").length;

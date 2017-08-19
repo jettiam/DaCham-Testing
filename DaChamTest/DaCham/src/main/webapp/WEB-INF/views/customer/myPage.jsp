@@ -23,6 +23,7 @@
 <style>
 .myPageImg{
 	max-width: 160px;
+	height:120px;
 }
 .optionView{
 	display:none;
@@ -72,6 +73,7 @@ border:0px;
 @media only screen and (max-width: 768px) {
 	.myPageImg{
 		max-width: 50px;
+		height:39px;
 	}	
 	
 }

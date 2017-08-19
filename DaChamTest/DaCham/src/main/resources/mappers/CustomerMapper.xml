@@ -68,8 +68,8 @@ order by o.orderCode desc;
 <select id="myOrderList" resultType="Customer">
   select d.dietImg,d.dietName,o.dietCode,o.price,o.orderCode,o.orderDate,o.dietAmount,o.orderItemCode
 from (select dietCode, price, orderCode,orderDate, dietAmount,orderItemCode
-from orderlist where id = #{id}) o,diet d
-where o.dietCode = d.dietCode order by o.orderDate desc;  
+from orderlist where id = #{id} and orderItemCode!=1) o,diet d
+where o.dietCode = d.dietCode order by o.orderCode desc;  
   </select>
 
 

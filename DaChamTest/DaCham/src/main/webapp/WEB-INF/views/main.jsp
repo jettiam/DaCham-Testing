@@ -156,8 +156,9 @@ $(window).scroll(function() {
 		<div class="row">
 		  
 		    <div class="col-sm-8">
-		      <h3>직접 만드는 건강한 식단</h3><br>
-		      <h4>내용용요용</h4>
+		      <h3>살충제 달걀 걱정 NO!</h3><br>
+		      <p class="lead">저희 다참은 살충제 성분이 검출되지 않은 농장에서 직접 달걀을 구매하고있습니다.<br>
+		      안심하시고 드셔도 됩니다.</p>
 		      
 		    </div>
 		      <div class="col-sm-4">

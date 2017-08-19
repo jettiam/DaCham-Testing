@@ -102,7 +102,7 @@
   	</update>
   	<update id = "changer">
  		update orderlist set orderItemCode = 10
- 		where 
+ 		where orderCode=#{orderCode} and
  		(select count(orderCode) from foodminven where orderCode = #{orderCode})
  		= (select count(orderCode) from foodminven where foodMStatus = 1 and orderCode = #{orderCode})  		
    	</update>
