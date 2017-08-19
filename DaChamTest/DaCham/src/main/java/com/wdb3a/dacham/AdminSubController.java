@@ -64,7 +64,7 @@ public class AdminSubController {
 	public ResponseEntity<String> transportNum1(@RequestBody OrderList order) {
 		ResponseEntity<String> entity = null;
 		try {
-			service.workUpdate(order);
+			service.workUpdate(order);			
 			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -168,6 +168,21 @@ public class AdminSubController {
 			orderList.setSearchType(searchType);
 			orderList.setKeyword(keyword);
 			List<OrderList> list = service.orderAllSearch(orderList);
+			entity = new ResponseEntity<>(list, HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	
+	@RequestMapping(value = "DietAllTdCount", method = RequestMethod.GET)
+	public ResponseEntity<List<Diet>> DietAllTdCount() {
+		ResponseEntity<List<Diet>> entity = null;
+  
+		try {   
+			List<Diet> list = service.DietAllTdCount();  
 			entity = new ResponseEntity<>(list, HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -459,6 +474,20 @@ public class AdminSubController {
 		ResponseEntity<List<Diet>> entity = null;
 		try {
 			List<Diet> list = service.disease4();
+			entity = new ResponseEntity<>(list, HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	
+	@RequestMapping(value = "/disease5", method = RequestMethod.GET)
+	public ResponseEntity<List<Diet>> disease5() {
+		ResponseEntity<List<Diet>> entity = null;
+		try {
+			List<Diet> list = service.disease5(); 
 			entity = new ResponseEntity<>(list, HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

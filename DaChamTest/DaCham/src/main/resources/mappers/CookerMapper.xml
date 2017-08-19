@@ -232,6 +232,11 @@
 		update orderoptions set orderItemCode= #{orderItemCode} 
 		where sideDCode = #{sideDCode};
 	</update>
+		<update id="updateOrderItemCode" parameterType="HashMap">
+		UPDATE orderlist SET orderItemCode=5 
+		WHERE (select count(*) from orderoptions where orderCode=174 and orderItemCode=5)=6 
+		and orderCode=174
+	</update>
 
 
 </mapper>

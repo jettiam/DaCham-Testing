@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
-<html>
+<html> 
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -459,7 +459,7 @@
 
 		var code = $(".active").attr('data-code');
 
-		alert('코드번호:' + code);
+		//alert('코드번호:' + code);
 		if (code == 1) {
 			orderSort1(replyPage);
 		} else if (code == 2) {
@@ -647,7 +647,7 @@
 												for (var i = 0; i < data.length; i++) {
 													if (data[i].orderItemName == "조리 대기") {
 														readyCook++;
-														console.log(readyCook);
+														console.log("조리대기 "+readyCook);
 													} else if (data[i].orderItemName == "식재료발주") {
 														ReadyFood++;
 													} else if (data[i].orderItemName == "식재료 입고") {
@@ -672,8 +672,8 @@
 
 												$("#str1").append(str1);
 												$("#str2").append(str2);
-												$("#str3").append(str3);
-												$("#str4").append(str4);    
+												$("#str4").append(str3);  
+												$("#str3").append(str4);
 												$("#str5").append(str5);
 
 											});
@@ -953,4 +953,4 @@
 
 					});
 </script>
-</html>
+</html> 

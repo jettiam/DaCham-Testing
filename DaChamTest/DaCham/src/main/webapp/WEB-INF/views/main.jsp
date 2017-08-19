@@ -133,7 +133,7 @@ $(window).scroll(function() {
       </div>
       <div class="item">
       	<div>
-          <h3>"내용"<br><p>내용</p></h3>
+          <h3>"조리부터 배송까지"<br><p>건강한 재료를 엄선하여 정성을 다해 만듭니다</p></h3>
         </div>
       </div>     
     </div>
@@ -161,11 +161,11 @@ $(window).scroll(function() {
 		      
 		    </div>
 		      <div class="col-sm-4">
-		      <img src="resources/customerImage/dmain.jpg" class="slideanim">
+		      <img src="resources/customerImage/dachamlogo.png" class="slideanim">
 		    </div>
 		 </div>
 	</div>
-		<div class="container">	
+		<!-- <div class="container">	
 		<div class="row">
 		    <div class="col-sm-4">
 		      <img src="resources/customerImage/dachamlogo.png" class="slideanim">
@@ -175,7 +175,7 @@ $(window).scroll(function() {
 		     
 		    </div>
 		 </div>
-	</div>
+	</div> -->
 
 	<div id="mainContent" class="container">
 	</div>

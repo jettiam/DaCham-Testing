@@ -53,7 +53,7 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 	@Override
 	public void workUpdate(OrderList list) throws Exception {
 		sqlSession.update(namespace+".workupdate", list);
-		
+		sqlSession.update(namespace+".workupdateOptions", list);
 	}
 
 	@Override
@@ -309,6 +309,18 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 	public List<OrderList> orderAllCountTd() throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".orderAllCountTd"); 
+	}
+
+	@Override
+	public List<Diet> DietAllTdCount() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".DietAllTdCount");
+	}
+
+	@Override
+	public List<Diet> disease5() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".disease5");
 	}
 
 	

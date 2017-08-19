@@ -159,9 +159,11 @@ img{width:100%}
         <i class="fa fa-user-circle-o"></i>                      
      </a>
      </c:if>
-      <a class="visible-xs" style="margin:5px;" href="main">
+     <div class="visible-xs"  style="margin:2px;">
+      <a href="main">
         <img style="display:blcok; width:48px; height:48px;"
-				src="resources/customerImage/dachamlogo.png" ></a>            
+				src="resources/customerImage/dachamlogo.png" ></a>  
+		</div>          
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">    
       	<ul class="nav nav-bar nav-justified">			

@@ -57,6 +57,7 @@ public interface AdminMainDAO {
 	public List<Diet> disease2() throws Exception;
 	public List<Diet> disease3() throws Exception;
 	public List<Diet> disease4() throws Exception;
+	public List<Diet> disease5() throws Exception;
 	public void empjoin(Member member) throws Exception;
 	
 	public List<Member> memberAll() throws Exception;
@@ -65,6 +66,7 @@ public interface AdminMainDAO {
 	public void joinOut(String id) throws Exception;
 	public void empUpdate(Member member) throws Exception;
 	public List<OrderList> orderAllCountTd() throws Exception;
+	public List<Diet> DietAllTdCount() throws Exception;  
 	
 	public void insertFoodM(FoodMAmountRead foodMAmountRead) throws Exception;  
 	public void foodMUpdate(int orderCode) throws Exception;

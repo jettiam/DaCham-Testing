@@ -384,6 +384,9 @@ function previewImage(targetObj, View_area) {
 .topMar{
 	margin-top: 4cm;  
 }
+#password,#rePassword{
+font-family:sans-serif !important;
+}
 </style>
 <body>
 	<%@include file="../admin/upmenu.jsp"%>
