@@ -102,5 +102,10 @@ public class CookServiceImpl implements CookService {
 		// TODO Auto-generated method stub
 		return dao.anotherSelectCookingItemCount2();
 	}
+	@Override
+	public void updateOrderItemCode() throws Exception {
+		// TODO Auto-generated method stub
+		dao.updateOrderItemCode();
+	}
 	
 }
