@@ -42,20 +42,22 @@
 		
   	</select>
   	<select id = "showDeliverAll" resultType = "com.wdb3a.dacham.bean.Deliver">
-  		select foodMICode, foodMName, sum(inAmount) as inAmount,orderDate, unit, orderCode
-      from foodminven
-      where orderCode is not null
+  		select a.foodMICode, a.foodMName, sum(a.inAmount) as inAmount,b.orderDate, a.unit, a.orderCode
+      from foodminven a, orderlist b
+      where a.orderCode = b.orderCode
+      and a.orderCode is not null
       and foodMStatus = 0
       group by foodMName
   		limit #{startRecord},#{recordsPerPage}
   	</select>
   	<select id = "showDeliverAllCount" resultType = "Integer">
   		select count(c.foodMName)
-		from (select foodMICode, foodMName, sum(inAmount) as inAmount,orderDate, unit, orderCode
-      	from foodminven
-      	where orderCode is not null
-      	and foodMStatus = 0
-      	group by foodMName) c
+		from (select a.foodMICode, a.foodMName, sum(a.inAmount) as inAmount,b.orderDate, a.unit, a.orderCode
+      from foodminven a, orderlist b
+      where a.orderCode = b.orderCode
+      and a.orderCode is not null
+      and foodMStatus = 0
+      group by foodMName) c
   	</select>
   	<select id = "showCount" resultType = "Integer">
   		select count(*)
