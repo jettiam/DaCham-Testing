@@ -310,6 +310,18 @@ public class AdminMainServiceImpl implements AdminMainService {
 		return dao.orderAllCountTd();  
 	}
 
+	@Override
+	public List<Diet> DietAllTdCount() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.DietAllTdCount();
+	}
+
+	@Override
+	public List<Diet> disease5() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.disease5();
+	}
+
 	
 	
 	

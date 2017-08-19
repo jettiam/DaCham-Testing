@@ -47,22 +47,25 @@
       $("#changer").on("click",function(){
          doing(1);           
       });
-      $(document.body).on("click",".statusButton",function(){
-         var orderCode = $(this).attr("data-status");
-         var foodMName = $(this).attr("data-vcode");
+      $(".statusButton").on("click",function(){
+        $("input[name='chk']:checked").each(function(){
+        	var orderCode = $(this).val();
+        	var foodMName = $(this).attr('data-status');
+        	$.ajax({
+                type : "PUT",
+                url : "deliverAjax/changer/"+orderCode + "/" + foodMName,
+                success : function(result){
+                   if(result == "SUCCESS"){
+                      console.log("입고처리되었습니다.");
+                      window.location.reload();     
+                   }
+                   else{
+                      alert("오류 실패");
+                   }
+                }
+             });
+        });
          
-         $.ajax({
-            type : "PUT",
-            url : "deliverAjax/changer/"+orderCode + "/" + foodMName,
-            success : function(result){
-               if(result == "SUCCESS"){
-                  console.log("입고처리되었습니다.");
-               }
-               else{
-                  alert("오류 실패");
-               }
-            }
-         });
       });
       
       $("#search").on("click",function(){
@@ -80,7 +83,7 @@
             
             $(data.list).each(function(){
                
-                  str += "<tr class = 'actionResult'><td><input type = 'hidden' class = 'orderCode' name = 'orderCode' value = '"+this.orderCode+"'>"+"<input type = 'hidden' class = 'foodMICode' name = 'foodMICode' value = '"+this.foodMICode+"'>"+this.foodMICode+"</td><td>"+this.foodMName+"</td><td>"+this.orderDate+"</td><td>"+this.inAmount+"</td><td>"+this.unit+"</td><td>"+this.orderCode+"</td><td>"+"<button class = 'statusButton btn btn-default' data-status = '"+this.orderCode+"' data-vcode = '"+this.foodMName+"'>입고작업</button>"+"</td></tr>";
+                  str += "<tr class = 'actionResult'><td><input type = 'checkbox' name = 'chk' class = 'orderCode' value = '"+this.orderCode+"' data-status = '"+this.foodMName+"'></td><td>"+"<input type = 'hidden' class = 'foodMICode' name = 'foodMICode' value = '"+this.foodMICode+"'>"+this.foodMICode+"</td><td>"+this.foodMName+"</td><td>"+this.orderDate+"</td><td>"+this.inAmount+"</td><td>"+this.unit+"</td><td>"+this.orderCode+"</td><td></td></tr>";
             });
             $(".action1").append(str);    
             printPaging3(data.criteria);
@@ -133,6 +136,16 @@
          
          completeAll(1);
       });
+      
+      $("#allCheck").click(function() {
+			if ($("#allCheck").prop("checked")) {
+				//input태그의 name이 che인 태그들을 찾아서 checked옵션을 true로 정의
+				$("input[name=chk]").prop('checked', true);
+				//클릭이 안되있으면 
+			} else {
+				$("input[name=chk]").prop('checked', false);
+			}
+		});
       function completeAll(page){
          $(".action1").hide();
          $(".actionResult2").remove();
@@ -258,13 +271,15 @@
 <!--          </div> -->
          <div>
             <button  class = "btn btn-success"><a id = "changer" data-toggle = "modal" href = "#myModal">입고중인 목록</a></button>
-            <button id = "completeAll" class = "btn btn-warning">입고된 목록</button>                  
+            <button id = "completeAll" class = "btn btn-warning">입고된 목록</button>  
+            <button class = "statusButton">체크항목 입고작업</button>                
          </div>
          <br><br>
          <form>
             <div>
                <table class = "action1 table table-hover">
                   <tr>
+                  	 <th><input type = "checkbox" name = "chk" id = "allCheck"></th>
                      <th>코드번호&nbsp;</th>
                            
                      <th>식재료명&nbsp;</th>
@@ -273,7 +288,7 @@
                      <th>수량&nbsp;</th>
                      <th>단위&nbsp;</th>
                      <th>주문번호</th>
-                     <th>입고여부</th>
+                    
 
                   </tr>
                   

@@ -75,24 +75,14 @@
 		group by b.sideDName
 	</select>
 	<select id="readyScreen" resultType="Cook">
-		select a.orderCode as
-		orderCode,
-		a.sideDCode as sideDCode,
-		c.sideDImg as sideDImg,
-		c.sideDName
-		as sideDName,
-		b.orderItemCode as orderOrderItemCode,
-		a.orderItemCode as
-		optionsOrderItemCode,
-		sum(b.dietAmount) as cookingAmount, d.orderItemName  
-		from
-		orderoptions a, orderlist b, sidedish c, orderitem d
-		where a.orderCode = b.orderCode
-		and a.orderItemCode = d.orderItemCode
-		and
-		a.sideDCode = c.sideDCode
-		group by sideDcode
-		having optionsOrderItemCode = 3
+select oo.sideDCode, sum(oc.dietAmount) cookingAmount,oc.orderItemName,sd.sideDName,sd.sideDImg
+from orderoptions oo, 
+(select a.orderCode, a.dietAmount,b.orderItemName
+from orderList a,(select DISTINCT o.orderCode,oi.orderItemName from orderoptions o, orderitem oi where o.orderItemCode = 3 and o.orderItemCode=oi.orderItemCode) b
+where a.orderCode=b.orderCode) oc, sidedish sd
+where orderItemCode = 3 and oo.orderCode = oc.orderCode and oo.sideDCode=sd.sideDCode
+and sd.sideDCode=oo.sideDCode
+group by oo.sideDCode
 	</select>
 	<update id="transportNum2">
 		update orderlist set orderItemCode = 5
@@ -128,43 +118,19 @@
 
 	<!-- 조리 해야할(orderItemCode=3) sideDcode와 조리량을 select -->
 	<select id="selectCookingItem" resultType="CookingItem">
-		select a.orderCode as
-		orderCode,
-		a.sideDCode as sideDCode,
-		c.sideDImg as sideDImg,
-		c.sideDName
-		as sideDName,
-		b.orderItemCode as orderOrderItemCode,
-		a.orderItemCode as
-		optionsOrderItemCode,
-		sum(b.dietAmount) as cookingAmount
-		from
-		orderoptions a, orderlist b, sidedish c
-		where a.orderCode = b.orderCode
-		and
-		a.sideDCode = c.sideDCode
-		group by sideDcode 
+select a.orderCode,a.sideDCode,a.orderItemName,a.orderItemCode optionsOrderItemCode,sum(b.dietAmount) cookingAmount,c.sideDName,c.sideDImg
+from
+(select  o.orderCode,o.sideDCode,oi.orderItemName,oi.orderItemCode from orderoptions o, orderitem oi where  o.orderItemCode=oi.orderItemCode and (oi.orderItemCode=3 or oi.orderItemCode=4)) a, orderlist b, sidedish c
+where a.orderCode=b.orderCode and c.sideDCode=a.sideDCode
+group by sideDCode
 		
 	</select>
 	<select id="anotherSelectCookingItem3" resultType="CookingItem">
-		select a.orderCode as
-		orderCode,
-		a.sideDCode as sideDCode,
-		c.sideDImg as sideDImg,
-		c.sideDName
-		as sideDName,
-		b.orderItemCode as orderOrderItemCode,
-		a.orderItemCode as
-		optionsOrderItemCode,
-		sum(b.dietAmount) as cookingAmount, d.orderItemName  
-		from
-		orderoptions a, orderlist b, sidedish c, orderitem d
-		where a.orderCode = b.orderCode
-		and a.orderItemCode = d.orderItemCode
-		and
-		a.sideDCode = c.sideDCode
-		group by sideDcode
-		having optionsOrderItemCode = 3
+select a.orderCode,a.sideDCode,a.orderItemName,a.orderItemCode optionsOrderItemCode,sum(b.dietAmount) cookingAmount,c.sideDName,c.sideDImg
+from
+(select  o.orderCode,o.sideDCode,oi.orderItemName,oi.orderItemCode from orderoptions o, orderitem oi where  o.orderItemCode=oi.orderItemCode and (oi.orderItemCode=3)) a, orderlist b, sidedish c
+where a.orderCode=b.orderCode and c.sideDCode=a.sideDCode
+group by sideDCode
 		
 	</select>
 	<select id = "anotherSelectCookingItemCount" resultType = "Integer">
@@ -232,10 +198,15 @@
 		update orderoptions set orderItemCode= #{orderItemCode} 
 		where sideDCode = #{sideDCode};
 	</update>
-		<update id="updateOrderItemCode" parameterType="HashMap">
-		UPDATE orderlist SET orderItemCode=5 
-		WHERE (select count(*) from orderoptions where orderCode=174 and orderItemCode=5)=6 
-		and orderCode=174
+		<update id="updateOrderItemCode">
+update orderlist set orderItemCode = 5
+where orderCode=
+(select a.orderCode
+from
+(select oo.orderCode, count(oo.orderItemCode) countCode
+from orderoptions oo,orderList ol where oo.orderCode = ol.orderCode and ol.orderItemCode=3 and oo.orderItemCode=5
+group by oo.orderCode) a
+where a.countCode = 6)
 	</update>
 
 

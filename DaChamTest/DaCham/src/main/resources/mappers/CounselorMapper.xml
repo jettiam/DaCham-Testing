@@ -138,5 +138,7 @@ select  a.id , a.name ,a.birthday, a.address, a.tel, a.email, a.deptCode, a.grad
 	where a.counselItemCode = b.counselItemCode
 	and a.customer = c.id
 	and b.counselItemCode = #{counselItemCode}
+	order by counselDate desc
+	
 </select>
 </mapper>

@@ -311,6 +311,18 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 		return sqlSession.selectList(namespace+".orderAllCountTd"); 
 	}
 
+	@Override
+	public List<Diet> DietAllTdCount() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".DietAllTdCount");
+	}
+
+	@Override
+	public List<Diet> disease5() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".disease5");
+	}
+
 	
 
 	
