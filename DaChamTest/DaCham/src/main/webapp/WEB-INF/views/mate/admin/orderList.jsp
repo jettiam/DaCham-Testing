@@ -673,7 +673,7 @@
 												$("#str1").append(str1);
 												$("#str2").append(str2);
 												$("#str3").append(str3);
-												$("#str4").append(str4);
+												$("#str4").append(str4);    
 												$("#str5").append(str5);
 
 											});
