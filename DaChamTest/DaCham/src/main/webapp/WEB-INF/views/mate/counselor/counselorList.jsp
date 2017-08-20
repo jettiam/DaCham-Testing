@@ -181,7 +181,7 @@
 </head>
 <body>           
 <%@include file = "counselorNavi.jsp" %>
-    <div class = "container"  style = "width:100%;overflow-x:auto; ">    
+    <div class = "container"  >    
       <div class = "box1">
       
              <h3>고객의 정보</h3>
@@ -227,10 +227,6 @@
          </table>
          </div>
          </div>
-         </div>
-        
-         <div>
-           
          </div>
          <form>
             <div class = "answer">

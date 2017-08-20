@@ -321,7 +321,7 @@
                <div class = "modal-content">
                   <div class = "modal-header">
                      <button type = "button" class = "close" data-dismiss = "modal">X</button>
-                        <h4 class = "modal-title">진행중인 식재료</h4>
+                        <h4 class = "modal-title">입고 진행중인 식재료</h4>
                   </div>
                   <div class = "modal-body">
                      <table class = "doingTable table table-hover">

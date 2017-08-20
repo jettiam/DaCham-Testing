@@ -16,7 +16,7 @@
  .box1 {
   float:left;  }
  .box2 {
-  display:inline-block;  margin-left:50px;}  
+  display:inline-block;  margin-left:20px;}  
 </style>
 <script>
 $(document).ready(function(){
@@ -195,13 +195,13 @@ $(document).ready(function(){
 </head>
 <body>
 <%@include file = "counselorNavi.jsp" %>
-   <div class = "container">
+   <div class = "container-fluid" style = "margin:200px;">
       <div class = "box1">
-         <div style = "border:1px solid gold;">
+         <div style = "border:1px solid gold;" >
             <input type = "hidden" name = "counselCode" class = "counselCode" readonly>
-            <input type = "text" class = "counselItemName" name = "category" value = "배송문의" readonly>
-            <input type = "text" class = "counselTitle" name = "title" value = "특별식을 주문했는데" readonly><br>
-            <textarea class = "counselContent" style = "width:400px;" readonly>  
+            <input type = "text" class = "counselItemName col-md-2" name = "category" value = "배송문의" readonly>
+            <input type = "text" class = "col-xs-8 col-md-4" name = "title" value = "특별식을 주문했는데" readonly><br>
+            <textarea class = "counselContent form-control" style = "width:720px;" readonly>  
                                내용
             </textarea>
          </div>
@@ -213,8 +213,8 @@ $(document).ready(function(){
             </textarea>     
          </div>   
          <div class = "dropOut" style = "border:1px solid gold;">
-            <textarea placeholder = "답변내용 입력" class = "answers"></textarea>
-            <button id = "answer" class = "btn btn-success">답변</button>
+            <textarea placeholder = "답변내용 입력" class = "answers form-control"></textarea>
+            <button id = "answer" class = "btn btn-success" style ="float:right;" >답변</button>
          </div>
          <br><br>
          <div style = "border:1px solid gold;">   
@@ -363,6 +363,7 @@ $(document).ready(function(){
             </div>
          </div>
       </div>
-   </div>  
+   </div>
+ 
 </body>
 </html>
