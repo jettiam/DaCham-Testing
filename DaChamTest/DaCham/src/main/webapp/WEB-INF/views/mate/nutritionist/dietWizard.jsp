@@ -45,7 +45,7 @@
 	<div class="align_bottom">
 	<img class="center-block" src="resources/bottom_bg.png"/>
 	</div>
-	<h1>안녕ㅇ하세요</h1>
-	<h1>안녕ㅇ하세요</h1><h1>안녕ㅇ하세요</h1><h1>안녕ㅇ하세요</h1>
+	<h1 style="text-align : center;"><b>위자드 제작 설명서</b></h1>
+	
 </body>
 </html>
