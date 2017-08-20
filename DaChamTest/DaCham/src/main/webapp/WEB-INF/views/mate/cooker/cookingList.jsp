@@ -19,31 +19,75 @@
 		$("#button").on("click",function(){
 			window.location.href = "cookScreen";
 		});
-		
+		orderList1(1);  
+		orderList2(1);
 		$("#startCookBtn").on("click", function(){
 			window.open("cookScreen", "", "height=1024, width=1366, fullscreen=yes");
 		});
 		
-		$(".turbo1 li a").on("click",function(){
-		      event.preventDefault();
-		      
-		      var form1 = $("#form1");
-		      var targetPage =$(this).attr("href"); //a 태그에 href 값 가져옴
-		      form1.find("[name=page]").val(targetPage);
-		      form1.attr("action","cookList");
-		      form1.attr("method","get");
-		      form1.submit();
-		   });
-		$(".turbo2 li a").on("click",function(){
-		      event.preventDefault();
-		      
-		      var form2 = $("#form2");
-		      var targetPage =$(this).attr("href"); //a 태그에 href 값 가져옴
-		      form2.find("[name=page]").val(targetPage);
-		      form2.attr("action","cookList");
-		      form2.attr("method","get");
-		      form2.submit();
-		   });
+		$(".turbo1").on("click","li a",function(){
+			event.preventDefault();
+			var replyPage = $(this).attr("href");
+			orderList1(replyPage);
+		});
+		$(".turbo2").on("click","li a",function(){
+			event.preventDefault();
+			var replyPage = $(this).attr("href");
+			orderList2(replyPage);
+		});
+		
+		function orderList1(page){
+			$(".sourceResult").remove();
+			$.getJSON("cookAjax/anotherSelectCookingItem3/"+page,function(data){
+				var str = "";
+				$(data.list).each(function(){
+					str += "<tr class = 'sourceResult'><td>"+this.orderCode+"</td><td>"+this.sideDCode+"</td><td>"+"<img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:50px; height : 50px;'>"+"</td><td>"+this.sideDName+"</td><td>"+this.orderItemName+"</td><td>"+this.cookingAmount+"</td></tr>"
+				});
+				$(".sourceTable").append(str);
+				printPaging(data.criteria);
+			});             
+		}
+		function orderList2(page){
+			$(".codeResult").remove();
+			$.getJSON("cookAjax/anotherSelectCookingItem5/"+page,function(data){
+				var str = "";
+				$(data.list).each(function(){
+					str += "<tr class = 'codeResult'><td>"+this.orderCode+"</td><td>"+this.sideDCode+"</td><td>"+"<img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:50px; height : 50px;'>"+"</td><td>"+this.sideDName+"</td><td>"+this.orderItemName+"</td><td>"+this.cookingAmount+"</td></tr>"
+				});
+				$(".codeTable").append(str);
+				printPaging2(data.criteria);
+			});             
+		}
+		function printPaging(criteria){
+			var str = "";
+					
+			if(criteria.prev){
+				str += "<li><a href=''"+(criteria.startPage-1)+"'>'" + "<<"+"</a></li>";
+			}
+			for(var i = criteria.startPage; i<=criteria.endPage; i++){
+				var strClass = criteria.page == i?"class = 'active'":"";
+				str += "<li "+strClass+"><a href ='"+i+"'>"+i + "</a></li>";
+			}
+			if(criteria.next){
+				str += "<li><a href=''"+(criteria.endPage+1)+"'>'" + ">>"+"</a></li>";
+			}
+			$(".turbo1").html(str);
+		}
+		function printPaging2(criteria){
+			var str = "";
+					
+			if(criteria.prev){
+				str += "<li><a href=''"+(criteria.startPage-1)+"'>'" + "<<"+"</a></li>";
+			}
+			for(var i = criteria.startPage; i<=criteria.endPage; i++){
+				var strClass = criteria.page == i?"class = 'active'":"";
+				str += "<li "+strClass+"><a href ='"+i+"'>"+i + "</a></li>";
+			}
+			if(criteria.next){
+				str += "<li><a href=''"+(criteria.endPage+1)+"'>'" + ">>"+"</a></li>";
+			}
+			$(".turbo2").html(str);
+		}
 	});
 </script>
 </head>
@@ -52,10 +96,10 @@
 	<div class = container>
 	<h1>조리 대기</h1>
 		<button id = "startCookBtn" class = "btn btn-primary btn-lg">조리시작</button>
-		<form id = "form1">
+		
 		<input type = "hidden" name = "page" value = "${criteria.page }">
    		<input type = "hidden" name = "recordsPerPage" value = "${criteria.recordsPerPage }">
-		<table class ="table table-hover">
+		<table class ="sourceTable table table-hover">
 			<tr>
 				<th>주문번호</th>
 				<th>반찬번호</th>
@@ -64,18 +108,10 @@
 				<th>주문안의 반찬진행상태</th>
 				<th>조리량</th>
 			</tr>
-			<c:forEach items = "${list }" var = "b">
-				<tr>
-				<td>${b.orderCode}</td>
-				<td>${b.sideDCode}</td>
-				<td><img src = "displayFile?fileName=${b.sideDImg}" style = "width:50px; height : 50px;"></td>
-				<td>${b.sideDName}</td>
-				<td>${b.orderItemName}</td>
-				<td>${b.cookingAmount}</td>
-				</tr>
-			</c:forEach>			
+			<tr class = "sourceResult">
+			</tr>		
 		</table>
-		</form>
+		
 		<div class="container">
          <ul class="turbo1 pagination">
             <c:if test="${criteria.prev}">
@@ -94,10 +130,10 @@
          </ul>
       </div>
 	<h1>조리 완료</h1>
-		<form id = "form2">
+		
 		<input type = "hidden" name = "page" value = "${criteria2.page }">
    		<input type = "hidden" name = "recordsPerPage" value = "${criteria2.recordsPerPage }">
-		<table class = "table table-hover">
+		<table class = "codeTable table table-hover">
 			<tr>
 				<th>주문번호</th>
 				<th>반찬번호</th>
@@ -107,19 +143,13 @@
 				<th>주문안의 반찬진행상태</th>
 				<th>조리량</th>
 			</tr>
-			<c:forEach items = "${list2 }" var ="y">
-			<tr>
-				<td>${y.orderCode}</td>
-				<td>${y.sideDCode}</td>
-				<td><img src = "displayFile?fileName=${y.sideDImg}" style = "width:50px; height : 50px;"></td>
-				<td>${y.sideDName}</td>
-				               
-				<td>${y.orderItemName}</td>   
-				<td>${y.cookingAmount}</td>   
+			
+			<tr class = "codeResult">
+				
 			</tr>
-			</c:forEach>
+			
 		</table>
-		</form>
+	
 		<div class="container">
          <ul class="turbo2 pagination">
             <c:if test="${criteria2.prev}">
