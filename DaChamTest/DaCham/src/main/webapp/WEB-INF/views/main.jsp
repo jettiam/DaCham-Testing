@@ -161,7 +161,7 @@ $(window).scroll(function() {
 		      <h3>살충제 달걀 걱정 NO!</h3><br>
 		      <p class="lead">저희 다참은 살충제 성분이 검출되지 않은 농장에서 직접 달걀을 구매하고있습니다.</p>		      
 		    </div>
-
+ 
 		    <div class="col-sm-4">
 		      <img src="resources/customerImage/dachamlogo.png" class="slideanim">
 		    </div>
