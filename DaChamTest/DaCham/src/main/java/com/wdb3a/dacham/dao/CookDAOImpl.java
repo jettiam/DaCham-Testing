@@ -103,5 +103,14 @@ public class CookDAOImpl implements CookDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace+".anotherSelectCookingItemCount2");
 	}
+	
+	@Override
+	/**
+	 * 조리완료 반찬 6개면 주문목록 조리완료로 변경
+	 */
+	public void updateOrderItemCode() throws Exception {
+		sqlSession.update(namespace+".updateOrderItemCode");
+		
+	}
 
 }

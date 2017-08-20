@@ -100,7 +100,9 @@ public class CookAjaxController {
 	public ResponseEntity<String> updateOptionsItem(int orderItemCode, int sideDCode){
 		ResponseEntity<String> entity = null;	
 		try {
+			
 			service.updateOptionsItemCode(orderItemCode, sideDCode);
+			service.updateOrderItemCode();
 			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

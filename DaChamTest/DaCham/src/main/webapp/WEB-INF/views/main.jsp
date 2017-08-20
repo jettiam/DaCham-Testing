@@ -133,7 +133,7 @@ $(window).scroll(function() {
       </div>
       <div class="item">
       	<div>
-          <h3>"내용"<br><p>내용</p></h3>
+          <h3>"조리부터 배송까지"<br><p>건강한 재료를 엄선하여 정성을 다해 만듭니다</p></h3>
         </div>
       </div>     
     </div>
@@ -156,16 +156,17 @@ $(window).scroll(function() {
 		<div class="row">
 		  
 		    <div class="col-sm-8">
-		      <h3>직접 만드는 건강한 식단</h3><br>
-		      <h4>내용용요용</h4>
+		      <h3>살충제 달걀 걱정 NO!</h3><br>
+		      <p class="lead">저희 다참은 살충제 성분이 검출되지 않은 농장에서 직접 달걀을 구매하고있습니다.<br>
+		      안심하시고 드셔도 됩니다.</p>
 		      
 		    </div>
 		      <div class="col-sm-4">
-		      <img src="resources/customerImage/dmain.jpg" class="slideanim">
+		      <img src="resources/customerImage/dachamlogo.png" class="slideanim">
 		    </div>
 		 </div>
 	</div>
-		<div class="container">	
+		<!-- <div class="container">	
 		<div class="row">
 		    <div class="col-sm-4">
 		      <img src="resources/customerImage/dachamlogo.png" class="slideanim">
@@ -175,7 +176,7 @@ $(window).scroll(function() {
 		     
 		    </div>
 		 </div>
-	</div>
+	</div> -->
 
 	<div id="mainContent" class="container">
 	</div>

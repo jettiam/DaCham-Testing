@@ -23,7 +23,7 @@
       $.getJSON("counselAjax/counselorListAll",function(data){
          var str = "";
          $(data).each(function(){
-            str += "<tr class = 'searchResult1'><td>"+this.id+"</td><td><a class = 'nameClick' data-code = '"+this.couselCode+"' data-name = '"+this.id+"' data-toggle = 'modal' href = '#myModal'>"+this.name+"</a></td><td>"+this.birthday+"</td><td>"+this.address+"</td><td>"+this.tel+"</td><td>"+this.email+"</td><td>"+this.deptCode+"</td><td>"+this.gradeCode+"</td><td>"+this.joinDate+"</td><td>"+this.diseaseName+"</td><td>"+this.judgement+"</td></tr>";
+            str += "<tr class = 'searchResult1'><td>"+this.id+"</td><td><a class = 'nameClick' data-code = '"+this.couselCode+"' data-name = '"+this.id+"' data-toggle = 'modal' href = '#myModal'>"+this.name+"</a></td><td>"+this.birthday+"</td><td>"+this.address+"</td><td>"+this.tel+"</td><td>"+this.email+"</td><td>"+this.joinDate+"</td><td>"+this.diseaseName+"</td><td>"+this.judgement+"</td></tr>";
          });
          $(".search1").append(str);
       });
@@ -53,7 +53,7 @@
          var customer = $(this).attr('data-code');
          var answer = $(".quickAnswer").val();
          var counselTitle = $(".quickTitle").val();
-         alert("정답:"+answer);
+         
          $.ajax({
             type : "POST",
             url : 'counselAjax/counselInsert/'+customer+"/"+answer + "/" + counselTitle,
@@ -71,17 +71,24 @@
       });
       
       $("#search").on("click",function(){
-         $(".searchResult1").remove();
-         
-         var str = "";
+        
          var searchType = $(".searchType").val();
          var keyword = $("#keyword").val();
-         $.getJSON("counselAjax/listAll/"+searchType+"/"+keyword,function(data){
-            $(data).each(function(){
-            	str += "<tr class = 'searchResult1'><td>"+this.id+"</td><td><a class = 'nameClick' data-code = '"+this.couselCode+"' data-name = '"+this.id+"' data-toggle = 'modal' href = '#myModal'>"+this.name+"</a></td><td>"+this.birthday+"</td><td>"+this.address+"</td><td>"+this.tel+"</td><td>"+this.email+"</td><td>"+this.deptCode+"</td><td>"+this.gradeCode+"</td><td>"+this.joinDate+"</td><td>"+this.diseaseName+"</td><td>"+this.judgement+"</td></tr>";
-            });
-            $(".search1").append(str);
-         });
+         if(keyword == ""){
+        	 alert("검색어를 입력하세요");
+         }
+         else{
+        	 $(".searchResult1").remove();
+             
+             var str = "";
+        	 $.getJSON("counselAjax/listAll/"+searchType+"/"+keyword,function(data){
+                 $(data).each(function(){
+                 	str += "<tr class = 'searchResult1'><td>"+this.id+"</td><td><a class = 'nameClick' data-code = '"+this.couselCode+"' data-name = '"+this.id+"' data-toggle = 'modal' href = '#myModal'>"+this.name+"</a></td><td>"+this.birthday+"</td><td>"+this.address+"</td><td>"+this.tel+"</td><td>"+this.email+"</td><td>"+this.joinDate+"</td><td>"+this.diseaseName+"</td><td>"+this.judgement+"</td></tr>";
+                 });
+                 $(".search1").append(str);
+              });	 
+         }
+         
       });
       
       $(document.body).on("click",".answerClick",function(){
@@ -138,7 +145,17 @@
             $(".search2").append(str);
          });
       });
-      
+      $("#listAll").on("click",function(){
+    	  $(".searchResult1").remove();
+          $(".answerReturn").hide();
+          $.getJSON("counselAjax/counselorListAll",function(data){
+             var str = "";
+             $(data).each(function(){
+                str += "<tr class = 'searchResult1'><td>"+this.id+"</td><td><a class = 'nameClick' data-code = '"+this.couselCode+"' data-name = '"+this.id+"' data-toggle = 'modal' href = '#myModal'>"+this.name+"</a></td><td>"+this.birthday+"</td><td>"+this.address+"</td><td>"+this.tel+"</td><td>"+this.email+"</td><td>"+this.deptCode+"</td><td>"+this.gradeCode+"</td><td>"+this.joinDate+"</td><td>"+this.diseaseName+"</td><td>"+this.judgement+"</td></tr>";
+             });
+             $(".search1").append(str);
+          });
+      });
       function linkAll(customer){
          $(".answerResult").remove();
         $(".super div").remove();	
@@ -159,24 +176,19 @@
 </script>
 <style>
  .nameClick { color: blue; text-decoration: underline;}
- .box1 {
-  float:left;  }
- .box2 {
-  display:inline-block;  margin-left:20px;}  
+ 
 </style>
 </head>
 <body>           
 <%@include file = "counselorNavi.jsp" %>
-   <div class = "container"  style = "width:100%; overflow-x:auto;">   
+    <div class = "container"  style = "width:100%;overflow-x:auto; ">    
       <div class = "box1">
       
              <h3>고객의 정보</h3>
-         <div>
-            <select name = "searchType" class= "searchType">
-               <option value = "n"
-                  <c:out value="${Counselor.searchType==null?'selected':'' }"/>>
-                  ----------
-                  </option>
+             <div>
+             <div class="form-group row">   
+			<div class="col-xs-2"> 
+            <select name = "searchType" class= "searchType form-control">
                   <option value = "t"
                   <c:out value="${Counselor.searchType eq 't'?'selected':'' }"/>>
                   고객id
@@ -186,31 +198,37 @@
                   고객이름
                   </option>
             </select>
-            <input type = "text" name = "keyword" id = "keyword" placeholder = "검색어 입력란">
+            </div>
+            <div class="col-xs-3">
+            <input type = "text" name = "keyword" id = "keyword" class="form-control" placeholder  = "검색어 입력란">
+            </div>
             <button id = "search" class = "btn btn-success">검색</button>
+            <button id = "listAll" class = "btn btn-warning">전체고객목록</button>
          </div>
       
          
-        <div style = "border:1px solid gold;">
-         <table border ="1" class = "search1 table table-hover" style = "width:1580px;">
+        <div>
+              
+		<table  class = "search1 table table-borded">
             <tr>
                   <th>고객id</th>
                   <th>고객이름</th>
+                  <th>생일</th>
                   <th>주소</th>
                   <th>전화번호</th>
                   <th>Email</th>
-                  <th>부서</th>
-                  <th>직급</th>
                   <th>가입일</th>
                   <th>질병이름</th>
                   <th>위험군</th>
-                  <th>판정</th>
                   
             </tr>
               <tr class = "searchResult1">
               </tr>
          </table>
          </div>
+         </div>
+         </div>
+        
          <div>
            
          </div>
@@ -218,10 +236,7 @@
             <div class = "answer">
             </div>
          </form>     
-      </div>
-      <div class = "box2">
-         
-      </div>
+      
       <div class = "modal fade" id = "myModal" role = "dialog" style = "width:100%; overflow-x:auto;">
       		<div class = "modal-dialog" style = "width:100%;">
       			<div class = "modal-content">
@@ -249,6 +264,7 @@
       				</div>
       			</div>
       		</div>
+      		</div>
       </div>
       <div class = "modal fade" id = "yourModal" role = "dialog">
       	<div class = "modal-dialog" >
@@ -265,8 +281,10 @@
       		</div>
       	</div>
       </div>
+      </div>
       <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
       <br><br><br><br><br><br>
      </div>
+  
 </body>
 </html>

@@ -152,7 +152,7 @@
 		b,foodmaterial f where a.sideDCode=b.sideDCode and b.foodMCode=f.foodMCode 
 		group by f.foodMName </select> -->
 	<select id="chartList" resultType="ChartList"> <!--특정식단에 대한 이름, 판매량 -->
-		select diet.dietName, sum(orderList.dietAmount) as sellAmount
+		select diet.dietName, sum(orderlist.dietAmount) as sellAmount
 		from
 		orderlist, diet
 		where orderlist.dietCode = diet.dietCode and
@@ -225,6 +225,7 @@
 		and
 		(b.orderItemCode =
 		c.orderItemCode)
+		order by field(b.orderItemCode, 2,3,9,10,6)
 		limit #{startRecord},
 		#{recordsPerPage}
 	</select>
@@ -471,6 +472,20 @@
 		and b.orderItemCode = c.orderItemCode ) a
 		group by orderItemName
 	</select>
+	
+	<select id="orderAllCountTd" resultType="OrderList">
+	select c.orderItemName
+		from diet a,
+		orderlist b,
+		orderitem c
+		where a.dietCode=b.dietCode
+		and (c.orderItemCode=2 or c.orderItemCode
+		=3 or c.orderItemCode =9 or
+		c.orderItemCode=10 or c.orderItemCode=6)
+		and
+		(b.orderItemCode =
+		c.orderItemCode)
+	</select>
 
 
 
@@ -495,6 +510,14 @@
 		limit
 		#{startRecord},
 		#{recordsPerPage}
+	</select>
+	
+	<select id="DietAllTdCount" resultType="Diet">  
+	select b.diseaseName, a.spDietItem,
+		b.judgement
+		from diet a
+		join disease b
+		where a.diseaseCode=b.diseaseCode
 	</select>
 
 	<update id="dietPriceUp">
@@ -568,6 +591,20 @@
 		and diseaseName =
 		'신부전증'
 		order by field(a.spDietItem, 1,2,0)
+	</select>
+	
+	<select id="disease5" resultType="Diet">
+		select a.price, a.dietCode,
+		a.dietName, a.price, a.dietImg, b.diseaseName,
+		a.spDietItem,
+		b.judgement
+		from diet a
+		join disease b
+		where
+		a.diseaseCode=b.diseaseCode
+		and diseaseName =
+		'기타'
+		order by field(a.spDietItem, 1,2,0) 
 	</select>
 
 	<insert id="empjoin">

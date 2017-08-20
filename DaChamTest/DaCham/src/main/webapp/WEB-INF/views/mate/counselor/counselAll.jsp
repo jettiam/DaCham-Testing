@@ -74,6 +74,7 @@
 				<th>상담제목</th>
 				<th>고객ID</th>
 				<th>작성일</th>
+				
 			</tr>		
 			<tr class = "counselResult">
 				

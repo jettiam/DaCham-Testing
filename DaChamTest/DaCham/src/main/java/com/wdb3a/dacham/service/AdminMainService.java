@@ -39,6 +39,8 @@ public interface AdminMainService {
 	public int foodStockListStopCount() throws Exception;
 	public int dietAllCount() throws Exception;
 	public List<OrderList> orderItemNameCount() throws Exception;
+	public List<OrderList> orderAllCountTd() throws Exception; 
+	public List<Diet> DietAllTdCount() throws Exception; 
 	
 	//public List<OrderList> orderAll(OrderList orderList) throws Exception;
 	public List<OrderList> orderAllSearch(OrderList orderList) throws Exception;
@@ -57,6 +59,7 @@ public interface AdminMainService {
 	public List<Diet> disease2() throws Exception;
 	public List<Diet> disease3() throws Exception; 
 	public List<Diet> disease4() throws Exception;
+	public List<Diet> disease5() throws Exception;
 	public void empjoin(Member member) throws Exception;
 	public List<Member> memberAll() throws Exception;
 	public List<Member> memberNomal() throws Exception; 

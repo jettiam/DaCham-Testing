@@ -122,7 +122,7 @@ public void setOrderItemCode(int orderItemCode) {
 	this.orderItemCode = orderItemCode;
 	if(orderItemCode==0){
 		this.setOrderListStatus("미결제");
-	}else if(orderItemCode>=2 && orderItemCode<=5){
+	}else if((orderItemCode>=2 && orderItemCode<=5)||orderItemCode==9 ||orderItemCode==10){
 		this.setOrderListStatus("결제완료");
 	}else if(orderItemCode==6){
 		this.setOrderListStatus("주문취소");

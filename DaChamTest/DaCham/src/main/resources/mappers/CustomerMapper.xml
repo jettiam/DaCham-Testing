@@ -68,8 +68,8 @@ order by o.orderCode desc;
 <select id="myOrderList" resultType="Customer">
   select d.dietImg,d.dietName,o.dietCode,o.price,o.orderCode,o.orderDate,o.dietAmount,o.orderItemCode
 from (select dietCode, price, orderCode,orderDate, dietAmount,orderItemCode
-from orderlist where id = #{id} and orderItemCode between 2 and 8 or orderItemCode = 0) o,diet d
-where o.dietCode = d.dietCode order by o.orderDate desc; 
+from orderlist where id = #{id} and orderItemCode!=1) o,diet d
+where o.dietCode = d.dietCode order by o.orderCode desc;  
   </select>
 
 
@@ -100,7 +100,7 @@ from (select diseaseCode
 		from disease
 		where diseaseName=#{rName} AND judgement=#{rJudg}) s,
 		diet d
-where s.diseaseCode = d.diseaseCode limit 1;
+where s.diseaseCode = d.diseaseCode and d.spDietItem=1  limit 1;
 </select>
 
 <!-- 마이페이지 차트의 내 영양정보 불러오기 용 -->
@@ -157,7 +157,7 @@ from
 	where si.foodMCode = f.foodMCode) a
 	group by a.sidedcode) f 
 where s.sideDCode=f.sideDcode) result, dietinfo di
-where result.sideDCode= di.sideDCode
+where result.sideDCode= di.sideDCode and di.sideDType=0
 group by di.dietCode
 order by di.sideDType) n
 where d.diseaseCode=#{diseaseCode} and di.dietCode=d.dietCode and di.sideDCode=s.sideDCode and di.sideDType=0 and d.spDietitem=1 and d.dietCode=n.dietCode

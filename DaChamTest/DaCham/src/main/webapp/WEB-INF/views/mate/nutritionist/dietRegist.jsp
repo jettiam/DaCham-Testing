@@ -588,7 +588,7 @@
 							else if((length1 <= 0) || (length2 <= 0) || (length3 <= 0) || (length4 <= 0) || (length5 <= 0) || (length6 <= 0)){
 								alert("최소한 한 개 이상의 반찬은 선택하셔야 합니다.");
 							}
-							else if($(".diseaseCodeId option:selected").val() == '0' || $(".diseaseCodeId option:selected").val() == '-1'){
+							else if($(".diseaseCodeId option:selected").val() == '-1'){
 								alert("질병을 선택해 주세요");
 							}
 											
@@ -861,11 +861,7 @@ label{
 						<tr><td>칼로리<br>(Kcal)</td><td>탄수화물<br>(g)</td><td>단백질<br>(g)</td><td>지방<br>(g)</td><td>나트륨<br>(g)</td></tr>
             <tr><td id= "TKcal"></td><td id="TCarbohydrate"></td><td id="TProtein"></td><td id="TFat"></td><td id="TNa"></td></tr>
 					</table>
-					<table>
-						<tr><td>성별</td><td>칼로리<br>(Kcal)</td><td>탄수화물<br>(g)</td><td>단백질<br>(g)</td><td>지방<br>(g)</td><td>나트륨<br>(g)</td><td>칼륨<br>(g)</td></tr>
-            <tr><td>남자</td><td id="MKcal">2400</td><td id="MCarbo">405</td><td id="MProtein">50</td><td id="MFat">40</td><td id="MNa">2000</td><td id="MK">3500</td></tr>
-            <tr><td>여자</td><td id="WMKcal">1900</td><td id="WMCarbo">325</td><td id="WMProtein">40</td><td id="WMFat">35</td><td id="WMNa">2000</td><td id="WMK">3500</td></tr>
-					</table>
+				
 				</div>
 			</div>
 <input type="hidden" name="kcal" id="kcal"> <input

@@ -27,4 +27,5 @@ public interface CookDAO {
 	public List<CookingItem> anotherSelectCookingItem5(Criteria criteria) throws Exception;
 	public int anotherSelectCookingItemCount() throws Exception;
 	public int anotherSelectCookingItemCount2() throws Exception;
+	public void updateOrderItemCode() throws Exception;
 }

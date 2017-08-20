@@ -2,9 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
+<meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script
@@ -20,12 +21,12 @@
 	//조리시작
 	function cookStart() {	
 		var p = $(this).parent();
-		var sideDCode = p.find(".waitSideDCode").text();
+		var sideDCode = p.find(".waitSideDCode").text(); 
 		var sideDName = p.find(".waitSideDName").text();
 		var amount = p.find(".waitAmount").text();
-		
+		var sideDImg =p.find(".waitSideDImg").val();
 		var newTr =	"<tr class=c"+sideDCode+">" 
-						+ "<td><img src='http://placehold.it/100x100?text=sideImg'/></td>"
+						+ "<td><img class='sideDImg' src='displayFile?fileName="+sideDImg+"'/></td>"
 						+ "<td><h3><b>"+sideDName+"</b></h3><h4>"+amount+"</h4></td>"
 						+ "<td></td>"
 						+ "</tr>"
@@ -48,12 +49,7 @@
 	function cookEnd(){
 		var className = $(this).parent().parent().attr('class');
 		var code = className.slice(1);
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'master' of git@github.com:jettiam/DaCham-Testing.git
-		updateOptionsItemCode(5, code);
-		
+		updateOptionsItemCode(5, code);		
 		var element = $("tr."+className);
 		var sideDName = element.find("b").text();
 		var amount = element.find("h4").text();
@@ -81,7 +77,8 @@
 				}			
 			}
 		});
-	}	
+	}
+
 	
 	$(document)
 			.ready(
@@ -120,7 +117,10 @@
 * {
 	font-family: 'Jeju Gothic', sans-serif;
 }
-
+.sideDImg{
+	width:100px;
+	height: 100px;
+}
 body {
 	margin: 40px;
 }
@@ -226,7 +226,7 @@ body {
 									<button class='end'>완료</button>
 								</p> --%>					
 							<tr class="c${list.sideDCode}">
-								<td><img src="http://placehold.it/100x100?text=sideImg"/></td>
+								<td><img class="sideDImg" src= "displayFile?fileName=${list.sideDImg}"/></td>
 								<td><span class='continueSideDCode' style='display:none;'>${list.sideDCode}</span>
 										<h3><b>${list.sideDName}</b></h3><h4>${list.cookingAmount}인분</h4>
 								</td>
@@ -251,6 +251,7 @@ body {
 						<c:forEach items="${list}" var="list">
 							<c:if test="${list.optionsOrderItemCode==3}">
 								<p>
+									<input class="waitSideDImg" type="hidden" value='${list.sideDImg}'>
 									<span class="waitSideDCode">${list.sideDCode} </span> 
 									<span class="waitSideDName">${list.sideDName}</span>
 									<span class="waitAmount">${list.cookingAmount}인분</span>
@@ -275,7 +276,7 @@ body {
 
 	<script src="resources/jquery.countup.js"></script>
 
-	<h1>↓↓↓여기서부터 잘라낼 부분 개발 확인용 ↓↓↓</h1>
+	<%-- <h1>↓↓↓여기서부터 잘라낼 부분 개발 확인용 ↓↓↓</h1>
 	<table class="table">
 		<tr>
 			<td>주문번호</td>
@@ -288,15 +289,15 @@ body {
 		</tr>
 		<c:forEach items="${list}" var="list">
 			<tr>
-				<td>${list.orderCode}</td>
+				
 				<td>${list.sideDCode}</td>
 				<td>${list.sideDImg}</td>
 				<td>${list.sideDName}</td>
-				<td>${list.orderOrderItemCode}</td>
+				
 				<td>${list.optionsOrderItemCode}</td>
 				<td>${list.cookingAmount}</td>
 			</tr>
 		</c:forEach>
-	</table>
+	</table> --%>
 </body>
 </html>
