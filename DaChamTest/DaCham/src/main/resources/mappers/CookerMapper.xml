@@ -200,7 +200,7 @@ group by sideDCode
 	</update>
 		<update id="updateOrderItemCode">
 update orderlist set orderItemCode = 5
-where orderCode=
+where orderCode in
 (select a.orderCode
 from
 (select oo.orderCode, count(oo.orderItemCode) countCode

@@ -272,7 +272,8 @@
          <div>
             <button  class = "btn btn-success"><a id = "changer" data-toggle = "modal" href = "#myModal">입고중인 목록</a></button>
             <button id = "completeAll" class = "btn btn-warning">입고된 목록</button>  
-            <button class = "statusButton">체크항목 입고작업</button>                
+            <button class = "statusButton">체크항목 입고작업</button>
+                           
          </div>
          <br><br>
          <form>
