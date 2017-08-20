@@ -137,6 +137,7 @@
 	(select  o.orderCode,o.sideDCode,oi.orderItemName,oi.orderItemCode from orderoptions o, orderitem oi where  o.orderItemCode=oi.orderItemCode and (oi.orderItemCode=3)) a, orderlist b, sidedish c
 	where a.orderCode=b.orderCode and c.sideDCode=a.sideDCode
 	group by sideDCode
+	order by orderCode
 	limit #{startRecord},#{recordsPerPage}
 		
 	</select>

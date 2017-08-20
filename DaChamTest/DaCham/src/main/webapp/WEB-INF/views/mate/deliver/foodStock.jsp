@@ -47,6 +47,22 @@
       $("#changer").on("click",function(){
          doing(1);           
       });
+      $(document.body).on("click",".statusButton",function(){
+    		var orderCode = $(this).attr("data-status");
+    	    var foodMName = $(this).attr("data-vcode");
+    	    $.ajax({
+    	    	             type : "PUT",
+    	    	            url : "deliverAjax/changer/"+orderCode + "/" + foodMName,
+    	    		            success : function(result){
+    	    	                if(result == "SUCCESS"){
+    	    	                  console.log("입고처리되었습니다.");
+    	    	               }
+    	    	               else{
+    	    	                   alert("오류 실패");
+    	    	                }
+    	    	            }
+    	    	          });
+      });
       $(".statusButton").on("click",function(){
         $("input[name='chk']:checked").each(function(){
         	var orderCode = $(this).val();
@@ -83,7 +99,7 @@
             
             $(data.list).each(function(){
                
-                  str += "<tr class = 'actionResult'><td><input type = 'checkbox' name = 'chk' class = 'orderCode' value = '"+this.orderCode+"' data-status = '"+this.foodMName+"'></td><td>"+"<input type = 'hidden' class = 'foodMICode' name = 'foodMICode' value = '"+this.foodMICode+"'>"+this.foodMICode+"</td><td>"+this.foodMName+"</td><td>"+this.orderDate+"</td><td>"+this.inAmount+"</td><td>"+this.unit+"</td><td>"+this.orderCode+"</td><td></td></tr>";
+                  str += "<tr class = 'actionResult'><td><input type = 'checkbox' name = 'chk' class = 'orderCode' value = '"+this.orderCode+"' data-status = '"+this.foodMName+"'></td><td>"+"<input type = 'hidden' class = 'foodMICode' name = 'foodMICode' value = '"+this.foodMICode+"'>"+this.foodMICode+"</td><td>"+this.foodMName+"</td><td>"+this.orderDate+"</td><td>"+this.inAmount+"</td><td>"+this.unit+"</td><td>"+this.orderCode+"</td><td>"+"<button class = 'statusButton btn btn-default' data-status = '"+this.orderCode+"' data-vcode = '"+this.foodMName+"'>입고작업</button>"+"</td></tr>";
             });
             $(".action1").append(str);    
             printPaging3(data.criteria);
@@ -272,8 +288,7 @@
          <div>
             <button  class = "btn btn-success"><a id = "changer" data-toggle = "modal" href = "#myModal">입고중인 목록</a></button>
             <button id = "completeAll" class = "btn btn-warning">입고된 목록</button>  
-            <button class = "statusButton">체크항목 입고작업</button>
-                           
+            <button class = "statusButton">체크항목 입고작업</button>                
          </div>
          <br><br>
          <form>
@@ -289,6 +304,7 @@
                      <th>수량&nbsp;</th>
                      <th>단위&nbsp;</th>
                      <th>주문번호</th>
+                     <th>입고여부</th>
                     
 
                   </tr>
@@ -321,7 +337,7 @@
                <div class = "modal-content">
                   <div class = "modal-header">
                      <button type = "button" class = "close" data-dismiss = "modal">X</button>
-                        <h4 class = "modal-title">입고 진행중인 식재료</h4>
+                        <h4 class = "modal-title">진행중인 식재료</h4>
                   </div>
                   <div class = "modal-body">
                      <table class = "doingTable table table-hover">
