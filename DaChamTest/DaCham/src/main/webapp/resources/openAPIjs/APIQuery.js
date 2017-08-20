@@ -7,11 +7,11 @@ function openAPI(){
 	var count6 = parseInt(localStorage['count6']);
 	
 	    var w = 200,h = 200;           
-		
+		 
 		var colorscale = d3.scale.category10();
-		
+		 
 		//Legend titles
-		var LegendOptions = ['선택 반찬의 영양정보','적정 요구량'];
+		var LegendOptions = ['영양정보','1일 권장영양']; 
 		
 		//Data
 		var protein = 0;

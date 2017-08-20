@@ -307,7 +307,7 @@
 									$(
 											'<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
 													+ sideDImg
-													+ '" class="img-responsive sideDImg" data-id = "'+2+'" >'+'<input type="radio" name="foodG01" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
+													+ '" class="img-responsive sideDImg" data-id = "'+2+'" >'+'<input type="radio" name="foodG01" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'">&nbsp;<label for="'+sideDCode+'">'
 													+ sideDName + '</label></div>').appendTo('.foodG01');
 									
 											
@@ -316,7 +316,7 @@
 									$(
 											'<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
 													+ sideDImg
-													+ '" class="img-responsive sideDImg" data-id = "'+1+'" >'+'<input type="radio" name="foodG02" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
+													+ '" class="img-responsive sideDImg" data-id = "'+1+'" >'+'<input type="radio" name="foodG02" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'">&nbsp;<label for="'+sideDCode+'">'
 													+ sideDName + '</label></div>').appendTo('.foodG02');
 									break;
 								case "03":
@@ -324,7 +324,7 @@
 									$(
 											'<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
 													+ sideDImg
-													+ '" class="img-responsive sideDImg" data-id = "'+3+'" >'+'<input type="radio" name="foodG03" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
+													+ '" class="img-responsive sideDImg" data-id = "'+3+'" >'+'<input type="radio" name="foodG03" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'">&nbsp;<label for="'+sideDCode+'">'
 													+ sideDName + '</label></div>').appendTo('.foodG03');
 									break;
 								case "04":
@@ -332,7 +332,7 @@
 									$(
 											'<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
 													+ sideDImg
-													+ '" class="img-responsive sideDImg" data-id = "'+4+'" >'+'<input type="radio" name="foodG04" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
+													+ '" class="img-responsive sideDImg" data-id = "'+4+'" >'+'<input type="radio" name="foodG04" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'">&nbsp;<label for="'+sideDCode+'">'
 													+ sideDName + '</label></div>').appendTo('.foodG04');
 									break;
 								case "05":
@@ -340,7 +340,7 @@
 									$(
 											'<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
 													+ sideDImg
-													+ '" class="img-responsive sideDImg" data-id = "'+5+'" >'+'<input type="radio" name="foodG05" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
+													+ '" class="img-responsive sideDImg" data-id = "'+5+'" >'+'<input type="radio" name="foodG05" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'">&nbsp;<label for="'+sideDCode+'">'
 													+ sideDName + '</label></div>').appendTo('.foodG05');
 									break;
 								case "06":
@@ -348,7 +348,7 @@
 									$(
 											'<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
 													+ sideDImg
-													+ '" class="img-responsive sideDImg" data-id = "'+6+'" >'+'<input type="radio" name="foodG06" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'"><label for="'+sideDCode+'">'
+													+ '" class="img-responsive sideDImg" data-id = "'+6+'" >'+'<input type="radio" name="foodG06" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'">&nbsp;<label for="'+sideDCode+'">'
 													+ sideDName + '</label></div>').appendTo('.foodG06');
 									break;
 								}
@@ -551,6 +551,8 @@
 						});
 						
 						$("#regist").on("click", function() {
+							var dc = $(".diseaseCodeId").val();
+							$("#diseaseCode").val(dc);
 							var length1 = $(".foodG01 input[type ='hidden']").length;
 							var length2 = $(".foodG02 input[type ='hidden']").length;
 							var length3 = $(".foodG03 input[type ='hidden']").length;
@@ -746,37 +748,58 @@
 	}	
 </style> -->
 <style>
+.container-fluid{
+	padding-right:50px;
+	padding-left:70px;
+}
 .sideDImg {
 	max-height: 80px;
-
+	margin-bottom:5px;
 	
 }
 label{
 	display : inline;
 }
 .checkSideD{
-	height : 150px;  
+	height : 160px;  
 }
-
+.nameClick{
+	cursor: pointer;
+}
+.foodGStyle{
+	padding-bottom:5px; border-bottom:solid #777 1px;
+}
+#View_area{
+margin-bottom:15px;
+}
 </style>
 </head>
 <body>
 	<%@include file="nutritionistNavi.jsp"%>
-	<div class="container">
-		<div class="col-sm-6" style = "border: 1px solid gold;">
-		<h3>선택된 반찬 목록</h3>        
+	<div class="container-fluid">
+		<div class="col-sm-6" >
+			<div class="form-inline">
+						<h4 style="display:inline-block;"><b>질환 선택 </b> </h4>         
+						<select name="diseaseCode"  class = "diseaseCodeId form-control" style="width:200px;">
+							<c:forEach items="${overList }" var="v">
+								<option value="${v.diseaseCode }">${v.diseaseName },
+									${v.judgement}</option>
+							</c:forEach>
+						</select>
+					</div>
+		<h3 style="margin-top:15px; padding-bottom:8px; border-bottom:solid #777 5px;">선택된 반찬 목록</h3>        
 		<div class="material">
-			<div class="col-sm-12 h4">밥</div>
+			<div class="col-sm-12 h4 foodGStyle">밥</div>
 			<div class="foodG01 checkSideD"></div>
-			<div class="col-sm-12  h4">국</div>
+			<div class="col-sm-12  h4 foodGStyle">국</div>
 			<div class="foodG02 checkSideD"></div>
-			<div class="col-sm-12 h4">메인메뉴1</div>
+			<div class="col-sm-12 h4 foodGStyle">메인메뉴1</div>
 			<div class="foodG03 checkSideD"></div>
-			<div class="col-sm-12 h4">메인메뉴2</div>
+			<div class="col-sm-12 h4 foodGStyle">메인메뉴2</div>
 			<div class="foodG04 checkSideD"></div>
-			<div class="col-sm-12 h4">메인메뉴3</div>
+			<div class="col-sm-12 h4 foodGStyle">메인메뉴3</div>
 			<div class="foodG05 checkSideD"></div>
-			<div class="col-sm-12 h4">메인메뉴4</div>
+			<div class="col-sm-12 h4 foodGStyle">메인메뉴4</div>
 			<div class="foodG06 checkSideD"></div>
 				
 				
@@ -812,15 +835,19 @@ label{
 
 		<div class="div1 col-sm-6">
 			<div class="col-sm-12">
-				<input type="text" name="search" id="keyword" placeholder="반찬 검색란">
+				<div style="margin-bottom:10px;">
+				<input type="text" name="search" id="keyword" placeholder="반찬 검색란">&nbsp;
 				<button id="search" class="btn btn-primary">검색</button>
-				<br>
+				</div>
+				<div style="margin-bottom:10px;">
 				<button id="rice" class="btn btn-info">밥</button>
 				<button id="soup" class="btn btn-info">국</button>
 				<button id="main1" class="btn btn-info">메인 메뉴1</button>
 				<button id="main2" class="btn btn-info">메인 메뉴2</button>
 				<button id="main3" class="btn btn-info">메인 메뉴3</button>
 				<button id="main4" class="btn btn-info">메인 메뉴4</button>
+				</div>
+				<div style="height:300px;">
 				<table class="searchTable table table-hover">
 					<tr>
 						<th>반찬명</th>
@@ -830,12 +857,13 @@ label{
 					<tr class="searchResult">
 
 					</tr>
-
 				</table>
+				</div>
 				<ul class="pagination">
 				</ul>
 			</div>
 			<div class="box2 col-sm-12">
+				<div class="h4">반찬 영양정보</div>
 				<table class="table table-hover">
 					<tr>
 						<th>열량&nbsp;&nbsp;</th>
@@ -853,10 +881,11 @@ label{
 					</tr>
 				</table>
 				<div id="body">
-					<div id="chart"></div>
+					<div id="chart" class="center-block"></div>
 					<div>
 						<!-- 총 칼로리 양 표시 -->
 					</div>
+					<div class="h4">식단 영양정보</div>
 					<table class = "press table table-hover">
 						<tr><td>칼로리<br>(Kcal)</td><td>탄수화물<br>(g)</td><td>단백질<br>(g)</td><td>지방<br>(g)</td><td>나트륨<br>(g)</td></tr>
             <tr><td id= "TKcal"></td><td id="TCarbohydrate"></td><td id="TProtein"></td><td id="TFat"></td><td id="TNa"></td></tr>
@@ -870,8 +899,8 @@ label{
 			type="hidden" name="fat" id="fat"> <input type="hidden"
 			name="na" id="na">
 
-		<div class="col-sm-12">
-			<form id="registForm" enctype="multipart/form-data">
+		<div class="col-sm-12 form-inline" style="margin-bottom:15px;">
+			<form id="registForm" enctype="multipart/form-data" class="form-group">
 				<div class="div2">
 
 <!-- 					<div class="template"> -->
@@ -879,33 +908,25 @@ label{
 <!-- 							data-code="4">신부전증</a><br> - <a class="templateErase">템플릿 -->
 <!-- 							초기화</a> -->
 <!-- 					</div> -->
-
-
-					<div id="test">
-						<h5><b>질병을 선택하세요</b></h5>          
-						<select name="diseaseCode"  class = "diseaseCodeId">
-							<c:forEach items="${overList }" var="v">
-								<option value="${v.diseaseCode }">${v.diseaseName },
-									${v.judgement}</option>
-							</c:forEach>
-						</select>
-					</div>
-					<div id="dietName">
-						<!-- 식단의 이름을 지어줌 -->
-						<input type="text" id = "dietNameText" name="dietName" placeholder="식단 이름 짓기">
-					</div>
-					<div id="price">
-						<!-- 식단의 가격을 지어줌 -->
-						<input type="number" id = "priceText" name="price" placeholder="식단 가격 짓기">
-					</div>
-					<div id="dietImg">
+					
+					<input type="hidden" id="diseaseCode" name="diseaseCode">
+					<div id="View_area">
+							<img id="prev_View_area" src="http://placehold.it/100x100">
+						</div> 
+						
 						<input type="file" class="filestyle" data-input="false"
 							name="file" placeholder="식단이미지 올리기" id="profile_pt"
 							onchange="previewImage(this,'View_area')">
-						<div id="View_area">
-							<img id="prev_View_area" src="http://placehold.it/100x100">
-						</div>
-					</div>
+						<!-- 식단의 이름을 지어줌 -->
+						<input type="text" id = "dietNameText" name="dietName" placeholder="식단명" class="form-control">
+					
+					
+						<!-- 식단의 가격을 지어줌 -->
+						<input type="number" id = "priceText" name="price" placeholder="식단 가격" class="form-control">
+						
+						
+						
+					
 					<div id="spDietItem">
 						 <input type="hidden" name="spDietItem" value="1" checked>
 					</div>
@@ -915,11 +936,12 @@ label{
 
 		</div>
 		
-			<div>
+			
 
 				<button id="regist" class="btn btn-danger">등록</button>
 				<button id="cancle" class="btn btn-warning">취소</button>
-			</div>
+			
+			
 		</div>
 
 	</div>
