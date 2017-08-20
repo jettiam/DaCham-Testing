@@ -14,7 +14,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
-	.align_bottom{
+	.align_bottom{	
 	width : 100%;
     position: fixed;
   	bottom: 0;
@@ -38,15 +38,14 @@
 
 <body>
 	<%@include file="nutritionistNavi.jsp"%>
-		<div>
-		</div>
+		
 			<button id="regist" class="btn btn-default">위자드 등록</button>
 			<button id="modify" class="btn btn-primary">위자드 수정(프로토 발표용)</button>
 
 	<div class="align_bottom">
 	<img class="center-block" src="resources/bottom_bg.png"/>
 	</div>
-	<h1>안녕ㅇ하세요</h1>
-	<h1>안녕ㅇ하세요</h1><h1>안녕ㅇ하세요</h1><h1>안녕ㅇ하세요</h1>
+	<h1 style="text-align : center;"><b>위자드 제작 설명서</b></h1>
+	
 </body>
 </html>

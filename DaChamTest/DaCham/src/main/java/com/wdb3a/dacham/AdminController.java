@@ -204,7 +204,7 @@ public class AdminController {
 		for (int i = 0; i < jsonObj.size(); i++) { 
 			JSONObject jsonObj1 = (JSONObject) jsonObj.get(i + "");
 			FoodMAmountRead foodMAmountRead4 = new FoodMAmountRead();   
-			System.out.println(foodMOrderInfo);      
+			     
 			foodMAmountRead4.setFoodMCode(jsonObj1.get("foodMCode").toString());
 			foodMAmountRead4.setFoodMName(jsonObj1.get("foodMName").toString());
 			foodMAmountRead4.setInAmount(Double.parseDouble(jsonObj1.get("totalAmount").toString()));
@@ -230,7 +230,7 @@ public class AdminController {
 				+ foodPrice[i] + " 주문량 :"  + totalAmount1[i]
 				+ unit[i] + " 총가격 : " +  + foodPrice[i]*totalAmount1[i] +"원";
 		}
-		System.out.println("되니?");
+		
 		
 		 
 		String content = toString; // 내용
@@ -244,7 +244,7 @@ public class AdminController {
 			messageHelper.setText(content); // 메일 내용
 
 			mailSender.send(message);
-		} catch (Exception e) {
+		} catch (Exception e) { 
 			System.out.println(e);
 		}
 		
@@ -288,7 +288,7 @@ public class AdminController {
 			System.out.println(output);
 		}
 
-		conn.disconnect();
+		conn.disconnect(); 
 		// ("식재료명 :" + bookObject.get("foodMName") + " 단가
 		// :"+bookObject.get("price") + " 주문량 :" + bookObject.get("foodMAmount")
 		// + " 단위 : " + bookObject.get("unit"));
@@ -307,9 +307,9 @@ public class AdminController {
 		 * messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
 		 * messageHelper.setText(content); // 메일 내용
 		 * 
-		 * mailSender.send(message); } catch(Exception e){
+		 * mailSender.send(message); } catch(Exception e){ 
 		 * System.out.println(e); }
-		 */
+		 */  
 
 		return "redirect:orderList";
 	}
@@ -341,7 +341,7 @@ public class AdminController {
 	@RequestMapping(value = "/adminMain3", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ChartPrice> getadminMain3(Model model, @RequestBody ChartPrice dates) throws Exception {
-		System.out.println(dates.getStartdate());
+		
 		List<ChartPrice> chartPrice = service.chartPrice1(dates);
 		model.addAttribute("chartPrice", chartPrice);
 		return chartPrice;
@@ -351,7 +351,7 @@ public class AdminController {
 	@RequestMapping(value = "/adminMain4", method = RequestMethod.POST)
 	@ResponseBody
 	public List<OrderList> getadminMain4(@RequestParam(value = "orderCode") String orderCode) throws Exception {
-		System.out.println(orderCode);
+		
 		List<OrderList> orderList = service.datailview(orderCode);
 		return orderList;
 	}
@@ -416,11 +416,11 @@ public class AdminController {
 		for (int i = 0; i < jsonObj.size(); i++) {
 
 			JSONObject jsonObj1 = (JSONObject) jsonObj.get(i + "");
-			System.out.println("이건돌아가냐?1");
+		
 			List<FoodMAmountRead> foodMAmountRead1 = new ArrayList<FoodMAmountRead>();
-			System.out.println("이건돌아가냐?2");
+			
 			// foodMAmountRead1.setOrderCode(Integer.parseInt(jsonObj1.get("orderCode").toString()));
-			System.out.println(Integer.parseInt(jsonObj1.get("orderCode").toString()));
+			
 			int a = Integer.parseInt(jsonObj1.get("orderCode").toString());
 			foodMAmountRead1 = service.foodMAmountRead(a);
 
@@ -511,7 +511,7 @@ public class AdminController {
 		@RequestMapping(value="/dietSell",method=RequestMethod.GET)
 		public String dietSell(@RequestParam(value="dietCode") int dietCode[])throws Exception{
 		   //serviceCu.orderRegist(customer);
-		   System.out.println("오더에 들어감");
+		   
 		   for(int i=0;i<dietCode.length;i++){
 		      service.dietSell(dietCode[i]);  
 		   }
@@ -523,7 +523,7 @@ public class AdminController {
 		
 		@RequestMapping(value="/dietSellStop",method=RequestMethod.GET)
 		public String dietSellStop(@RequestParam(value="dietCode") int dietCode[])throws Exception{
-		   System.out.println("오더에 들어감");
+		   
 		   for(int i=0;i<dietCode.length;i++){
 		      service.dietSellStop(dietCode[i]);  
 		   } 
