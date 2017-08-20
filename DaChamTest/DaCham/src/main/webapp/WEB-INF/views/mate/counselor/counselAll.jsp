@@ -43,11 +43,16 @@
 				$(".counselResult").remove();
 				var str = "";
 				$(data).each(function(){
-					str += "<tr class='counselResult'><td>"+this.counselCode+"</td><td>"+this.counselItemName+"</td><td class='counselTitle'><a class = 'nameClick' data-code = '"+this.counselCode+"' data-name = '"+this.name+"' data-id = '"+this.customer+"'>"+this.counselTitle+"</a></td><td>"+this.customer+"</td><td>"+this.counselDate+"</td></tr>";
+					if(this.adviser == null){
+			               str += "<tr class = 'counselResult'><td>"+this.counselCode+"</td><td>"+this.counselItemName+"</td><td class = 'counselTitle'><a class = 'nameClick' data-code = '"+this.counselCode+"' data-name = '"+this.name+"' data-id = '"+this.customer+"'>"+this.counselTitle+"</a></td><td>"+this.id+"</td><td>"+this.counselDate+"</td><td>미응답</td></tr>";
+			            }
+			            else{
+			               str += "<tr class = 'counselResult'><td>"+this.counselCode+"</td><td>"+this.counselItemName+"</td><td class = 'counselTitle'><a class = 'nameClick' data-code = '"+this.counselCode+"' data-name = '"+this.name+"' data-id = '"+this.customer+"'>"+this.counselTitle+"</a></td><td>"+this.id+"</td><td>"+this.counselDate+"</td><td>응답완료</td></tr>";
+			            }
 				});
 				$(".counsel").append(str);
 			});
-		}
+		}          
 		$(document.body).on("click",".counselTitle a",function(){
 	         var counselCode = $(this).attr('data-code');
 	         var customer = $(this).attr('data-id');   
@@ -74,7 +79,7 @@
 				<th>상담제목</th>
 				<th>고객ID</th>
 				<th>작성일</th>
-				
+				<th>상담여부</th>
 			</tr>		
 			<tr class = "counselResult">
 				

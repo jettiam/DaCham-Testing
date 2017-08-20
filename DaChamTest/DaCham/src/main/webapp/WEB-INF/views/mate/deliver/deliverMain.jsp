@@ -64,7 +64,7 @@
 	               }
 	            });
 	            $(".shinTable").append(str);
-	            printPaging(data.criteria);
+	            printPaging2(data.criteria);
 	         });
 	      }
 		function printPaging(criteria){

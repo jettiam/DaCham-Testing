@@ -40,14 +40,16 @@
                   }),
                   success : function(result){
                      if(result == "SUCCESS"){
-                        alert("수정되었습니다.");
-                        all(currentPage,5);   
+                        all(currentPage,5);
+                        
                      }
+                   
                   }
+                  
                });
          });
          
-         
+         alert("배송이완료되었습니다.");  
       });
       $("#search").on("click",function(){
          $(".searchResult").remove();
