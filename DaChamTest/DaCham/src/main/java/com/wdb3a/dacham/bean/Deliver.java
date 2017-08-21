@@ -62,7 +62,7 @@ public class Deliver {
 		return inAmount;
 	}
 	public void setInAmount(double inAmount) {
-		this.inAmount = inAmount;
+		this.inAmount = Math.round(inAmount*1000d)/1000d; ;
 	}
 	public Date getInDate() {
 		return inDate;
