@@ -199,7 +199,7 @@ where orderCode=
 (select a.orderCode
 from
 (select oo.orderCode, count(oo.orderItemCode) countCode
-from orderoptions oo,orderList ol where oo.orderCode = ol.orderCode and ol.orderItemCode=3 and oo.orderItemCode=5
+from orderoptions oo,orderlist ol where oo.orderCode = ol.orderCode and ol.orderItemCode=3 and oo.orderItemCode=5
 group by oo.orderCode) a
 where a.countCode = 6)
 	</update>
