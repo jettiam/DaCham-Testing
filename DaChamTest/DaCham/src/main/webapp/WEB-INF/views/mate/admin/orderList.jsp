@@ -1046,7 +1046,7 @@
 						}
 						
 						$(".pagination6").on("click", "li a", function() { 
-							event.preventDefault();
+							event.preventDefault(); 
 							var replyPage = $(this).attr("href"); 
 							orderSort5(replyPage);  
 							
