@@ -165,7 +165,7 @@
 				</ul>
 				<div>
 					<button id="foodOrder" class="btn btn-default">식재료 주문</button>
-					<button id="work" class="btn btn-default">작업 요청</button>
+					<button id="work" class="btn btn-default">조리 요청</button> 
 					<button id="refund" class="btn btn-danger">환불</button>
 				</div>
 
@@ -415,6 +415,12 @@
 						$('#refund')
 								.click(
 										function() {
+											$(".pagination1 li").remove();
+											$(".pagination2 li").remove();
+											$(".pagination3 li").remove(); 
+											$(".pagination4 li").remove(); 
+											$(".pagination5 li").remove();
+											$(".pagination6 li").remove();
 											var length = $('.orderListTable input:checked').length;
 
 											if (length != 0) {
@@ -480,6 +486,12 @@
 						$('#work')
 								.click(
 										function() {
+											$(".pagination1 li").remove();
+											$(".pagination2 li").remove();
+											$(".pagination3 li").remove(); 
+											$(".pagination4 li").remove(); 
+											$(".pagination5 li").remove();
+											$(".pagination6 li").remove(); 
 											var length = $('.orderListTable input:checked').length;
 											if (length != 0) {
 
