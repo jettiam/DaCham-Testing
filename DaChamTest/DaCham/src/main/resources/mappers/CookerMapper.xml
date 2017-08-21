@@ -137,6 +137,7 @@
 	(select  o.orderCode,o.sideDCode,oi.orderItemName,oi.orderItemCode from orderoptions o, orderitem oi where  o.orderItemCode=oi.orderItemCode and (oi.orderItemCode=3)) a, orderlist b, sidedish c
 	where a.orderCode=b.orderCode and c.sideDCode=a.sideDCode
 	group by sideDCode
+	order by orderCode
 	limit #{startRecord},#{recordsPerPage}
 		
 	</select>
@@ -195,8 +196,8 @@
 	</update>
 		<update id="updateOrderItemCode">
 update orderlist set orderItemCode = 5
-where orderCode=
-(select a.orderCode
+where orderCode
+in (select a.orderCode
 from
 (select oo.orderCode, count(oo.orderItemCode) countCode
 from orderoptions oo,orderlist ol where oo.orderCode = ol.orderCode and ol.orderItemCode=3 and oo.orderItemCode=5

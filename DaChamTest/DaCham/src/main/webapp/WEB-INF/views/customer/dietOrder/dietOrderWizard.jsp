@@ -200,6 +200,7 @@ img#startWizard {
 	margin: 0;
 	padding: 0;
 	position: absolute;
+	
 }
 
 #startWizardArea {
@@ -208,7 +209,7 @@ img#startWizard {
 	
 	width: 230px;
 	hegith: 160px;
-	
+	cursor: pointer;
 	font-size: 23px;
 }
 
