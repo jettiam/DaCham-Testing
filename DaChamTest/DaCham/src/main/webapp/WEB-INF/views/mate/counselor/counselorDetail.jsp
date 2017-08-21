@@ -38,12 +38,20 @@ $(document).ready(function(){
    
    $(document.body).on("click",".counselCode",function(){
       couselCode = $(this).attr('data-code');
+      var status = $(this).attr('data-status');
+      if(status == '응답완료'){
+    	  $(".dropOut").hide();
+      }
+      else if(status == '미응답'){
+    	  $(".dropOut").show();	
+      }
       $.getJSON("counselAjax/selectCounsel/"+couselCode,function(data){
          $("#counselItemCode2").text(data.counselItemName);
          $("#counselTitle2").text(data.counselTitle);
          $("#counselContent").text(data.counselContent);
          $("#thisAnswer").text(data.answer);
          $("#counselDate").text(data.counselDate);
+         $(".answer2").val(data.answer);
       });
    });
    $(".pagination").on("click","li a",function(){
@@ -157,10 +165,10 @@ $(document).ready(function(){
          var str = "";
          $(data).each(function(){
             if(this.adviser == null){
-               str += "<tr class = 'answerResult'><td>"+this.counselCode+"</td><td>"+this.counselItemName+"</td><td><a class = 'counselCode' data-code = '"+this.counselCode+"' data-id = '"+this.customer+"' data-toggle = 'modal' href = '#yourModal'>"+this.counselTitle+"</a></td><td>"+this.counselDate+"</td><td>미응답</td></tr>";
+               str += "<tr class = 'answerResult'><td>"+this.counselCode+"</td><td>"+this.counselItemName+"</td><td><a class = 'counselCode' data-code = '"+this.counselCode+"' data-id = '"+this.customer+"' data-toggle = 'modal' href = '#yourModal' data-status = '미응답'>"+this.counselTitle+"</a></td><td>"+this.counselDate+"</td><td>미응답</td></tr>";
             }
             else{
-               str += "<tr class = 'answerResult'><td>"+this.counselCode+"</td><td>"+this.counselItemName+"</td><td><a class = 'counselCode' data-code = '"+this.counselCode+"' data-id = '"+this.customer+"' data-toggle = 'modal' href = '#yourModal'>"+this.counselTitle+"</a></td><td>"+this.counselDate+"</td><td>응답완료</td></tr>";
+               str += "<tr class = 'answerResult'><td>"+this.counselCode+"</td><td>"+this.counselItemName+"</td><td><a class = 'counselCode' data-code = '"+this.counselCode+"' data-id = '"+this.customer+"' data-toggle = 'modal' href = '#yourModal' data-status = '응답완료'>"+this.counselTitle+"</a></td><td>"+this.counselDate+"</td><td>응답완료</td></tr>";
             }
          });
          $(".link").append(str);
@@ -187,26 +195,26 @@ $(document).ready(function(){
 </head>
 <body>
 <%@include file = "counselorNavi.jsp" %>
-   <div class = "container">
+   <div class = "container-fluid" style = "margin:200px;">
       <div class = "box1">
-         <div style = "border:1px solid gold;">
+         <div style = "border:1px solid gold;" >
             <input type = "hidden" name = "counselCode" class = "counselCode" readonly>
-            <input type = "text" class = "counselItemName" name = "category" value = "배송문의" readonly>
-            <input type = "text" class = "counselTitle" name = "title" value = "특별식을 주문했는데" readonly><br>
-            <textarea class = "counselContent" style = "width:400px;" readonly>  
+            <input type = "text" class = "counselItemName col-md-2" name = "category" value = "배송문의" readonly>
+            <input type = "text" class = "col-xs-8 col-md-4" name = "title" value = "특별식을 주문했는데" readonly><br>
+            <textarea class = "counselContent form-control" style = "width:720px;" readonly>  
                                내용
             </textarea>
          </div>
          <br><br>
-         <div style = "border:1px solid gold;">     
-            <h4>답변내용</h4>
-            <textarea class = "answer2" readonly>
+         <div class = "form-group" style = "border:1px solid gold;">     
+            <label for = "comment">답변내용</label>       
+            <textarea class = "answer2 form-control" readonly = 'readonly' rows = "10">
                
-            </textarea>
-         </div>
-         <div style = "border:1px solid gold;">
-            <textarea placeholder = "답변내용 입력" class = "answers"></textarea>
-            <button id = "answer" class = "btn btn-success">답변</button>
+            </textarea>     
+         </div>   
+         <div class = "dropOut" style = "border:1px solid gold;">
+            <textarea placeholder = "답변내용 입력" class = "answers form-control"></textarea>
+            <button id = "answer" class = "btn btn-success" style ="float:right;" >답변</button>
          </div>
          <br><br>
          <div style = "border:1px solid gold;">   
@@ -355,6 +363,7 @@ $(document).ready(function(){
             </div>
          </div>
       </div>
-   </div>  
+   </div>
+ 
 </body>
 </html>

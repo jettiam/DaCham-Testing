@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wdb3a.dacham.bean.Cook;
+import com.wdb3a.dacham.bean.CookingItem;
 import com.wdb3a.dacham.bean.Criteria;
 import com.wdb3a.dacham.bean.FoodMInven;
 import com.wdb3a.dacham.bean.OrderList;
@@ -143,6 +144,46 @@ public class CookAjaxController {
 			List<FoodMInven> list = service.CookStock(foodInv);
 			System.out.println("¸®½ºÆ®:"+list);
 			entity = new ResponseEntity<>(list,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	@RequestMapping(value = "/anotherSelectCookingItem3/{page}",method = RequestMethod.GET)
+	public ResponseEntity<Map<String,Object>> anotherSelectCookingItem3(@PathVariable("page")int page){
+		ResponseEntity<Map<String,Object>> entity = null;
+		Criteria criteria = new Criteria();
+		try {
+			int totalCount = service.anotherSelectCookingItemCount();
+			criteria.setPage(page);
+			criteria.setTotalCount(totalCount);
+			List<CookingItem> list = service.anotherSelectCookingItem3(criteria);
+			Map<String,Object> map = new HashMap<>();
+			map.put("criteria", criteria);
+			map.put("list", list);
+			entity = new ResponseEntity<>(map,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	@RequestMapping(value = "/anotherSelectCookingItem5/{page}",method = RequestMethod.GET)
+	public ResponseEntity<Map<String,Object>> anotherSelectCookingItem5(@PathVariable("page")int page){
+		ResponseEntity<Map<String,Object>> entity = null;
+		Criteria criteria = new Criteria();
+		try {
+			int totalCount = service.anotherSelectCookingItemCount2();
+			criteria.setPage(page);
+			criteria.setTotalCount(totalCount);
+			List<CookingItem> list = service.anotherSelectCookingItem5(criteria);
+			Map<String,Object> map = new HashMap<>();
+			map.put("criteria", criteria);
+			map.put("list", list);
+			entity = new ResponseEntity<>(map,HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
