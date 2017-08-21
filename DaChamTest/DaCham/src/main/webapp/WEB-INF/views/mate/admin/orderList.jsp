@@ -146,7 +146,22 @@
 						</table>
 					</div>
 				</form>
-				<ul class="pagination" position="center">
+				<ul class="pagination1 pagination" position="center">
+				</ul>
+				
+				<ul class="pagination2 pagination" position="center">
+				</ul>
+				
+				<ul class="pagination3 pagination" position="center">
+				</ul>
+				
+				<ul class="pagination4 pagination" position="center">
+				</ul>
+				
+				<ul class="pagination5 pagination" position="center">
+				</ul> 
+				
+				<ul class="pagination6 pagination" position="center">
 				</ul>
 				<div>
 					<button id="foodOrder" class="btn btn-default">식재료 주문</button>
@@ -202,291 +217,7 @@
 		</div>
 </body>
 <script>
-	var object = new Object();
-	var booler = false;
-	var sortCount;
-
-	function orderSort1(page) {
-
-		$(".pagination li").remove();
-		sortCount = 1
-		$
-				.getJSON(
-						"adminSub/orderSort1/" + page,
-						function(data) {
-
-							console.log(data);
-							$(".orderListTable").remove();
-							var str = "";
-							for (var i = 0; i < data.list.length; i++) {
-								str += "<tr class='orderListTable'><td>"
-										+ "<input type='checkBox' id='"
-										+ data.list[i].orderCode
-										+ "' value='"
-										+ data.list[i].orderCode
-										+ "' name='che'</td>"
-										+ "<td class='orderCode'>"
-										+ data.list[i].orderCode
-										+ "</td>"
-										+ "<td class='id'>"
-										+ data.list[i].id
-										+ "</td>"
-										+ "<td>"
-										+ "<a data-src='"+data.list[i].orderCode+"' class='dietName' data-toggle='modal' href='#myModal'>"
-										+ data.list[i].dietName
-										+ "</a> </td>"
-										+ "<td class='orderDate'>"
-										+ data.list[i].orderDate
-										+ "</td>"
-										+ "<td class='price'>"
-										+ data.list[i].price
-										+ "</td>"
-										+ "<td class='orderItemName'>"
-										+ data.list[i].orderItemName
-										+ "</td></tr>"
-							}
-							console.log(str);
-							$(".tables").append(str);
-							printPaging1(data.criteria);
-							fontColor1()
-						});
-	}
-	function orderSort2(page) {
-		$(".pagination li").remove();
-		sortCount = 2;
-		$
-				.getJSON(
-						"adminSub/orderSort2/" + page,
-						function(data) {
-							console.log(data);
-							$(".orderListTable").remove();
-							var str = "";
-							for (var i = 0; i < data.list.length; i++) {
-								str += "<tr class='orderListTable'><td>"
-										+ "<input type='checkBox' id='"
-										+ data.list[i].orderCode
-										+ "' value='"
-										+ data.list[i].orderCode
-										+ "' name='che'</td>"
-										+ "<td class='orderCode'>"
-										+ data.list[i].orderCode
-										+ "</td>"
-										+ "<td class='id'>"
-										+ data.list[i].id
-										+ "</td>"
-										+ "<td>"
-										+ "<a data-src='"+data.list[i].orderCode+"' class='dietName' data-toggle='modal' href='#myModal'>"
-										+ data.list[i].dietName
-										+ "</a> </td>"
-										+ "<td class='orderDate'>"
-										+ data.list[i].orderDate
-										+ "</td>"
-										+ "<td class='price'>"
-										+ data.list[i].price
-										+ "</td>"
-										+ "<td class='orderItemName'>"
-										+ data.list[i].orderItemName
-										+ "</td></tr>"
-							}
-							console.log(str);
-							$(".tables").append(str);
-							printPaging1(data.criteria);
-							fontColor1()
-						});
-	}
-	function orderSort3(page) {
-		$(".pagination li").remove();
-		sortCount = 3
-		$
-				.getJSON(
-						"adminSub/orderSort3/" + page,
-						function(data) {
-							console.log(data);
-							$(".orderListTable").remove();
-							var str = "";
-							for (var i = 0; i < data.list.length; i++) {
-								str += "<tr class='orderListTable'><td>"
-										+ "<input type='checkBox' id='"
-										+ data.list[i].orderCode
-										+ "' value='"
-										+ data.list[i].orderCode
-										+ "' name='che'</td>"
-										+ "<td class='orderCode'>"
-										+ data.list[i].orderCode
-										+ "</td>"
-										+ "<td class='id'>"
-										+ data.list[i].id
-										+ "</td>"
-										+ "<td>"
-										+ "<a data-src='"+data.list[i].orderCode+"' class='dietName' data-toggle='modal' href='#myModal'>"
-										+ data.list[i].dietName
-										+ "</a> </td>"
-										+ "<td class='orderDate'>"
-										+ data.list[i].orderDate
-										+ "</td>"
-										+ "<td class='price'>"
-										+ data.list[i].price
-										+ "</td>"
-										+ "<td class='orderItemName'>"
-										+ data.list[i].orderItemName
-										+ "</td></tr>"
-							}
-							console.log(str);
-							$(".tables").append(str);
-							printPaging1(data.criteria);
-							fontColor1()
-						});
-	}
-	function orderSort4(page) {
-		$(".pagination li").remove();
-		sortCount = 4;
-		$
-				.getJSON(
-						"adminSub/orderSort4/" + page,
-						function(data) {
-							console.log(data);
-							$(".orderListTable").remove();
-							var str = "";
-							for (var i = 0; i < data.list.length; i++) {
-								str += "<tr class='orderListTable'><td>"
-										+ "<input type='checkBox' id='"
-										+ data.list[i].orderCode
-										+ "' value='"
-										+ data.list[i].orderCode
-										+ "' name='che'</td>"
-										+ "<td class='orderCode'>"
-										+ data.list[i].orderCode
-										+ "</td>"
-										+ "<td class='id'>"
-										+ data.list[i].id
-										+ "</td>"
-										+ "<td>"
-										+ "<a data-src='"+data.list[i].orderCode+"' class='dietName' data-toggle='modal' href='#myModal'>"
-										+ data.list[i].dietName
-										+ "</a> </td>"
-										+ "<td class='orderDate'>"
-										+ data.list[i].orderDate
-										+ "</td>"
-										+ "<td class='price'>"
-										+ data.list[i].price
-										+ "</td>"
-										+ "<td class='orderItemName'>"
-										+ data.list[i].orderItemName
-										+ "</td></tr>"
-							}
-							console.log(str);
-							$(".tables").append(str);
-							printPaging1(data.criteria);
-							fontColor1()
-						});
-	}
-
-	function orderSort5(page) {
-		$(".pagination li").remove();
-		sortCount = 5;
-		$
-				.getJSON(
-						"adminSub/orderSort5/" + page,
-						function(data) {
-							console.log(data);
-							$(".orderListTable").remove();
-							var str = "";
-							for (var i = 0; i < data.list.length; i++) {
-								str += "<tr class='orderListTable'><td>"
-										+ "<input type='checkBox' id='"
-										+ data.list[i].orderCode
-										+ "' value='"
-										+ data.list[i].orderCode
-										+ "' name='che'</td>"
-										+ "<td class='orderCode'>"
-										+ data.list[i].orderCode
-										+ "</td>"
-										+ "<td class='id'>"
-										+ data.list[i].id
-										+ "</td>"
-										+ "<td>"
-										+ "<a data-src='"+data.list[i].orderCode+"' class='dietName' data-toggle='modal' href='#myModal'>"
-										+ data.list[i].dietName
-										+ "</a> </td>"
-										+ "<td class='orderDate'>"
-										+ data.list[i].orderDate
-										+ "</td>"
-										+ "<td class='price'>"
-										+ data.list[i].price
-										+ "</td>"
-										+ "<td class='orderItemName'>"
-										+ data.list[i].orderItemName
-										+ "</td></tr>"
-							}
-							console.log(str);
-							$(".tables").append(str);
-							printPaging1(data.criteria);
-							fontColor1()
-						});
-	}
-
-	function printPaging1(criteria) {
-		var str = "";
-
-		if (criteria.prev) {
-			str += "<li><a href=''" + (criteria.startPage - 1) + "'>'" + "<<"
-					+ "</a></li>";
-		}
-		for (var i = criteria.startPage; i <= criteria.endPage; i++) {
-			var strClass = criteria.page == i ? "class = 'active'" : "";
-			str += "<li "+strClass+"><a href ='"+i+"'>" + i + "</a></li>";
-		}
-		if (criteria.next) {
-			str += "<li><a href=''" + (criteria.endPage + 1) + "'>'" + ">>"
-					+ "</a></li>";
-		}
-		$(".pagination").html(str);
-	}
-	function fontColor1() {
-		var length = $('.tables tr').length;
-		for (var i = 0; i < length; i++) {
-			var font = $(".orderItemName").eq(i).text();
-			if (font == "환불") {
-
-				$(".orderItemName").eq(i).css("color", "red");
-			}
-		}
-	}
-
-	$(".pagination").on("click", "li a", function() {
-		event.preventDefault();
-		var replyPage = $(this).attr("href");
-
-		var code = $(".active").attr('data-code');
-
-		//alert('코드번호:' + code);
-		if (code == 1) {
-			orderSort1(replyPage);
-		} else if (code == 2) {
-			orderSort2(replyPage);
-		} else if (code == 3) {
-			orderSort3(replyPage);
-		} else if (code == 4) {
-			orderSort4(replyPage);
-		}
-
-	});
-
-	$("#creadt").click(function() {
-		orderSort1(1);
-	});
-	$("#FoodOrder").click(function() {
-		orderSort3(1);
-	})
-	$("#Foodreceiving").click(function() {
-		orderSort4(1);
-	})
-	$("#cook").click(function() {
-		orderSort2(1);
-	})
-	$("#refundSort").click(function() {
-		orderSort5(1);
-	})
+	
 
 	$(document)
 			.ready(
@@ -728,7 +459,7 @@
 
 																						alert("환불처리 되었습니다");
 																						all(1);
-																						orderAllCountTd()
+																						
 																					},
 																					error : function() {
 																						alert("실패");
@@ -743,6 +474,7 @@
 											} else {
 												alert("식단을 선택하세요");
 											}
+											orderAllCountTd()
 										});
 						//작업요청
 						$('#work')
@@ -788,7 +520,7 @@
 																							data) {
 
 																						all(1);
-																						orderAllCountTd()
+																						
 
 																					},
 																					error : function() {
@@ -803,7 +535,7 @@
 											} else {
 												alert("식단을 선택하세요");
 											}
-
+											orderAllCountTd()
 										});
 						//검색
 						$("#search")
@@ -926,30 +658,416 @@
 										+ (criteria.endPage + 1) + "'>'" + ">>"
 										+ "</a></li>";
 							}
-							$(".pagination").html(str);
+							$(".pagination1").html(str);   
 						}
 
 						var currentPage = 1;
-						$(".pagination").on("click", "li a", function() {
+						$(".pagination1").on("click", "li a", function() {
 							event.preventDefault();
 							var replyPage = $(this).attr("href");
-
-							var code = $(".data").attr('data-code');
-
-							//alert('코드번호22:'+sortCount);  
-							if (sortCount == 1) {
-								orderSort1(replyPage);
-							} else if (sortCount == 2) {
-								orderSort2(replyPage);
-							} else if (sortCount == 3) {
-								orderSort3(replyPage);
-							} else if (sortCount == 4) {
-								orderSort4(replyPage);
-							} else if (sortCount == 5) {
-								orderSort5(replyPage);
-							}
 							all(replyPage);
 						});
+						
+						
+						var object = new Object();
+						var booler = false;
+						var sortCount;
+
+						function orderSort1(page) {
+
+							$(".pagination1 li").empty();    
+							$(".pagination3 li").remove();
+							$(".pagination4 li").remove();
+							$(".pagination5 li").remove();
+							$(".pagination6 li").remove();            
+							sortCount = 1
+							$
+									.getJSON(
+											"adminSub/orderSort1/" + page,
+											function(data) {
+
+												console.log(data);
+												$(".orderListTable").remove();
+												var str = "";
+												for (var i = 0; i < data.list.length; i++) {
+													str += "<tr class='orderListTable'><td>"
+															+ "<input type='checkBox' id='"
+															+ data.list[i].orderCode
+															+ "' value='"
+															+ data.list[i].orderCode
+															+ "' name='che'</td>"
+															+ "<td class='orderCode'>"
+															+ data.list[i].orderCode
+															+ "</td>"
+															+ "<td class='id'>"
+															+ data.list[i].id
+															+ "</td>"
+															+ "<td>"
+															+ "<a data-src='"+data.list[i].orderCode+"' class='dietName' data-toggle='modal' href='#myModal'>"
+															+ data.list[i].dietName
+															+ "</a> </td>"
+															+ "<td class='orderDate'>"
+															+ data.list[i].orderDate
+															+ "</td>"
+															+ "<td class='price'>"
+															+ data.list[i].price
+															+ "</td>"
+															+ "<td class='orderItemName'>"
+															+ data.list[i].orderItemName
+															+ "</td></tr>"
+												}
+												console.log(str);
+												$(".tables").append(str);
+												printPaging2(data.criteria);  
+												fontColor1()
+											});
+						}
+						function orderSort2(page) {
+							$(".pagination1 li").remove();
+							$(".pagination2 li").remove();
+							$(".pagination4 li").remove();
+							$(".pagination5 li").remove();
+							$(".pagination6 li").remove();
+							
+							sortCount = 2;
+							$
+									.getJSON(
+											"adminSub/orderSort2/" + page,
+											function(data) {
+												console.log(data);
+												$(".orderListTable").remove();
+												var str = "";
+												for (var i = 0; i < data.list.length; i++) {
+													str += "<tr class='orderListTable'><td>"
+															+ "<input type='checkBox' id='"
+															+ data.list[i].orderCode
+															+ "' value='"
+															+ data.list[i].orderCode
+															+ "' name='che'</td>"
+															+ "<td class='orderCode'>"
+															+ data.list[i].orderCode
+															+ "</td>"
+															+ "<td class='id'>"
+															+ data.list[i].id
+															+ "</td>"
+															+ "<td>"
+															+ "<a data-src='"+data.list[i].orderCode+"' class='dietName' data-toggle='modal' href='#myModal'>"
+															+ data.list[i].dietName
+															+ "</a> </td>"
+															+ "<td class='orderDate'>"
+															+ data.list[i].orderDate
+															+ "</td>"
+															+ "<td class='price'>"
+															+ data.list[i].price
+															+ "</td>"
+															+ "<td class='orderItemName'>"
+															+ data.list[i].orderItemName
+															+ "</td></tr>"
+												}
+												console.log(str);
+												$(".tables").append(str);
+												printPaging3(data.criteria);
+												fontColor1()  
+											});
+						}
+						function orderSort3(page) {
+							$(".pagination1 li").remove();
+							$(".pagination2 li").remove();
+							$(".pagination3 li").remove(); 
+							$(".pagination5 li").remove();
+							$(".pagination6 li").remove();
+							sortCount = 3
+							$
+									.getJSON(
+											"adminSub/orderSort3/" + page,
+											function(data) {
+												console.log(data);
+												$(".orderListTable").remove();
+												var str = "";
+												for (var i = 0; i < data.list.length; i++) {
+													str += "<tr class='orderListTable'><td>"
+															+ "<input type='checkBox' id='"
+															+ data.list[i].orderCode
+															+ "' value='"
+															+ data.list[i].orderCode
+															+ "' name='che'</td>"
+															+ "<td class='orderCode'>"
+															+ data.list[i].orderCode
+															+ "</td>"
+															+ "<td class='id'>"
+															+ data.list[i].id
+															+ "</td>"
+															+ "<td>"
+															+ "<a data-src='"+data.list[i].orderCode+"' class='dietName' data-toggle='modal' href='#myModal'>"
+															+ data.list[i].dietName
+															+ "</a> </td>"
+															+ "<td class='orderDate'>"
+															+ data.list[i].orderDate
+															+ "</td>"
+															+ "<td class='price'>"
+															+ data.list[i].price
+															+ "</td>"
+															+ "<td class='orderItemName'>"
+															+ data.list[i].orderItemName
+															+ "</td></tr>"
+												}
+												console.log(str);
+												$(".tables").append(str);
+												printPaging4(data.criteria);
+												fontColor1()
+											});
+						}
+						function orderSort4(page) {
+							$(".pagination1 li").remove();
+							$(".pagination2 li").remove();
+							$(".pagination3 li").remove(); 
+							$(".pagination4 li").remove(); 
+							$(".pagination6 li").remove();
+							sortCount = 4;
+							$
+									.getJSON(
+											"adminSub/orderSort4/" + page,
+											function(data) {
+												console.log(data);
+												$(".orderListTable").remove();
+												var str = "";
+												for (var i = 0; i < data.list.length; i++) {
+													str += "<tr class='orderListTable'><td>"
+															+ "<input type='checkBox' id='"
+															+ data.list[i].orderCode
+															+ "' value='"
+															+ data.list[i].orderCode
+															+ "' name='che'</td>"
+															+ "<td class='orderCode'>"
+															+ data.list[i].orderCode
+															+ "</td>"
+															+ "<td class='id'>"
+															+ data.list[i].id
+															+ "</td>"
+															+ "<td>"
+															+ "<a data-src='"+data.list[i].orderCode+"' class='dietName' data-toggle='modal' href='#myModal'>"
+															+ data.list[i].dietName
+															+ "</a> </td>"
+															+ "<td class='orderDate'>"
+															+ data.list[i].orderDate
+															+ "</td>"
+															+ "<td class='price'>"
+															+ data.list[i].price
+															+ "</td>"
+															+ "<td class='orderItemName'>"
+															+ data.list[i].orderItemName
+															+ "</td></tr>"
+												}
+												console.log(str);
+												$(".tables").append(str);
+												printPaging5(data.criteria);     
+												fontColor1()
+											});
+						}
+
+						function orderSort5(page) {
+							$(".pagination1 li").remove();
+							$(".pagination2 li").remove();
+							$(".pagination3 li").remove(); 
+							$(".pagination4 li").remove(); 
+							$(".pagination5 li").remove(); 
+							sortCount = 5;
+							$
+									.getJSON(
+											"adminSub/orderSort5/" + page,
+											function(data) {
+												console.log(data);
+												$(".orderListTable").remove();
+												var str = "";
+												for (var i = 0; i < data.list.length; i++) {
+													str += "<tr class='orderListTable'><td>"
+															+ "<input type='checkBox' id='"
+															+ data.list[i].orderCode
+															+ "' value='"
+															+ data.list[i].orderCode
+															+ "' name='che'</td>"
+															+ "<td class='orderCode'>"
+															+ data.list[i].orderCode
+															+ "</td>"
+															+ "<td class='id'>"
+															+ data.list[i].id
+															+ "</td>"
+															+ "<td>"
+															+ "<a data-src='"+data.list[i].orderCode+"' class='dietName' data-toggle='modal' href='#myModal'>"
+															+ data.list[i].dietName
+															+ "</a> </td>"
+															+ "<td class='orderDate'>"
+															+ data.list[i].orderDate
+															+ "</td>"
+															+ "<td class='price'>"
+															+ data.list[i].price
+															+ "</td>"
+															+ "<td class='orderItemName'>"
+															+ data.list[i].orderItemName
+															+ "</td></tr>"
+												}
+												console.log(str);
+												$(".tables").append(str);
+												printPaging6(data.criteria);   
+												fontColor1()   
+											});
+						}
+
+						function printPaging2(criteria) {
+							var str = "";
+
+							if (criteria.prev) {
+								str += "<li><a href=''" + (criteria.startPage - 1) + "'>'" + "<<"
+										+ "</a></li>";
+							}
+							for (var i = criteria.startPage; i <= criteria.endPage; i++) {
+								var strClass = criteria.page == i ? "class = 'active'" : "";
+								str += "<li "+strClass+"><a href ='"+i+"'>" + i + "</a></li>";
+							}
+							if (criteria.next) {
+								str += "<li><a href=''" + (criteria.endPage + 1) + "'>'" + ">>"
+										+ "</a></li>";
+							}
+							$(".pagination2").html(str);   
+						}
+						function fontColor1() {
+							var length = $('.tables tr').length;
+							for (var i = 0; i < length; i++) {
+								var font = $(".orderItemName").eq(i).text();
+								if (font == "환불") {
+
+									$(".orderItemName").eq(i).css("color", "red");
+								}
+							}
+						}
+
+						$(".pagination2").on("click", "li a", function() { 
+							event.preventDefault();
+							var replyPage = $(this).attr("href");
+							orderSort1(replyPage);
+							
+
+						});
+						
+						function printPaging3(criteria) {    
+							var str = "";
+
+							if (criteria.prev) {
+								str += "<li><a href=''" + (criteria.startPage - 1) + "'>'" + "<<"
+										+ "</a></li>";
+							}
+							for (var i = criteria.startPage; i <= criteria.endPage; i++) {
+								var strClass = criteria.page == i ? "class = 'active'" : "";
+								str += "<li "+strClass+"><a href ='"+i+"'>" + i + "</a></li>";
+							}
+							if (criteria.next) {
+								str += "<li><a href=''" + (criteria.endPage + 1) + "'>'" + ">>"
+										+ "</a></li>";
+							}
+							$(".pagination3").html(str);   
+						}
+						
+						$(".pagination3").on("click", "li a", function() { 
+							event.preventDefault();
+							var replyPage = $(this).attr("href");
+							orderSort2(replyPage);  
+							
+
+						});
+						
+						function printPaging4(criteria) {    
+							var str = "";
+
+							if (criteria.prev) {
+								str += "<li><a href=''" + (criteria.startPage - 1) + "'>'" + "<<"
+										+ "</a></li>";
+							}
+							for (var i = criteria.startPage; i <= criteria.endPage; i++) {
+								var strClass = criteria.page == i ? "class = 'active'" : "";
+								str += "<li "+strClass+"><a href ='"+i+"'>" + i + "</a></li>";
+							}
+							if (criteria.next) {
+								str += "<li><a href=''" + (criteria.endPage + 1) + "'>'" + ">>"
+										+ "</a></li>";
+							}
+							$(".pagination4").html(str);   
+						}
+						
+						$(".pagination4").on("click", "li a", function() { 
+							event.preventDefault();
+							var replyPage = $(this).attr("href");
+							orderSort3(replyPage);  
+							
+
+						});
+						
+						function printPaging5(criteria) {    
+							var str = "";
+
+							if (criteria.prev) {
+								str += "<li><a href=''" + (criteria.startPage - 1) + "'>'" + "<<"
+										+ "</a></li>";
+							}
+							for (var i = criteria.startPage; i <= criteria.endPage; i++) {
+								var strClass = criteria.page == i ? "class = 'active'" : "";
+								str += "<li "+strClass+"><a href ='"+i+"'>" + i + "</a></li>";
+							}
+							if (criteria.next) {
+								str += "<li><a href=''" + (criteria.endPage + 1) + "'>'" + ">>"
+										+ "</a></li>";
+							}
+							$(".pagination5").html(str);    
+						}
+						
+						$(".pagination5").on("click", "li a", function() { 
+							event.preventDefault();
+							var replyPage = $(this).attr("href"); 
+							orderSort4(replyPage);  
+							
+
+						});
+						
+						function printPaging6(criteria) {    
+							var str = "";
+
+							if (criteria.prev) {
+								str += "<li><a href=''" + (criteria.startPage - 1) + "'>'" + "<<"
+										+ "</a></li>";
+							}
+							for (var i = criteria.startPage; i <= criteria.endPage; i++) {
+								var strClass = criteria.page == i ? "class = 'active'" : "";
+								str += "<li "+strClass+"><a href ='"+i+"'>" + i + "</a></li>";
+							}
+							if (criteria.next) {
+								str += "<li><a href=''" + (criteria.endPage + 1) + "'>'" + ">>"
+										+ "</a></li>";
+							}
+							$(".pagination6").html(str);    
+						}
+						
+						$(".pagination6").on("click", "li a", function() { 
+							event.preventDefault();
+							var replyPage = $(this).attr("href"); 
+							orderSort5(replyPage);  
+							
+
+						});
+
+						$("#creadt").click(function() {
+							orderSort1(1);
+						});
+						$("#FoodOrder").click(function() {
+							orderSort3(1);
+						})
+						$("#Foodreceiving").click(function() {
+							orderSort4(1);
+						})
+						$("#cook").click(function() {
+							orderSort2(1);
+						})
+						$("#refundSort").click(function() {
+							orderSort5(1);
+						})  
 
 					});
 </script>
