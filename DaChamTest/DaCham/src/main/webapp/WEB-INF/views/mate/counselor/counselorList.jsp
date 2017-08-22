@@ -209,7 +209,7 @@
          
         <div>
               
-		<table  class = "search1 table table-borded">
+		<table class = "search1 table table-borded">
             <tr>
                   <th>고객id</th>
                   <th>고객이름</th>
