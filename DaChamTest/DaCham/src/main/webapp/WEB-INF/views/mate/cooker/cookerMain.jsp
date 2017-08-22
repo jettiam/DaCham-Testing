@@ -19,23 +19,29 @@
 </style>
 <script>
 	$(document).ready(function(){
-		readyCook();
+		readyCook1(1);
 		foodStockAll(1);
-		$(".pagination").on("click","li a",function(){
+		$(".turbo2").on("click","li a",function(){
 			event.preventDefault();
 			var replyPage = $(this).attr("href");
 			
 			foodStockAll(replyPage);
+		});         
+		$(".turbo1").on("click","li a",function(){
+			event.preventDefault();
+			var replyPage = $(this).attr("href");
+			readyCook1(replyPage);
 		});
 		
-		function readyCook(){
-			$.getJSON("cookAjax/readyScreen/",function(data){
+		function readyCook1(page){
+			$.getJSON("cookAjax/anotherSelectCookingItem3/"+page,function(data){
 				$(".tableResult").remove();
 				var str = "";
-				$(data).each(function(){
-					str += "<tr class = 'tableResult'><td>"+this.orderCode+"</td><td>"+this.sideDCode+"</td><td>"+this.sideDName+"</td><td>"+this.orderItemName+"</td><td>"+this.cookingAmount+"</td></tr>"
+				$(data.list).each(function(){
+					str += "<tr class = 'tableResult'><td>"+this.orderCode+"</td><td>"+this.sideDCode+"</td><td>"+"<img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:50px; height : 50px;'>"+"</td><td>"+this.sideDName+"</td><td>"+this.orderItemName+"</td><td>"+this.cookingAmount+"</td></tr>"
 				});
 				$(".overTable").append(str);
+				printPaging0(data.criteria);
 			});
 		}
 		function foodStockAll(page){
@@ -49,7 +55,21 @@
 				printPaging(data.criteria);
 			});
 		}
-		
+		function printPaging0(criteria){
+			var str = "";
+					  
+			if(criteria.prev){
+				str += "<li><a href='"+(criteria.startPage-1)+"'>" + "<<"+"</a></li>";
+			}
+			for(var i = criteria.startPage; i<=criteria.endPage; i++){
+				var strClass = criteria.page == i?"class = 'active'":"";
+				str += "<li "+strClass+"><a href ='"+i+"'>"+i + "</a></li>";
+			}
+			if(criteria.next){
+				str += "<li><a href='"+(criteria.endPage+1)+"'>" + ">>"+"</a></li>";   
+			}
+			$(".turbo1").html(str);
+		}
 		function printPaging(criteria){
 			var str = "";
 					
@@ -63,7 +83,7 @@
 			if(criteria.next){
 				str += "<li><a href='"+(criteria.endPage+1)+"'>" + ">>"+"</a></li>";   
 			}
-			$(".pagination").html(str);
+			$(".turbo2").html(str);
 		}
 	});
 </script>
@@ -118,7 +138,8 @@
 	            <tr class = "tableResult">
 	            </tr>
 	         </table>
-	         
+	         <ul class = "turbo1 pagination">
+	   			</ul>
 	      </div>
 	   </div>
 	   <div>
@@ -133,7 +154,7 @@
 	   				<tr class = "dualResult">
 	   				</tr>
 	   			</table>
-	   			<ul class = "pagination">
+	   			<ul class = "turbo2 pagination">
 	   			</ul>
 	   		</div>
 	   </div>

@@ -417,9 +417,9 @@
 		and
 		(c.orderItemCode=2 or c.orderItemCode
 		=3 or c.orderItemCode =9 or
-		c.orderItemCode=10) and
+		c.orderItemCode=10 or c.orderItemCode=6) and
 		(b.orderItemCode =
-		c.orderItemCode)
+		c.orderItemCode) 
 	</select>
 
 	<select id="foodStockListCount" resultType="Integer">

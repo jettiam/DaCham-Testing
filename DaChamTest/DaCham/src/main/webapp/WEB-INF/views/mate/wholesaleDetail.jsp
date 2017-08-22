@@ -40,7 +40,7 @@ $(document).ready(function(){
 }
 .totalPrice{
 padding: 20px 0;
-}
+}  1601
 </style>
 </head>
 <body>

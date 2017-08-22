@@ -172,7 +172,7 @@
          });
       }
    });
-
+ 
 </script>
 <style>
  .nameClick { color: blue; text-decoration: underline;}
@@ -181,7 +181,7 @@
 </head>
 <body>           
 <%@include file = "counselorNavi.jsp" %>
-    <div class = "container"  style = "width:100%;overflow-x:auto; ">    
+    <div class = "container"  >    
       <div class = "box1">
       
              <h3>고객의 정보</h3>
@@ -209,7 +209,7 @@
          
         <div>
               
-		<table  class = "search1 table table-borded">
+		<table class = "search1 table table-borded">
             <tr>
                   <th>고객id</th>
                   <th>고객이름</th>
@@ -227,10 +227,6 @@
          </table>
          </div>
          </div>
-         </div>
-        
-         <div>
-           
          </div>
          <form>
             <div class = "answer">

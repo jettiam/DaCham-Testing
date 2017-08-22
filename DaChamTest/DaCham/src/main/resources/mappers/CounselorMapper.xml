@@ -8,7 +8,7 @@ select  a.id , a.name ,a.birthday, a.address, a.tel, a.email, a.deptCode, a.grad
 	from member a  join disease b
 	where a.diseaseCode = b.diseaseCode
 	and a.gradeCode = '일반회원'
-
+	and a.outDate is null
 </select>
 <!-- 미답변 상담목록 -->
 <select id = "counselorseList2All" resultType="Counselor">
@@ -30,6 +30,8 @@ select  a.id , a.name ,a.birthday, a.address, a.tel, a.email, a.deptCode, a.grad
 	from member a  join disease b
 	where a.diseaseCode = b.diseaseCode
 	and a.gradeCode = '일반회원'
+	and a.outDate is null
+	
       <include refid="search"></include>
    </select>
    <sql id = "search">
@@ -121,8 +123,8 @@ select  a.id , a.name ,a.birthday, a.address, a.tel, a.email, a.deptCode, a.grad
    where counselCode = #{couselCode}
 </update>
 <insert id = "counselInsert">
-   insert into counsel(answer,counselItemCode,counselTitle,counselDate,counselContent,customer)
-   values(#{answer},4,#{counselTitle},now(),#{counselContent},#{customer});
+   insert into counsel(answer,counselItemCode,counselTitle,adviser,counselDate,counselContent,customer)
+   values(#{answer},4,#{counselTitle},'counselor',now(),#{counselContent},#{customer});
 </insert>
 <select id = "counselTuning" resultType = "Counselor">
    select counselCode,answer,counselDate from counsel

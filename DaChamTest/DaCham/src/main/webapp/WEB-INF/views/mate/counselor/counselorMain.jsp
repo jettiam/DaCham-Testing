@@ -70,7 +70,7 @@
 <%@include file = "counselorNavi.jsp" %>
   
   <div class="container">   
-    <div class="col-sm-6">
+    <div>
     <h3 class="text-center">미상담 목록</h3>
     	<table id="unfinCounselList" class="table">
     		<tr>
@@ -82,7 +82,7 @@
            </tr>
     	</table>
     </div>
-    <div class="col-sm-6">
+    <div>           
     <h3 class="text-center">상담완료 목록</h3>
     	<table id="finCounselList" class="table">
     		<tr>

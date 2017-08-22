@@ -72,7 +72,7 @@
 	
 	
 	<div>
-		<h2>식단에 포함된 식재료</h2>
+		<h2>식단에 포함된 식재료</h2><button id="foodMOrder" class = "btn btn-default">식재료 주문서 보내기</button>       
 		<table id="foodMTable" class="tables table table-condensed"> 
 			<tr>
 				<th>식재료코드</th>
@@ -100,7 +100,7 @@
 			
 		</table>
 	</div>
-	<button id="foodMOrder" class = "btn btn-default">식재료 주문서 보내기</button>
+	
 	</div>
 	<form class="foodMOrderForm" action="mailSending" method="post">  
 		<input type="hidden" name="foodMOrderInfo" id="foodMOrderInfo">

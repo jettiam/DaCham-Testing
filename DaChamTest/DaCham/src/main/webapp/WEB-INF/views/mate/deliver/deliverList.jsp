@@ -15,7 +15,7 @@
    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
 
-   $(document).ready(function(){   
+   $(document).ready(function(){
          $("#deliverList").addClass("w3-light-gray");
          var currentPage = 1;
          var currentItemCode = "";
@@ -25,7 +25,9 @@
          $("input[name='chk']:checked").each(function(){
             var orderCode = $(this).val();     
             var data = $(".transportNum"+orderCode).val();
-            
+          //  if(transportNum == ""){
+          // 	 alert("운송장번호입력하세요");
+           // }
             
                $.ajax({
                   type : "put",   
@@ -40,11 +42,13 @@
                   }),
                   success : function(result){
                      if(result == "SUCCESS"){
-                        alert("수정되었습니다.");
-                        all(currentPage,5);   
+                        all(currentPage,5);
+                        
                      }
                   }
+                  
                });
+               alert("배송이완료되었습니다.");  
          });
          
          
@@ -53,11 +57,13 @@
          $(".searchResult").remove();
          var searchType = $('.searchType').val();
          var keyword = $("#keyword").val();
-         
+         if(keyword == ""){
+        	 alert("검색어를 입력하세요");
+         }
          $.getJSON("deliverAjax/"+searchType+"/"+keyword,function(data){
             var str = "";
             $(data).each(function(){
-               str += "<tr class = 'searchResult'>"+"<td>"+"<input type = 'radio' name = 'chk' value = '"+this.orderCode+"' class = 'check'>"+"</td>"+"<td>"+this.orderCode+"</td>"+"<td>"+this.id+"</td>"+"<td>"+this.dietName+"</td>"+"<td>"+this.address+"</td>"+"<td>"+"<input type = 'text' class = 'transportNum"+this.orderCode+"' name = 'transportNum'>"+"</td>"+"<td>"+this.orderItemName+"</td>"+"</tr>";
+               str += "<tr class = 'searchResult'><td><input type = 'checkbox' name = 'chk' value = '"+this.orderCode+"' class = 'check'>"+"</td>"+"<td>"+this.orderCode+"</td>"+"<td>"+this.id+"</td>"+"<td>"+this.dietName+"</td>"+"<td>"+this.address+"</td>"+"<td>"+"<input type = 'text' class = 'transportNum"+this.orderCode+"' name = 'transportNum'>"+"</td>"+"<td>"+this.orderItemName+"</td>"+"</tr>";
             });
             $(".searchTable").append(str);
          });
@@ -109,8 +115,18 @@
          }
          $(".pagination").html(str);
       }
-   });
    
+   $("#allCheck").click(function() {
+	   
+		if ($("#allCheck").prop("checked")) {
+			//input태그의 name이 che인 태그들을 찾아서 checked옵션을 true로 정의
+			$("input[name=chk]").prop('checked', true);
+			//클릭이 안되있으면 
+		} else {
+			$("input[name=chk]").prop('checked', false);
+		}
+	});
+   });
 </script>
 </head>
 <body>
@@ -146,7 +162,7 @@
       </div>
          <table class = "searchTable table table-hover">   
             <tr>
-               <th>   </th>
+               <th><input type = "checkbox" name = "chk" id = "allCheck"></th>
                <th>주문번호</th>
                <th>고객 아이디</th>
                <th>식단명</th>

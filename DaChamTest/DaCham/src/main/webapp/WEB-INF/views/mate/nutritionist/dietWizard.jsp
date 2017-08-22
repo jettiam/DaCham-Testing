@@ -14,11 +14,11 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
-	.align_bottom{
-	z-index : -100; 
+	.align_bottom{	
 	width : 100%;
     position: fixed;
   	bottom: 0;
+  	z-index: -100;
   	}
   	
   	
