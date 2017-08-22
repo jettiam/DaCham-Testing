@@ -22,35 +22,44 @@
          all(1,5);
       
       $("#button").on("click",function(){
+         var status = true;
          $("input[name='chk']:checked").each(function(){
             var orderCode = $(this).val();     
             var data = $(".transportNum"+orderCode).val();
-          //  if(transportNum == ""){
-          // 	 alert("운송장번호입력하세요");
-           // }
-            
+            if(data == "" || orderCode == null){
+                alert("운송장번호입력하세요");
+                status = false;
+            }
+            else{
+                 
                $.ajax({
-                  type : "put",   
-                  url : "deliverAjax/"+ orderCode,
-                  headers : {
-                     "Content-Type" : "application/json",
-                     "X-HTTP-Method-Override" : "PUT"
-                  },
-                  dataType : 'text',
-                  data : JSON.stringify({
-                     "transportNum" : data
-                  }),
-                  success : function(result){
-                     if(result == "SUCCESS"){
-                        all(currentPage,5);
-                        
-                     }
-                  }
-                  
-               });
-               alert("배송이완료되었습니다.");  
+                    type : "put",   
+                    url : "deliverAjax/"+ orderCode,
+                    headers : {
+                       "Content-Type" : "application/json",
+                       "X-HTTP-Method-Override" : "PUT"
+                    },
+                    dataType : 'text',
+                    data : JSON.stringify({
+                       "transportNum" : data
+                    }),
+                    success : function(result){
+                       if(result == "SUCCESS"){
+                          all(currentPage,5);
+                          status = true;
+                       }
+                    }
+                    
+                 });
+                 
+            }
+             
+            
+            
          });
-         
+         if(status == true && $("input[name='chk']").is(":checked")){   
+            alert("배송이 완료되었습니다.");
+         }
          
       });
       $("#search").on("click",function(){
@@ -58,7 +67,7 @@
          var searchType = $('.searchType').val();
          var keyword = $("#keyword").val();
          if(keyword == ""){
-        	 alert("검색어를 입력하세요");
+            alert("검색어를 입력하세요");
          }
          $.getJSON("deliverAjax/"+searchType+"/"+keyword,function(data){
             var str = "";
@@ -117,15 +126,15 @@
       }
    
    $("#allCheck").click(function() {
-	   
-		if ($("#allCheck").prop("checked")) {
-			//input태그의 name이 che인 태그들을 찾아서 checked옵션을 true로 정의
-			$("input[name=chk]").prop('checked', true);
-			//클릭이 안되있으면 
-		} else {
-			$("input[name=chk]").prop('checked', false);
-		}
-	});
+      
+      if ($("#allCheck").prop("checked")) {
+         //input태그의 name이 che인 태그들을 찾아서 checked옵션을 true로 정의
+         $("input[name=chk]").prop('checked', true);
+         //클릭이 안되있으면 
+      } else {
+         $("input[name=chk]").prop('checked', false);
+      }
+   });
    });
 </script>
 </head>
