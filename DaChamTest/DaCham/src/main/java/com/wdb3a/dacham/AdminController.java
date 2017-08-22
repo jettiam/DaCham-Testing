@@ -234,7 +234,7 @@ public class AdminController {
 		
 		 
 		String content = toString; // 내용
-		try {
+		try { 
 			MimeMessage message = mailSender.createMimeMessage();
 			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 
@@ -286,9 +286,9 @@ public class AdminController {
 		System.out.println("Output from Server .... \n");
 		while ((output = br.readLine()) != null) {
 			System.out.println(output);
-		}
+		} 
 
-		conn.disconnect(); 
+		conn.disconnect();  
 		// ("식재료명 :" + bookObject.get("foodMName") + " 단가
 		// :"+bookObject.get("price") + " 주문량 :" + bookObject.get("foodMAmount")
 		// + " 단위 : " + bookObject.get("unit"));
