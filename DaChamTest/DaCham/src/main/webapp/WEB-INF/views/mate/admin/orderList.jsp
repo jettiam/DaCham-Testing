@@ -359,17 +359,17 @@
 
 											});
 						}
-						var readyCook = 0; //조리대기
-						var ReadyFood = 0; //식재료 발주
-						var StartFood = 0; //식재료 입고
-						var Creadit = 0; //결제완료
-						var refund = 0; //환불
+						
 						function orderAllCountTd() {
 							$
 									.getJSON(
 											"adminSub/orderAllCountTd",
 											function(data) {
-
+												var readyCook = 0; //조리대기
+												var ReadyFood = 0; //식재료 발주
+												var StartFood = 0; //식재료 입고
+												var Creadit = 0; //결제완료
+												var refund = 0; //환불
 												$("#str1").empty();
 												$("#str2").empty();
 												$("#str3").empty();
@@ -415,6 +415,12 @@
 						$('#refund')
 								.click(
 										function() {
+											var readyCook = 0; //조리대기
+											var ReadyFood = 0; //식재료 발주
+											var StartFood = 0; //식재료 입고
+											var Creadit = 0; //결제완료
+											var refund = 0; //환불  
+											var check = true;
 											$(".pagination1 li").remove();
 											$(".pagination2 li").remove();
 											$(".pagination3 li").remove(); 
@@ -462,12 +468,14 @@
 																					},
 																					success : function(
 																							data) {
-
-																						alert("환불처리 되었습니다");
+																						if(check==true){
+																						check =true;
+																						}
 																						all(1);
 																						
 																					},
 																					error : function() {
+																						check = false;
 																						alert("실패");
 																					}
 
@@ -477,6 +485,9 @@
 																	}
 
 																});
+													if(check==true){
+													 alert("환불되었습니다");
+													}
 											} else {
 												alert("식단을 선택하세요");
 											}
@@ -486,6 +497,12 @@
 						$('#work')
 								.click(
 										function() {
+											var readyCook = 0; //조리대기
+											var ReadyFood = 0; //식재료 발주
+											var StartFood = 0; //식재료 입고
+											var Creadit = 0; //결제완료
+											var refund = 0; //환불 
+											var check = true;
 											$(".pagination1 li").remove();
 											$(".pagination2 li").remove();
 											$(".pagination3 li").remove(); 
@@ -530,12 +547,15 @@
 																					},
 																					success : function(
 																							data) {
-
+																						if(check==true){
+																							check=true;
+																						}
 																						all(1);
 																						
 
 																					},
 																					error : function() {
+																						check=false;
 																						alert("실패");
 																					}
 
@@ -544,6 +564,9 @@
 																		alert("식재료 입고 상태여야만 작업요청을 할 수 있습니다.")
 																	}
 																});
+															if(check==true){
+																alert("조리요청 되었습니다");
+															}
 											} else {
 												alert("식단을 선택하세요");
 											}

@@ -196,11 +196,11 @@
 	</update>
 		<update id="updateOrderItemCode">
 update orderlist set orderItemCode = 5
-where orderCode=
-(select a.orderCode
+where orderCode
+in (select a.orderCode
 from
 (select oo.orderCode, count(oo.orderItemCode) countCode
-from orderoptions oo,orderList ol where oo.orderCode = ol.orderCode and ol.orderItemCode=3 and oo.orderItemCode=5
+from orderoptions oo,orderlist ol where oo.orderCode = ol.orderCode and ol.orderItemCode=3 and oo.orderItemCode=5
 group by oo.orderCode) a
 where a.countCode = 6)
 	</update>

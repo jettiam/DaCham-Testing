@@ -155,7 +155,7 @@ $(window).scroll(function() {
 	<div class="container">	
 		<div class="row">
 		   <div class="col-sm-4">
-		      <img src="resources/customerImage/egg.png" class="slideanim">
+		      <img src="resources/customerImage/egg.png" class="">
 		    </div>
 		    <div class="col-sm-4">
 		      <h3>살충제 달걀 걱정 NO!</h3><br>
