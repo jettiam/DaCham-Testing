@@ -90,9 +90,13 @@
 		});
 
 	}
-
 	// Creates an animated transition between the two numbers
 	function switchDigit(position,number){
+
+		
+		
+
+		
 
 		var digit = position.find('.digit')
 
