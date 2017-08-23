@@ -200,7 +200,7 @@ $(document).ready(function(){
          <div style = "border:1px solid gold;" >
             <input type = "hidden" name = "counselCode" class = "counselCode" readonly>
             <input type = "text" class = "counselItemName col-md-2" name = "category" value = "배송문의" readonly>
-            <input type = "text" class = "col-xs-8 col-md-4" name = "title" value = "특별식을 주문했는데" readonly><br>
+            <input type = "text" class = "counselTitle col-xs-8 col-md-4 " name = "title" value = "특별식을 주문했는데" readonly><br>
             <textarea class = "counselContent form-control" style = "width:720px;" readonly>  
                                내용
             </textarea>

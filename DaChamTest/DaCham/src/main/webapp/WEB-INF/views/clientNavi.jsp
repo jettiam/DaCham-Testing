@@ -72,7 +72,9 @@ padding-right:20px;
 .joinBox{
 float:right;
 }
+
 img{width:100%}
+
 #logoImg{
 	max-width:150px;
 	max-height:150px; 

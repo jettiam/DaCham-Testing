@@ -176,6 +176,10 @@ svg {
 			type="answerLink"></block></category> <category name="4. 결과지와 연결하기">
 		<block type="resultsheet"></block></category> <category name="5. 결과지 블록모음">
 		<block type="d1"></block> <block type="d2"></block> <block type="d3"></block>
+		
+		<block type="h1"></block><block type="h2"></block><block type="h3"></block>
+		<block type="s1"></block><block type="s2"></block><block type="s3"></block>
+		<block type="g1"></block><block type="g2"></block><block type="g3"></block>
 		</category></xml>
 	</span>
 

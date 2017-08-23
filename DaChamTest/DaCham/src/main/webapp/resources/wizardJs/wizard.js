@@ -180,11 +180,122 @@ Blockly.Blocks['d3'] = {
   }
 };
 
+Blockly.Blocks['h1'] = {
+	init: function() {
+		this.appendDummyInput()
+        .appendField("심부전증");
+    this.appendDummyInput()
+        .appendField("주의");
+    this.setOutput(true, null);
+    this.setColour(colorSet1);
+    this.setTooltip('');
+    this.setHelpUrl('');
+	}
+}
 
+Blockly.Blocks['h2'] = {
+		init: function() {
+			this.appendDummyInput()
+	        .appendField("심부전증");
+	    this.appendDummyInput()
+	        .appendField("위험");
+	    this.setOutput(true, null);
+	    this.setColour(colorSet2);
+	    this.setTooltip('');
+	    this.setHelpUrl('');
+		}
+	}
 
+Blockly.Blocks['h3'] = {
+		init: function() {
+			this.appendDummyInput()
+	        .appendField("심부전증");
+	    this.appendDummyInput()
+	        .appendField("고위험");
+	    this.setOutput(true, null);
+	    this.setColour(colorSet3);
+	    this.setTooltip('');
+	    this.setHelpUrl('');
+		}
+	}
 
+Blockly.Blocks['s1'] = {
+		init: function() {
+			this.appendDummyInput()
+	        .appendField("신부전증");
+	    this.appendDummyInput()
+	        .appendField("주의");
+	    this.setOutput(true, null);
+	    this.setColour(colorSet1);
+	    this.setTooltip('');
+	    this.setHelpUrl('');
+		}
+	}
 
+	Blockly.Blocks['s2'] = {
+			init: function() {
+				this.appendDummyInput()
+		        .appendField("신부전증");
+		    this.appendDummyInput()
+		        .appendField("위험");
+		    this.setOutput(true, null);
+		    this.setColour(colorSet2);
+		    this.setTooltip('');
+		    this.setHelpUrl('');
+			}
+		}
 
+	Blockly.Blocks['s3'] = {
+			init: function() {
+				this.appendDummyInput()
+		        .appendField("신부전증");
+		    this.appendDummyInput()
+		        .appendField("고위험");
+		    this.setOutput(true, null);
+		    this.setColour(colorSet3);
+		    this.setTooltip('');
+		    this.setHelpUrl('');
+			}
+		}
+
+Blockly.Blocks['g1'] = {
+		init: function() {
+			this.appendDummyInput()
+	        .appendField("고지혈증");
+	    this.appendDummyInput()
+	        .appendField("주의");
+	    this.setOutput(true, null);
+	    this.setColour(colorSet1);
+	    this.setTooltip('');
+	    this.setHelpUrl('');
+		}
+	}
+
+	Blockly.Blocks['g2'] = {
+			init: function() {
+				this.appendDummyInput()
+		        .appendField("고지혈증");
+		    this.appendDummyInput()
+		        .appendField("위험");
+		    this.setOutput(true, null);
+		    this.setColour(colorSet2);
+		    this.setTooltip('');
+		    this.setHelpUrl('');
+			}
+		}
+
+	Blockly.Blocks['g3'] = {
+			init: function() {
+				this.appendDummyInput()
+		        .appendField("고지혈증");
+		    this.appendDummyInput()
+		        .appendField("고위험");
+		    this.setOutput(true, null);
+		    this.setColour(colorSet3);
+		    this.setTooltip('');
+		    this.setHelpUrl('');
+			}
+		}
 
 
 
@@ -248,24 +359,87 @@ Blockly.JavaScript['resultsheet'] = function(block) {
 
 	
 	
-	// 당뇨 고위험군
+	// 당뇨 
 	Blockly.JavaScript['d1'] = function(block) {
 		  var code = " 'result': '당뇨', 'judg':'주의' ";
 		  return [code, Blockly.JavaScript.ORDER_ATOMIC];
 		};
 
 	
-	// 당뇨 고위험군
+
 	Blockly.JavaScript['d2'] = function(block) {
 		  var code = " 'result': '당뇨', 'judg':'위험' ";
+		  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+		};
+
+Blockly.JavaScript['d3'] = function(block) {
+	  var code = " 'result': '당뇨', 'judg':'고위험' ";
+	  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+	};
+
+	
+	
+	
+	Blockly.JavaScript['h1'] = function(block) {
+		  var code = " 'result': '심부전증', 'judg':'주의' ";
+		  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+		};
+
+	
+	// 당뇨 고위험군
+	Blockly.JavaScript['h2'] = function(block) {
+		  var code = " 'result': '심부전증', 'judg':'위험' ";
 		  return [code, Blockly.JavaScript.ORDER_ATOMIC];
 		};
 
 	
 	
 	
-// 당뇨 고위험군
-Blockly.JavaScript['d3'] = function(block) {
-	  var code = " 'result': '당뇨', 'judg':'고위험' ";
+//당뇨 고위험군
+Blockly.JavaScript['h3'] = function(block) {
+	  var code = " 'result': '심부전증', 'judg':'고위험' ";
+	  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+	};
+	
+	
+	Blockly.JavaScript['s1'] = function(block) {
+		  var code = " 'result': '신부전증', 'judg':'주의' ";
+		  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+		};
+
+	
+	// 당뇨 고위험군
+	Blockly.JavaScript['s2'] = function(block) {
+		  var code = " 'result': '신부전증', 'judg':'위험' ";
+		  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+		};
+
+	
+	
+	
+//당뇨 고위험군
+Blockly.JavaScript['s3'] = function(block) {
+	  var code = " 'result': '신부전증', 'judg':'고위험' ";
+	  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+	};
+	
+	Blockly.JavaScript['g1'] = function(block) {
+		  var code = " 'result': '고지혈증', 'judg':'주의' ";
+		  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+		};
+
+	
+	// 당뇨 고위험군
+	Blockly.JavaScript['g2'] = function(block) {
+		  var code = " 'result': '고지혈증', 'judg':'위험' ";
+		  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+		};
+
+	
+	
+	
+//당뇨 고위험군
+Blockly.JavaScript['g3'] = function(block) {
+	  var code = " 'result': '고지혈증', 'judg':'고위험' ";
 	  return [code, Blockly.JavaScript.ORDER_ATOMIC];
 	};

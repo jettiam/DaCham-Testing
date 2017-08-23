@@ -38,7 +38,7 @@ margin-bottom:20px;
 		<!-- 상단 메뉴바 -->
 		<div class="w3-bar w3-border w3-theme-d5 w3-xlarge">
 		<div class="w3-container">
-		  <a href="wizard" class="w3-bar-item w3-button w3-hover-light-gray" id="wizard">식단 위자드 관리</a>
+		  <a href="wizard" class="w3-bar-item w3-button w3-hover-light-gray" id="wizard">위자드 관리</a>
 		  <a href="diet" class="w3-bar-item w3-button w3-hover-light-gray" id="diet">식단 관리</a>	 
 		 <a href="side"  class="w3-bar-item w3-button w3-hover-light-gray" id="side">반찬 관리</a>	
 		 <a href="special"  class="w3-bar-item w3-button w3-hover-light-gray" id="special">특별식단 관리</a>
