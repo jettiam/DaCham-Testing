@@ -17,7 +17,13 @@
 <link rel="stylesheet" href="resources/jquery.countup.css">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="resources/jquery.growl.js" type="text/javascript"></script>
+  <link href="resources/jquery.growl.css" rel="stylesheet" type="text/css" />
+  
+  
 <script>
+
+
 	//조리시작
 	function cookStart() {	
 		var p = $(this).parent();
@@ -83,6 +89,7 @@
 	$(document)
 			.ready(
 					function() {
+					/* 	$.growl.warning({ message: "조리 상태를 확인 하세요" }); */
 						$("#present").on("click", function() {
 							window.location.href = "cook";
 						});
@@ -273,7 +280,8 @@ body {
 			
 		</div>
 	</div>
-
+	<script src="resources/jquery.growl.js" type="text/javascript"></script>
+  	<link href="resources/jquery.growl.css" rel="stylesheet" type="text/css" />
 	<script src="resources/jquery.countup.js"></script>
 
 	<%-- <h1>↓↓↓여기서부터 잘라낼 부분 개발 확인용 ↓↓↓</h1>

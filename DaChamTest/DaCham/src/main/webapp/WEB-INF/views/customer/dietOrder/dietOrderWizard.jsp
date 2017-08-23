@@ -52,7 +52,6 @@
 			$("#wizardStepLogo").attr("colspan", $(this).attr("data-step"));
 			$("#wizardStartButton").attr("colspan", $(this).attr("data-step"));
 			$(this).nextAll("td").remove();
-			alert($(this).attr("data-step") + "단계~");
 			step = parseInt($(this).attr("data-step")) + 1;
 			alert("step: " + step + ", link: " + $(this).attr("data-link"));
 			getStep($(this).attr("data-link"));
@@ -197,7 +196,7 @@
 }
 
 button#startWizard {
-  background:#1AAB8A;
+  background:#819b3a;
   color:#fff;
   border:none;
   width: 100%;
@@ -213,7 +212,7 @@ button#startWizard {
 
 button#startWizard:hover{
   background:#fff;
-  color:#1AAB8A;
+  color:#819b3a;
 }
 
 button#startWizard:before,button:after{
@@ -223,7 +222,7 @@ button#startWizard:before,button:after{
   right:0;
   height:2px;
   width:0;
-  background: #1AAB8A;
+  background: #819b3a;
   transition:400ms ease all;
 }
 button#startWizard:after{
@@ -251,7 +250,7 @@ button#startWizard:hover:before,button#startWizard:hover:after{
 
 .startWizardBefore {
 	background-color: #FFFFFF;
-	border: 3px solid #819b3a;
+	
 }
 
 .startWizardAfter {
@@ -273,7 +272,7 @@ h2#question {
 
 .testing {
 	border-radius: 5px;
-	border: 1px solid #819b3a;
+	
 	padding: 5px;
 }
 
@@ -410,6 +409,7 @@ li {
 						고객님의 위자드 결과
 						<h2 id="resultName"></h2>
 						<h2 id="resultJudg"></h2>
+						<a href="#" class="btn-gradient red">Button</a>
 						<button id="showResultDiet">추천식단 보기</button>
 					</div>
 					<!-- 시간이 된다면 추가할 파트
