@@ -142,8 +142,8 @@
 <%@include file = "deliverNavi.jsp" %>
    <div class = "container">
       <div>
-       
-         <select name = "searchType" class = "searchType">
+       <div class="col-xs-3"> 
+         <select name = "searchType" class = "searchType form-control">
             <option value = "n"
                <c:out value="${orderList.searchType==null?'selected':'' }"/>>
                분류
@@ -157,17 +157,20 @@
                고객id
                </option>
          </select>
-         <input type = "text" name = "keyword" placeholder = "검색어 입력란" id = "keyword">
-         <button id = "search" class = "btn btn-warning">검색</button>
-         <button id = "all" class = "btn btn-warning">전체목록</button>
+         </div>
+         <div class="col-xs-3">
+         <input type = "text" name = "keyword" class="form-control" placeholder = "검색어 입력란" id = "keyword">
+         </div>
+         <button id = "search" class = "btn btn-success">검색</button>
+         <button id = "all" class = "btn btn-success">전체목록</button>
       </div>
-      <br><br><br><br>
+      <br><br>
    
       <div>
       <button id = "button" class = "btn btn-primary">배송</button>
       <div style = "float:right;">
-         <button id = "button1" class = "btn btn-danger">배송목록</button>
-         <button id = "button2" class = "btn btn-danger">배송확인 목록</button>       
+         <button id = "button1" class = "btn btn-info">배송목록</button>
+         <button id = "button2" class = "btn btn-info">배송확인 목록</button>       
       </div>
          <table class = "searchTable table table-hover">   
             <tr>
@@ -183,12 +186,13 @@
                   
                </tr>
          </table>
+         
          <ul class = "pagination">
          </ul>
-         
+      	 </div>
       </div>
    
       
-   </div>
+ 
 </body>
 </html>

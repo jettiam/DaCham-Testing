@@ -15,7 +15,12 @@
 
 <title>Insert title here</title>
 <style>
- 
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+* {
+	font-family: 'Jeju Gothic',"Nanum Gothic", sans-serif !important;
+} 
 </style>
 <script>
 	$(document).ready(function(){
