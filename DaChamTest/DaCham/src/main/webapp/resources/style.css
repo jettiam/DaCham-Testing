@@ -4,7 +4,7 @@
 
 h1, h2, h3, h4, h5, h6{
 	font-family: 'Raleway', sans-serif;
-	text-transform: uppercase;
+	
 	font-weight: 900;
 	color: #424242;
 
@@ -348,24 +348,9 @@ section{
 	font-size: 18px;
 }
 .footer{
-	background-color: #202020;
-	text-align: center;
+	
 	padding: 60px 0;
 }
-.footer span{
-	color: #51c2b9;
-}
-.footer p{
-	font-size: 21px;
-	color: #fff;
-	margin-bottom: 0;
-}
-.footer a{
-	color: #fff;
-}
-
-
-
 
 /*animations*/
 .vira-card .vira-card-header .card-icon:after{
