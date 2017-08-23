@@ -4,8 +4,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wdb3a.CookerMapper">
 	<select id = "foodStockAll" resultType = "FoodMInven">
-		select foodMName,sum(inAmount) inAmount,sum(outAmount) outAmount,unit
-		from foodminven group by foodMName
+		select foodMName,
+		sum(inAmount) as inAmount, COALESCE(sum(outAmount),0)
+		as
+		outAmount, unit, foodMStatus,
+		sum(inAmount)-COALESCE(sum(outAmount),0) as stock
+		from foodminven where
+		foodMStatus = 1
+		group by foodMName
 		limit #{startRecord} , #{recordsPerPage}
 	</select>
 	<select id = "foodStockAllCount" resultType = "Integer">
@@ -18,10 +24,13 @@
 		
 	</select>
 	<select id="foodStock" resultType="FoodMInven">
-		select a.foodMName,sum(a.inAmount) inAmount,sum(a.outAmount) outAmount,a.unit
-		from foodminven a,orderlist b
-		where a.orderCode = b.orderCode 
-		and b.orderItemCode = 10
+	select foodMName,
+		sum(inAmount) as inAmount, COALESCE(sum(outAmount),0)
+		as
+		outAmount, unit, foodMStatus,
+		sum(inAmount)-COALESCE(sum(outAmount),0) as stock
+		from foodminven where
+		foodMStatus = 1
 		group by foodMName
 		having foodMName like CONCAT('%',#{keyword},'%')
 	</select>

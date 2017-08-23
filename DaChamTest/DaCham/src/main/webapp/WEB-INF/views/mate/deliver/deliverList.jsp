@@ -22,35 +22,44 @@
          all(1,5);
       
       $("#button").on("click",function(){
+         var status = true;
          $("input[name='chk']:checked").each(function(){
             var orderCode = $(this).val();     
             var data = $(".transportNum"+orderCode).val();
-          //  if(transportNum == ""){
-          // 	 alert("운송장번호입력하세요");
-           // }
-            
+            if(data == "" || orderCode == null){
+                alert("운송장번호입력하세요");
+                status = false;
+            }
+            else{
+                 
                $.ajax({
-                  type : "put",   
-                  url : "deliverAjax/"+ orderCode,
-                  headers : {
-                     "Content-Type" : "application/json",
-                     "X-HTTP-Method-Override" : "PUT"
-                  },
-                  dataType : 'text',
-                  data : JSON.stringify({
-                     "transportNum" : data
-                  }),
-                  success : function(result){
-                     if(result == "SUCCESS"){
-                        all(currentPage,5);
-                        
-                     }
-                  }
-                  
-               });
-               alert("배송이완료되었습니다.");  
+                    type : "put",   
+                    url : "deliverAjax/"+ orderCode,
+                    headers : {
+                       "Content-Type" : "application/json",
+                       "X-HTTP-Method-Override" : "PUT"
+                    },
+                    dataType : 'text',
+                    data : JSON.stringify({
+                       "transportNum" : data
+                    }),
+                    success : function(result){
+                       if(result == "SUCCESS"){
+                          all(currentPage,5);
+                          status = true;
+                       }
+                    }
+                    
+                 });
+                 
+            }
+             
+            
+            
          });
-         
+         if(status == true && $("input[name='chk']").is(":checked")){   
+            alert("배송이 완료되었습니다.");
+         }
          
       });
       $("#search").on("click",function(){
@@ -58,7 +67,7 @@
          var searchType = $('.searchType').val();
          var keyword = $("#keyword").val();
          if(keyword == ""){
-        	 alert("검색어를 입력하세요");
+            alert("검색어를 입력하세요");
          }
          $.getJSON("deliverAjax/"+searchType+"/"+keyword,function(data){
             var str = "";
@@ -117,15 +126,15 @@
       }
    
    $("#allCheck").click(function() {
-	   
-		if ($("#allCheck").prop("checked")) {
-			//input태그의 name이 che인 태그들을 찾아서 checked옵션을 true로 정의
-			$("input[name=chk]").prop('checked', true);
-			//클릭이 안되있으면 
-		} else {
-			$("input[name=chk]").prop('checked', false);
-		}
-	});
+      
+      if ($("#allCheck").prop("checked")) {
+         //input태그의 name이 che인 태그들을 찾아서 checked옵션을 true로 정의
+         $("input[name=chk]").prop('checked', true);
+         //클릭이 안되있으면 
+      } else {
+         $("input[name=chk]").prop('checked', false);
+      }
+   });
    });
 </script>
 </head>
@@ -133,8 +142,8 @@
 <%@include file = "deliverNavi.jsp" %>
    <div class = "container">
       <div>
-       
-         <select name = "searchType" class = "searchType">
+       <div class="col-xs-3"> 
+         <select name = "searchType" class = "searchType form-control">
             <option value = "n"
                <c:out value="${orderList.searchType==null?'selected':'' }"/>>
                분류
@@ -148,17 +157,20 @@
                고객id
                </option>
          </select>
-         <input type = "text" name = "keyword" placeholder = "검색어 입력란" id = "keyword">
-         <button id = "search" class = "btn btn-warning">검색</button>
-         <button id = "all" class = "btn btn-warning">전체목록</button>
+         </div>
+         <div class="col-xs-3">
+         <input type = "text" name = "keyword" class="form-control" placeholder = "검색어 입력란" id = "keyword">
+         </div>
+         <button id = "search" class = "btn btn-success">검색</button>
+         <button id = "all" class = "btn btn-success">전체목록</button>
       </div>
-      <br><br><br><br>
+      <br><br>
    
       <div>
       <button id = "button" class = "btn btn-primary">배송</button>
       <div style = "float:right;">
-         <button id = "button1" class = "btn btn-danger">배송목록</button>
-         <button id = "button2" class = "btn btn-danger">배송확인 목록</button>       
+         <button id = "button1" class = "btn btn-info">배송목록</button>
+         <button id = "button2" class = "btn btn-info">배송확인 목록</button>       
       </div>
          <table class = "searchTable table table-hover">   
             <tr>
@@ -174,12 +186,13 @@
                   
                </tr>
          </table>
+         
          <ul class = "pagination">
          </ul>
-         
+      	 </div>
       </div>
    
       
-   </div>
+ 
 </body>
 </html>

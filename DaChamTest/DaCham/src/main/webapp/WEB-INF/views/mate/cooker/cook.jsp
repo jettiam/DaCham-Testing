@@ -12,6 +12,12 @@
 <script
    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+* {
+	font-family: 'Jeju Gothic',"Nanum Gothic", sans-serif !important;
+}
    .floating-box{
       display : inline-block;
          width: 150px;
