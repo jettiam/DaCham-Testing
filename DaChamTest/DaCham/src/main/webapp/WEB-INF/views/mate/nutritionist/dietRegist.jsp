@@ -393,14 +393,15 @@
 								TFat += data.fat;
 								TNa += data.na;
 								
-								$("#TKcal").text(TKcal);
-								$("#TCarbohydrate").text(TCarbohydrate);
-								$("#TProtein").text(TProtein);
-								$("#TFat").text(TFat);
-								$("#TNa").text(TNa);
+								
 								
 								count1++;
 								openAPI();
+								$("#TKcal").text(localStorage[0+'_total3']);
+								$("#TCarbohydrate").text(localStorage[0+'_total2']);
+								$("#TProtein").text(localStorage[0+'_total1']);
+								$("#TFat").text(localStorage[0+'_total5']);
+								$("#TNa").text(localStorage[0+'_total4']);
 							});
 							
 						});
@@ -422,14 +423,15 @@
 								TFat += data.fat;
 								TNa += data.na;
 								
-								$("#TKcal").text(TKcal);
-								$("#TCarbohydrate").text(TCarbohydrate);
-								$("#TProtein").text(TProtein);
-								$("#TFat").text(TFat);
-								$("#TNa").text(TNa);
+								
 								
 								count2++;
 								openAPI();
+								$("#TKcal").text(localStorage[0+'_total3']);
+								$("#TCarbohydrate").text(localStorage[0+'_total2']);
+								$("#TProtein").text(localStorage[0+'_total1']);
+								$("#TFat").text(localStorage[0+'_total5']);
+								$("#TNa").text(localStorage[0+'_total4']);
 							});
 							
 						});
@@ -450,15 +452,16 @@
 								TFat += data.fat;
 								TNa += data.na;
 								
-								$("#TKcal").text(TKcal);
-								$("#TCarbohydrate").text(TCarbohydrate);
-								$("#TProtein").text(TProtein);
-								$("#TFat").text(TFat);
-								$("#TNa").text(TNa);
+								
 								
 								
 								count3++;
 								openAPI();
+								$("#TKcal").text(localStorage[0+'_total3']);
+								$("#TCarbohydrate").text(localStorage[0+'_total2']);
+								$("#TProtein").text(localStorage[0+'_total1']);
+								$("#TFat").text(localStorage[0+'_total5']);
+								$("#TNa").text(localStorage[0+'_total4']);
 							});
 							
 						});
@@ -480,14 +483,16 @@
 								TFat += data.fat;
 								TNa += data.na;
 								
-								$("#TKcal").text(TKcal);
-								$("#TCarbohydrate").text(TCarbohydrate);
-								$("#TProtein").text(TProtein);
-								$("#TFat").text(TFat);
-								$("#TNa").text(TNa);
+								
 								
 								count4++;
 								openAPI();
+								
+								$("#TKcal").text(localStorage[0+'_total3']);
+								$("#TCarbohydrate").text(localStorage[0+'_total2']);
+								$("#TProtein").text(localStorage[0+'_total1']);
+								$("#TFat").text(localStorage[0+'_total5']);
+								$("#TNa").text(localStorage[0+'_total4']);
 							});
 							
 						});
@@ -508,15 +513,17 @@
 								TFat += data.fat;
 								TNa += data.na;
 								
-								$("#TKcal").text(TKcal);
-								$("#TCarbohydrate").text(TCarbohydrate);
-								$("#TProtein").text(TProtein);
-								$("#TFat").text(TFat);
-								$("#TNa").text(TNa);
+								
 								
 								
 								count5++;
 								openAPI();
+								
+								$("#TKcal").text(localStorage[0+'_total3']);
+								$("#TCarbohydrate").text(localStorage[0+'_total2']);
+								$("#TProtein").text(localStorage[0+'_total1']);
+								$("#TFat").text(localStorage[0+'_total5']);
+								$("#TNa").text(localStorage[0+'_total4']);
 							});
 							
 						});
@@ -538,14 +545,16 @@
 								TFat += data.fat;
 								TNa += data.na;
 								
-								$("#TKcal").text(TKcal);
-								$("#TCarbohydrate").text(TCarbohydrate);
-								$("#TProtein").text(TProtein);
-								$("#TFat").text(TFat);
-								$("#TNa").text(TNa);
+								
 								
 								count6++;
 								openAPI();
+								
+								$("#TKcal").text(localStorage[0+'_total3']);
+								$("#TCarbohydrate").text(localStorage[0+'_total2']);
+								$("#TProtein").text(localStorage[0+'_total1']);
+								$("#TFat").text(localStorage[0+'_total5']);
+								$("#TNa").text(localStorage[0+'_total4']);
 							});
 							
 						});
