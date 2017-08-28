@@ -409,7 +409,7 @@ li {
 						고객님의 위자드 결과
 						<h2 id="resultName"></h2>
 						<h2 id="resultJudg"></h2>
-						<a href="#" class="btn-gradient red">Button</a>
+						
 						<button id="showResultDiet">추천식단 보기</button>
 					</div>
 					<!-- 시간이 된다면 추가할 파트
