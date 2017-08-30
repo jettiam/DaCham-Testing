@@ -9,7 +9,7 @@ Blockly.Blocks['makeQSheet'] = {
       .setCheck(null)
       .appendField("질문지 번호: ")
       .appendField(new Blockly.FieldNumber(1), "q_no");
-    this.setColour("#8F807F");
+    this.setColour("#332523");
     this.setTooltip('');
     this.setHelpUrl('');
   }
@@ -23,7 +23,8 @@ Blockly.Blocks['resultsheet'] = {
         .appendField("결과를 블록으로 연결하세요.");
     this.setInputsInline(false);
     this.setOutput(true, null);
-    this.setColour("#C87661");
+    this.setColour("#9AAAA1");
+    
     this.setTooltip('');
     this.setHelpUrl(''); 
   }
@@ -39,7 +40,7 @@ Blockly.Blocks['inputQ'] = {
     this.appendDummyInput()
       .appendField("질문: ")
       .appendField(new Blockly.FieldTextInput("질문을 입력하세요."), "question");
-    this.setColour("#DF9D8C");
+    this.setColour("#705A50");
     this.itemCount_ = 3;
     this.updateShape_();
     this.setOutput(true, 'Array');
@@ -133,7 +134,7 @@ Blockly.Blocks['answerLink'] = {
       .appendField(new Blockly.FieldNumber(1), "link_no")
       .appendField("로 연결합니다.");
     this.setOutput(true, null);
-    this.setColour("#96BEBD");
+    this.setColour("#D3C7BB");
     this.setTooltip('');
     this.setHelpUrl('');
   }

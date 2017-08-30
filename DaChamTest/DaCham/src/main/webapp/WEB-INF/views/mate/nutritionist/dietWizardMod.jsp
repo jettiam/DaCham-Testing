@@ -110,7 +110,9 @@ ul {
 li {
 	list-style-type: none;
 }
-
+#searchNum{
+	width:97%;
+}
 .sideNaviStart {
 	
 }
@@ -167,14 +169,15 @@ svg {
 	</div>
 	<span id="blockWizard">
 		<div id="blocklyDiv"
-			style="display: inline-block; height: 3000px; width: 100%;"></div> <xml
+			style="display: inline-block; height: 3000px; width: 100%;"></div> 
+			<xml
 			xmlns="http://www.w3.org/1999/xhtml" id="toolbox"
 			style="display: none"> <category name="1. 질문지 만들기"
-			colour="#89934a"> <block type="makeQSheet"></block> </category> <category
-			name="2. 질문 입력" colour="#f57e24"> <block type="inputQ"></block>
-		</category> <category name="3. 답안입력, 연결" colour="#f8b125"> <block
-			type="answerLink"></block></category> <category name="4. 결과지와 연결하기">
-		<block type="resultsheet"></block></category> <category name="5. 결과지 블록모음">
+			colour="#332523"> <block type="makeQSheet"></block> </category> <category
+			name="2. 질문 입력" colour="#705A50"> <block type="inputQ"></block>
+		</category> <category name="3. 답안입력, 연결" colour="#D3C7BB"> <block
+			type="answerLink"></block></category> <category name="4. 결과지와 연결하기" colour="#9AAAA1">
+		<block type="resultsheet"></block></category> <category name="5. 결과지 블록모음" colour="#f8b125">
 		<block type="d1"></block> <block type="d2"></block> <block type="d3"></block>
 		
 		<block type="h1"></block><block type="h2"></block><block type="h3"></block>

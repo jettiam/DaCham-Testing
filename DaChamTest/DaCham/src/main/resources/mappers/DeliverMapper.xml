@@ -32,13 +32,13 @@
   		from foodmaterial
   	</select>
   	<select id = "showDeliver" resultType = "com.wdb3a.dacham.bean.Deliver">
-  		select *
-		from foodminven b join orderlist c join orderitem d
-		where b.orderCode = c.orderCode
-		and c.orderItemCode = d.orderItemCode
-		and d.orderItemCode = 9
-
-		<include refid="searchDeliver"></include>
+  		select a.foodMICode, a.foodMName, sum(a.inAmount) as inAmount,b.orderDate, a.unit, a.orderCode
+      from foodminven a, orderlist b
+      where a.orderCode = b.orderCode
+      and a.orderCode is not null
+      and foodMStatus = 0
+      group by foodMName
+		having foodMName like CONCAT('%',#{keyword},'%')
 		
   	</select>
   	<select id = "showDeliverAll" resultType = "com.wdb3a.dacham.bean.Deliver">

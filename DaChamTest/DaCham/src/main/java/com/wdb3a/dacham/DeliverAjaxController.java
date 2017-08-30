@@ -82,14 +82,14 @@ public class DeliverAjaxController {
 		}
 		return entity;
 	}
-	@RequestMapping(value = "/showDeliver/{searchType}/{keyword}",method = RequestMethod.GET)
-	public ResponseEntity<List<Deliver>> showDeliver(@PathVariable("searchType")String searchType, @PathVariable("keyword")String keyword){
+	@RequestMapping(value = "/showDeliver/{keyword}",method = RequestMethod.GET)
+	public ResponseEntity<List<Deliver>> showDeliver(@PathVariable("keyword")String keyword){
 		ResponseEntity<List<Deliver>> entity = null;
 		Deliver deliver = new Deliver();
 		
 		try {
 			
-			deliver.setSearchType(searchType);
+			
 			deliver.setKeyword(keyword);
 			List<Deliver> list = service.showDeliver(deliver);
 			entity = new ResponseEntity<>(list,HttpStatus.OK);
