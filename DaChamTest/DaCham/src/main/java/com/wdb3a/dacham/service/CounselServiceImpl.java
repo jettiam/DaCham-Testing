@@ -7,15 +7,16 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.wdb3a.dacham.bean.Counsel;
+import com.wdb3a.dacham.bean.Criteria;
 import com.wdb3a.dacham.dao.CounselDAO;
 @Service
 public class CounselServiceImpl implements CounselService {
 @Inject
 private CounselDAO dao;
 	@Override
-	public List<Counsel> counselList() throws Exception {
+	public List<Counsel> counselList(Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.counselList();
+		return dao.counselList(criteria);
 	}
 	@Override
 
@@ -37,6 +38,11 @@ private CounselDAO dao;
 	public void update(Counsel counsel) throws Exception {
 		dao.update(counsel);
 		
+	}
+	@Override
+	public int couselListAll() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.couselListAll();
 	}
     
 }
