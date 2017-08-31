@@ -86,9 +86,9 @@ public class CounselorServiceImpl implements CounselorService {
 	}
 
 	@Override
-	public List<Counselor> counselorseList2All() throws Exception {
+	public List<Counselor> counselorseList2All(Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.counselorseList2All();
+		return dao.counselorseList2All(criteria);
 	}
 
 	@Override
@@ -110,9 +110,9 @@ public class CounselorServiceImpl implements CounselorService {
 	}
 
 	@Override
-	public List<Counselor> finCounselList() throws Exception {
+	public List<Counselor> finCounselList(Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.finCounselList();
+		return dao.finCounselList(criteria);
 	}
 
 	@Override
@@ -131,5 +131,17 @@ public class CounselorServiceImpl implements CounselorService {
 	public List<Counselor> linkCounsel2(String customer) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.linkCounsel2(customer);
+	}
+
+	@Override
+	public int counselorseList2AllCount() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.counselorseList2AllCount();
+	}
+
+	@Override
+	public int finCounselListCount() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.finCounselListCount();
 	}
 }
