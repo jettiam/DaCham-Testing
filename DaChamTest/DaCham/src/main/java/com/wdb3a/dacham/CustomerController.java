@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,10 +19,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.wdb3a.dacham.bean.Counsel;
-
+import com.wdb3a.dacham.bean.Criteria;
 import com.wdb3a.dacham.bean.OrderList;
 
 import com.wdb3a.dacham.bean.Customer;
@@ -254,10 +256,15 @@ public String nutritionInfoDetail(Model model,int detail){
  */
 @RequestMapping(value="/counsel",method = RequestMethod.GET)
 public String getCounsel(Model model) throws Exception{	
-	List<Counsel> list = service.counselList();
+	Criteria criteria = new Criteria();
+	criteria.setPage(1);
+	criteria.setTotalCount(service.couselListAll());
+	List<Counsel> list = service.counselList(criteria);
 	model.addAttribute("list",list);
+	model.addAttribute("criteria",criteria);
 	return "customer/counsel/counsel";
 }
+
 @RequestMapping(value="/write",method = RequestMethod.GET)
 /**
  * 
