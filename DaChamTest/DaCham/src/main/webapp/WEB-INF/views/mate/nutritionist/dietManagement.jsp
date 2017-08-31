@@ -15,7 +15,7 @@
 	$(document).ready(function(){
 		$("#diet").addClass("w3-light-gray");
 		var currentPage = 1;
-		var diseaseName = "";
+		var diseaseName = '당뇨';
 		$("#regist").click(function(){
 			window.location.href = "dietRegist";
 		});
