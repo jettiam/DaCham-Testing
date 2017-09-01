@@ -88,7 +88,12 @@
 		});
 		$(".updateSide").on("click",function(){
 			var sideDCode = $('input:radio[name="radio"]:checked').val();
-			window.location.href = "sideModify?sideDCode="+sideDCode;
+			if(sideDCode == undefined){
+				alert("라디오로 반찬을 선택 후 진행해 주세요");
+			}
+			else{
+				window.location.href = "sideModify?sideDCode="+sideDCode;
+			}
 		});
 		$(".deleteSide").on("click",function(){
 			var ans = confirm("삭제하면 되돌릴 수 없습니다. 정말로 반찬을 삭제하시겠습니까?");
