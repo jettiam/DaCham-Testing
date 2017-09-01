@@ -198,7 +198,7 @@
 	<!-- 특별식단 등록이 완료되면 표시함 -->
 	<update id = "specialComplete">
 		update counsel set counselItemCode = 5
-		where customer = #{customer}
+		where counselCode = #{counselCode}
 	</update>
 	<!-- 특별 고객이 등록한 특별식단 toggle -->
 	<select id = "specialToggle" resultType = "com.wdb3a.dacham.bean.Nutritionist">
@@ -231,7 +231,7 @@
 	<!-- 특별식단 추가 등록하고 싶으면 전환함 -->
 	<update id="reRegist">
 		update counsel set counselItemCode = 2
-		where customer = #{customer}
+		where counselCode = #{counselCode}
 	</update>
 	<!-- 특별식단의 디폴트 반찬 옵션에 입력함 -->
 	<insert id = "optionInsert">

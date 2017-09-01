@@ -24,6 +24,8 @@
 			.ready(
 					function() {
 						$("#special").addClass("w3-light-gray");
+						var counselCode = ${counsel.counselCode};
+						console.log(counselCode);
 						var currentPage = 1;
 						var currentGroup = "";
 						var v = 0;
@@ -37,7 +39,7 @@
 							if (window.confirm("정말로 취소하시겠습니까?")) {
 								if(${counsel.counselItemCode} == 2){
 									$.ajax({
-										url : "nutriAjax/rollback/"+customer,
+										url : "nutriAjax/rollback/"+counselCode,
 										type : "PUT",
 										headers : {
 											"Content-Type" : "application/json",
@@ -57,11 +59,7 @@
 						$("#sideAll").on("click", function() {
 							sideAll();
 						});
-						$("#cancle").click(function() {
-							if (window.confirm("정말로 취소하시겠습니까?")) {
-								window.location.href = "diet";
-							}
-						});
+						
 						localStorage.clear();
 						
 						if (!localStorage['init']
@@ -630,8 +628,21 @@
 											
 							else{
 								$("#registForm").attr("method", "post");
-								$("#registForm").attr("action", "diet");
+								$("#registForm").attr("action", "SPDiet");
 								$("#registForm").submit();	
+								$.ajax({
+									url : "nutriAjax/rollback/"+counselCode,
+									type : "PUT",
+									headers : {
+										"Content-Type" : "application/json",
+										"X-HTTP-Method-Override" : "PUT"
+									},
+									success : function(result){
+										if(result == "SUCCESS"){
+											
+										}
+									}
+								});
 							}
 							
 						});
@@ -953,6 +964,8 @@ margin-bottom:15px;
 
 		<div class="col-sm-12 form-inline" style="margin-bottom:15px;">
 			<form id="registForm" enctype="multipart/form-data" class="form-group">
+				<input type = "hidden" name = "counselCode" value = "${counsel.counselCode }">
+				<input type = "hidden" name = "customer" value = "${counsel.customer }">
 				<div class="div2">
 
 <!-- 					<div class="template"> -->
@@ -980,7 +993,7 @@ margin-bottom:15px;
 						
 					
 					<div id="spDietItem">
-						 <input type="hidden" name="spDietItem" value="1" checked>
+						 <input type="hidden" name="spDietItem" value="0" checked>
 					</div>
 
 				</div>
@@ -1029,6 +1042,7 @@ margin-bottom:15px;
 	
 	<script>
 		//이미 등록된 특별식단의 반찬을 보여주는 기능
+		var counselCode = ${counsel.counselCode};
 		$(document).ready(function(){
 			var customer ='${counsel.customer}';
 			
@@ -1037,7 +1051,7 @@ margin-bottom:15px;
 			
 			$("#reRegist").on("click",function(){
 				$.ajax({
-					url : "nutriAjax/reRegist/"+customer,
+					url : "nutriAjax/reRegist/"+counselCode,
 					type : "PUT",
 					dataType : "jsonp",
 					headers : {
