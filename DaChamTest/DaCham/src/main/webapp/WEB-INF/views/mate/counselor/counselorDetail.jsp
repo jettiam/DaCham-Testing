@@ -17,6 +17,10 @@
   float:left;  }
  .box2 {
   display:inline-block;  margin-left:20px;}  
+  .modalTable2{
+  	table-layout:fixed;
+		work-break:break-all;
+  }    
 </style>
 <script>
 $(document).ready(function(){
@@ -335,18 +339,7 @@ $(document).ready(function(){
                </div>
                <div class = "modal-body">
                   <table class = "modalTable2 table table-borded">
-                     <tr>
-                        <th>분류</th>
-                        <td id = "counselItemCode2"></td>
-                     </tr>
-                     <tr>
-                        <th>제목</th>
-                        <td id = "counselTitle2"></td>
-                     </tr>
-                     <tr>
-                        <th>상담일자</th>
-                        <td id = "counselDate"></td>
-                     </tr>
+                     
                      <tr>
                         <th>내용</th>
                         <td id = "counselContent"></td>

@@ -14,6 +14,11 @@
 <title>Insert title here</title>
 <style>
 	.counselTitle { color: blue; text-decoration: underline;}   
+	
+	.counsel{
+		table-layout:fixed;
+		work-break:break-all;
+	}
 </style>
 <script>
 	$(document).ready(function(){

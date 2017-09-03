@@ -186,7 +186,14 @@
 </script>
 <style>
  .nameClick { color: blue; text-decoration: underline;}
- 
+ .link {
+ 	table-layout:fixed;
+		work-break:break-all;
+ }    
+ .pushTable{    
+ 	table-layout:fixed;
+		work-break:break-all;   
+ }  
 </style>
 </head>
 <body>           
@@ -294,7 +301,7 @@
       				<h4 class = "modal-title">상담상세 내역</h4>
       			</div>
       			<div class = "modal-body" style="word-wrap : break-word">
-      				<table class = "table table-hover">
+      				<table class = "pushTable table table-hover">
       					<tr>
       						<th>내용</th>
       						<td id = "dualContent"></td>
