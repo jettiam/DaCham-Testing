@@ -232,7 +232,7 @@
 				var foodMName = $(this).attr('data-src');
 				var foodMCode = $(this).attr('data-code');
 				
-				$(".material").append("<tr class = 'item'><td>"+"<input type = 'hidden' name = 'foodMCode' value = '"+foodMCode+"'>"+"</td><td class = 'foodMName' name = 'foodMName' data-name = '"+foodMName+"'>"+foodMName+"</td><td>"+"<input type = 'text' class = 'foodMAmountClass' name = 'foodMAmount' maxlength = '4' size = '1' value = '1'>"+"</td></tr>");
+				
 				$(this).parent().parent().hide();
 				var length = $(".material tbody > .item").length;
 				//alert("식재료의 개수:"+length);	
@@ -240,6 +240,8 @@
 				var status = true;
 				
 				if(length == 0){
+					$(".material").append("<tr class = 'item'><td>"+"<input type = 'hidden' name = 'foodMCode' value = '"+foodMCode+"'>"+"</td><td class = 'foodMName' name = 'foodMName' data-name = '"+foodMName+"'>"+foodMName+"</td><td>"+"<input type = 'text' class = 'foodMAmountClass' name = 'foodMAmount' maxlength = '4' size = '1' value = '1'>"+"</td></tr>");
+					console.log("상위콘솔:"+$(".material tbody > .item").eq(i).children().children().val());
 					cntChange(v);
 					$.getJSON("nutriAjax/show/"+foodMCode,function(data){
 						
@@ -262,7 +264,7 @@
 				else{
 					for(var i = 0; i < length; i++){
 						console.log("콘솔:"+$(".material tbody > .item").children().eq(i).children().eq(0).val());
-						if($(".material tbody > .item").children().eq(i).children().eq(0).val() == foodMCode){
+						if($(".material tbody > .item").eq(i).children().children().val() == foodMCode){
 							alert("중복된 식재료가 선택되었습니다.");
 							status = false;
 							break;
@@ -272,6 +274,8 @@
 						}
 					}
 					if(status == true){
+						$(".material").append("<tr class = 'item'><td>"+"<input type = 'hidden' name = 'foodMCode' value = '"+foodMCode+"'>"+"</td><td class = 'foodMName' name = 'foodMName' data-name = '"+foodMName+"'>"+foodMName+"</td><td>"+"<input type = 'text' class = 'foodMAmountClass' name = 'foodMAmount' maxlength = '4' size = '1' value = '1'>"+"</td></tr>");
+						console.log("상위콘솔:"+$(".material tbody > .item").eq(i).children().children().val());
 						cntChange(v);
 						$.getJSON("nutriAjax/show/"+foodMCode,function(data){
 							
