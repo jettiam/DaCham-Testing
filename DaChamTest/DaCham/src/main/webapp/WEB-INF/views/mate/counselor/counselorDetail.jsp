@@ -13,6 +13,12 @@
    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 <style>
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+* {
+	font-family: 'Jeju Gothic',"Nanum Gothic", sans-serif !important;
+}
  .box1 {
   float:left;  }
  .box2 {
@@ -337,7 +343,8 @@ $(document).ready(function(){
                   <button type = "button" class = "close" data-dismiss = "modal">X</button>
                   <h4 class = "modal-title">상세 내역</h4>
                </div>
-               <div class = "modal-body">
+           
+               <div class = "modal-body" id = "myModal" role = "dialog" style = "width:100%; overflow-x:auto; word-wrap : break-word;">
                   <table class = "modalTable2 table table-borded">
                      
                      <tr>
@@ -354,6 +361,7 @@ $(document).ready(function(){
                   <button type = "button" class = "btn btn-default" data-dismiss = "modal">Close</button>
                </div>
             </div>
+          
          </div>
       </div>
    </div>

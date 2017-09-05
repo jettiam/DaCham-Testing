@@ -185,6 +185,12 @@
  
 </script>
 <style>
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+* {
+	font-family: 'Jeju Gothic',"Nanum Gothic", sans-serif !important;
+}
  .nameClick { color: blue; text-decoration: underline;}
  .link {
  	table-layout:fixed;
@@ -198,10 +204,10 @@
 </head>
 <body>           
 <%@include file = "counselorNavi.jsp" %>
-    <div class = "container"  >    
+    <div class = "container-fluid"  >    
       <div class = "box1">
       
-             <h3>고객의 정보</h3>
+             <h3>고객 정보</h3>
              <div>
              <div class="form-group row" >   
 			<div class="col-xs-2" > 
