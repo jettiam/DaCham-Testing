@@ -80,8 +80,8 @@
 			var str = "";
 
 			if (criteria.prev) {
-				str += "<li><a href=''"
-						+ (criteria.startPage - 1) + "'>'"
+				str += "<li><a href='"
+						+ (criteria.startPage - 1) + "'>"
 						+ "<<" + "</a></li>";
 			}
 			for (var i = criteria.startPage; i <= criteria.endPage; i++) {
@@ -91,8 +91,8 @@
 						+ "</a></li>";
 			}
 			if (criteria.next) {
-				str += "<li><a href=''"
-						+ (criteria.endPage + 1) + "'>'" + ">>"
+				str += "<li><a href='"
+						+ (criteria.endPage + 1) + "'>" + ">>" 
 						+ "</a></li>";
 			}
 			$(".all").html(str);
@@ -109,8 +109,8 @@
 			var str = "";
 
 			if (criteria.prev) {
-				str += "<li><a href=''"
-						+ (criteria.startPage - 1) + "'>'"
+				str += "<li><a href='"
+						+ (criteria.startPage - 1) + "'>"
 						+ "<<" + "</a></li>";
 			}
 			for (var i = criteria.startPage; i <= criteria.endPage; i++) {
@@ -120,8 +120,8 @@
 						+ "</a></li>";
 			}
 			if (criteria.next) {
-				str += "<li><a href=''"
-						+ (criteria.endPage + 1) + "'>'" + ">>"
+				str += "<li><a href='"      
+						+ (criteria.endPage + 1) + "'>" + ">>"
 						+ "</a></li>";
 			}
 			$(".paginationSub").html(str);

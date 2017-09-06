@@ -461,7 +461,7 @@
 																				+ "<td>"
 																				+ data[i].orderItemName
 																				+ "</td>"
-																				+ "<td>"
+																				+ "<td class='transportNum'>"
 																				+ data[i].transportNum
 																				+ "</td> </tr>"
 																	}
@@ -471,6 +471,7 @@
 																	$(
 																			".pagination")
 																			.empty();
+																	fontColor()
 																});
 											} else {
 												alert("검색어를 입력하세요");
@@ -521,13 +522,14 @@
 															+ "<td>"
 															+ data.list[i].orderItemName
 															+ "</td>"
-															+ "<td>"
+															+ "<td class='transportNum'>"
 															+ data.list[i].transportNum
 															+ "</td> </tr>"
 												}
 												console.log(str);
 												$(".tables").append(str);
 												printPaging(data.criteria);
+												fontColor()
 											});
 						}
 
@@ -535,8 +537,8 @@
 							var str = "";
 
 							if (criteria.prev) {
-								str += "<li><a href=''"
-										+ (criteria.startPage - 1) + "'>'"
+								str += "<li><a href='"
+										+ (criteria.startPage - 1) + "'>"  
 										+ "<<" + "</a></li>";
 							}
 							for (var i = criteria.startPage; i <= criteria.endPage; i++) {
@@ -546,8 +548,8 @@
 										+ "</a></li>";
 							}
 							if (criteria.next) {
-								str += "<li><a href=''"
-										+ (criteria.endPage + 1) + "'>'" + ">>"
+								str += "<li><a href='"
+										+ (criteria.endPage + 1) + "'>" + ">>"
 										+ "</a></li>";
 							}
 							$(".pagination").html(str);
@@ -555,6 +557,18 @@
 						$("#sort").on("click", function() {
 							even.preventDefault();
 						})
+						
+						function fontColor() {
+							var length = $('.tables tr').length;
+							for (var i = 0; i < length; i++) {
+								var font = $(".transportNum").eq(i).text();
+								if (font != null) {
+
+									$(".transportNum").eq(i).css("color",
+											"#FA5858");  
+								}
+							}
+						}
 					});
 </script>
 </html>

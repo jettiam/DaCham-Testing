@@ -79,9 +79,9 @@ function previewImage(targetObj, View_area){
 												$(".memberTable").append(str);
 											});
 						}
-						all();
-						$(document.body).on("click", ".ids", function() {
-							var id = $(this).attr('data-code');
+						all(); 
+						$(".memberTable").on("click", ".ids", function() {
+							var id = $(this).attr('data-code'); 
 
 							userMemberInfo(id);
 						});
