@@ -56,7 +56,7 @@
 		<div>
 				<table class = "table table-hover">
 					<tr>
-						<th>*</th>
+						
 						<th>번호</th>
 						<th>고객id</th>
 						<th>상담명</th>
@@ -65,8 +65,7 @@
 					</tr>
 					<c:forEach items = "${list }" var = "v">
 						<tr class = "detail">
-							<td><input type = "radio" name = "counselCode" value = "${v.counselCode }"></td>
-							   
+				
 							<td>${v.counselCode}</td>   
 							<td>${v.customer }</td>
 							<td><a href = "SPRegist?counselCode=${v.counselCode }">${v.counselTitle }</a></td>   

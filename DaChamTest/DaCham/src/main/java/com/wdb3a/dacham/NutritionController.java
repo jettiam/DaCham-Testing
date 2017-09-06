@@ -233,8 +233,8 @@ public class NutritionController {
 	   
 	   //마지막에 제일 최근에 등록된 식단 코드를 가져오는 쿼리2
 	   //a태그를 해서 String에 붙이고, String을 위에 식단코드 주소를 a태그에 
-	   service.specialComplete(nutritionist.getCustomer());
-	   System.out.println("고객아이디:"+nutritionist.getCustomer());
+	   service.specialComplete(nutritionist.getCounselCode());
+	   System.out.println("고객아이디:"+nutritionist.getCounselCode());
 	   return "redirect:special";
    }
    //수정을 위한 반찬 정보 출력

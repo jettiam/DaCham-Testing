@@ -8,15 +8,16 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.wdb3a.dacham.bean.Counsel;
+import com.wdb3a.dacham.bean.Criteria;
 @Repository
 public class CounselDAOImpl implements CounselDAO {
 	private static final String namespace="com.wdb3a.CounselMapper";
 	@Inject
 	private SqlSession sqlSession;
 	@Override
-	public List<Counsel> counselList() throws Exception {
+	public List<Counsel> counselList(Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".counselList");
+		return sqlSession.selectList(namespace+".counselList",criteria);
 	}
 	@Override
 
@@ -39,6 +40,11 @@ public class CounselDAOImpl implements CounselDAO {
 		// TODO Auto-generated method stub
 		sqlSession.update(namespace+".update",counsel);
 		
+	}
+	@Override
+	public int couselListAll() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".couselListAll");
 	}	
 
 

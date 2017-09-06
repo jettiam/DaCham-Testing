@@ -3,9 +3,10 @@ package com.wdb3a.dacham.service;
 import java.util.List;
 
 import com.wdb3a.dacham.bean.Counsel;
+import com.wdb3a.dacham.bean.Criteria;
 
 public interface CounselService {
-	public List<Counsel> counselList() throws Exception;
+	public List<Counsel> counselList(Criteria criteria) throws Exception;
 
 	public void write(Counsel counsel) throws Exception; 
 
@@ -14,4 +15,5 @@ public interface CounselService {
 	public void delete(int counselCode) throws Exception;
 	
 	public void update(Counsel counsel) throws Exception;
+	public int couselListAll() throws Exception;
 }

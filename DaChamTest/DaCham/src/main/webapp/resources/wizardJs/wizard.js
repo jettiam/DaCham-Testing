@@ -9,7 +9,7 @@ Blockly.Blocks['makeQSheet'] = {
       .setCheck(null)
       .appendField("질문지 번호: ")
       .appendField(new Blockly.FieldNumber(1), "q_no");
-    this.setColour("#8F807F");
+    this.setColour("#332523");
     this.setTooltip('');
     this.setHelpUrl('');
   }
@@ -23,7 +23,8 @@ Blockly.Blocks['resultsheet'] = {
         .appendField("결과를 블록으로 연결하세요.");
     this.setInputsInline(false);
     this.setOutput(true, null);
-    this.setColour("#C87661");
+    this.setColour("#9AAAA1");
+    
     this.setTooltip('');
     this.setHelpUrl(''); 
   }
@@ -39,7 +40,7 @@ Blockly.Blocks['inputQ'] = {
     this.appendDummyInput()
       .appendField("질문: ")
       .appendField(new Blockly.FieldTextInput("질문을 입력하세요."), "question");
-    this.setColour("#DF9D8C");
+    this.setColour("#705A50");
     this.itemCount_ = 3;
     this.updateShape_();
     this.setOutput(true, 'Array');
@@ -133,7 +134,7 @@ Blockly.Blocks['answerLink'] = {
       .appendField(new Blockly.FieldNumber(1), "link_no")
       .appendField("로 연결합니다.");
     this.setOutput(true, null);
-    this.setColour("#96BEBD");
+    this.setColour("#D3C7BB");
     this.setTooltip('');
     this.setHelpUrl('');
   }
@@ -180,11 +181,122 @@ Blockly.Blocks['d3'] = {
   }
 };
 
+Blockly.Blocks['h1'] = {
+	init: function() {
+		this.appendDummyInput()
+        .appendField("심부전증");
+    this.appendDummyInput()
+        .appendField("주의");
+    this.setOutput(true, null);
+    this.setColour(colorSet1);
+    this.setTooltip('');
+    this.setHelpUrl('');
+	}
+}
 
+Blockly.Blocks['h2'] = {
+		init: function() {
+			this.appendDummyInput()
+	        .appendField("심부전증");
+	    this.appendDummyInput()
+	        .appendField("위험");
+	    this.setOutput(true, null);
+	    this.setColour(colorSet2);
+	    this.setTooltip('');
+	    this.setHelpUrl('');
+		}
+	}
 
+Blockly.Blocks['h3'] = {
+		init: function() {
+			this.appendDummyInput()
+	        .appendField("심부전증");
+	    this.appendDummyInput()
+	        .appendField("고위험");
+	    this.setOutput(true, null);
+	    this.setColour(colorSet3);
+	    this.setTooltip('');
+	    this.setHelpUrl('');
+		}
+	}
 
+Blockly.Blocks['s1'] = {
+		init: function() {
+			this.appendDummyInput()
+	        .appendField("신부전증");
+	    this.appendDummyInput()
+	        .appendField("주의");
+	    this.setOutput(true, null);
+	    this.setColour(colorSet1);
+	    this.setTooltip('');
+	    this.setHelpUrl('');
+		}
+	}
 
+	Blockly.Blocks['s2'] = {
+			init: function() {
+				this.appendDummyInput()
+		        .appendField("신부전증");
+		    this.appendDummyInput()
+		        .appendField("위험");
+		    this.setOutput(true, null);
+		    this.setColour(colorSet2);
+		    this.setTooltip('');
+		    this.setHelpUrl('');
+			}
+		}
 
+	Blockly.Blocks['s3'] = {
+			init: function() {
+				this.appendDummyInput()
+		        .appendField("신부전증");
+		    this.appendDummyInput()
+		        .appendField("고위험");
+		    this.setOutput(true, null);
+		    this.setColour(colorSet3);
+		    this.setTooltip('');
+		    this.setHelpUrl('');
+			}
+		}
+
+Blockly.Blocks['g1'] = {
+		init: function() {
+			this.appendDummyInput()
+	        .appendField("고지혈증");
+	    this.appendDummyInput()
+	        .appendField("주의");
+	    this.setOutput(true, null);
+	    this.setColour(colorSet1);
+	    this.setTooltip('');
+	    this.setHelpUrl('');
+		}
+	}
+
+	Blockly.Blocks['g2'] = {
+			init: function() {
+				this.appendDummyInput()
+		        .appendField("고지혈증");
+		    this.appendDummyInput()
+		        .appendField("위험");
+		    this.setOutput(true, null);
+		    this.setColour(colorSet2);
+		    this.setTooltip('');
+		    this.setHelpUrl('');
+			}
+		}
+
+	Blockly.Blocks['g3'] = {
+			init: function() {
+				this.appendDummyInput()
+		        .appendField("고지혈증");
+		    this.appendDummyInput()
+		        .appendField("고위험");
+		    this.setOutput(true, null);
+		    this.setColour(colorSet3);
+		    this.setTooltip('');
+		    this.setHelpUrl('');
+			}
+		}
 
 
 
@@ -248,24 +360,87 @@ Blockly.JavaScript['resultsheet'] = function(block) {
 
 	
 	
-	// 당뇨 고위험군
+	// 당뇨 
 	Blockly.JavaScript['d1'] = function(block) {
 		  var code = " 'result': '당뇨', 'judg':'주의' ";
 		  return [code, Blockly.JavaScript.ORDER_ATOMIC];
 		};
 
 	
-	// 당뇨 고위험군
+
 	Blockly.JavaScript['d2'] = function(block) {
 		  var code = " 'result': '당뇨', 'judg':'위험' ";
+		  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+		};
+
+Blockly.JavaScript['d3'] = function(block) {
+	  var code = " 'result': '당뇨', 'judg':'고위험' ";
+	  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+	};
+
+	
+	
+	
+	Blockly.JavaScript['h1'] = function(block) {
+		  var code = " 'result': '심부전증', 'judg':'주의' ";
+		  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+		};
+
+	
+	// 당뇨 고위험군
+	Blockly.JavaScript['h2'] = function(block) {
+		  var code = " 'result': '심부전증', 'judg':'위험' ";
 		  return [code, Blockly.JavaScript.ORDER_ATOMIC];
 		};
 
 	
 	
 	
-// 당뇨 고위험군
-Blockly.JavaScript['d3'] = function(block) {
-	  var code = " 'result': '당뇨', 'judg':'고위험' ";
+//당뇨 고위험군
+Blockly.JavaScript['h3'] = function(block) {
+	  var code = " 'result': '심부전증', 'judg':'고위험' ";
+	  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+	};
+	
+	
+	Blockly.JavaScript['s1'] = function(block) {
+		  var code = " 'result': '신부전증', 'judg':'주의' ";
+		  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+		};
+
+	
+	// 당뇨 고위험군
+	Blockly.JavaScript['s2'] = function(block) {
+		  var code = " 'result': '신부전증', 'judg':'위험' ";
+		  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+		};
+
+	
+	
+	
+//당뇨 고위험군
+Blockly.JavaScript['s3'] = function(block) {
+	  var code = " 'result': '신부전증', 'judg':'고위험' ";
+	  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+	};
+	
+	Blockly.JavaScript['g1'] = function(block) {
+		  var code = " 'result': '고지혈증', 'judg':'주의' ";
+		  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+		};
+
+	
+	// 당뇨 고위험군
+	Blockly.JavaScript['g2'] = function(block) {
+		  var code = " 'result': '고지혈증', 'judg':'위험' ";
+		  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+		};
+
+	
+	
+	
+//당뇨 고위험군
+Blockly.JavaScript['g3'] = function(block) {
+	  var code = " 'result': '고지혈증', 'judg':'고위험' ";
 	  return [code, Blockly.JavaScript.ORDER_ATOMIC];
 	};

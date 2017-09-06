@@ -72,7 +72,7 @@
          $.getJSON("deliverAjax/"+searchType+"/"+keyword,function(data){
             var str = "";
             $(data).each(function(){
-               str += "<tr class = 'searchResult'><td><input type = 'checkbox' name = 'chk' value = '"+this.orderCode+"' class = 'check'>"+"</td>"+"<td>"+this.orderCode+"</td>"+"<td>"+this.id+"</td>"+"<td>"+this.dietName+"</td>"+"<td>"+this.address+"</td>"+"<td>"+"<input type = 'text' class = 'transportNum"+this.orderCode+"' name = 'transportNum'>"+"</td>"+"<td>"+this.orderItemName+"</td>"+"</tr>";
+               str += "<tr class = 'searchResult'><td><input type = 'checkbox' name = 'chk' value = '"+this.orderCode+"' class = 'check'>"+"</td>"+"<td>"+this.orderCode+"</td>"+"<td>"+this.id+"</td>"+"<td>"+this.dietName+"</td>"+"<td>"+this.address+"</td>"+"<td>"+"<input type = 'text' class = 'transportNum"+this.orderCode+"' name = 'transportNum'>"+"</td>"+"<td>"+"배송대기"+"</td>"+"</tr>";
             });
             $(".searchTable").append(str);
          });
@@ -91,6 +91,7 @@
          var replyPage = $(this).attr("href");
          all(replyPage,currentItemCode);
       });
+      
       function all(page,orderItemCode){
          $.getJSON("deliverAjax/all/"+page+"/"+orderItemCode,function(data){
             currentPage = page;
@@ -99,7 +100,7 @@
             var str = "";
             $(data.list).each(function(){
                if(orderItemCode == 5){
-                  str += "<tr class = 'searchResult'>"+"<td>"+"<input type = 'checkBox' name = 'chk' value = '"+this.orderCode+"' class = 'check'>"+"</td>"+"<td>"+this.orderCode+"</td>"+"<td>"+this.id+"</td>"+"<td>"+this.dietName+"</td>"+"<td>"+this.address+"</td>"+"<td>"+"<input type = 'text' class = 'transportNum"+this.orderCode+"' name = 'transportNum'>"+"</td>"+"<td>"+this.orderItemName+"</td>"+"</tr>";
+                  str += "<tr class = 'searchResult'>"+"<td>"+"<input type = 'checkBox' name = 'chk' value = '"+this.orderCode+"' class = 'check'>"+"</td>"+"<td>"+this.orderCode+"</td>"+"<td>"+this.id+"</td>"+"<td class = 'orderItemName' style = 'color:red;'>"+this.dietName+"</td>"+"<td>"+this.address+"</td>"+"<td>"+"<input type = 'text' class = 'transportNum"+this.orderCode+"' name = 'transportNum'>"+"</td>"+"<td style ='color:red;'>"+"배송대기"+"</td>"+"</tr>";
                }
                else{
                   str += "<tr class = 'searchResult'>"+"<td>"+"<input type = 'checkBox' name = 'chk' value = '"+this.orderCode+"' class = 'check'>"+"</td>"+"<td>"+this.orderCode+"</td>"+"<td>"+this.id+"</td>"+"<td>"+this.dietName+"</td>"+"<td>"+this.address+"</td>"+"<td>"+"<input type = 'text' class = 'transportNum"+this.orderCode+"' name = 'transportNum' value = '"+this.transportNum+"' readonly>"+"</td>"+"<td>"+this.orderItemName+"</td>"+"</tr>";
@@ -142,8 +143,8 @@
 <%@include file = "deliverNavi.jsp" %>
    <div class = "container">
       <div>
-       
-         <select name = "searchType" class = "searchType">
+       <div class="col-xs-3"> 
+         <select name = "searchType" class = "searchType form-control">
             <option value = "n"
                <c:out value="${orderList.searchType==null?'selected':'' }"/>>
                분류
@@ -157,17 +158,20 @@
                고객id
                </option>
          </select>
-         <input type = "text" name = "keyword" placeholder = "검색어 입력란" id = "keyword">
-         <button id = "search" class = "btn btn-warning">검색</button>
-         <button id = "all" class = "btn btn-warning">전체목록</button>
+         </div>
+         <div class="col-xs-3">
+         <input type = "text" name = "keyword" class="form-control" placeholder = "검색어 입력란" id = "keyword">
+         </div>
+         <button id = "search" class = "btn btn-success">검색</button>
+         <button id = "all" class = "btn btn-success">전체목록</button>
       </div>
-      <br><br><br><br>
+      <br><br>
    
       <div>
       <button id = "button" class = "btn btn-primary">배송</button>
       <div style = "float:right;">
-         <button id = "button1" class = "btn btn-danger">배송목록</button>
-         <button id = "button2" class = "btn btn-danger">배송확인 목록</button>       
+         <button id = "button1" class = "btn btn-info">배송목록</button>
+         <button id = "button2" class = "btn btn-info">배송확인 목록</button>       
       </div>
          <table class = "searchTable table table-hover">   
             <tr>
@@ -183,12 +187,13 @@
                   
                </tr>
          </table>
+         
          <ul class = "pagination">
          </ul>
-         
+      	 </div>
       </div>
    
       
-   </div>
+ 
 </body>
 </html>

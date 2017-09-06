@@ -16,6 +16,12 @@
    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <style>
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+* {
+	font-family: 'Jeju Gothic',"Nanum Gothic", sans-serif !important;
+}
    #submit{
       position : relative;
       align : right;
@@ -30,7 +36,7 @@
       
       showDeliverAll(1);
       
-      showDeliver('t','감자');
+      
       
       var searchType = $(".searchType").val();
       var keyword = $(".keyword").val();
@@ -86,10 +92,10 @@
       
       $("#search").on("click",function(){
          $(".actionResult").remove();
-         searchType = $(".searchType").val();
+         
          keyword = $(".keyword").val();
          /* alert("검색값:"+search); */
-         showDeliver(searchType,keyword);
+         showDeliver(keyword);
       });
       
       function showDeliverAll(page){
@@ -106,14 +112,14 @@
          });
       }
       
-      function showDeliver(searchType,keyword){
+      function showDeliver(keyword){
          
          $(".actionResult").remove();
          
-         $.getJSON("deliverAjax/showDeliver/"+searchType+"/"+keyword,function(data){
+         $.getJSON("deliverAjax/showDeliver/"+keyword,function(data){
             var str = "";
             $(data).each(function(){
-               str += "<tr class = 'actionResult'><td>"+this.foodMCode+"</td><td>"+this.foodMName+"</td><td>"+this.orderDate+"</td><td>"+this.inDate+"</td><td>"+this.unit+"</td><td>"+this.orderItemName+"</td></tr>";
+            	str += "<tr class = 'actionResult'><td><input type = 'checkbox' name = 'chk' class = 'orderCode' value = '"+this.orderCode+"' data-status = '"+this.foodMName+"'></td><td>"+"<input type = 'hidden' class = 'foodMICode' name = 'foodMICode' value = '"+this.foodMICode+"'>"+this.foodMICode+"</td><td>"+this.foodMName+"</td><td>"+this.orderDate+"</td><td>"+this.inAmount+"</td><td>"+this.unit+"</td><td>"+"<button class = 'statusButton btn btn-default' data-status = '"+this.orderCode+"' data-vcode = '"+this.foodMName+"'>입고작업</button>"+"</td></tr>";
             });
             $(".action1").append(str);
             
@@ -285,13 +291,17 @@
 <!--             <input type = "text" class = "keyword" name = "keyword" placeholder = "검색어 입력란"> -->
 <!--             <button id = "search" class = "btn btn-warning">검색</button> -->
 <!--          </div> -->
+		<div>
+			<input type = "text" class = "keyword" name = "keyword" placeholder = "검색어 입력란">
+			<button id = "search" class = "btn btn-warning">검색</button>
+		</div>
+		<br><br><br>
          <div>
             <button  class = "btn btn-success"><a id = "changer" data-toggle = "modal" href = "#myModal">입고중인 목록</a></button>
             <button id = "completeAll" class = "btn btn-warning">입고된 목록</button>  
             <button class = "statusButton">체크항목 입고작업</button>                
          </div>
          <br><br>
-         <form>
             <div>
                <table class = "action1 table table-hover">
                   <tr>
@@ -330,7 +340,7 @@
                <ul class = "pagination1 pagination">
                </ul>       
             </div>
-         </form>
+        
          
          <div class = "modal fade" id = "myModal" role = "dialog">
             <div class = "modal-dialog" style = "width:1080px;">

@@ -52,7 +52,6 @@
 			$("#wizardStepLogo").attr("colspan", $(this).attr("data-step"));
 			$("#wizardStartButton").attr("colspan", $(this).attr("data-step"));
 			$(this).nextAll("td").remove();
-			alert($(this).attr("data-step") + "단계~");
 			step = parseInt($(this).attr("data-step")) + 1;
 			alert("step: " + step + ", link: " + $(this).attr("data-link"));
 			getStep($(this).attr("data-link"));
@@ -196,18 +195,54 @@
 	height: 100px;
 }
 
-img#startWizard {
-	margin: 0;
-	padding: 0;
-	position: absolute;
-	
+button#startWizard {
+  background:#819b3a;
+  color:#fff;
+  border:none;
+  width: 100%;
+  position:relative;
+  height:60px;
+ font-size : 1.45em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
 }
+
+
+button#startWizard:hover{
+  background:#fff;
+  color:#819b3a;
+}
+
+button#startWizard:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #819b3a;
+  transition:400ms ease all;
+}
+button#startWizard:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button#startWizard:hover:before,button#startWizard:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
+
 
 #startWizardArea {
 	margin: 0 auto;
 	border-radius : 12px;
 	
-	width: 230px;
+	
 	hegith: 160px;
 	cursor: pointer;
 	font-size: 23px;
@@ -215,7 +250,7 @@ img#startWizard {
 
 .startWizardBefore {
 	background-color: #FFFFFF;
-	border: 3px solid #819b3a;
+	
 }
 
 .startWizardAfter {
@@ -237,7 +272,7 @@ h2#question {
 
 .testing {
 	border-radius: 5px;
-	border: 1px solid #819b3a;
+	
 	padding: 5px;
 }
 
@@ -251,19 +286,83 @@ li {
 <body>
 	<%@include file="../../clientNavi.jsp"%>
 	<!-- 위자드 실행 영역 -->
+	
+
+
 	<section class="purpose section">
 		<div class="container">
+			<h2 class="title">About Wizard</h2>
+			<div class="row">
+				<div class="col-sm-4">
+					<div class="vira-card">
+						<div class="vira-card-header">
+							<div class="card-icon">
+								<span class="fa fa-one" aria-hidden="true"> <img
+									src="resources/number-1.png" style="width: 50px; hegit: 50px;" />
+								</span>
+							</div>
+						</div>
+						<div class="vira-card-content">
+							<h3>간편한 실행</h3>
+							<p>다참 위자드를 실행 하세요.</p>
+							<p>다참 위자드가 당신에게 맞는 식단을 추천해줄꺼에요.</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="vira-card">
+						<div class="vira-card-header">
+							<div class="card-icon">
+								<span class="fa fa-two" aria-hidden="true"> <img
+									src="resources/number-2.png" style="width: 50px; hegit: 50px;" />
+								</span>
+							</div>
+						</div>
+						<div class="vira-card-content">
+							<h3>맞춤화된 단계</h3>
+							<p>질환, 건강측정 정보 등을 선택하세요.</p>
+							<p>개인에 따라 질문지의 단계에 차이가 있을 수 있어요.</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="vira-card">
+						<div class="vira-card-header">
+							<div class="card-icon">
+								<span class="fa fa-three" aria-hidden="true"> <img
+									src="resources/number-3.png" style="width: 50px; hegit: 50px;" />
+								</span>
+							</div>
+						</div>
+						<div class="vira-card-content">
+							<h3>알맞은 식단 추천</h3>
+							<p>응답을 통해 사용자에게 최적화된 식단을 추천합니다.</p>
+							<p>반찬이 마음에 안들까봐 걱정하지 마세요.</P>
+							<p>식단 구매 메뉴에서 우리는 많은 선택지를 제공합니다.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr>
+	</section>
+	
+	
+	
+	
+<section class="purpose section">
+		<div class="container">
 			<h2 class="title">Dacham Wizard</h2>
-
 			<div class="row">
 				<div id="ground" class="container col-sm-4 testing">
 					<table id="wizardStep" class="table table-bordered">
 						<tr>
 							<td id="wizardStartButton">
-								<div id="startWizardArea" class="startWizardBefore">
-									<img src="resources/play-button-green.png" style="width: 50px; height:50px;" />
-									<span id="startWizard">위자드 시작하기</span>
-								</div>
+								
+								
+									<button id="startWizard">위자드 시작하기</button>
+									<!-- <span id="startWizard">위자드 시작하기</span>  -->
+								
 							</td>
 						</tr>
 						<tr>
@@ -278,10 +377,9 @@ li {
 
 				<div  class="col-sm-8 testing">
 						
-							<hr style="align:center;  border: solid 1px #5D5D5D; width: 50%; ">
-							<b><h2 id="question"></h2></b>
-							<hr style="align:center;  border: solid 1px #5D5D5D; width: 50%; ">							
 							
+							<b><h2 style="margin-top: 15px;" id="question"></h2></b>
+						
 							
 						
 
@@ -311,6 +409,7 @@ li {
 						고객님의 위자드 결과
 						<h2 id="resultName"></h2>
 						<h2 id="resultJudg"></h2>
+						
 						<button id="showResultDiet">추천식단 보기</button>
 					</div>
 					<!-- 시간이 된다면 추가할 파트
@@ -328,66 +427,6 @@ li {
 
 		</div>
 	</section>
-
-
-	<section class="purpose section">
-		<div class="container">
-			<h2 class="title">About Wizard</h2>
-			<div class="row">
-				<div class="col-sm-4">
-					<div class="vira-card">
-						<div class="vira-card-header">
-							<div class="card-icon">
-								<span class="fa fa-one" aria-hidden="true"> <img
-									src="resources/number-1.png" width="60" height="60" />
-								</span>
-							</div>
-						</div>
-						<div class="vira-card-content">
-							<h3>간편한 실행</h3>
-							<p>다참 위자드를 실행 하세요.</p>
-							<p>다참 위자드가 당신에게 맞는 식단을 추천해줄꺼에요.</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-4">
-					<div class="vira-card">
-						<div class="vira-card-header">
-							<div class="card-icon">
-								<span class="fa fa-two" aria-hidden="true"> <img
-									src="resources/number-2.png" width="60" height="60" />
-								</span>
-							</div>
-						</div>
-						<div class="vira-card-content">
-							<h3>맞춤화된 단계</h3>
-							<p>질환, 건강측정 정보 등을 선택하세요.</p>
-							<p>개인에 따라 질문지의 단계에 차이가 있을 수 있어요.</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-4">
-					<div class="vira-card">
-						<div class="vira-card-header">
-							<div class="card-icon">
-								<span class="fa fa-bicycle" aria-hidden="true"> <img
-									src="resources/number-3.png" width="60" height="60" />
-								</span>
-							</div>
-						</div>
-						<div class="vira-card-content">
-							<h3>알맞은 식단 추천</h3>
-							<p>응답을 통해 사용자에게 최적화된 식단을 추천합니다.</p>
-							<p>반찬이 마음에 안들까봐 걱정하지 마세요.</P>
-							<p>식단 구매 메뉴에서 우리는 많은 선택지를 제공합니다.</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<hr>
-	</section>
-
 
 	<footer>
 		<%@include file="../../footer.jsp"%>

@@ -9,8 +9,8 @@ import com.wdb3a.dacham.bean.Criteria;
 
 public interface CounselorDAO {
 	public List<Counselor> counselorListAll() throws Exception;
-	public List<Counselor> counselorseList2All() throws Exception;
-	public List<Counselor> finCounselList() throws Exception; 
+	public List<Counselor> counselorseList2All(Criteria criteria) throws Exception;
+	public List<Counselor> finCounselList(Criteria criteria) throws Exception; 
 	public List<Counselor> listAll(Counselor counselor) throws Exception;
 	public List<Counselor> listMaterial() throws Exception;
 	public void createCounselor(Counselor Counselor) throws Exception;
@@ -28,4 +28,6 @@ public interface CounselorDAO {
 	public List<Counselor> optionTuning(int orderCode) throws Exception;
 	public List<Counselor> listAll(int counselItemCode) throws Exception;
 	public List<Counselor> linkCounsel2(String customer) throws Exception;
+	public int counselorseList2AllCount() throws Exception;
+	public int finCounselListCount() throws Exception;
 }

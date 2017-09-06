@@ -21,6 +21,14 @@
 		});
 		var foodGName = "";
 		var cookMName = "";
+		$.getJSON("nutriAjax/categorySearch/"+"밥"+"/"+"찜",function(data){
+			console.log(data);
+			var str = "";
+			$(data).each(function(){
+				str += "<tr class = 'searchResult'>"+"<td>"+"<input type = 'radio' name = 'radio' value = '"+this.sideDCode+"'>"+"</td>"+"<td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width: 75px; height: 25px;'></td>"+"<td>"+this.sideDName+"</td>"+"</tr>"
+			});
+			$(".searchTable").append(str);
+		});
 		$(".category li a").on("click",function(){
 			event.preventDefault();
 			foodGName = $(this).attr("data-name");
@@ -80,7 +88,12 @@
 		});
 		$(".updateSide").on("click",function(){
 			var sideDCode = $('input:radio[name="radio"]:checked').val();
-			window.location.href = "sideModify?sideDCode="+sideDCode;
+			if(sideDCode == undefined){
+				alert("라디오로 반찬을 선택 후 진행해 주세요");
+			}
+			else{
+				window.location.href = "sideModify?sideDCode="+sideDCode;
+			}
 		});
 		$(".deleteSide").on("click",function(){
 			var ans = confirm("삭제하면 되돌릴 수 없습니다. 정말로 반찬을 삭제하시겠습니까?");

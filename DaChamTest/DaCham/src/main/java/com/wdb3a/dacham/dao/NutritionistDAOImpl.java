@@ -201,9 +201,9 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 	}
 
 	@Override
-	public void specialComplete(String customer) throws Exception {
+	public void specialComplete(int counselCode) throws Exception {
 		// TODO Auto-generated method stub
-		sqlSession.update(namespace+".specialComplete",customer);
+		sqlSession.update(namespace+".specialComplete",counselCode);
 	}
 
 	@Override
@@ -213,9 +213,9 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 	}
 
 	@Override
-	public void reRegist(String customer) throws Exception {
+	public void reRegist(int counselCode) throws Exception {
 		// TODO Auto-generated method stub
-		sqlSession.update(namespace + ".reRegist",customer);
+		sqlSession.update(namespace + ".reRegist",counselCode);
 	}
 
 	@Override
