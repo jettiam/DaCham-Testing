@@ -156,6 +156,16 @@
              $(".search1").append(str);
           });
       });
+      $(document.body).on("click",".dualLink",function(){
+    	  var counselCode = $(this).attr('data-code');
+    	  console.log(counselCode);
+    	  $.getJSON("counselAjax/views/"+counselCode,function(data){
+    		  $("#dualContent").text(data.counselContent);
+    		  $("#dualAnswer").text(data.answer);
+    		  console.log(data.counselContent);
+    		  console.log(data.answer);
+    	  });
+      });
       function linkAll(customer){
          $(".answerResult").remove();
         $(".super div").remove();	
@@ -163,7 +173,7 @@
             var str = "";
             $(data).each(function(){
                if(this.counselCode != null){
-                  str += "<tr class = 'answerResult'><td class = 'counselCode' data-code = '"+this.counselCode+"' data-id = '"+this.customer+"'><a>"+this.counselCode+"</a></td><td>"+this.customer+"</td><td>"+this.counselTitle+"</td><td>"+this.counselContent+"</td><td><a  href = '#yourModal' data-toggle = 'modal'  class = 'answerClick' data-code = '"+this.counselCode+"' data-answer = '"+this.answer+"' data-customer = '"+customer+"'>"+this.answer+"</a></td></tr>";
+                  str += "<tr class = 'answerResult'><td>"+this.counselDate+"</td><td>"+this.counselItemName+"</td><td><a class = 'dualLink' href = '#ourModal' data-toggle = 'modal' data-code = '"+this.counselCode+"'>"+this.counselTitle+"</a></td></tr>";
                }
               
             });
@@ -175,19 +185,32 @@
  
 </script>
 <style>
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+* {
+	font-family: 'Jeju Gothic',"Nanum Gothic", sans-serif !important;
+}
  .nameClick { color: blue; text-decoration: underline;}
- 
+ .link {
+ 	table-layout:fixed;
+		work-break:break-all;
+ }    
+ .pushTable{    
+ 	table-layout:fixed;
+		work-break:break-all;   
+ }  
 </style>
 </head>
 <body>           
 <%@include file = "counselorNavi.jsp" %>
-    <div class = "container"  >    
+    <div class = "container-fluid"  >    
       <div class = "box1">
       
-             <h3>고객의 정보</h3>
+             <h3>고객 정보</h3>
              <div>
-             <div class="form-group row">   
-			<div class="col-xs-2"> 
+             <div class="form-group row" >   
+			<div class="col-xs-2" > 
             <select name = "searchType" class= "searchType form-control">
                   <option value = "t"
                   <c:out value="${Counselor.searchType eq 't'?'selected':'' }"/>>
@@ -199,7 +222,7 @@
                   </option>
             </select>
             </div>
-            <div class="col-xs-3">
+            <div class="col-xs-3" >
             <input type = "text" name = "keyword" id = "keyword" class="form-control" placeholder  = "검색어 입력란">
             </div>
             <button id = "search" class = "btn btn-success">검색</button>
@@ -209,7 +232,7 @@
          
         <div>
               
-		<table class = "search1 table table-borded">
+		<table class = "search1 table table-borded" >
             <tr>
                   <th>고객id</th>
                   <th>고객이름</th>
@@ -233,8 +256,8 @@
             </div>
          </form>     
       
-      <div class = "modal fade" id = "myModal" role = "dialog" style = "width:100%; overflow-x:auto;">
-      		<div class = "modal-dialog" style = "width:100%;">
+      <div class = "modal fade" id = "myModal" role = "dialog" style = "width:100%; overflow-x:auto; word-wrap : break-word;">
+      		<div class = "modal-dialog">
       			<div class = "modal-content">
       				<div class = "modal-header">
       					<button type = "button" class = "close" data-dismiss = "modal">X</button>
@@ -243,11 +266,10 @@
       				<div class = "super modal-body">
       					<table class = "link table table-borded">
       						<tr>
-      							<th>번호</th>
-      							<th>고객아이디</th>
+      							<th>날짜</th>
+      							<th>상담목록</th>
       							<th>제목</th>
-      							<th>내용</th>
-      							<th>답변</th>
+      							
       							
       						</tr>
       						<tr class = "answerResult">
@@ -277,10 +299,33 @@
       		</div>
       	</div>
       </div>
+      <div class = "modal fade" id = "ourModal" role = "dialog" style= "word-wrap : break-word";>
+      	<div class = "modal-dialog">
+      		<div class = "modal-content">
+      			<div class = "modal-header">
+      				<button type = "button" class = "close" data-dismiss = "modal">X</button>
+      				<h4 class = "modal-title">상담상세 내역</h4>
+      			</div>
+      			<div class = "modal-body" style="word-wrap : break-word">
+      				<table class = "pushTable table table-hover">
+      					<tr>
+      						<th>내용</th>
+      						<td id = "dualContent"></td>
+      					</tr>
+      					<tr>
+      						<th>답변</th>
+      						<td id = "dualAnswer"></td>
+      					</tr>
+      				</table>
+      			</div>
+      			<div class = "modal-footer">
+      			</div>
+      		</div>
+      	</div>
       </div>
       <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
       <br><br><br><br><br><br>
-     </div>
+    
   
 </body>
 </html>

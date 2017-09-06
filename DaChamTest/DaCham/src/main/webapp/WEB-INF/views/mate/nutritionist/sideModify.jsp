@@ -22,6 +22,8 @@
 		var sideDCode = '${nutritionist.sideDCode}';
 		var foodMCode = 0;
 		
+		materialAll(1);
+		
 		$(".materialResult").remove();
 		$.getJSON("nutriAjax/sideMaterial/"+sideDCode,function(data){
 			var str = "";
@@ -38,9 +40,37 @@
 		$(document.body).on("click",".nameClick",function(){
 			var foodMName = $(this).attr('data-src');
 			foodMCode = $(this).attr('data-code');
-			$(".material").append("<tr class = 'materialResult'><td>"+"<input type = 'hidden' name = 'foodMCode' value = '"+foodMCode+"'>"+"</td><td class = 'foodMName' data-code = '"+foodMCode+"'>"+foodMName+"</td><td>"+"<input type = 'text' name = 'foodMAmount' class = 'foodMAmount'>"+"</td></tr>");
-			v = $('.materialResult').length; 
-			cntChange(v);
+			
+			
+			var length = $('.materialResult').length; 
+			v =  length;
+			var status = true;
+		
+			
+			if(length == 0){
+				$(".material").append("<tr class = 'materialResult'><td>"+"<input type = 'hidden' name = 'foodMCode' value = '"+foodMCode+"'>"+"</td><td class = 'foodMName' data-code = '"+foodMCode+"'>"+foodMName+"</td><td>"+"<input type = 'text' name = 'foodMAmount' class = 'foodMAmount'>"+"</td></tr>");
+				$(this).parent().parent().hide();
+				cntChange(v);
+			}
+			else{
+				for(var i = 0; i<length; i++){
+					if($(".materialResult").eq(i).children().children().val() == foodMCode){
+						alert("중복된 식재료가 선택되었습니다.");
+						status = false;
+						break;
+					}
+					else{
+						
+					}
+				}
+				if(status == true){
+					$(".material").append("<tr class = 'materialResult'><td>"+"<input type = 'hidden' name = 'foodMCode' value = '"+foodMCode+"'>"+"</td><td class = 'foodMName' data-code = '"+foodMCode+"'>"+foodMName+"</td><td>"+"<input type = 'text' name = 'foodMAmount' class = 'foodMAmount'>"+"</td></tr>");
+					$(this).parent().parent().hide();
+					cntChange(v);
+				}
+			}
+			
+			
 		});
 		$(document.body).on("click",'.foodMName',function(){   
 			$(this).parent().remove();   

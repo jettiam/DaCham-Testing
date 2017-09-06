@@ -177,12 +177,20 @@ public class CounselorAjaxController {
 	 * 미상담 목록
 	 * @return
 	 */
-	@RequestMapping(value = "/unfinCounselList",method = RequestMethod.GET)
-	public ResponseEntity<List<Counselor>> unfinCounselList(){
-		ResponseEntity<List<Counselor>> entity = null;
+	@RequestMapping(value = "/unfinCounselList/{page}",method = RequestMethod.GET)
+	public ResponseEntity<Map<String,Object>> unfinCounselList(@PathVariable("page")int page){
+		ResponseEntity<Map<String,Object>> entity = null;
 		try {
-			List<Counselor> list = service.counselorseList2All();
-			entity = new ResponseEntity<>(list,HttpStatus.OK);
+			Criteria criteria = new Criteria();
+			int totalCount = service.counselorseList2AllCount();
+			criteria.setPage(page);
+			criteria.setTotalCount(totalCount);
+			
+			List<Counselor> list = service.counselorseList2All(criteria);
+			Map<String,Object> map = new HashMap<>();
+			map.put("list", list);
+			map.put("criteria", criteria);
+			entity = new ResponseEntity<>(map,HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -194,12 +202,19 @@ public class CounselorAjaxController {
 	 * 상담완료 목록
 	 * @return
 	 */
-	@RequestMapping(value = "/finCounselList",method = RequestMethod.GET)
-	public ResponseEntity<List<Counselor>> finCounselList(){
-		ResponseEntity<List<Counselor>> entity = null;
+	@RequestMapping(value = "/finCounselList/{page}",method = RequestMethod.GET)
+	public ResponseEntity<Map<String,Object>> finCounselList(@PathVariable("page")int page){
+		ResponseEntity<Map<String,Object>> entity = null;
 		try {
-			List<Counselor> list = service.finCounselList();
-			entity = new ResponseEntity<>(list,HttpStatus.OK);
+			Criteria criteria = new Criteria();
+			int totalCount = service.finCounselListCount();
+			criteria.setPage(page);
+			criteria.setTotalCount(totalCount);
+			List<Counselor> list = service.finCounselList(criteria);
+			Map<String,Object> map = new HashMap<>();
+			map.put("list", list);
+			map.put("criteria", criteria);
+			entity = new ResponseEntity<>(map,HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
