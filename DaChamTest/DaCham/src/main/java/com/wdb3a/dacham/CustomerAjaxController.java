@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.wdb3a.dacham.bean.Counsel;
+import com.wdb3a.dacham.bean.Criteria;
 import com.wdb3a.dacham.bean.Customer;
 import com.wdb3a.dacham.bean.Measure;
+import com.wdb3a.dacham.service.CounselService;
 import com.wdb3a.dacham.service.CustomerService;
 
 @RestController
@@ -24,7 +27,10 @@ import com.wdb3a.dacham.service.CustomerService;
 public class CustomerAjaxController {
 	@Inject
 	private CustomerService service;
-
+	
+	@Inject
+	private CounselService serviceCO;
+	
 	@RequestMapping(value = "dietList/{diseaseCode}", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> dietList(@PathVariable("diseaseCode") int diseaseCode) {
 		ResponseEntity<Map<String, Object>> entity = null;
@@ -245,6 +251,30 @@ public class CustomerAjaxController {
 			list = service.menuShow(diseaseCode);
 			Map<String, Object> map = new HashMap<>();
 			map.put("list",list);
+			entity = new ResponseEntity<>(map,HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	/**
+	 * 
+	 * @param page
+	 * @return 문의하기 다른 페이지
+	 */
+	@RequestMapping(value="/counsel/{page}",method = RequestMethod.GET)
+	public ResponseEntity<Map<String, Object>> counselPage(@PathVariable("page")int page){
+		ResponseEntity<Map<String, Object>> entity = null;
+		List<Counsel> list;
+		Criteria criteria = new Criteria();
+		criteria.setPage(page);
+		try {
+			criteria.setTotalCount(serviceCO.couselListAll());
+			list = serviceCO.counselList(criteria);
+			Map<String, Object> map = new HashMap<>();
+			map.put("list", list);
 			entity = new ResponseEntity<>(map,HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

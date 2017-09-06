@@ -43,24 +43,32 @@
 			}
 		});
 		$(".update").on("click",function(){
+			var dc = $(".diseaseCodeId").val();
+			$("#diseaseCode").val(dc);
+			var length1 = $(".foodG01 input[type ='hidden']").length;
+			var length2 = $(".foodG02 input[type ='hidden']").length;
+			var length3 = $(".foodG03 input[type ='hidden']").length;
+			var length4 = $(".foodG04 input[type ='hidden']").length;
+			var length5 = $(".foodG05 input[type ='hidden']").length;
+			var length6 = $(".foodG06 input[type ='hidden']").length;
 			var sideDLength = $(".material input[type='hidden']").length;
-			$(".material input[type='radio']:checked").clone().appendTo("form");	
-			//checked 먼저 넣고 변경하기
-			for(var i=0;i<$("form .groupRadio:checked").length;i++){
-				var sideDType=$("form .groupRadio").eq(i).val().replace("_1","_0");
-				$("form .groupRadio").eq(i).val(sideDType);
+			$(".material input[type='radio']:checked").clone().appendTo("#registForm");							
+			//checked 먼저 넣고 바꾸기							
+			for(var i=0;i<$("#registForm .foodType:checked").length;i++){
+				var sideDType=$("#registForm .foodType").eq(i).val().replace("_1","_0");
+				$("#registForm .foodType").eq(i).val(sideDType);
 			}
+			$("#registForm .foodType").attr("type","hidden");
 			
-			$("form .groupRadio").attr('type','hidden');
-			
-			$(".material input[type='radio']").clone().appendTo("form");
-			$("form .groupRadio:checked").remove();
-			$("form .groupRadio").attr("type","hidden");
-			$("form .groupRadio").attr("name","sideDType");
-			
-			
-			$('<input type = "hidden" id = "cnt" name = "count" value = "'+sideDLength+'">').appendTo("form");
-			
+			/* for(var i=0;i<sideDLength;i++){
+				var sideDCode = $(".material input[type='hidden']").eq(i).val();
+				$("<input type='hidden' name='sideDCode'>").val(sideDCode).appendTo("#registForm");							
+			} */
+			$(".material input[type='radio']").clone().appendTo("#registForm");	
+			$('<input type = "hidden" id = "cnt" name = "count" value = "'+sideDLength+'">').appendTo("#registForm");
+			$("#registForm .foodType:checked").remove();
+			$("#registForm .foodType").attr("type","hidden");
+			$("#registForm .foodType").attr("name","sideDType");
 			if($("#prev_View_area").attr("src") == "http://placehold.it/100x100"){
 				alert("이미지를 변경하세요");
 			}	
@@ -134,40 +142,259 @@
 			var sideDCode = $(this).attr('data-code');
 			$(this).parent().parent().remove();
 			if(foodGCode == '01'){
-				var str = "";
-				str = "<tr class = 'groupResult1'><td><input type = 'hidden' name = 'sideDCode' value = "+sideDCode+"><input type = 'radio' class = 'groupRadio' name = 'foodG01' value = '"+sideDCode+"_1'></td><td><img src = 'displayFile?fileName="+sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+sideDName+"</td></tr>";
-				$(".foodGroup1").append(str);      
+				var foodGLength = $(".foodG"+foodGCode+" img").length;
+				console.log("푸드그룹랭스 "+foodGLength);
+				if(foodGLength>4){
+					alert("다섯가지 이상 선택할 수 없습니다.");												
+				}
+				else{
+					var length = $(".foodG"+foodGCode).children().length;
+					var status = true;
+					
+					if(length == 0){
+					
+					}
+					else{
+						for(var i = 0; i < length; i++){
+								console.log("콘솔:"+$(".foodG"+foodGCode).children().eq(i).children().eq(0).val());
+								if($(".foodG"+foodGCode).children().eq(i).children().eq(0).val() == sideDCode){
+									alert("중복된 반찬이 있습니다.");
+									status = false;
+									break;
+							}
+							else{
+
+								
+							}
+						}
+						if(status == true){
+							var str = "";
+							str = '<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
+							+ sideDImg
+							+ '" class="img-responsive sideDImg" data-id = "'+2+'" >'+'<input type="radio" name="foodG01" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'">&nbsp;<label for="'+sideDCode+'">'
+							+ sideDName + '</label></div>';
+						}
+					}
+					$(".foodG01").append(str);      
+				}
+				
 			}
 			else if(foodGCode == '02'){
-				var str = "";
-				str = "<tr class = 'groupResult2'><td><input type = 'hidden' name = 'sideDCode' value = "+sideDCode+"><input type = 'radio' class = 'groupRadio' name = 'foodG02' value = '"+sideDCode+"_1'></td><td><img src = 'displayFile?fileName="+sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+sideDName+"</td></tr>";
-				$(".foodGroup2").append(str);      
+				var foodGLength = $(".foodG"+foodGCode+" img").length;
+				console.log("푸드그룹랭스 "+foodGLength);
+				if(foodGLength>4){
+					alert("다섯가지 이상 선택할 수 없습니다.");												
+				}
+				else{
+					var length = $(".foodG"+foodGCode).children().length;
+					var status = true;
+					
+					if(length == 0){
+					
+					}
+					else{
+						for(var i = 0; i < length; i++){
+								console.log("콘솔:"+$(".foodG"+foodGCode).children().eq(i).children().eq(0).val());
+								if($(".foodG"+foodGCode).children().eq(i).children().eq(0).val() == sideDCode){
+									alert("중복된 반찬이 있습니다.");
+									status = false;
+									break;
+							}
+							else{
+
+								
+							}
+						}
+						if(status == true){
+							var str = "";
+							str = '<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
+							+ sideDImg
+							+ '" class="img-responsive sideDImg" data-id = "'+2+'" >'+'<input type="radio" name="foodG02" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'">&nbsp;<label for="'+sideDCode+'">'
+							+ sideDName + '</label></div>';
+						}
+					}
+					$(".foodG02").append(str);      
+				}
+				
 			}
 			else if(foodGCode == '03'){
-				var str = "";
-				str = "<tr class = 'groupResult3'><td><input type = 'hidden' name = 'sideDCode' value = "+sideDCode+"><input type = 'radio' class = 'groupRadio' name = 'foodG03' value = '"+sideDCode+"_1'></td><td><img src = 'displayFile?fileName="+sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+sideDName+"</td></tr>";
-				$(".foodGroup3").append(str);      
+				var foodGLength = $(".foodG"+foodGCode+" img").length;
+				console.log("푸드그룹랭스 "+foodGLength);
+				if(foodGLength>4){
+					alert("다섯가지 이상 선택할 수 없습니다.");												
+				}
+				else{
+					var length = $(".foodG"+foodGCode).children().length;
+					var status = true;
+					
+					if(length == 0){
+					
+					}
+					else{
+						for(var i = 0; i < length; i++){
+								console.log("콘솔:"+$(".foodG"+foodGCode).children().eq(i).children().eq(0).val());
+								if($(".foodG"+foodGCode).children().eq(i).children().eq(0).val() == sideDCode){
+									alert("중복된 반찬이 있습니다.");
+									status = false;
+									break;
+							}
+							else{
+
+								
+							}
+						}
+						if(status == true){
+							var str = "";
+							str = '<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
+							+ sideDImg
+							+ '" class="img-responsive sideDImg" data-id = "'+2+'" >'+'<input type="radio" name="foodG03" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'">&nbsp;<label for="'+sideDCode+'">'
+							+ sideDName + '</label></div>';
+						}
+					}
+					$(".foodG03").append(str);   
+				}
+				   
 			}
 			else if(foodGCode == '04'){
-				var str = "";
-				str = "<tr class = 'groupResult4'><td><input type = 'hidden' name = 'sideDCode' value = "+sideDCode+"><input type = 'radio' class = 'groupRadio' name = 'foodG04' value = '"+sideDCode+"_1'></td><td><img src = 'displayFile?fileName="+sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+sideDName+"</td></tr>";
-				$(".foodGroup4").append(str);      
+				var foodGLength = $(".foodG"+foodGCode+" img").length;
+				console.log("푸드그룹랭스 "+foodGLength);
+				if(foodGLength>4){
+					alert("다섯가지 이상 선택할 수 없습니다.");												
+				}
+				else{
+					var length = $(".foodG"+foodGCode).children().length;
+					var status = true;
+					
+					if(length == 0){
+					
+					}
+					else{
+						for(var i = 0; i < length; i++){
+								console.log("콘솔:"+$(".foodG"+foodGCode).children().eq(i).children().eq(0).val());
+								if($(".foodG"+foodGCode).children().eq(i).children().eq(0).val() == sideDCode){
+									alert("중복된 반찬이 있습니다.");
+									status = false;
+									break;
+							}
+							else{
+
+								
+							}
+						}
+						if(status == true){
+							var str = "";
+							str = '<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
+							+ sideDImg
+							+ '" class="img-responsive sideDImg" data-id = "'+2+'" >'+'<input type="radio" name="foodG04" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'">&nbsp;<label for="'+sideDCode+'">'
+							+ sideDName + '</label></div>';
+						}
+					}
+					$(".foodG04").append(str);   
+				}
+				   
 			}
 			else if(foodGCode == '05'){
-				var str = "";
-				str = "<tr class = 'groupResult5'><td><input type = 'hidden' name = 'sideDCode' value = "+sideDCode+"><input type = 'radio' class = 'groupRadio' name = 'foodG05' value = '"+sideDCode+"_1'></td><td><img src = 'displayFile?fileName="+sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+sideDName+"</td></tr>";
-				$(".foodGroup5").append(str);      
+				var foodGLength = $(".foodG"+foodGCode+" img").length;
+				console.log("푸드그룹랭스 "+foodGLength);
+				if(foodGLength>4){
+					alert("다섯가지 이상 선택할 수 없습니다.");												
+				}
+				else{
+					var length = $(".foodG"+foodGCode).children().length;
+					var status = true;
+					
+					if(length == 0){
+					
+					}
+					else{
+						for(var i = 0; i < length; i++){
+								console.log("콘솔:"+$(".foodG"+foodGCode).children().eq(i).children().eq(0).val());
+								if($(".foodG"+foodGCode).children().eq(i).children().eq(0).val() == sideDCode){
+									alert("중복된 반찬이 있습니다.");
+									status = false;
+									break;
+							}
+							else{
+
+								
+							}
+						}
+						if(status == true){
+							var str = "";
+							str = '<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
+							+ sideDImg
+							+ '" class="img-responsive sideDImg" data-id = "'+2+'" >'+'<input type="radio" name="foodG05" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'">&nbsp;<label for="'+sideDCode+'">'
+							+ sideDName + '</label></div>';
+						}
+					}
+					$(".foodG05").append(str);   
+				}
+				   
 			}
 			else if(foodGCode == '06'){
-				var str = "";
-				str = "<tr class = 'groupResult6'><td><input type = 'hidden' name = 'sideDCode' value = "+sideDCode+"><input type = 'radio' class = 'groupRadio' name = 'foodG06' value = '"+sideDCode+"_1'></td><td><img src = 'displayFile?fileName="+sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+sideDName+"</td></tr>";
-				$(".foodGroup6").append(str);      
+				var foodGLength = $(".foodG"+foodGCode+" img").length;
+				console.log("푸드그룹랭스 "+foodGLength);
+				if(foodGLength>4){
+					alert("다섯가지 이상 선택할 수 없습니다.");												
+				}
+				else{
+					var length = $(".foodG"+foodGCode).children().length;
+					var status = true;
+					
+					if(length == 0){
+					
+					}
+					else{
+						for(var i = 0; i < length; i++){
+								console.log("콘솔:"+$(".foodG"+foodGCode).children().eq(i).children().eq(0).val());
+								if($(".foodG"+foodGCode).children().eq(i).children().eq(0).val() == sideDCode){
+									alert("중복된 반찬이 있습니다.");
+									status = false;
+									break;
+							}
+							else{
+
+								
+							}
+						}
+						if(status == true){
+							var str = "";
+							str = '<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
+							+ sideDImg
+							+ '" class="img-responsive sideDImg" data-id = "'+2+'" >'+'<input type="radio" name="foodG06" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'">&nbsp;<label for="'+sideDCode+'">'
+							+ sideDName + '</label></div>';
+						}
+					}
+					$(".foodG06").append(str);      
+				}
 			}
+				
 		});
 		
 		$(document.body).on("click",".sideDImg",function(data){
-			$(this).parent().parent().remove();   
+			$(this).parent().remove();         
 		});
+		$(document.body).on(
+				"mouseover",
+				".nameClick",
+				function() {
+					var sideDCode = $(this).attr('data-code');
+					console.log("이것은" + sideDCode);
+					$.getJSON(
+							"nutriAjax/allNutri/" + sideDCode,
+							function(data) {
+								$("#sideDName").text(
+										data.sideDName);
+								$("#kcal").text(data.kcal);
+								$("#carbohydrate").text(
+										data.carbohydrate);
+								$("#protein")
+										.text(data.protein);
+								$("#fat").text(data.fat);
+								$("#na").text(data.na);
+							});
+				});
+
 		
 		function groupSelector1(foodGCode,dietCode){
 			$(".groupResult1").remove();
@@ -175,16 +402,19 @@
 				var str = "";
 				var code = new Array();
 				$(data).each(function(i){         
-					str += "<tr class = 'groupResult1'><td><input type = 'hidden' name = 'sideDCode' value = '"+this.sideDCode+"'><input type = 'radio' class = 'groupRadio' name = 'foodG01' value = '"+this.sideDCode+"_"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+this.sideDName+"</td></tr>";
+					str += '<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+this.sideDCode + '><img src = "displayFile?fileName='
+					+ this.sideDImg
+					+ '" class="img-responsive sideDImg" data-id = "'+2+'" >'+'<input type="radio" name="foodG01" class="foodType" value="'+this.sideDCode+'_'+this.sideDType+'" id="'+this.sideDCode+'">&nbsp;<label for="'+this.sideDCode+'">'
+					+ this.sideDName + '</label></div>';
 					code[i] = this.sideDCode; 	
 					console.log("식단코드배열:"+code[i]);
 				});
 				
 				
-				$(".foodGroup1").append(str);   
+				$(".foodG01").append(str);     
 				
-				for(var i = 0; i< $('.foodGroup1 input[type="hidden"]').length;i++){
-					$(".groupRadio:input[value = '"+code[i]+"_0']").prop("checked",true);	
+				for(var i = 0; i< $('.foodG01 input[type="hidden"]').length;i++){
+					$(".foodType:input[value = '"+code[i]+"_0']").prop("checked",true);	
 					console.log("코드배열2: "+code[i]);
 				}        
 			});
@@ -195,13 +425,16 @@
 				var str = "";
 				var code = new Array();
 				$(data).each(function(i){
-					str += "<tr class = 'groupResult2'><td><input type = 'hidden' name = 'sideDCode' value = '"+this.sideDCode+"'><input type = 'radio' class = 'groupRadio' name = 'foodG02' value = '"+this.sideDCode+"_"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+this.sideDName+"</td></tr>"
+					str += '<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+this.sideDCode + '><img src = "displayFile?fileName='
+					+ this.sideDImg
+					+ '" class="img-responsive sideDImg" data-id = "'+2+'" >'+'<input type="radio" name="foodG02" class="foodType" value="'+this.sideDCode+'_'+this.sideDType+'" id="'+this.sideDCode+'">&nbsp;<label for="'+this.sideDCode+'">'
+					+ this.sideDName + '</label></div>';
 					code[i] = this.sideDCode; 	
 					console.log("식단코드배열:"+code[i]);
 				});
-				$(".foodGroup2").append(str);
-				for(var i = 0; i< $('.foodGroup2 input[type="hidden"]').length;i++){
-					$(".groupRadio:input[value = '"+code[i]+"_0']").prop("checked",true);	
+				$(".foodG02").append(str);
+				for(var i = 0; i< $('.foodG02 input[type="hidden"]').length;i++){
+					$(".foodType:input[value = '"+code[i]+"_0']").prop("checked",true);	
 					console.log("코드배열2: "+code[i]);
 				}        
 			});
@@ -212,13 +445,16 @@
 				var str = "";
 				var code = new Array();
 				$(data).each(function(i){
-					str += "<tr class = 'groupResult3'><td><input type = 'hidden' name = 'sideDCode' value = '"+this.sideDCode+"'><input type = 'radio' class = 'groupRadio' name = 'foodG03' value = '"+this.sideDCode+"_"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+this.sideDName+"</td></tr>"
+					str += '<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+this.sideDCode + '><img src = "displayFile?fileName='
+					+ this.sideDImg
+					+ '" class="img-responsive sideDImg" data-id = "'+2+'" >'+'<input type="radio" name="foodG03" class="foodType" value="'+this.sideDCode+'_'+this.sideDType+'" id="'+this.sideDCode+'">&nbsp;<label for="'+this.sideDCode+'">'
+					+ this.sideDName + '</label></div>';
 					code[i] = this.sideDCode; 	
 					console.log("식단코드배열:"+code[i]);
 				});
-				$(".foodGroup3").append(str);
-				for(var i = 0; i< $('.foodGroup3 input[type="hidden"]').length;i++){
-					$(".groupRadio:input[value = '"+code[i]+"_0']").prop("checked",true);	
+				$(".foodG03").append(str);
+				for(var i = 0; i< $('.foodG03 input[type="hidden"]').length;i++){
+					$(".foodType:input[value = '"+code[i]+"_0']").prop("checked",true);	
 					console.log("코드배열2: "+code[i]);
 				}     
 			});
@@ -229,13 +465,16 @@
 				var str = "";
 				var code = new Array();
 				$(data).each(function(i){
-					str += "<tr class = 'groupResult4'><td><input type = 'hidden' name = 'sideDCode' value = '"+this.sideDCode+"'><input type = 'radio' class = 'groupRadio' name = 'foodG04' value = '"+this.sideDCode+"_"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+this.sideDName+"</td></tr>"
+					str += '<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+this.sideDCode + '><img src = "displayFile?fileName='
+					+ this.sideDImg
+					+ '" class="img-responsive sideDImg" data-id = "'+2+'" >'+'<input type="radio" name="foodG04" class="foodType" value="'+this.sideDCode+'_'+this.sideDType+'" id="'+this.sideDCode+'">&nbsp;<label for="'+this.sideDCode+'">'
+					+ this.sideDName + '</label></div>';
 					code[i] = this.sideDCode;
 				});
 				 	
-				$(".foodGroup4").append(str);
-				for(var i = 0; i< $('.foodGroup4 input[type="hidden"]').length;i++){
-					$(".groupRadio:input[value = '"+code[i]+"_0']").prop("checked",true);	
+				$(".foodG04").append(str);
+				for(var i = 0; i< $('.foodG04 input[type="hidden"]').length;i++){
+					$(".foodType:input[value = '"+code[i]+"_0']").prop("checked",true);	
 					console.log("코드배열2: "+code[i]);
 				}   
 			});
@@ -246,12 +485,15 @@
 				var str = "";
 				var code = new Array();
 				$(data).each(function(i){
-					str += "<tr class = 'groupResult5'><td><input type = 'hidden' name = 'sideDCode' value = '"+this.sideDCode+"'><input type = 'radio' class = 'groupRadio' name = 'foodG05' value = '"+this.sideDCode+"_"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+this.sideDName+"</td></tr>";
+					str += '<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+this.sideDCode + '><img src = "displayFile?fileName='
+					+ this.sideDImg
+					+ '" class="img-responsive sideDImg" data-id = "'+2+'" >'+'<input type="radio" name="foodG05" class="foodType" value="'+this.sideDCode+'_'+this.sideDType+'" id="'+this.sideDCode+'">&nbsp;<label for="'+this.sideDCode+'">'
+					+ this.sideDName + '</label></div>';
 					code[i] = this.sideDCode;										
 				});
-				$(".foodGroup5").append(str);
-				for(var i = 0; i< $('.foodGroup5 input[type="hidden"]').length;i++){
-					$(".groupRadio:input[value = '"+code[i]+"_0']").prop("checked",true);	
+				$(".foodG05").append(str);
+				for(var i = 0; i< $('.foodG05 input[type="hidden"]').length;i++){
+					$(".foodType:input[value = '"+code[i]+"_0']").prop("checked",true);	
 					console.log("코드배열2: "+code[i]);
 				}   
 			});
@@ -262,12 +504,15 @@
 				var str = "";
 				var code = new Array();
 				$(data).each(function(i){
-					str += "<tr class = 'groupResult6'><td><input type = 'hidden' name = 'sideDCode' value = '"+this.sideDCode+"'><input type = 'radio' class = 'groupRadio' name = 'foodG06' value = '"+this.sideDCode+"_"+this.sideDType+"'></td><td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width:80px; height:60px;' class='img-responsive sideDImg center-block'></td><td>"+this.sideDName+"</td></tr>"
+					str += '<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+this.sideDCode + '><img src = "displayFile?fileName='
+					+ this.sideDImg
+					+ '" class="img-responsive sideDImg" data-id = "'+2+'" >'+'<input type="radio" name="foodG06" class="foodType" value="'+this.sideDCode+'_'+this.sideDType+'" id="'+this.sideDCode+'">&nbsp;<label for="'+this.sideDCode+'">'
+					+ this.sideDName + '</label></div>';
 					code[i] = this.sideDCode;
 				});
-				$(".foodGroup6").append(str);
-				for(var i = 0; i< $('.foodGroup6 input[type="hidden"]').length;i++){
-					$(".groupRadio:input[value = '"+code[i]+"_0']").prop("checked",true);	
+				$(".foodG06").append(str);
+				for(var i = 0; i< $('.foodG06 input[type="hidden"]').length;i++){
+					$(".foodType:input[value = '"+code[i]+"_0']").prop("checked",true);	
 					console.log("코드배열6: "+code[i]);
 				}   
 			});
@@ -349,98 +594,80 @@
 </style>             
 </head>
 <body>
-	<div class = "container">
-		<h2>&nbsp;식단 수정 페이지입니다.</h2>
-		<div class = "material">   
-			<div class = "col-sm-2">
-				<h2>밥</h2>
-				<table class = "foodGroup1">
-					<tr>
-						<th>&nbsp;&nbsp;&nbsp;</th>
-						<th>반찬사진&nbsp;&nbsp;&nbsp;</th>
-						<th>반찬명&nbsp;&nbsp;&nbsp;</th>
-					</tr>
-					<tr class = "groupResult1">
-					</tr>
-				</table>
-			</div>  
-			<div class = "col-sm-2">
-				<h2>국</h2>
-				<table class = "foodGroup2">
-					<tr>
-						<th>&nbsp;&nbsp;&nbsp;</th>
-						<th>반찬사진&nbsp;&nbsp;&nbsp;</th>
-						<th>반찬명&nbsp;&nbsp;&nbsp;</th>
-					</tr>
-					<tr class = "groupResult2">
-						
-					</tr>
-				</table>
-			</div> 
-			<div class = "col-sm-2">
-				<h2>메인 메뉴1</h2>
-				<table class = "foodGroup3">
-					<tr>
-						<th>&nbsp;&nbsp;&nbsp;</th>
-						<th>반찬사진&nbsp;&nbsp;&nbsp;</th>
-						<th>반찬명&nbsp;&nbsp;&nbsp;</th>
-					</tr>
-					<tr class = "groupResult3">
-						
-					</tr>
-				</table>
-			</div>  
-			<div class = "col-sm-2">
-				<h2>메인 메뉴2</h2>
-				<table class = "foodGroup4">   
-					<tr>
-						<th>&nbsp;&nbsp;&nbsp;</th>
-						<th>반찬사진&nbsp;&nbsp;&nbsp;</th>
-						<th>반찬명&nbsp;&nbsp;&nbsp;</th>
-					</tr>
-					<tr class = "groupResult4">
-						
-					</tr>
-				</table>
-			</div>  
-			<div class = "col-sm-2">
-				<h2>메인 메뉴3</h2>
-				<table class = "foodGroup5">
-					<tr>
-						<th>&nbsp;&nbsp;&nbsp;</th>
-						<th>반찬사진&nbsp;&nbsp;&nbsp;</th>
-						<th>반찬명&nbsp;&nbsp;&nbsp;</th>
-					</tr>
-					<tr class = "groupResult5">
-						
-					</tr>
-				</table>
-			</div>  
-			<div class = "col-sm-2">
-				<h2>메인 메뉴4</h2>
-				<table class = "foodGroup6">    
-					<tr>
-						<th>&nbsp;&nbsp;&nbsp;</th>
-						<th>반찬사진&nbsp;&nbsp;&nbsp;</th>
-						<th>반찬명&nbsp;&nbsp;&nbsp;</th>
-					</tr>
-					<tr class = "groupResult6">
-						
-					</tr>
-				</table>
-			</div>       
-		</div>                        
-		<div class="div1 col-sm-12">
-			<div class="col-sm-6">
-				<input type="text" name="search" id="keyword" placeholder="반찬 검색란">
+	<div class="container-fluid">
+		<h3><b>식단 수정 페이지입니다.</b></h3>
+		
+		<br><br><br>
+		<div class="col-sm-6" >
+			<div class="form-inline">
+						<h4 style="display:inline-block;"><b>질환 선택 </b> </h4>         
+						<select name = "diseaseCode" class = "diseaseCodeId form-control"> 
+							<c:forEach var = "o" items = "${overList }">
+								<option value="${o.diseaseCode }" <c:out value="${o.diseaseCode eq cloneDisease ? 'selected':''}"/>>${o.diseaseName }, ${o.judgement }</option>						
+							</c:forEach>					
+						</select>	
+					</div>
+		<h3 style="margin-top:15px; padding-bottom:8px; border-bottom:solid #777 5px;">선택된 반찬 목록</h3>        
+		<div class="material">
+			<div class="col-sm-12 h4 foodGStyle">밥</div>
+			<div class="foodG01 checkSideD"></div>
+			<div class="col-sm-12  h4 foodGStyle">국</div>
+			<div class="foodG02 checkSideD"></div>
+			<div class="col-sm-12 h4 foodGStyle">메인메뉴1</div>
+			<div class="foodG03 checkSideD"></div>
+			<div class="col-sm-12 h4 foodGStyle">메인메뉴2</div>
+			<div class="foodG04 checkSideD"></div>
+			<div class="col-sm-12 h4 foodGStyle">메인메뉴3</div>
+			<div class="foodG05 checkSideD"></div>
+			<div class="col-sm-12 h4 foodGStyle">메인메뉴4</div>
+			<div class="foodG06 checkSideD"></div>
+				
+				
+				
+			</div>
+<!-- 			<table class = "materialTable"> -->
+<!-- 				<tr class = "foodG01"> -->
+<!-- 					<td><h3>밥</h3></td> -->
+										
+<!-- 				</tr> -->
+<!-- 				<tr> -->
+<!-- 					<td><h3>국</h3></td> -->
+<!-- 					<td></td>					 -->
+<!-- 				</tr> -->
+<!-- 				<tr> -->
+<!-- 					<td><h3>메인 메뉴1</h3></td> -->
+<!-- 					<td></td>					 -->
+<!-- 				</tr> -->
+<!-- 				<tr> -->
+<!-- 					<td><h3>메인 메뉴2</h3></td> -->
+<!-- 					<td></td>					 -->
+<!-- 				</tr> -->
+<!-- 				<tr> -->
+<!-- 					<td><h3>메인 메뉴3</h3></td> -->
+<!-- 					<td></td>					 -->
+<!-- 				</tr> -->
+<!-- 				<tr> -->
+<!-- 					<td><h3>메인 메뉴4</h3></td> -->
+<!-- 					<td></td>					 -->
+<!-- 				</tr> -->
+<!-- 			</table> -->
+		</div>
+
+		<div class="div1 col-sm-6">
+			<div class="col-sm-12">
+				<div style="margin-bottom:10px;">
+				<input type="text" name="search" id="keyword" placeholder="반찬 검색란">&nbsp;
 				<button id="search" class="btn btn-primary">검색</button>
-				<br>
+				</div>
+				<div style="margin-bottom:10px;">
 				<button id="rice" class="btn btn-info">밥</button>
 				<button id="soup" class="btn btn-info">국</button>
 				<button id="main1" class="btn btn-info">메인 메뉴1</button>
 				<button id="main2" class="btn btn-info">메인 메뉴2</button>
 				<button id="main3" class="btn btn-info">메인 메뉴3</button>
 				<button id="main4" class="btn btn-info">메인 메뉴4</button>
+				</div>
+				<div style="height:300px;">
 				<table class="searchTable table table-hover">
 					<tr>
 						<th>반찬명</th>
@@ -450,44 +677,83 @@
 					<tr class="searchResult">
 
 					</tr>
-
 				</table>
+				</div>
 				<ul class="pagination">
 				</ul>
-			</div>        
-		</div>
-		<form enctype = "multipart/form-data">
-			<input type = "hidden" name = "dietCode" value = "${nutritionist.dietCode }">
-			
-			<div class = "form-group">
-				<label for = "diseaseCode">질병 선택</label>
-				<select name = "diseaseCode" class = "form-control"> 
-					<c:forEach var = "o" items = "${overList }">
-						<option value="${o.diseaseCode }" <c:out value="${o.diseaseCode eq cloneDisease ? 'selected':''}"/>>${o.diseaseName }, ${o.judgement }</option>						
-					</c:forEach>					
-				</select>				
 			</div>
-			<div class = "form-group">
-				<label for = "sideDName">식단의 이름</label>
-				<input type = "text" name = "dietName" value = "${nutritionist.dietName }" class = "form-control">
+			<div class="box2 col-sm-12">
+				<div class="h4">반찬 영양정보</div>
+				<table class="table table-hover">
+					<tr>
+						<th>열량&nbsp;&nbsp;</th>
+						<th>탄수화물&nbsp;&nbsp;</th>
+						<th>단백질&nbsp;&nbsp;</th>
+						<th>지방&nbsp;&nbsp;</th>
+						<th>나트륨&nbsp;&nbsp;</th>
+					</tr>
+					<tr>
+						<td id="kcal">&nbsp;&nbsp;&nbsp;</td>
+						<td id="carbohydrate">&nbsp;&nbsp;&nbsp;</td>
+						<td id="protein">&nbsp;&nbsp;&nbsp;</td>
+						<td id="fat">&nbsp;&nbsp;&nbsp;</td>
+						<td id="na">&nbsp;&nbsp;&nbsp;</td>
+					</tr>
+				</table>
+				
 			</div>
-			<div class = "form-group">
-				<label for = "price">식단의 가격</label>
-				<input type = "number" name = "price" value = "${nutritionist.price }" class = "form-control">   
-			</div>
-			<div>
-				<h2>식단 사진</h2>
-					<div id = "View_area">
-						<img id = "prev_View_area" src="http://placehold.it/100x100" style = "width:100px; height : 100px;">
-					</div>
+<input type="hidden" name="kcal" id="kcal"> <input
+			type="hidden" name="carbohydrate" id="carbohydrate"> <input
+			type="hidden" name="protein" id="protein"> <input
+			type="hidden" name="fat" id="fat"> <input type="hidden"
+			name="na" id="na">
+
+		<div class="col-sm-12 form-inline" style="margin-bottom:15px;">
+			<form id="registForm" enctype="multipart/form-data" class="form-group">
+				<input type = "hidden" name = "dietCode" value = "${nutritionist.dietCode }">
+				<div class="div2">
+
+<!-- 					<div class="template"> -->
+<!-- 						질환별 식단 목록<br> - <a data-code="1">당뇨병</a><br> - <a -->
+<!-- 							data-code="4">신부전증</a><br> - <a class="templateErase">템플릿 -->
+<!-- 							초기화</a> -->
+<!-- 					</div> -->
 					
-					<input type = "file" class = "filestyle" data-input = "false" name = "file" placeholder = "식단이미지 올리기" id = "profile_pt" onchange = "previewImage(this,'View_area')">
-			</div>
-		</form>
-		<div>
-			<button id="update" class="update btn btn-danger">수정</button>
-			<button id="cancle" class="btn btn-warning">취소</button>
+					<input type="hidden" id="diseaseCode" name="diseaseCode">
+					<div id="View_area">
+							<img id="prev_View_area" src="http://placehold.it/100x100">
+						</div> 
+						
+						<input type="file" class="filestyle" data-input="false"
+							name="file" placeholder="식단이미지 올리기" id="profile_pt"
+							onchange="previewImage(this,'View_area')">
+						<!-- 식단의 이름을 지어줌 -->
+						<input type="text" id = "dietNameText" name="dietName" placeholder="식단명" value = "${nutritionist.dietName }"class="form-control">
+					
+					
+						<!-- 식단의 가격을 지어줌 -->
+						<input type="number" id = "priceText" name="price" placeholder="식단 가격" value = "${nutritionist.price }" class="form-control">
+						<input type="hidden" id="diseaseCode" name="diseaseCode">
+						
+						
+					
+					<div id="spDietItem">
+						 <input type="hidden" name="spDietItem" value="${nutritionist.spDietItem }">
+					</div>
+
+				</div>
+			</form>
+
 		</div>
+		
+			
+
+				<button id="regist" class="update btn btn-danger">수정</button>
+				<button id="cancle" class="btn btn-warning">취소</button>
+			
+			
+		</div>
+
 	</div>
 </body>
 <script>

@@ -347,11 +347,11 @@ public class NutritionistAjaxController {
 		return entity;
 	}
 	//해당 특별식단을 추가 등록하길 원할 때 페이지를 갱신함
-	@RequestMapping(value = "/reRegist/{customer}",method = RequestMethod.PUT)
-	public ResponseEntity<String> reRegist(@PathVariable("customer")String customer){
+	@RequestMapping(value = "/reRegist/{counselCode}",method = RequestMethod.PUT)
+	public ResponseEntity<String> reRegist(@PathVariable("counselCode")int counselCode){
 		ResponseEntity<String> entity = null;
 		try {
-			service.reRegist(customer);
+			service.reRegist(counselCode);
 			entity = new ResponseEntity<>("SUCCESS",HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -361,11 +361,11 @@ public class NutritionistAjaxController {
 		return entity;
 	}
 	//원래대로 되돌림
-	@RequestMapping(value = "/rollback/{customer}",method = RequestMethod.PUT)
-	public ResponseEntity<String> rollback(@PathVariable("customer")String customer){
+	@RequestMapping(value = "/rollback/{counselCode}",method = RequestMethod.PUT)
+	public ResponseEntity<String> rollback(@PathVariable("counselCode")int counselCode){
 		ResponseEntity<String> entity = null;
 		try {
-			service.specialComplete(customer);
+			service.specialComplete(counselCode);
 			entity = new ResponseEntity<>("SUCCESS",HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

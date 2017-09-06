@@ -30,6 +30,53 @@
 			}
 		});
 		$("#counsel").addClass("w3-gray");
+		
+		var page = ${criteria.page};
+		if(page==1){
+			var prev = ${criteria.prev};
+			var next = ${criteria.next};
+			var strPaginations ="";
+			var startPage=${criteria.startPage};
+			var length = ${criteria.endPage}
+			if(prev){
+				strPaginations = "<li><a href='"+(page-1)+"'><<</a></li>"
+			}
+			for(var i=startPage;i<=length;i++){
+				var strClass = page == i?"class = 'active'":"";
+				strPaginations += "<li "+strClass+"><a href ='"+i+"'>"+i + "</a></li>";
+			}
+			if(next){
+				strPaginations += "<li><a href='"+(page+1)+"'>>></a></li>"
+			}
+			$(".pagination").html(strPaginations);
+		}
+		
+		$(".pagination").on("click","li a",function(){
+			var page = $(this).attr("href");
+			event.preventDefault();
+			$(".pagination li").removeClass("active");
+			$(this).parent().addClass("active"); 
+			
+			counselPage(page);
+		});
+		function counselPage(page){
+			$.getJSON("customerAjax/counsel/"+page,function(data){
+				console.log(data.list);
+				$(".counselList").remove();
+				for(var i=0; i<data.list.length;i++){
+					var str = "<tr class='counselList'><td>"+data.list[i].counselItemName+"</td><td>"+data.list[i].counselCode+"</td><td><a data-id='"+data.list[i].customer+"' href='read?counselCode="+data.list[i].counselCode+"'>"+data.list[i].counselTitle+"</a></td><td>"+data.list[i].customer+"</td><td>"+data.list[i].counselDate+"</td>";
+					var checkCounsel = data.list[i].adviser;
+					if(checkCounsel==null){
+						checkCounsel="미응답";
+					}else{
+						checkCounsel="답변완료";
+					}
+					str += "<td>"+checkCounsel+"</td></tr>"
+					$("#counselTable").append(str);
+					
+				}
+			});
+		} 
 	});
 </script>
 <style>
@@ -44,16 +91,16 @@
 		<div class="container">
 		<table id="counselTable" class="table table-hover">
 			<tr>
-				<th>문의분류</th>
-				<th>글번호</th>
+				<th width="10%">문의분류</th>
+				<th width="8%">글번호</th>
 				<th>글제목</th>
-				<th>작성자</th>
-				<th>작성일</th>
-				<th>답변</th>
+				<th width="10%">작성자</th>
+				<th width="9%">작성일</th>
+				<th width="7%">답변</th>
 				
 			</tr>
 			<c:forEach items="${list}" var="counsel">
-			<tr>
+			<tr class="counselList">
 				<td>${counsel.counselItemName}</td>			
 				<td>${counsel.counselCode }</td>
 				<td><a href = "read?counselCode=${counsel.counselCode}" data-id="${counsel.customer}" class="counselRead">${counsel.counselTitle }</a></td>
@@ -68,7 +115,10 @@
 			</tr>
 			</c:forEach>
 		</table>
-			
+		<div class="text-center">
+			<ul class = "pagination">			
+			</ul>
+		</div>	
 		<div>
 		<c:if test="${empty sessionScope.memberName}">
 			로그인 후 이용해주세요.

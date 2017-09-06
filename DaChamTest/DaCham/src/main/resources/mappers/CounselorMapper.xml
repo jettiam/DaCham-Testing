@@ -16,6 +16,16 @@ select  a.id , a.name ,a.birthday, a.address, a.tel, a.email, a.deptCode, a.grad
    from member a, counsel b, counselitem c
    where a.id =b.customer and c.counselItemCode=b.counselItemCode and b.adviser is null
    order by b.counselDate
+   limit #{startRecord},#{recordsPerPage}
+</select>
+<select id = "counselorseList2AllCount" resultType = "Integer">
+	
+select count(f.counselCode)
+from(
+select  b.counselCode, b.counselDate,c.counselItemName,b.counselTitle ,a.name, b.customer
+   from member a, counsel b, counselitem c
+   where a.id =b.customer and c.counselItemCode=b.counselItemCode and b.adviser is null
+   order by b.counselDate)f
 </select>
 <!-- 상담완료 목록 -->
 <select id = "finCounselList" resultType="Counselor">
@@ -23,6 +33,16 @@ select  a.id , a.name ,a.birthday, a.address, a.tel, a.email, a.deptCode, a.grad
    from member a, counsel b, counselitem c
    where a.id =b.customer and c.counselItemCode=b.counselItemCode and b.adviser is not null
    order by b.counselDate
+   limit #{startRecord},#{recordsPerPage}
+</select>
+<select id = "finCounselListCount" resultType = "Integer">
+
+ 
+ select count(f.counselCode)
+from( select  b.counselCode, b.counselDate,c.counselItemName,b.counselTitle ,a.name, b.customer
+   from member a, counsel b, counselitem c
+   where a.id =b.customer and c.counselItemCode=b.counselItemCode and b.adviser is not null
+   order by b.counselDate) f
 </select>
 
 <select id="counselorList" resultType="Counselor">
@@ -63,7 +83,7 @@ select  a.id , a.name ,a.birthday, a.address, a.tel, a.email, a.deptCode, a.grad
 
 
 <select id = "viewCounsel" resultType = "Counselor">
-   select counselTitle, counselContent
+   select *
    from counsel
    where counselCode = #{counselCode} 
 </select>

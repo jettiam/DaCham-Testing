@@ -7,7 +7,7 @@ import com.wdb3a.dacham.bean.Criteria;
 
 public interface CounselorService {
 	public List<Counselor> counselorListAll() throws Exception;
-	public List<Counselor> counselorseList2All() throws Exception;
+	public List<Counselor> counselorseList2All(Criteria criteria) throws Exception;
 	public List<Counselor> listAll(Counselor counselor) throws Exception;
 	public List<Counselor> listMaterial()throws Exception;
 	public void createCounselor(Counselor counselor)throws Exception;
@@ -22,8 +22,10 @@ public interface CounselorService {
 	public void counselUpdate(Counselor counselor) throws Exception;
 	public void counselInsert(Counselor counselor) throws Exception;
 	public List<Counselor> orderListSearch(Counselor counselor) throws Exception;
-	public List<Counselor> finCounselList() throws Exception;
+	public List<Counselor> finCounselList(Criteria criteria) throws Exception;
 	public List<Counselor> optionTuning(int orderCode) throws Exception;
 	public List<Counselor> listAll(int counselItemCode) throws Exception;
 	public List<Counselor> linkCounsel2(String customer) throws Exception;
+	public int counselorseList2AllCount() throws Exception;
+	public int finCounselListCount() throws Exception;
 }

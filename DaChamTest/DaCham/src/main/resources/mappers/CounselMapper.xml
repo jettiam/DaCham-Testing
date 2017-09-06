@@ -3,11 +3,15 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.wdb3a.CounselMapper">
+  <select id="couselListAll" resultType="integer">
+  	select count(counselCode) from counsel
+  </select>
   <select id="counselList" resultType="Counsel">
   select c.counselCode, i.counselItemName,c.customer,c.counselTitle,c.counselDate,c.adviser
   from counsel c, counselitem i
-  where c.counselItemCode=i.counselItemCode order by c.counselCode desc
+  where c.counselItemCode=i.counselItemCode order by c.counselCode desc limit #{startRecord},#{recordsPerPage}
   </select>
+  
   <insert id="write">
    insert into counsel(counselItemCode, customer, counselTitle, counselContent,counselDate)
    values(#{counselItemCode}, #{customer}, #{counselTitle}, #{counselContent},now())

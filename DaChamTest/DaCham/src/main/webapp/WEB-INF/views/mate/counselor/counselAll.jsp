@@ -13,7 +13,18 @@
    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 <style>
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+* {
+	font-family: 'Jeju Gothic',"Nanum Gothic", sans-serif !important;
+}
 	.counselTitle { color: blue; text-decoration: underline;}   
+	
+	.counsel{
+		table-layout:fixed;
+		work-break:break-all;
+	}
 </style>
 <script>
 	$(document).ready(function(){

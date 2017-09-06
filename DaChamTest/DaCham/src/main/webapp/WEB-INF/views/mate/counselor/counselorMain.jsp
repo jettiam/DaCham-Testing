@@ -15,6 +15,12 @@
 
 <title>Insert title here</title>
 <style>
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+* {
+	font-family: 'Jeju Gothic',"Nanum Gothic", sans-serif !important;
+}
  .box1 {
   float:left;  }
  .box2 {
@@ -24,24 +30,65 @@
 <script>
    $(document).ready(function(){
       $(".searchResult2").remove();
+      var currentPage = 0;
       //미상담 목록
-      $.getJSON("counselAjax/unfinCounselList",function(data){
+      
+      function orderList1(page){
+    	  $(".searchResult2").remove();
+    	  $.getJSON("counselAjax/unfinCounselList/"+page,function(data){
+    	         var str = "";
+    	         $(data.list).each(function(){
+    	            //str += "<tr class = 'searchResult2'><td>"+this.counselCode+"</td><td class = 'counselTitle'><a class = 'nameClick' data-code = '"+this.counselCode+"' data-name = '"+this.name+"' data-id = '"+this.id+"'>"+this.counselTitle+"</a></td><td>"+this.name+"</td><td>"+this.id+"</td><td>"+this.counselDate+"</td></tr>";
+    	         	str += "<tr class='searchResult2'><td>"+this.counselCode+"</td><td>"+this.counselItemName+"</td><td class='counselTitle'><a class = 'nameClick' data-code = '"+this.counselCode+"' data-name = '"+this.name+"' data-id = '"+this.customer+"'>"+this.counselTitle+"</a></td><td>"+this.customer+"</td><td>"+this.counselDate+"</td></tr>";
+    	         });
+    	         $("#unfinCounselList").append(str);
+    	         printPaging(data.criteria);
+    	      });
+      }
+	function orderList2(page){
+		 $.getJSON("counselAjax/finCounselList/"+page,function(data){
+			 $(".searchResult3").remove();
+	         var str = "";
+	         $(data.list).each(function(){
+	            //str += "<tr class = 'searchResult2'><td>"+this.counselCode+"</td><td class = 'counselTitle'><a class = 'nameClick' data-code = '"+this.counselCode+"' data-name = '"+this.name+"' data-id = '"+this.id+"'>"+this.counselTitle+"</a></td><td>"+this.name+"</td><td>"+this.id+"</td><td>"+this.counselDate+"</td></tr>";
+	         	str += "<tr class='searchResult3'><td>"+this.counselCode+"</td><td>"+this.counselItemName+"</td><td class='counselTitle'><a class = 'nameClick' data-code = '"+this.counselCode+"' data-name = '"+this.name+"' data-id = '"+this.customer+"'>"+this.counselTitle+"</a></td><td>"+this.customer+"</td><td>"+this.counselDate+"</td></tr>";
+	         });
+	         $("#finCounselList").append(str);
+	         printPaging2(data.criteria);
+	      });
+      }
+      $.getJSON("counselAjax/unfinCounselList/1",function(data){
          var str = "";
-         $(data).each(function(){
+         $(data.list).each(function(){
             //str += "<tr class = 'searchResult2'><td>"+this.counselCode+"</td><td class = 'counselTitle'><a class = 'nameClick' data-code = '"+this.counselCode+"' data-name = '"+this.name+"' data-id = '"+this.id+"'>"+this.counselTitle+"</a></td><td>"+this.name+"</td><td>"+this.id+"</td><td>"+this.counselDate+"</td></tr>";
          	str += "<tr class='searchResult2'><td>"+this.counselCode+"</td><td>"+this.counselItemName+"</td><td class='counselTitle'><a class = 'nameClick' data-code = '"+this.counselCode+"' data-name = '"+this.name+"' data-id = '"+this.customer+"'>"+this.counselTitle+"</a></td><td>"+this.customer+"</td><td>"+this.counselDate+"</td></tr>";
          });
          $("#unfinCounselList").append(str);
+         printPaging(data.criteria);
       });
       //상담 완료 목록
-      $.getJSON("counselAjax/finCounselList",function(data){
+      $.getJSON("counselAjax/finCounselList/1",function(data){
          var str = "";
-         $(data).each(function(){
+         $(data.list).each(function(){
             //str += "<tr class = 'searchResult2'><td>"+this.counselCode+"</td><td class = 'counselTitle'><a class = 'nameClick' data-code = '"+this.counselCode+"' data-name = '"+this.name+"' data-id = '"+this.id+"'>"+this.counselTitle+"</a></td><td>"+this.name+"</td><td>"+this.id+"</td><td>"+this.counselDate+"</td></tr>";
-         	str += "<tr class='searchResult2'><td>"+this.counselCode+"</td><td>"+this.counselItemName+"</td><td class='counselTitle'><a class = 'nameClick' data-code = '"+this.counselCode+"' data-name = '"+this.name+"' data-id = '"+this.customer+"'>"+this.counselTitle+"</a></td><td>"+this.customer+"</td><td>"+this.counselDate+"</td></tr>";
+         	str += "<tr class='searchResult3'><td>"+this.counselCode+"</td><td>"+this.counselItemName+"</td><td class='counselTitle'><a class = 'nameClick' data-code = '"+this.counselCode+"' data-name = '"+this.name+"' data-id = '"+this.customer+"'>"+this.counselTitle+"</a></td><td>"+this.customer+"</td><td>"+this.counselDate+"</td></tr>";
          });
          $("#finCounselList").append(str);
+         printPaging2(data.criteria);
       });
+      
+      $(".overPage1").on("click","li a",function(){
+          event.preventDefault();
+          var replyPage = $(this).attr("href");
+          
+          orderList1(replyPage);                  
+       });
+      $(".overPage2").on("click","li a",function(){
+    	      event.preventDefault();
+    	      var replyPage = $(this).attr("href");
+    	      
+    	      orderList2(replyPage);                  
+       });
       
       $(document.body).on("click",".counselTitle a",function(){
          var counselCode = $(this).attr('data-code');
@@ -63,6 +110,36 @@
             $(".search2").append(str);
          });
       });
+      function printPaging(criteria){
+          var str = "";
+                
+          if(criteria.prev){
+             str += "<li><a href='"+(criteria.startPage-1)+"'>" + "<<"+"</a></li>";
+          }
+          for(var i = criteria.startPage; i<=criteria.endPage; i++){
+             var strClass = criteria.page == i?"class = 'active'":"";
+             str += "<li "+strClass+"><a href ='"+i+"'>"+i + "</a></li>";
+          }
+          if(criteria.next){
+             str += "<li><a href='"+(criteria.endPage+1)+"'>" + ">>"+"</a></li>";
+          }
+          $(".overPage1").html(str);
+       }
+      function printPaging2(criteria){
+          var str = "";
+                
+          if(criteria.prev){
+             str += "<li><a href='"+(criteria.startPage-1)+"'>" + "<<"+"</a></li>";
+          }
+          for(var i = criteria.startPage; i<=criteria.endPage; i++){
+             var strClass = criteria.page == i?"class = 'active'":"";
+             str += "<li "+strClass+"><a href ='"+i+"'>"+i + "</a></li>";
+          }
+          if(criteria.next){
+             str += "<li><a href='"+(criteria.endPage+1)+"'>" + ">>"+"</a></li>";
+          }
+          $(".overPage2").html(str);
+       }
    });
 </script>
 </head>
@@ -81,6 +158,8 @@
                <th>작성일</th>                 
            </tr>
     	</table>
+    	<ul class = "overPage1 pagination">
+               </ul>
     </div>
     <div>           
     <h3 class="text-center">상담완료 목록</h3>
@@ -93,6 +172,8 @@
                <th>작성일</th>               
            </tr>
     	</table>
+    	<ul class = "overPage2 pagination">
+               </ul>
     </div>
    </div>   
     
