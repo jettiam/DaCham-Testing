@@ -17,15 +17,15 @@
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
 * {
-	font-family: 'Jeju Gothic',"Nanum Gothic", sans-serif !important;
+   font-family: 'Jeju Gothic',"Nanum Gothic", sans-serif !important;
 }
  .box1 {
   float:left;  }
  .box2 {
   display:inline-block;  margin-left:20px;}  
   .modalTable2{
-  	table-layout:fixed;
-		work-break:break-all;
+     table-layout:fixed;
+      work-break:break-all;
   }    
 </style>
 <script>
@@ -50,19 +50,19 @@ $(document).ready(function(){
       couselCode = $(this).attr('data-code');
       var status = $(this).attr('data-status');
       if(status == '응답완료'){
-    	  $(".dropOut").hide();
+         $(".dropOut").hide();
       }
       else if(status == '미응답'){
-    	  $(".dropOut").show();	
+         $(".dropOut").show();   
       }
-      $.getJSON("counselAjax/selectCounsel/"+couselCode,function(data){
-         $("#counselItemCode2").text(data.counselItemName);
-         $("#counselTitle2").text(data.counselTitle);
-         $("#counselContent").text(data.counselContent);
-         $("#thisAnswer").text(data.answer);
-         $("#counselDate").text(data.counselDate);
-         $(".answer2").val(data.answer);
-      });
+       $.getJSON("counselAjax/selectCounsel/"+couselCode,function(data){
+//          $("#counselItemCode2").text(data.counselItemName);
+//          $("#counselTitle2").text(data.counselTitle);
+            $("#counselContent").text(data.counselContent);
+            $("#thisAnswer").text(data.answer);
+//          $("#counselDate").text(data.counselDate);
+//          $(".answer2").val(data.answer);
+       });
    });
    $(".pagination").on("click","li a",function(){
       event.preventDefault();
@@ -120,6 +120,12 @@ $(document).ready(function(){
          $(".counselContent").val(data.counselContent);   
          $(".answer2").val(data.answer);
          answer = data.answer;
+         if(data.adviser == null){   
+            $(".dropOut").show();
+         }
+         else{
+            $(".dropOut").hide();     
+         }
       });
    }
    $("#answer").on("click",function(){
