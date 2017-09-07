@@ -389,7 +389,7 @@ translateY
 			</div>
 		</div>
 		
-		
+		<!-- 새우 인스타그램 -->
 		<div id="blockShrimp" class="modal">
 		<span class="close">x</span>
 		<span class="modal-content">
@@ -423,6 +423,45 @@ translateY
 		</span>
 		<script async defer src="//platform.instagram.com/en_US/embeds.js"></script>		
 		</div>
+		
+		
+		
+		<!-- 다른 음식 블록 같은 블록 2개 더 생성해야함. -->
+		<div id="blockShrimp" class="modal">
+		<span class="close">x</span>
+		<span class="modal-content">
+		<blockquote class="instagram-media" data-instgrm-captioned
+			data-instgrm-version="7"
+			style="background: #FFF; border: 0; border-radius: 3px; box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.5), 0 1px 10px 0 rgba(0, 0, 0, 0.15); margin: 1px; max-width: 658px; padding: 0; width: 99.375%; width: -webkit-calc(100% - 2px); width: calc(100% - 2px);">
+			<div style="padding: 8px;">
+				<div
+					style="background: #F8F8F8; line-height: 0; margin-top: 40px; padding: 50.0% 0; text-align: center; width: 100%;">
+					<div
+						style="background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAMAAAApWqozAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAMUExURczMzPf399fX1+bm5mzY9AMAAADiSURBVDjLvZXbEsMgCES5/P8/t9FuRVCRmU73JWlzosgSIIZURCjo/ad+EQJJB4Hv8BFt+IDpQoCx1wjOSBFhh2XssxEIYn3ulI/6MNReE07UIWJEv8UEOWDS88LY97kqyTliJKKtuYBbruAyVh5wOHiXmpi5we58Ek028czwyuQdLKPG1Bkb4NnM+VeAnfHqn1k4+GPT6uGQcvu2h2OVuIf/gWUFyy8OWEpdyZSa3aVCqpVoVvzZZ2VTnn2wU8qzVjDDetO90GSy9mVLqtgYSy231MxrY6I2gGqjrTY0L8fxCxfCBbhWrsYYAAAAAElFTkSuQmCC); display: block; height: 44px; margin: 0 auto -44px; position: relative; top: -22px; width: 44px;"></div>
+				</div>
+				<p style="margin: 8px 0 0 0; padding: 0 4px;">
+					<a href="https://www.instagram.com/p/BYabscWDJEW/"
+						style="color: #000; font-family: Arial, sans-serif; font-size: 14px; font-style: normal; font-weight: normal; line-height: 17px; text-decoration: none; word-wrap: break-word;"
+						target="_blank">다참과 함께 하는 건강한 식생활 🎶 다참 가족 여러분은 새우의 효능에 대해
+						아시나요? . 새우는 특히 고혈압 예방과 동맥경화 방지에 좋습니다. 새우는 종류가 매우 다양한데요~ ㅎㅎ
+						고단백❗️저지방❗️당질 제로❗️랍니다. . . (그렇지만 통풍의 원인인 요산을 증가시키는 퓨린을 많이 만들기 때문에
+						요산 수치가 높은사람은 주의 해 주세요!) . . 🚫다참은 정식 런칭된 서비스가 아닌 컴퓨터정보계열 캡스톤 디자인
+						프로젝트 입니다.</a>
+				</p>
+				<p
+					style="color: #c9c8cd; font-family: Arial, sans-serif; font-size: 14px; line-height: 17px; margin-bottom: 0; margin-top: 8px; overflow: hidden; padding: 8px 0 7px; text-align: center; text-overflow: ellipsis; white-space: nowrap;">
+					다참(@dacham_official)님의 공유 게시물님,
+					<time
+						style="font-family: Arial, sans-serif; font-size: 14px; line-height: 17px;"
+						datetime="2017-08-30T09:31:57+00:00">2017 8월 30 오전 2:31 PDT</time>
+				</p>
+			</div>
+		</blockquote>
+		</span>
+		<script async defer src="//platform.instagram.com/en_US/embeds.js"></script>		
+		</div>
+		
+		
 	</div>
 
 	

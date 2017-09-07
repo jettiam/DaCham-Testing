@@ -17,10 +17,16 @@
 	src="resources/wizardJs/javascript_compressed.js"></script>
 <script src="resources/wizardJs/ko.js"></script>
 <script src="resources/wizardJs/wizard.js"></script>
-
+<style>
+	#graphWizard{
+		background-color: red;
+	}
+</style>
 <script>
 	$(document).ready(
 			function() {
+				
+				$("#graphWizard").hide();
 				var block = '${block}';
 				var xml_block = Blockly.Xml.textToDom(block);
 				Blockly.Xml.domToWorkspace(xml_block, workspace);
@@ -79,7 +85,14 @@
 								}
 							});
 						});
+				$(".blocklyTreeRoot").append("<h2 style='margin-bottom: 5px; text-align: center;'>그래프 보기</h2><img id ='showGraph' src='resources/showGraph.png' width='180px;' />");
+				
+				var graphIcon = $("#showGraph");
+				graphIcon.on("click", function(){
+					$("#graphWizard").toggle();
+				})
 			});
+	
 </script>
 <style>
 @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
@@ -96,7 +109,7 @@ body {
 	width: 150px;
 	height: 400px;
 	position: fixed;
-	top: 100px;
+	bottom : 0px;
 	left: 90%;
 	z-index: 100;
 }
@@ -148,9 +161,78 @@ li {
 	stroke-width: 2px;
 }
 
-svg {
-	
+/* Checkbox body */
+
+label {
+  display: block;
+  width: 54px;
+  height: 32px;
+  margin: 0px auto;
+  border-radius: 100px;
+  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  background-color: #E6E9EC;
 }
+
+input {
+  
+}
+
+
+/* The toggle */
+
+i {
+  height: 28px;
+  width: 28px;
+  background: #ffffff;
+  display: inline-block;
+  border-radius: 100px;
+  margin-top: 2px;
+  margin-left: 2px;
+  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  pointer-events: none;
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+label:hover>i {
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.20);
+  transform: scale(1.01);
+}
+
+input:checked+label>i {
+  margin-left: 24px;
+}
+
+label:active {
+  background-color: #A6B9CB;
+}
+
+label:active>i {
+  width: 34px;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.20);
+}
+
+input:checked+label:active>i {
+  margin-left: 18px;
+}
+
+input:checked+label {
+  background-color: #008FFF;
+}
+
+
+/* nice to have stuff */
+
+#wizardArea {
+  font-family: 'Source Sans Pro', arial, sans-serif;
+  color: #303336;
+  font-weight: 300;
+}
+
+
+
+/* Hope you enjoy the toggle as much as I do! Follow me @danielhannih on Twitter! */
 </style>
 
 </head>
@@ -164,9 +246,13 @@ svg {
 		<button id="registWizard">등록</button>
 		<button id="cancle">취소</button>
 	</div>
-	<div id="graphWizard"></div>
-	<div id="searchArea">
+	<div id="graphWizard">
+		<span>x</span>
+		<input type="checkbox" id="toggly">
+  <label for="toggly"><i></i></label>
+		
 	</div>
+	
 	<span id="blockWizard">
 		<div id="blocklyDiv"
 			style="display: inline-block; height: 3000px; width: 100%;"></div> 
@@ -183,7 +269,11 @@ svg {
 		<block type="h1"></block><block type="h2"></block><block type="h3"></block>
 		<block type="s1"></block><block type="s2"></block><block type="s3"></block>
 		<block type="g1"></block><block type="g2"></block><block type="g3"></block>
-		</category></xml>
+		</category>
+		
+</svg>
+	
+		</xml>
 	</span>
 
 	<!-- 오른쪽 컨트롤 네비 바 -->
