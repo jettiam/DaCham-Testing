@@ -576,8 +576,8 @@ function disease5(){
 							var str = "";
 
 							if (criteria.prev) {
-								str += "<li><a href=''"
-										+ (criteria.startPage - 1) + "'>'"
+								str += "<li><a href='"
+										+ (criteria.startPage - 1) + "'>"
 										+ "<<" + "</a></li>";
 							}
 							for (var i = criteria.startPage; i <= criteria.endPage; i++) {
@@ -587,9 +587,9 @@ function disease5(){
 										+ "</a></li>";
 							}
 							if (criteria.next) {
-								str += "<li><a href=''"
-										+ (criteria.endPage + 1) + "'>'" + ">>"
-										+ "</a></li>";
+								str += "<li><a href='"
+										+ (criteria.endPage + 1) + "'>" + ">>"
+										+ "</a></li>";   
 							}
 							$(".pagination").html(str);
 						}  
