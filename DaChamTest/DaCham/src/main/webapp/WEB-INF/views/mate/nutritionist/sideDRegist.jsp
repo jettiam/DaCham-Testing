@@ -240,7 +240,7 @@
 				var status = true;
 				
 				if(length == 0){
-					$(".material").append("<tr class = 'item'><td>"+"<input type = 'hidden' name = 'foodMCode' value = '"+foodMCode+"'>"+"</td><td class = 'foodMName' name = 'foodMName' data-name = '"+foodMName+"'>"+foodMName+"</td><td>"+"<input type = 'text' class = 'foodMAmountClass' name = 'foodMAmount' maxlength = '4' size = '1' value = '1'>"+"</td></tr>");
+					$(".material").append("<tr class = 'item'><td>"+"<input type = 'hidden' name = 'foodMCode' value = '"+foodMCode+"'>"+"</td><td class = 'foodMName' name = 'foodMName' data-name = '"+foodMName+"'>"+foodMName+"</td><td>"+"<input type = 'text' class = 'foodMAmountClass' name = 'foodMAmount' data-effect = "+cnt+" maxlength = '4' size = '4' value = '1'>"+"</td></tr>");
 					console.log("상위콘솔:"+$(".material tbody > .item").eq(i).children().children().val());
 					cntChange(v);
 					$.getJSON("nutriAjax/show/"+foodMCode,function(data){
@@ -274,7 +274,7 @@
 						}
 					}
 					if(status == true){
-						$(".material").append("<tr class = 'item'><td>"+"<input type = 'hidden' name = 'foodMCode' value = '"+foodMCode+"'>"+"</td><td class = 'foodMName' name = 'foodMName' data-name = '"+foodMName+"'>"+foodMName+"</td><td>"+"<input type = 'text' class = 'foodMAmountClass' name = 'foodMAmount' maxlength = '4' size = '1' value = '1'>"+"</td></tr>");
+						$(".material").append("<tr class = 'item'><td>"+"<input type = 'hidden' name = 'foodMCode' value = '"+foodMCode+"'>"+"</td><td class = 'foodMName' name = 'foodMName' data-name = '"+foodMName+"'>"+foodMName+"</td><td>"+"<input type = 'text' class = 'foodMAmountClass' name = 'foodMAmount' data-effect = "+cnt+" maxlength = '4' size = '4' value = '1'>"+"</td></tr>");
 						console.log("상위콘솔:"+$(".material tbody > .item").eq(i).children().children().val());
 						cntChange(v);
 						$.getJSON("nutriAjax/show/"+foodMCode,function(data){
@@ -301,27 +301,28 @@
 				
 				
 			});
+			
 			$(document.body).on('focusout','.foodMAmountClass',function(){
 				var cnt = parseInt(localStorage['cnt']);
 				var subCnt = cnt - 1;
 				var value = $(this).val();
+				var effect = $(this).attr('data-effect');
 				if(value == ""){
-					localStorage[subCnt+"_k1"] = localStorage[subCnt+"_k"]*1*0.01;
-					localStorage[subCnt+"_carbohydrate1"] = localStorage[subCnt+"_carbohydrate"]*1*0.01;
-					localStorage[subCnt+"_protein1"] = localStorage[subCnt+"_protein"]*1*0.01;  
-					localStorage[subCnt+"_fat1"] = localStorage[subCnt+"_fat"]*1*0.01;
-					localStorage[subCnt+"_na1"] = localStorage[subCnt+"_na"]*1*0.01;
+					localStorage[effect+"_k1"] = localStorage[effect+"_k"]*1*0.01;
+					localStorage[effect+"_carbohydrate1"] = localStorage[effect+"_carbohydrate"]*1*0.01;
+					localStorage[effect+"_protein1"] = localStorage[effect+"_protein"]*1*0.01;  
+					localStorage[effect+"_fat1"] = localStorage[effect+"_fat"]*1*0.01;
+					localStorage[effect+"_na1"] = localStorage[effect+"_na"]*1*0.01;
 					openAPI();
 				}
-				else{
+				else{				
 					
-				
+					localStorage[effect+"_k1"] = localStorage[effect+"_k"]*value*0.01;
+					localStorage[effect+"_carbohydrate1"] = localStorage[effect+"_carbohydrate"]*value*0.01;
+					localStorage[effect+"_protein1"] = localStorage[effect+"_protein"]*value*0.01;  
+					localStorage[effect+"_fat1"] = localStorage[effect+"_fat"]*value*0.01;
+					localStorage[effect+"_na1"] = localStorage[effect+"_na"]*value*0.01;
 					
-					localStorage[subCnt+"_k1"] = localStorage[subCnt+"_k"]*value*0.01;
-					localStorage[subCnt+"_carbohydrate1"] = localStorage[subCnt+"_carbohydrate"]*value*0.01;
-					localStorage[subCnt+"_protein1"] = localStorage[subCnt+"_protein"]*value*0.01;  
-					localStorage[subCnt+"_fat1"] = localStorage[subCnt+"_fat"]*value*0.01;
-					localStorage[subCnt+"_na1"] = localStorage[subCnt+"_na"]*value*0.01;
 					openAPI();
 				}
 			});
@@ -359,7 +360,7 @@
 					var item = $('<tr></tr>').addClass('item').attr('data-id',i);
 					$('<td></td>').html('<input type = "hidden" name = "foodMCode" value = '+foodMCode + '>').appendTo(item);    
 					$('<td>'+foodMName+'</td>').addClass("foodMName").attr('name','foodMName').attr('data-name',foodMName).appendTo(item);
-					$('<td></td>').addClass("mountItem").append('<input type ="text" class = "foodMAmountClass" name = "foodMAmount" maxlength="4" size="1" >').appendTo(item);
+					$('<td></td>').addClass("mountItem").append('<input type ="text" class = "foodMAmountClass" name = "foodMAmount" data-effect = '+cnt+' maxlength="4" size="5" >').appendTo(item);    
 					item.appendTo(".material");
 					
 				}

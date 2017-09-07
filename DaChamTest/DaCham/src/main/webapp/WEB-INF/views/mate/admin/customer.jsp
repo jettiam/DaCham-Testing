@@ -79,10 +79,10 @@ function previewImage(targetObj, View_area){
 												$(".memberTable").append(str);
 											});
 						}
-						all();
-						$(document.body).on("click", ".ids", function() {
-							var id = $(this).attr('data-code');
-
+						all();          
+						$(".memberTable").on("click", ".ids", function() {
+							var id = $(this).attr('data-code'); 
+ 
 							userMemberInfo(id);
 						});
 						function userMemberInfo(id) {
@@ -323,7 +323,8 @@ function previewImage(targetObj, View_area){
 						$(".admin").on("click", function(){
 							all();  
 						})
-						$(".member").on("click", function(){
+						
+						 $("#member").on("click", function(){
 							$
 							.getJSON(
 									"adminSub/memberNomal",  
@@ -333,7 +334,7 @@ function previewImage(targetObj, View_area){
 										var str = "";
 										for (var i = 0; i < data.length; i++) {
 											if (data[i].outDate == null) {
-												str += "<tr class='trclass'><td class='ids' data-code = '"+data[i].id+"'>"
+								 				str += "<tr class='trclass'><td class='ids' data-code = '"+data[i].id+"'>"
 														+ data[i].id
 														+ "</td>"
 														+ "<td>"
@@ -347,7 +348,7 @@ function previewImage(targetObj, View_area){
 										console.log(str);
 										$(".memberTable").append(str);
 									});
-						})
+						}) 
 
 					});
 </script>
@@ -379,7 +380,7 @@ function previewImage(targetObj, View_area){
 			<div class="col-sm-offset-8">      
 			&nbsp;
 			<button class="admin btn btn-default btn-xs">관리자</button> 
-			<button class="member btn btn-default btn-xs">회원</button> 
+			<button class="btn btn-default btn-xs" id="member">회원</button> 
 			</div>
 			<div id="margin">
 			<pre class="member pre-scrollable" width="30">
@@ -406,7 +407,7 @@ function previewImage(targetObj, View_area){
 
 		</div>
 		<div id = "View_area">
-					<img id = "prev_View_area" src="http://placehold.it/250x250" style = "width:250px; height : 250px; display:none;">      
+					<img id = "prev_View_area" src="http://placehold.it/250x250" style = "width:250px; height : 300px; display:none;">       
 				</div>
 				
 		

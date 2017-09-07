@@ -208,7 +208,7 @@
 						</div>
 
 					</div>
-				</div>
+				</div> 
 
 
 
@@ -678,8 +678,8 @@
 							var str = "";
 
 							if (criteria.prev) {
-								str += "<li><a href=''"
-										+ (criteria.startPage - 1) + "'>'"
+								str += "<li><a href='"
+										+ (criteria.startPage - 1) + "'>"
 										+ "<<" + "</a></li>";
 							}
 							for (var i = criteria.startPage; i <= criteria.endPage; i++) {
@@ -689,8 +689,8 @@
 										+ "</a></li>";
 							}
 							if (criteria.next) {
-								str += "<li><a href=''"
-										+ (criteria.endPage + 1) + "'>'" + ">>"
+								str += "<li><a href='"
+										+ (criteria.endPage + 1) + "'>" + ">>"
 										+ "</a></li>";
 							}
 							$(".pagination1").html(str);   
@@ -952,7 +952,7 @@
 							var str = "";
 
 							if (criteria.prev) {
-								str += "<li><a href=''" + (criteria.startPage - 1) + "'>'" + "<<"
+								str += "<li><a href='" + (criteria.startPage - 1) + "'>" + "<<"
 										+ "</a></li>";
 							}
 							for (var i = criteria.startPage; i <= criteria.endPage; i++) {
@@ -960,7 +960,7 @@
 								str += "<li "+strClass+"><a href ='"+i+"'>" + i + "</a></li>";
 							}
 							if (criteria.next) {
-								str += "<li><a href=''" + (criteria.endPage + 1) + "'>'" + ">>"
+								str += "<li><a href='" + (criteria.endPage + 1) + "'>" + ">>"
 										+ "</a></li>";
 							}
 							$(".pagination2").html(str);   
@@ -988,7 +988,7 @@
 							var str = "";
 
 							if (criteria.prev) {
-								str += "<li><a href=''" + (criteria.startPage - 1) + "'>'" + "<<"
+								str += "<li><a href='" + (criteria.startPage - 1) + "'>" + "<<"
 										+ "</a></li>";
 							}
 							for (var i = criteria.startPage; i <= criteria.endPage; i++) {
@@ -996,7 +996,7 @@
 								str += "<li "+strClass+"><a href ='"+i+"'>" + i + "</a></li>";
 							}
 							if (criteria.next) {
-								str += "<li><a href=''" + (criteria.endPage + 1) + "'>'" + ">>"
+								str += "<li><a href='" + (criteria.endPage + 1) + "'>" + ">>"
 										+ "</a></li>";
 							}
 							$(".pagination3").html(str);   
@@ -1014,7 +1014,7 @@
 							var str = "";
 
 							if (criteria.prev) {
-								str += "<li><a href=''" + (criteria.startPage - 1) + "'>'" + "<<"
+								str += "<li><a href='" + (criteria.startPage - 1) + "'>" + "<<"
 										+ "</a></li>";
 							}
 							for (var i = criteria.startPage; i <= criteria.endPage; i++) {
@@ -1022,7 +1022,7 @@
 								str += "<li "+strClass+"><a href ='"+i+"'>" + i + "</a></li>";
 							}
 							if (criteria.next) {
-								str += "<li><a href=''" + (criteria.endPage + 1) + "'>'" + ">>"
+								str += "<li><a href='" + (criteria.endPage + 1) + "'>" + ">>"
 										+ "</a></li>";
 							}
 							$(".pagination4").html(str);   
@@ -1040,7 +1040,7 @@
 							var str = "";
 
 							if (criteria.prev) {
-								str += "<li><a href=''" + (criteria.startPage - 1) + "'>'" + "<<"
+								str += "<li><a href='" + (criteria.startPage - 1) + "'>" + "<<"
 										+ "</a></li>";
 							}
 							for (var i = criteria.startPage; i <= criteria.endPage; i++) {
@@ -1048,7 +1048,7 @@
 								str += "<li "+strClass+"><a href ='"+i+"'>" + i + "</a></li>";
 							}
 							if (criteria.next) {
-								str += "<li><a href=''" + (criteria.endPage + 1) + "'>'" + ">>"
+								str += "<li><a href='" + (criteria.endPage + 1) + "'>" + ">>"
 										+ "</a></li>";
 							}
 							$(".pagination5").html(str);    
@@ -1066,15 +1066,15 @@
 							var str = "";
 
 							if (criteria.prev) {
-								str += "<li><a href=''" + (criteria.startPage - 1) + "'>'" + "<<"
-										+ "</a></li>";
+								str += "<li><a href='" + (criteria.startPage - 1) + "'>" + "<<"
+										+ "</a></li>"; 
 							}
 							for (var i = criteria.startPage; i <= criteria.endPage; i++) {
 								var strClass = criteria.page == i ? "class = 'active'" : "";
 								str += "<li "+strClass+"><a href ='"+i+"'>" + i + "</a></li>";
 							}
 							if (criteria.next) {
-								str += "<li><a href=''" + (criteria.endPage + 1) + "'>'" + ">>"
+								str += "<li><a href='" + (criteria.endPage + 1) + "'>" + ">>"
 										+ "</a></li>";
 							}
 							$(".pagination6").html(str);    

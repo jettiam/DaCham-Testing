@@ -234,7 +234,7 @@ public class AdminController {
 		
 		 
 		String content = toString; // ³»¿ë
-		try { 
+		try {  
 			MimeMessage message = mailSender.createMimeMessage();
 			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 
