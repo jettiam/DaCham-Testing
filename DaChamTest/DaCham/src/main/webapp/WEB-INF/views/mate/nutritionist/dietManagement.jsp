@@ -159,13 +159,19 @@
       </nav>
    </div>
    <div class = "box2">
-      <div>
-         <button id = "regist" class = "btn btn-default">식단 등록</button>
-         <button class = "modifyDiet btn btn-default">식단 수정</button>
-<!--          <button class = "deleteDiet btn btn-default">식단 삭제</button>    -->
-      </div>
-      <div>
-         <table class = "dietDiseaseOverview table table-hover">
+      <div class = "row">
+      	<div class = "col-lg-12 col-md-12">
+      		<div class = "card">
+      			<div class = "card-header" data-background-color = "green">
+      				<h4 class = "title">식단 목록</h4>   
+      				<div>
+			         <button id = "regist" class = "btn btn-primary">식단 등록</button>
+			         <button class = "modifyDiet btn btn-primary">식단 수정</button>
+			<!--          <button class = "deleteDiet btn btn-default">식단 삭제</button>    -->
+			      </div>      				
+      			</div>
+      			<div class = "card-content table-responsive">
+      				<table class = "dietDiseaseOverview table table-hover">
             <tr>
                <th></th>
                
@@ -178,6 +184,9 @@
          </table>
          <ul class = "pagination">
          </ul>
+      			</div>
+      		</div>
+      	</div>
       </div>
    </div>
    </div>

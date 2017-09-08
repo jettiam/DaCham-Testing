@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
- <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -11,6 +11,32 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+<link rel="shortcut icon" href="resources/favicon/N.ico">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	<!-- Bootstrap core CSS     -->
+<link href="resources/assets/css/bootstrap.min.css" rel="stylesheet" />
+
+<!--  Material Dashboard CSS    -->
+<link href="resources/assets/css/material-dashboard.css"
+	rel="stylesheet" />
+
+<!--  CSS for Demo Purpose, don't include it in your project     -->
+<link href="resources/assets/css/demo.css" rel="stylesheet" />
+
+<!--     Fonts and icons     -->
+<link
+	href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"
+	rel="stylesheet">
+<link
+	href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons'
+	rel='stylesheet' type='text/css'>	
 <script>
 	$(document).ready(function(){
 		$("#side").addClass("w3-light-gray");
@@ -21,7 +47,7 @@
 		$("#regist").click(function(){
 			window.location.href = "sideDRegist";
 		});
-		var foodGName = "";
+		var foodGName = "밥";
 		var cookMName = "";
 		categorySearch(1,"밥","찜");
 		
@@ -149,7 +175,7 @@
 	.box1 {
   float:left; width: 150px; margin-right : 20px;  }
  .box2 {
-  display:inline-block;  margin-left:20px; width:580px;}
+  display:inline-block;  margin-left:20px; width:800px;}
   ul{
   	list-style : none;
   }
@@ -186,24 +212,33 @@
 		</nav>
 	</div>
 	<div class = "box2">
-		<div>
-			<button id = "regist" class = "btn btn-primary">반찬 등록</button>
-			<button class = "updateSide btn btn-primary">반찬 수정</button>
-<!-- 			<button class = "deleteSide btn btn-primary">반찬 삭제</button> -->
-		</div>
-		<div>
-			<table class = "searchTable table table-hover">
-				<tr>
-					<th>&nbsp;&nbsp;</th>
-					<th>이미지&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-					<th>반찬명</th>
-				</tr>
-				<tr class = "searchResult">
-					
-				</tr>
-			</table>
-			<ul class = "pagination">
-			</ul>
+		<div class = "row">
+			<div class = "col-lg-12 col-md-12">
+				<div class = "card">
+					<div class = "card-header" data-background-color = "blue">
+						<h4 class = "title">반찬 목록</h4>
+						<div>
+							<button id = "regist" class = "btn btn-primary">반찬 등록</button>
+							<button class = "updateSide btn btn-primary">반찬 수정</button>
+			<!-- 			<button class = "deleteSide btn btn-primary">반찬 삭제</button> -->
+						</div>
+					</div>
+					<div class = "card-content table-responsive">
+						<table class = "searchTable table table-hover">
+							<tr>
+								<th>&nbsp;&nbsp;</th>
+								<th>이미지&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+								<th>반찬명</th>
+							</tr>
+							<tr class = "searchResult">
+								
+							</tr>
+						</table>
+						<ul class = "pagination">
+						</ul>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
    </div>
