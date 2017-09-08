@@ -150,6 +150,16 @@
 		from sidedish a join cookmethod b join foodgroup c
 		where a.cookMCode = b.cookMCode
 		and a.foodGCode = c.foodGCode
+		and b.cookMName = #{nutritionist.cookMName}
+		and c.foodGName = #{nutritionist.foodGName}
+		limit #{criteria.startRecord},#{criteria.recordsPerPage}
+	</select>
+	<!-- 해당 카테고리의 카운트 표시(페이지네이션) -->
+	<select id = "categorySearchCount" resultType = "Integer">
+		select count(a.sideDCode)
+		from sidedish a join cookmethod b join foodgroup c
+		where a.cookMCode = b.cookMCode
+		and a.foodGCode = c.foodGCode
 		and b.cookMName = #{cookMName}
 		and c.foodGName = #{foodGName}
 	</select>

@@ -14,6 +14,8 @@
 <script>
 	$(document).ready(function(){
 		$("#side").addClass("w3-light-gray");
+		
+		var currentPage = 1;
 		$('.category').hide();
 		$('.category2').hide();
 		$("#regist").click(function(){
@@ -21,42 +23,28 @@
 		});
 		var foodGName = "";
 		var cookMName = "";
-		$.getJSON("nutriAjax/categorySearch/"+"밥"+"/"+"찜",function(data){
-			console.log(data);
-			var str = "";
-			$(data).each(function(){
-				str += "<tr class = 'searchResult'>"+"<td>"+"<input type = 'radio' name = 'radio' value = '"+this.sideDCode+"'>"+"</td>"+"<td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width: 75px; height: 25px;'></td>"+"<td>"+this.sideDName+"</td>"+"</tr>"
-			});
-			$(".searchTable").append(str);
+		categorySearch(1,"밥","찜");
+		
+		$(".pagination").on("click","li a",function(){
+			event.preventDefault();
+			var replyPage = $(this).attr("href");
+			if(foodGName == '밥'){
+				cookMName = "찜";
+			}
+			else if(foodGName == '국'){
+				cookMName = "탕";
+			}
+			categorySearch(replyPage,foodGName, cookMName);
 		});
 		$(".category li a").on("click",function(){
 			event.preventDefault();
 			foodGName = $(this).attr("data-name");
+			
 			if(foodGName == "밥"){
-				$(".searchResult").remove();
-				$.getJSON("nutriAjax/categorySearch/"+foodGName+"/"+"찜",function(data){
-					console.log(data);
-					var str = "";
-					$(data).each(function(){
-						str += "<tr class = 'searchResult'>"+"<td>"+"<input type = 'radio' name = 'radio' value = '"+this.sideDCode+"'>"+"</td>"+"<td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width: 75px; height: 25px;'></td>"+"<td>"+this.sideDName+"</td>"+"</tr>"
-					});
-					$(".searchTable").append(str);
-				});
-				$('.category').hide();
-				$('#categoryStart').show();
+				categorySearch(1,"밥","찜");
 			}
 			else if(foodGName == "국"){
-				$(".searchResult").remove();
-				$.getJSON("nutriAjax/categorySearch/"+foodGName+"/"+"탕",function(data){
-					console.log(data);
-					var str = "";
-					$(data).each(function(){
-						str += "<tr class = 'searchResult'>"+"<td>"+"<input type = 'radio' name = 'radio' value = '"+this.sideDCode+"'>"+"</td>"+"<td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width: 75px; height: 25px;'></td>"+"<td>"+this.sideDName+"</td>"+"</tr>"
-					});
-					$(".searchTable").append(str);
-				});
-				$('.category').hide();
-				$('#categoryStart').show();
+				categorySearch(1,"국","탕");
 			}
 			else{
 				$('.category').hide();
@@ -64,6 +52,25 @@
 			}
 			
 		});
+		
+		
+		function categorySearch(page,foodGName, cookMName){
+			$(".searchResult").remove();
+			$.getJSON("nutriAjax/categorySearch/"+page+"/"+foodGName+"/"+cookMName,function(data){
+				console.log(data);
+				var str = "";
+				$(data.list).each(function(){
+					str += "<tr class = 'searchResult'>"+"<td>"+"<input type = 'radio' name = 'radio' value = '"+this.sideDCode+"'>"+"</td>"+"<td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width: 75px; height: 25px;'></td>"+"<td>"+this.sideDName+"</td>"+"</tr>"
+					    
+				});
+				$(".searchTable").append(str);
+				printPaging(data.criteria);
+			});    
+			$('.category').hide();
+			$('#categoryStart').show();
+		}
+		
+		
 		$(".category2 li a").on("click",function(){
 			event.preventDefault();
 			cookMName = $(this).attr("data-name");
@@ -72,10 +79,10 @@
 			$('.category2').hide();
 			$('#categoryStart').show();
 			
-			$.getJSON("nutriAjax/categorySearch/"+foodGName+"/"+cookMName,function(data){
+			$.getJSON("nutriAjax/categorySearch/"+1+"/"+foodGName+"/"+cookMName,function(data){
 				console.log(data);
 				var str = "";
-				$(data).each(function(){
+				$(data.list).each(function(){
 					str += "<tr class = 'searchResult'>"+"<td>"+"<input type = 'radio' name = 'radio' value = '"+this.sideDCode+"'>"+"</td>"+"<td><img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width: 75px; height: 25px;'></td>"+"<td>"+this.sideDName+"</td>"+"</tr>"
 				});
 				$(".searchTable").append(str);
@@ -119,6 +126,22 @@
 			});
 			
 		});
+		
+		function printPaging(criteria){
+			var str = "";
+					
+			if(criteria.prev){
+				str += "<li><a href='"+(criteria.startPage-1)+"'>" + "<<"+"</a></li>";
+			}
+			for(var i = criteria.startPage; i<=criteria.endPage; i++){
+				var strClass = criteria.page == i?"class = 'active'":"";
+				str += "<li "+strClass+"><a href ='"+i+"'>"+i + "</a></li>";
+			}
+			if(criteria.next){
+				str += "<li><a href='"+(criteria.endPage+1)+"'>" + ">>"+"</a></li>";
+			}
+			$(".pagination").html(str);
+		}
 	});
 </script>
 <title>반찬 관리 페이지</title>
@@ -179,6 +202,8 @@
 					
 				</tr>
 			</table>
+			<ul class = "pagination">
+			</ul>
 		</div>
 	</div>
    </div>

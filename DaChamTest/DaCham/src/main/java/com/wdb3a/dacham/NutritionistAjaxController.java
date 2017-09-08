@@ -239,15 +239,35 @@ public class NutritionistAjaxController {
 		return entity;
 	}
 	//해당 반찬에 대한 카테고리 검색
-	@RequestMapping(value = "/categorySearch/{foodGName}/{cookMName}",method = RequestMethod.GET)
-	public ResponseEntity<List<Nutritionist>> categorySearch(@PathVariable("foodGName")String foodGName, @PathVariable("cookMName")String cookMName){
-		ResponseEntity<List<Nutritionist>> entity = null;
+	@RequestMapping(value = "/categorySearch/{page}/{foodGName}/{cookMName}",method = RequestMethod.GET)
+	public ResponseEntity<Map<String,Object>> categorySearch(@PathVariable("page")int page,@PathVariable("foodGName")String foodGName, @PathVariable("cookMName")String cookMName){
+		ResponseEntity<Map<String,Object>> entity = null;
 		Nutritionist nutritionist = new Nutritionist();
 		try {
-			nutritionist.setFoodGName(foodGName);
+			Criteria criteria = new Criteria();
+			
+			
+			
 			nutritionist.setCookMName(cookMName);
-			List<Nutritionist> list = service.categorySearch(nutritionist);
-			entity = new ResponseEntity<>(list,HttpStatus.OK);
+			nutritionist.setFoodGName(foodGName);
+			
+			System.out.println(foodGName);
+			System.out.println(cookMName);
+			System.out.println(page);
+				
+			
+			
+			int totalCount = service.categorySearchCount(nutritionist);
+			System.out.println("카테고리 count:"+totalCount);
+			criteria.setPage(page);
+			criteria.setTotalCount(totalCount);
+			System.out.println("크라이테리아:"+criteria);
+			List<Nutritionist> list = service.categorySearch(nutritionist,criteria);
+			System.out.println("카테고리 리스트:"+list);
+			Map<String,Object> map = new HashMap<>();
+			map.put("list", list);
+			map.put("criteria", criteria);
+			entity = new ResponseEntity<>(map,HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
