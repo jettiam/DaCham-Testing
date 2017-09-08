@@ -115,9 +115,9 @@ public class NutritionistServiceImpl implements NutritionistService {
 	}
 
 	@Override
-	public List<Nutritionist> categorySearch(Nutritionist nutritionist) throws Exception {
+	public List<Nutritionist> categorySearch(Nutritionist nutritionist,Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.categorySearch(nutritionist);
+		return dao.categorySearch(nutritionist,criteria);
 	}
 
 	@Override
@@ -352,6 +352,12 @@ public class NutritionistServiceImpl implements NutritionistService {
 	public List<Nutritionist> callName(int sideDCode) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.callName(sideDCode);
+	}
+
+	@Override
+	public int categorySearchCount(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.categorySearchCount(nutritionist);
 	}
 
 

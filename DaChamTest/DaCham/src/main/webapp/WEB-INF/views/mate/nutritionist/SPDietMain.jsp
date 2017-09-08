@@ -1,18 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
- <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<script src="https://www.w3schools.com/lib/w3.js"></script>
+	
+<link rel="shortcut icon" href="resources/favicon/N.ico">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	<!-- Bootstrap core CSS     -->
+<link href="resources/assets/css/bootstrap.min.css" rel="stylesheet" />
+
+<!--  Material Dashboard CSS    -->
+<link href="resources/assets/css/material-dashboard.css"
+	rel="stylesheet" />
+
+<!--  CSS for Demo Purpose, don't include it in your project     -->
+<link href="resources/assets/css/demo.css" rel="stylesheet" />
+
+<!--     Fonts and icons     -->
+<link
+	href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"
+	rel="stylesheet">
+<link
+	href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons'
+	rel='stylesheet' type='text/css'>	
 <script>
 	$(document).ready(function(){
 		$("#special").addClass("w3-light-gray");
@@ -53,8 +77,14 @@
 <%@include file="nutritionistNavi.jsp" %>
 	<div class = "container">    
 		
-		<div>
-				<table class = "table table-hover">
+		<div class = "row">
+			<div class = "col-lg-12 col-md-12">
+				<div class = "card">
+					<div class = "card-header" data-background-color = "blue">
+						<h4 class = "title">특별식단 요청 리스트</h4>
+					</div>
+					<div class = "card-content table-responsive">
+						<table class = "table table-hover">
 					<tr>
 						
 						<th>번호</th>
@@ -75,6 +105,9 @@
 					</c:forEach>
 					                  
 				</table>
+					</div>
+				</div>
+			</div>	
 		</div>
 	</div>
 </body>

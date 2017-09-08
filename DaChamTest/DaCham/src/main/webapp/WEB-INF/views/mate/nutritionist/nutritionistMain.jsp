@@ -1,8 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="shortcut icon" href="resources/favicon/N.ico">
@@ -12,6 +19,24 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	<!-- Bootstrap core CSS     -->
+<link href="resources/assets/css/bootstrap.min.css" rel="stylesheet" />
+
+<!--  Material Dashboard CSS    -->
+<link href="resources/assets/css/material-dashboard.css"
+	rel="stylesheet" />
+
+<!--  CSS for Demo Purpose, don't include it in your project     -->
+<link href="resources/assets/css/demo.css" rel="stylesheet" />
+
+<!--     Fonts and icons     -->
+<link
+	href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"
+	rel="stylesheet">
+<link
+	href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons'
+	rel='stylesheet' type='text/css'>
 <script>
 	$(document).ready(function(){
 		orderList(1);
@@ -121,7 +146,7 @@
  	float:left;
   }  
   .thisMonth{
-  		display:inline-block;  margin-left:100px;
+  		display:inline-block;  margin-left:100px; width : 500px;  
   }
   ul{
   	list-style : none;
@@ -163,35 +188,58 @@
 <!--       </div> -->
 <!--    </div> -->
    <div class = "box2">
-   	  <h2>특별 식단 요청 리스트</h2>  
-      <table class = "orderTable table table-hover">      
-         <tr>
-            <th>번호&nbsp;&nbsp;&nbsp;</th>
-            <th>고객id&nbsp;&nbsp;&nbsp;</th>
-            <th>식단명&nbsp;&nbsp;&nbsp;</th>
-            <th>주문접수일&nbsp;&nbsp;&nbsp;</th>
-            <th>금액&nbsp;&nbsp;&nbsp;</th>
-         </tr>
-         <tr class = "orderResult">
-            
-         </tr>
-      </table>
-      <ul class = "pagination1 pagination">
-      </ul>
+   		<div class = "row">
+   			<div class = "col-lg-12 col-md-12">
+   				<div class = "card">
+   					<div class = "card-header" data-background-color = "green">
+   						<h4 class = "title">특별식단 요청 리스트</h4>
+   						<div class = "form-group row">
+   							<div class = "col-xs-2">
+   							</div>
+   						</div>
+   					</div>
+   					<div class = "card-content table-responsive">
+   						<table class = "orderTable table table-hover">      
+				         <tr>
+				            <th>번호&nbsp;&nbsp;&nbsp;</th>
+				            <th>고객id&nbsp;&nbsp;&nbsp;</th>
+				            <th>식단명&nbsp;&nbsp;&nbsp;</th>
+				            <th>주문접수일&nbsp;&nbsp;&nbsp;</th>
+				            <th>금액&nbsp;&nbsp;&nbsp;</th>
+				         </tr>
+				         <tr class = "orderResult">
+				            
+				         </tr>
+				      </table>
+				      <ul class = "pagination1 pagination">
+				      </ul>
+   					</div>
+   				</div>
+   			</div>
+   		</div>
    </div>
    <div class = "thisMonth">
-      <h1> 이번 달의 판매 식단</h1>
-      <hr align = "left" width = "20%">
-     	<table class = "thisTable table table-hover">
-     		<tr>
-     			<th>이미지</th>
-     			<th>식단명</th>
-     		</tr>
-     		<tr class = "thisResult">
-     		</tr>
-     	</table>
-     <ul class = "pagination2 pagination">
-     </ul>
+      <div class = "row">
+      	<div class = "col-lg-12 col-md-12">
+      		<div class = "card">
+      			<div class = "card-header" data-background-color = "blue">    
+      				<h4 class = "title">이번 달의 판매 식단</h4>
+      			</div>
+      			<div class = "card-content table-responsive">
+      				<table class = "thisTable table table-hover">
+			     		<tr>
+			     			<th>이미지</th>
+			     			<th>식단명</th>
+			     		</tr>
+			     		<tr class = "thisResult">
+			     		</tr>
+			     	</table>
+			     <ul class = "pagination2 pagination">
+			     </ul>
+      			</div>
+      		</div>
+      	</div>
+      </div>
    </div>
    <div class = "modal fade" id = "myModal">
    		<div class = "modal-dialog">
