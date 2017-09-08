@@ -1,12 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ page import="com.wdb3a.dacham.bean.OrderList"%>
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<!-- Bootstrap core CSS     -->
+<link href="resources/assets/css/bootstrap.min.css" rel="stylesheet" />
+
+<!--  Material Dashboard CSS    -->
+<link href="resources/assets/css/material-dashboard.css"
+	rel="stylesheet" />
+
+<!--  CSS for Demo Purpose, don't include it in your project     -->
+<link href="resources/assets/css/demo.css" rel="stylesheet" />
+
+<!--     Fonts and icons     -->
+<link
+	href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"
+	rel="stylesheet">
+<link
+	href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons'
+	rel='stylesheet' type='text/css'>
 
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -204,13 +233,18 @@
 </head>
 <body>           
 <%@include file = "counselorNavi.jsp" %>
+    
     <div class = "container-fluid"  >    
-      <div class = "box1">
+    <!--   <div class = "box1"> --> 
       
-             <h3>고객 정보</h3>
-             <div>
-             <div class="form-group row" >   
-			<div class="col-xs-2" > 
+   
+             <div class ="row">
+				<div class="col-lg-12 col-md-12">
+				<div class="card">
+				<div class="card-header" data-background-color="skyblue">
+				<h4 class="title">고객정보</h4>
+				<div class="form-group row">
+				<div class="col-xs-2">
             <select name = "searchType" class= "searchType form-control">
                   <option value = "t"
                   <c:out value="${Counselor.searchType eq 't'?'selected':'' }"/>>
@@ -222,17 +256,19 @@
                   </option>
             </select>
             </div>
+          
             <div class="col-xs-3" >
-            <input type = "text" name = "keyword" id = "keyword" class="form-control" placeholder  = "검색어 입력란">
+            <input type = "text" name = "keyword" id = "keyword" class="form-control"  placeholder  = "검색어 입력란">
             </div>
             <button id = "search" class = "btn btn-success">검색</button>
             <button id = "listAll" class = "btn btn-warning">전체고객목록</button>
          </div>
-      
+        </div>
+        
          
         <div>
-              
-		<table class = "search1 table table-borded" >
+			<div class="card-content table-responsive">
+	        <table class = "search1 table table-borded" >                   
             <tr>
                   <th>고객id</th>
                   <th>고객이름</th>
@@ -248,6 +284,8 @@
               <tr class = "searchResult1">
               </tr>
          </table>
+         </div>
+         </div>
          </div>
          </div>
          </div>
@@ -299,7 +337,7 @@
       		</div>
       	</div>
       </div>
-      <div class = "modal fade" id = "ourModal" role = "dialog" style= "word-wrap : break-word";>
+      <div class = "modal fade" id = "ourModal" role = "dialog" style= "word-wrap : break-word">
       	<div class = "modal-dialog">
       		<div class = "modal-content">
       			<div class = "modal-header">
@@ -321,8 +359,10 @@
       			<div class = "modal-footer">
       			</div>
       		</div>
+      		</div>
+      		</div>
       	</div>
-      </div>
+      
       <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
       <br><br><br><br><br><br>
     
