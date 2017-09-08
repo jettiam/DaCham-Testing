@@ -17,16 +17,25 @@
 	src="resources/wizardJs/javascript_compressed.js"></script>
 <script src="resources/wizardJs/ko.js"></script>
 <script src="resources/wizardJs/wizard.js"></script>
-<style>
-	#graphWizard{
-		background-color: red;
-	}
-</style>
+
 <script>
+	$("label").on("click", function(){
+		alert("안녕클릭");
+	})
 	$(document).ready(
 			function() {
 				
 				$("#graphWizard").hide();
+				var ck = $("input#toggly");
+				
+				$("input").on("click", function(){
+					var ckstatus = ck.is(":checked");
+					if(ckstatus===true){
+						$("#graphWizard").show("slow");
+					}else{
+						$("#graphWizard").hide("slow");
+					}
+				});
 				var block = '${block}';
 				var xml_block = Blockly.Xml.textToDom(block);
 				Blockly.Xml.domToWorkspace(xml_block, workspace);
@@ -99,11 +108,27 @@
 
 body {
 	font-family: 'Jeju Gothic', sans-serif;
+	margin: 0;
 }
 
 .blocklyTreeLabel {
 	font-family: 'Jeju Gothic';
 }
+
+#wizardNavi {
+	margin: 0px;
+	background-color: #2f455a;
+	position: fixed;
+	z-index: 100;
+	width: 100%;
+	height: 40px;
+}
+
+#blocklyDiv{
+	padding: 8px;
+	margin-top: 40px;
+}
+
 
 #sideController {
 	width: 150px;
@@ -125,9 +150,6 @@ li {
 }
 #searchNum{
 	width:97%;
-}
-.sideNaviStart {
-	
 }
 
 .sideNavi {
@@ -164,7 +186,7 @@ li {
 /* Checkbox body */
 
 label {
-  display: block;
+  display: inline-block;
   width: 54px;
   height: 32px;
   margin: 0px auto;
@@ -174,11 +196,9 @@ label {
   background-color: #E6E9EC;
 }
 
-input {
-  
+h5{
+	display: inline-block;
 }
-
-
 /* The toggle */
 
 i {
@@ -230,32 +250,27 @@ input:checked+label {
   font-weight: 300;
 }
 
-
-
-/* Hope you enjoy the toggle as much as I do! Follow me @danielhannih on Twitter! */
 </style>
 
 </head>
 <body>
-
-	<hr width="150">
-	<h3 id="alert" style="text-align: center;">다 참 위 자 드</h3>
-	<hr width="150">
-
-	<div>
-		<button id="registWizard">등록</button>
+	<div id="wizardNavi">	
+	<h3 id="alert" style="display: inline">다 참 위 자 드</h3>
+	<button id="registWizard">등록</button>
 		<button id="cancle">취소</button>
-	</div>
-	<div id="graphWizard">
-		<span>x</span>
+		<h5>그래프끄기</h5>
 		<input type="checkbox" id="toggly">
   <label for="toggly"><i></i></label>
+  <h5>그래프보기</h5>
+	</div>
+
+	<div id="graphWizard">
+		
 		
 	</div>
 	
 	<span id="blockWizard">
-		<div id="blocklyDiv"
-			style="display: inline-block; height: 3000px; width: 100%;"></div> 
+		<div id="blocklyDiv" style="display: inline-block; height: 3000px; width: 99%;"></div> 
 			<xml
 			xmlns="http://www.w3.org/1999/xhtml" id="toolbox"
 			style="display: none"> <category name="1. 질문지 만들기"
@@ -270,9 +285,6 @@ input:checked+label {
 		<block type="s1"></block><block type="s2"></block><block type="s3"></block>
 		<block type="g1"></block><block type="g2"></block><block type="g3"></block>
 		</category>
-		
-</svg>
-	
 		</xml>
 	</span>
 
@@ -361,7 +373,7 @@ input:checked+label {
 				right : 120,
 				bottom : 20,
 				left : 50
-			}, width = window.outerWidth, height = window.outerHeight / 3;
+			}, width = window.outerWidth, height = 1000; //window.outerHeight / 3;
 			var i = 0, duration = 750, root;
 			var tree = d3.layout.tree().size([ height, width ]);
 			var diagonal = d3.svg.diagonal().projection(function(d) {
@@ -388,7 +400,7 @@ input:checked+label {
 						.links(nodes);
 				// Normalize for fixed-depth.
 				nodes.forEach(function(d) {
-					d.y = d.depth * 240;
+					d.y = d.depth * 300;
 				});
 				// Update the nodes…
 				var node = svg.selectAll("g.node").data(nodes, function(d) {
@@ -474,7 +486,8 @@ input:checked+label {
 					} else {
 						return "#CC3D3D";
 					}
-				})
+				});
+				/* 주석 풀면 답변 들어감.
 				.append('svg:tspan').attr('x', 16).attr('dy', 12).text(
 						function(d) {
 							var q = eval("plainJson.q" + d.name);
@@ -492,7 +505,8 @@ input:checked+label {
 								}								
 							}
 							return answerRtn;
-						}).attr('font-size', '11px');
+						}).attr('font-size', '11px');  */
+
 
 				var answerNodeStr = "nodeEnter.append('svg:text')";
 				
