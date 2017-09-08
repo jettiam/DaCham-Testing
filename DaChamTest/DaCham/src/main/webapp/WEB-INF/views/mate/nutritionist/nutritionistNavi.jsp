@@ -9,7 +9,9 @@
 body {
 	font-family: 'Jeju Gothic', sans-serif;
 }
-
+* {
+	font-family: 'Jeju Gothic',"Nanum Gothic", sans-serif !important;
+}
 
 
 .w3-display-container{
