@@ -17,136 +17,185 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<!-- Bootstrap core CSS     -->
+<link href="resources/assets/css/bootstrap.min.css" rel="stylesheet" />
+
+<!--  Material Dashboard CSS    -->
+<link href="resources/assets/css/material-dashboard.css"
+	rel="stylesheet" />
+
+<!--  CSS for Demo Purpose, don't include it in your project     -->
+<link href="resources/assets/css/demo.css" rel="stylesheet" />
+
+<!--     Fonts and icons     -->
+<link
+	href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"
+	rel="stylesheet">
+<link
+	href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons'
+	rel='stylesheet' type='text/css'>
+
 <title>Insert title here</title>
 </head>
+<style>
+.container {
+	width: 1500px !important;
+}
+.paginationCss{
+	margin:10px auto;           
+}
+</style>
 <body>
 	<%@include file="../admin/upmenu.jsp"%>
+
+
+
 	<div class="container">
-		<!-- <div class="col-sm-6">  
-		<h2>공지사항</h2>
-		<div class="form-group row">
-		<div class="col-sm-3">   
-			<select class= "form-control">
-				<option>등록자</option>
-				<option>제목</option>
-			</select>
-		</div>
-		<div class="col-sm-5">
-			<input type="text" class="form-control"> 
-		</div>
-			<input type="submit" value="검색" class = "btn btn-default">
-		
-			<div style="margin-top:13px">
-			<table class="table table-bordered">    
-				<tr>    
-					<th>번호</th>
-					<th>제목</th>
-					<th>등록자</th>
-					<th>등록 일자</th>
-					<th>조회수</th>
-				</tr>
-			</table>
-			<input type="button" value="목록" id="notice" class = "btn btn-default">
-			</div>
-		</div>
-	</div> -->
-		<!--차트  -->
-		<div id="chart" class="col-sm-12">
-			<h2>일자별 통계</h2>
-			<div class="form-group row">
-				<div class="col-sm-5"></div>
-				<div class="col-sm-2 text-right">
-					<input type="date" id="startdate" class="form-control"
-						style="width: 165px">
-				</div>
-				<div class="col-sm-1 text-center" style="font-size: 23px">~</div>
-				<div class="col-sm-2 text-right">
-					<input type="date" id="enddate" class="form-control"
-						style="width: 165px">
-				</div>
-				<div class="col-sm-1 text-right">
-					<input type="button" value="검색" id="chartsearch"
-						class="btn btn-default">
-				</div>
-				<div class="col-sm-11 text-right" style="margin-top: 13px">
-					<input type="button" value="오늘" id="today" class="btn btn-default">
-					<input type="button" value="일주일" id="week" class="btn btn-default">
-					<input type="button" value="지난 한달" id="month"
-						class="btn btn-default"> <br>
+		<div class="row">
+			<div class="col-lg-4 col-md-6 col-sm-6">
+				<div class="card card-stats">
+					<div class="card-header" data-background-color="orange">
+						<i class="material-icons"></i>
+					</div>
+					<div class="card-content">
+						<p class="category">오늘의 매출액</p>
+						<h3 class="title">
+							얼마게?<small>명</small>
+						</h3>
+					</div>
+					<div class="card-footer"></div>
 				</div>
 			</div>
-			<div>
-				<input type="hidden" id="dietName" name="dietName"> <input
-					type="hidden" id="sellAmount" name="sellAmount"> <input
-					type="hidden" id="totalprice" name="totalprice">
+			<div class="col-lg-4 col-md-6 col-sm-6">
+				<div class="card card-stats">
+					<div class="card-header" data-background-color="green">
+						<i class="material-icons"></i>
+					</div>
+					<div class="card-content">
+						<p class="category">오늘의 주문량</p>
+						<h3 class="title">$34,245</h3>
+					</div>
+					<div class="card-footer"></div>
+				</div>
 			</div>
-			<div id="chart_div" style="width: 1000px; height: 300px;"></div>
-			<div id="piechart" style="width: 1000px; height: 300px;"></div>
+			<div class="col-lg-4 col-md-6 col-sm-6">
+				<div class="card card-stats">
+					<div class="card-header" data-background-color="red">
+						<i class="material-icons"></i>
+					</div>
+					<div class="card-content">
+						<p class="category">오늘의 판매 건수</p>
+						<h3 class="title">75</h3>
+					</div>
+					<div class="card-footer"></div>
+				</div>
+			</div>
 		</div>
 
+		<div class="row">
+			<div class="col-md-7">
+				<div class="card">
+					<div class="card-header card-chart" data-background-color="green">
+						<div id="chart_div"></div>
+					</div>
 
-
-
-
-		<div>
-			<h2>모든 주문내역</h2>
-			<div class="form-group row">
-				<div class="col-xs-2">
-					<select name="searchType" class="searchType form-control">
-						<option value="t"
-							<c:out value="${orderList.searchType eq 't'?'selected':'' }"/>>
-							고객 아이디</option>
-						<option value="c"
-							<c:out value="${orderList.searchType eq 'c'?'selected':'' }"/>>
-							식단명</option>
-					</select>
+					<div class="card-footer">
+						<div class="card-content">
+							<h4 class="title">일자별 통계</h4>
+							<!-- <div class="col-sm-5"></div> -->
+							<div class="pull-right">
+								<div class="col-sm-4">
+									<input type="date" id="startdate" class="form-control">
+								</div>
+								<div class="col-sm-1 text-center" style="font-size: 23px">~</div>
+								<div class="col-sm-4">
+									<input type="date" id="enddate" class="form-control">
+								</div>
+								<div class="col-sm-3 text-right">
+									<input type="button" value="검색" id="chartsearch"
+										class="btn btn-default">
+								</div>
+							</div>
+							<div class="pull-right">
+								<div class="col-sm-12" style="margin-top: 13px">
+									<input type="button" value="오늘" id="today"
+										class="btn btn-default"> <input type="button"
+										value="일주일" id="week" class="btn btn-default"> <input
+										type="button" value="지난 한달" id="month" class="btn btn-default">
+									<br>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-				<div class="col-xs-3">
-					<input type="text" name="keyword" id="keyword" class="form-control">
-				</div>
-				<button id="search" class="btn btn-default">검색</button>
-				<button id="searchAll" class="btn btn-default">전체</button>
 			</div>
-			<div>
-				<table class="tables table table-condensed" width="600">
-					<tr>
-						<th>주문번호</th>
-						<th>고객id</th>
-						<th>식단명</th>
-						<th>주문 접수일</th>
-						<th>금액</th>
-						<th><a href="#" id="sort"></a>진행상태</th>
-						<th>운송장 번호</th>
-					</tr>
-				</table>
-				<ul class="pagination" position="center">
+
+			<div class="col-md-5">
+				<div class="card">
+					<div class="card-header card-chart" data-background-color="orange">
+						<div id="piechart"></div>
+					</div>
+					<div class="card-content">
+						<h4 class="title">전체 식단 판매율</h4>
+
+					</div>
+					<div class="card-footer">
+						<div class="stats"></div>
+						<h4>순위 리스트 수정중</h4>               
+					</div>
+
+				</div>
+			</div>
+
+
+		</div>
+
+		<div class="row">
+			<div class="col-lg-12 col-md-12">
+				<div class="card">
+					<div class="card-header" data-background-color="orange">
+						<h4 class="title">모든 주문내역</h4>
+						<div class="form-group row">
+							<div class="col-xs-2">
+								<select name="searchType" class="searchType form-control">
+									<option value="t"
+										<c:out value="${orderList.searchType eq 't'?'selected':'' }"/>>
+										고객 아이디</option>
+									<option value="c"
+										<c:out value="${orderList.searchType eq 'c'?'selected':'' }"/>>
+										식단명</option>
+								</select>
+							</div>
+							<div class="col-xs-3">
+								<input type="text" name="keyword" id="keyword"
+									class="form-control">
+							</div>
+							<button id="search" class="btn btn-default">검색</button>
+							<button id="searchAll" class="btn btn-default">전체</button>
+						</div>
+					</div>
+					<div class="card-content table-responsive">
+						<table class="tables table table-hover">        
+							<thead class="text-warning">
+								<th>주문번호</th>
+								<th>고객id</th>
+								<th>식단명</th>
+								<th>주문 접수일</th>
+								<th>금액</th>
+								<th><a href="#" id="sort"></a>진행상태</th>
+								<th>운송장 번호</th>
+							</thead>
+							
+						</table>
+						<ul class="pagination">   
 				</ul>
+					</div>
+				</div>
 			</div>
 		</div>
-		<!-- <div id="read" class="read" >  
-		<table  border="1" class="table table-bordered">
-			<tr>
-				<th>고객이름</th>
-				<td id="orderName"></td>
-				<th>배달주소</th>
-				<td id="orderAddRess"></td>
-			</tr>
-			<tr>
-				<th>가격</th>
-				<td id="orderPrice"></td>
-				<th>식단명</th>
-				<td id="orderDietName"></td>
-			</tr>  
-			<tr>
-				<th>주문일</th>
-				<td id="orderOrderDate"></td>
-				<th>전화번호</th>
-				<td id="orderTel"></td>
-			</tr>
-		</table>
-		<button id="close">닫기</button>
-		</div> -->
-	</div>
+		    
 	<div class="modal fade" id="myModal" role="dialog">
 		<div class="modal-dialog">
 
@@ -182,9 +231,10 @@
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>
-
 		</div>
 	</div>
+
+
 </body>
 <script>
 	google.charts.load('current', {
@@ -248,14 +298,11 @@
 					data1.setCell(i, 0, data[i].dietName);
 					data1.setCell(i, 1, data[i].sellAmount);
 				}
-				var options = {
-					title : '전체 식단 판매율'
-				};
 
 				var chart = new google.visualization.PieChart(document
 						.getElementById('piechart'));
 
-				chart.draw(data1, options);
+				chart.draw(data1);
 			}
 		});
 	}
@@ -440,7 +487,7 @@
 																	for (var i = 0; i < data.length; i++) {
 																		if (data[i].transportNum == null) {
 																			data[i].transportNum = "";
-																		}  
+																		}
 																		str += "<tr class='orderListTable'>"
 																				+ "<td>"
 																				+ data[i].orderCode
@@ -538,7 +585,7 @@
 
 							if (criteria.prev) {
 								str += "<li><a href='"
-										+ (criteria.startPage - 1) + "'>"  
+										+ (criteria.startPage - 1) + "'>"
 										+ "<<" + "</a></li>";
 							}
 							for (var i = criteria.startPage; i <= criteria.endPage; i++) {
@@ -548,16 +595,15 @@
 										+ "</a></li>";
 							}
 							if (criteria.next) {
-								str += "<li><a href='"
-										+ (criteria.endPage + 1) + "'>" + ">>"
-										+ "</a></li>";
+								str += "<li><a href='" + (criteria.endPage + 1)
+										+ "'>" + ">>" + "</a></li>";
 							}
 							$(".pagination").html(str);
 						}
 						$("#sort").on("click", function() {
 							even.preventDefault();
 						})
-						
+
 						function fontColor() {
 							var length = $('.tables tr').length;
 							for (var i = 0; i < length; i++) {
@@ -565,7 +611,7 @@
 								if (font != null) {
 
 									$(".transportNum").eq(i).css("color",
-											"#FA5858");  
+											"#FA5858");
 								}
 							}
 						}

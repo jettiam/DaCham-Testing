@@ -40,7 +40,9 @@ public interface NutritionistDAO {
 	//위의 목록결과의 수량을 구합니다.
 	public int diseaseDietCount(String diseaseName) throws Exception;
 	//해당 반찬에 대한 카테고리 검색
-	public List<Nutritionist> categorySearch(Nutritionist nutritionist) throws Exception;
+	public List<Nutritionist> categorySearch(Nutritionist nutritionist,Criteria criteria) throws Exception;
+	//해당 반찬 카테고리 검색에 대한 카운트
+	public int categorySearchCount(Nutritionist nutritionist) throws Exception;
 	//해당 메인 페이지에 주문목록 표시
 	public List<OrderList> orderList(Criteria criteria) throws Exception;
 	//해당 메인페이지 주문목록 개수 구하기

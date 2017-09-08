@@ -11,6 +11,32 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+<link rel="shortcut icon" href="resources/favicon/N.ico">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	<!-- Bootstrap core CSS     -->
+<link href="resources/assets/css/bootstrap.min.css" rel="stylesheet" />
+
+<!--  Material Dashboard CSS    -->
+<link href="resources/assets/css/material-dashboard.css"
+	rel="stylesheet" />
+
+<!--  CSS for Demo Purpose, don't include it in your project     -->
+<link href="resources/assets/css/demo.css" rel="stylesheet" />
+
+<!--     Fonts and icons     -->
+<link
+	href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"
+	rel="stylesheet">
+<link
+	href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons'
+	rel='stylesheet' type='text/css'>	
 <script>
 	$(document).ready(function(){
 		$("#diet").addClass("w3-light-gray");
@@ -133,13 +159,19 @@
       </nav>
    </div>
    <div class = "box2">
-      <div>
-         <button id = "regist" class = "btn btn-default">식단 등록</button>
-         <button class = "modifyDiet btn btn-default">식단 수정</button>
-<!--          <button class = "deleteDiet btn btn-default">식단 삭제</button>    -->
-      </div>
-      <div>
-         <table class = "dietDiseaseOverview table table-hover">
+      <div class = "row">
+      	<div class = "col-lg-12 col-md-12">
+      		<div class = "card">
+      			<div class = "card-header" data-background-color = "green">
+      				<h4 class = "title">식단 목록</h4>   
+      				<div>
+			         <button id = "regist" class = "btn btn-primary">식단 등록</button>
+			         <button class = "modifyDiet btn btn-primary">식단 수정</button>
+			<!--          <button class = "deleteDiet btn btn-default">식단 삭제</button>    -->
+			      </div>      				
+      			</div>
+      			<div class = "card-content table-responsive">
+      				<table class = "dietDiseaseOverview table table-hover">
             <tr>
                <th></th>
                
@@ -152,6 +184,9 @@
          </table>
          <ul class = "pagination">
          </ul>
+      			</div>
+      		</div>
+      	</div>
       </div>
    </div>
    </div>

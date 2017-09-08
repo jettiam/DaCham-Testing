@@ -123,9 +123,12 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 	}
 
 	@Override
-	public List<Nutritionist> categorySearch(Nutritionist nutritionist) throws Exception {
+	public List<Nutritionist> categorySearch(Nutritionist nutritionist,Criteria criteria) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".categorySearch",nutritionist);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("nutritionist", nutritionist);
+		map.put("criteria", criteria);
+		return sqlSession.selectList(namespace+".categorySearch",map);
 	}
 
 	@Override
@@ -360,5 +363,11 @@ public class NutritionistDAOImpl implements NutritionistDAO {
 	public List<Nutritionist> callName(int sideDCode) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".callName",sideDCode);
+	}
+
+	@Override
+	public int categorySearchCount(Nutritionist nutritionist) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".categorySearchCount",nutritionist);
 	}
 }

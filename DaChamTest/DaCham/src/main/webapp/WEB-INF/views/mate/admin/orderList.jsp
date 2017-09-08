@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
-<html> 
+<html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -16,209 +16,239 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <title>Insert title here</title>
 
+<!-- Bootstrap core CSS     -->
+<link href="resources/assets/css/bootstrap.min.css" rel="stylesheet" />
+
+<!--  Material Dashboard CSS    -->
+<link href="resources/assets/css/material-dashboard.css"
+	rel="stylesheet" />
+
+<!--  CSS for Demo Purpose, don't include it in your project     -->
+<link href="resources/assets/css/demo.css" rel="stylesheet" />
+
+<!--     Fonts and icons     -->
+<link
+	href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"
+	rel="stylesheet">
+<link
+	href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons'
+	rel='stylesheet' type='text/css'>
 
 
 </head>
 <style>
-.topMar {
-	margin-top: 0.1cm;
+
+ #searchdiv {
+	float: right;	
+	width: 750px;
+} 
+
+.w3-card-4 {
+	margin-right: 25px;
+	margin-bottom: 20px;
 }
-.w3-card-4{
-	margin-right: 25px; 
-	margin-bottom : 20px;       
+
+ #buttonDiv {
+	float: right;	      
 }
+
+button#search, button#searchAll{
+	margin-top: -7px;
+}
+
+ 
 </style>
 <body>
 	<%@include file="../admin/upmenu.jsp"%>
+
 	<div class="container">
-		<form id='formid' method='post' action='foodOrder'>
-			<input type="hidden" name="orderCode">
-		</form>
-		<div>
-			<div class="form-group row">
-				<div class="col-xs-2">
-					<select name="searchType" class="searchType form-control">
-						</option>
-						<option value="t"
-							<c:out value="${orderList.searchType eq 't'?'selected':'' }"/>>
-							고객id</option>
-						<option value="c"
-							<c:out value="${orderList.searchType eq 'c'?'selected':'' }"/>>
-							식단명</option>
-						<option value="a"
-							<c:out value="${orderList.searchType eq 'a'?'selected':'' }"/>>
-							진행상태</option>
-					</select>
-				</div>
-				<div class="col-xs-3">
-					<input type="text" name="keyword" id="keyword" class="form-control">
-				</div>
-				<button id="search" class="btn btn-default">검색</button>
-				<button id="searchAll" class="btn btn-default">전체 검색</button>
-			</div>
-
-			<div class="w3-container ">    
-
-				<div class="w3-card-4 w3-dark-grey w3-col m2">
-
-					<div class="w3-container w3-center">
-						<h4>결제완료</h4>
-						<div class="w3-section">
-							<p id="str1"></p>
-							<button class="active w3-button w3-green w3-center" id="creadt"
-								data-code="1">결제완료 정렬</button>
-						</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header" data-background-color="purple">
+						<h4 class="title">주문 내역</h4>
 					</div>
-				</div>
-				<div class="w3-card-4 w3-dark-grey w3-col m2">
-					<div class="w3-container w3-center">
-						<h4>식재료 발주</h4>
-						<div class="w3-section">
-							<p id="str2"></p>
-							<button class="active w3-button w3-green w3-center"
-								id="FoodOrder" data-code="2">식재료 발주 정렬</button>
-						</div>
-					</div>
-				</div>
-				<div class="w3-card-4 w3-dark-grey w3-col m2">
-					<div class="w3-container w3-center">
-						<h4>식재료 입고</h4>
-						<div class="w3-section">
-							<p id="str3">ddd</p>
-							<button class="active w3-button w3-green" id="Foodreceiving"
-								data-code="3">식재료 입고 정렬</button>
-						</div>
-					</div>
-				</div>
-				<div class="w3-card-4 w3-dark-grey w3-col m2">
-					<div class="w3-container w3-center">
-						<h4>조리대기</h4>
-						<div class="w3-section">
-							<p id="str4"></p>
-							<button class="active w3-button w3-green" id="cook" data-code="4">조리대기
-								정렬</button>
-						</div>
-					</div>
-				</div>
-				<div class="w3-card-4 w3-dark-grey w3-col m2"> 
+					<div class="card-content table-responsive">
+						<div class="w3-container ">
 
-					<div class="w3-container w3-center">
-						<h4>환불</h4>
-						<div class="w3-section">
-							<p id="str5"></p>
-							<button class="active w3-button w3-green" id="refundSort"
-								data-code="5">환불 정렬</button>
-						</div>
-					</div>
+							<div class="w3-card-4 w3-dark-grey w3-col m2">
 
-				</div>
-			</div>
-			<!-- <ul class="nav nav-pills text-right">
-					<li role="presentation" class="active"><a class='data'
-						data-code='1' href="#" onclick="orderSort1(1);">결제완료 정렬</a></li>
-					<li role="presentation" class="active"><a class='data'
-						data-code='3' href="#" onclick="orderSort3(1);">식재료 발주 정렬</a></li>
-					<li role="presentation" class="active"><a class='data'
-						data-code='4' href="#" onclick="orderSort4(1);">식재료 입고 정렬</a></li>
-					<li role="presentation" class="active"><a class='data'
-						data-code='2' href="#" onclick="orderSort2(1);">조리대기 정렬</a></li>
-					<li role="presentation" class="active"><a class='data'
-						data-code='5' href="#" onclick="orderSort5(1);">환불 정렬</a></li> -->
-			</ul>
-		</div>
-		<div class="orderItemNameCount"></div>
-		<div class="topMar">
-			<div class="form-group row">
-
-				<form role="form" method="post">
-					<div class="divs" id="a1">
-						<table class="tables table table-condensed">
-							<tr>
-								<th><input type="checkBox" id="allCheck">전체</th>
-								<th>주문번호</th>
-								<th>고객id</th>
-								<th>식단명</th>
-								<th>주문 접수일</th>
-								<th>금액</th>
-								<th>진행상태</th>
-							</tr>
-
-						</table>
-					</div>
-				</form>
-				<ul class="pagination1 pagination" position="center">
-				</ul>
-				
-				<ul class="pagination2 pagination" position="center">
-				</ul>
-				
-				<ul class="pagination3 pagination" position="center">
-				</ul>
-				
-				<ul class="pagination4 pagination" position="center">
-				</ul>
-				
-				<ul class="pagination5 pagination" position="center">
-				</ul> 
-				
-				<ul class="pagination6 pagination" position="center">
-				</ul>
-				<div>
-					<button id="foodOrder" class="btn btn-default">식재료 주문</button>
-					<button id="work" class="btn btn-default">조리 요청</button> 
-					<button id="refund" class="btn btn-danger">환불</button>
-				</div>
-
-
-				<div class="modal fade" id="myModal" role="dialog">
-					<div class="modal-dialog">
-
-						<!-- Modal content-->
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">×</button>
-								<h4 class="modal-title">상세 내역</h4>
+								<div class="w3-container w3-center">
+									<h4>결제완료</h4>
+									<div class="w3-section">
+										<p id="str1"></p>
+										<button class="active w3-button w3-green w3-center"
+											id="creadt" data-code="1">결제완료 정렬</button>
+									</div>
+								</div>
 							</div>
-							<div class="modal-body">
-								<table class="table table-bordered">
-									<tr>
-										<th>고객이름</th>
-										<td id="orderName"></td>
-										<th>배달주소</th>
-										<td id="orderAddRess"></td>
-									</tr>
-									<tr>
-										<th>가격</th>
-										<td id="orderPrice"></td>
+							<div class="w3-card-4 w3-dark-grey w3-col m2">
+								<div class="w3-container w3-center">
+									<h4>식재료 발주</h4>
+									<div class="w3-section">
+										<p id="str2"></p>
+										<button class="active w3-button w3-green w3-center"
+											id="FoodOrder" data-code="2">식재료 발주 정렬</button>
+									</div>
+								</div>
+							</div>
+							<div class="w3-card-4 w3-dark-grey w3-col m2">
+								<div class="w3-container w3-center">
+									<h4>식재료 입고</h4>
+									<div class="w3-section">
+										<p id="str3">ddd</p>
+										<button class="active w3-button w3-green" id="Foodreceiving"
+											data-code="3">식재료 입고 정렬</button>
+									</div>
+								</div>
+							</div>
+							<div class="w3-card-4 w3-dark-grey w3-col m2">
+								<div class="w3-container w3-center">
+									<h4>조리대기</h4>
+									<div class="w3-section">
+										<p id="str4"></p>
+										<button class="active w3-button w3-green" id="cook"
+											data-code="4">조리대기 정렬</button>
+									</div>
+								</div>
+							</div>
+							<div class="w3-card-4 w3-dark-grey w3-col m2">
+
+								<div class="w3-container w3-center">
+									<h4>환불</h4>
+									<div class="w3-section">
+										<p id="str5"></p>
+										<button class="active w3-button w3-green" id="refundSort"
+											data-code="5">환불 정렬</button>
+									</div>
+								</div>
+
+							</div>
+						</div>
+						<div id="searchdiv">
+							<div class="form-group row">
+								<div class="col-sm-offset-3 col-sm-2">
+								
+									<select name="searchType" class="searchType form-control">
+										</option>
+										<option value="t"
+											<c:out value="${orderList.searchType eq 't'?'selected':'' }"/>>
+											고객ID</option>
+										<option value="c"
+											<c:out value="${orderList.searchType eq 'c'?'selected':'' }"/>>
+											식단명</option>
+										<option value="a"
+											<c:out value="${orderList.searchType eq 'a'?'selected':'' }"/>>
+											진행상태</option>
+									</select>
+								</div>
+								<div class="col-sm-3">
+									<input type="text" name="keyword" id="keyword"
+										class="form-control">
+								</div>
+								<div class="col-sm-4">
+									<button id="search" class="btn btn-default">검색</button>
+									<button id="searchAll" class="btn btn-default">전체 검색</button>
+								</div>
+							</div>
+						</div>
+						<form role="form" method="post">
+							<div class="divs" id="a1">
+								<table class="tables table table-condensed">
+									<thead class="text-primary">
+										<th><input type="checkBox" id="allCheck">전체</th>
+										<th>주문번호</th>
+										<th>고객id</th>
 										<th>식단명</th>
-										<td id="orderDietName"></td>
-									</tr>
-									<tr>
-										<th>주문일</th>
-										<td id="orderOrderDate"></td>
-										<th>전화번호</th>
-										<td id="orderTel"></td>
-									</tr>
+										<th>주문 접수일</th>
+										<th>금액</th>
+										<th>진행상태</th>
+									</thead>
+
 								</table>
 							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default"
-									data-dismiss="modal">Close</button>
-							</div>
+						</form>
+						<ul class="pagination1 pagination">
+						</ul>
+
+						<ul class="pagination2 pagination">
+						</ul>
+
+						<ul class="pagination3 pagination">
+						</ul>
+
+						<ul class="pagination4 pagination">
+						</ul>
+
+						<ul class="pagination5 pagination">
+						</ul>
+
+						<ul class="pagination6 pagination">
+						</ul>
+						 <br>
+						<div id="buttonDiv">
+							<button id="foodOrder" class="btn btn-default">식재료 주문</button>
+							<button id="work" class="btn btn-default">조리 요청</button>
+							<button id="refund" class="btn btn-danger">환불</button>
 						</div>
-
 					</div>
-				</div> 
-
-
-
-
+				</div>
 			</div>
 		</div>
+	</div>
+
+
+
+
+	<form id='formid' method='post' action='foodOrder'>
+		<input type="hidden" name="orderCode">
+	</form>
+
+	<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">×</button>
+					<h4 class="modal-title">상세 내역</h4>
+				</div>
+				<div class="modal-body">
+					<table class="table table-bordered">
+						<tr>
+							<th>고객이름</th>
+							<td id="orderName"></td>
+							<th>배달주소</th>
+							<td id="orderAddRess"></td>
+						</tr>
+						<tr>
+							<th>가격</th>
+							<td id="orderPrice"></td>
+							<th>식단명</th>
+							<td id="orderDietName"></td>
+						</tr>
+						<tr>
+							<th>주문일</th>
+							<td id="orderOrderDate"></td>
+							<th>전화번호</th>
+							<td id="orderTel"></td>
+						</tr>
+					</table>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+
+
+
 </body>
 <script>
-	
-
 	$(document)
 			.ready(
 					function() {
@@ -359,7 +389,7 @@
 
 											});
 						}
-						
+
 						function orderAllCountTd() {
 							$
 									.getJSON(
@@ -378,7 +408,8 @@
 												for (var i = 0; i < data.length; i++) {
 													if (data[i].orderItemName == "조리 대기") {
 														readyCook++;
-														console.log("조리대기 "+readyCook);
+														console.log("조리대기 "
+																+ readyCook);
 													} else if (data[i].orderItemName == "식재료발주") {
 														ReadyFood++;
 													} else if (data[i].orderItemName == "식재료 입고") {
@@ -403,7 +434,7 @@
 
 												$("#str1").append(str1);
 												$("#str2").append(str2);
-												$("#str4").append(str3);  
+												$("#str4").append(str3);
 												$("#str3").append(str4);
 												$("#str5").append(str5);
 
@@ -423,8 +454,8 @@
 											var check = true;
 											$(".pagination1 li").remove();
 											$(".pagination2 li").remove();
-											$(".pagination3 li").remove(); 
-											$(".pagination4 li").remove(); 
+											$(".pagination3 li").remove();
+											$(".pagination4 li").remove();
 											$(".pagination5 li").remove();
 											$(".pagination6 li").remove();
 											var length = $('.orderListTable input:checked').length;
@@ -468,11 +499,11 @@
 																					},
 																					success : function(
 																							data) {
-																						if(check==true){
-																						check =true;
+																						if (check == true) {
+																							check = true;
 																						}
 																						all(1);
-																						
+
 																					},
 																					error : function() {
 																						check = false;
@@ -485,9 +516,9 @@
 																	}
 
 																});
-													if(check==true){
-													 alert("환불되었습니다");
-													}
+												if (check == true) {
+													alert("환불되었습니다");
+												}
 											} else {
 												alert("식단을 선택하세요");
 											}
@@ -505,10 +536,10 @@
 											var check = true;
 											$(".pagination1 li").remove();
 											$(".pagination2 li").remove();
-											$(".pagination3 li").remove(); 
-											$(".pagination4 li").remove(); 
+											$(".pagination3 li").remove();
+											$(".pagination4 li").remove();
 											$(".pagination5 li").remove();
-											$(".pagination6 li").remove(); 
+											$(".pagination6 li").remove();
 											var length = $('.orderListTable input:checked').length;
 											if (length != 0) {
 
@@ -547,15 +578,14 @@
 																					},
 																					success : function(
 																							data) {
-																						if(check==true){
-																							check=true;
+																						if (check == true) {
+																							check = true;
 																						}
 																						all(1);
-																						
 
 																					},
 																					error : function() {
-																						check=false;
+																						check = false;
 																						alert("실패");
 																					}
 
@@ -564,9 +594,9 @@
 																		alert("식재료 입고 상태여야만 작업요청을 할 수 있습니다.")
 																	}
 																});
-															if(check==true){
-																alert("조리요청 되었습니다");
-															}
+												if (check == true) {
+													alert("조리요청 되었습니다");
+												}
 											} else {
 												alert("식단을 선택하세요");
 											}
@@ -689,11 +719,10 @@
 										+ "</a></li>";
 							}
 							if (criteria.next) {
-								str += "<li><a href='"
-										+ (criteria.endPage + 1) + "'>" + ">>"
-										+ "</a></li>";
+								str += "<li><a href='" + (criteria.endPage + 1)
+										+ "'>" + ">>" + "</a></li>";
 							}
-							$(".pagination1").html(str);   
+							$(".pagination1").html(str);
 						}
 
 						var currentPage = 1;
@@ -702,19 +731,18 @@
 							var replyPage = $(this).attr("href");
 							all(replyPage);
 						});
-						
-						
+
 						var object = new Object();
 						var booler = false;
 						var sortCount;
 
 						function orderSort1(page) {
 
-							$(".pagination1 li").empty();    
+							$(".pagination1 li").empty();
 							$(".pagination3 li").remove();
 							$(".pagination4 li").remove();
 							$(".pagination5 li").remove();
-							$(".pagination6 li").remove();            
+							$(".pagination6 li").remove();
 							sortCount = 1
 							$
 									.getJSON(
@@ -753,7 +781,7 @@
 												}
 												console.log(str);
 												$(".tables").append(str);
-												printPaging2(data.criteria);  
+												printPaging2(data.criteria);
 												fontColor1()
 											});
 						}
@@ -763,7 +791,7 @@
 							$(".pagination4 li").remove();
 							$(".pagination5 li").remove();
 							$(".pagination6 li").remove();
-							
+
 							sortCount = 2;
 							$
 									.getJSON(
@@ -802,13 +830,13 @@
 												console.log(str);
 												$(".tables").append(str);
 												printPaging3(data.criteria);
-												fontColor1()  
+												fontColor1()
 											});
 						}
 						function orderSort3(page) {
 							$(".pagination1 li").remove();
 							$(".pagination2 li").remove();
-							$(".pagination3 li").remove(); 
+							$(".pagination3 li").remove();
 							$(".pagination5 li").remove();
 							$(".pagination6 li").remove();
 							sortCount = 3
@@ -855,8 +883,8 @@
 						function orderSort4(page) {
 							$(".pagination1 li").remove();
 							$(".pagination2 li").remove();
-							$(".pagination3 li").remove(); 
-							$(".pagination4 li").remove(); 
+							$(".pagination3 li").remove();
+							$(".pagination4 li").remove();
 							$(".pagination6 li").remove();
 							sortCount = 4;
 							$
@@ -895,7 +923,7 @@
 												}
 												console.log(str);
 												$(".tables").append(str);
-												printPaging5(data.criteria);     
+												printPaging5(data.criteria);
 												fontColor1()
 											});
 						}
@@ -903,9 +931,9 @@
 						function orderSort5(page) {
 							$(".pagination1 li").remove();
 							$(".pagination2 li").remove();
-							$(".pagination3 li").remove(); 
-							$(".pagination4 li").remove(); 
-							$(".pagination5 li").remove(); 
+							$(".pagination3 li").remove();
+							$(".pagination4 li").remove();
+							$(".pagination5 li").remove();
 							sortCount = 5;
 							$
 									.getJSON(
@@ -943,8 +971,8 @@
 												}
 												console.log(str);
 												$(".tables").append(str);
-												printPaging6(data.criteria);   
-												fontColor1()   
+												printPaging6(data.criteria);
+												fontColor1()
 											});
 						}
 
@@ -952,18 +980,21 @@
 							var str = "";
 
 							if (criteria.prev) {
-								str += "<li><a href='" + (criteria.startPage - 1) + "'>" + "<<"
-										+ "</a></li>";
+								str += "<li><a href='"
+										+ (criteria.startPage - 1) + "'>"
+										+ "<<" + "</a></li>";
 							}
 							for (var i = criteria.startPage; i <= criteria.endPage; i++) {
-								var strClass = criteria.page == i ? "class = 'active'" : "";
-								str += "<li "+strClass+"><a href ='"+i+"'>" + i + "</a></li>";
-							}
-							if (criteria.next) {
-								str += "<li><a href='" + (criteria.endPage + 1) + "'>" + ">>"
+								var strClass = criteria.page == i ? "class = 'active'"
+										: "";
+								str += "<li "+strClass+"><a href ='"+i+"'>" + i
 										+ "</a></li>";
 							}
-							$(".pagination2").html(str);   
+							if (criteria.next) {
+								str += "<li><a href='" + (criteria.endPage + 1)
+										+ "'>" + ">>" + "</a></li>";
+							}
+							$(".pagination2").html(str);
 						}
 						function fontColor1() {
 							var length = $('.tables tr').length;
@@ -971,120 +1002,128 @@
 								var font = $(".orderItemName").eq(i).text();
 								if (font == "환불") {
 
-									$(".orderItemName").eq(i).css("color", "red");
+									$(".orderItemName").eq(i).css("color",
+											"red");
 								}
 							}
 						}
 
-						$(".pagination2").on("click", "li a", function() { 
+						$(".pagination2").on("click", "li a", function() {
 							event.preventDefault();
 							var replyPage = $(this).attr("href");
 							orderSort1(replyPage);
-							
 
 						});
-						
-						function printPaging3(criteria) {    
+
+						function printPaging3(criteria) {
 							var str = "";
 
 							if (criteria.prev) {
-								str += "<li><a href='" + (criteria.startPage - 1) + "'>" + "<<"
-										+ "</a></li>";
+								str += "<li><a href='"
+										+ (criteria.startPage - 1) + "'>"
+										+ "<<" + "</a></li>";
 							}
 							for (var i = criteria.startPage; i <= criteria.endPage; i++) {
-								var strClass = criteria.page == i ? "class = 'active'" : "";
-								str += "<li "+strClass+"><a href ='"+i+"'>" + i + "</a></li>";
-							}
-							if (criteria.next) {
-								str += "<li><a href='" + (criteria.endPage + 1) + "'>" + ">>"
+								var strClass = criteria.page == i ? "class = 'active'"
+										: "";
+								str += "<li "+strClass+"><a href ='"+i+"'>" + i
 										+ "</a></li>";
 							}
-							$(".pagination3").html(str);   
+							if (criteria.next) {
+								str += "<li><a href='" + (criteria.endPage + 1)
+										+ "'>" + ">>" + "</a></li>";
+							}
+							$(".pagination3").html(str);
 						}
-						
-						$(".pagination3").on("click", "li a", function() { 
+
+						$(".pagination3").on("click", "li a", function() {
 							event.preventDefault();
 							var replyPage = $(this).attr("href");
-							orderSort2(replyPage);  
-							
+							orderSort2(replyPage);
 
 						});
-						
-						function printPaging4(criteria) {    
+
+						function printPaging4(criteria) {
 							var str = "";
 
 							if (criteria.prev) {
-								str += "<li><a href='" + (criteria.startPage - 1) + "'>" + "<<"
-										+ "</a></li>";
+								str += "<li><a href='"
+										+ (criteria.startPage - 1) + "'>"
+										+ "<<" + "</a></li>";
 							}
 							for (var i = criteria.startPage; i <= criteria.endPage; i++) {
-								var strClass = criteria.page == i ? "class = 'active'" : "";
-								str += "<li "+strClass+"><a href ='"+i+"'>" + i + "</a></li>";
-							}
-							if (criteria.next) {
-								str += "<li><a href='" + (criteria.endPage + 1) + "'>" + ">>"
+								var strClass = criteria.page == i ? "class = 'active'"
+										: "";
+								str += "<li "+strClass+"><a href ='"+i+"'>" + i
 										+ "</a></li>";
 							}
-							$(".pagination4").html(str);   
+							if (criteria.next) {
+								str += "<li><a href='" + (criteria.endPage + 1)
+										+ "'>" + ">>" + "</a></li>";
+							}
+							$(".pagination4").html(str);
 						}
-						
-						$(".pagination4").on("click", "li a", function() { 
+
+						$(".pagination4").on("click", "li a", function() {
 							event.preventDefault();
 							var replyPage = $(this).attr("href");
-							orderSort3(replyPage);  
-							
+							orderSort3(replyPage);
 
 						});
-						
-						function printPaging5(criteria) {    
+
+						function printPaging5(criteria) {
 							var str = "";
 
 							if (criteria.prev) {
-								str += "<li><a href='" + (criteria.startPage - 1) + "'>" + "<<"
-										+ "</a></li>";
+								str += "<li><a href='"
+										+ (criteria.startPage - 1) + "'>"
+										+ "<<" + "</a></li>";
 							}
 							for (var i = criteria.startPage; i <= criteria.endPage; i++) {
-								var strClass = criteria.page == i ? "class = 'active'" : "";
-								str += "<li "+strClass+"><a href ='"+i+"'>" + i + "</a></li>";
-							}
-							if (criteria.next) {
-								str += "<li><a href='" + (criteria.endPage + 1) + "'>" + ">>"
+								var strClass = criteria.page == i ? "class = 'active'"
+										: "";
+								str += "<li "+strClass+"><a href ='"+i+"'>" + i
 										+ "</a></li>";
 							}
-							$(".pagination5").html(str);    
+							if (criteria.next) {
+								str += "<li><a href='" + (criteria.endPage + 1)
+										+ "'>" + ">>" + "</a></li>";
+							}
+							$(".pagination5").html(str);
 						}
-						
-						$(".pagination5").on("click", "li a", function() { 
+
+						$(".pagination5").on("click", "li a", function() {
 							event.preventDefault();
-							var replyPage = $(this).attr("href"); 
-							orderSort4(replyPage);  
-							
+							var replyPage = $(this).attr("href");
+							orderSort4(replyPage);
 
 						});
-						
-						function printPaging6(criteria) {    
+
+						function printPaging6(criteria) {
 							var str = "";
 
 							if (criteria.prev) {
-								str += "<li><a href='" + (criteria.startPage - 1) + "'>" + "<<"
-										+ "</a></li>"; 
+								str += "<li><a href='"
+										+ (criteria.startPage - 1) + "'>"
+										+ "<<" + "</a></li>";
 							}
 							for (var i = criteria.startPage; i <= criteria.endPage; i++) {
-								var strClass = criteria.page == i ? "class = 'active'" : "";
-								str += "<li "+strClass+"><a href ='"+i+"'>" + i + "</a></li>";
-							}
-							if (criteria.next) {
-								str += "<li><a href='" + (criteria.endPage + 1) + "'>" + ">>"
+								var strClass = criteria.page == i ? "class = 'active'"
+										: "";
+								str += "<li "+strClass+"><a href ='"+i+"'>" + i
 										+ "</a></li>";
 							}
-							$(".pagination6").html(str);    
+							if (criteria.next) {
+								str += "<li><a href='" + (criteria.endPage + 1)
+										+ "'>" + ">>" + "</a></li>";
+							}
+							$(".pagination6").html(str);
 						}
-						
-						$(".pagination6").on("click", "li a", function() { 
-							event.preventDefault(); 
-							var replyPage = $(this).attr("href"); 
-							orderSort5(replyPage);  
-							
+
+						$(".pagination6").on("click", "li a", function() {
+							event.preventDefault();
+							var replyPage = $(this).attr("href");
+							orderSort5(replyPage);
 
 						});
 
@@ -1102,8 +1141,8 @@
 						})
 						$("#refundSort").click(function() {
 							orderSort5(1);
-						})  
+						})
 
 					});
 </script>
-</html> 
+</html>
