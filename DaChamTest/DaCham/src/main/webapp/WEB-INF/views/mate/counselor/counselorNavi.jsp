@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <script src = "http://code.jquery.com/jquery-3.1.1.min.js"></script>
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-indigo.css">
+<link rel="stylesheet" href="resources/mateCSS/w3.css">
+<link rel="stylesheet" href="resources/mateCSS/w3-theme-indigo.css">
 <style>
 @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
@@ -16,6 +16,9 @@ height:180px;
 }
 #headerBox{
 margin-bottom:20px;
+}
+#counselorList,#detail{
+text-decoration: none;
 }
 </style>
 <body>
