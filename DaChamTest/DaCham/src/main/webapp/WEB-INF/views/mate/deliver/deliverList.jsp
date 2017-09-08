@@ -1,11 +1,42 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ page import="com.wdb3a.dacham.bean.OrderList"%>
+
 <!DOCTYPE html>
 <html>
 <head>
- <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link rel="stylesheet"
+   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+   src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- Bootstrap core CSS     -->
+<link href="resources/assets/css/bootstrap.min.css" rel="stylesheet" />
+
+<!--  Material Dashboard CSS    -->
+<link href="resources/assets/css/material-dashboard.css"
+	rel="stylesheet" />
+
+<!--  CSS for Demo Purpose, don't include it in your project     -->
+<link href="resources/assets/css/demo.css" rel="stylesheet" />
+
+<!--     Fonts and icons     -->
+<link
+	href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"
+	rel="stylesheet">
+<link
+	href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons'
+	rel='stylesheet' type='text/css'>
 
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -69,6 +100,7 @@
          if(keyword == ""){
             alert("검색어를 입력하세요");
          }
+         
          $.getJSON("deliverAjax/"+searchType+"/"+keyword,function(data){
             var str = "";
             $(data).each(function(){
@@ -142,8 +174,13 @@
 <body>
 <%@include file = "deliverNavi.jsp" %>
    <div class = "container">
-      <div>
-       <div class="col-xs-3"> 
+                <div class ="row">
+				<div class="col-lg-12 col-md-12">
+				<div class="card">
+				<div class="card-header" data-background-color="skyblue">
+				<h4 class="title">배송 검색</h4>
+				<div class="form-group row">
+				<div class="col-xs-2">
          <select name = "searchType" class = "searchType form-control">
             <option value = "n"
                <c:out value="${orderList.searchType==null?'selected':'' }"/>>
@@ -162,17 +199,24 @@
          <div class="col-xs-3">
          <input type = "text" name = "keyword" class="form-control" placeholder = "검색어 입력란" id = "keyword">
          </div>
+         
          <button id = "search" class = "btn btn-success">검색</button>
          <button id = "all" class = "btn btn-success">전체목록</button>
       </div>
-      <br><br>
-   
-      <div>
-      <button id = "button" class = "btn btn-primary">배송</button>
+      </div>
+      
+      
+      <br>
+     
+      <div class="card">
+      <button id = "button" class = "btn btn-success">배송</button>
       <div style = "float:right;">
          <button id = "button1" class = "btn btn-info">배송목록</button>
          <button id = "button2" class = "btn btn-info">배송확인 목록</button>       
       </div>
+     
+     
+      	<div class="card-content table-responsive">
          <table class = "searchTable table table-hover">   
             <tr>
                <th><input type = "checkbox" name = "chk" id = "allCheck"></th>
@@ -187,13 +231,16 @@
                   
                </tr>
          </table>
-         
+        </div>
+        </div>
+        
+        
          <ul class = "pagination">
          </ul>
-      	 </div>
-      </div>
-   
       
- 
+      </div>
+    
+      </div>
+      </div>
 </body>
 </html>

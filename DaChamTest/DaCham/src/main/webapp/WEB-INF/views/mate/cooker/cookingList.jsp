@@ -1,11 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ page import="com.wdb3a.dacham.bean.OrderList"%>
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<!-- Bootstrap core CSS     -->
+<link href="resources/assets/css/bootstrap.min.css" rel="stylesheet" />
+
+<!--  Material Dashboard CSS    -->
+<link href="resources/assets/css/material-dashboard.css"
+	rel="stylesheet" />
+
+<!--  CSS for Demo Purpose, don't include it in your project     -->
+<link href="resources/assets/css/demo.css" rel="stylesheet" />
+
+<!--     Fonts and icons     -->
+<link
+	href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"
+	rel="stylesheet">
+<link
+	href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons'
+	rel='stylesheet' type='text/css'>
 
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -94,23 +124,34 @@
 <body>
 	<%@include file = "cookerNavi.jsp" %>
 	<div class = container>
-	<h1>조리 대기</h1>
-		<button id = "startCookBtn" class = "btn btn-primary btn-lg">조리시작</button>
+	 <div class ="row">
+	<div class="col-lg-12 col-md-12">
+	<div class="card">
+		<div class="card-header" data-background-color="skyblue">
+		<h2 class="title text-center">조리목록</h2>
 		
+		<button id = "startCookBtn" class = "btn btn-primary btn-lg" >조리시작</button>
 		<input type = "hidden" name = "page" value = "${criteria.page }">
    		<input type = "hidden" name = "recordsPerPage" value = "${criteria.recordsPerPage }">
+   		
+   		
+   		</div>
+   		
+   		
+   		<div class="card-content table-responsive">
 		<table class ="sourceTable table table-hover">
 			<tr>
 				<th>주문번호</th>
 				<th>반찬번호</th>
 				<th>반찬이미지</th>
 				<th>반찬이름</th>
-				<th>주문안의 반찬진행상태</th>
+				<th>진행상태</th>
 				<th>조리량</th>
 			</tr>
 			<tr class = "sourceResult">
 			</tr>		
 		</table>
+	</div>
 		
 		<div class="container">
          <ul class="turbo1 pagination">
@@ -129,18 +170,27 @@
             </c:if>
          </ul>
       </div>
-	<h1>조리 완료</h1>
-		
+      </div>
+		</div>
+			
+	 	<div class ="row">
+		<div class="col-lg-12 col-md-12">
+		<div class="card">
+		<div class="card-header" data-background-color="skyblue">
+		<h2 class="title text-center">조리완료</h2>
+		</div>
 		<input type = "hidden" name = "page" value = "${criteria2.page }">
    		<input type = "hidden" name = "recordsPerPage" value = "${criteria2.recordsPerPage }">
+		<div class="card-content table-responsive">
 		<table class = "codeTable table table-hover">
+		
 			<tr>
 				<th>주문번호</th>
 				<th>반찬번호</th>
 				<th>반찬이미지</th>
 				<th>반찬이름</th>
 				
-				<th>주문안의 반찬진행상태</th>
+				<th>진행상태</th>
 				<th>조리량</th>
 			</tr>
 			
@@ -167,6 +217,11 @@
             </c:if>
          </ul>
       </div>	
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
 	</div>
 </body>
 </html>
