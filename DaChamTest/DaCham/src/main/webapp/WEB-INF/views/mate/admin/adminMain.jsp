@@ -87,7 +87,7 @@
 					</div>
 					<div class="card-content">
 						<p class="category">오늘의 판매 건수</p>
-						<h3 class="title">75</h3>
+						<h3 class="title" >75</h3>
 					</div>
 					<div class="card-footer"></div>
 				</div>
@@ -143,7 +143,7 @@
 					</div>
 					<div class="card-footer">
 						<div class="stats"></div>
-						<h4>순위 리스트 수정중</h4>               
+						<h4>순위 리스트 수정중</h4>      
 					</div>
 
 				</div>

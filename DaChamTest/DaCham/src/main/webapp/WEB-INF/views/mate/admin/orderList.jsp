@@ -66,7 +66,7 @@ button#search, button#searchAll{
 			<div class="col-md-12">
 				<div class="card">
 					<div class="card-header" data-background-color="purple">
-						<h4 class="title">주문 내역</h4>
+						<h4 class="title" style="text-align: center">주문 내역</h4>
 					</div>
 					<div class="card-content table-responsive">
 						<div class="w3-container ">
