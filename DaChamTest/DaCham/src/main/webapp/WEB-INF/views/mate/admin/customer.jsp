@@ -474,7 +474,7 @@
 						</div>
 						<div class="col-md-6">
 							<div class="card">
-								<div class="card-header" data-background-color="purple">
+								<div class="card-header" data-background-color="#3A546D">    
 									<h4 class="title" style="text-align: center">프로필</h4>
 									
 								</div>

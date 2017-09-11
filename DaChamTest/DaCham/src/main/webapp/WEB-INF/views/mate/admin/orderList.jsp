@@ -55,6 +55,9 @@
 button#search, button#searchAll{
 	margin-top: -7px;
 }
+.cardDiv{
+	margin-left:1.5cm;      
+}
 
  
 </style>
@@ -65,11 +68,11 @@ button#search, button#searchAll{
 		<div class="row">
 			<div class="col-md-12">
 				<div class="card">
-					<div class="card-header" data-background-color="purple">
+					<div class="card-header" data-background-color="#3A546D">
 						<h4 class="title" style="text-align: center">주문 내역</h4>
 					</div>
 					<div class="card-content table-responsive">
-						<div class="w3-container ">
+						<div class="cardDiv w3-container ">
 
 							<div class="w3-card-4 w3-dark-grey w3-col m2">
 
@@ -78,7 +81,7 @@ button#search, button#searchAll{
 									<div class="w3-section">
 										<p id="str1"></p>
 										<button class="active w3-button w3-green w3-center"
-											id="creadt" data-code="1">결제완료 정렬</button>
+											id="creadt" data-code="1">결제완료 정렬</button>  
 									</div>
 								</div>
 							</div>
@@ -198,7 +201,7 @@ button#search, button#searchAll{
 	</div>
 
 
-
+ 
 
 	<form id='formid' method='post' action='foodOrder'>
 		<input type="hidden" name="orderCode">
