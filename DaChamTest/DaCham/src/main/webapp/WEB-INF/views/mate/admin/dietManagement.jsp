@@ -42,6 +42,19 @@
 	margin-right: 25px;
 	margin-bottom: 20px;
 }
+.cardSize{
+ margin-top: 1cm;     
+}
+.priceUpdate{ 
+margin :0px 0px;   
+}
+.pagination{
+margin-bottom: 0px;
+}
+#buttonDiv{
+float:right;
+margin-right: 1cm;                    
+}
 </style>
 <body>
 	<%@include file="../admin/upmenu.jsp"%>
@@ -53,10 +66,10 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="card">
-							<div class="card-header" data-background-color="purple">
+							<div class="card-header" data-background-color="#3A546D">
 								<h4 class="title" style="text-align: center">식단 관리</h4>
 							</div>
-							<div class="col-sm-offset-1">
+							<div class="cardSize col-sm-offset-1">
 								<div class="w3-container ">
 									<div class="w3-card-4 w3-dark-grey w3-col m2">
 
@@ -75,7 +88,7 @@
 											<div class="w3-section">
 												<p id="str2"></p>
 												<button class="active w3-button w3-green w3-center"
-													id="Hyperlipidemia" data-code="2">고지혈증</button>
+													id="Hyperlipidemia" data-code="2">고지혈증</button> 
 											</div>
 										</div>
 									</div>
@@ -127,10 +140,10 @@
 								<ul class="pagination">
 								</ul>
 							</div>
-							
+							<div id="buttonDiv">
 								<button id="dietSell" class="btn btn-default">판매</button>
 								<button id="dietSellStop" class="btn btn-danger">판매중지</button>
-							    
+							</div>    
 						</div>
 					</div>
 

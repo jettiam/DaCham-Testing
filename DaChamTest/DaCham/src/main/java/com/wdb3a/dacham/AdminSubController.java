@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wdb3a.dacham.bean.ChartList;
+import com.wdb3a.dacham.bean.ChartPrice;
 import com.wdb3a.dacham.bean.Criteria;
 import com.wdb3a.dacham.bean.Diet;
 import com.wdb3a.dacham.bean.FoodMAmountRead;
@@ -94,6 +95,38 @@ public class AdminSubController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	@RequestMapping(value = "/chartList1", method = RequestMethod.GET)  
+	public ResponseEntity<List<ChartList>> chartList1() {
+		ResponseEntity<List<ChartList>> entity = null;
+   
+		try {
+			ChartList chartList = new ChartList(); 
+			List<ChartList> list = service.chartList1();   
+			entity = new ResponseEntity<>(list, HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);   
+		}
+		return entity;
+	}  
+	        
+	
+	@RequestMapping(value = "/adminMainUp", method = RequestMethod.GET)  
+	public ResponseEntity<List<ChartPrice>> adminMainUp() {
+		ResponseEntity<List<ChartPrice>> entity = null;
+
+		try {
+			ChartPrice chartPrice = new ChartPrice();
+			List<ChartPrice> list = service.adminMainUp();
+			entity = new ResponseEntity<>(list, HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST); 
 		}
 		return entity;
 	}

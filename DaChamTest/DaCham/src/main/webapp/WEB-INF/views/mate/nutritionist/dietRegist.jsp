@@ -15,6 +15,10 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!--  Material Dashboard CSS    -->    
+<link href="resources/assets/css/material-dashboard.css"
+	rel="stylesheet" />
 <script type="text/javascript"
 	src="resources/bootstrap-filestyle.min.js">
 	
@@ -96,6 +100,13 @@
 											}else{ 
 											$(this).parent().parent().hide();
 											var count = parseInt(localStorage['count']);
+											var count1 = parseInt(localStorage['count1']);
+											var count2 = parseInt(localStorage['count2']);
+											var count3 = parseInt(localStorage['count3']);
+											var count4 = parseInt(localStorage['count4']);
+											var count5 = parseInt(localStorage['count5']);
+											var count6 = parseInt(localStorage['count6']);
+											
 											console.log(count);
 											var sideDImg = $(this).attr(
 													'data-img');
@@ -129,6 +140,8 @@
 											var sideDCode = $(this).attr('data-code');
 											var length = $(".foodG"+foodGCode).children().length;
 											var status = true;
+											
+											
 											
 											if(length == 0){
 												++count;
@@ -195,6 +208,8 @@
 										'.sideDImg',
 										function() {
 											var count = parseInt(localStorage['count']);
+											
+											
 											var id = $(this).attr('data-id');
 
 											var sideDCode = $('.sideDCode')
@@ -219,6 +234,10 @@
 											.removeItem(id + '_sideDName');
 											localStorage
 											.removeItem(id + '_sideDCode');
+											
+											
+											
+											
 // 											localStorage.removeItem(id
 // 													+ '_codes');
 // 											localStorage.removeItem(id
@@ -232,8 +251,17 @@
 // 											localStorage.removeItem(id + '_na');
 											--count;
 											localStorage['count'] = count;
+											localStorage['count1'] = $(".foodG01 input[type ='hidden']").length;
+											localStorage['count2'] = $(".foodG02 input[type ='hidden']").length;
+											localStorage['count3'] = $(".foodG03 input[type ='hidden']").length;
+											localStorage['count4'] = $(".foodG04 input[type ='hidden']").length;
+											localStorage['count5'] = $(".foodG05 input[type ='hidden']").length;
+											localStorage['count6'] = $(".foodG06 input[type ='hidden']").length;
+											
 											
 											v = count;
+											
+											
 											cntChange(v);
 										});
 
@@ -300,64 +328,300 @@
 
 						function Refresh(foodGCode, sideDImg, sideDCode, sideDName) {
 							var count = parseInt(localStorage['count']);
+							var count1 = parseInt(localStorage['count1']);
+							var count2 = parseInt(localStorage['count2']);
+							var count3 = parseInt(localStorage['count3']);
+							var count4 = parseInt(localStorage['count4']);
+							var count5 = parseInt(localStorage['count5']);
+							var count6 = parseInt(localStorage['count6']);
 							
 							
 								switch (foodGCode) {
 								case "01":
-									$(
-											'<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
-													+ sideDImg
-													+ '" class="img-responsive sideDImg" data-id = "'+2+'" >'+'<input type="radio" name="foodG01" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'">&nbsp;<label for="'+sideDCode+'">'
-													+ sideDName + '</label></div>').appendTo('.foodG01');
-									
+									if($(".foodG01 input[type ='hidden']").length == 0){
+										$(
+												'<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
+														+ sideDImg
+														+ '" class="img-responsive sideDImg" data-id = "'+1+'" >'+'<input type="radio" name="foodG01" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'" checked>&nbsp;<label for="'+sideDCode+'" >'
+														+ sideDName + '</label></div>').appendTo('.foodG01');
+										
+										var sideDCode = $("input:radio[name=foodG01]").attr("id");
+										
+										$.getJSON("nutriAjax/allNutri/"+sideDCode,function(data){
+											localStorage[count1 + '_kcal1'] = data.kcal;
+											localStorage[count1 + '_carbohydrate1'] = data.carbohydrate;
+											localStorage[count1 + '_protein1'] = data.protein;
+											localStorage[count1 + '_fat1'] = data.fat;
+											localStorage[count1 + '_na1'] = data.na;
 											
-									break;
+											TKcal += data.kcal;
+											TCarbohydrate += data.carbohydrate;
+											TProtein += data.protein;
+											TFat += data.fat;
+											TNa += data.na;
+											
+											
+											count1++;
+											openAPI();
+											
+											
+											$("#TKcal").text(localStorage[0+'_total3']);
+											$("#TCarbohydrate").text(localStorage[0+'_total2']);
+											$("#TProtein").text(localStorage[0+'_total1']);
+											$("#TFat").text(localStorage[0+'_total5']);
+											$("#TNa").text(localStorage[0+'_total4']);
+										});
+										break;
+									}
+									else{
+										$(
+												'<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
+														+ sideDImg
+														+ '" class="img-responsive sideDImg" data-id = "'+1+'" >'+'<input type="radio" name="foodG01" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'">&nbsp;<label for="'+sideDCode+'" >'
+														+ sideDName + '</label></div>').appendTo('.foodG01');
+										break;
+									}
+																		
+											
+
 								case "02":
-									$(
-											'<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
-													+ sideDImg
-													+ '" class="img-responsive sideDImg" data-id = "'+1+'" >'+'<input type="radio" name="foodG02" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'">&nbsp;<label for="'+sideDCode+'">'
-													+ sideDName + '</label></div>').appendTo('.foodG02');
-									break;
+									if($(".foodG02 input[type ='hidden']").length == 0){
+										$(
+												'<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
+														+ sideDImg
+														+ '" class="img-responsive sideDImg" data-id = "'+2+'" >'+'<input type="radio" name="foodG02" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'" checked>&nbsp;<label for="'+sideDCode+'">'
+														+ sideDName + '</label></div>').appendTo('.foodG02');
+										
+										var sideDCode = $("input:radio[name=foodG02]").attr("id");
+										
+										$.getJSON("nutriAjax/allNutri/"+sideDCode,function(data){
+											localStorage[count2 + '_kcal2'] = data.kcal;
+											localStorage[count2 + '_carbohydrate2'] = data.carbohydrate;
+											localStorage[count2 + '_protein2'] = data.protein;
+											localStorage[count2 + '_fat2'] = data.fat;
+											localStorage[count2 + '_na2'] = data.na;
+											
+											
+											TKcal += data.kcal;
+											TCarbohydrate += data.carbohydrate;
+											TProtein += data.protein;
+											TFat += data.fat;
+											TNa += data.na;
+											
+											
+											count2++;
+											openAPI();
+											
+											
+											$("#TKcal").text(localStorage[0+'_total3']);
+											$("#TCarbohydrate").text(localStorage[0+'_total2']);
+											$("#TProtein").text(localStorage[0+'_total1']);
+											$("#TFat").text(localStorage[0+'_total5']);
+											$("#TNa").text(localStorage[0+'_total4']);
+										});
+										break;
+									}
+									else{
+										$(
+												'<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
+														+ sideDImg
+														+ '" class="img-responsive sideDImg" data-id = "'+2+'" >'+'<input type="radio" name="foodG02" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'">&nbsp;<label for="'+sideDCode+'">'
+														+ sideDName + '</label></div>').appendTo('.foodG02');
+										break;     
+									}
+									
+									
 								case "03":
 									
-									$(
-											'<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
-													+ sideDImg
-													+ '" class="img-responsive sideDImg" data-id = "'+3+'" >'+'<input type="radio" name="foodG03" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'">&nbsp;<label for="'+sideDCode+'">'
-													+ sideDName + '</label></div>').appendTo('.foodG03');
-									break;
+									if($(".foodG03 input[type ='hidden']").length == 0){
+										$(
+												'<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
+														+ sideDImg
+														+ '" class="img-responsive sideDImg" data-id = "'+3+'" >'+'<input type="radio" name="foodG03" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'" checked>&nbsp;<label for="'+sideDCode+'">'
+														+ sideDName + '</label></div>').appendTo('.foodG03');
+										
+										var sideDCode = $("input:radio[name=foodG03]").attr("id");
+										
+										$.getJSON("nutriAjax/allNutri/"+sideDCode,function(data){
+											localStorage[count3 + '_kcal3'] = data.kcal;
+											localStorage[count3 + '_carbohydrate3'] = data.carbohydrate;
+											localStorage[count3 + '_protein3'] = data.protein;
+											localStorage[count3 + '_fat3'] = data.fat;
+											localStorage[count3 + '_na3'] = data.na;
+											
+											
+											TKcal += data.kcal;
+											TCarbohydrate += data.carbohydrate;
+											TProtein += data.protein;
+											TFat += data.fat;
+											TNa += data.na;
+											
+											
+											count3++;
+											openAPI();
+											
+											
+											$("#TKcal").text(localStorage[0+'_total3']);
+											$("#TCarbohydrate").text(localStorage[0+'_total2']);
+											$("#TProtein").text(localStorage[0+'_total1']);
+											$("#TFat").text(localStorage[0+'_total5']);
+											$("#TNa").text(localStorage[0+'_total4']);
+										});
+										break;
+									}
+									else{
+										$(
+												'<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
+														+ sideDImg
+														+ '" class="img-responsive sideDImg" data-id = "'+3+'" >'+'<input type="radio" name="foodG03" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'">&nbsp;<label for="'+sideDCode+'">'
+														+ sideDName + '</label></div>').appendTo('.foodG03');
+										break;     
+									}
 								case "04":
 									
-									$(
-											'<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
-													+ sideDImg
-													+ '" class="img-responsive sideDImg" data-id = "'+4+'" >'+'<input type="radio" name="foodG04" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'">&nbsp;<label for="'+sideDCode+'">'
-													+ sideDName + '</label></div>').appendTo('.foodG04');
-									break;
+									if($(".foodG04 input[type ='hidden']").length == 0){
+										$(
+												'<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
+														+ sideDImg
+														+ '" class="img-responsive sideDImg" data-id = "'+4+'" >'+'<input type="radio" name="foodG04" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'" checked>&nbsp;<label for="'+sideDCode+'">'
+														+ sideDName + '</label></div>').appendTo('.foodG04');
+										
+										var sideDCode = $("input:radio[name=foodG04]").attr("id");
+										
+										$.getJSON("nutriAjax/allNutri/"+sideDCode,function(data){
+											localStorage[count4 + '_kcal4'] = data.kcal;
+											localStorage[count4 + '_carbohydrate4'] = data.carbohydrate;
+											localStorage[count4 + '_protein4'] = data.protein;
+											localStorage[count4 + '_fat4'] = data.fat;
+											localStorage[count4 + '_na4'] = data.na;
+											
+											
+											TKcal += data.kcal;
+											TCarbohydrate += data.carbohydrate;
+											TProtein += data.protein;
+											TFat += data.fat;
+											TNa += data.na;
+											
+											
+											count4++;
+											openAPI();
+											
+											
+											$("#TKcal").text(localStorage[0+'_total3']);
+											$("#TCarbohydrate").text(localStorage[0+'_total2']);
+											$("#TProtein").text(localStorage[0+'_total1']);
+											$("#TFat").text(localStorage[0+'_total5']);
+											$("#TNa").text(localStorage[0+'_total4']);
+										});
+										break;
+									}
+									else{
+										$(
+												'<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
+														+ sideDImg
+														+ '" class="img-responsive sideDImg" data-id = "'+4+'" >'+'<input type="radio" name="foodG04" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'">&nbsp;<label for="'+sideDCode+'">'
+														+ sideDName + '</label></div>').appendTo('.foodG04');
+										break;     
+									}
 								case "05":
 									
-									$(
-											'<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
-													+ sideDImg
-													+ '" class="img-responsive sideDImg" data-id = "'+5+'" >'+'<input type="radio" name="foodG05" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'">&nbsp;<label for="'+sideDCode+'">'
-													+ sideDName + '</label></div>').appendTo('.foodG05');
-									break;
+									if($(".foodG05 input[type ='hidden']").length == 0){
+										$(
+												'<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
+														+ sideDImg
+														+ '" class="img-responsive sideDImg" data-id = "'+3+'" >'+'<input type="radio" name="foodG05" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'" checked>&nbsp;<label for="'+sideDCode+'">'
+														+ sideDName + '</label></div>').appendTo('.foodG05');
+										
+										var sideDCode = $("input:radio[name=foodG05]").attr("id");
+										
+										$.getJSON("nutriAjax/allNutri/"+sideDCode,function(data){
+											localStorage[count5 + '_kcal5'] = data.kcal;
+											localStorage[count5 + '_carbohydrate5'] = data.carbohydrate;
+											localStorage[count5 + '_protein5'] = data.protein;
+											localStorage[count5 + '_fat5'] = data.fat;
+											localStorage[count5 + '_na5'] = data.na;
+											
+											
+											TKcal += data.kcal;
+											TCarbohydrate += data.carbohydrate;
+											TProtein += data.protein;
+											TFat += data.fat;
+											TNa += data.na;
+											
+											
+											count5++;
+											openAPI();
+											
+											
+											$("#TKcal").text(localStorage[0+'_total3']);
+											$("#TCarbohydrate").text(localStorage[0+'_total2']);
+											$("#TProtein").text(localStorage[0+'_total1']);
+											$("#TFat").text(localStorage[0+'_total5']);
+											$("#TNa").text(localStorage[0+'_total4']);
+										});
+										break;
+									}
+									else{
+										$(
+												'<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
+														+ sideDImg
+														+ '" class="img-responsive sideDImg" data-id = "'+5+'" >'+'<input type="radio" name="foodG05" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'">&nbsp;<label for="'+sideDCode+'">'
+														+ sideDName + '</label></div>').appendTo('.foodG05');
+										break;     
+									}
 								case "06":
 										
-									$(
-											'<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
-													+ sideDImg
-													+ '" class="img-responsive sideDImg" data-id = "'+6+'" >'+'<input type="radio" name="foodG06" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'">&nbsp;<label for="'+sideDCode+'">'
-													+ sideDName + '</label></div>').appendTo('.foodG06');
-									break;
+									if($(".foodG06 input[type ='hidden']").length == 0){
+										$(
+												'<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
+														+ sideDImg
+														+ '" class="img-responsive sideDImg" data-id = "'+3+'" >'+'<input type="radio" name="foodG06" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'" checked>&nbsp;<label for="'+sideDCode+'">'
+														+ sideDName + '</label></div>').appendTo('.foodG06');
+										
+										var sideDCode = $("input:radio[name=foodG06]").attr("id");
+										
+										$.getJSON("nutriAjax/allNutri/"+sideDCode,function(data){
+											localStorage[count6 + '_kcal6'] = data.kcal;
+											localStorage[count6 + '_carbohydrate6'] = data.carbohydrate;
+											localStorage[count6 + '_protein6'] = data.protein;
+											localStorage[count6 + '_fat6'] = data.fat;
+											localStorage[count6 + '_na6'] = data.na;
+											
+											
+											TKcal += data.kcal;
+											TCarbohydrate += data.carbohydrate;
+											TProtein += data.protein;
+											TFat += data.fat;
+											TNa += data.na;
+											
+											
+											count6++;
+											openAPI();
+											
+											
+											$("#TKcal").text(localStorage[0+'_total3']);
+											$("#TCarbohydrate").text(localStorage[0+'_total2']);
+											$("#TProtein").text(localStorage[0+'_total1']);
+											$("#TFat").text(localStorage[0+'_total5']);
+											$("#TNa").text(localStorage[0+'_total4']);
+										});
+										break;
+									}
+									else{
+										$(
+												'<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
+														+ sideDImg
+														+ '" class="img-responsive sideDImg" data-id = "'+6+'" >'+'<input type="radio" name="foodG06" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'">&nbsp;<label for="'+sideDCode+'">'
+														+ sideDName + '</label></div>').appendTo('.foodG06');
+										break;     
+									}
 								}
 
 							
 
 							v = count;
 
-							cntChange(v);
+							cntChange(v);      
 						}
 						Refresh();
 
@@ -396,6 +660,7 @@
 								
 								
 								count1++;
+								localStorage['count1'] == count1;
 								openAPI();
 								$("#TKcal").text(localStorage[0+'_total3']);
 								$("#TCarbohydrate").text(localStorage[0+'_total2']);
@@ -426,6 +691,7 @@
 								
 								
 								count2++;
+								localStorage['count2'] == count2;
 								openAPI();
 								$("#TKcal").text(localStorage[0+'_total3']);
 								$("#TCarbohydrate").text(localStorage[0+'_total2']);
@@ -456,6 +722,7 @@
 								
 								
 								count3++;
+								localStorage['count3'] == count3;
 								openAPI();
 								$("#TKcal").text(localStorage[0+'_total3']);
 								$("#TCarbohydrate").text(localStorage[0+'_total2']);
@@ -486,6 +753,7 @@
 								
 								
 								count4++;
+								localStorage['count4'] == count4;
 								openAPI();
 								
 								$("#TKcal").text(localStorage[0+'_total3']);
@@ -517,6 +785,7 @@
 								
 								
 								count5++;
+								localStorage['count5'] == count5;
 								openAPI();
 								
 								$("#TKcal").text(localStorage[0+'_total3']);
@@ -548,6 +817,7 @@
 								
 								
 								count6++;
+								localStorage['count6'] == count6;
 								openAPI();
 								
 								$("#TKcal").text(localStorage[0+'_total3']);
@@ -856,8 +1126,8 @@ margin-bottom:15px;
 				<button id="main3" class="btn btn-info">메인 메뉴3</button>
 				<button id="main4" class="btn btn-info">메인 메뉴4</button>
 				</div>
-				<div style="height:300px;">
-				<table class="searchTable table table-hover">
+				<div style="height:400px">
+				<table class="searchTable table table-hover" >
 					<tr>
 						<th>반찬명</th>
 						<th>식품군</th>

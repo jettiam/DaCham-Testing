@@ -32,6 +32,15 @@
 	href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons'
 	rel='stylesheet' type='text/css'>
 <title>Insert title here</title>
+<style>
+.all, .paginationSub{
+	margin-bottom: 0px;
+}
+#foodOrder{
+float:right;
+margin-right: 1cm;         
+}
+</style>
 <script>
 	$(document)
 			.ready(
@@ -223,7 +232,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="card">
-							<div class="card-header" data-background-color="purple">
+							<div class="card-header" data-background-color="#3A546D">
 								<h4 class="title" style="text-align: center">식재료 현황</h4>
 							</div>
 							<div class="form-group row">
@@ -269,7 +278,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="card">
-							<div class="card-header" data-background-color="purple">
+							<div class="card-header" data-background-color="#3A546D">     
 								<h4 class="title" style="text-align: center">식재료 입고 대기 현황</h4>
 							</div>
 							<div class="card-content table-responsive">

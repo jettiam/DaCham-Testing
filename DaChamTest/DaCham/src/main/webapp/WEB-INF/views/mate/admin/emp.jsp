@@ -15,8 +15,30 @@
 	src="resources/bootstrap-filestyle.min.js">
 	
 </script>
+<!-- Bootstrap core CSS     -->
+<link href="resources/assets/css/bootstrap.min.css" rel="stylesheet" />
+
+<!--  Material Dashboard CSS    -->
+<link href="resources/assets/css/material-dashboard.css"
+	rel="stylesheet" />
+
+<!--  CSS for Demo Purpose, don't include it in your project     -->
+<link href="resources/assets/css/demo.css" rel="stylesheet" />
+
+<!--     Fonts and icons     -->
+<link
+	href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"
+	rel="stylesheet">
+<link
+	href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons'
+	rel='stylesheet' type='text/css'>
 
 <title>Insert title here</title>
+<style >
+.form-group{
+	margin: 0px 0 0 0 ;    
+}
+</style>
 <script>
 function previewImage(targetObj, View_area) {
 	var preview = document.getElementById(View_area);
@@ -433,7 +455,7 @@ font-family:sans-serif !important;
 				</div>
 				<div class="col-sm-4" id="passwdCheck" data-passwdCheck="false"></div>
 			</div>
-			<div class="form-group">
+			<div class="form-group"> 
 				<label for="name" class="control-label col-sm-2 col-sm-offset-1">이름</label>
 				<div class="col-sm-3">
 					<input type="text" id="name" name="name" class="form-control ">
@@ -553,7 +575,7 @@ font-family:sans-serif !important;
   		</div>
 		</div>
 		<div class="col-sm-offset-10">      
-			<button id="join" class="btn btn-default">회원가입</button>
+			<button id="join" class="btn btn-default">회원가입</button> 
 			<button id="cancle" class="btn btn-default">취소</button>
 		</div>
 		

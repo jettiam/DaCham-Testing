@@ -134,6 +134,9 @@
   ul{
   	list-style : none;
   }
+   #buttonDiv {
+	float: right;	                
+}
 </style>
 </head>
 <body>
@@ -164,7 +167,7 @@
       		<div class = "card">
       			<div class = "card-header" data-background-color = "green">
       				<h4 class = "title">식단 목록</h4>   
-      				<div>
+      				<div id="buttonDiv">       
 			         <button id = "regist" class = "btn btn-primary">식단 등록</button>
 			         <button class = "modifyDiet btn btn-primary">식단 수정</button>
 			<!--          <button class = "deleteDiet btn btn-default">식단 삭제</button>    -->

@@ -4,6 +4,7 @@ public class ChartList {
 	private String dietName;
 	private int sellAmount;
 	
+	
 	public String getDietName() {
 		return dietName;
 	}

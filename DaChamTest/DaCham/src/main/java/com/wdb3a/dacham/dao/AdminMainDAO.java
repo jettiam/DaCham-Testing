@@ -26,7 +26,9 @@ public interface AdminMainDAO {
 	public void workUpdate(OrderList list) throws Exception;
 	public List<FoodMAmountRead> foodMAmountRead(int orderCode) throws Exception;
 	public List<ChartList> chartList() throws Exception;
+	public List<ChartList> chartList1() throws Exception; 
 	public List<ChartPrice> chartPrice() throws Exception;
+	public List<ChartPrice> adminMainUp() throws Exception;
 	public List<ChartPrice> chartPrice1(ChartPrice dates) throws Exception;
 	public List<OrderList> all(Criteria criteria) throws Exception;
 	public List<OrderList> orderAll(Criteria criteria) throws Exception;

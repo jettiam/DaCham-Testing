@@ -401,7 +401,7 @@ h2.title {
 }
 
 .text-primary {
-  color: #9c27b0;
+  color: #ff9800; 
 }
 
 .text-danger {
@@ -826,7 +826,7 @@ h2.title {
 .navbar .navbar-nav > li > a.btn.btn-primary.dropdown-toggle, .open >
 .navbar .navbar-nav > li > a.btn.btn-primary.dropdown-toggle:focus, .open >
 .navbar .navbar-nav > li > a.btn.btn-primary.dropdown-toggle:hover {
-  background-color: #9c27b0;
+ /*  background-color: #9c27b0; */ 
   color: #FFFFFF;
 }
 .btn.btn-primary:focus, .btn.btn-primary:active, .btn.btn-primary:hover,
@@ -3576,11 +3576,11 @@ footer .btn {
   margin: -20px 15px 0;
   border-radius: 3px;
   padding: 15px;
-  background-color: #999999;
+ /*  background-color: #999999; */  
 }
-.card .card-header .title {
-  color: #FFFFFF;
-}
+.card-header .title {
+  color: #FFFFFF;  
+}  
 .card .card-header .category {
   margin-bottom: 0;
   color: rgba(255, 255, 255, 0.62);
@@ -3685,8 +3685,8 @@ footer .btn {
 .card .table tr:first-child td {
   border-top: none;
 }
-.card [data-background-color="purple"] {
-  background: linear-gradient(60deg, #ab47bc, #8e24aa);
+.card [data-background-color="#3A546D"] {
+  background: linear-gradient(60deg, #3A546D, #3A546D); 
   box-shadow: 0 12px 20px -10px rgba(156, 39, 176, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(156, 39, 176, 0.2);
 }
 .card [data-background-color="blue"] {
