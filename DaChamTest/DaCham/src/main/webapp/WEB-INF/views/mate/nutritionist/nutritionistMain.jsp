@@ -61,7 +61,7 @@
 				$(".modalResult").remove();
 				var str = "";
 				$(data).each(function(){
-					str += "<tr class = 'modalResult'><td>"+"<img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width: 75px; height: 25px;'>"+"</td><td>"+this.sideDName+"</td></tr>";
+					str += "<tr class = 'modalResult'><td>"+"<img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width: 120px; height: 90px;'>"+"</td><td>"+this.sideDName+"</td></tr>";
 				});
 				$(".modalTable").append(str);  
 			});   
@@ -74,7 +74,7 @@
 				$(".modalResult").remove();
 				var str = "";
 				$(data).each(function(){
-					str += "<tr class = 'modalResult'><td>"+"<img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width: 75px; height: 25px;'>"+"</td><td>"+this.sideDName+"</td></tr>";
+					str += "<tr class = 'modalResult'><td>"+"<img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width: 120px; height: 90px;'>"+"</td><td>"+this.sideDName+"</td></tr>";
 				});
 				$(".modalTable").append(str);  
 			});   
@@ -99,7 +99,7 @@
 				doubleCurrentPage = page;
 				var str = "";
 				$(data.list).each(function(){
-					str += "<tr class = 'thisResult'><td>"+"<img src = 'displayFile?fileName="+this.dietImg+"' style = 'width: 75px; height: 25px;'>"+"</td><td><a class = 'clicker' data-code = '"+this.dietCode+"' data-toggle = 'modal' href = '#myModal'>"+this.dietName+"</a></td></tr>";
+					str += "<tr class = 'thisResult'><td>"+"<img src = 'displayFile?fileName="+this.dietImg+"' style = 'width: 120px; height: 90px;'>"+"</td><td><a class = 'clicker' data-code = '"+this.dietCode+"' data-toggle = 'modal' href = '#myModal'>"+this.dietName+"</a></td></tr>";
 				});
 				$(".thisTable").append(str);
 				printPaging2(data.criteria);
