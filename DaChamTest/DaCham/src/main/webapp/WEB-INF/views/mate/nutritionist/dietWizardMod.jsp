@@ -93,9 +93,7 @@
 											+ request.responseText);
 								}
 							});
-						});
-				$(".blocklyTreeRoot").append("<h2 style='margin-bottom: 5px; text-align: center;'>그래프 보기</h2><img id ='showGraph' src='resources/showGraph.png' width='180px;' />");
-				
+						});				
 				var graphIcon = $("#showGraph");
 				graphIcon.on("click", function(){
 					$("#graphWizard").toggle();
@@ -407,6 +405,21 @@ input:checked+label {
 					return d.id || (d.id = ++i);
 				});
 				// Enter any new nodes at the parent's previous position.
+				
+				/* var q = eval("plainJson.q" + d.name);
+					var keyArr = new Array();
+					var cnt = 0;
+					for ( var key in q) {
+						keyArr[cnt] = key;
+						cnt++;
+					}
+					if (keyArr[0] != undefined) {
+						return "#000000";
+					} else {
+						return "#CC3D3D";
+					}
+				//여기 가은 편집중입니다. 
+								 */
 				var nodeEnter = node.enter().append("g").attr("class", "node")
 						.attr(
 								"transform",
@@ -414,13 +427,26 @@ input:checked+label {
 									return "translate(" + source.y0 + ","
 											+ source.x0 + ")";
 								}).on("click", click);
+				
 				nodeEnter.append("circle").attr("r", 1e-6).style("fill",
 						function(d) {
-							return d._children ? "lightsteelblue" : "#fff";
+							//return d._children ? "lightsteelblue" : "#fff";
+							return d._children ? "lightsteelblue" : "red";
 						});
 				nodeEnter.append("text").attr("x", function(d) {
-					//return d.children || d._children ? -13 : 13;
-					return d.children || d._children ? 3 : -3;
+					/** 원 안에 들어가는 번호 텍스트의 x 위치 지정 하는 곳 */
+					var name_length = d.name.length;
+					switch(name_length){
+						case 1: return d.children || d._children ? 3 : -3;
+							break;
+						case 2: return d.children || d._children ? 7 : -7;
+							break;
+						case 3: return d.children || d._children ? 11 : -11;
+							break;
+						case 4: return d.children || d._children ? 15 : -15;
+							break;
+						default: return d.name;
+					}
 				}).attr("dy", ".35em").attr("text-anchor", function(d) {
 					return d.children || d._children ? "end" : "start";
 				}).text(function(d) {
@@ -487,6 +513,7 @@ input:checked+label {
 						return "#CC3D3D";
 					}
 				});
+				
 				/* 주석 풀면 답변 들어감.
 				.append('svg:tspan').attr('x', 16).attr('dy', 12).text(
 						function(d) {
@@ -526,7 +553,7 @@ input:checked+label {
 						"transform", function(d) {
 							return "translate(" + d.y + "," + d.x + ")";
 						});
-				nodeUpdate.select("circle").attr("r", 10).style("fill",
+				nodeUpdate.select("circle").attr("r", 13.5 ).style("fill",
 						function(d) {
 							return d._children ? "lightsteelblue" : "#fff";
 						});
@@ -591,11 +618,8 @@ input:checked+label {
 
 		}
 
-		function searchSheet(num) {
-			
-			var txt = $("#blocklyDiv").text();
-		
-		
+		function searchSheet(num) {			
+			var txt = $("#blocklyDiv").text();	
 		}
 
 		workspace.addChangeListener(drawGraph);
