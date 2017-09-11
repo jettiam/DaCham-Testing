@@ -87,7 +87,9 @@
 					</div>
 					<div class="card-content">
 						<p class="category">오늘의 판매 건수</p>
+
 						<h3 class="title">0건</h3>
+
 					</div>
 					<div class="card-footer"></div>
 				</div>
@@ -142,6 +144,7 @@
 
 					</div>
 					<div class="card-footer">
+
 						<div class="stats">
 						<h4 style="font-size:16px;">
 						1.해물채소식단<br>
@@ -150,8 +153,8 @@
 						4.저당질당뇨식단<br>
 						5.이뇨촉진식단
 						</h4> 
-						</div>
-						              
+						</div>				              
+
 					</div>
 
 				</div>

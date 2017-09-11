@@ -544,8 +544,21 @@ public class AdminSubController {
 	@RequestMapping(value = "/empUpdate", method = RequestMethod.PUT)
 	public ResponseEntity<String> empUpdate(@RequestBody Member member) {
 		ResponseEntity<String> entity = null;
+		System.out.println(member.getId());
+		System.out.println(member.getTel());
+		System.out.println(member.getEmail());
+		System.out.println(member.getAddress());
+		System.out.println(member.getDeptCode());
+		System.out.println(member.getGradeCode());
+		System.out.println(member.getSalary());
+		System.out.println(member.getEducation());
+		System.out.println(member.getBank_name());
+		System.out.println(member.getBank_user());
+		System.out.println(member.getAccount_Number()); 
+		 
 		try {
 			service.empUpdate(member);
+			 
 			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
