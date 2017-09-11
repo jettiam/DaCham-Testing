@@ -15,6 +15,10 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!--  Material Dashboard CSS    -->    
+<link href="resources/assets/css/material-dashboard.css"
+	rel="stylesheet" />
 <script type="text/javascript"
 	src="resources/bootstrap-filestyle.min.js">
 	
@@ -195,6 +199,8 @@
 										'.sideDImg',
 										function() {
 											var count = parseInt(localStorage['count']);
+											
+											
 											var id = $(this).attr('data-id');
 
 											var sideDCode = $('.sideDCode')
@@ -219,6 +225,16 @@
 											.removeItem(id + '_sideDName');
 											localStorage
 											.removeItem(id + '_sideDCode');
+											
+											
+											if("input:radio[name=foodG0"+id+"]:checked"){
+												localStorage.removeItem(0+'_kcal'+id);
+												localStorage.removeItem(0+'_fat'+id);
+												localStorage.removeItem(0+'_na'+id);
+												localStorage.removeItem(0+'_protein'+id);
+												localStorage.removeItem(0+'_carbohydrate'+id);	
+											}
+											
 // 											localStorage.removeItem(id
 // 													+ '_codes');
 // 											localStorage.removeItem(id
@@ -234,6 +250,15 @@
 											localStorage['count'] = count;
 											
 											v = count;
+											if(count == 0){
+												localStorage[0 + '_total1'] = 0;
+												localStorage[0 + '_total2'] = 0;
+												localStorage[0 + '_total3'] = 0;
+												localStorage[0 + '_total4'] = 0;
+												localStorage[0 + '_total5'] = 0;
+												openAPI();
+											}
+											
 											cntChange(v);
 										});
 
@@ -304,19 +329,56 @@
 							
 								switch (foodGCode) {
 								case "01":
-									$(
-											'<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
-													+ sideDImg
-													+ '" class="img-responsive sideDImg" data-id = "'+2+'" >'+'<input type="radio" name="foodG01" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'">&nbsp;<label for="'+sideDCode+'">'
-													+ sideDName + '</label></div>').appendTo('.foodG01');
-									
+									if(count1 == 1){
+										$(
+												'<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
+														+ sideDImg
+														+ '" class="img-responsive sideDImg" data-id = "'+1+'" >'+'<input type="radio" name="foodG01" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'" checked>&nbsp;<label for="'+sideDCode+'" >'
+														+ sideDName + '</label></div>').appendTo('.foodG01');
+										
+										var sideDCode = $("input:radio[name=foodG01]").attr("id");
+										var count1 = parseInt(localStorage['count1']);
+										$.getJSON("nutriAjax/allNutri/"+sideDCode,function(data){
+											localStorage[count1 + '_kcal1'] = data.kcal;
+											localStorage[count1 + '_carbohydrate1'] = data.carbohydrate;
+											localStorage[count1 + '_protein1'] = data.protein;
+											localStorage[count1 + '_fat1'] = data.fat;
+											localStorage[count1 + '_na1'] = data.na;
 											
-									break;
+											TKcal += data.kcal;
+											TCarbohydrate += data.carbohydrate;
+											TProtein += data.protein;
+											TFat += data.fat;
+											TNa += data.na;
+											
+											
+											
+											count1++;
+											openAPI();
+											$("#TKcal").text(localStorage[0+'_total3']);
+											$("#TCarbohydrate").text(localStorage[0+'_total2']);
+											$("#TProtein").text(localStorage[0+'_total1']);
+											$("#TFat").text(localStorage[0+'_total5']);
+											$("#TNa").text(localStorage[0+'_total4']);
+										});
+										break;
+									}
+									else{
+										$(
+												'<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
+														+ sideDImg
+														+ '" class="img-responsive sideDImg" data-id = "'+1+'" >'+'<input type="radio" name="foodG01" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'">&nbsp;<label for="'+sideDCode+'" >'
+														+ sideDName + '</label></div>').appendTo('.foodG01');
+										break;
+									}
+																		
+											
+
 								case "02":
 									$(
 											'<div class = "col-sm-2"><input type = "hidden" name = "sideDCode" class = "sideDCode" value = '+sideDCode + '><img src = "displayFile?fileName='
 													+ sideDImg
-													+ '" class="img-responsive sideDImg" data-id = "'+1+'" >'+'<input type="radio" name="foodG02" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'">&nbsp;<label for="'+sideDCode+'">'
+													+ '" class="img-responsive sideDImg" data-id = "'+2+'" >'+'<input type="radio" name="foodG02" class="foodType" value="'+sideDCode+'_1" id="'+sideDCode+'">&nbsp;<label for="'+sideDCode+'">'
 													+ sideDName + '</label></div>').appendTo('.foodG02');
 									break;
 								case "03":
@@ -396,6 +458,7 @@
 								
 								
 								count1++;
+								localStorage['count1'] == count1;
 								openAPI();
 								$("#TKcal").text(localStorage[0+'_total3']);
 								$("#TCarbohydrate").text(localStorage[0+'_total2']);
@@ -426,6 +489,7 @@
 								
 								
 								count2++;
+								localStorage['count2'] == count2;
 								openAPI();
 								$("#TKcal").text(localStorage[0+'_total3']);
 								$("#TCarbohydrate").text(localStorage[0+'_total2']);
@@ -456,6 +520,7 @@
 								
 								
 								count3++;
+								localStorage['count3'] == count3;
 								openAPI();
 								$("#TKcal").text(localStorage[0+'_total3']);
 								$("#TCarbohydrate").text(localStorage[0+'_total2']);
@@ -486,6 +551,7 @@
 								
 								
 								count4++;
+								localStorage['count4'] == count4;
 								openAPI();
 								
 								$("#TKcal").text(localStorage[0+'_total3']);
@@ -517,6 +583,7 @@
 								
 								
 								count5++;
+								localStorage['count5'] == count5;
 								openAPI();
 								
 								$("#TKcal").text(localStorage[0+'_total3']);
@@ -548,6 +615,7 @@
 								
 								
 								count6++;
+								localStorage['count6'] == count6;
 								openAPI();
 								
 								$("#TKcal").text(localStorage[0+'_total3']);

@@ -16,6 +16,9 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--  Material Dashboard CSS    -->    
+<link href="resources/assets/css/material-dashboard.css"
+	rel="stylesheet" />	
 <script type="text/javascript" src="resources/bootstrap-filestyle.min.js"> </script>
 <script>
 		//이미지를 업로드하면 미리 볼 수 있는 기능
@@ -131,9 +134,9 @@
 			</div>
 			<div style = "margin-bottom : 1px;">
 				<h2>반찬 레시피</h2>
-				<textarea placeholder = "레시피 입력란" name = "recipe"></textarea>
+				<textarea placeholder = "레시피 입력란" name = "recipe" class = "form-control"></textarea>
 				<br>
-				반찬 이름<input type = "text" name = "sideDName">
+				반찬 이름<input type = "text" name = "sideDName" class = "form-control">
 			
 				<table>
 					<tr>
@@ -142,7 +145,7 @@
 					</tr>
 					<tr>
 						<td>
-							<select name = "foodGCode">
+							<select name = "foodGCode" class = "form-control">
 								<option value = "01">밥</option>
 								<option value = "02">국</option>
 								<option value = "03">메인메뉴1</option>
@@ -152,7 +155,7 @@
 							</select>
 						</td>
 						<td>
-							<select name = "cookMCode">	
+							<select name = "cookMCode" class = "form-control">	
 								<option value = "01">튀김</option>
 								<option value = "02">구이</option>
 								<option value = "08">볶음</option>	
