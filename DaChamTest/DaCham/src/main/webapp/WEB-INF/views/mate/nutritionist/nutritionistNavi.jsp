@@ -20,6 +20,9 @@ height:180px;
 #headerBox{
 margin-bottom:20px;
 }
+#wizard,#diet,#side,#special{
+	text-decoration: none;
+}
 </style>
 <body>
 	<c:if test="${not empty sessionScope.EmpName}">
