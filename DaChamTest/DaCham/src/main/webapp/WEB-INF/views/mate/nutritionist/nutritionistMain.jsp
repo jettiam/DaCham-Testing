@@ -191,7 +191,7 @@
    		<div class = "row">
    			<div class = "col-lg-12 col-md-12">
    				<div class = "card">
-   					<div class = "card-header" data-background-color = "green">
+   					<div class = "card-header" data-background-color = "#3A546D">
    						<h4 class = "title">특별식단 요청 리스트</h4>
    						<div class = "form-group row">
    							<div class = "col-xs-2">
@@ -222,8 +222,8 @@
       <div class = "row">
       	<div class = "col-lg-12 col-md-12">
       		<div class = "card">
-      			<div class = "card-header" data-background-color = "blue">    
-      				<h4 class = "title">이번 달의 판매 식단</h4>
+      			<div class = "card-header" data-background-color = "green">                                  
+      				<h4 class = "title">이번 달의 판매 식단</h4>  
       			</div>
       			<div class = "card-content table-responsive">
       				<table class = "thisTable table table-hover">

@@ -135,7 +135,7 @@
   	list-style : none;
   }
    #buttonDiv {
-	float: right;	                
+	float: center;	                
 }
 </style>
 </head>
@@ -165,7 +165,7 @@
       <div class = "row">
       	<div class = "col-lg-12 col-md-12">
       		<div class = "card">
-      			<div class = "card-header" data-background-color = "green">
+      			<div class = "card-header" data-background-color = "#3A546D">
       				<h4 class = "title">식단 목록</h4>   
       				<div id="buttonDiv">       
 			         <button id = "regist" class = "btn btn-primary">식단 등록</button>

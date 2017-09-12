@@ -80,7 +80,7 @@
 		<div class = "row">
 			<div class = "col-lg-12 col-md-12">
 				<div class = "card">
-					<div class = "card-header" data-background-color = "blue">
+					<div class = "card-header" data-background-color = "#3A546D">
 						<h4 class = "title">특별식단 요청 리스트</h4>
 					</div>
 					<div class = "card-content table-responsive">
