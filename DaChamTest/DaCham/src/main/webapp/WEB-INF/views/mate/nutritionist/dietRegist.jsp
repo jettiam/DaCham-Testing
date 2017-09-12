@@ -211,7 +211,15 @@
 											
 											
 											var id = $(this).attr('data-id');
-
+											
+											if($("input:radio[name=foodG0"+id+"]").is(":checked") == true){
+		  										localStorage[0+'_kcal'+id] = 0;
+		  										localStorage[0+'_carbohydrate'+id] = 0;
+		  										localStorage[0+'_fat'+id] = 0;
+		  										localStorage[0+'_na'+id] = 0;
+		  										localStorage[0+'_protein'+id] = 0;
+											}
+		  									openAPI();
 											var sideDCode = $('.sideDCode')
 													.val();
 											console.log("데이터:" + sideDCode);
