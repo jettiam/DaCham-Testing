@@ -149,7 +149,8 @@
             });
             $(".action1").append(str);
             
-         });                                        
+         });      
+         $(".pagination3").hide();
          
       }   
       function doing(page){

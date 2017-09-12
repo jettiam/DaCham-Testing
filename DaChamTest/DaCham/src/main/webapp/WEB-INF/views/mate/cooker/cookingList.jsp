@@ -127,7 +127,7 @@
 	 <div class ="row">
 	<div class="col-lg-12 col-md-12">
 	<div class="card">
-		<div class="card-header" data-background-color="skyblue">
+		<div class="card-header" data-background-color="#3A546D">
 		<h2 class="title text-center">조리목록</h2>
 		
 		<button id = "startCookBtn" class = "btn btn-primary btn-lg" >조리시작</button>
@@ -176,13 +176,13 @@
 	 	<div class ="row">
 		<div class="col-lg-12 col-md-12">
 		<div class="card">
-		<div class="card-header" data-background-color="skyblue">
+		<div class="card-header" data-background-color="#3A546D">
 		<h2 class="title text-center">조리완료</h2>
 		</div>
 		<input type = "hidden" name = "page" value = "${criteria2.page }">
    		<input type = "hidden" name = "recordsPerPage" value = "${criteria2.recordsPerPage }">
-		<div class="card-content table-responsive">
-		<table class = "codeTable table table-hover">
+		<div class="card-content table-responsive" style = "overflow-x: hidden;">
+		<table class = "codeTable table table-hover">   
 		
 			<tr>
 				<th>주문번호</th>
