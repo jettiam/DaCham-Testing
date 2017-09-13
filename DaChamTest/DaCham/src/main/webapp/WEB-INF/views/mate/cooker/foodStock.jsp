@@ -142,7 +142,7 @@
 	 		<div class ="row">
 			<div class="col-lg-12 col-md-12">
 			<div class="card">
-			<div class="card-header" data-background-color="skyblue">
+			<div class="card-header" data-background-color="#3A546D">
 			<h2 class="title text-center">식재료재고</h2>
 			
 				<input type = "text" id = "keyword" name = "keyword" placeholder = "검색어 입력란">

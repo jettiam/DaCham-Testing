@@ -182,7 +182,7 @@
 	     	<div class="row">
 			<div class="col-lg-12 col-md-12">
 				<div class="card">
-			<div class="card-header" data-background-color="orange">
+			<div class="card-header" data-background-color="#3A546D">
 				<h3 class="title text-center" >입고 식재료</h3>
 				</div>
 	      	 <div class="card-content table-responsive">
@@ -210,7 +210,7 @@
 	      <div class="row">
 			<div class="col-lg-12 col-md-12">
 				<div class="card">
-			<div class="card-header" data-background-color="orange">
+			<div class="card-header" data-background-color="#3A546D">
 			     <h3 class="title text-center" >배송 목록</h3>
 			</div>
 	      		<table class = "shinTable table table-hover">

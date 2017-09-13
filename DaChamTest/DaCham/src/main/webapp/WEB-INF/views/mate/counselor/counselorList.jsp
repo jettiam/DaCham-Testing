@@ -241,7 +241,7 @@
              <div class ="row">
 				<div class="col-lg-12 col-md-12">
 				<div class="card">
-				<div class="card-header" data-background-color="skyblue">
+				<div class="card-header" data-background-color="#3A546D">
 				<h4 class="title">고객정보</h4>
 				<div class="form-group row">
 				<div class="col-xs-2">

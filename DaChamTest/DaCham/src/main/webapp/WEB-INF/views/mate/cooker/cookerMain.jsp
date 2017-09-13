@@ -156,7 +156,7 @@
 	   	<div class="row">
 			<div class="col-lg-12 col-md-12">
 				<div class="card">
-			<div class="card-header" data-background-color="orange">
+			<div class="card-header" data-background-color="#3A546D">
 				<h3 class="title text-center" >조리대기</h3>
 				</div>
 	      <div class="card-content table-responsive">
@@ -180,7 +180,7 @@
 	   	<div class="row">
 			<div class="col-lg-12 col-md-12">
 				<div class="card">
-			<div class="card-header" data-background-color="orange">
+			<div class="card-header" data-background-color="#3A546D">
 				<h3 class="title text-center" >식재료 재고</h3>
 				</div>
 	   		  <div class="card-content table-responsive">
