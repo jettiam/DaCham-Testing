@@ -11,332 +11,358 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">  
-     
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- Bootstrap core CSS     -->
+<link href="resources/assets/css/bootstrap.min.css" rel="stylesheet" />
+
+<!--  Material Dashboard CSS    -->
+<link href="resources/assets/css/material-dashboard.css"
+	rel="stylesheet" />
+
+<!--  CSS for Demo Purpose, don't include it in your project     -->
+<link href="resources/assets/css/demo.css" rel="stylesheet" />
+
+<!--     Fonts and icons     -->
+<link
+	href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"
+	rel="stylesheet">
+<link
+	href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons'
+	rel='stylesheet' type='text/css'>
+
 <title>Insert title here</title>
 
 </head>
 <style>
-.topMar{
+.topMar {
 	margin-top: 0.1cm;
 }
-.w3-card-4{
-	margin-right: 25px; 
-	margin-bottom : 20px;       
+
+.w3-card-4 {
+	margin-right: 25px;
+	margin-bottom: 20px;
+}
+.cardSize{
+ margin-top: 1cm;     
+}
+.priceUpdate{ 
+margin :0px 0px;   
+}
+.pagination{
+margin-bottom: 0px;
+}
+#buttonDiv{
+float:right;
+margin-right: 1cm;                    
 }
 </style>
 <body>
 	<%@include file="../admin/upmenu.jsp"%>
-	<div class="container"> 
-	
-		<div  class="col-sm-offset-1">
-		<div class="w3-container ">         
-				<div class="w3-card-4 w3-dark-grey w3-col m2">
 
-					<div class="w3-container w3-center">
-						<h4>당뇨 판매</h4>
-						<div class="w3-section">
-							<p id="str1"></p>
-							<button class="active w3-button w3-green w3-center" id="Diabetes"
-								data-code="1">당뇨</button>
-						</div>
-					</div>
-				</div>
-				<div class="w3-card-4 w3-dark-grey w3-col m2">
-					<div class="w3-container w3-center">
-						<h4>고지혈증 판매</h4>
-						<div class="w3-section">
-							<p id="str2"></p>
-							<button class="active w3-button w3-green w3-center"
-								id="Hyperlipidemia" data-code="2">고지혈증</button>
-						</div>
-					</div>
-				</div>
-				<div class="w3-card-4 w3-dark-grey w3-col m2">
-					<div class="w3-container w3-center">
-						<h4>심부전증 판매</h4>
-						<div class="w3-section">
-							<p id="str3"></p> 
-							<button class="active w3-button w3-green" id="Hypertrophia"
-								data-code="3">심부전증</button>
-						</div>
-					</div>
-				</div>
-				<div class="w3-card-4 w3-dark-grey w3-col m2">
-					<div class="w3-container w3-center">
-						<h4>신부전증 판매</h4>
-						<div class="w3-section">
-							<p id="str4"></p>
-							<button class="active w3-button w3-green" id="Nephropathy" data-code="4">신부전증</button>
-						</div>
-					</div>
-				</div>
-				
-				<div class="w3-card-4 w3-dark-grey w3-col m2"> 
+	<div class="wrapper">
 
-					<div class="w3-container w3-center">
-						<h4>기타 판매</h4> 
-						<div class="w3-section">
-							<p id="str5"></p>
-							<button class="active w3-button w3-green" id="etc"
-								data-code="5">기타</button>
-						</div> 
+		<div class="content">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card">
+							<div class="card-header" data-background-color="#3A546D">
+								<h4 class="title" style="text-align: center">식단 관리</h4>
+							</div>
+							<div class="cardSize col-sm-offset-1">
+								<div class="w3-container ">
+									<div class="w3-card-4 w3-dark-grey w3-col m2">
+
+										<div class="w3-container w3-center">
+											<h4>당뇨 판매</h4>
+											<div class="w3-section">
+												<p id="str1"></p>
+												<button class="active w3-button w3-green w3-center"
+													id="Diabetes" data-code="1">당뇨</button>
+											</div>
+										</div>
+									</div>
+									<div class="w3-card-4 w3-dark-grey w3-col m2">
+										<div class="w3-container w3-center">
+											<h4>고지혈증 판매</h4>
+											<div class="w3-section">
+												<p id="str2"></p>
+												<button class="active w3-button w3-green w3-center"
+													id="Hyperlipidemia" data-code="2">고지혈증</button> 
+											</div>
+										</div>
+									</div>
+									<div class="w3-card-4 w3-dark-grey w3-col m2">
+										<div class="w3-container w3-center">
+											<h4>심부전증 판매</h4>
+											<div class="w3-section">
+												<p id="str3"></p>
+												<button class="active w3-button w3-green" id="Hypertrophia"
+													data-code="3">심부전증</button>
+											</div>
+										</div>
+									</div>
+									<div class="w3-card-4 w3-dark-grey w3-col m2">
+										<div class="w3-container w3-center">
+											<h4>신부전증 판매</h4>
+											<div class="w3-section">
+												<p id="str4"></p>
+												<button class="active w3-button w3-green" id="Nephropathy"
+													data-code="4">신부전증</button>
+											</div>
+										</div>
+									</div>
+
+									<div class="w3-card-4 w3-dark-grey w3-col m2">
+
+										<div class="w3-container w3-center">
+											<h4>기타 판매</h4>
+											<div class="w3-section">
+												<p id="str5"></p>
+												<button class="active w3-button w3-green" id="etc"
+													data-code="5">기타</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="card-content table-responsive">
+								<table class="tables table">
+									<thead class="text-primary">
+										<th>선택</th>
+										<th>식단명</th>
+										<th>금액</th>
+										<th>질환명</th>
+										<th>질환 위험도</th>
+										<th>상태</th>
+									</thead>
+								</table>
+								<ul class="pagination">
+								</ul>
+							</div>
+							<div id="buttonDiv">
+								<button id="dietSell" class="btn btn-default">판매</button>
+								<button id="dietSellStop" class="btn btn-danger">판매중지</button>
+							</div>    
+						</div>
 					</div>
 
+
 				</div>
-				
-			</div>  
-		
-		                                                    
-		<!-- <ul class="nav nav-pills">    
-			<li role="presentation" class="active"><a href="#" onclick="disease1();">당뇨</a></li>
-			<li role="presentation" class="active"><a href="#" onclick="disease2();">고지혈증</a></li>
-			<li role="presentation" class="active"><a href="#" onclick="disease3();">심부전증</a></li>
-			<li role="presentation" class="active"><a href="#" onclick="disease4();">신부전증</a></li> 
-		</ul> -->
+			</div>
 		</div>
-		<div class="topMar">
-			<table class="tables table table-condensed" width="600">
-				<tr>
-					<th>선택</th>
-					<th>식단명</th>
-					<th>금액</th>
-					<th>질환명</th>
-					<th>질환 위험도</th>
-					<th>상태</th>
-				</tr>
-			</table>
-			<ul class="pagination" position="center">
-					</ul>
-		</div>
-		<div class="col-sm-offset-10">
-			<button id="dietSell" class="btn btn-default">판매</button>
-			<button id="dietSellStop" class="btn btn-danger">판매중지</button>
-		</div>
+
+
 	</div>
+	
 	<div>
 		<form id='dietSellForm' method='GET' action='dietSell'></form>
 		<form id='dietSellStopForm' method='GET' action='dietSellStop'>
 		</form>
 	</div>
-	
+
 </body>
 <script>
-function fontColor1(){    
-	var length = $('.dietAll').length;
-	for(var i=0; i<length; i++){
-		var font = $(".spDietItem").eq(i).text();
-		if(font =="판매중지"){
-			   
-			$(".spDietItem").eq(i).css("color", "red");      
+	function fontColor1() {
+		var length = $('.dietAll').length;
+		for (var i = 0; i < length; i++) {
+			var font = $(".spDietItem").eq(i).text();
+			if (font == "판매중지") {
+
+				$(".spDietItem").eq(i).css("color", "red");
+			}
 		}
 	}
-} 
-function disease1(){
-	$
-	.getJSON(
-			"adminSub/disease1",
-			function(data) {
-				console.log(data);
-				$(".dietAll").remove();
-				var str = "";
-				for (var i = 0; i < data.length; i++) {
-					if (data[i].spDietItem == 0) {
-						data[i].spDietItem = "특별식단"
-					} else if (data[i].spDietItem == 1) {
-						data[i].spDietItem = "판매중"
-					} else {
-						data[i].spDietItem = "판매중지"
-					}
-					str += "<tr class='dietAll'>"
-							+ "<td><input type='checkBox' name='dietCode' value='"+data[i].dietCode+"'></td>"
-							+ "<td>"
-							+ data[i].dietName
-							+ "</td>"
-							+ "<td><input type='text' value='" + data[i].price + "'>"
-							+ "&nbsp&nbsp<button class='priceUpdate btn btn-default' data-price='"+data[i].dietCode+"'>가격수정</button>"
-							+ "</td>"
-							+ "<td>"
-							+ data[i].diseaseName
-							+ "</td><td>" 
-							+ data[i].judgement
-							+ "</td><td class='spDietItem'>"
-							+ data[i].spDietItem
-							+ "</td></tr>"
-				}
-				console.log(str);
-				$(".tables").append(str);
-				$(".pagination").empty();
-				fontColor1();        
-			});
-}
-function disease2(){
-	$
-	.getJSON(
-			"adminSub/disease2",
-			function(data) {
-				console.log(data);
-				$(".dietAll").remove();
-				var str = "";
-				for (var i = 0; i < data.length; i++) {
-					if (data[i].spDietItem == 0) {
-						data[i].spDietItem = "특별식단"
-					} else if (data[i].spDietItem == 1) {
-						data[i].spDietItem = "판매중"
-					} else {
-						data[i].spDietItem = "판매중지"
-					}
-					str += "<tr class='dietAll'>"
-							+ "<td><input type='checkBox' name='dietCode' value='"+data[i].dietCode+"'></td>"
-							+ "<td>"
-							+ data[i].dietName
-							+ "</td>"
-							+ "<td><input type='text' value='" + data[i].price + "'>"
-							+ "&nbsp&nbsp<button class='priceUpdate btn btn-default' data-price='"+data[i].dietCode+"'>가격수정</button>"
-							+ "</td>"
-							+ "<td>"
-							+ data[i].diseaseName
-							+ "</td><td>"
-							+ data[i].judgement
-							+ "</td><td class='spDietItem'>"
-							+ data[i].spDietItem
-							+ "</td></tr>"
-				}
-				console.log(str);
-				$(".tables").append(str);
-				$(".pagination").empty();
-				fontColor1();
-			});
-}  
-function disease3(){
-	$
-	.getJSON(
-			"adminSub/disease3",
-			function(data) {
-				console.log(data);
-				$(".dietAll").remove();
-				var str = "";
-				for (var i = 0; i < data.length; i++) {
-					if (data[i].spDietItem == 0) {
-						data[i].spDietItem = "특별식단"
-					} else if (data[i].spDietItem == 1) {
-						data[i].spDietItem = "판매중"
-					} else {
-						data[i].spDietItem = "판매중지"
-					}
-					str += "<tr class='dietAll'>"
-							+ "<td><input type='checkBox' name='dietCode' value='"+data[i].dietCode+"'></td>"
-							+ "<td>"
-							+ data[i].dietName
-							+ "</td>"
-							+ "<td><input type='text' value='" + data[i].price + "'>"
-							+ "&nbsp&nbsp<button class='priceUpdate btn btn-default' data-price='"+data[i].dietCode+"'>가격수정</button>"
-							+ "</td>"
-							+ "<td>"
-							+ data[i].diseaseName
-							+ "</td><td>"
-							+ data[i].judgement
-							+ "</td><td class='spDietItem'>"
-							+ data[i].spDietItem
-							+ "</td></tr>"
-				}
-				console.log(str);
-				$(".tables").append(str);
-				$(".pagination").empty();
-				fontColor1();
-			});
-}
-function disease4(){
-	$
-	.getJSON(
-			"adminSub/disease4",
-			function(data) {
-				console.log(data);
-				$(".dietAll").remove();
-				var str = "";
-				for (var i = 0; i < data.length; i++) {
-					if (data[i].spDietItem == 0) {
-						data[i].spDietItem = "특별식단"
-					} else if (data[i].spDietItem == 1) {
-						data[i].spDietItem = "판매중"
-					} else {
-						data[i].spDietItem = "판매중지"
-					}
-					str += "<tr class='dietAll'>"
-							+ "<td><input type='checkBox' name='dietCode' value='"+data[i].dietCode+"'></td>"
-							+ "<td>"
-							+ data[i].dietName
-							+ "</td>"
-							+ "<td><input type='text' value='" + data[i].price + "'>"
-							+ "&nbsp&nbsp<button class='priceUpdate btn btn-default' data-price='"+data[i].dietCode+"'>가격수정</button>"
-							+ "</td>"
-							+ "<td>"
-							+ data[i].diseaseName
-							+ "</td><td>"
-							+ data[i].judgement
-							+ "</td><td class='spDietItem'>"    
-							+ data[i].spDietItem
-							+ "</td></tr>"
-				}
-				console.log(str);
-				$(".tables").append(str);
-				$(".pagination").empty();
-				fontColor1();
-			});
-	
-}
-function disease5(){
-	$
-	.getJSON(
-			"adminSub/disease5",
-			function(data) {
-				console.log(data);
-				$(".dietAll").remove();
-				var str = "";
-				for (var i = 0; i < data.length; i++) {
-					if (data[i].spDietItem == 0) {
-						data[i].spDietItem = "특별식단"
-					} else if (data[i].spDietItem == 1) {
-						data[i].spDietItem = "판매중"
-					} else {
-						data[i].spDietItem = "판매중지"
-					}
-					str += "<tr class='dietAll'>"
-							+ "<td><input type='checkBox' name='dietCode' value='"+data[i].dietCode+"'></td>"
-							+ "<td>"
-							+ data[i].dietName
-							+ "</td>"
-							+ "<td><input type='text' value='" + data[i].price + "'>"
-							+ "&nbsp&nbsp<button class='priceUpdate btn btn-default' data-price='"+data[i].dietCode+"'>가격수정</button>"
-							+ "</td>"
-							+ "<td>"
-							+ data[i].diseaseName
-							+ "</td><td>"
-							+ data[i].judgement
-							+ "</td><td class='spDietItem'>"    
-							+ data[i].spDietItem
-							+ "</td></tr>"
-				}
-				console.log(str);
-				$(".tables").append(str);
-				$(".pagination").empty();
-				fontColor1();
-			});
-	
-}
-	$("#Diabetes").click(function(){
+	function disease1() {
+		$
+				.getJSON(
+						"adminSub/disease1",
+						function(data) {
+							console.log(data);
+							$(".dietAll").remove();
+							var str = "";
+							for (var i = 0; i < data.length; i++) {
+								if (data[i].spDietItem == 0) {
+									data[i].spDietItem = "특별식단"
+								} else if (data[i].spDietItem == 1) {
+									data[i].spDietItem = "판매중"
+								} else {
+									data[i].spDietItem = "판매중지"
+								}
+								str += "<tr class='dietAll'>"
+										+ "<td><input type='checkBox' name='dietCode' value='"+data[i].dietCode+"'></td>"
+										+ "<td>"
+										+ data[i].dietName
+										+ "</td>"
+										+ "<td><input type='text' value='" + data[i].price + "'>"
+										+ "&nbsp&nbsp<button class='priceUpdate btn btn-default' data-price='"+data[i].dietCode+"'>가격수정</button>"
+										+ "</td>" + "<td>"
+										+ data[i].diseaseName + "</td><td>"
+										+ data[i].judgement
+										+ "</td><td class='spDietItem'>"
+										+ data[i].spDietItem + "</td></tr>"
+							}
+							console.log(str);
+							$(".tables").append(str);
+							$(".pagination").empty();
+							fontColor1();
+						});
+	}
+	function disease2() {
+		$
+				.getJSON(
+						"adminSub/disease2",
+						function(data) {
+							console.log(data);
+							$(".dietAll").remove();
+							var str = "";
+							for (var i = 0; i < data.length; i++) {
+								if (data[i].spDietItem == 0) {
+									data[i].spDietItem = "특별식단"
+								} else if (data[i].spDietItem == 1) {
+									data[i].spDietItem = "판매중"
+								} else {
+									data[i].spDietItem = "판매중지"
+								}
+								str += "<tr class='dietAll'>"
+										+ "<td><input type='checkBox' name='dietCode' value='"+data[i].dietCode+"'></td>"
+										+ "<td>"
+										+ data[i].dietName
+										+ "</td>"
+										+ "<td><input type='text' value='" + data[i].price + "'>"
+										+ "&nbsp&nbsp<button class='priceUpdate btn btn-default' data-price='"+data[i].dietCode+"'>가격수정</button>"
+										+ "</td>" + "<td>"
+										+ data[i].diseaseName + "</td><td>"
+										+ data[i].judgement
+										+ "</td><td class='spDietItem'>"
+										+ data[i].spDietItem + "</td></tr>"
+							}
+							console.log(str);
+							$(".tables").append(str);
+							$(".pagination").empty();
+							fontColor1();
+						});
+	}
+	function disease3() {
+		$
+				.getJSON(
+						"adminSub/disease3",
+						function(data) {
+							console.log(data);
+							$(".dietAll").remove();
+							var str = "";
+							for (var i = 0; i < data.length; i++) {
+								if (data[i].spDietItem == 0) {
+									data[i].spDietItem = "특별식단"
+								} else if (data[i].spDietItem == 1) {
+									data[i].spDietItem = "판매중"
+								} else {
+									data[i].spDietItem = "판매중지"
+								}
+								str += "<tr class='dietAll'>"
+										+ "<td><input type='checkBox' name='dietCode' value='"+data[i].dietCode+"'></td>"
+										+ "<td>"
+										+ data[i].dietName
+										+ "</td>"
+										+ "<td><input type='text' value='" + data[i].price + "'>"
+										+ "&nbsp&nbsp<button class='priceUpdate btn btn-default' data-price='"+data[i].dietCode+"'>가격수정</button>"
+										+ "</td>" + "<td>"
+										+ data[i].diseaseName + "</td><td>"
+										+ data[i].judgement
+										+ "</td><td class='spDietItem'>"
+										+ data[i].spDietItem + "</td></tr>"
+							}
+							console.log(str);
+							$(".tables").append(str);
+							$(".pagination").empty();
+							fontColor1();
+						});
+	}
+	function disease4() {
+		$
+				.getJSON(
+						"adminSub/disease4",
+						function(data) {
+							console.log(data);
+							$(".dietAll").remove();
+							var str = "";
+							for (var i = 0; i < data.length; i++) {
+								if (data[i].spDietItem == 0) {
+									data[i].spDietItem = "특별식단"
+								} else if (data[i].spDietItem == 1) {
+									data[i].spDietItem = "판매중"
+								} else {
+									data[i].spDietItem = "판매중지"
+								}
+								str += "<tr class='dietAll'>"
+										+ "<td><input type='checkBox' name='dietCode' value='"+data[i].dietCode+"'></td>"
+										+ "<td>"
+										+ data[i].dietName
+										+ "</td>"
+										+ "<td><input type='text' value='" + data[i].price + "'>"
+										+ "&nbsp&nbsp<button class='priceUpdate btn btn-default' data-price='"+data[i].dietCode+"'>가격수정</button>"
+										+ "</td>" + "<td>"
+										+ data[i].diseaseName + "</td><td>"
+										+ data[i].judgement
+										+ "</td><td class='spDietItem'>"
+										+ data[i].spDietItem + "</td></tr>"
+							}
+							console.log(str);
+							$(".tables").append(str);
+							$(".pagination").empty();
+							fontColor1();
+						});
+
+	}
+	function disease5() {
+		$
+				.getJSON(
+						"adminSub/disease5",
+						function(data) {
+							console.log(data);
+							$(".dietAll").remove();
+							var str = "";
+							for (var i = 0; i < data.length; i++) {
+								if (data[i].spDietItem == 0) {
+									data[i].spDietItem = "특별식단"
+								} else if (data[i].spDietItem == 1) {
+									data[i].spDietItem = "판매중"
+								} else {
+									data[i].spDietItem = "판매중지"
+								}
+								str += "<tr class='dietAll'>"
+										+ "<td><input type='checkBox' name='dietCode' value='"+data[i].dietCode+"'></td>"
+										+ "<td>"
+										+ data[i].dietName
+										+ "</td>"
+										+ "<td><input type='text' value='" + data[i].price + "'>"
+										+ "&nbsp&nbsp<button class='priceUpdate btn btn-default' data-price='"+data[i].dietCode+"'>가격수정</button>"
+										+ "</td>" + "<td>"
+										+ data[i].diseaseName + "</td><td>"
+										+ data[i].judgement
+										+ "</td><td class='spDietItem'>"
+										+ data[i].spDietItem + "</td></tr>"
+							}
+							console.log(str);
+							$(".tables").append(str);
+							$(".pagination").empty();
+							fontColor1();
+						});
+
+	}
+	$("#Diabetes").click(function() {
 		disease1();
 	})
-	$("#Hyperlipidemia").click(function(){
+	$("#Hyperlipidemia").click(function() {
 		disease2();
 	})
-	$("#Hypertrophia").click(function(){
+	$("#Hypertrophia").click(function() {
 		disease3();
 	})
-	$("#Nephropathy").click(function(){
+	$("#Nephropathy").click(function() {
 		disease4();
 	})
-	$("#etc").click(function(){
+	$("#etc").click(function() {
 		disease5()
 	})
 
@@ -344,22 +370,22 @@ function disease5(){
 			.ready(
 					function() {
 						$("#dietManagement").addClass("w3-light-gray");
-						
-						function fontColor(){
+
+						function fontColor() {
 							var length = $('.dietAll').length;
-							for(var i=0; i<length; i++){
+							for (var i = 0; i < length; i++) {
 								var font = $(".spDietItem").eq(i).text();
-								if(font =="판매중지"){
-									   
-									$(".spDietItem").eq(i).css("color", "red");      
+								if (font == "판매중지") {
+
+									$(".spDietItem").eq(i).css("color", "red");
 								}
 							}
 						}
-						
+
 						function all(page) {
 							$
 									.getJSON(
-											"adminSub/dietAll/"+page,
+											"adminSub/dietAll/" + page,
 											function(data) {
 												console.log(data);
 												$(".dietAll").remove();
@@ -382,7 +408,7 @@ function disease5(){
 															+ "</td>"
 															+ "<td>"
 															+ data.list[i].diseaseName
-															+ "</td><td>"  
+															+ "</td><td>"
 															+ data.list[i].judgement
 															+ "</td><td class='spDietItem'>"
 															+ data.list[i].spDietItem
@@ -395,26 +421,26 @@ function disease5(){
 											});
 						}
 						all(1)
-						
+
 						var Diabetes = 0; //당뇨
 						var Hyperlipidemia = 0; //고지혈증
 						var Hypertrophia = 0; //심부전증
 						var Nephropathy = 0; //신부전증
 						var etc = 0; //기타
-						
+
 						var DiabetesDanger = 0; //당뇨 위험 
 						var HyperlipidemiaDanger = 0; //고지혈증위험 
-						var HypertrophiaDanger= 0; //심부전증위험 
+						var HypertrophiaDanger = 0; //심부전증위험 
 						var NephropathyDanger = 0; //신부전증위험 
-						
+
 						var DiabetesHighDanger = 0; //당뇨 고위험 
 						var HyperlipidemiaHighDanger = 0; //고지혈증고위험 
-						var HypertrophiaHighDanger= 0; //심부전증고위험 
+						var HypertrophiaHighDanger = 0; //심부전증고위험 
 						var NephropathyHighDanger = 0; //신부전증고위험 
 						function orderAllCountTd() {
 							$
 									.getJSON(
-											"adminSub/DietAllTdCount", 
+											"adminSub/DietAllTdCount",
 											function(data) {
 
 												$("#str1").empty();
@@ -424,62 +450,82 @@ function disease5(){
 												$("#str5").empty();
 												for (var i = 0; i < data.length; i++) {
 													if (data[i].diseaseName == "당뇨") {
-														if(data[i].spDietItem=="1")
-															if(data[i].judgement=="주의"){
+														if (data[i].spDietItem == "1")
+															if (data[i].judgement == "주의") {
 																Diabetes++;
-															}else if(data[i].judgement=="위험"){
+															} else if (data[i].judgement == "위험") {
 																DiabetesDanger++
-															}else if(data[i].judgement=="고위험"){
+															} else if (data[i].judgement == "고위험") {
 																DiabetesHighDanger++
 															}
-														
+
 													} else if (data[i].diseaseName == "고지혈증") {
-														if(data[i].spDietItem=="1")
-															if(data[i].judgement=="주의"){
+														if (data[i].spDietItem == "1")
+															if (data[i].judgement == "주의") {
 																Hyperlipidemia++;
-															}else if(data[i].judgement=="위험"){
+															} else if (data[i].judgement == "위험") {
 																HyperlipidemiaDanger++
-															}else if(data[i].judgement=="고위험"){
+															} else if (data[i].judgement == "고위험") {
 																HyperlipidemiaHighDanger++
 															}
 													} else if (data[i].diseaseName == "심부전증") {
-														if(data[i].spDietItem=="1")
-															if(data[i].judgement=="주의"){
+														if (data[i].spDietItem == "1")
+															if (data[i].judgement == "주의") {
 																Hypertrophia++;
-															}else if(data[i].judgement=="위험"){
+															} else if (data[i].judgement == "위험") {
 																HypertrophiaDanger++
-															}else if(data[i].judgement=="고위험"){
+															} else if (data[i].judgement == "고위험") {
 																HypertrophiaHighDanger++
 															}
 													} else if (data[i].diseaseName == "신부전증") {
-														if(data[i].spDietItem=="1")
-															if(data[i].judgement=="주의"){
+														if (data[i].spDietItem == "1")
+															if (data[i].judgement == "주의") {
 																Nephropathy++;
-															}else if(data[i].judgement=="위험"){
+															} else if (data[i].judgement == "위험") {
 																NephropathyDanger++
-															}else if(data[i].judgement=="고위험"){
+															} else if (data[i].judgement == "고위험") {
 																NephropathyHighDanger++
 															}
-													} else if(data[i].diseaseName == "기타"){ 
-														etc++ 
+													} else if (data[i].diseaseName == "기타") {
+														etc++
 													}
 
 												}
 												str1 = "<p id='str1'>주의  : "
-														+ Diabetes + "건<br>위험 : "+DiabetesDanger +"건<br>고위험 : "+DiabetesHighDanger +"건</p>"
+														+ Diabetes
+														+ "건<br>위험 : "
+														+ DiabetesDanger
+														+ "건<br>고위험 : "
+														+ DiabetesHighDanger
+														+ "건</p>"
 												str2 = "<p id='str2'>주의  : "
-													+ Hyperlipidemia  + "건<br>위험 : "+HyperlipidemiaDanger  +"건<br>고위험 : "+HyperlipidemiaHighDanger  +"건</p>"
+														+ Hyperlipidemia
+														+ "건<br>위험 : "
+														+ HyperlipidemiaDanger
+														+ "건<br>고위험 : "
+														+ HyperlipidemiaHighDanger
+														+ "건</p>"
 												str3 = "<p id='str3'>주의  : "
-													+ Hypertrophia   + "건<br>위험 : "+HypertrophiaDanger  +"건<br>고위험 : "+HypertrophiaHighDanger  +"건</p>"
+														+ Hypertrophia
+														+ "건<br>위험 : "
+														+ HypertrophiaDanger
+														+ "건<br>고위험 : "
+														+ HypertrophiaHighDanger
+														+ "건</p>"
 												str4 = "<p id='str4'>주의  : "
-													+ Nephropathy   + "건<br>위험 : "+NephropathyDanger   +"건<br>고위험 : "+NephropathyHighDanger   +"건</p>" 
+														+ Nephropathy
+														+ "건<br>위험 : "
+														+ NephropathyDanger
+														+ "건<br>고위험 : "
+														+ NephropathyHighDanger
+														+ "건</p>"
 												str5 = "<p id='str5'>" + etc
-														+ "건<br><br><br></p>" 
+														+ "건<br><br><br></p>"
 
 												$("#str1").append(str1);
 												$("#str2").append(str2);
-												$("#str3").append(str3);  
-												$("#str4").append(str4);  
+												$("#str3").append(str3);
+												$("#str4").append(str4);
 												$("#str5").append(str5);
 
 											});
@@ -517,27 +563,27 @@ function disease5(){
 										function() {
 											var dietCode = "";
 											var length = $('.tables input:checked').length;
-										          
-											
-											if(length != 0){
-											for (var i = 0; i < $('.dietAll').length; i++) { 
-												if ($(
-														'.dietAll:eq(' + i
-																+ ') input')
-														.prop('checked')) {
-													dietCode = $(
+
+											if (length != 0) {
+												for (var i = 0; i < $('.dietAll').length; i++) {
+													if ($(
 															'.dietAll:eq(' + i
 																	+ ') input')
-															.val();
-													//alert(dietCode);
-													$("#dietSellForm")
-															.append(
-																	'<input type="hidden" value= "'+dietCode+'" name="dietCode">');
+															.prop('checked')) {
+														dietCode = $(
+																'.dietAll:eq('
+																		+ i
+																		+ ') input')
+																.val();
+														//alert(dietCode);
+														$("#dietSellForm")
+																.append(
+																		'<input type="hidden" value= "'+dietCode+'" name="dietCode">');
+													}
 												}
-											}
-											//alert(JSON.stringify(dietinfo));     
-											$("#dietSellForm").submit();
-											}else{
+												//alert(JSON.stringify(dietinfo));     
+												$("#dietSellForm").submit();
+											} else {
 												alert("식단을 선택하세요");
 											}
 										});
@@ -548,30 +594,30 @@ function disease5(){
 										function() {
 											var dietCode = "";
 											var length = $('.tables input:checked').length;
-											if(length != 0){
-											for (var i = 0; i < $('.dietAll').length; i++) {
-												if ($(
-														'.dietAll:eq(' + i
-																+ ') input')
-														.prop('checked')) {
-													dietCode = $(
+											if (length != 0) {
+												for (var i = 0; i < $('.dietAll').length; i++) {
+													if ($(
 															'.dietAll:eq(' + i
 																	+ ') input')
-															.val();
-													//alert(dietCode); 
-													$("#dietSellStopForm")
-															.append(
-																	'<input type="hidden" value= "'+dietCode+'" name="dietCode">');
+															.prop('checked')) {
+														dietCode = $(
+																'.dietAll:eq('
+																		+ i
+																		+ ') input')
+																.val();
+														//alert(dietCode); 
+														$("#dietSellStopForm")
+																.append(
+																		'<input type="hidden" value= "'+dietCode+'" name="dietCode">');
+													}
 												}
-											}
-											//alert(JSON.stringify(dietinfo));   
-											$("#dietSellStopForm").submit();
-											}else{
-												alert("식단을 선택하세요"); 
+												//alert(JSON.stringify(dietinfo));   
+												$("#dietSellStopForm").submit();
+											} else {
+												alert("식단을 선택하세요");
 											}
 										});
-						
-						
+
 						function printPaging(criteria) {
 							var str = "";
 
@@ -587,23 +633,18 @@ function disease5(){
 										+ "</a></li>";
 							}
 							if (criteria.next) {
-								str += "<li><a href='"
-										+ (criteria.endPage + 1) + "'>" + ">>"
-										+ "</a></li>";   
+								str += "<li><a href='" + (criteria.endPage + 1)
+										+ "'>" + ">>" + "</a></li>";
 							}
 							$(".pagination").html(str);
-						}  
+						}
 
 						var currentPage = 1;
 						$(".pagination").on("click", "li a", function() {
 							event.preventDefault();
 							var replyPage = $(this).attr("href");
 							all(replyPage);
-						});   
-
-				
-						
-						
+						});
 
 					});
 </script>

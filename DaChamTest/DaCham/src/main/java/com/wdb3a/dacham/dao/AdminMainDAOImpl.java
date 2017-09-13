@@ -323,6 +323,18 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 		return sqlSession.selectList(namespace+".disease5");
 	}
 
+	@Override
+	public List<ChartPrice> adminMainUp() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".adminMainUp");    
+	}
+
+	@Override
+	public List<ChartList> chartList1() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".chartList1");    
+	}
+
 	
 
 	

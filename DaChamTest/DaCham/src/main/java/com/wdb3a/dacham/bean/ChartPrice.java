@@ -8,8 +8,15 @@ public class ChartPrice {
 	private int dietAmount;
 	private String startdate;
 	private String enddate;
+	private int orderCodetotal;
 	
-	
+	 
+	public int getOrderCodetotal() {
+		return orderCodetotal;
+	}
+	public void setOrderCodetotal(int orderCodetotal) {
+		this.orderCodetotal = orderCodetotal;
+	}
 	public String getStartdate() {
 		return startdate;
 	}

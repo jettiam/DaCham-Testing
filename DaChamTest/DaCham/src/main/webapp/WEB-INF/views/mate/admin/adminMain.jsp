@@ -46,6 +46,12 @@
 .paginationCss{
 	margin:10px auto;           
 }
+.cardAll{
+background-color:#3A546D;   
+}
+.chart{
+margin-left:1.3cm;     
+}
 </style>
 <body>
 	<%@include file="../admin/upmenu.jsp"%>
@@ -56,13 +62,13 @@
 		<div class="row">
 			<div class="col-lg-4 col-md-6 col-sm-6">
 				<div class="card card-stats">
-					<div class="card-header" data-background-color="orange">
+					<div class="card-header" style="background-color:#7B8749">  
 						<i class="material-icons"></i>
 					</div>
 					<div class="card-content">
 						<p class="category">오늘의 매출액</p>
-						<h3 class="title">
-							얼마게?<small>명</small>
+						<h3 class="title" id="title1">
+							0
 						</h3>
 					</div>
 					<div class="card-footer"></div>
@@ -70,24 +76,26 @@
 			</div>
 			<div class="col-lg-4 col-md-6 col-sm-6">
 				<div class="card card-stats">
-					<div class="card-header" data-background-color="green">
+					<div class="card-header" style="background-color:#E8BE6B"> 
 						<i class="material-icons"></i>
 					</div>
 					<div class="card-content">
 						<p class="category">오늘의 주문량</p>
-						<h3 class="title">$34,245</h3>
+						<h3 class="title" id="title2">0<small>건</small></h3>
 					</div>
 					<div class="card-footer"></div>
 				</div>
 			</div>
 			<div class="col-lg-4 col-md-6 col-sm-6">
 				<div class="card card-stats">
-					<div class="card-header" data-background-color="red">
+					<div class="card-header" style="background-color:#78A8D8"> 
 						<i class="material-icons"></i>
 					</div>
 					<div class="card-content">
 						<p class="category">오늘의 판매 건수</p>
-						<h3 class="title">75</h3>
+
+						<h3 class="title" id="title3">0<small>건</small></h3>  
+
 					</div>
 					<div class="card-footer"></div>
 				</div>
@@ -134,7 +142,7 @@
 
 			<div class="col-md-5">
 				<div class="card">
-					<div class="card-header card-chart" data-background-color="orange">
+					<div class="card-header card-chart" data-background-color="orange">  
 						<div id="piechart"></div>
 					</div>
 					<div class="card-content">
@@ -142,8 +150,13 @@
 
 					</div>
 					<div class="card-footer">
-						<div class="stats"></div>
-						<h4>순위 리스트 수정중</h4>               
+
+						<div class="stats">
+						<table class="chart table table-hover">
+						                 
+						</table>
+						</div>				              
+
 					</div>
 
 				</div>
@@ -155,21 +168,21 @@
 		<div class="row">
 			<div class="col-lg-12 col-md-12">
 				<div class="card">
-					<div class="card-header" data-background-color="orange">
+					<div class="cardAll card-header">      
 						<h4 class="title">모든 주문내역</h4>
 						<div class="form-group row">
 							<div class="col-xs-2">
-								<select name="searchType" class="searchType form-control">
-									<option value="t"
+								<select name="searchType" class="searchType form-control" style="color:white" >    
+									<option value="t" style="color:black"
 										<c:out value="${orderList.searchType eq 't'?'selected':'' }"/>>
 										고객 아이디</option>
-									<option value="c"
+									<option value="c" style="color:black"             
 										<c:out value="${orderList.searchType eq 'c'?'selected':'' }"/>>
-										식단명</option>
+										식단명</option>    
 								</select>
 							</div>
 							<div class="col-xs-3">
-								<input type="text" name="keyword" id="keyword"
+								<input type="text" name="keyword" id="keyword"     
 									class="form-control">
 							</div>
 							<button id="search" class="btn btn-default">검색</button>
@@ -246,7 +259,7 @@
 	function drawVisualization() {
 		$.ajax({
 			url : "adminMain2",
-			success : function(data) {
+			success : function(data) { 
 
 				var data1 = new google.visualization.DataTable();
 				data1.addColumn('string', '날짜');
@@ -579,6 +592,73 @@
 												fontColor()
 											});
 						}
+						
+						function adminMainUp() {
+							$
+									.getJSON(
+											"adminSub/adminMainUp",
+											function(data) {
+												console.log(data);
+												
+												$("#title1").text(data[0].totalprice);       
+												$("#title1").append("<small>원</small>" )
+												$("#title2").text(data[0].dietAmount);       
+												$("#title2").append("<small>건</small>" )
+												$("#title3").text(data[0].orderCodetotal);         
+												$("#title3").append("<small>건</small>" )
+												//$(".orderListTable").remove();
+												
+												
+											});
+						}
+						
+						function chart1() {
+							$
+									.getJSON(
+											"adminSub/chartList1", 
+											function(data) {
+												console.log(data);
+												var str="";
+												 str += "<tr><td>1위</td><td>"  
+													+ data[0].dietName
+													+ "</td>"
+													+ "<td style='width:20%'>"              
+													+ data[0].sellAmount    
+													+ "건</td><td>4위</td><td>"+data[3].dietName+"</td><td>"+data[3].sellAmount+"건</td>"+"</tr>"         
+													+"<tr><td>2위</td><td>"  
+													+ data[1].dietName         
+													+ "</td>"
+													+ "<td>"   
+													+ data[1].sellAmount    
+													+ "건</td><td>5위</td><td>"+data[4].dietName+"</td><td>"+data[4].sellAmount+"건</td>"+"</tr>"
+													+"<tr><td>3위</td><td>"  
+													+ data[2].dietName
+													+ "</td>"
+													+ "<td>"         
+													+ data[2].sellAmount       
+													+ "건</td><td>6위</td><td>"+data[5].dietName+"</td><td>"+data[5].sellAmount+"건</td></tr>"  
+												/* for(var i=1; i<=data.length; i++){
+												 str += "<tr><td>"+i+"위</td><td>"  
+														+ data[i-1].dietName
+														+ "</td>"
+														+ "<td>"   
+														+ data[i-1].sellAmount    
+														+ "건</td></tr>"       
+														
+												} */      
+												$(".chart").append(str);     
+												/* $("#chart1").text("1위 "+ data[0].dietName + " "+data[0].sellAmount +"건");          
+												$("#chart2").text("1위 "+ data[1].dietName + " "+data[1].sellAmount +"건");
+												$("#chart3").text("1위 "+ data[2].dietName + " "+data[2].sellAmount +"건");
+												$("#chart4").text("1위 "+ data[3].dietName + " "+data[3].sellAmount +"건");
+												$("#chart5").text("1위 "+ data[4].dietName + " "+data[4].sellAmount +"건"); */
+												//$(".orderListTable").remove();
+												
+												     
+											});
+						}
+						adminMainUp()
+						chart1()
 
 						function printPaging(criteria) {
 							var str = "";

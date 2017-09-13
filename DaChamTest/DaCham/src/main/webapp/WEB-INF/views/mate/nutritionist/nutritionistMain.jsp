@@ -61,7 +61,7 @@
 				$(".modalResult").remove();
 				var str = "";
 				$(data).each(function(){
-					str += "<tr class = 'modalResult'><td>"+"<img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width: 75px; height: 25px;'>"+"</td><td>"+this.sideDName+"</td></tr>";
+					str += "<tr class = 'modalResult'><td>"+"<img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width: 120px; height: 90px;'>"+"</td><td>"+this.sideDName+"</td></tr>";
 				});
 				$(".modalTable").append(str);  
 			});   
@@ -74,7 +74,7 @@
 				$(".modalResult").remove();
 				var str = "";
 				$(data).each(function(){
-					str += "<tr class = 'modalResult'><td>"+"<img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width: 75px; height: 25px;'>"+"</td><td>"+this.sideDName+"</td></tr>";
+					str += "<tr class = 'modalResult'><td>"+"<img src = 'displayFile?fileName="+this.sideDImg+"' style = 'width: 120px; height: 90px;'>"+"</td><td>"+this.sideDName+"</td></tr>";
 				});
 				$(".modalTable").append(str);  
 			});   
@@ -99,7 +99,7 @@
 				doubleCurrentPage = page;
 				var str = "";
 				$(data.list).each(function(){
-					str += "<tr class = 'thisResult'><td>"+"<img src = 'displayFile?fileName="+this.dietImg+"' style = 'width: 75px; height: 25px;'>"+"</td><td><a class = 'clicker' data-code = '"+this.dietCode+"' data-toggle = 'modal' href = '#myModal'>"+this.dietName+"</a></td></tr>";
+					str += "<tr class = 'thisResult'><td>"+"<img src = 'displayFile?fileName="+this.dietImg+"' style = 'width: 120px; height: 90px;'>"+"</td><td><a class = 'clicker' data-code = '"+this.dietCode+"' data-toggle = 'modal' href = '#myModal'>"+this.dietName+"</a></td></tr>";
 				});
 				$(".thisTable").append(str);
 				printPaging2(data.criteria);
@@ -191,7 +191,7 @@
    		<div class = "row">
    			<div class = "col-lg-12 col-md-12">
    				<div class = "card">
-   					<div class = "card-header" data-background-color = "green">
+   					<div class = "card-header" data-background-color = "#3A546D">
    						<h4 class = "title">특별식단 요청 리스트</h4>
    						<div class = "form-group row">
    							<div class = "col-xs-2">
@@ -222,8 +222,8 @@
       <div class = "row">
       	<div class = "col-lg-12 col-md-12">
       		<div class = "card">
-      			<div class = "card-header" data-background-color = "blue">    
-      				<h4 class = "title">이번 달의 판매 식단</h4>
+      			<div class = "card-header" data-background-color = "green">                                  
+      				<h4 class = "title">이번 달의 판매 식단</h4>  
       			</div>
       			<div class = "card-content table-responsive">
       				<table class = "thisTable table table-hover">

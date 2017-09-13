@@ -4,23 +4,49 @@
 <%@ page import = "java.util.Date" %>
 <%@ page import = "java.text.*" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ page import="com.wdb3a.dacham.bean.OrderList"%>
 <!DOCTYPE html>
 <html>
 <head>
- <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript"
+   src="https://www.gstatic.com/charts/loader.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <link rel="stylesheet"
    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<!-- Bootstrap core CSS     -->
+<link href="resources/assets/css/bootstrap.min.css" rel="stylesheet" />
+
+<!--  Material Dashboard CSS    -->
+<link href="resources/assets/css/material-dashboard.css"
+   rel="stylesheet" />
+
+<!--  CSS for Demo Purpose, don't include it in your project     -->
+<link href="resources/assets/css/demo.css" rel="stylesheet" />
+
+<!--     Fonts and icons     -->
+<link
+   href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"
+   rel="stylesheet">
+<link
+   href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons'
+   rel='stylesheet' type='text/css'>
 
 <style>
 @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
 * {
-	font-family: 'Jeju Gothic',"Nanum Gothic", sans-serif !important;
+   font-family: 'Jeju Gothic',"Nanum Gothic", sans-serif !important;
 }
    #submit{
       position : relative;
@@ -53,27 +79,28 @@
       $("#changer").on("click",function(){
          doing(1);           
       });
-      $(document.body).on("click",".statusButton",function(){
-    		var orderCode = $(this).attr("data-status");
-    	    var foodMName = $(this).attr("data-vcode");
-    	    $.ajax({
-    	    	             type : "PUT",
-    	    	            url : "deliverAjax/changer/"+orderCode + "/" + foodMName,
-    	    		            success : function(result){
-    	    	                if(result == "SUCCESS"){
-    	    	                  console.log("입고처리되었습니다.");
-    	    	               }
-    	    	               else{
-    	    	                   alert("오류 실패");
-    	    	                }
-    	    	            }
-    	    	          });
+      $(document.body).on("click",".shiningButton",function(){
+          var orderCode = $(this).attr("data-status");
+           var foodMName = $(this).attr("data-vcode");
+           $.ajax({
+                           type : "PUT",
+                          url : "deliverAjax/changer/"+orderCode + "/" + foodMName,
+                             success : function(result){
+                              if(result == "SUCCESS"){
+                                console.log("입고처리되었습니다.");
+                                window.location.reload();
+                             }
+                             else{
+                                 alert("오류 실패");
+                              }
+                          }
+                        });
       });
       $(".statusButton").on("click",function(){
         $("input[name='chk']:checked").each(function(){
-        	var orderCode = $(this).val();
-        	var foodMName = $(this).attr('data-status');
-        	$.ajax({
+           var orderCode = $(this).val();
+           var foodMName = $(this).attr('data-status');
+           $.ajax({
                 type : "PUT",
                 url : "deliverAjax/changer/"+orderCode + "/" + foodMName,
                 success : function(result){
@@ -105,7 +132,7 @@
             
             $(data.list).each(function(){
                
-                  str += "<tr class = 'actionResult'><td><input type = 'checkbox' name = 'chk' class = 'orderCode' value = '"+this.orderCode+"' data-status = '"+this.foodMName+"'></td><td>"+"<input type = 'hidden' class = 'foodMICode' name = 'foodMICode' value = '"+this.foodMICode+"'>"+this.foodMICode+"</td><td>"+this.foodMName+"</td><td>"+this.orderDate+"</td><td>"+this.inAmount+"</td><td>"+this.unit+"</td><td>"+"<button class = 'statusButton btn btn-default' data-status = '"+this.orderCode+"' data-vcode = '"+this.foodMName+"'>입고작업</button>"+"</td></tr>";
+                  str += "<tr class = 'actionResult'><td><input type = 'checkbox' name = 'chk' class = 'orderCode' value = '"+this.orderCode+"' data-status = '"+this.foodMName+"'></td><td>"+"<input type = 'hidden' class = 'foodMICode' name = 'foodMICode' value = '"+this.foodMICode+"'>"+this.foodMICode+"</td><td>"+this.foodMName+"</td><td>"+this.orderDate+"</td><td>"+this.inAmount+"</td><td>"+this.unit+"</td><td>"+"<button class = 'shiningButton btn btn-default' data-status = '"+this.orderCode+"' data-vcode = '"+this.foodMName+"'>입고작업</button>"+"</td></tr>";
             });
             $(".action1").append(str);    
             printPaging3(data.criteria);
@@ -119,7 +146,7 @@
          $.getJSON("deliverAjax/showDeliver/"+keyword,function(data){
             var str = "";
             $(data).each(function(){
-            	str += "<tr class = 'actionResult'><td><input type = 'checkbox' name = 'chk' class = 'orderCode' value = '"+this.orderCode+"' data-status = '"+this.foodMName+"'></td><td>"+"<input type = 'hidden' class = 'foodMICode' name = 'foodMICode' value = '"+this.foodMICode+"'>"+this.foodMICode+"</td><td>"+this.foodMName+"</td><td>"+this.orderDate+"</td><td>"+this.inAmount+"</td><td>"+this.unit+"</td><td>"+"<button class = 'statusButton btn btn-default' data-status = '"+this.orderCode+"' data-vcode = '"+this.foodMName+"'>입고작업</button>"+"</td></tr>";
+               str += "<tr class = 'actionResult'><td><input type = 'checkbox' name = 'chk' class = 'orderCode' value = '"+this.orderCode+"' data-status = '"+this.foodMName+"'></td><td>"+"<input type = 'hidden' class = 'foodMICode' name = 'foodMICode' value = '"+this.foodMICode+"'>"+this.foodMICode+"</td><td>"+this.foodMName+"</td><td>"+this.orderDate+"</td><td>"+this.inAmount+"</td><td>"+this.unit+"</td><td>"+"<button class = 'statusButton btn btn-default' data-status = '"+this.orderCode+"' data-vcode = '"+this.foodMName+"'>입고작업</button>"+"</td></tr>";
             });
             $(".action1").append(str);
             
@@ -160,14 +187,14 @@
       });
       
       $("#allCheck").click(function() {
-			if ($("#allCheck").prop("checked")) {
-				//input태그의 name이 che인 태그들을 찾아서 checked옵션을 true로 정의
-				$("input[name=chk]").prop('checked', true);
-				//클릭이 안되있으면 
-			} else {
-				$("input[name=chk]").prop('checked', false);
-			}
-		});
+         if ($("#allCheck").prop("checked")) {
+            //input태그의 name이 che인 태그들을 찾아서 checked옵션을 true로 정의
+            $("input[name=chk]").prop('checked', true);
+            //클릭이 안되있으면 
+         } else {
+            $("input[name=chk]").prop('checked', false);
+         }
+      });
       function completeAll(page){
          $(".action1").hide();
          $(".actionResult2").remove();
@@ -271,7 +298,7 @@
 <!--          </table> -->
 <!--          <button id = "regist" class = "btn btn-danger">확인</button> -->
 <!--       </form> -->        
-      <br><br><br>
+ <!--     <br><br><br> --> 
    
 <!--          <div> -->
 <!--             <select name = "searchType" class = "searchType"> -->
@@ -291,11 +318,15 @@
 <!--             <input type = "text" class = "keyword" name = "keyword" placeholder = "검색어 입력란"> -->
 <!--             <button id = "search" class = "btn btn-warning">검색</button> -->
 <!--          </div> -->
-		<div>
-			<input type = "text" class = "keyword" name = "keyword" placeholder = "검색어 입력란">
-			<button id = "search" class = "btn btn-warning">검색</button>
-		</div>
-		<br><br><br>
+      <div class="row">
+         <div class="col-lg-12 col-md-12">
+            <div class="card">
+         <div class="card-header" data-background-color="#3A546D">
+            <h3 class="title text-center" >입고 식재료</h3>
+            </div>
+         <input type = "text" class = "keyword" name = "keyword" placeholder = "검색어 입력란">
+         <button id = "search" class = "btn btn-warning">검색</button>
+   
          <div>
             <button  class = "btn btn-success"><a id = "changer" data-toggle = "modal" href = "#myModal">입고중인 목록</a></button>
             <button id = "completeAll" class = "btn btn-warning">입고된 목록</button>  
@@ -305,7 +336,7 @@
             <div>
                <table class = "action1 table table-hover">
                   <tr>
-                  	 <th><input type = "checkbox" name = "chk" id = "allCheck"></th>
+                      <th><input type = "checkbox" name = "chk" id = "allCheck"></th>
                      <th>코드번호&nbsp;</th>
                            
                      <th>식재료명&nbsp;</th>
@@ -340,6 +371,8 @@
                <ul class = "pagination1 pagination">
                </ul>       
             </div>
+        </div>
+        </div>
         
          
          <div class = "modal fade" id = "myModal" role = "dialog">
