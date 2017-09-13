@@ -74,17 +74,31 @@
 						var r = "json.q" + no + ".result";
 						r = eval(r);
 						if (r == "결과") {
-							document.getElementById("question").innerText = r;
+							document.getElementById("question").innerText = "";
 							/* alert(r); */
 							$(".btn").hide("slow");
 							var resultName = eval("json.q" + no
-
 							+ ".resultList.result");
 							var resultJudg = eval("json.q" + no
 									+ ".resultList.judg");
-							$("#resultName").text(resultName);
-							$("#resultJudg").text(resultJudg);
-							$("#wizardAnswerArea").hide("slow");
+							$("#resultName").text(resultName);							
+							switch(resultJudg){
+							case "주의" : 
+								$("#resultJudg").css("color", "#6B9900");
+								break;
+							case "위험" :
+								$("#resultJudg").css("color", "#993800");
+								break;
+							case "고위험" :
+								$("#resultJudg").css("color", "#980000");
+								break;
+							default : 
+								break;
+							}
+							$("#resultJudg").text(resultJudg);		
+							
+							
+							$("#wizardAnswerArea").hide("fast");
 							$("#wizardResult").show("slow");
 						} else {
 							var q = "json.q" + no + ".question";
@@ -284,10 +298,17 @@ li {
 	color: #6F6F6F;
 	font-size: 4em;
 }
-#resultJudg {
-	color: #CC3D3D;
+#resultJudg {	
 	font-size: 8em;
 }
+
+.result{
+	display: inline-block;
+}
+#wizardResult{
+	margin-top: -25px;
+}
+
 </style>
 <link rel="stylesheet" href="resources/style.css">
 <title></title>
@@ -302,12 +323,8 @@ li {
 				<div id="ground" class="container col-sm-4 testing">
 					<table id="wizardStep" class="table table-bordered">
 						<tr>
-							<td id="wizardStartButton">
-								
-								
-									<button id="startWizard">위자드 시작하기</button>
-									<!-- <span id="startWizard">위자드 시작하기</span>  -->
-								
+							<td id="wizardStartButton">							
+									<button id="startWizard">위자드 시작하기</button>								
 							</td>
 						</tr>
 						<tr>
@@ -322,12 +339,8 @@ li {
 
 				<div  class="col-sm-8 testing">
 						
-							
+											
 							<b><h2 style="margin-top: 15px;" id="question"></h2></b>
-						
-							
-						
-
 						<table style="text-align: center; align:center;" id="wizardAnswerArea" class="table" >
 							<tr>
 								<td style="border:0px;">
@@ -350,12 +363,21 @@ li {
 								</td>
 							</tr>
 						</table>		
-					<div id="wizardResult" style="display: none">
-						고객님의 위자드 결과
-						<h2 id="resultName"></h2>
-						<h2 id="resultJudg"></h2>
+				
 						
-						<button id="showResultDiet">추천식단 보기</button>
+					<div id="wizardResult" style="display: none">  
+						<div style="font-size: 2em;">
+							<c:if test="${not empty sessionScope.memberName}">
+								${memberName} 님의 위자드 결과
+							</c:if>
+							<c:if test="${empty sessionScope.memberName}">
+								방문자 님의 위자드 결과
+							</c:if>
+						</div>
+						<div class="result" id="resultName">병명</div>
+						<div class="result" id="resultJudg">위험도</div>
+						
+						<div><button id="showResultDiet">추천식단 보기</button></div>
 					</div>
 					<!-- 시간이 된다면 추가할 파트
 	<div id="resultDiet" class=".col-md-8 col-md-offset-4">
@@ -430,92 +452,11 @@ li {
 			</div>
 		</div>
 		<hr>
-<<<<<<< HEAD
+
 	</section>
 	
 	
-	
-	
-<section class="purpose section">
-		<div class="container">
-			<h2 class="title">Dacham Wizard</h2>
-			<div class="row">
-				<div id="ground" class="container col-sm-4 testing">
-					<table id="wizardStep" class="table table-bordered">
-						<tr>
-							<td id="wizardStartButton">
-								
-								
-									<button id="startWizard">위자드 시작하기</button>
-									<!-- <span id="startWizard">위자드 시작하기</span>  -->
-								
-							</td>
-						</tr>
-						<tr>
-							<td id="wizardStepLogo">
-							<img src="resources/salad.png"
-							style="width:100px; height:100px; margin-bottom: 10px; "/></td>
-						</tr>
-						<tr id="wizardStepArea">
-						</tr>
-					</table>
-				</div>
 
-				<div  class="col-sm-8 testing">
-						
-							
-							<b><h2 style="margin-top: 15px;" id="question"></h2></b>
-						
-							
-						
-
-						<table style="text-align: center; align:center;" id="wizardAnswerArea" class="table" >
-							<tr>
-								<td>
-									<li class="btn" id="1" data-id=""></li>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<li class="btn" id="2" data-id=""></li>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<li class="btn" id="3" data-id=""></li>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<li class="btn" id="4" data-id=""></li>
-								</td>
-							</tr>
-						</table>		
-					<div id="wizardResult"> /**style="display: none">*/
-						고객님의 위자드 결과
-						<br/>
-						<span id="resultName">당뇨</span>
-						<span id="resultJudg">위험</span>
-						
-						<button id="showResultDiet">추천식단 보기</button>
-					</div>
-					<!-- 시간이 된다면 추가할 파트
-	<div id="resultDiet" class=".col-md-8 col-md-offset-4">
-		추천식단 목록
-	</div> -->
-				</div>
-			</div>
-
-
-			<form id="ResultDiet" method="GET">
-				<input id="rName" type="hidden" name="rName"> <input
-					id="rJudg" type="hidden" name="rJudg">
-			</form>
-
-		</div>
-=======
->>>>>>> branch 'master' of git@github.com:jettiam/DaCham-Testing.git
-	</section>
 
 	<footer>
 		<%@include file="../../footer.jsp"%>
