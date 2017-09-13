@@ -279,6 +279,15 @@ h2#question {
 li {
 	list-style-type: none;
 }
+
+#resultName {
+	color: #6F6F6F;
+	font-size: 4em;
+}
+#resultJudg {
+	color: #CC3D3D;
+	font-size: 8em;
+}
 </style>
 <link rel="stylesheet" href="resources/style.css">
 <title></title>
@@ -405,10 +414,11 @@ li {
 								</td>
 							</tr>
 						</table>		
-					<div id="wizardResult" style="display: none">
+					<div id="wizardResult"> /**style="display: none">*/
 						고객님의 위자드 결과
-						<h2 id="resultName"></h2>
-						<h2 id="resultJudg"></h2>
+						<br/>
+						<span id="resultName">당뇨</span>
+						<span id="resultJudg">위험</span>
 						
 						<button id="showResultDiet">추천식단 보기</button>
 					</div>
