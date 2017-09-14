@@ -103,12 +103,19 @@
 <body>
 	<%@include file = "counselorNavi.jsp" %>
 	<div class = "container">
+	<div class ="row">
+	<div class="col-lg-12 col-md-12">
+	<div class="card">
+	<div class="card-header" data-background-color="#3A546D"  >
+	
 		<button id = "listAll1" data-item = "1" class = "btn btn-success">식단문의</button>
 		<button id = "listAll2" data-item = "2" class = "btn btn-success">특별식단</button>
 		<button id = "listAll3" data-item = "3" class = "btn btn-success">배송문의</button>
 		<button id = "listAll4" data-item = "4" class = "btn btn-success">기타문의</button>
 		<button id = "listAll5" data-item = "5" class = "btn btn-success">특별식단작성완료</button>
-		
+	
+	</div>
+		<div class="card-content table-responsive">
 		<table class = "counsel table table-hover">
 			<tr>
 				<th>상담번호</th>
@@ -122,6 +129,10 @@
 				
 			</tr>
 		</table>
+	</div>
+	</div>
+	</div>
+	</div>
 	</div>
 </body>
 </html>

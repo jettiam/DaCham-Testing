@@ -197,7 +197,7 @@
          </select>
          </div>
          <div class="col-xs-3">
-         <input type = "text" name = "keyword" class="form-control" placeholder = "검색어 입력란" id = "keyword">
+         <input type = "text" name = "keyword" class="form-control " placeholder = "검색어 입력란" id = "keyword">
          </div>
          
          <button id = "search" class = "btn btn-success">검색</button>

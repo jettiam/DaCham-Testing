@@ -324,9 +324,10 @@
          <div class="card-header" data-background-color="#3A546D">
             <h3 class="title text-center" >입고 식재료</h3>
             </div>
-         <input type = "text" class = "keyword" name = "keyword" placeholder = "검색어 입력란">
+            <div style = "float:right;">
+         <input type = "text" class = "keyword" name = "keyword" placeholder = "검색어 입력란" >
          <button id = "search" class = "btn btn-warning">검색</button>
-   
+   			</div>
          <div>
             <button  class = "btn btn-success"><a id = "changer" data-toggle = "modal" href = "#myModal">입고중인 목록</a></button>
             <button id = "completeAll" class = "btn btn-warning">입고된 목록</button>  
