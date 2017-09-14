@@ -14,7 +14,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
+<link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
 <script src="resources/json2.js"></script>
 <script>
 	$(document).ready(function() {
@@ -309,6 +309,34 @@ li {
 	margin-top: -25px;
 }
 
+ #showResultDiet:hover { color: #212121;}
+
+.action-button
+{
+	position: relative;
+	padding: 10px 40px;
+  	margin: 0px 10px 10px 0px;
+	border-radius: 10px;	
+	font-size: 25px;
+	color: #fff;
+	text-decoration: none !important;	
+}
+
+.green
+{
+	background-color: #82BF56;
+	border-bottom: 5px solid #669644;
+	text-shadow: 0px -2px #669644;
+}
+
+.yellow
+{
+	background-color: #F2CF66;
+	border-bottom: 5px solid #D1B358;
+	border-right : 3px solid #D1B358;
+	text-shadow: 0px -2px #D1B358;
+}
+
 </style>
 <link rel="stylesheet" href="resources/style.css">
 <title></title>
@@ -364,8 +392,8 @@ li {
 							</tr>
 						</table>		
 				
-						
-					<div id="wizardResult" style="display: none">  
+					
+					<div id="wizardResult"	style="display: none">
 						<div style="font-size: 2em;">
 							<c:if test="${not empty sessionScope.memberName}">
 								${memberName} 님의 위자드 결과
@@ -377,7 +405,9 @@ li {
 						<div class="result" id="resultName">병명</div>
 						<div class="result" id="resultJudg">위험도</div>
 						
-						<div><button id="showResultDiet">추천식단 보기</button></div>
+						<div>
+							<button class="action-button yellow" id="showResultDiet">추천식단 보기</button>					
+						</div>
 					</div>
 					<!-- 시간이 된다면 추가할 파트
 	<div id="resultDiet" class=".col-md-8 col-md-offset-4">
