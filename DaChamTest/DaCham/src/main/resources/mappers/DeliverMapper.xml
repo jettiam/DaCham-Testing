@@ -133,7 +133,7 @@
    		where foodMICode = #{foodMICode}
    	</update>
    	<select id = "doing" resultType = "com.wdb3a.dacham.bean.Deliver">
-   		select * from foodminven a, orderlist b
+   		select a.foodMICode, a.foodMName, a.orderDate, a.inAmount, a.unit, a.orderCode from foodminven a, orderlist b
    		where a.orderCode = b.orderCode
    		and b.orderItemCode = 9
    		and a.foodMStatus = 1
@@ -141,9 +141,12 @@
    		limit #{startRecord},#{recordsPerPage}
    	</select>
    	<select id = "doingCount" resultType = "Integer">
-   		select count(*) from foodminven a, orderlist b
+   		
+select count(v.foodMICode)
+from(  select a.foodMICode, a.foodMName, a.orderDate, a.inAmount, a.unit, a.orderCode from foodminven a, orderlist b
    		where a.orderCode = b.orderCode
    		and b.orderItemCode = 9
    		and a.foodMStatus = 1
+   		group by foodMName)v
    	</select>
 </mapper>

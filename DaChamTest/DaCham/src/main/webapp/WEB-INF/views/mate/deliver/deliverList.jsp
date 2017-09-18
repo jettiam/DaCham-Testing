@@ -179,6 +179,7 @@
 				<div class="card">
 				<div class="card-header" data-background-color="#3A546D">
 				<h4 class="title">배송 검색</h4>
+				</div>
 				<div class="form-group row">
 				<div class="col-xs-2">
          <select name = "searchType" class = "searchType form-control">
@@ -203,7 +204,7 @@
          <button id = "search" class = "btn btn-success">검색</button>
          <button id = "all" class = "btn btn-success">전체목록</button>
       </div>
-      </div>
+      
       
       
       <br>
@@ -240,6 +241,7 @@
       
       </div>
     
+      </div>
       </div>
       </div>
 </body>

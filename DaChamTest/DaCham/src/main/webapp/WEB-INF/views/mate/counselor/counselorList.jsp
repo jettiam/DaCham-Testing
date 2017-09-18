@@ -245,7 +245,7 @@
 				<h4 class="title">고객정보</h4>
 				<div class="form-group row">
 				<div class="col-xs-2">
-            <select name = "searchType" class= "searchType form-control">
+            <select name = "searchType" class= "searchType form-control" style="color:white">
                   <option value = "t"
                   <c:out value="${Counselor.searchType eq 't'?'selected':'' }"/>>
                   고객id
@@ -258,7 +258,7 @@
             </div>
           
             <div class="col-xs-3" >
-            <input type = "text" name = "keyword" id = "keyword" class="form-control"  placeholder  = "검색어 입력란">
+            <input type = "text" name = "keyword" id = "keyword" class="form-control"    placeholder  = "검색어 입력란">
             </div>
             <button id = "search" class = "btn btn-success">검색</button>
             <button id = "listAll" class = "btn btn-warning">전체고객목록</button>
